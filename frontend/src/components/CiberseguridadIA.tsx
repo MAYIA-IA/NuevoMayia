@@ -1,305 +1,338 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const CiberseguridadIA = () => {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
-  const [selectedCard, setSelectedCard] = useState<number | null>(null);
+  const [floatingParticles, setFloatingParticles] = useState(false);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setFloatingParticles(prev => !prev);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
 
   const servicios = [
     {
       id: 1,
-      title: "Protección de Modelos",
-      shortTitle: "Model Security",
+      title: "Protección de Modelos IA",
       icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z",
-      description: "Defensa contra ataques adversarios, envenenamiento de datos y extracción de modelos.",
-      features: ["Ataques adversarios", "Envenenamiento", "Extracción"],
+      description: "Protegemos tus modelos de IA contra ataques adversarios, envenenamiento de datos y extracción de modelos. Implementamos técnicas de defensa robustas que garantizan la integridad y confidencialidad de tus algoritmos en producción.",
       color: "from-cyan-500 to-blue-600",
-      stat: "99.9%",
-      statLabel: "Protección"
+      label: "Defensa de Modelos ML/AI"
     },
     {
       id: 2,
-      title: "Seguridad de Datos",
-      shortTitle: "Data Privacy",
+      title: "Seguridad de Datos para IA",
       icon: "M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z",
-      description: "Cifrado homomórfico, federated learning y privacidad diferencial para tus datos de IA.",
-      features: ["Cifrado homomórfico", "Federated learning", "Privacidad diferencial"],
+      description: "Protegemos los datos de entrenamiento e inferencia de tus sistemas de IA. Implementamos cifrado homomórfico, federated learning y técnicas de privacidad diferencial para garantizar la confidencialidad mientras mantienes la utilidad de los datos.",
       color: "from-lime-500 to-green-600",
-      stat: "100%",
-      statLabel: "Confidencial"
+      label: "Privacidad de Datos AI/ML"
     },
     {
       id: 3,
-      title: "Detección de Ataques",
-      shortTitle: "Threat Detection",
+      title: "Detección de Ataques IA",
       icon: "M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z",
-      description: "Monitoreo proactivo contra evasión, inferencia y extracción. IA que defiende IA.",
-      features: ["Evasión", "Inferencia", "Monitoring 24/7"],
+      description: "Monitoreamos y detectamos ataques específicos contra sistemas de IA: ataques de evasión, de envenenamiento, de inferencia y de extracción. Nuestras soluciones utilizan IA para defender IA, creando un ecosistema de seguridad proactivo.",
       color: "from-purple-500 to-pink-600",
-      stat: "24/7",
-      statLabel: "Monitoreo"
+      label: "Threat Intelligence AI"
     },
     {
       id: 4,
-      title: "Gobernanza & Compliance",
-      shortTitle: "AI Governance",
+      title: "Gobernanza y Compliance IA",
       icon: "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z",
-      description: "Cumplimiento regulatorio, evaluación de riesgo y auditoría continua para IA ética.",
-      features: ["Evaluación riesgo", "Auditoría", "Compliance"],
+      description: "Cumplimiento con regulaciones específicas de IA. Establecemos marcos de gobernanza, evaluación de riesgo y procesos de auditoría continua para sistemas de IA éticos y seguros.",
       color: "from-orange-500 to-red-600",
-      stat: "ISO",
-      statLabel: "Certificado"
+      label: "AI Governance & Compliance"
     }
   ];
 
-  const certifications = [
-    { name: "FIRST", active: true },
-    { name: "ISO 27001", active: true },
-    { name: "ISO 27034", active: true },
-    { name: "SOC 2", active: true }
-  ];
-
-  const threats = [
-    { name: "Ataques Adversarios", level: "Critical", color: "text-red-500" },
-    { name: "Data Poisoning", level: "High", color: "text-orange-500" },
-    { name: "Model Extraction", level: "High", color: "text-orange-500" },
-    { name: "Membership Inference", level: "Medium", color: "text-yellow-500" }
-  ];
-
   return (
-    <div className="w-full bg-gradient-to-b from-slate-900 via-gray-900 to-black py-20 relative overflow-hidden">
-      {/* Efectos de fondo sutiles */}
+    <div className="w-full bg-gradient-to-b from-gray-900 via-[#0a1f44] to-black py-20 relative overflow-hidden">
+      {/* Efectos de fondo */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f08_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f08_1px,transparent_1px)] bg-[size:40px_40px]"></div>
-        <div className="absolute top-20 left-20 w-96 h-96 bg-lime-400/5 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-20 w-96 h-96 bg-cyan-400/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f12_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f12_1px,transparent_1px)] bg-[size:40px_40px] animate-grid"></div>
+        <div className="absolute top-20 left-20 w-96 h-96 bg-lime-400/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-20 w-96 h-96 bg-cyan-400/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+        
+        {/* Partículas flotantes adicionales */}
+        <div className="absolute top-1/4 left-1/4 w-3 h-3 bg-lime-400 rounded-full animate-float-slow opacity-60"></div>
+        <div className="absolute top-1/3 right-1/3 w-2 h-2 bg-cyan-400 rounded-full animate-float-slow opacity-60" style={{ animationDelay: '1.5s' }}></div>
+        <div className="absolute bottom-1/3 left-1/2 w-2 h-2 bg-yellow-300 rounded-full animate-float-slow opacity-60" style={{ animationDelay: '3s' }}></div>
+        <div className="absolute top-2/3 right-1/4 w-3 h-3 bg-purple-400 rounded-full animate-float-slow opacity-60" style={{ animationDelay: '2s' }}></div>
+        
+        {/* Líneas decorativas animadas */}
+        <svg className="absolute top-0 left-0 w-full h-full opacity-20">
+          <defs>
+            <linearGradient id="lineGradient1" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#d4ff00" />
+              <stop offset="50%" stopColor="#22d3ee" />
+              <stop offset="100%" stopColor="#d4ff00" />
+            </linearGradient>
+          </defs>
+          <path 
+            d="M 0 150 Q 200 100, 400 150 T 800 150" 
+            stroke="url(#lineGradient1)" 
+            strokeWidth="2" 
+            fill="none"
+            className="animate-draw-slow"
+          />
+          <path 
+            d="M 600 500 Q 800 450, 1000 500 T 1400 500" 
+            stroke="url(#lineGradient1)" 
+            strokeWidth="2" 
+            fill="none"
+            className="animate-draw-slow"
+            style={{ animationDelay: '1.5s' }}
+          />
+        </svg>
       </div>
 
-      <div className="container mx-auto px-4 relative z-10 max-w-7xl">
-        {/* Header Section - Más compacto */}
-        <div className="mb-16">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full mb-6 backdrop-blur-sm">
-              <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
-              <span className="text-sm font-medium text-gray-300">Ciberseguridad Especializada en IA</span>
+      <div className="container mx-auto px-4 relative z-10">
+        {/* Header Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+          {/* Left side - Main title */}
+          <div className="space-y-6 animate-fade-in">
+            <div>
+              <h1 className="text-5xl lg:text-6xl font-bold mb-4">
+                <span className="text-white">Ciberseguridad para </span>
+                <span className="bg-gradient-to-r from-lime-400 to-cyan-400 bg-clip-text text-transparent animate-gradient-x">Sistemas de IA</span>
+              </h1>
+              <div className="h-1 w-32 bg-gradient-to-r from-lime-400 to-cyan-400 rounded-full animate-slide-in"></div>
             </div>
-
-            <h1 className="text-4xl lg:text-6xl font-bold mb-4">
-              <span className="text-white">Protege tus</span>
-              <br />
-              <span className="bg-gradient-to-r from-lime-400 via-cyan-400 to-lime-400 bg-clip-text text-transparent">
-                Sistemas de IA
-              </span>
-            </h1>
-
-            <p className="text-lg text-gray-300 max-w-3xl mx-auto mb-8">
-              Desde datos de entrenamiento hasta modelos en producción.
-              Seguridad especializada para <span className="text-lime-400 font-semibold">MLOps</span> y <span className="text-cyan-400 font-semibold">AI-as-a-Service</span>
-            </p>
-
-            {/* Certificaciones badge */}
-            <div className="flex flex-wrap justify-center gap-3">
-              {certifications.map((cert, idx) => (
-                <div
-                  key={idx}
-                  className="px-4 py-2 bg-white/5 border border-white/10 rounded-full backdrop-blur-sm hover:bg-white/10 transition-all duration-300 hover:scale-105"
-                >
-                  <div className="flex items-center gap-2">
-                    <svg className="w-4 h-4 text-lime-400" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                    <span className="text-sm font-semibold text-white">{cert.name}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* CTA Hero Box - Más compacto */}
-          <div className="bg-gradient-to-br from-lime-400 via-cyan-400 to-lime-400 rounded-2xl p-8 relative overflow-hidden max-w-4xl mx-auto">
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff12_1px,transparent_1px),linear-gradient(to_bottom,#ffffff12_1px,transparent_1px)] bg-[size:20px_20px]"></div>
             
-            <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
-              <div className="flex-1 text-center md:text-left">
-                <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
-                  MAYiA <span className="font-light">cyberAI</span>
-                </h3>
-                <p className="text-gray-800 font-medium">
-                  Auditoría de seguridad completa para tus sistemas de IA
-                </p>
-              </div>
-              
-              <button className="flex-shrink-0 bg-gray-900 hover:bg-gray-800 text-white px-6 py-3 rounded-xl font-bold text-sm transition-all duration-300 hover:scale-105 shadow-xl">
-                Solicitar Auditoría
-              </button>
+            <p className="text-gray-300 text-lg leading-relaxed animate-fade-in" style={{ animationDelay: '0.2s' }}>
+              Protegemos tus sistemas de Inteligencia Artificial contra amenazas modernas. Desde la seguridad de datos de entrenamiento hasta la protección de modelos en producción, diseñamos soluciones de ciberseguridad especializadas para entornos de <span className="italic font-semibold text-cyan-400">MLOps</span> y <span className="italic font-semibold text-lime-400">AI-as-a-Service</span>.
+            </p>
+          </div>
+
+          {/* Right side - CTA Box */}
+          <div className="bg-gradient-to-br from-lime-400 via-yellow-300 to-lime-400 rounded-3xl p-8 flex flex-col items-center justify-center text-center shadow-2xl relative overflow-hidden group animate-fade-in" style={{ animationDelay: '0.4s' }}>
+            {/* Efectos de fondo animados */}
+            <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div className="absolute top-0 right-0 w-40 h-40 bg-white/20 rounded-full blur-3xl animate-pulse"></div>
+            <div className="absolute bottom-0 left-0 w-32 h-32 bg-white/20 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+            
+            {/* Círculos orbitales */}
+            <div className="absolute inset-0 rounded-3xl overflow-visible">
+              <div className="absolute top-4 right-4 w-16 h-16 border-2 border-gray-900/10 rounded-full animate-ping-slow"></div>
+              <div className="absolute bottom-8 left-8 w-20 h-20 border-2 border-gray-900/10 rounded-full animate-ping-slow" style={{ animationDelay: '1s' }}></div>
             </div>
-          </div>
-        </div>
-
-        {/* Threat Dashboard - Nuevo */}
-        <div className="mb-12 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-bold text-white flex items-center gap-2">
-              <svg className="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-              </svg>
-              Amenazas Detectadas
-            </h3>
-            <span className="text-xs text-gray-400">Actualizado en tiempo real</span>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
-            {threats.map((threat, idx) => (
-              <div
-                key={idx}
-                className="bg-white/5 border border-white/10 rounded-xl p-4 hover:bg-white/10 transition-all duration-300"
-              >
-                <div className="flex items-start justify-between mb-2">
-                  <span className="text-sm font-medium text-white">{threat.name}</span>
-                  <span className={`text-xs font-bold ${threat.color} px-2 py-1 bg-white/10 rounded-full`}>
-                    {threat.level}
-                  </span>
-                </div>
-                <div className="w-full bg-white/10 rounded-full h-2">
-                  <div 
-                    className={`h-2 rounded-full ${threat.color.replace('text', 'bg')}`}
-                    style={{ width: threat.level === 'Critical' ? '90%' : threat.level === 'High' ? '70%' : '50%' }}
-                  ></div>
-                </div>
+            
+            <div className="relative z-10 space-y-4">
+              <h3 className="text-3xl font-bold text-gray-900 transform group-hover:scale-105 transition-transform duration-300">
+                Protege tus sistemas de IA
+              </h3>
+              <div className="text-4xl font-bold text-gray-900 transform group-hover:scale-105 transition-transform duration-300">
+                MAYiA <span className="font-light">cyberAI</span>
               </div>
-            ))}
+              <button className="bg-gray-900 text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-gray-800 transition-all duration-300 hover:scale-105 shadow-lg mt-4 relative overflow-hidden group/btn">
+                <span className="relative z-10">AUDITORÍA DE SEGURIDAD AI</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-lime-400/20 to-cyan-400/20 transform scale-x-0 group-hover/btn:scale-x-100 transition-transform origin-left duration-500"></div>
+              </button>
+              <div className="mt-4 px-6 py-2 bg-white rounded-full inline-block shadow-md transform group-hover:scale-110 transition-transform duration-300">
+                <span className="text-gray-900 font-bold text-sm"> ¡Certificaciones de Ciberseguridad en FIRST, ISO 27001 y más!</span>
+              </div>
+            </div>
+            
+            {/* Partículas flotantes en la caja */}
+            <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-gray-900 rounded-full opacity-20 animate-float"></div>
+            <div className="absolute top-1/2 right-1/4 w-2 h-2 bg-gray-900 rounded-full opacity-20 animate-float" style={{ animationDelay: '1s' }}></div>
+            <div className="absolute bottom-1/3 left-1/3 w-2 h-2 bg-gray-900 rounded-full opacity-20 animate-float" style={{ animationDelay: '2s' }}></div>
           </div>
         </div>
 
-        {/* Services Grid - Más compacto */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {servicios.map((servicio) => (
-            <div
-              key={servicio.id}
-              onMouseEnter={() => setHoveredCard(servicio.id)}
-              onMouseLeave={() => setHoveredCard(null)}
-              onClick={() => setSelectedCard(selectedCard === servicio.id ? null : servicio.id)}
-              className={`group relative bg-white rounded-2xl overflow-hidden border-2 transition-all duration-500 cursor-pointer flex flex-col ${
-                selectedCard === servicio.id
-                  ? 'border-lime-400 shadow-2xl scale-[1.02]'
-                  : 'border-gray-200 shadow-lg hover:shadow-xl hover:border-gray-300'
-              }`}
+        {/* Labels Bar */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+          {servicios.map((servicio, index) => (
+            <div 
+              key={`label-${servicio.id}`}
+              className="flex items-center gap-3 bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 border border-gray-700 hover:border-lime-400/50 transition-all duration-300 hover:scale-105 animate-fade-in"
+              style={{ animationDelay: `${index * 0.1}s` }}
             >
-              {/* Header con gradiente */}
-              <div className={`relative bg-gradient-to-br ${servicio.color} p-6 pb-12`}>
-                <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff12_1px,transparent_1px),linear-gradient(to_bottom,#ffffff12_1px,transparent_1px)] bg-[size:20px_20px]"></div>
-                
-                <div className="relative z-10">
-                  {/* Icono */}
-                  <div className="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                    <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={servicio.icon} />
-                    </svg>
-                  </div>
-
-                  {/* Título */}
-                  <h3 className="text-xl font-bold text-white mb-1">
-                    {servicio.title}
-                  </h3>
-                  <p className="text-sm text-white/80 font-medium">
-                    {servicio.shortTitle}
-                  </p>
-                </div>
-
-                {/* Stat badge */}
-                <div className="absolute bottom-4 right-4 bg-white/20 backdrop-blur-sm rounded-full px-3 py-1">
-                  <div className="text-xl font-bold text-white">{servicio.stat}</div>
-                  <div className="text-xs text-white/80 text-center">{servicio.statLabel}</div>
-                </div>
+              <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${servicio.color} flex items-center justify-center flex-shrink-0 transform group-hover:rotate-12 transition-transform duration-300 shadow-lg`}>
+                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={servicio.icon} />
+                </svg>
               </div>
-
-              {/* Content */}
-              <div className="p-5 flex flex-col flex-grow bg-white">
-                {/* Description */}
-                <p className="text-sm text-gray-700 mb-4 leading-relaxed">
-                  {servicio.description}
-                </p>
-
-                {/* Features tags */}
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {servicio.features.map((feature, idx) => (
-                    <span
-                      key={idx}
-                      className={`text-xs px-2 py-1 rounded-full bg-gradient-to-r ${servicio.color} bg-opacity-10 text-gray-700 font-medium`}
-                    >
-                      {feature}
-                    </span>
-                  ))}
-                </div>
-
-                {/* CTA Button */}
-                <button
-                  className={`w-full mt-auto py-3 rounded-xl font-semibold text-sm transition-all duration-300 bg-gradient-to-r ${servicio.color} text-white hover:scale-[1.02] shadow-md hover:shadow-lg`}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    // Lógica de evaluación
-                  }}
-                >
-                  Solicitar Evaluación
-                </button>
-              </div>
-
-              {/* Línea decorativa */}
-              <div className={`h-1 bg-gradient-to-r ${servicio.color} transform transition-transform duration-500 ${
-                hoveredCard === servicio.id || selectedCard === servicio.id ? 'scale-x-100' : 'scale-x-0'
-              } origin-left`}></div>
+              <span className="text-white text-xs font-medium leading-tight">{servicio.label}</span>
             </div>
           ))}
         </div>
 
-        {/* Bottom CTA */}
-        <div className="mt-16 text-center">
-          <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 md:p-12">
-            <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              ¿Tus sistemas de IA están protegidos?
-            </h3>
-            <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
-              Agenda una evaluación gratuita de seguridad y descubre vulnerabilidades antes que los atacantes
-            </p>
+        {/* Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {servicios.map((servicio, index) => (
+            <div 
+              key={servicio.id}
+              onMouseEnter={() => setHoveredCard(servicio.id)}
+              onMouseLeave={() => setHoveredCard(null)}
+              className="group relative bg-white rounded-3xl p-8 shadow-lg border-2 border-gray-200 flex flex-col overflow-hidden transition-all duration-500 hover:shadow-2xl hover:scale-105 hover:border-transparent animate-fade-in"
+              style={{ animationDelay: `${0.6 + index * 0.15}s` }}
+            >
+              {/* Borde gradient en hover */}
+              <div className={`absolute inset-0 bg-gradient-to-br ${servicio.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl`}></div>
+              <div className="absolute inset-[2px] bg-white rounded-3xl z-10"></div>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="group relative bg-gradient-to-r from-lime-400 to-cyan-500 hover:from-lime-500 hover:to-cyan-600 text-gray-900 font-bold py-4 px-8 rounded-xl text-lg transition-all duration-300 hover:scale-105 shadow-xl">
-                <span className="relative z-10 flex items-center justify-center gap-2">
-                  Evaluación gratuita
-                  <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </span>
-              </button>
+              {/* Contenido */}
+              <div className="relative z-20 flex flex-col h-full">
+                {/* Icono */}
+                <div className="mb-6">
+                  <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${servicio.color} flex items-center justify-center transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-lg relative`}>
+                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={servicio.icon} />
+                    </svg>
+                    {/* Anillo pulsante */}
+                    <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${servicio.color} opacity-0 group-hover:opacity-30 group-hover:animate-ping`}></div>
+                  </div>
+                </div>
 
-              <button className="group bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-semibold py-4 px-8 rounded-xl text-lg transition-all duration-300 border border-white/20 hover:border-white/40">
-                Ver casos de éxito
-              </button>
+                {/* Título */}
+                <h3 className="text-xl font-bold text-[#0a1f44] mb-4 group-hover:text-cyan-700 transition-colors">
+                  {servicio.title}
+                </h3>
+
+                {/* Descripción con flex-grow para empujar el botón al fondo */}
+                <p className="text-sm text-gray-700 leading-relaxed mb-6 text-justify flex-grow">
+                  {servicio.description}
+                </p>
+
+                {/* Botón en la parte inferior */}
+                <div className="mt-auto">
+                  <button className={`w-full bg-gradient-to-r ${servicio.color} text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 hover:scale-105 shadow-md hover:shadow-xl relative overflow-hidden group/btn`}>
+                    <span className="relative z-10">Solicitar Evaluación</span>
+                    <div className="absolute inset-0 bg-white/20 transform scale-x-0 group-hover/btn:scale-x-100 transition-transform origin-left duration-300"></div>
+                  </button>
+                </div>
+              </div>
+
+              {/* Partículas decorativas múltiples */}
+              <div className={`absolute top-4 right-4 w-2 h-2 rounded-full bg-gradient-to-br ${servicio.color} opacity-0 group-hover:opacity-100 group-hover:animate-ping z-30`}></div>
+              <div className={`absolute top-8 right-8 w-1.5 h-1.5 rounded-full bg-gradient-to-br ${servicio.color} opacity-0 group-hover:opacity-100 group-hover:animate-ping z-30`} style={{ animationDelay: '0.3s' }}></div>
+              <div className={`absolute bottom-4 left-4 w-2 h-2 rounded-full bg-gradient-to-br ${servicio.color} opacity-0 group-hover:opacity-100 group-hover:animate-ping z-30`} style={{ animationDelay: '0.5s' }}></div>
             </div>
-
-            {/* Trust indicators */}
-            <div className="flex flex-wrap justify-center gap-6 mt-8 pt-8 border-t border-white/10">
-              <div className="flex items-center gap-2">
-                <svg className="w-5 h-5 text-lime-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                <span className="text-sm text-gray-300">Certificado FIRST</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <svg className="w-5 h-5 text-lime-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                <span className="text-sm text-gray-300">ISO 27001 / 27034</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <svg className="w-5 h-5 text-lime-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                <span className="text-sm text-gray-300">Respuesta 24/7</span>
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
+
+      <style>{`
+        @keyframes fade-in {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        @keyframes slide-in {
+          from {
+            width: 0;
+          }
+          to {
+            width: 8rem;
+          }
+        }
+        
+        @keyframes float {
+          0%, 100% {
+            transform: translateY(0) translateX(0);
+          }
+          25% {
+            transform: translateY(-15px) translateX(10px);
+          }
+          50% {
+            transform: translateY(-25px) translateX(0);
+          }
+          75% {
+            transform: translateY(-15px) translateX(-10px);
+          }
+        }
+        
+        @keyframes float-slow {
+          0%, 100% {
+            transform: translateY(0) translateX(0);
+          }
+          25% {
+            transform: translateY(-30px) translateX(20px);
+          }
+          50% {
+            transform: translateY(-50px) translateX(0);
+          }
+          75% {
+            transform: translateY(-30px) translateX(-20px);
+          }
+        }
+        
+        @keyframes grid {
+          0% {
+            background-position: 0 0;
+          }
+          100% {
+            background-position: 40px 40px;
+          }
+        }
+        
+        @keyframes draw-slow {
+          from {
+            stroke-dasharray: 0, 2000;
+          }
+          to {
+            stroke-dasharray: 2000, 0;
+          }
+        }
+        
+        @keyframes gradient-x {
+          0%, 100% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+        }
+        
+        @keyframes ping-slow {
+          75%, 100% {
+            transform: scale(1.2);
+            opacity: 0;
+          }
+        }
+        
+        .animate-fade-in {
+          animation: fade-in 0.8s ease-out forwards;
+          opacity: 0;
+        }
+        
+        .animate-slide-in {
+          animation: slide-in 1s ease-out forwards;
+        }
+        
+        .animate-float {
+          animation: float 4s ease-in-out infinite;
+        }
+        
+        .animate-float-slow {
+          animation: float-slow 8s ease-in-out infinite;
+        }
+        
+        .animate-grid {
+          animation: grid 20s linear infinite;
+        }
+        
+        .animate-draw-slow {
+          animation: draw-slow 5s ease-in-out infinite;
+        }
+        
+        .animate-gradient-x {
+          background-size: 200% 200%;
+          animation: gradient-x 3s ease infinite;
+        }
+        
+        .animate-ping-slow {
+          animation: ping-slow 3s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+      `}</style>
     </div>
   );
 };
