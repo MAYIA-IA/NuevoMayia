@@ -44,8 +44,8 @@ async function startServer() {
     // Inicializar Gemini
     initGeminiClient();
     
-    // Probar conexión a BD
-    await testConnection();
+    // Probar conexión a BD (Quitamos la conexión a DB porque no es necesaria en este caso)
+    // await testConnection();
     
     app.listen(PORT, () => {
       console.log(`\nServidor corriendo en http://localhost:${PORT}`);
