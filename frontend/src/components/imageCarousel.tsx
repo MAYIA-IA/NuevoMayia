@@ -44,7 +44,7 @@ const carouselItems: CarouselItem[] = [
     id: 4,
     image: imagen3,
     title: 'Marketplace #1 de IA',
-    description: 'Desarrolla tu solución de IA y nosotros la comercializamos. Acceso a infraestructura IA-ready y escaparate digital nacional.',
+    description: 'Soluciones con IA para tu empresa. Acceso a infraestructura IA-ready y escaparate digital nacional.',
     tag: 'Marketplace',
     cta: 'Publicar solución',
   },
