@@ -384,7 +384,7 @@ const ChatWidget = ({
     return (
       <button
         onClick={onToggle}
-        className="fixed bottom-6 right-6 z-40 w-14 h-14 bg-gradient-to-r from-lime-400 to-cyan-500 rounded-full flex items-center justify-center shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-110 group"
+        className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-r from-lime-400 to-cyan-500 rounded-full flex items-center justify-center shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-110 group"
         aria-label="Abrir chat de asistente"
       >
         <svg 
@@ -404,18 +404,24 @@ const ChatWidget = ({
   }
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 w-96 h-[600px] flex flex-col bg-gradient-to-b from-gray-900 to-black rounded-2xl shadow-2xl overflow-hidden border border-white/10">
+    <div
+      className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex flex-col bg-gradient-to-b from-gray-900 to-black rounded-2xl shadow-2xl overflow-hidden border border-white/10"
+      style={{
+        width: 'min(360px, calc(100vw - 2rem))',
+        height: 'min(520px, calc(100dvh - 5rem))',
+      }}
+    >
       {/* Chat Header */}
-      <div className="bg-gradient-to-r from-lime-500 to-cyan-600 p-4">
+      <div className="bg-gradient-to-r from-lime-500 to-cyan-600 p-3 flex-shrink-0">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
-              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
+              <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
               </svg>
             </div>
             <div>
-              <h3 className="text-white font-bold">MAYiA Assistant</h3>
+              <h3 className="text-white font-bold text-sm">MAYiA Assistant</h3>
               <div className="flex items-center gap-2">
                 <div className={`w-2 h-2 rounded-full ${
                   backendStatus === 'online' ? 'bg-green-400 animate-pulse' :
@@ -473,7 +479,7 @@ const ChatWidget = ({
       </div>
 
       {/* Messages Container */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+      <div className="flex-1 overflow-y-auto p-3 space-y-3 min-h-0">
         {messages.map((message) => (
           <div
             key={message.id}
@@ -532,7 +538,7 @@ const ChatWidget = ({
       </div>
 
       {/* Input Area */}
-      <form onSubmit={handleSubmit} className="p-4 border-t border-white/10">
+      <form onSubmit={handleSubmit} className="p-3 border-t border-white/10 flex-shrink-0">
         <div className="flex gap-2">
           <input
             ref={inputRef}
@@ -541,15 +547,14 @@ const ChatWidget = ({
             onChange={(e) => setInputText(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="Escribe tu mensaje..."
-            className="flex-1 bg-gray-800 border border-gray-700 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:border-transparent"
+            className="flex-1 bg-gray-800 border border-gray-700 rounded-xl px-3 py-2.5 text-white text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:border-transparent"
             disabled={isLoading || backendStatus === 'offline'}
           />
           <button
             type="submit"
             disabled={isLoading || !inputText.trim() || backendStatus === 'offline'}
-            className="bg-gradient-to-r from-lime-500 to-cyan-600 text-white px-6 rounded-xl font-semibold hover:from-lime-600 hover:to-cyan-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+            className="bg-gradient-to-r from-lime-500 to-cyan-600 text-white px-4 rounded-xl font-semibold hover:from-lime-600 hover:to-cyan-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
           >
-            <span>Enviar</span>
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
             </svg>
