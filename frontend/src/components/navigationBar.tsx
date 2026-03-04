@@ -7,11 +7,11 @@ interface NavItem {
 }
 
 const mainNavItems: NavItem[] = [
-  { label: 'HACKATHON', href: '#' },
-  { label: 'STARTUPS', href: '#' },
-  { label: 'ESPECIALISTAS', href: '#' },
-  { label: 'SALA PRENSA', href: '#' },
-  { label: 'Mesa de Servicio', href: '#' }
+  { label: 'Cuartel de IA Ciudadana', href: 'https://app.learnbrite.com/scenario_3.0/?spaceId=spc970276cba97879fd8849d8&worldId=wrl431b8a8cb8f6e8b011a286' },
+  { label: 'Oficinas Virtuales en Vivo', href: 'https://app.learnbrite.com/scenario_3.0/?spaceId=spc970276cba97879fd8849d8&worldId=wrl431b8a8cb8f6e8b011a286' },
+  { label: 'Centro de Convenciones Digital', href: 'https://app.learnbrite.com/scenario_3.0/?spaceId=spc970276cba97879fd8849d8&worldId=wrl431b8a8cb8f6e8b011a286' },
+  { label: 'Sala de Prensa con IA', href: 'https://app.learnbrite.com/scenario_3.0/?spaceId=spc970276cba97879fd8849d8&worldId=wrl431b8a8cb8f6e8b011a286' },
+  { label: 'Academia de IA y contrata nuestros cursos', href: 'https://app.learnbrite.com/scenario_3.0/?spaceId=spc970276cba97879fd8849d8&worldId=wrl431b8a8cb8f6e8b011a286' }
 ];
 
 export default function NavigationBar() {
@@ -19,7 +19,7 @@ export default function NavigationBar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <nav className="w-full bg-gradient-to-r from-gray-700 via-gray-600 to-gray-700 shadow-lg">
+    <nav className="w-full bg-[#0A0A14] border-b border-white/5 shadow-xl">
       <div className="max-w-7xl mx-auto px-3 sm:px-4 py-3 sm:py-4">
         <div className="flex items-center justify-between">
           <div className="flex-shrink-0">

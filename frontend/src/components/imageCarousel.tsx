@@ -74,9 +74,9 @@ export default function imageCarousel() {
   };
 
   return (
-    <div className="w-full py-8 px-4 md:px-8 lg:px-16">
+    <div className="w-full bg-[#0A0A14] py-0">
       <div
-        className="relative w-full max-w-7xl mx-auto rounded-xl overflow-hidden shadow-2xl group"
+        className="relative w-full max-w-full mx-auto overflow-hidden group"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
