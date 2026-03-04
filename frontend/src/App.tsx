@@ -26,16 +26,15 @@ function App() {
       {/* 2. Urgencia / evento */}
       <HeaderBanner />
 
-      {/* 3. Impacto visual inmediato */}
-      <ImageCarousel />
-
-      {/* 4. Propuesta de valor — quiénes somos */}
+      {/* 3. Propuesta de valor — quiénes somos */}
       <MusculosMAYiA />
 
-      {/* 5. Índice navegable — ya saben qué es MAYiA */}
+      {/* 4. Impacto visual inmediato */}
+      <ImageCarousel />
+
+      {/* 5. Índice navegable */}
       <SubNavigation />
 
-      {/* 6. Secciones de producto en orden lógico */}
       <IAEmpresarial />
       <AgentesConsultores />
       <IAPorSector />

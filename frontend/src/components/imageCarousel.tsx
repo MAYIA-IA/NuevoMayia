@@ -11,6 +11,8 @@ interface CarouselItem {
   image: string;
   title: string;
   description: string;
+  tag: string;
+  cta: string;
 }
 
 const carouselItems: CarouselItem[] = [
@@ -18,140 +20,224 @@ const carouselItems: CarouselItem[] = [
     id: 1,
     image: imagen5,
     title: 'IA desde el Origen',
-    description: 'Modelos de IA nativos de México'
+    description: 'Modelos de inteligencia artificial desarrollados nativamente en México, respaldados por infraestructura soberana en 30 centros de datos EdgeNet.',
+    tag: 'Infraestructura',
+    cta: 'Conocer más',
   },
   {
     id: 2,
     image: imagen1,
-    title: 'Consultoria MAYiA',
-    description: 'Modelo VALITICS'
+    title: 'Consultoría MAYiA',
+    description: 'Metodología VATYCS: estrategia, gobierno e implementación de IA con ROI medible desde el primer diagnóstico.',
+    tag: 'Consultoría',
+    cta: 'Agendar sesión',
   },
   {
     id: 3,
     image: imagen2,
-    title: 'Fabrica de agentes de IA',
-    description: 'Para todo tu organigrama'
+    title: 'Fábrica de Agentes de IA',
+    description: 'Empleados digitales para todo tu organigrama. Escalamos de 3M a 19M de colaboradores digitales para PyMES antes de 2028.',
+    tag: 'Agentes IA',
+    cta: 'Ver agentes',
   },
   {
     id: 4,
     image: imagen3,
     title: 'Marketplace #1 de IA',
-    description: 'Desarrolla tu fábrica de IA y nosotros la comercializamos'
+    description: 'Desarrolla tu solución de IA y nosotros la comercializamos. Acceso a infraestructura IA-ready y escaparate digital nacional.',
+    tag: 'Marketplace',
+    cta: 'Publicar solución',
   },
   {
     id: 5,
     image: imagen4,
-    title: 'Camaras IA',
-    description: 'Modificamos tus cámaras para el control de tu negocio'
-  }
+    title: 'Cámaras IA',
+    description: 'Convertimos tus cámaras existentes en inspectores 24/7: control de inventario, calidad, seguridad y comportamiento de clientes en tiempo real.',
+    tag: 'Vision IA',
+    cta: 'Ver demo',
+  },
 ];
 
-export default function imageCarousel() {
+export default function ImageCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isHovered, setIsHovered] = useState(false);
+  const [hoveredSlide, setHoveredSlide] = useState(false);
+  const [isCarouselHovered, setIsCarouselHovered] = useState(false);
   const autoPlayRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
-    if (!isHovered) {
+    if (!isCarouselHovered) {
       autoPlayRef.current = setInterval(() => {
         setCurrentIndex((prev) => (prev + 1) % carouselItems.length);
-      }, 4000);
+      }, 4500);
     }
-
     return () => {
-      if (autoPlayRef.current) {
-        clearInterval(autoPlayRef.current);
-      }
+      if (autoPlayRef.current) clearInterval(autoPlayRef.current);
     };
-  }, [isHovered]);
+  }, [isCarouselHovered]);
 
-  const nextSlide = () => {
-    setCurrentIndex((prev) => (prev + 1) % carouselItems.length);
+  const goTo = (index: number) => {
+    setCurrentIndex(index);
+    setHoveredSlide(false);
   };
+  const nextSlide = () => { setCurrentIndex((prev) => (prev + 1) % carouselItems.length); setHoveredSlide(false); };
+  const prevSlide = () => { setCurrentIndex((prev) => (prev - 1 + carouselItems.length) % carouselItems.length); setHoveredSlide(false); };
 
-  const prevSlide = () => {
-    setCurrentIndex((prev) => (prev - 1 + carouselItems.length) % carouselItems.length);
-  };
+  const item = carouselItems[currentIndex];
 
   return (
-    <div className="w-full bg-[#0A0A14] py-0">
+    <div className="w-full bg-[#0A0A14] px-4 md:px-10 lg:px-20 py-10">
+
+      {/* Main slide */}
       <div
-        className="relative w-full max-w-full mx-auto overflow-hidden group"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
+        className="relative w-full overflow-hidden rounded-2xl group"
+        style={{ height: 460 }}
+        onMouseEnter={() => setIsCarouselHovered(true)}
+        onMouseLeave={() => { setIsCarouselHovered(false); setHoveredSlide(false); }}
       >
-        {/* Carrusel */}
-        <div className="overflow-hidden">
+        {/* Images — crossfade via absolute positioning */}
+        {carouselItems.map((ci, idx) => (
           <div
-            className="flex transition-transform duration-700 ease-in-out"
-            style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+            key={ci.id}
+            className="absolute inset-0 transition-opacity duration-700"
+            style={{ opacity: idx === currentIndex ? 1 : 0, zIndex: idx === currentIndex ? 1 : 0 }}
           >
-            {carouselItems.map((item) => (
-              <div key={item.id} className="min-w-full">
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className="
-                    w-full
-                    h-auto
-                    object-cover
-                    select-none
-                    pointer-events-none
-                  "
-                  style={{ aspectRatio: '16/9', maxHeight: '600px' }}
-                />
-              </div>
-            ))}
+            <img
+              src={ci.image}
+              alt={ci.title}
+              className="w-full h-full object-cover select-none pointer-events-none transition-all duration-500"
+              style={{
+                filter: hoveredSlide && idx === currentIndex
+                  ? 'blur(4px) brightness(0.35)'
+                  : 'brightness(0.82)',
+              }}
+            />
           </div>
+        ))}
+
+        {/* Hover target layer */}
+        <div
+          className="absolute inset-0 z-10 cursor-pointer"
+          onMouseEnter={() => setHoveredSlide(true)}
+          onMouseLeave={() => setHoveredSlide(false)}
+        />
+
+        {/* Default bottom info — visible when NOT hovered */}
+        <div
+          className="absolute bottom-0 left-0 right-0 z-20 px-8 pb-8 pointer-events-none"
+          style={{
+            background: 'linear-gradient(to top, rgba(10,10,20,0.95) 0%, rgba(10,10,20,0.3) 50%, transparent 80%)',
+            opacity: hoveredSlide ? 0 : 1,
+            transform: hoveredSlide ? 'translateY(8px)' : 'translateY(0)',
+            transition: 'opacity 0.35s ease, transform 0.35s ease',
+          }}
+        >
+          <span
+            className="inline-block text-[10px] font-mono font-bold tracking-widest uppercase px-3 py-1 rounded-full mb-3"
+            style={{ background: 'rgba(164,217,85,0.15)', color: '#A4D955', border: '1px solid rgba(164,217,85,0.35)' }}
+          >
+            {item.tag}
+          </span>
+          <h3 className="text-white text-2xl md:text-3xl font-bold">{item.title}</h3>
+          <p className="text-gray-400 text-sm mt-1">Pasa el cursor para saber más</p>
         </div>
 
-        {/* Flecha izquierda */}
+        {/* Hover overlay — centered full info */}
+        <div
+          className="absolute inset-0 z-20 flex flex-col items-center justify-center px-8 md:px-20 text-center pointer-events-none"
+          style={{
+            opacity: hoveredSlide ? 1 : 0,
+            transform: hoveredSlide ? 'translateY(0)' : 'translateY(14px)',
+            transition: 'opacity 0.4s ease, transform 0.4s ease',
+          }}
+        >
+          <span
+            className="inline-block text-[10px] font-mono font-bold tracking-widest uppercase px-3 py-1 rounded-full mb-4"
+            style={{ background: 'rgba(164,217,85,0.2)', color: '#A4D955', border: '1px solid rgba(164,217,85,0.45)' }}
+          >
+            {item.tag}
+          </span>
+          <h3 className="text-white text-3xl md:text-5xl font-bold mb-5 leading-tight">
+            {item.title}
+          </h3>
+          <p className="text-gray-200 text-base md:text-xl max-w-2xl leading-relaxed mb-8">
+            {item.description}
+          </p>
+          <button
+            className="flex items-center gap-2 font-bold text-sm md:text-base px-7 py-3 rounded-xl transition-all duration-300 hover:scale-105 pointer-events-auto"
+            style={{ background: '#A4D955', color: '#0A0A14', boxShadow: '0 0 24px rgba(164,217,85,0.35)' }}
+          >
+            {item.cta}
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </button>
+        </div>
+
+        {/* Arrows */}
         <button
           onClick={prevSlide}
-          className="
-            absolute left-4 md:left-6 top-1/2 -translate-y-1/2
-            opacity-0 group-hover:opacity-100
-            transition-opacity duration-300
-            bg-lime-400 text-black p-3 md:p-4 rounded-full
-            hover:scale-110
-            z-10
-          "
+          className="absolute left-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110 z-30 w-10 h-10 rounded-full flex items-center justify-center"
+          style={{ background: 'rgba(164,217,85,0.9)', color: '#0A0A14' }}
         >
-          <svg className="w-5 h-5 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M15 19l-7-7 7-7" />
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
           </svg>
         </button>
-
-        {/* Flecha derecha */}
         <button
           onClick={nextSlide}
-          className="
-            absolute right-4 md:right-6 top-1/2 -translate-y-1/2
-            opacity-0 group-hover:opacity-100
-            transition-opacity duration-300
-            bg-lime-400 text-black p-3 md:p-4 rounded-full
-            hover:scale-110
-            z-10
-          "
+          className="absolute right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110 z-30 w-10 h-10 rounded-full flex items-center justify-center"
+          style={{ background: 'rgba(164,217,85,0.9)', color: '#0A0A14' }}
         >
-          <svg className="w-5 h-5 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M9 5l7 7-7 7" />
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
           </svg>
         </button>
 
-        {/* Indicadores */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-10">
-          {carouselItems.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentIndex(index)}
-              className={`
-                w-2 h-2 md:w-3 md:h-3 rounded-full transition-all duration-300
-                ${currentIndex === index ? 'bg-lime-400 w-8 md:w-10' : 'bg-white/50 hover:bg-white/80'}
-              `}
-            />
-          ))}
+        {/* Slide counter top-right */}
+        <div
+          className="absolute top-5 right-5 z-30 font-mono text-xs font-bold px-3 py-1.5 rounded-full"
+          style={{ background: 'rgba(10,10,20,0.7)', color: '#A4D955', border: '1px solid rgba(164,217,85,0.25)' }}
+        >
+          {String(currentIndex + 1).padStart(2, '0')} / {String(carouselItems.length).padStart(2, '0')}
         </div>
+      </div>
+
+      {/* Thumbnail strip */}
+      <div className="flex gap-3 mt-4 justify-center">
+        {carouselItems.map((ci, index) => (
+          <button
+            key={ci.id}
+            onClick={() => goTo(index)}
+            className="relative flex-1 max-w-[160px] rounded-xl overflow-hidden transition-all duration-300 group/thumb"
+            style={{
+              height: 68,
+              outline: currentIndex === index ? '2px solid #A4D955' : '2px solid transparent',
+              outlineOffset: 2,
+              opacity: currentIndex === index ? 1 : 0.45,
+              transform: currentIndex === index ? 'scale(1.05)' : 'scale(1)',
+            }}
+          >
+            <img
+              src={ci.image}
+              alt={ci.title}
+              className="w-full h-full object-cover transition-all duration-300 group-hover/thumb:brightness-110"
+              style={{ filter: currentIndex === index ? 'brightness(1)' : 'brightness(0.55)' }}
+            />
+            {/* Label */}
+            <div
+              className="absolute inset-0 flex items-end px-2 pb-1.5"
+              style={{ background: 'linear-gradient(to top, rgba(10,10,20,0.9) 0%, transparent 60%)' }}
+            >
+              <span className="text-white text-[9px] font-semibold leading-tight line-clamp-1 tracking-wide">
+                {ci.title}
+              </span>
+            </div>
+            {/* Active indicator */}
+            {currentIndex === index && (
+              <div className="absolute top-2 right-2 w-1.5 h-1.5 rounded-full" style={{ background: '#A4D955' }} />
+            )}
+          </button>
+        ))}
       </div>
     </div>
   );
