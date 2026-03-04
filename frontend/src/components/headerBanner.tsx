@@ -34,7 +34,29 @@ export default function HeaderBanner() {
   }, []);
 
   return (
-    <div className="w-full bg-[#0f0f1a] border-b border-lime-400/20 py-5 px-4">
+    <div className="w-full bg-[#0f0f1a] py-5 px-4 relative overflow-hidden">
+      {/* Animated gradient border — top */}
+      <div className="absolute top-0 left-0 right-0 h-[2px]" style={{
+        background: 'linear-gradient(90deg, transparent 0%, #A4D955 25%, #7FD1FF 50%, #A4D955 75%, transparent 100%)',
+        backgroundSize: '200% 100%',
+        animation: 'bannerBorder 3s linear infinite',
+      }} />
+      {/* Animated gradient border — bottom */}
+      <div className="absolute bottom-0 left-0 right-0 h-[2px]" style={{
+        background: 'linear-gradient(90deg, transparent 0%, #7FD1FF 25%, #A4D955 50%, #7FD1FF 75%, transparent 100%)',
+        backgroundSize: '200% 100%',
+        animation: 'bannerBorder 3s linear infinite reverse',
+      }} />
+      {/* Ambient glow */}
+      <div className="absolute inset-0 pointer-events-none" style={{
+        background: 'radial-gradient(ellipse 70% 120% at 50% 50%, rgba(164,217,85,0.05) 0%, transparent 70%)',
+      }} />
+      <style>{`
+        @keyframes bannerBorder {
+          0%   { background-position: 200% 0; }
+          100% { background-position: -200% 0; }
+        }
+      `}</style>
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
         {/* Countdown Timer */}
         <div className="flex gap-4 text-center">
