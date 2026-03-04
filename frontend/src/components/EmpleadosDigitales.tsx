@@ -73,7 +73,7 @@ const EmpleadosDigitales = () => {
   ];
 
   return (
-    <div className="w-full bg-gradient-to-b from-slate-900 via-gray-900 to-black py-20 px-4 relative overflow-hidden">
+    <div id="empleados-digitales" className="w-full bg-gradient-to-b from-slate-900 via-gray-900 to-black py-20 px-4 relative overflow-hidden">
       {/* Efectos de fondo mejorados */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f08_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f08_1px,transparent_1px)] bg-[size:40px_40px]"></div>

@@ -135,7 +135,7 @@ const AgentesConsultores = () => {
   }, [hoveredId, videoErrors, videoLoaded]);
 
   return (
-    <div className="w-full bg-gradient-to-b from-white via-slate-50 to-white py-20 relative overflow-hidden">
+    <div id="agentes-ia" className="w-full bg-gradient-to-b from-white via-slate-50 to-white py-20 relative overflow-hidden">
       {/* Efectos de fondo sutiles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-0 w-96 h-96 bg-lime-400/3 rounded-full blur-3xl"></div>

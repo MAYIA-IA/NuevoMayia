@@ -52,7 +52,7 @@ const AcademiaIA = () => {
   ];
 
   return (
-    <section className="w-full bg-gradient-to-b from-white via-slate-50 to-white py-20 relative overflow-hidden">
+    <section id="academia" className="w-full bg-gradient-to-b from-white via-slate-50 to-white py-20 relative overflow-hidden">
       {/* Efectos de fondo sutiles */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-lime-400/5 rounded-full blur-3xl animate-pulse"></div>

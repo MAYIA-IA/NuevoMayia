@@ -13,6 +13,7 @@ import CiberseguridadIA from './components/CiberseguridadIA';
 import AcademiaIA from './components/AcademiaIA';
 import Footer from './components/piepagina';
 import ChatWidget from './components/ChatAgente';
+import MusculosMAYiA from './components/musculosMayia';
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
       <NavigationBar />
       <SubNavigation />
       <BrandFooter />
+      <MusculosMAYiA />
       <ImageCarousel />
       <IAEmpresarial />
       <AgentesConsultores />

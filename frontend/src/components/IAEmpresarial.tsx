@@ -50,7 +50,7 @@ const IAEmpresarial = () => {
   ];
 
   return (
-    <div className="w-full bg-gradient-to-b from-slate-50 via-white to-slate-50 overflow-hidden">
+    <div id="ia-empresarial" className="w-full bg-gradient-to-b from-slate-50 via-white to-slate-50 overflow-hidden">
       {/* Hero Section - Más limpio y directo */}
       <div className="relative min-h-[70vh] flex items-center pb-16">
         {/* Efectos de fondo sutiles */}
