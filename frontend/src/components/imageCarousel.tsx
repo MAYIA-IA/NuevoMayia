@@ -58,6 +58,89 @@ const carouselItems: CarouselItem[] = [
   },
 ];
 
+/* ── Particle canvas ─────────────────────────────────────────────────────── */
+function ParticleCanvas() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    let animId: number;
+
+    const resize = () => {
+      canvas.width  = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+    };
+    resize();
+    window.addEventListener('resize', resize);
+
+    type P = { x: number; y: number; vx: number; vy: number; r: number; alpha: number; color: string; pulse: number; phase: number };
+    const COLORS = ['#A4D955', '#7FD1FF', '#A4D955', '#c8ec88', '#aadeff'];
+
+    const particles: P[] = Array.from({ length: 55 }, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 0.35,
+      vy: (Math.random() - 0.5) * 0.35,
+      r: Math.random() * 3 + 1,
+      alpha: Math.random() * 0.45 + 0.1,
+      color: COLORS[Math.floor(Math.random() * COLORS.length)],
+      pulse: Math.random() * 0.012 + 0.006,
+      phase: Math.random() * Math.PI * 2,
+    }));
+
+    const draw = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      particles.forEach((p) => {
+        p.phase += p.pulse;
+        const a = p.alpha * (0.55 + 0.45 * Math.sin(p.phase));
+
+        // glow
+        const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 5);
+        grad.addColorStop(0, p.color + Math.round(a * 255).toString(16).padStart(2, '0'));
+        grad.addColorStop(1, p.color + '00');
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r * 5, 0, Math.PI * 2);
+        ctx.fillStyle = grad;
+        ctx.fill();
+
+        // core dot
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = p.color + Math.round((a + 0.3) * 255).toString(16).padStart(2, '0').slice(-2);
+        ctx.fill();
+
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < -10) p.x = canvas.width + 10;
+        if (p.x > canvas.width + 10) p.x = -10;
+        if (p.y < -10) p.y = canvas.height + 10;
+        if (p.y > canvas.height + 10) p.y = -10;
+      });
+
+      animId = requestAnimationFrame(draw);
+    };
+    draw();
+
+    return () => {
+      cancelAnimationFrame(animId);
+      window.removeEventListener('resize', resize);
+    };
+  }, []);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      className="absolute inset-0 w-full h-full pointer-events-none"
+      style={{ zIndex: 0 }}
+    />
+  );
+}
+
 export default function ImageCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [hoveredSlide, setHoveredSlide] = useState(false);
@@ -75,26 +158,37 @@ export default function ImageCarousel() {
     };
   }, [isCarouselHovered]);
 
-  const goTo = (index: number) => {
-    setCurrentIndex(index);
-    setHoveredSlide(false);
-  };
+  const goTo = (index: number) => { setCurrentIndex(index); setHoveredSlide(false); };
   const nextSlide = () => { setCurrentIndex((prev) => (prev + 1) % carouselItems.length); setHoveredSlide(false); };
   const prevSlide = () => { setCurrentIndex((prev) => (prev - 1 + carouselItems.length) % carouselItems.length); setHoveredSlide(false); };
 
   const item = carouselItems[currentIndex];
 
   return (
-    <div className="w-full bg-[#0A0A14] px-4 md:px-10 lg:px-20 py-10">
+    /* ── Outer wrapper: WHITE bg with particles ── */
+    <div className="relative w-full overflow-hidden px-4 md:px-10 lg:px-20 py-10"
+      style={{ background: '#ffffff' }}>
+
+      {/* Particle layer (sits behind everything) */}
+      <ParticleCanvas />
+
+      {/* Soft vignette so edges feel airy */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(ellipse 80% 60% at 50% 50%, transparent 40%, rgba(240,248,255,0.6) 100%)',
+          zIndex: 1,
+        }}
+      />
 
       {/* Main slide */}
       <div
         className="relative w-full overflow-hidden rounded-2xl group"
-        style={{ height: 460 }}
+        style={{ height: 460, zIndex: 2 }}
         onMouseEnter={() => setIsCarouselHovered(true)}
         onMouseLeave={() => { setIsCarouselHovered(false); setHoveredSlide(false); }}
       >
-        {/* Images — crossfade via absolute positioning */}
         {carouselItems.map((ci, idx) => (
           <div
             key={ci.id}
@@ -121,7 +215,7 @@ export default function ImageCarousel() {
           onMouseLeave={() => setHoveredSlide(false)}
         />
 
-        {/* Default bottom info — visible when NOT hovered */}
+        {/* Default bottom info */}
         <div
           className="absolute bottom-0 left-0 right-0 z-20 px-8 pb-8 pointer-events-none"
           style={{
@@ -138,10 +232,10 @@ export default function ImageCarousel() {
             {item.tag}
           </span>
           <h3 className="text-white text-2xl md:text-3xl font-bold">{item.title}</h3>
-          <p className="text-gray-400 text-sm mt-1">Pasa el cursor para saber más</p>
+          <p className="text-gray-300 text-sm mt-1">Pasa el cursor para saber más</p>
         </div>
 
-        {/* Hover overlay — centered full info */}
+        {/* Hover overlay */}
         <div
           className="absolute inset-0 z-20 flex flex-col items-center justify-center px-8 md:px-20 text-center pointer-events-none"
           style={{
@@ -156,12 +250,8 @@ export default function ImageCarousel() {
           >
             {item.tag}
           </span>
-          <h3 className="text-white text-3xl md:text-5xl font-bold mb-5 leading-tight">
-            {item.title}
-          </h3>
-          <p className="text-gray-200 text-base md:text-xl max-w-2xl leading-relaxed mb-8">
-            {item.description}
-          </p>
+          <h3 className="text-white text-3xl md:text-5xl font-bold mb-5 leading-tight">{item.title}</h3>
+          <p className="text-gray-200 text-base md:text-xl max-w-2xl leading-relaxed mb-8">{item.description}</p>
           <button
             className="flex items-center gap-2 font-bold text-sm md:text-base px-7 py-3 rounded-xl transition-all duration-300 hover:scale-105 pointer-events-auto"
             style={{ background: '#A4D955', color: '#0A0A14', boxShadow: '0 0 24px rgba(164,217,85,0.35)' }}
@@ -193,7 +283,7 @@ export default function ImageCarousel() {
           </svg>
         </button>
 
-        {/* Slide counter top-right */}
+        {/* Slide counter */}
         <div
           className="absolute top-5 right-5 z-30 font-mono text-xs font-bold px-3 py-1.5 rounded-full"
           style={{ background: 'rgba(10,10,20,0.7)', color: '#A4D955', border: '1px solid rgba(164,217,85,0.25)' }}
@@ -203,7 +293,7 @@ export default function ImageCarousel() {
       </div>
 
       {/* Thumbnail strip */}
-      <div className="flex gap-3 mt-4 justify-center">
+      <div className="flex gap-3 mt-4 justify-center" style={{ position: 'relative', zIndex: 2 }}>
         {carouselItems.map((ci, index) => (
           <button
             key={ci.id}
@@ -213,17 +303,17 @@ export default function ImageCarousel() {
               height: 68,
               outline: currentIndex === index ? '2px solid #A4D955' : '2px solid transparent',
               outlineOffset: 2,
-              opacity: currentIndex === index ? 1 : 0.45,
+              opacity: currentIndex === index ? 1 : 0.55,
               transform: currentIndex === index ? 'scale(1.05)' : 'scale(1)',
+              boxShadow: currentIndex === index ? '0 4px 16px rgba(164,217,85,0.25)' : 'none',
             }}
           >
             <img
               src={ci.image}
               alt={ci.title}
               className="w-full h-full object-cover transition-all duration-300 group-hover/thumb:brightness-110"
-              style={{ filter: currentIndex === index ? 'brightness(1)' : 'brightness(0.55)' }}
+              style={{ filter: currentIndex === index ? 'brightness(1)' : 'brightness(0.65)' }}
             />
-            {/* Label */}
             <div
               className="absolute inset-0 flex items-end px-2 pb-1.5"
               style={{ background: 'linear-gradient(to top, rgba(10,10,20,0.9) 0%, transparent 60%)' }}
@@ -232,7 +322,6 @@ export default function ImageCarousel() {
                 {ci.title}
               </span>
             </div>
-            {/* Active indicator */}
             {currentIndex === index && (
               <div className="absolute top-2 right-2 w-1.5 h-1.5 rounded-full" style={{ background: '#A4D955' }} />
             )}
