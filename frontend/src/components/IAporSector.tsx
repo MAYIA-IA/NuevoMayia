@@ -1,205 +1,226 @@
-import { useState } from 'react';
+import SectionModules from './SectionModules';
+import type { ModuleCard } from './SectionModules';
 
-const IAPorSector = () => {
-  const [hoveredDetail, setHoveredDetail] = useState<number | null>(null);
+const cards: ModuleCard[] = [
+  {
+    id: 'finanzas',
+    title: 'Finanzas',
+    tagline: 'Banca, seguros e inversión',
+    description: 'Detección de fraudes en tiempo real, banca personalizada con chatbots y perspectivas de inversión potenciadas por modelos predictivos.',
+    glowColor: '#6ee7b7',
+    accentColor: '#059669',
+    stats: [{ value: '99.7%', label: 'Precisión anti-fraude' }, { value: '3 min', label: 'Aprobación crédito' }],
+    icon: (
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    ),
+    detail: {
+      headline: 'IA que protege y hace crecer tu patrimonio',
+      body: 'Soluciones diseñadas para el sector financiero mexicano, cumpliendo CNBV, CONDUSEF y mejores prácticas internacionales. Desde la detección de transacciones sospechosas hasta asesores de inversión personalizados.',
+      bullets: [
+        'Motor antifraude con aprendizaje continuo y < 0.1% falsos positivos',
+        'Chatbot bancario multicanal (app, web, WhatsApp)',
+        'Modelos de scoring crediticio inclusivos y explicables',
+        'Análisis de sentimiento de mercados en tiempo real',
+        'Cumplimiento automatizado con regulación CNBV/Banxico',
+      ],
+      cta: 'Ver solución para Finanzas',
+    },
+  },
+  {
+    id: 'salud',
+    title: 'Salud',
+    tagline: 'Hospitales, farma y clínicas',
+    description: 'Simulación de moléculas, descubrimiento de fármacos y análisis de datos de ensayos clínicos para acelerar la investigación médica.',
+    glowColor: '#a3e635',
+    accentColor: '#4d7c0f',
+    stats: [{ value: '40%', label: 'Reducción diagnóstico' }, { value: '10×', label: 'Velocidad fármacos' }],
+    icon: (
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+      </svg>
+    ),
+    detail: {
+      headline: 'Tecnología que salva vidas',
+      body: 'Plataforma de IA clínica que asiste a médicos con diagnósticos diferenciales, optimiza agendas hospitalarias y acelera la investigación farmacéutica mediante simulación molecular.',
+      bullets: [
+        'Apoyo al diagnóstico médico con modelos de visión computacional',
+        'Análisis automatizado de imágenes de radiología y patología',
+        'Plataforma de gestión de ensayos clínicos y datos de pacientes',
+        'Predicción de reingresos hospitalarios y deterioro del paciente',
+        'Cumplimiento con NOM-024-SSA3 y regulación COFEPRIS',
+      ],
+      cta: 'Ver solución para Salud',
+    },
+  },
+  {
+    id: 'retail',
+    title: 'Retail',
+    tagline: 'Tiendas físicas y e-commerce',
+    description: 'Compras personalizadas, tiendas inteligentes, gestión omnicanal y chatbots de servicio al cliente que convierten y retienen.',
+    glowColor: '#bbf7d0',
+    accentColor: '#16a34a',
+    stats: [{ value: '+28%', label: 'Conversión' }, { value: '−35%', label: 'Merma' }],
+    icon: (
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+      </svg>
+    ),
+    detail: {
+      headline: 'El retail inteligente que tus clientes esperan',
+      body: 'Desde la personalización del journey digital hasta la optimización del inventario físico, nuestra IA integra todos los canales para maximizar conversión y experiencia de cliente.',
+      bullets: [
+        'Motor de recomendaciones personalizado por comportamiento y contexto',
+        'Gestión inteligente de inventario con predicción de demanda',
+        'Análisis de flujo en tienda con cámaras IA (sin rostros)',
+        'Chatbot de atención al cliente con escalamiento a humano',
+        'Precios dinámicos y optimización de promociones',
+      ],
+      cta: 'Ver solución para Retail',
+    },
+  },
+  {
+    id: 'manufactura',
+    title: 'Manufactura',
+    tagline: 'Planta, calidad y cadena de valor',
+    description: 'La fábrica habilitada por IA: diseño de productos, mantenimiento predictivo y chatbots para el proceso de ventas industriales.',
+    glowColor: '#d9f99d',
+    accentColor: '#65a30d',
+    stats: [{ value: '60%', label: 'Menos paros' }, { value: '+15%', label: 'Throughput' }],
+    icon: (
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+      </svg>
+    ),
+    detail: {
+      headline: 'La fábrica del futuro, hoy',
+      body: 'Transformamos plantas industriales en operaciones inteligentes: sensores IoT + IA predicen fallas antes de que ocurran, vision systems detectan defectos en línea y gemelos digitales optimizan cada proceso.',
+      bullets: [
+        'Mantenimiento predictivo con sensores IoT y modelos de anomalía',
+        'Control de calidad visual con cámaras IA en línea de producción',
+        'Gemelo digital de planta para optimización de throughput',
+        'Planificación de producción con IA considerando demanda y cuellos de botella',
+        'Chatbot técnico para soporte en piso de planta',
+      ],
+      cta: 'Ver solución para Manufactura',
+    },
+  },
+  {
+    id: 'sector-publico',
+    title: 'Sector Público',
+    tagline: 'Gobierno federal, estatal y municipal',
+    description: 'Chatbots para participación ciudadana, resumen de documentos, cumplimiento de auditorías y asistentes virtuales de IA.',
+    glowColor: '#6ee7b7',
+    accentColor: '#059669',
+    stats: [{ value: '80%', label: 'Menos trámites manuales' }, { value: '24/7', label: 'Atención ciudadana' }],
+    icon: (
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+      </svg>
+    ),
+    detail: {
+      headline: 'Gobierno digital que sirve a los ciudadanos',
+      body: 'Soluciones de IA diseñadas para modernizar la gestión pública: desde la atención ciudadana automatizada hasta la detección de irregularidades en procesos de auditoría.',
+      bullets: [
+        'Asistente virtual ciudadano multicanal (web, WhatsApp, app)',
+        'Automatización de trámites y digitalización de expedientes',
+        'Análisis de contratos y documentos legales con NLP',
+        'Sistema de alertas tempranas para auditorías internas',
+        'Dashboard de KPIs de gobierno abierto y transparencia',
+      ],
+      cta: 'Ver solución para Gobierno',
+    },
+  },
+  {
+    id: 'energia',
+    title: 'Energía',
+    tagline: 'Oil & gas, renovables y utilities',
+    description: 'Gemelos digitales, mantenimiento predictivo y preventivo, y servicio al cliente para el sector energético.',
+    glowColor: '#a3e635',
+    accentColor: '#4d7c0f',
+    stats: [{ value: '45%', label: 'Reducción OPEX' }, { value: '+20%', label: 'Generación eficiente' }],
+    icon: (
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M13 10V3L4 14h7v7l9-11h-7z" />
+      </svg>
+    ),
+    detail: {
+      headline: 'Energía más limpia y rentable con IA',
+      body: 'Optimizamos la generación, distribución y comercialización de energía mediante modelos predictivos que maximizan la eficiencia y reducen costos operativos.',
+      bullets: [
+        'Gemelo digital de planta generadora o red de distribución',
+        'Predicción de demanda energética con series temporales',
+        'Mantenimiento predictivo de turbinas, transformadores y equipos',
+        'Optimización de portafolio de generación renovable',
+        'Detección de fraude en consumo y pérdidas técnicas',
+      ],
+      cta: 'Ver solución para Energía',
+    },
+  },
+  {
+    id: 'ingenieria',
+    title: 'Ingeniería y Construcción',
+    tagline: 'Diseño, obra y cadena de valor',
+    description: 'Acelera flujos de trabajo de diseño, toma decisiones con rastreo en tiempo real y obtén perspectivas profundas en productos.',
+    glowColor: '#bbf7d0',
+    accentColor: '#16a34a',
+    stats: [{ value: '35%', label: 'Menos tiempo diseño' }, { value: '−25%', label: 'Incidentes en obra' }],
+    icon: (
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+      </svg>
+    ),
+    detail: {
+      headline: 'Construye más rápido, con más seguridad',
+      body: 'Desde el diseño generativo asistido por IA hasta el monitoreo de seguridad en obra con cámaras inteligentes, transformamos cada etapa del ciclo de vida de los proyectos de ingeniería.',
+      bullets: [
+        'Diseño generativo: la IA propone alternativas óptimas de ingeniería',
+        'BIM aumentado con análisis predictivo de costos y plazos',
+        'Monitoreo de seguridad en obra con cámaras IA (EPP, zonas restringidas)',
+        'Optimización de cadena de suministro de materiales',
+        'Detección temprana de desviaciones en cronograma y presupuesto',
+      ],
+      cta: 'Ver solución para Construcción',
+    },
+  },
+  {
+    id: 'medios',
+    title: 'Medios y Entretenimiento',
+    tagline: 'Contenido, publicidad y experiencias',
+    description: 'Desarrollo de personajes, edición de video, creación de imágenes y publicidad hiper-personalizada para el consumidor moderno.',
+    glowColor: '#d9f99d',
+    accentColor: '#65a30d',
+    stats: [{ value: '5×', label: 'Más contenido' }, { value: '+40%', label: 'Engagement' }],
+    icon: (
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+      </svg>
+    ),
+    detail: {
+      headline: 'Contenido a escala, creatividad sin límites',
+      body: 'Potenciamos a creativos y equipos de marketing con herramientas de IA generativa que multiplican la producción de contenido sin sacrificar calidad ni identidad de marca.',
+      bullets: [
+        'Generación de variantes de campaña para A/B testing masivo',
+        'Localización y adaptación cultural automática de contenido',
+        'Análisis de audiencia para segmentación hiper-personalizada',
+        'Asistente de guión y desarrollo de narrativa para series y anuncios',
+        'Herramientas de edición de video y postproducción asistida por IA',
+      ],
+      cta: 'Ver solución para Medios',
+    },
+  },
+];
 
-  const sectoresDetallados = [
-    {
-      id: 1,
-      category: "Finanzas",
-      title: "Finanzas",
-      image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=400&h=250&fit=crop",
-      gradient: "from-blue-600 to-purple-600",
-      services: [
-        "Detección de Pagos y Fraudes",
-        "Banca Personalizada (chatbots)",
-        "Perspectivas de Inversión y Trading"
-      ]
-    },
-    {
-      id: 2,
-      category: "Salud",
-      title: "Salud",
-      image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=400&h=250&fit=crop",
-      gradient: "from-green-600 to-teal-600",
-      services: [
-        "Simulación de Moléculas",
-        "Descubrimiento de Fármacos",
-        "Análisis de Datos de Ensayos Clínicos"
-      ]
-    },
-    {
-      id: 3,
-      category: "Retail",
-      title: "Retail",
-      image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400&h=250&fit=crop",
-      gradient: "from-cyan-600 to-blue-600",
-      services: [
-        "Compras Personalizadas",
-        "Tiendas Inteligentes y Cadena de Suministro",
-        "Gestión Omnicanal",
-        "Chatbots de Servicio al Cliente"
-      ]
-    },
-    {
-      id: 4,
-      category: "Ingeniería",
-      title: "Ingeniería y Construcción",
-      image: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=400&h=250&fit=crop",
-      gradient: "from-orange-600 to-red-600",
-      services: [
-        "Acelerar Flujos de Trabajo de Diseño",
-        "Tomar Decisiones Más Rápidas con Rastreo en Tiempo Real",
-        "Perspectivas Más Profundas en Productos de Diseño"
-      ]
-    },
-    {
-      id: 5,
-      category: "Medios",
-      title: "Medios y Entretenimiento",
-      image: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=400&h=250&fit=crop",
-      gradient: "from-pink-600 to-purple-600",
-      services: [
-        "Desarrollo de Personajes",
-        "Edición de Video y Creación de Imágenes",
-        "Publicidad Hiper-Personalizada para el Consumidor"
-      ]
-    },
-    {
-      id: 6,
-      category: "Manufactura",
-      title: "Manufactura",
-      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=250&fit=crop",
-      gradient: "from-lime-600 to-green-600",
-      services: [
-        "La Fábrica Habilitada por IA",
-        "Diseño y Desarrollo de Productos",
-        "Mantenimiento Predictivo",
-        "Chatbots para el Proceso de Ventas"
-      ]
-    },
-    {
-      id: 7,
-      category: "Público",
-      title: "Sector Público",
-      image: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=400&h=250&fit=crop",
-      gradient: "from-indigo-600 to-purple-600",
-      services: [
-        "Chatbots para la Participación Ciudadana",
-        "Resumen de Documentos",
-        "Cumplimiento de Auditorías",
-        "Asistentes Virtuales de IA"
-      ]
-    },
-    {
-      id: 8,
-      category: "Energía",
-      title: "Energía",
-      image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=400&h=250&fit=crop",
-      gradient: "from-yellow-600 to-orange-600",
-      services: [
-        "Gemelos Digitales",
-        "Mantenimiento Predictivo y Preventivo",
-        "Servicio al Cliente"
-      ]
-    }
-  ];
-
+export default function IAPorSector() {
   return (
-    <div id="ia-sectores" className="w-full bg-gradient-to-b from-white via-gray-50 to-white py-16 relative overflow-hidden">
-      {/* Efectos de fondo */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-lime-400/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-cyan-400/5 rounded-full blur-3xl"></div>
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:32px_32px]"></div>
-      </div>
-
-      <div className="container mx-auto px-4 relative z-10">
-        {/* Header mejorado */}
-        <div className="mb-12 text-center">
-          <div className="inline-block">
-            <h1 className="text-5xl lg:text-6xl font-bold mb-3 bg-gradient-to-r from-[#0a1f44] via-cyan-700 to-[#0a1f44] bg-clip-text text-transparent">
-              IA por Sector
-            </h1>
-            <div className="h-1 bg-gradient-to-r from-lime-400 via-cyan-400 to-lime-400 rounded-full"></div>
-          </div>
-          <p className="text-base text-gray-600 mt-6">
-            Soluciones disponibles como 
-            <span className="mx-2 px-3 py-1 bg-gradient-to-r from-lime-400 to-cyan-400 text-gray-900 rounded-full text-sm font-bold">VaaS</span>
-            y
-            <span className="ml-2 px-3 py-1 bg-gradient-to-r from-cyan-400 to-lime-400 text-gray-900 rounded-full text-sm font-bold">SaaS</span>
-          </p>
-        </div>
-
-        {/* Sección de 8 sectores detallados - TODOS CON MISMA ALTURA */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {sectoresDetallados.map((sector) => (
-            <div 
-              key={sector.id}
-              onMouseEnter={() => setHoveredDetail(sector.id)}
-              onMouseLeave={() => setHoveredDetail(null)}
-              className="group relative bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-200 transition-all duration-500 hover:shadow-2xl hover:scale-105 flex flex-col h-full"
-            >
-              {/* Image con overlay - ALTURA FIJA */}
-              <div className="relative h-48 overflow-hidden flex-shrink-0">
-                <img 
-                  src={sector.image} 
-                  alt={sector.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className={`absolute inset-0 bg-gradient-to-br ${sector.gradient} opacity-60 mix-blend-multiply transition-opacity duration-500 group-hover:opacity-80`}></div>
-                
-                {/* Título sobre imagen */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <h3 className="text-2xl font-bold text-white text-center px-4 transform transition-all duration-500 group-hover:scale-110">
-                    {sector.title}
-                  </h3>
-                </div>
-
-                {/* Badge de categoría */}
-                <div className={`absolute top-4 right-4 px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold ${sector.gradient} bg-clip-text text-transparent transform translate-x-20 group-hover:translate-x-0 transition-transform duration-500`}>
-                  {sector.category}
-                </div>
-              </div>
-
-              {/* Content - FLEX-GROW PARA OCUPAR ESPACIO RESTANTE */}
-              <div className="p-6 flex flex-col flex-grow">
-                {/* Lista de servicios con altura fija y scroll si es necesario */}
-                <div className="flex-grow mb-4">
-                  <ul className="space-y-2.5 h-full">
-                    {sector.services.map((service, index) => (
-                      <li 
-                        key={index} 
-                        className="flex items-start gap-2 text-xs text-gray-700 leading-relaxed group/item"
-                      >
-                        <svg className={`w-4 h-4 flex-shrink-0 mt-0.5 bg-gradient-to-br ${sector.gradient} text-transparent`} fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                        </svg>
-                        <span className="flex-1 group-hover/item:text-gray-900 transition-colors line-clamp-2">
-                          {service}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Botón de reserva - SIEMPRE EN LA PARTE INFERIOR */}
-                <div className="mt-auto">
-                  <button className={`w-full bg-gradient-to-r ${sector.gradient} text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300 hover:scale-105 shadow-md hover:shadow-xl relative overflow-hidden group/btn`}>
-                    <span className="relative z-10 text-sm">Agendar Demo</span>
-                    <div className="absolute inset-0 bg-white/20 transform scale-x-0 group-hover/btn:scale-x-100 transition-transform origin-left duration-300"></div>
-                  </button>
-                </div>
-              </div>
-
-              {/* Línea decorativa inferior */}
-              <div className={`h-1 bg-gradient-to-r ${sector.gradient} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left flex-shrink-0`}></div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
+    <SectionModules
+      id="ia-sectores"
+      eyebrow="Soluciones VaaS & SaaS por Industria"
+      sectionTitle="IA por Sector"
+      sectionSubtitle="Soluciones de inteligencia artificial diseñadas para los retos específicos de cada industria. Implementación en semanas, no meses."
+      cards={cards}
+      background="#f9fafb"
+    />
   );
-};
-
-export default IAPorSector;
+}

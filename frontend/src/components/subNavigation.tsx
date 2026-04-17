@@ -15,8 +15,6 @@ const subNavItems: SubNavItem[] = [
   { label: 'Academia MAYiA',      href: '#academia' },
   { label: 'Nube Flai IA',        href: '#flai' },
   { label: 'Fábrica Edgenet',     href: '#spaces' },
-  { label: 'Robotics & Quantum',  href: '#robotics' },
-  { label: 'Soberanía de datos',  href: '#soberania' },
 ];
 
 /* ── Tiny spark particle canvas for the horizontal bar ───────────────────── */
@@ -179,7 +177,6 @@ export default function SubNavigation() {
             animation: 'slideInRight 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both',
           }}
         >
-          {/* Pill container — white on white page, subtle shadow */}
           <div
             className="flex flex-col"
             style={{
@@ -280,7 +277,7 @@ export default function SubNavigation() {
     );
   }
 
-  /* ── HORIZONTAL BAR — white bg + particles ───────────────────────────── */
+  /* ── HORIZONTAL BAR ───────────────────────────────────────────────────── */
   return (
     <div
       ref={navRef}
@@ -291,7 +288,6 @@ export default function SubNavigation() {
         borderBottom: '1px solid rgba(164,217,85,0.18)',
       }}
     >
-      {/* Particle canvas */}
       <NavParticleCanvas />
 
       <div className="relative max-w-7xl mx-auto px-3 sm:px-4" style={{ zIndex: 1 }}>
@@ -312,24 +308,18 @@ export default function SubNavigation() {
                 <span
                   className="relative z-10 transition-colors duration-200"
                   style={{
-                    color: isActive
-                      ? '#111'
-                      : isVisited
-                      ? '#5aab00'
-                      : '#374151',
+                    color: isActive ? '#111' : isVisited ? '#5aab00' : '#374151',
                   }}
                 >
                   {item.label}
                 </span>
 
-                {/* Hover / active background */}
                 <div
                   className={`absolute inset-0 rounded-md transition-all duration-300
                     ${hoveredIndex === index || isActive ? 'opacity-100' : 'opacity-0'}`}
                   style={{ background: 'linear-gradient(90deg, #A4D955, #7FD1FF)' }}
                 />
 
-                {/* Glow */}
                 <div
                   className={`absolute -inset-1 rounded-md blur-sm transition-all duration-300
                     ${hoveredIndex === index || isActive ? 'opacity-30' : 'opacity-0'}`}
