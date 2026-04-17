@@ -10,19 +10,6 @@ import video8 from '../assets/PildorasIA/OperacionSucursales.mp4';
 
 import logoSrc from '../assets/PildorasIA/Imagen6.png';
 
-// ─────────────────────────────────────────────────────────────────────────────
-// SECCIÓN HERO — espacios para media externa
-// ─────────────────────────────────────────────────────────────────────────────
-// • heroVideoSrc   → ruta del video principal (donde aparece la ciudad 3D)
-//   Ejemplo: import heroVideo from '../assets/hero.mp4'; → heroVideoSrc={heroVideo}
-// • advisorMedia   → array de 3 objetos { type: 'image'|'video', src: string }
-//   Cada objeto corresponde a un asesor en la sección inferior del hero.
-//   Ejemplo:
-//     const advisorMedia = [
-//       { type: 'video', src: advisorVideo1 },
-//       { type: 'image', src: advisorImg2 },
-//       { type: 'video', src: advisorVideo3 },
-//     ];
 
 const PildorasIA = () => {
   // ── STATE ──────────────────────────────────────────────────────────────────
@@ -71,7 +58,6 @@ const PildorasIA = () => {
     : pildoras.filter(p => p.category === activeFilter);
 
   // ── ASESORES para el hero (espacios para media externa) ────────────────────
-  // Reemplaza los src con tus propias imágenes o videos.
   // type: 'image' | 'video'
   const advisors = [
     { id: 'a1', label: 'Asesor Contable',      description: 'Automatiza tus procesos fiscales y contables con IA entrenada en normatividad mexicana.', type: 'image' as const, src: '' },
