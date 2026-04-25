@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
 const IAPorSector = () => {
-  const [hoveredDetail, setHoveredDetail] = useState<number | null>(null);
 
   const sectoresDetallados = [
     {
@@ -136,8 +135,6 @@ const IAPorSector = () => {
           {sectoresDetallados.map((sector) => (
             <div 
               key={sector.id}
-              onMouseEnter={() => setHoveredDetail(sector.id)}
-              onMouseLeave={() => setHoveredDetail(null)}
               className="group relative bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-200 transition-all duration-500 hover:shadow-2xl hover:scale-105 flex flex-col h-full"
             >
               {/* Image con overlay - ALTURA FIJA */}

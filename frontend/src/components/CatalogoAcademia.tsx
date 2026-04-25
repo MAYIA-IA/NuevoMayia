@@ -19,7 +19,6 @@ interface CatalogoAcademiaProps {
 const CatalogoAcademia = ({ isOpen, onClose }: CatalogoAcademiaProps) => {
   const [filtroCategoria, setFiltroCategoria] = useState<'TODOS' | 'NEGOCIOS' | 'TECH'>('TODOS');
   const [filtroNivel, setFiltroNivel] = useState<'TODOS' | 'PRINCIPIANTE' | 'INTERMEDIO' | 'AVANZADO'>('TODOS');
-  const [hoveredCourse, setHoveredCourse] = useState<number | null>(null);
   const [busqueda, setBusqueda] = useState('');
   const savedScrollY = useRef(0);
 
@@ -514,8 +513,6 @@ const CatalogoAcademia = ({ isOpen, onClose }: CatalogoAcademiaProps) => {
                 {cursosNegocios.map((curso) => (
                   <div
                     key={curso.id}
-                    onMouseEnter={() => setHoveredCourse(curso.id)}
-                    onMouseLeave={() => setHoveredCourse(null)}
                     className="group relative bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-2xl cursor-pointer border border-gray-700 hover:border-lime-400"
                   >
                     {/* Gradient overlay */}
@@ -586,8 +583,6 @@ const CatalogoAcademia = ({ isOpen, onClose }: CatalogoAcademiaProps) => {
                 {cursosTech.map((curso) => (
                   <div
                     key={curso.id}
-                    onMouseEnter={() => setHoveredCourse(curso.id)}
-                    onMouseLeave={() => setHoveredCourse(null)}
                     className="group relative bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-2xl cursor-pointer border border-gray-700 hover:border-cyan-400"
                   >
                     {/* Gradient overlay */}
