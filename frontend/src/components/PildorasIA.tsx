@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import video1 from '../assets/PildorasIA/imagen2.mp4';
+import video1 from '../assets/PildorasIA/Imagen2.mp4';
 import video2 from '../assets/PildorasIA/WhCF.mp4';
 import video3 from '../assets/PildorasIA/Recomendadora.mp4';
 import video4 from '../assets/PildorasIA/Ciberseguridad.mp4';
