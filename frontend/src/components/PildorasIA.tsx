@@ -9,6 +9,10 @@ import video7 from '../assets/PildorasIA/PrevencionRobo.mp4';
 import video8 from '../assets/PildorasIA/OperacionSucursales.mp4';
 
 import logoSrc from '../assets/PildorasIA/Imagen6.png';
+import PildoraViewer from './PildoraViewer';
+
+const WA_URL = 'https://api.whatsapp.com/send/?phone=525553315526&text&type=phone_number&app_absent=0';
+const openWA = () => window.open(WA_URL, '_blank', 'noopener,noreferrer');
 
 
 const PildorasIA = () => {
@@ -60,9 +64,9 @@ const PildorasIA = () => {
   // ── ASESORES para el hero (espacios para media externa) ────────────────────
   // type: 'image' | 'video'
   const advisors = [
-    { id: 'a1', label: 'Asesor Contable',      description: 'Automatiza tus procesos fiscales y contables con IA entrenada en normatividad mexicana.', type: 'image' as const, src: '' },
-    { id: 'a2', label: 'Agente de Ventas',     description: 'Incrementa tus conversiones con recomendaciones inteligentes y seguimiento automatizado.', type: 'image' as const, src: '' },
-    { id: 'a3', label: 'Vigilancia IA',        description: 'Monitoreo inteligente en tiempo real para proteger tus instalaciones y activos.', type: 'image' as const, src: '' },
+    { id: 'a1', label: 'Asesor Contable',  description: 'Automatiza tus procesos fiscales y contables con IA entrenada en normatividad mexicana.', type: 'image' as const, src: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=600&h=400&fit=crop&auto=format' },
+    { id: 'a2', label: 'Agente de Ventas', description: 'Incrementa tus conversiones con recomendaciones inteligentes y seguimiento automatizado.', type: 'image' as const, src: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&h=400&fit=crop&auto=format' },
+    { id: 'a3', label: 'Vigilancia IA',   description: 'Monitoreo inteligente en tiempo real para proteger tus instalaciones y activos.', type: 'image' as const, src: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=600&h=400&fit=crop&auto=format' },
   ];
 
   // ── HANDLERS ──────────────────────────────────────────────────────────────
@@ -125,23 +129,24 @@ const PildorasIA = () => {
         ::-webkit-scrollbar-track { background: #0a0f1e; }
         ::-webkit-scrollbar-thumb { background: #a3e635; border-radius: 2px; }
 
-        /* fade-in animation */
+        /* iOS spring entrance */
         @keyframes fadeUp {
-          from { opacity: 0; transform: translateY(24px); }
-          to   { opacity: 1; transform: translateY(0); }
+          0%   { opacity: 0; transform: translateY(28px) scale(0.97); }
+          60%  { opacity: 1; transform: translateY(-3px) scale(1.005); }
+          100% { opacity: 1; transform: translateY(0) scale(1); }
         }
-        .fade-up { animation: fadeUp 0.6s ease forwards; }
-        .fade-up-d1 { animation-delay: 0.1s; opacity: 0; }
-        .fade-up-d2 { animation-delay: 0.2s; opacity: 0; }
-        .fade-up-d3 { animation-delay: 0.3s; opacity: 0; }
-        .fade-up-d4 { animation-delay: 0.4s; opacity: 0; }
+        .fade-up { animation: fadeUp 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+        .fade-up-d1 { animation-delay: 0.08s; opacity: 0; }
+        .fade-up-d2 { animation-delay: 0.16s; opacity: 0; }
+        .fade-up-d3 { animation-delay: 0.24s; opacity: 0; }
+        .fade-up-d4 { animation-delay: 0.32s; opacity: 0; }
 
         /* pill badge pulse */
         @keyframes pulseGlow {
-          0%, 100% { box-shadow: 0 0 6px #a3e63544; }
-          50%       { box-shadow: 0 0 16px #a3e63588; }
+          0%, 100% { box-shadow: 0 0 6px #a3e63544; transform: scale(1); }
+          50%       { box-shadow: 0 0 16px #a3e63588; transform: scale(1.02); }
         }
-        .badge-pulse { animation: pulseGlow 2.4s ease-in-out infinite; }
+        .badge-pulse { animation: pulseGlow 2.4s cubic-bezier(0.45, 0, 0.55, 1) infinite; }
 
         /* nav underline */
         .nav-link { position: relative; }
@@ -151,7 +156,7 @@ const PildorasIA = () => {
           bottom: -2px; left: 0;
           width: 0; height: 1px;
           background: #a3e635;
-          transition: width 0.3s ease;
+          transition: width 0.35s cubic-bezier(0.2, 0, 0, 1);
         }
         .nav-link:hover::after { width: 100%; }
 
@@ -166,12 +171,13 @@ const PildorasIA = () => {
           animation: shimmer 3s infinite;
         }
 
-        /* video modal */
+        /* video modal — iOS spring */
         @keyframes modalIn {
-          from { opacity: 0; transform: scale(0.94); }
-          to   { opacity: 1; transform: scale(1); }
+          0%   { opacity: 0; transform: scale(0.90) translateY(20px); }
+          60%  { opacity: 1; transform: scale(1.02) translateY(-4px); }
+          100% { opacity: 1; transform: scale(1) translateY(0); }
         }
-        .modal-in { animation: modalIn 0.25s ease forwards; }
+        .modal-in { animation: modalIn 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
 
         /* scan line overlay */
         .scan-lines {
@@ -184,6 +190,33 @@ const PildorasIA = () => {
           );
           pointer-events: none;
         }
+
+        /* iOS spring card hover */
+        .card-hover {
+          transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+                      box-shadow 0.35s cubic-bezier(0.2, 0, 0, 1),
+                      border-color 0.3s ease;
+        }
+        .card-hover:hover { transform: translateY(-6px) scale(1.01); }
+
+        /* floating glow orb animation */
+        @keyframes floatOrb {
+          0%, 100% { transform: translateY(0) scale(1); opacity: 0.8; }
+          50%       { transform: translateY(-18px) scale(1.06); opacity: 1; }
+        }
+        .float-orb { animation: floatOrb 5s cubic-bezier(0.45, 0, 0.55, 1) infinite; }
+
+        /* advisor image zoom on hover */
+        .advisor-img { transition: transform 0.55s cubic-bezier(0.2, 0, 0, 1); }
+        .advisor-card:hover .advisor-img { transform: scale(1.06); }
+
+        /* button press iOS feel */
+        .btn-spring {
+          transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+                      box-shadow 0.3s cubic-bezier(0.2, 0, 0, 1);
+        }
+        .btn-spring:hover  { transform: scale(1.055) translateY(-1px); }
+        .btn-spring:active { transform: scale(0.97); transition-duration: 0.12s; }
       `}</style>
 
       {/* ── FONDO DECORATIVO ── */}
@@ -236,16 +269,18 @@ const PildorasIA = () => {
 
             <div className="flex flex-wrap gap-4">
               <button
-                className="group flex items-center gap-2 px-7 py-3.5 rounded-xl font-bold text-sm transition-all duration-300 hover:scale-105"
+                onClick={openWA}
+                className="btn-spring group flex items-center gap-2 px-7 py-3.5 rounded-xl font-bold text-sm"
                 style={{ background: 'linear-gradient(135deg, #a3e635, #65a30d)', color: '#fff', boxShadow: '0 4px 24px rgba(163,230,53,0.35)' }}
               >
-                Ver soluciones
+                Agendar ahora
                 <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </button>
               <button
-                className="flex items-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-sm transition-all duration-300"
+                onClick={openWA}
+                className="btn-spring flex items-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-sm"
                 style={{ background: 'rgba(0,0,0,0.04)', border: '1px solid rgba(0,0,0,0.12)', color: '#374151' }}
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -271,50 +306,21 @@ const PildorasIA = () => {
             </div>
           </div>
 
-          {/* ── Video hero (espacio para video externo) ── */}
+          {/* ── PildoraViewer 3D ── */}
           <div className="fade-up fade-up-d2 relative">
-            {/*
-              ╔══════════════════════════════════════════════════════════╗
-              ║  ESPACIO PARA VIDEO PRINCIPAL                            ║
-              ║  Reemplaza el contenido de este div con tu <video> o     ║
-              ║  <iframe> según necesites. Ej:                           ║
-              ║                                                           ║
-              ║  <video src={heroVideo} autoPlay muted loop              ║
-              ║    playsInline className="w-full h-full object-cover     ║
-              ║    rounded-2xl" />                                        ║
-              ╚══════════════════════════════════════════════════════════╝
-            */}
             <div
-              className="relative w-full rounded-2xl overflow-hidden flex items-center justify-center"
+              className="relative w-full rounded-2xl overflow-hidden float-orb"
               style={{
                 aspectRatio: '4/3',
-                background: 'linear-gradient(135deg, rgba(163,230,53,0.06) 0%, rgba(34,211,238,0.06) 100%)',
+                background: 'linear-gradient(135deg, rgba(163,230,53,0.04) 0%, rgba(34,211,238,0.04) 100%)',
                 border: '1px solid rgba(163,230,53,0.3)',
-                boxShadow: '0 4px 40px rgba(163,230,53,0.10), 0 0 80px rgba(34,211,238,0.06)',
+                boxShadow: '0 8px 60px rgba(163,230,53,0.14), 0 0 100px rgba(34,211,238,0.08)',
               }}
             >
-              {/* scan lines overlay */}
-              <div className="absolute inset-0 scan-lines opacity-30" />
-
-              {/* placeholder content */}
-              <div className="relative z-10 flex flex-col items-center gap-4 text-center px-8">
-                <div className="w-16 h-16 rounded-2xl flex items-center justify-center"
-                     style={{ background: 'rgba(163,230,53,0.1)', border: '1px solid rgba(163,230,53,0.3)' }}>
-                  <svg className="w-8 h-8" style={{ color: '#a3e635' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                  </svg>
-                </div>
-                <p className="text-sm font-medium" style={{ color: 'rgba(77,124,15,0.7)' }}>
-                  Integra tu video aquí<br />
-                  <span className="text-xs" style={{ color: 'rgba(0,0,0,0.3)' }}>
-                    Reemplaza este espacio con &lt;video src=&#123;heroVideo&#125; /&gt;
-                  </span>
-                </p>
-              </div>
-
+              <PildoraViewer />
               {/* corner decorators */}
               {['top-0 left-0', 'top-0 right-0', 'bottom-0 left-0', 'bottom-0 right-0'].map((pos, i) => (
-                <div key={i} className={`absolute ${pos} w-6 h-6`}
+                <div key={i} className={`absolute ${pos} w-6 h-6 pointer-events-none`}
                      style={{
                        borderTop:    pos.includes('top')    ? '2px solid #a3e635' : 'none',
                        borderBottom: pos.includes('bottom') ? '2px solid #a3e635' : 'none',
@@ -323,7 +329,6 @@ const PildorasIA = () => {
                      }} />
               ))}
             </div>
-
           </div>
         </div>
       </section>
@@ -347,55 +352,34 @@ const PildorasIA = () => {
             {advisors.map((advisor, idx) => (
               <div
                 key={advisor.id}
-                className="fade-up relative rounded-2xl overflow-hidden group"
+                className="fade-up advisor-card relative rounded-2xl overflow-hidden group"
                 style={{
-                  animationDelay: `${idx * 0.1}s`,
+                  animationDelay: `${idx * 0.12}s`,
                   opacity: 0,
                   background: '#fff',
                   border: '1px solid rgba(163,230,53,0.25)',
                   boxShadow: '0 2px 16px rgba(0,0,0,0.06)',
-                  transition: 'border-color 0.3s, box-shadow 0.3s',
+                  transition: 'border-color 0.4s cubic-bezier(0.2,0,0,1), box-shadow 0.4s cubic-bezier(0.2,0,0,1), transform 0.45s cubic-bezier(0.34,1.56,0.64,1)',
                 }}
                 onMouseEnter={e => {
                   (e.currentTarget as HTMLElement).style.borderColor = 'rgba(163,230,53,0.55)';
-                  (e.currentTarget as HTMLElement).style.boxShadow = '0 8px 32px rgba(163,230,53,0.18)';
+                  (e.currentTarget as HTMLElement).style.boxShadow = '0 12px 40px rgba(163,230,53,0.20)';
+                  (e.currentTarget as HTMLElement).style.transform = 'translateY(-5px) scale(1.01)';
                 }}
                 onMouseLeave={e => {
                   (e.currentTarget as HTMLElement).style.borderColor = 'rgba(163,230,53,0.25)';
                   (e.currentTarget as HTMLElement).style.boxShadow = '0 2px 16px rgba(0,0,0,0.06)';
+                  (e.currentTarget as HTMLElement).style.transform = 'translateY(0) scale(1)';
                 }}
               >
-                {/*
-                  ╔═══════════════════════════════════════════════════════════╗
-                  ║  ESPACIO PARA IMAGEN / VIDEO DEL ASESOR #{idx + 1}        ║
-                  ║  Reemplaza el contenido de este bloque con:               ║
-                  ║    <img src={advisorImg} className="w-full h-full         ║
-                  ║      object-cover" />                                      ║
-                  ║  o bien:                                                   ║
-                  ║    <video src={advisorVideo} autoPlay muted loop           ║
-                  ║      playsInline className="w-full h-full object-cover" /> ║
-                  ╚═══════════════════════════════════════════════════════════╝
-                */}
-                <div
-                  className="relative w-full flex items-center justify-center"
-                  style={{
-                    height: '220px',
-                    background: 'linear-gradient(160deg, rgba(163,230,53,0.06), rgba(34,211,238,0.05))',
-                    borderBottom: '1px solid rgba(163,230,53,0.15)',
-                  }}
-                >
-                  <div className="shimmer-bg absolute inset-0" />
-                  <div className="relative z-10 flex flex-col items-center gap-3">
-                    <div className="w-12 h-12 rounded-xl flex items-center justify-center"
-                         style={{ background: 'rgba(163,230,53,0.08)', border: '1px solid rgba(163,230,53,0.25)' }}>
-                      <svg className="w-6 h-6" style={{ color: '#a3e635' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                      </svg>
-                    </div>
-                    <span className="text-xs text-center px-4" style={{ color: 'rgba(77,124,15,0.5)' }}>
-                      Integra imagen o video<br />del asesor aquí
-                    </span>
-                  </div>
+                <div className="relative w-full overflow-hidden" style={{ height: '220px' }}>
+                  <img
+                    src={advisor.src}
+                    alt={advisor.label}
+                    className="advisor-img w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0"
+                       style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.35) 0%, transparent 60%)' }} />
                 </div>
 
                 {/* Info */}
@@ -461,12 +445,11 @@ const PildorasIA = () => {
                 onMouseEnter={() => handleMouseEnter(pildora.id)}
                 onMouseLeave={() => handleMouseLeave(pildora.id)}
                 onClick={() => openVideoModal(pildora.id)}
-                className="card-hover group relative rounded-2xl overflow-hidden flex flex-col cursor-pointer transition-all duration-400"
+                className="card-hover group relative rounded-2xl overflow-hidden flex flex-col cursor-pointer"
                 style={{
                   background: '#fff',
                   border: `1px solid ${hoveredId === pildora.id ? pildora.accent + '88' : 'rgba(0,0,0,0.08)'}`,
-                  boxShadow: hoveredId === pildora.id ? `0 8px 32px ${pildora.accent}28` : '0 2px 12px rgba(0,0,0,0.06)',
-                  transition: 'all 0.35s ease',
+                  boxShadow: hoveredId === pildora.id ? `0 12px 40px ${pildora.accent}30` : '0 2px 12px rgba(0,0,0,0.06)',
                 }}
               >
                 {/* Video/thumbnail */}
@@ -552,17 +535,18 @@ const PildorasIA = () => {
                     </div>
 
                     <button
-                      className="w-full py-2.5 rounded-xl font-bold text-xs transition-all duration-300 hover:scale-[1.02] flex items-center justify-center gap-2"
-                      onClick={e => { e.stopPropagation(); }}
+                      className="btn-spring w-full py-2.5 rounded-xl font-bold text-xs flex items-center justify-center gap-2"
+                      onClick={e => { e.stopPropagation(); openWA(); }}
                       style={{
                         background: `linear-gradient(135deg, ${pildora.accent}, ${pildora.accent === '#a3e635' ? '#65a30d' : '#0891b2'})`,
                         color: '#0a0f1e',
                         boxShadow: `0 0 16px ${pildora.accent}44`,
                       }}
                     >
-                      Comprar ahora
-                      <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                      Agendar ahora
+                      <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+                        <path d="M12 0C5.373 0 0 5.373 0 12c0 2.116.553 4.103 1.523 5.824L.057 23.16a.75.75 0 00.92.92l5.335-1.467A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.97 0-3.81-.538-5.383-1.473l-.385-.228-3.986 1.096 1.113-3.873-.251-.399A10 10 0 1112 22z"/>
                       </svg>
                     </button>
                   </div>
@@ -612,7 +596,8 @@ const PildorasIA = () => {
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <button
-                  className="group flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-bold text-sm transition-all duration-300 hover:scale-105"
+                  onClick={openWA}
+                  className="btn-spring group flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-bold text-sm"
                   style={{ background: 'linear-gradient(135deg, #a3e635, #65a30d)', color: '#fff', boxShadow: '0 4px 24px rgba(163,230,53,0.35)' }}
                 >
                   Solicitar desarrollo

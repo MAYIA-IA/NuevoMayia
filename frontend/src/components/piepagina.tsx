@@ -1,4 +1,7 @@
 import { useState } from 'react';
+import mayiaLogo from '../assets/logosNativos/mayiaLogoBlanco.png';
+import edgeNetLogo from '../assets/logosNativos/edgeNetLogoBlanco.png';
+import hechoEnMexico from '../assets/logosNativos/hechoEnMexico.svg';
 
 const Footer = () => {
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
@@ -40,25 +43,34 @@ const Footer = () => {
   ];
 
   const socialLinks = [
-    { name: 'LinkedIn', icon: 'M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z M4 6a2 2 0 100-4 2 2 0 000 4z', href: '#' },
-    { name: 'Twitter', icon: 'M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z', href: '#' },
-    { name: 'Facebook', icon: 'M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z', href: '#' },
-    { name: 'Instagram', icon: 'M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01 M7.5 2h9A5.5 5.5 0 0122 7.5v9a5.5 5.5 0 01-5.5 5.5h-9A5.5 5.5 0 012 16.5v-9A5.5 5.5 0 017.5 2z', href: '#' },
-    { name: 'YouTube', icon: 'M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.33z M9.75 15.02l5.75-3.27-5.75-3.27v6.54z', href: '#' },
+    { name: 'LinkedIn', icon: 'M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z M4 6a2 2 0 100-4 2 2 0 000 4z', href: 'https://www.linkedin.com/company/mayia-edgenet/' },
+    { name: 'Twitter', icon: 'M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z', href: 'https://x.com/EdgenetData' },
+    { name: 'Facebook', icon: 'M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z', href: 'https://www.facebook.com/MAYiaInteligenciaArtificial?locale=es_LA' },
+    { name: 'Instagram', icon: 'M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01 M7.5 2h9A5.5 5.5 0 0122 7.5v9a5.5 5.5 0 01-5.5 5.5h-9A5.5 5.5 0 012 16.5v-9A5.5 5.5 0 017.5 2z', href: 'https://www.instagram.com/mayia.inteligencia.artificial/' },
+    { name: 'YouTube', icon: 'M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.33z M9.75 15.02l5.75-3.27-5.75-3.27v6.54z', href: 'https://www.youtube.com/watch?v=kIkBfJ2yoXk' },
   ];
 
-  const certifications = [
-    { name: 'FIRST', logo: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=100&h=100&fit=crop' },
-    { name: 'ISO 27001', logo: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=100&h=100&fit=crop' },
-    { name: 'ISO 27034', logo: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=100&h=100&fit=crop' },
-    { name: 'ISO 27017', logo: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=100&h=100&fit=crop' },
-    { name: 'ISO 9001', logo: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=100&h=100&fit=crop' },
-    { name: 'ISO 37001', logo: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=100&h=100&fit=crop' },
-    { name: 'ISO 42001', logo: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=100&h=100&fit=crop' },
-    { name: 'ISO 27018', logo: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=100&h=100&fit=crop' },
-    { name: 'SOC', logo: 'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=100&h=100&fit=crop' },
-    { name: 'NVIDIA Partner', logo: 'https://img.icons8.com/color/512/nvidia.png' },
-    { name: 'LENOVO', logo: 'https://img.icons8.com/color/512/nvidia.png'}
+  type CertEntry =
+    | { type: 'logo'; name: string; img: string; dark?: boolean }
+    | { type: 'badge'; name: string; sub: string; color: string };
+
+  const certifications: CertEntry[] = [
+    { type: 'logo',  name: 'MAYiA',         img: mayiaLogo },
+    { type: 'logo',  name: 'EdgeNet',        img: edgeNetLogo },
+    { type: 'logo',  name: 'Hecho en México',img: hechoEnMexico, dark: true },
+    { type: 'logo',  name: 'ISO 27001',      img: '/assets/logosCertificaciones/ISO 27001 - Negro_edited.avif', dark: true },
+    { type: 'logo',  name: 'IQNet',          img: '/assets/logosCertificaciones/IQNET RCMark_NegCMYK.avif', dark: true },
+    { type: 'logo',  name: 'Network Security',img: '/assets/logosCertificaciones/Network_Security_Badge.avif', dark: true },
+    { type: 'logo',  name: 'PCNSE',          img: '/assets/logosCertificaciones/PCNSE.avif', dark: true },
+    { type: 'badge', name: 'ISO', sub: '27034', color: '#a3e635' },
+    { type: 'badge', name: 'ISO', sub: '27017', color: '#22d3ee' },
+    { type: 'badge', name: 'ISO', sub: '9001',  color: '#a3e635' },
+    { type: 'badge', name: 'ISO', sub: '37001', color: '#22d3ee' },
+    { type: 'badge', name: 'ISO', sub: '42001', color: '#a3e635' },
+    { type: 'badge', name: 'ISO', sub: '27018', color: '#22d3ee' },
+    { type: 'badge', name: 'SOC', sub: '2',     color: '#818cf8' },
+    { type: 'badge', name: 'NVIDIA', sub: 'Partner', color: '#4ade80' },
+    { type: 'badge', name: 'LENOVO', sub: 'Partner', color: '#94a3b8' },
   ];
 
   return (
@@ -77,18 +89,29 @@ const Footer = () => {
             <h3 className="text-center text-sm font-semibold text-gray-400 mb-6 uppercase tracking-wider">
               Certificaciones y Partners
             </h3>
-            <div className="flex flex-wrap items-center justify-center gap-8">
+            <div className="flex flex-wrap items-center justify-center gap-6">
               {certifications.map((cert, index) => (
-                <div 
-                  key={cert.name}
+                <div
+                  key={cert.name + index}
                   className="group relative"
-                  style={{ animationDelay: `${index * 0.1}s` }}
+                  style={{ animationDelay: `${index * 0.05}s` }}
                 >
-                  <div className="w-20 h-20 bg-white rounded-xl flex items-center justify-center transform transition-all duration-300 group-hover:scale-110 group-hover:rotate-3 shadow-lg group-hover:shadow-2xl">
-                    <div className="w-16 h-16 bg-gray-200 rounded-lg flex items-center justify-center">
-                      <span className="text-xs font-bold text-gray-600">{cert.name}</span>
+                  {cert.type === 'logo' ? (
+                    <div
+                      className="flex items-center justify-center transform transition-all duration-300 group-hover:scale-110 group-hover:-rotate-1 shadow-lg group-hover:shadow-2xl rounded-xl overflow-hidden"
+                      style={{ width: 88, height: 56, background: cert.dark ? 'rgba(255,255,255,0.08)' : 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.15)', padding: '8px 12px' }}
+                    >
+                      <img src={cert.img} alt={cert.name} className="max-w-full max-h-full object-contain" />
                     </div>
-                  </div>
+                  ) : (
+                    <div
+                      className="flex flex-col items-center justify-center transform transition-all duration-300 group-hover:scale-110 group-hover:rotate-1 shadow-lg group-hover:shadow-xl rounded-xl"
+                      style={{ width: 72, height: 72, background: 'rgba(255,255,255,0.06)', border: `1px solid ${cert.color}44` }}
+                    >
+                      <span className="text-xs font-extrabold" style={{ color: cert.color, lineHeight: 1 }}>{cert.name}</span>
+                      <span className="text-lg font-black leading-none mt-0.5" style={{ color: '#fff' }}>{cert.sub}</span>
+                    </div>
+                  )}
                   <div className="absolute inset-0 bg-gradient-to-br from-lime-400/20 to-cyan-400/20 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10 blur-xl"></div>
                 </div>
               ))}

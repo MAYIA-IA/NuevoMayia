@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 interface Curso {
   id: number;
@@ -21,6 +21,7 @@ const CatalogoAcademia = ({ isOpen, onClose }: CatalogoAcademiaProps) => {
   const [filtroNivel, setFiltroNivel] = useState<'TODOS' | 'PRINCIPIANTE' | 'INTERMEDIO' | 'AVANZADO'>('TODOS');
   const [hoveredCourse, setHoveredCourse] = useState<number | null>(null);
   const [busqueda, setBusqueda] = useState('');
+  const savedScrollY = useRef(0);
 
   const cursos: Curso[] = [
     // Cursos de Negocios
@@ -350,18 +351,17 @@ const CatalogoAcademia = ({ isOpen, onClose }: CatalogoAcademiaProps) => {
   // Control del scroll del body cuando el modal está abierto
   useEffect(() => {
     if (isOpen) {
-      const scrollY = window.scrollY;
+      savedScrollY.current = window.scrollY;
       document.body.style.position = 'fixed';
-      document.body.style.top = `-${scrollY}px`;
+      document.body.style.top = `-${savedScrollY.current}px`;
       document.body.style.width = '100%';
       document.body.style.overflow = 'hidden';
     } else {
-      const scrollY = document.body.style.top;
       document.body.style.position = '';
       document.body.style.top = '';
       document.body.style.width = '';
       document.body.style.overflow = '';
-      window.scrollTo(0, parseInt(scrollY || '0') * -1);
+      window.scrollTo(0, savedScrollY.current);
     }
 
     return () => {
@@ -510,7 +510,7 @@ const CatalogoAcademia = ({ isOpen, onClose }: CatalogoAcademiaProps) => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 [&>*]:will-change-transform">
                 {cursosNegocios.map((curso) => (
                   <div
                     key={curso.id}
@@ -552,8 +552,8 @@ const CatalogoAcademia = ({ isOpen, onClose }: CatalogoAcademiaProps) => {
 
                       {/* CTA Button */}
                       <div className="pt-4 border-t border-gray-700">
-                        <button className="w-full bg-gradient-to-r from-lime-400 to-cyan-500 hover:from-lime-500 hover:to-cyan-600 text-gray-900 font-bold py-3 px-4 rounded-xl transition-all duration-300 group-hover:scale-105 flex items-center justify-center gap-2">
-                          Ver detalles
+                        <button onClick={() => window.open('https://api.whatsapp.com/send/?phone=525553315526&text&type=phone_number&app_absent=0','_blank','noopener,noreferrer')} className="w-full bg-gradient-to-r from-lime-400 to-cyan-500 hover:from-lime-500 hover:to-cyan-600 text-gray-900 font-bold py-3 px-4 rounded-xl transition-all duration-300 group-hover:scale-105 flex items-center justify-center gap-2">
+                          Inscribirme
                           <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                           </svg>
@@ -582,7 +582,7 @@ const CatalogoAcademia = ({ isOpen, onClose }: CatalogoAcademiaProps) => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 [&>*]:will-change-transform">
                 {cursosTech.map((curso) => (
                   <div
                     key={curso.id}

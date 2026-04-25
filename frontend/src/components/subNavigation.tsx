@@ -13,10 +13,8 @@ const subNavItems: SubNavItem[] = [
   { label: 'Píldoras IA',         href: '#pildoras-ia' },
   { label: 'Ciberseguridad',      href: '#ciberseguridad' },
   { label: 'Academia MAYiA',      href: '#academia' },
-  { label: 'Nube Flai IA',        href: '#flai' },
-  { label: 'Fábrica Edgenet',     href: '#spaces' },
-  { label: 'Robotics & Quantum',  href: '#robotics' },
-  { label: 'Soberanía de datos',  href: '#soberania' },
+  /* { label: 'Nube Flai IA',        href: '#flai' },
+  { label: 'Fábrica Edgenet',     href: '#spaces' }, */
 ];
 
 /* ── Tiny spark particle canvas for the horizontal bar ───────────────────── */

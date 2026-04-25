@@ -128,7 +128,7 @@ const CiberseguridadIA = () => {
                 </p>
               </div>
               
-              <button className="flex-shrink-0 bg-gray-900 hover:bg-gray-800 text-white px-6 py-3 rounded-xl font-bold text-sm transition-all duration-300 hover:scale-105 shadow-xl">
+              <button onClick={() => window.open('https://api.whatsapp.com/send/?phone=525553315526&text&type=phone_number&app_absent=0','_blank','noopener,noreferrer')} className="flex-shrink-0 bg-gray-900 hover:bg-gray-800 text-white px-6 py-3 rounded-xl font-bold text-sm transition-all duration-300 hover:scale-105 shadow-xl">
                 Solicitar Auditoría
               </button>
             </div>
@@ -236,7 +236,7 @@ const CiberseguridadIA = () => {
                   className={`w-full mt-auto py-3 rounded-xl font-semibold text-sm transition-all duration-300 bg-gradient-to-r ${servicio.color} text-white hover:scale-[1.02] shadow-md hover:shadow-lg`}
                   onClick={(e) => {
                     e.stopPropagation();
-                    // Lógica de evaluación
+                    window.open('https://api.whatsapp.com/send/?phone=525553315526&text&type=phone_number&app_absent=0','_blank','noopener,noreferrer');
                   }}
                 >
                   Solicitar Evaluación

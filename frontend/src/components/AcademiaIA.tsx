@@ -1,6 +1,9 @@
 import { useState } from "react";
-import imgProfesor from '../assets/AcademiaIA/Profesor.png';
+import imgProfesor from '../assets/AcademiaIA/Academia.png';
 import CatalogoAcademia from "./CatalogoAcademia";
+
+const WA_URL = 'https://api.whatsapp.com/send/?phone=525553315526&text&type=phone_number&app_absent=0';
+const openWA = () => window.open(WA_URL, '_blank', 'noopener,noreferrer');
 
 
 const AcademiaIA = () => {
@@ -268,7 +271,7 @@ const AcademiaIA = () => {
             </div>
 
             <div className="flex-shrink-0 flex flex-col sm:flex-row gap-4">
-              <button className="group relative bg-gradient-to-r from-lime-400 to-cyan-400 hover:from-lime-500 hover:to-cyan-500 text-gray-900 font-bold py-4 px-8 rounded-xl text-lg transition-all duration-300 hover:scale-105 shadow-xl whitespace-nowrap">
+              <button onClick={openWA} className="group relative bg-gradient-to-r from-lime-400 to-cyan-400 hover:from-lime-500 hover:to-cyan-500 text-gray-900 font-bold py-4 px-8 rounded-xl text-lg transition-all duration-300 hover:scale-105 shadow-xl whitespace-nowrap">
                 <span className="relative z-10 flex items-center gap-2">
                   Clase demo gratuita
                   <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">

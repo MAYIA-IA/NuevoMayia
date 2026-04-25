@@ -185,7 +185,7 @@ const IAPorSector = () => {
 
                 {/* Botón de reserva - SIEMPRE EN LA PARTE INFERIOR */}
                 <div className="mt-auto">
-                  <button className={`w-full bg-gradient-to-r ${sector.gradient} text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300 hover:scale-105 shadow-md hover:shadow-xl relative overflow-hidden group/btn`}>
+                  <button onClick={() => window.open('https://api.whatsapp.com/send/?phone=525553315526&text&type=phone_number&app_absent=0','_blank','noopener,noreferrer')} className={`w-full bg-gradient-to-r ${sector.gradient} text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300 hover:scale-105 shadow-md hover:shadow-xl relative overflow-hidden group/btn`}>
                     <span className="relative z-10 text-sm">Agendar Demo</span>
                     <div className="absolute inset-0 bg-white/20 transform scale-x-0 group-hover/btn:scale-x-100 transition-transform origin-left duration-300"></div>
                   </button>
