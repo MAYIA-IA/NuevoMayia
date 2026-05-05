@@ -3,9 +3,9 @@ import NavigationBar from './components/navigationBar';
 import HeaderBanner from './components/headerBanner';
 import ImageCarousel from './components/imageCarousel';
 import MusculosMAYiA from './components/musculosMayia';
+import CertificacionesMarquee from './components/CertificacionesMarquee';
 import SubNavigation from './components/subNavigation';
 import IAEmpresarial from './components/IAEmpresarial';
-import AgentesConsultores from './components/AgentesConsultores';
 import IAPorSector from './components/IAporSector';
 import EmpleadosDigitales from './components/EmpleadosDigitales';
 import PildorasIA from './components/PildorasIA';
@@ -29,6 +29,9 @@ function App() {
       {/* 3. Propuesta de valor — quiénes somos */}
       <MusculosMAYiA />
 
+      {/* Sintillo de Certificaciones */}
+      <CertificacionesMarquee />
+
       {/* 4. Impacto visual inmediato */}
       <ImageCarousel />
 
@@ -36,7 +39,6 @@ function App() {
       <SubNavigation />
 
       <IAEmpresarial />
-      <AgentesConsultores />
       <IAPorSector />
       <EmpleadosDigitales />
       <PildorasIA />
