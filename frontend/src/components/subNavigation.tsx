@@ -6,13 +6,13 @@ interface SubNavItem {
 }
 
 const subNavItems: SubNavItem[] = [
-  { label: 'I.A. Empresarial',    href: '#ia-empresarial' },
-  { label: 'IA Sectores',         href: '#ia-sectores' },
+  { label: 'I.A. Empresarial', href: '#ia-empresarial' },
+  { label: 'IA Sectores', href: '#ia-sectores' },
   { label: 'Empleados Digitales', href: '#empleados-digitales' },
+  { label: 'Píldoras IA', href: '#pildoras-ia' },
   { label: 'Agentes Especializados', href: '#agentes-ia' },
-  { label: 'Píldoras IA',         href: '#pildoras-ia' },
-  { label: 'Ciberseguridad',      href: '#ciberseguridad' },
-  { label: 'Academia MAYiA',      href: '#academia' },
+  { label: 'Ciberseguridad', href: '#ciberseguridad' },
+  { label: 'Academia MAYiA', href: '#academia' },
   /* { label: 'Nube Flai IA',        href: '#flai' },
   { label: 'Fábrica Edgenet',     href: '#spaces' }, */
 ];
@@ -20,11 +20,11 @@ const subNavItems: SubNavItem[] = [
 
 export default function SubNavigation() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [activeHref, setActiveHref]     = useState<string>('');
+  const [activeHref, setActiveHref] = useState<string>('');
   const [visitedHrefs, setVisitedHrefs] = useState<Set<string>>(new Set());
-  const [isVertical, setIsVertical]     = useState<boolean>(false);
-  const [showAll, setShowAll]           = useState(false);
-  const [isDesktop, setIsDesktop]       = useState(
+  const [isVertical, setIsVertical] = useState<boolean>(false);
+  const [showAll, setShowAll] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(
     typeof window !== 'undefined' ? window.innerWidth >= 1024 : true
   );
   const navRef = useRef<HTMLDivElement>(null);
@@ -116,7 +116,7 @@ export default function SubNavigation() {
             }}
           >
             {subNavItems.map((item, index) => {
-              const isActive  = activeHref === item.href;
+              const isActive = activeHref === item.href;
               const isVisited = visitedHrefs.has(item.href);
               const isHovered = hoveredIndex === index;
               const showLabel = isDesktop && isHovered;
@@ -153,18 +153,18 @@ export default function SubNavigation() {
                     <div
                       className="rounded-full flex-shrink-0 transition-all duration-300"
                       style={{
-                        width:  isActive ? (isDesktop ? 12 : 9) : isHovered ? (isDesktop ? 10 : 8) : isVisited ? (isDesktop ? 8 : 6) : (isDesktop ? 6 : 5),
+                        width: isActive ? (isDesktop ? 12 : 9) : isHovered ? (isDesktop ? 10 : 8) : isVisited ? (isDesktop ? 8 : 6) : (isDesktop ? 6 : 5),
                         height: isActive ? (isDesktop ? 12 : 9) : isHovered ? (isDesktop ? 10 : 8) : isVisited ? (isDesktop ? 8 : 6) : (isDesktop ? 6 : 5),
                         background: isActive
                           ? 'linear-gradient(135deg, #A4D955, #7FD1FF)'
                           : isVisited ? '#A4D955'
-                          : isHovered ? '#7FD1FF'
-                          : 'rgba(0,0,0,0.18)',
+                            : isHovered ? '#7FD1FF'
+                              : 'rgba(0,0,0,0.18)',
                         boxShadow: isActive
                           ? '0 0 10px rgba(164,217,85,0.8), 0 0 20px rgba(127,209,255,0.35)'
                           : isVisited ? '0 0 5px rgba(164,217,85,0.5)'
-                          : isHovered ? '0 0 5px rgba(127,209,255,0.5)'
-                          : 'none',
+                            : isHovered ? '0 0 5px rgba(127,209,255,0.5)'
+                              : 'none',
                       }}
                     />
                   </button>
@@ -216,7 +216,7 @@ export default function SubNavigation() {
       <div className="relative max-w-7xl mx-auto px-3 sm:px-4" style={{ zIndex: 1 }}>
         <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
           {displayedItems.map((item, index) => {
-            const isActive  = activeHref === item.href;
+            const isActive = activeHref === item.href;
             const isVisited = visitedHrefs.has(item.href);
 
             return (
@@ -234,8 +234,8 @@ export default function SubNavigation() {
                     color: isActive
                       ? '#111'
                       : isVisited
-                      ? '#5aab00'
-                      : '#374151',
+                        ? '#5aab00'
+                        : '#374151',
                   }}
                 >
                   {item.label}
