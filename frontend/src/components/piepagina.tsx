@@ -1,7 +1,4 @@
 import { useState } from 'react';
-import mayiaLogo from '../assets/logosNativos/mayiaLogoBlanco.png';
-import edgeNetLogo from '../assets/logosNativos/edgeNetLogoBlanco.png';
-import hechoEnMexico from '../assets/logosNativos/hechoEnMexico.svg';
 
 const Footer = () => {
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
@@ -50,28 +47,7 @@ const Footer = () => {
     { name: 'YouTube', icon: 'M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.33z M9.75 15.02l5.75-3.27-5.75-3.27v6.54z', href: 'https://www.youtube.com/watch?v=kIkBfJ2yoXk' },
   ];
 
-  type CertEntry =
-    | { type: 'logo'; name: string; img: string; dark?: boolean }
-    | { type: 'badge'; name: string; sub: string; color: string };
 
-  const certifications: CertEntry[] = [
-    { type: 'logo',  name: 'MAYiA',         img: mayiaLogo },
-    { type: 'logo',  name: 'EdgeNet',        img: edgeNetLogo },
-    { type: 'logo',  name: 'Hecho en México',img: hechoEnMexico, dark: true },
-    { type: 'logo',  name: 'ISO 27001',      img: '/assets/logosCertificaciones/ISO 27001 - Negro_edited.avif', dark: true },
-    { type: 'logo',  name: 'IQNet',          img: '/assets/logosCertificaciones/IQNET RCMark_NegCMYK.avif', dark: true },
-    { type: 'logo',  name: 'Network Security',img: '/assets/logosCertificaciones/Network_Security_Badge.avif', dark: true },
-    { type: 'logo',  name: 'PCNSE',          img: '/assets/logosCertificaciones/PCNSE.avif', dark: true },
-    { type: 'badge', name: 'ISO', sub: '27034', color: '#a3e635' },
-    { type: 'badge', name: 'ISO', sub: '27017', color: '#22d3ee' },
-    { type: 'badge', name: 'ISO', sub: '9001',  color: '#a3e635' },
-    { type: 'badge', name: 'ISO', sub: '37001', color: '#22d3ee' },
-    { type: 'badge', name: 'ISO', sub: '42001', color: '#a3e635' },
-    { type: 'badge', name: 'ISO', sub: '27018', color: '#22d3ee' },
-    { type: 'badge', name: 'SOC', sub: '2',     color: '#818cf8' },
-    { type: 'badge', name: 'NVIDIA', sub: 'Partner', color: '#4ade80' },
-    { type: 'badge', name: 'LENOVO', sub: 'Partner', color: '#94a3b8' },
-  ];
 
   return (
     <footer className="w-full bg-gradient-to-b from-gray-900 via-[#0a1f44] to-black text-white pt-16 pb-8 relative overflow-hidden">
@@ -83,42 +59,6 @@ const Footer = () => {
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        {/* Certificaciones */}
-        <div className="mb-12 pb-12 border-b border-gray-700/50">
-          <div className="bg-gradient-to-r from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-3xl p-8 border border-gray-700/50">
-            <h3 className="text-center text-sm font-semibold text-gray-400 mb-6 uppercase tracking-wider">
-              Certificaciones y Partners
-            </h3>
-            <div className="flex flex-wrap items-center justify-center gap-6">
-              {certifications.map((cert, index) => (
-                <div
-                  key={cert.name + index}
-                  className="group relative"
-                  style={{ animationDelay: `${index * 0.05}s` }}
-                >
-                  {cert.type === 'logo' ? (
-                    <div
-                      className="flex items-center justify-center transform transition-all duration-300 group-hover:scale-110 group-hover:-rotate-1 shadow-lg group-hover:shadow-2xl rounded-xl overflow-hidden"
-                      style={{ width: 88, height: 56, background: cert.dark ? 'rgba(255,255,255,0.08)' : 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.15)', padding: '8px 12px' }}
-                    >
-                      <img src={cert.img} alt={cert.name} className="max-w-full max-h-full object-contain" />
-                    </div>
-                  ) : (
-                    <div
-                      className="flex flex-col items-center justify-center transform transition-all duration-300 group-hover:scale-110 group-hover:rotate-1 shadow-lg group-hover:shadow-xl rounded-xl"
-                      style={{ width: 72, height: 72, background: 'rgba(255,255,255,0.06)', border: `1px solid ${cert.color}44` }}
-                    >
-                      <span className="text-xs font-extrabold" style={{ color: cert.color, lineHeight: 1 }}>{cert.name}</span>
-                      <span className="text-lg font-black leading-none mt-0.5" style={{ color: '#fff' }}>{cert.sub}</span>
-                    </div>
-                  )}
-                  <div className="absolute inset-0 bg-gradient-to-br from-lime-400/20 to-cyan-400/20 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10 blur-xl"></div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
         {/* Links Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* Descubrir */}
