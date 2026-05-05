@@ -1,85 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
 
-/* ── Shared particle canvas ──────────────────────────────────────────────── */
-function ParticleCanvas() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    let animId: number;
-
-    const resize = () => {
-      canvas.width  = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
-    };
-    resize();
-    window.addEventListener('resize', resize);
-
-    type P = { x: number; y: number; vx: number; vy: number; r: number; alpha: number; color: string; phase: number; pulse: number };
-    const COLORS = ['#A4D955', '#7FD1FF', '#A4D955', '#c8ec88', '#b8e8ff'];
-
-    const particles: P[] = Array.from({ length: 70 }, () => ({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      vx: (Math.random() - 0.5) * 0.3,
-      vy: (Math.random() - 0.5) * 0.3,
-      r: Math.random() * 3 + 0.8,
-      alpha: Math.random() * 0.4 + 0.08,
-      color: COLORS[Math.floor(Math.random() * COLORS.length)],
-      phase: Math.random() * Math.PI * 2,
-      pulse: Math.random() * 0.01 + 0.005,
-    }));
-
-    const draw = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      particles.forEach((p) => {
-        p.phase += p.pulse;
-        const a = p.alpha * (0.5 + 0.5 * Math.sin(p.phase));
-
-        const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 6);
-        grad.addColorStop(0, p.color + Math.round(a * 255).toString(16).padStart(2, '0'));
-        grad.addColorStop(1, p.color + '00');
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r * 6, 0, Math.PI * 2);
-        ctx.fillStyle = grad;
-        ctx.fill();
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = p.color + 'cc';
-        ctx.fill();
-
-        p.x += p.vx;
-        p.y += p.vy;
-        if (p.x < -10) p.x = canvas.width + 10;
-        if (p.x > canvas.width + 10) p.x = -10;
-        if (p.y < -10) p.y = canvas.height + 10;
-        if (p.y > canvas.height + 10) p.y = -10;
-      });
-
-      animId = requestAnimationFrame(draw);
-    };
-    draw();
-
-    return () => {
-      cancelAnimationFrame(animId);
-      window.removeEventListener('resize', resize);
-    };
-  }, []);
-
-  return (
-    <canvas
-      ref={canvasRef}
-      className="absolute inset-0 w-full h-full pointer-events-none"
-      style={{ zIndex: 0 }}
-    />
-  );
-}
 
 /* ── Data ────────────────────────────────────────────────────────────────── */
 interface Musculo {
@@ -318,8 +238,7 @@ const MusculosMAYiA = () => {
   return (
     <section className="relative py-20 overflow-hidden" style={{ background: '#ffffff' }}>
 
-      {/* Particle canvas */}
-      <ParticleCanvas />
+      {/* Particle canvas removed */}
 
       {/* Subtle grid texture — lighter on white */}
       <div
@@ -341,17 +260,11 @@ const MusculosMAYiA = () => {
       <div className="relative container mx-auto px-6" style={{ zIndex: 2 }}>
         {/* Header */}
         <div className="text-center mb-14">
-          <p className="text-[11px] font-mono tracking-[0.3em] uppercase mb-3" style={{ color: '#9ca3af' }}>
-            Construido para escalar
-          </p>
           <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-4" style={{ color: '#111827' }}>
-            La plataforma más completa{' '}
-            <span style={{ background: 'linear-gradient(90deg, #5aab00, #0099cc)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-              de IA en México
-            </span>
+            Hola bienvenido a MAYiA ¿Qué deseas observar hoy?
           </h2>
           <p className="text-base max-w-xl mx-auto leading-relaxed" style={{ color: '#6b7280' }}>
-            Diez capacidades integradas. Un solo partner. Toda la potencia que tu empresa necesita para transformarse con IA.
+            La plataforma más grande de México
           </p>
         </div>
 

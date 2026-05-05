@@ -7,9 +7,9 @@ interface SubNavItem {
 
 const subNavItems: SubNavItem[] = [
   { label: 'I.A. Empresarial',    href: '#ia-empresarial' },
-  { label: 'Agentes IA',          href: '#agentes-ia' },
   { label: 'IA Sectores',         href: '#ia-sectores' },
   { label: 'Empleados Digitales', href: '#empleados-digitales' },
+  { label: 'Agentes Especializados', href: '#agentes-ia' },
   { label: 'Píldoras IA',         href: '#pildoras-ia' },
   { label: 'Ciberseguridad',      href: '#ciberseguridad' },
   { label: 'Academia MAYiA',      href: '#academia' },
@@ -17,84 +17,6 @@ const subNavItems: SubNavItem[] = [
   { label: 'Fábrica Edgenet',     href: '#spaces' }, */
 ];
 
-/* ── Tiny spark particle canvas for the horizontal bar ───────────────────── */
-function NavParticleCanvas() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    let animId: number;
-
-    const resize = () => {
-      canvas.width  = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
-    };
-    resize();
-    window.addEventListener('resize', resize);
-
-    type P = { x: number; y: number; vx: number; vy: number; r: number; alpha: number; color: string; phase: number; pulse: number };
-    const COLORS = ['#A4D955', '#7FD1FF', '#c8ec88', '#aadeff'];
-
-    const particles: P[] = Array.from({ length: 28 }, () => ({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      vx: (Math.random() - 0.5) * 0.4,
-      vy: (Math.random() - 0.5) * 0.4,
-      r: Math.random() * 2 + 0.6,
-      alpha: Math.random() * 0.35 + 0.08,
-      color: COLORS[Math.floor(Math.random() * COLORS.length)],
-      phase: Math.random() * Math.PI * 2,
-      pulse: Math.random() * 0.015 + 0.007,
-    }));
-
-    const draw = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach((p) => {
-        p.phase += p.pulse;
-        const a = p.alpha * (0.5 + 0.5 * Math.sin(p.phase));
-
-        const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 5);
-        grad.addColorStop(0, p.color + Math.round(a * 255).toString(16).padStart(2, '0'));
-        grad.addColorStop(1, p.color + '00');
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r * 5, 0, Math.PI * 2);
-        ctx.fillStyle = grad;
-        ctx.fill();
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = p.color + 'cc';
-        ctx.fill();
-
-        p.x += p.vx;
-        p.y += p.vy;
-        if (p.x < -10) p.x = canvas.width + 10;
-        if (p.x > canvas.width + 10) p.x = -10;
-        if (p.y < -10) p.y = canvas.height + 10;
-        if (p.y > canvas.height + 10) p.y = -10;
-      });
-      animId = requestAnimationFrame(draw);
-    };
-    draw();
-
-    return () => {
-      cancelAnimationFrame(animId);
-      window.removeEventListener('resize', resize);
-    };
-  }, []);
-
-  return (
-    <canvas
-      ref={canvasRef}
-      className="absolute inset-0 w-full h-full pointer-events-none"
-      style={{ zIndex: 0 }}
-    />
-  );
-}
 
 export default function SubNavigation() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -289,8 +211,7 @@ export default function SubNavigation() {
         borderBottom: '1px solid rgba(164,217,85,0.18)',
       }}
     >
-      {/* Particle canvas */}
-      <NavParticleCanvas />
+      {/* Particle canvas removed */}
 
       <div className="relative max-w-7xl mx-auto px-3 sm:px-4" style={{ zIndex: 1 }}>
         <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
