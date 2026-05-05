@@ -10,6 +10,7 @@ import video8 from '../assets/PildorasIA/OperacionSucursales.mp4';
 
 import logoSrc from '../assets/PildorasIA/Imagen6.png';
 import PildoraViewer from './PildoraViewer';
+import AgentesConsultores from './AgentesConsultores';
 
 const WA_URL = 'https://api.whatsapp.com/send/?phone=525553315526&text&type=phone_number&app_absent=0';
 const openWA = () => window.open(WA_URL, '_blank', 'noopener,noreferrer');
@@ -20,6 +21,8 @@ const PildorasIA = () => {
   const [hoveredId, setHoveredId] = useState<number | null>(null);
   const [selectedVideo, setSelectedVideo] = useState<number | null>(null);
   const [activeFilter, setActiveFilter] = useState('Todas');
+  const [isPaused, setIsPaused] = useState(false);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
   const videoRefs = useRef<{ [key: number]: HTMLVideoElement | null }>({});
   const modalVideoRef = useRef<HTMLVideoElement | null>(null);
 
@@ -61,13 +64,7 @@ const PildorasIA = () => {
     ? pildoras
     : pildoras.filter(p => p.category === activeFilter);
 
-  // ── ASESORES para el hero (espacios para media externa) ────────────────────
-  // type: 'image' | 'video'
-  const advisors = [
-    { id: 'a1', label: 'Asesor Contable',  description: 'Automatiza tus procesos fiscales y contables con IA entrenada en normatividad mexicana.', type: 'image' as const, src: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=600&h=400&fit=crop&auto=format' },
-    { id: 'a2', label: 'Agente de Ventas', description: 'Incrementa tus conversiones con recomendaciones inteligentes y seguimiento automatizado.', type: 'image' as const, src: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&h=400&fit=crop&auto=format' },
-    { id: 'a3', label: 'Vigilancia IA',   description: 'Monitoreo inteligente en tiempo real para proteger tus instalaciones y activos.', type: 'image' as const, src: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=600&h=400&fit=crop&auto=format' },
-  ];
+
 
   // ── HANDLERS ──────────────────────────────────────────────────────────────
   const handleMouseEnter = (id: number) => {
@@ -98,6 +95,27 @@ const PildorasIA = () => {
     return () => window.removeEventListener('keydown', handleEsc);
   }, []);
 
+  // ── AUTO-SCROLL CAROUSEL ───────────────────────────────────────────────────
+  useEffect(() => {
+    if (isPaused) return;
+
+    const interval = setInterval(() => {
+      const container = scrollContainerRef.current;
+      if (container) {
+        const cardWidth = 340; // width + gap aprox
+        const maxScroll = container.scrollWidth - container.clientWidth;
+        
+        if (container.scrollLeft >= maxScroll - 20) {
+          container.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          container.scrollBy({ left: cardWidth, behavior: 'smooth' });
+        }
+      }
+    }, 3500);
+
+    return () => clearInterval(interval);
+  }, [isPaused]);
+
   // ── RENDER ─────────────────────────────────────────────────────────────────
   return (
     <div
@@ -124,10 +142,13 @@ const PildorasIA = () => {
         /* card hover glow */
         .card-hover:hover { transform: translateY(-4px); }
 
-        /* scrollbar */
+        /* scrollbar global */
         ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-track { background: #0a0f1e; }
+        ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #a3e635; border-radius: 2px; }
+
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { scrollbar-width: none; ms-overflow-style: none; }
 
         /* iOS spring entrance */
         @keyframes fadeUp {
@@ -334,76 +355,16 @@ const PildorasIA = () => {
       </section>
 
       {/* ══════════════════════════════════════════════════════════════════════
-          ADVISOR CARDS  (espacios para imagen / video)
+          AGENTES ESPECIALIZADOS (INTEGRADO)
       ══════════════════════════════════════════════════════════════════════ */}
-      <section className="relative z-10 px-6 md:px-12 pb-20">
-        <div className="max-w-7xl mx-auto">
-
-          {/* divider */}
-          <div className="flex items-center gap-4 mb-12">
-            <div className="flex-1 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(163,230,53,0.5))' }} />
-            <span className="text-xs font-bold tracking-widest uppercase" style={{ color: '#65a30d' }}>
-              Agentes especializados
-            </span>
-            <div className="flex-1 h-px" style={{ background: 'linear-gradient(90deg, rgba(163,230,53,0.5), transparent)' }} />
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {advisors.map((advisor, idx) => (
-              <div
-                key={advisor.id}
-                className="fade-up advisor-card relative rounded-2xl overflow-hidden group"
-                style={{
-                  animationDelay: `${idx * 0.12}s`,
-                  opacity: 0,
-                  background: '#fff',
-                  border: '1px solid rgba(163,230,53,0.25)',
-                  boxShadow: '0 2px 16px rgba(0,0,0,0.06)',
-                  transition: 'border-color 0.4s cubic-bezier(0.2,0,0,1), box-shadow 0.4s cubic-bezier(0.2,0,0,1), transform 0.45s cubic-bezier(0.34,1.56,0.64,1)',
-                }}
-                onMouseEnter={e => {
-                  (e.currentTarget as HTMLElement).style.borderColor = 'rgba(163,230,53,0.55)';
-                  (e.currentTarget as HTMLElement).style.boxShadow = '0 12px 40px rgba(163,230,53,0.20)';
-                  (e.currentTarget as HTMLElement).style.transform = 'translateY(-5px) scale(1.01)';
-                }}
-                onMouseLeave={e => {
-                  (e.currentTarget as HTMLElement).style.borderColor = 'rgba(163,230,53,0.25)';
-                  (e.currentTarget as HTMLElement).style.boxShadow = '0 2px 16px rgba(0,0,0,0.06)';
-                  (e.currentTarget as HTMLElement).style.transform = 'translateY(0) scale(1)';
-                }}
-              >
-                <div className="relative w-full overflow-hidden" style={{ height: '220px' }}>
-                  <img
-                    src={advisor.src}
-                    alt={advisor.label}
-                    className="advisor-img w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0"
-                       style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.35) 0%, transparent 60%)' }} />
-                </div>
-
-                {/* Info */}
-                <div className="p-5">
-                  <div className="flex items-center gap-2 mb-2">
-                    <div className="w-1.5 h-1.5 rounded-full" style={{ background: '#65a30d' }} />
-                    <span className="text-xs font-bold tracking-wider uppercase" style={{ color: '#4d7c0f' }}>
-                      {advisor.label}
-                    </span>
-                  </div>
-                  <p className="text-sm leading-relaxed" style={{ color: '#6b7280' }}>
-                    {advisor.description}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <div className="relative z-20 -my-8 md:-my-12">
+        <AgentesConsultores />
+      </div>
 
       {/* ══════════════════════════════════════════════════════════════════════
           FILTROS + GRID DE PÍLDORAS
       ══════════════════════════════════════════════════════════════════════ */}
-      <section className="relative z-10 px-6 md:px-12 pb-24">
+      <section className="relative z-10 px-6 md:px-12 pb-24 pt-16 md:pt-24">
         <div className="max-w-7xl mx-auto">
 
           {/* Header sección */}
@@ -424,11 +385,11 @@ const PildorasIA = () => {
                 <button
                   key={f}
                   onClick={() => setActiveFilter(f)}
-                  className="px-4 py-1.5 rounded-full text-xs font-semibold transition-all duration-300"
+                  className="px-4 py-1.5 rounded-full text-xs font-semibold transition-all duration-300 hover:scale-105"
                   style={
                     activeFilter === f
-                      ? { background: '#a3e635', color: '#0a0f1e', boxShadow: '0 0 14px rgba(163,230,53,0.4)' }
-                      : { background: 'rgba(163,230,53,0.06)', border: '1px solid rgba(163,230,53,0.2)', color: 'rgba(255,255,255,0.6)' }
+                      ? { background: '#a3e635', color: '#111827', boxShadow: '0 4px 12px rgba(163,230,53,0.3)', border: '1px solid #a3e635' }
+                      : { background: '#ffffff', border: '1px solid #e5e7eb', color: '#4b5563', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }
                   }
                 >
                   {f}
@@ -437,15 +398,37 @@ const PildorasIA = () => {
             </div>
           </div>
 
-          {/* Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-            {filteredPildoras.map((pildora) => (
-              <div
-                key={pildora.id}
-                onMouseEnter={() => handleMouseEnter(pildora.id)}
-                onMouseLeave={() => handleMouseLeave(pildora.id)}
-                onClick={() => openVideoModal(pildora.id)}
-                className="card-hover group relative rounded-2xl overflow-hidden flex flex-col cursor-pointer"
+          {/* Carousel */}
+          <div className="relative group">
+            <button 
+              onClick={() => { if(scrollContainerRef.current) scrollContainerRef.current.scrollBy({left: -340, behavior: 'smooth'}) }}
+              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 lg:-translate-x-6 z-20 w-12 h-12 rounded-full bg-white shadow-[0_4px_20px_rgba(0,0,0,0.1)] border border-gray-100 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110 hover:border-lime-400 text-gray-800 hover:text-lime-500"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" /></svg>
+            </button>
+            <button 
+              onClick={() => { if(scrollContainerRef.current) scrollContainerRef.current.scrollBy({left: 340, behavior: 'smooth'}) }}
+              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 lg:translate-x-6 z-20 w-12 h-12 rounded-full bg-white shadow-[0_4px_20px_rgba(0,0,0,0.1)] border border-gray-100 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110 hover:border-lime-400 text-gray-800 hover:text-lime-500"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" /></svg>
+            </button>
+
+            <div 
+              ref={scrollContainerRef}
+              onMouseEnter={() => setIsPaused(true)}
+              onMouseLeave={() => setIsPaused(false)}
+              onTouchStart={() => setIsPaused(true)}
+              onTouchEnd={() => setIsPaused(false)}
+              className="flex overflow-x-auto gap-5 pb-8 pt-4 snap-x hide-scrollbar"
+              style={{ scrollBehavior: 'smooth' }}
+            >
+              {filteredPildoras.map((pildora) => (
+                <div
+                  key={pildora.id}
+                  onMouseEnter={() => handleMouseEnter(pildora.id)}
+                  onMouseLeave={() => handleMouseLeave(pildora.id)}
+                  onClick={() => openVideoModal(pildora.id)}
+                  className="card-hover group relative rounded-2xl overflow-hidden flex flex-col cursor-pointer shrink-0 snap-start w-[280px] sm:w-[320px]"
                 style={{
                   background: '#fff',
                   border: `1px solid ${hoveredId === pildora.id ? pildora.accent + '88' : 'rgba(0,0,0,0.08)'}`,
@@ -558,19 +541,20 @@ const PildorasIA = () => {
                        background: `linear-gradient(90deg, ${pildora.accent}, transparent)`,
                        transform: hoveredId === pildora.id ? 'scaleX(1)' : 'scaleX(0)',
                      }} />
-              </div>
-            ))}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* ══════════════════════════════════════════════════════════════════════
-          CTA FINAL
+          CTA FINAL COMPACTO
       ══════════════════════════════════════════════════════════════════════ */}
-      <section className="relative z-10 px-6 md:px-12 pb-24">
+      <section className="relative z-10 px-6 md:px-12 pb-12">
         <div className="max-w-7xl mx-auto">
           <div
-            className="relative rounded-3xl overflow-hidden p-8 md:p-14"
+            className="relative rounded-xl overflow-hidden p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6"
             style={{
               background: 'linear-gradient(135deg, #f0fdf4 0%, #ecfeff 100%)',
               border: '1px solid rgba(163,230,53,0.35)',
@@ -581,37 +565,35 @@ const PildorasIA = () => {
             <div className="absolute top-0 right-0 w-72 h-72 rounded-full pointer-events-none"
                  style={{ background: 'radial-gradient(circle, rgba(163,230,53,0.12) 0%, transparent 70%)', filter: 'blur(30px)' }} />
 
-            <div className="relative z-10 text-center">
-              <div className="text-xs font-bold tracking-widest uppercase mb-5" style={{ color: '#65a30d' }}>
+            <div className="relative z-10 flex-1 text-left">
+              <div className="text-xs font-bold tracking-widest uppercase mb-2" style={{ color: '#65a30d' }}>
                 — Desarrollo personalizado
               </div>
-              <h2 className="text-3xl md:text-5xl font-extrabold mb-4 leading-tight" style={{ color: '#111827' }}>
-                ¿Necesitas una solución<br />
-                <span style={{ color: '#4d7c0f' }}>a la medida?</span>
+              <h2 className="text-2xl md:text-3xl font-extrabold mb-2 leading-tight" style={{ color: '#111827' }}>
+                ¿Necesitas una solución <span style={{ color: '#4d7c0f' }}>a la medida?</span>
               </h2>
-              <p className="text-base md:text-lg mb-10 max-w-2xl mx-auto" style={{ color: '#6b7280' }}>
-                Creamos píldoras IA específicas para tu negocio en 2 – 4 semanas,
-                integradas con tus sistemas existentes.
+              <p className="text-sm md:text-base max-w-xl" style={{ color: '#6b7280' }}>
+                Creamos píldoras IA específicas para tu negocio en 2 – 4 semanas, integradas con tus sistemas.
               </p>
+            </div>
 
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button
-                  onClick={openWA}
-                  className="btn-spring group flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-bold text-sm"
-                  style={{ background: 'linear-gradient(135deg, #a3e635, #65a30d)', color: '#fff', boxShadow: '0 4px 24px rgba(163,230,53,0.35)' }}
-                >
-                  Solicitar desarrollo
-                  <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </button>
-                <button
-                  className="flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold text-sm transition-all duration-300"
-                  style={{ background: 'rgba(0,0,0,0.04)', border: '1px solid rgba(0,0,0,0.12)', color: '#374151' }}
-                >
-                  Ver catálogo completo
-                </button>
-              </div>
+            <div className="relative z-10 flex flex-col sm:flex-row gap-4 shrink-0">
+              <button
+                onClick={openWA}
+                className="btn-spring group flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-bold text-sm"
+                style={{ background: 'linear-gradient(135deg, #a3e635, #65a30d)', color: '#fff', boxShadow: '0 4px 24px rgba(163,230,53,0.35)' }}
+              >
+                Solicitar desarrollo
+                <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </button>
+              <button
+                className="flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-300"
+                style={{ background: 'rgba(0,0,0,0.04)', border: '1px solid rgba(0,0,0,0.12)', color: '#374151' }}
+              >
+                Ver catálogo completo
+              </button>
             </div>
           </div>
         </div>
