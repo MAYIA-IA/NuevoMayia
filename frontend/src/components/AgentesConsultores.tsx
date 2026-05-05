@@ -135,37 +135,15 @@ const AgentesConsultores = () => {
   }, [hoveredId, videoErrors, videoLoaded]);
 
   return (
-    <div id="agentes-ia" className="w-full bg-gradient-to-b from-white via-slate-50 to-white py-20 relative overflow-hidden">
-      {/* Efectos de fondo sutiles */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-lime-400/3 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-cyan-400/3 rounded-full blur-3xl"></div>
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:32px_32px]"></div>
-      </div>
+    <div id="agentes-ia" className="w-full py-12 relative z-10">
 
       <div className="container mx-auto px-4 relative z-10 max-w-7xl">
         {/* Header modernizado */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-full mb-6 shadow-sm">
-            <div className="w-2 h-2 bg-gradient-to-r from-lime-400 to-cyan-500 rounded-full animate-pulse"></div>
-            <span className="text-sm font-medium text-gray-700">Sistemas Multi-Agente de IA</span>
-          </div>
-
-          <h1 className="text-5xl lg:text-6xl font-bold mb-4">
-            <span className="text-gray-900">Agentes</span>
-            <span className="bg-gradient-to-r from-lime-400 via-cyan-500 to-lime-400 bg-clip-text text-transparent"> Consultores</span>
-          </h1>
-
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto mb-6">
-            Disponibles como <span className="font-semibold text-gray-900">VaaS</span> y <span className="font-semibold text-gray-900">SaaS</span>
-          </p>
-
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-lime-400/10 to-cyan-500/10 border border-lime-400/30 rounded-full">
-            <svg className="w-5 h-5 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <span className="text-sm font-semibold text-gray-800">Modelo Xtrive MR</span>
-          </div>
+        <div className="text-center mb-12">
+          <h2 className="text-4xl lg:text-5xl font-bold mb-2">
+            <span style={{ color: '#111827' }}>Agentes</span>
+            <span className="bg-gradient-to-r from-lime-500 to-lime-400 bg-clip-text text-transparent"> Especializados</span>
+          </h2>
         </div>
 
         {/* Cards Grid - Más compacto y elegante */}
@@ -331,64 +309,6 @@ const AgentesConsultores = () => {
               </div>
             );
           })}
-        </div>
-
-        {/* CTA Section */}
-        <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-3xl p-8 md:p-12 relative overflow-hidden">
-          {/* Efectos de fondo */}
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f12_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f12_1px,transparent_1px)] bg-[size:20px_20px]"></div>
-          <div className="absolute top-0 right-0 w-64 h-64 bg-lime-400/10 rounded-full blur-3xl"></div>
-
-          <div className="relative z-10 text-center max-w-3xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              ¿No sabes cuál agente necesitas?
-            </h2>
-            <p className="text-lg text-gray-300 mb-8">
-              Agenda una consultoría gratuita y te ayudamos a identificar la mejor solución para tu negocio
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button onClick={() => window.open('https://api.whatsapp.com/send/?phone=525553315526&text&type=phone_number&app_absent=0','_blank','noopener,noreferrer')} className="group relative bg-gradient-to-r from-lime-400 to-cyan-500 hover:from-lime-500 hover:to-cyan-600 text-gray-900 font-bold py-4 px-8 rounded-xl text-lg transition-all duration-300 hover:scale-105 shadow-xl">
-                <span className="relative z-10 flex items-center justify-center gap-2">
-                  Agendar consultoría
-                  <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </span>
-              </button>
-
-              <button className="group relative bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-semibold py-4 px-8 rounded-xl text-lg transition-all duration-300 border border-white/20 hover:border-white/40">
-                <span className="flex items-center justify-center gap-2">
-                  Ver comparativa completa
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                  </svg>
-                </span>
-              </button>
-            </div>
-
-            {/* Trust indicators */}
-            <div className="flex flex-wrap justify-center gap-6 mt-8 pt-8 border-t border-white/10">
-              <div className="flex items-center gap-2">
-                <svg className="w-5 h-5 text-lime-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                <span className="text-sm text-gray-300">Soporte 24/7</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <svg className="w-5 h-5 text-lime-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                <span className="text-sm text-gray-300">Implementación en 30 días</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <svg className="w-5 h-5 text-lime-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                <span className="text-sm text-gray-300">Garantía de satisfacción</span>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
