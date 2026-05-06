@@ -7,25 +7,15 @@ import { ResponsiveLayout } from './components/ResponsiveLayout';
 import { Sidebar } from './components/Sidebar';
 import { Header } from './components/Header';
 import { Dashboard as DashboardEnterprise } from './components/Dashboard';
-
-import { RecursosHumanos } from './components/departamentos/RecursosHumanos';
-import { FinanzasContabilidad } from './components/departamentos/FinanzasContabilidad';
-import { Operaciones } from './components/departamentos/Operaciones';
-import { VentasMarketing } from './components/departamentos/VentasMarketing';
-import { TecnologiasInformacion } from './components/departamentos/TecnologiasInformacion';
-import { Administracion } from './components/departamentos/Administracion';
-import { Ciberseguridad } from './components/departamentos/Ciberseguridad';
-import { Playground } from './components/departamentos/Playground';
-import { Academia } from './components/departamentos/Academia';
 import { Analiticos } from './components/departamentos/Analiticos';
 import { brandingConfig } from './config/branding';
 import './responsive.css';
 
 // Importaciones de NuevoMayia
-import ImageCarousel from './components/imageCarousel';
+import NoticiasTicker from './components/NoticiasTicker';
+import PartnersSection from './components/PartnersSection';
 import MusculosMAYiA from './components/musculosMayia';
 import CertificacionesMarquee from './components/CertificacionesMarquee';
-import SubNavigation from './components/subNavigation';
 import IAEmpresarial from './components/IAEmpresarial';
 import IAPorSector from './components/IAporSector';
 import EmpleadosDigitales from './components/EmpleadosDigitales';
@@ -34,26 +24,29 @@ import CiberseguridadIA from './components/CiberseguridadIA';
 import AcademiaIA from './components/AcademiaIA';
 import BrandFooter from './components/brandFooter';
 import Footer from './components/piepagina';
-import ChatWidget from './components/ChatAgente';
+import Organigrama from './components/Organigrama';
+import EmbajadoresMayia from './components/EmbajadoresMayia';
+import HackatonMarketplace from './components/HackatonMarketplace';
+import TermometroIAMexico from './components/TermometroIAMexico';
+import NetworkingHub from './components/NetworkingHub';
 
 function App() {
   const [activeSection, setActiveSection] = useState('dashboard');
-  const [isChatOpen, setIsChatOpen] = useState(false);
   const { colores } = brandingConfig;
 
   const getTitulo = () => {
     const titulos: Record<string, string> = {
-      dashboard:      'Dashboard General',
-      rh:             'Recursos Humanos',
-      finanzas:       'Finanzas y Contabilidad',
-      operaciones:    'Operaciones',
-      ventas:         'Ventas y Marketing',
-      ti:             'Tecnologías de la Información',
+      dashboard: 'Dashboard General',
+      rh: 'Recursos Humanos',
+      finanzas: 'Finanzas y Contabilidad',
+      operaciones: 'Operaciones',
+      ventas: 'Ventas y Marketing',
+      ti: 'Tecnologías de la Información',
       administracion: 'Administración',
       ciberseguridad: 'CiberSeguridad',
-      playground:     'Playground',
-      academia:       'Academia',
-      analiticos:     'México es MAYiA',
+      playground: 'Playground',
+      academia: 'Academia',
+      analiticos: 'México es MAYiA',
     };
     return titulos[activeSection] || 'Dashboard';
   };
@@ -61,30 +54,30 @@ function App() {
   // Configuración de IntersectionObserver para actualizar el sidebar al hacer scroll
   useEffect(() => {
     const ids = [
-      'dashboard', 'analiticos', 'ia-empresarial', 'ia-sectores', 
+      'dashboard', 'analiticos', 'ia-empresarial', 'ia-sectores',
       'empleados-digitales', 'pildoras-ia', 'ciberseguridad', 'academia'
     ];
-    
+
     // Esperamos a que el DOM esté listo
     setTimeout(() => {
       const scrollContainer = document.getElementById('main-scroll-container');
-      
+
       const observer = new IntersectionObserver((entries) => {
         // Obtenemos todas las secciones visibles
         const visibleEntries = entries.filter(entry => entry.isIntersecting);
-        
+
         if (visibleEntries.length > 0) {
           // Si hay varias visibles, tomamos la que está más cerca de la parte superior (top >= 0)
           // o la que abarque mayor parte de la pantalla.
           // Para simplificar, la última que cruzó el umbral funciona bien con rootMargin asimétrico.
           setActiveSection(visibleEntries[0].target.id);
         }
-      }, { 
+      }, {
         root: scrollContainer,
         // Al usar threshold 0, se dispara en cuanto cualquier píxel entra en el rootMargin
-        threshold: 0, 
+        threshold: 0,
         // El margen se ajusta para detectar qué elemento está en el 30% superior de la pantalla
-        rootMargin: '-20% 0px -70% 0px' 
+        rootMargin: '-20% 0px -70% 0px'
       });
 
       ids.forEach(id => {
@@ -113,15 +106,21 @@ function App() {
           <Analiticos />
         </div>
         <CertificacionesMarquee />
-        <ImageCarousel />
-        
+        <NoticiasTicker />
+        <PartnersSection />
+
         <div id="ia-empresarial"><IAEmpresarial /></div>
         <div id="ia-sectores"><IAPorSector /></div>
+        <TermometroIAMexico />
+        <HackatonMarketplace />
         <div id="empleados-digitales"><EmpleadosDigitales /></div>
         <div id="pildoras-ia"><PildorasIA /></div>
         <div id="ciberseguridad"><CiberseguridadIA /></div>
+        <EmbajadoresMayia />
+        <Organigrama />
         <div id="academia"><AcademiaIA /></div>
-        
+        <NetworkingHub />
+
         <BrandFooter />
         <Footer />
       </div>
@@ -157,10 +156,6 @@ function App() {
         </ResponsiveLayout>
       </div>
 
-      <ChatWidget
-        isOpen={isChatOpen}
-        onToggle={() => setIsChatOpen(!isChatOpen)}
-      />
     </div>
   );
 }
