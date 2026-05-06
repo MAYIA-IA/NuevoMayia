@@ -28,11 +28,11 @@ interface Notification {
 }
 
 const notificacionesEstaticas: Notification[] = [
-  { id: 1, tipo: 'urgente', titulo: 'Farmacias Del Ahorro: Quiebre Inminente · Antibióticos',        mensaje: 'Zona Norte en riesgo crítico. Stock vs demanda proyectada +34.7%. Acción inmediata requerida.',          tiempo: 'Hace 2 horas',  leida: false },
-  { id: 2, tipo: 'alerta',  titulo: 'Farmacias Del Ahorro: Alertas Epidemiológicas Activas',         mensaje: 'Influenza A +18.6% en 8 zonas y COVID-19 +12.3% en 6 zonas. CDMX con índice de riesgo: 92.',           tiempo: 'Hace 15 min',   leida: false },
-  { id: 3, tipo: 'alerta',  titulo: 'Farmacias Del Ahorro: Riesgo de Desabasto Nacional',       mensaje: '38 alertas activas hoy. 7.4% riesgo desabasto y 156 SKUs críticos de 24,390 monitoreados.',            tiempo: 'Hace 30 min',   leida: false },
-  { id: 4, tipo: 'exito',   titulo: 'Farmacias Del Ahorro: Reabastecimiento Completado · CDMX',       mensaje: 'Operación de reabastecimiento finalizada. Cobertura promedio actual: 92.6% en inventario disponible.',  tiempo: 'Hace 4 horas',  leida: true  },
-  { id: 5, tipo: 'info',    titulo: 'Farmacias Del Ahorro: Sobrestock Detectado · Vitaminas',     mensaje: 'Vitaminas Occidente con variación -3.2%. Cluster Alérgica tendencia -6% — nivel de riesgo bajo.',      tiempo: 'Hace 6 horas',  leida: true  },
+  { id: 1, tipo: 'urgente', titulo: 'MAYiA: ',        mensaje: 'Zona Norte en riesgo crítico. Stock vs demanda proyectada +34.7%. Acción inmediata requerida.',          tiempo: 'Hace 2 horas',  leida: false },
+  { id: 2, tipo: 'alerta',  titulo: 'MAYiA: Alertas Epidemiológicas Activas',         mensaje: 'Influenza A +18.6% en 8 zonas y COVID-19 +12.3% en 6 zonas. CDMX con índice de riesgo: 92.',           tiempo: 'Hace 15 min',   leida: false },
+  { id: 3, tipo: 'alerta',  titulo: 'MAYiA: Riesgo de Desabasto Nacional',       mensaje: '38 alertas activas hoy. 7.4% riesgo desabasto y 156 SKUs críticos de 24,390 monitoreados.',            tiempo: 'Hace 30 min',   leida: false },
+  { id: 4, tipo: 'exito',   titulo: 'MAYiA: Reabastecimiento Completado · CDMX',       mensaje: 'Operación de reabastecimiento finalizada. Cobertura promedio actual: 92.6% en inventario disponible.',  tiempo: 'Hace 4 horas',  leida: true  },
+  { id: 5, tipo: 'info',    titulo: 'MAYiA: Sobrestock Detectado · Vitaminas',     mensaje: 'Vitaminas Occidente con variación -3.2%. Cluster Alérgica tendencia -6% — nivel de riesgo bajo.',      tiempo: 'Hace 6 horas',  leida: true  },
 ];
 
 const sugerencias = [
