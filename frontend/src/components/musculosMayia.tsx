@@ -258,15 +258,7 @@ const MusculosMAYiA = () => {
         style={{ background: 'rgba(127,209,255,0.07)', filter: 'blur(100px)', zIndex: 1 }} />
 
       <div className="relative container mx-auto px-6" style={{ zIndex: 2 }}>
-        {/* Header */}
-        <div className="text-center mb-14">
-          <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-4" style={{ color: '#111827' }}>
-            Hola bienvenido a MAYiA ¿Qué deseas observar hoy?
-          </h2>
-          <p className="text-base max-w-xl mx-auto leading-relaxed" style={{ color: '#6b7280' }}>
-            La plataforma más grande de México
-          </p>
-        </div>
+
 
         {/* Cards grid */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
