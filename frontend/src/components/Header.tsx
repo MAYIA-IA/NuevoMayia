@@ -8,6 +8,9 @@ import {
   Bot,
   CalendarDays,
   Sparkles,
+  MessageCircle,
+  Mail,
+  Phone,
 } from 'lucide-react';
 import { brandingConfig } from '../config/branding';
 import { AsistenteIAChat } from './modules/AsistenteIAChat';
@@ -35,12 +38,72 @@ const notificacionesEstaticas: Notification[] = [
   { id: 5, tipo: 'info',    titulo: 'MAYiA: Sobrestock Detectado · Vitaminas',     mensaje: 'Vitaminas Occidente con variación -3.2%. Cluster Alérgica tendencia -6% — nivel de riesgo bajo.',      tiempo: 'Hace 6 horas',  leida: true  },
 ];
 
-const sugerencias = [
-  { icono: '🤖', texto: '¿Qué servicios de IA ofrece MAYiA?' },
-  { icono: '👤', texto: '¿Cómo funcionan los Empleados Digitales?' },
-  { icono: '🔐', texto: '¿Qué soluciones de ciberseguridad tienen?' },
-  { icono: '🎓', texto: '¿Qué es la Academia MAYiA?' },
+
+
+/* ── Botones de contacto rápido ── */
+const CONTACTOS = [
+  {
+    id: 'whatsapp',
+    href: 'https://api.whatsapp.com/send/?phone=525553315526',
+    icon: MessageCircle,
+    label: 'WhatsApp',
+    tooltip: '+52 55 5331 5526',
+    bg: '#25D366',
+    hoverBg: '#1ebe5d',
+    pulse: true,
+  },
+  {
+    id: 'email',
+    href: 'mailto:contacto@mayia.mx',
+    icon: Mail,
+    label: 'Email',
+    tooltip: 'contacto@mayia.mx',
+    bg: '#0284c7',
+    hoverBg: '#0369a1',
+    pulse: false,
+  },
+  {
+    id: 'phone',
+    href: 'tel:+525553315526',
+    icon: Phone,
+    label: 'Llamar',
+    tooltip: '+52 55 5331 5526',
+    bg: '#7c3aed',
+    hoverBg: '#6d28d9',
+    pulse: false,
+  },
 ];
+
+const contactCss = `
+  @keyframes hdr-whatsapp-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(37,211,102,0.5); }
+    50%       { box-shadow: 0 0 0 6px rgba(37,211,102,0); }
+  }
+  @keyframes hdr-sparkle {
+    0%, 100% { opacity: 1; transform: scale(1) rotate(0deg); }
+    50%       { opacity: 0.7; transform: scale(1.18) rotate(15deg); }
+  }
+  @keyframes hdr-shimmer {
+    0%   { background-position: -200% center; }
+    100% { background-position: 200% center; }
+  }
+  @keyframes hdr-ring-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(164,217,85,0.35), 0 2px 12px rgba(0,0,0,0.25); }
+    50%       { box-shadow: 0 0 0 4px rgba(164,217,85,0.12), 0 2px 12px rgba(0,0,0,0.25); }
+  }
+  .hdr-contact-btn { transition: all 0.25s cubic-bezier(.23,1,.32,1) !important; }
+  .hdr-contact-btn:hover { transform: translateY(-2px) scale(1.06) !important; }
+  .hdr-search-sparkle { animation: hdr-sparkle 2.8s ease-in-out infinite; }
+  .hdr-search-bar-idle { animation: hdr-ring-pulse 3s ease-in-out infinite; }
+  .hdr-label-shimmer {
+    background: linear-gradient(90deg, #888 30%, #A4D955 50%, #888 70%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: hdr-shimmer 3.5s linear infinite;
+  }
+`;
 
 export const Header: React.FC<HeaderProps> = ({ title }) => {
   const { colores } = brandingConfig;
@@ -52,6 +115,7 @@ export const Header: React.FC<HeaderProps> = ({ title }) => {
   const [chatAbierto, setChatAbierto] = useState(false);
   const searchWrapRef = useRef<HTMLDivElement>(null);
   const chatRef = useRef<AsistenteIAChatHandle>(null);
+  const [hovContact, setHovContact] = useState<string | null>(null);
 
   const fecha = new Date();
   const fechaFormateada = fecha.toLocaleDateString('es-ES', { day: '2-digit', month: 'short', year: 'numeric' });
@@ -93,6 +157,7 @@ export const Header: React.FC<HeaderProps> = ({ title }) => {
 
   return (
     <>
+      <style>{contactCss}</style>
       {/* Overlay oscuro cuando el chat está abierto */}
       {chatAbierto && (
         <div
@@ -126,49 +191,81 @@ export const Header: React.FC<HeaderProps> = ({ title }) => {
           ref={searchWrapRef}
           style={{ flex: 1, position: 'relative' }}
         >
-          {/* La barra */}
+          {/* La barra — premium */}
           <div
             onClick={() => { setChatAbierto(true); setTimeout(() => chatRef.current?.focusInput(), 50); }}
+            className={chatAbierto ? undefined : 'hdr-search-bar-idle'}
             style={{
               display: 'flex',
               alignItems: 'center',
               gap: '10px',
-              padding: '0 16px',
+              padding: '0 6px 0 16px',
               height: '44px',
               borderRadius: chatAbierto ? '14px 14px 0 0' : '999px',
-              backgroundColor: colores.fondoPrincipal,
-              border: `1px solid ${chatAbierto ? colores.primario : colores.borde}`,
-              borderBottom: chatAbierto ? `1px solid ${colores.borde}` : `1px solid ${colores.borde}`,
+              background: chatAbierto
+                ? colores.fondoPrincipal
+                : 'linear-gradient(135deg, #111111 0%, #1a1a1a 100%)',
+              border: `1.5px solid ${chatAbierto ? colores.primario : '#2a2a2a'}`,
+              borderBottom: chatAbierto ? `1px solid #1e1e1e` : `1.5px solid #2a2a2a`,
               cursor: 'text',
-              transition: 'border-radius 0.2s, box-shadow 0.2s',
-              boxShadow: chatAbierto ? `0 0 0 3px ${colores.primario}28` : '0 1px 4px rgba(0,0,0,0.06)',
+              transition: 'all 0.25s cubic-bezier(.23,1,.32,1)',
+              boxShadow: chatAbierto
+                ? `0 0 0 3px ${colores.primario}30, 0 8px 32px rgba(0,0,0,0.5)`
+                : '0 2px 12px rgba(0,0,0,0.25)',
               position: 'relative',
               zIndex: 310,
             }}
           >
-            <Sparkles size={17} style={{ color: colores.primario, flexShrink: 0 }} />
-            <span style={{ fontSize: '14px', color: colores.textoMedio, flex: 1, userSelect: 'none' }}>
-              {chatAbierto ? 'Asistente IA — escribe tu pregunta…' : 'Pregúntale algo al asistente IA…'}
+            {/* Sparkles animado */}
+            <Sparkles
+              size={17}
+              className="hdr-search-sparkle"
+              style={{ color: colores.primario, flexShrink: 0 }}
+            />
+
+            {/* Label con shimmer cuando está cerrado */}
+            <span
+              className={chatAbierto ? undefined : 'hdr-label-shimmer'}
+              style={{
+                fontSize: '13px',
+                fontWeight: chatAbierto ? 400 : 500,
+                color: chatAbierto ? colores.textoMedio : undefined,
+                flex: 1,
+                userSelect: 'none',
+                letterSpacing: '0.01em',
+              }}
+            >
+              {chatAbierto ? 'Asistente IA · escribe tu pregunta…' : 'Pregúntale algo al Asistente IA de MAYiA…'}
             </span>
+
             {chatAbierto ? (
               <button
                 onClick={e => { e.stopPropagation(); setChatAbierto(false); }}
-                style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '4px', display: 'flex', borderRadius: '50%' }}
+                style={{
+                  background: '#2a2a2a', border: 'none', cursor: 'pointer',
+                  padding: '6px', display: 'flex', borderRadius: '50%',
+                  transition: 'background 0.2s',
+                }}
+                onMouseEnter={e => (e.currentTarget.style.background = '#3a3a3a')}
+                onMouseLeave={e => (e.currentTarget.style.background = '#2a2a2a')}
               >
-                <X size={16} style={{ color: colores.textoMedio }} />
+                <X size={15} style={{ color: '#aaaaaa' }} />
               </button>
             ) : (
               <div style={{
-                width: '28px', height: '28px', borderRadius: '50%',
-                backgroundColor: colores.primario,
-                display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+                display: 'flex', alignItems: 'center', gap: '6px',
+                padding: '5px 10px 5px 8px',
+                borderRadius: '999px', marginLeft: '4px',
+                background: `linear-gradient(135deg, ${colores.primario}, #65a30d)`,
+                flexShrink: 0,
               }}>
-                <Bot size={14} color="#fff" />
+                <Bot size={13} color="#fff" />
+                <span style={{ fontSize: '11px', fontWeight: 700, color: '#fff', letterSpacing: '0.03em' }}>IA</span>
               </div>
             )}
           </div>
 
-          {/* ── Dropdown estilo Google ── */}
+          {/* ── Dropdown premium ── */}
           {chatAbierto && (
             <div
               style={{
@@ -177,10 +274,10 @@ export const Header: React.FC<HeaderProps> = ({ title }) => {
                 left: 0,
                 right: 0,
                 backgroundColor: colores.fondoPrincipal,
-                border: `1px solid ${colores.primario}`,
-                borderTop: `1px solid ${colores.borde}`,
-                borderRadius: '0 0 20px 20px',
-                boxShadow: '0 20px 60px rgba(0,0,0,0.45)',
+                border: `1.5px solid ${colores.primario}50`,
+                borderTop: `1px solid #1e1e1e`,
+                borderRadius: '0 0 22px 22px',
+                boxShadow: `0 24px 70px rgba(0,0,0,0.55), 0 0 0 1px ${colores.primario}18`,
                 overflow: 'hidden',
                 zIndex: 305,
                 display: 'flex',
@@ -188,42 +285,30 @@ export const Header: React.FC<HeaderProps> = ({ title }) => {
                 height: '520px',
               }}
             >
-              {/* Chips de acceso rápido */}
+              {/* Header decorativo del chat */}
               <div style={{
-                padding: '10px 16px',
-                borderBottom: `1px solid ${colores.borde}`,
-                display: 'flex', flexWrap: 'wrap', gap: '6px',
+                padding: '10px 16px 8px',
+                borderBottom: `1px solid #1e1e1e`,
+                display: 'flex', alignItems: 'center', gap: '10px',
                 flexShrink: 0,
+                background: 'linear-gradient(90deg, #0d0d0d, #111)',
               }}>
-                {sugerencias.map((s, i) => (
-                  <button
-                    key={i}
-                    onClick={() => chatRef.current?.sendExternal(s.texto)}
-                    style={{
-                      display: 'flex', alignItems: 'center', gap: '5px',
-                      padding: '4px 11px',
-                      borderRadius: '999px',
-                      border: `1px solid ${colores.borde}`,
-                      backgroundColor: colores.fondoTerciario,
-                      color: colores.textoClaro,
-                      fontSize: '11px',
-                      cursor: 'pointer',
-                      transition: 'all 0.15s',
-                      whiteSpace: 'nowrap',
-                    }}
-                    onMouseEnter={e => {
-                      e.currentTarget.style.backgroundColor = colores.fondoSecundario;
-                      e.currentTarget.style.borderColor = colores.primario;
-                    }}
-                    onMouseLeave={e => {
-                      e.currentTarget.style.backgroundColor = colores.fondoTerciario;
-                      e.currentTarget.style.borderColor = colores.borde;
-                    }}
-                  >
-                    <span>{s.icono}</span>
-                    <span>{s.texto}</span>
-                  </button>
-                ))}
+                <div style={{
+                  width: 28, height: 28, borderRadius: '50%',
+                  background: `linear-gradient(135deg, ${colores.primario}, #65a30d)`,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  flexShrink: 0,
+                  boxShadow: `0 0 12px ${colores.primario}50`,
+                }}>
+                  <Bot size={14} color="#fff" />
+                </div>
+                <div>
+                  <div style={{ fontSize: '13px', fontWeight: 700, color: '#ffffff', lineHeight: 1.2 }}>Asistente IA · MAYiA</div>
+                  <div style={{ fontSize: '10px', color: '#555', display: 'flex', alignItems: 'center', gap: 4 }}>
+                    <span style={{ display: 'inline-block', width: 6, height: 6, borderRadius: '50%', background: '#A4D955', boxShadow: '0 0 4px #A4D955' }} />
+                    En línea · Listo para responder
+                  </div>
+                </div>
               </div>
 
               {/* Chat ocupa el resto */}
@@ -232,6 +317,52 @@ export const Header: React.FC<HeaderProps> = ({ title }) => {
               </div>
             </div>
           )}
+        </div>
+
+        {/* ── CONTACTO RÁPIDO ── */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginLeft: '8px', marginRight: '4px' }}>
+          {CONTACTOS.map(c => (
+            <div key={c.id} style={{ position: 'relative' }}
+              onMouseEnter={() => setHovContact(c.id)}
+              onMouseLeave={() => setHovContact(null)}
+            >
+              <a
+                href={c.href}
+                target={c.id !== 'phone' ? '_blank' : undefined}
+                rel="noopener noreferrer"
+                className="hdr-contact-btn"
+                style={{
+                  display: 'flex', alignItems: 'center', gap: '6px',
+                  padding: '7px 13px', borderRadius: '999px',
+                  backgroundColor: hovContact === c.id ? c.hoverBg : c.bg,
+                  textDecoration: 'none',
+                  boxShadow: c.pulse ? '0 0 0 0 rgba(37,211,102,0.5)' : 'none',
+                  animation: c.pulse ? 'hdr-whatsapp-pulse 2.5s infinite' : 'none',
+                }}
+              >
+                <c.icon size={15} color="#ffffff" />
+                <span style={{ fontSize: '12px', fontWeight: '700', color: '#ffffff', whiteSpace: 'nowrap' }}>
+                  {c.label}
+                </span>
+              </a>
+              {/* Tooltip */}
+              {hovContact === c.id && (
+                <div style={{
+                  position: 'absolute', bottom: '-36px', left: '50%',
+                  transform: 'translateX(-50%)',
+                  backgroundColor: '#1a1a1a', color: '#ffffff',
+                  fontSize: '11px', fontWeight: '500',
+                  padding: '4px 10px', borderRadius: '7px',
+                  whiteSpace: 'nowrap', zIndex: 400,
+                  border: '1px solid #333',
+                  pointerEvents: 'none',
+                }}>
+                  {c.tooltip}
+                  <div style={{ position: 'absolute', top: '-5px', left: '50%', transform: 'translateX(-50%)', width: 0, height: 0, borderLeft: '5px solid transparent', borderRight: '5px solid transparent', borderBottom: '5px solid #333' }} />
+                </div>
+              )}
+            </div>
+          ))}
         </div>
 
         {/* ── DERECHA: Fecha + Bell + Avatar ── */}
