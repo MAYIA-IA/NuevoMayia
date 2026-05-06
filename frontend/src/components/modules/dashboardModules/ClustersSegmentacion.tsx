@@ -26,7 +26,7 @@ const clustersData: Record<EjeClusters, ClusterBurbuja[]> = {
     { id: 'c2', nombre: 'Gastrointestinal',    x: 72, y: 64, z: 310, casos: 5103, medicamentos: ['Loperamida','Metoclopramida','SRO'],         tendencia: +14, color: '#F59E0B' },
     { id: 'c3', nombre: 'Viral Estacional',    x: 65, y: 71, z: 280, casos: 3870, medicamentos: ['Paracetamol','Ibuprofeno','Vitamina C'],     tendencia: +19, color: '#8B5CF6' },
     { id: 'c4', nombre: 'Alérgica',            x: 45, y: 38, z: 190, casos: 2241, medicamentos: ['Loratadina','Cetirizina','Fluticasona'],     tendencia:  -6, color: '#10B981' },
-    { id: 'c5', nombre: 'Crónica Recurrente',  x: 38, y: 52, z: 160, casos: 1580, medicamentos: ['Metformina','Losartán','Atorvastatina'],     tendencia:  +3, color: '#008CAE' },
+    { id: 'c5', nombre: 'Crónica Recurrente',  x: 38, y: 52, z: 160, casos: 1580, medicamentos: ['Metformina','Losartán','Atorvastatina'],     tendencia:  +3, color: '#A4D955' },
     { id: 'c6', nombre: 'Pediátrica',          x: 78, y: 88, z: 240, casos: 2980, medicamentos: ['Amoxicilina pediátrica','Ibuprofeno niños'],tendencia: +22, color: '#F27405' },
   ],
   region: [
@@ -34,7 +34,7 @@ const clustersData: Record<EjeClusters, ClusterBurbuja[]> = {
     { id: 'r2', nombre: 'Región Centro',    x: 90, y: 85, z: 450, casos: 9120, medicamentos: ['Analgésicos','Antivirales'],    tendencia: +24, color: '#F27405' },
     { id: 'r3', nombre: 'Región Sur',       x: 68, y: 72, z: 320, casos: 5430, medicamentos: ['Antiparasitarios','SRO'],      tendencia: +12, color: '#F59E0B' },
     { id: 'r4', nombre: 'Región Bajío',     x: 55, y: 48, z: 240, casos: 3870, medicamentos: ['Antialérgicos','Vitaminas'],   tendencia:  +7, color: '#10B981' },
-    { id: 'r5', nombre: 'Región Occidente', x: 60, y: 55, z: 260, casos: 4210, medicamentos: ['Respiratorios','Crónicos'],    tendencia:  +9, color: '#008CAE' },
+    { id: 'r5', nombre: 'Región Occidente', x: 60, y: 55, z: 260, casos: 4210, medicamentos: ['Respiratorios','Crónicos'],    tendencia:  +9, color: '#A4D955' },
     { id: 'r6', nombre: 'Región Sureste',   x: 48, y: 42, z: 190, casos: 2980, medicamentos: ['Tropicales','Gastrointestinal'],tendencia: +5, color: '#8B5CF6' },
   ],
   temporalidad: [
@@ -45,7 +45,7 @@ const clustersData: Record<EjeClusters, ClusterBurbuja[]> = {
     { id: 't5', nombre: 'Otoño Estable',       x: 42, y: 38, z: 180, casos:  2840, medicamentos: ['Crónicos','Vitamina D'],                           tendencia:  -4, color: '#10B981' },
   ],
   perfil: [
-    { id: 'p1', nombre: 'Adulto Mayor 60+',   x: 55, y: 68, z: 320, casos: 5840, medicamentos: ['Antihipertensivos','Antidiabéticos','Estatinas'],     tendencia:  +8, color: '#008CAE' },
+    { id: 'p1', nombre: 'Adulto Mayor 60+',   x: 55, y: 68, z: 320, casos: 5840, medicamentos: ['Antihipertensivos','Antidiabéticos','Estatinas'],     tendencia:  +8, color: '#A4D955' },
     { id: 'p2', nombre: 'Pediátrico 0-12',    x: 80, y: 84, z: 380, casos: 7120, medicamentos: ['Antibióticos pediátricos','Antipiréticos','Vitaminas'],tendencia: +22, color: '#F27405' },
     { id: 'p3', nombre: 'Adulto Joven 18-40', x: 65, y: 52, z: 280, casos: 4980, medicamentos: ['Analgésicos','Anticonceptivos','Vitaminas'],           tendencia: +11, color: '#10B981' },
     { id: 'p4', nombre: 'Adulto Medio 40-60', x: 58, y: 62, z: 240, casos: 4120, medicamentos: ['Antihipertensivos','Analgésicos','Gastro'],            tendencia:  +9, color: '#8B5CF6' },
@@ -59,14 +59,14 @@ const segmentosTabla: Record<EjeClusters, SegmentoTabla[]> = {
     { segmento: 'Pediátrica',         descripcion: 'Alta correlación escolar',       casos: 2980, skus: 18, riesgo: 'critico', tendencia: +22, color: '#F27405' },
     { segmento: 'Viral Estacional',   descripcion: 'Aumento anormal región norte',   casos: 3870, skus: 22, riesgo: 'alto',    tendencia: +19, color: '#8B5CF6' },
     { segmento: 'Gastrointestinal',   descripcion: 'Pico estacional detectado',      casos: 5103, skus: 15, riesgo: 'alto',    tendencia: +14, color: '#F59E0B' },
-    { segmento: 'Crónica Recurrente', descripcion: 'Estable, monitoreo preventivo',  casos: 1580, skus: 32, riesgo: 'medio',   tendencia:  +3, color: '#008CAE' },
+    { segmento: 'Crónica Recurrente', descripcion: 'Estable, monitoreo preventivo',  casos: 1580, skus: 32, riesgo: 'medio',   tendencia:  +3, color: '#A4D955' },
     { segmento: 'Alérgica',           descripcion: 'Tendencia descendente temporal', casos: 2241, skus: 12, riesgo: 'bajo',    tendencia:  -6, color: '#10B981' },
   ],
   region: [
     { segmento: 'Región Centro',    descripcion: '18 estados, mayor densidad',      casos: 9120, skus: 42, riesgo: 'critico', tendencia: +24, color: '#F27405' },
     { segmento: 'Región Norte',     descripcion: 'Presión en antibióticos',         casos: 6840, skus: 35, riesgo: 'critico', tendencia: +18, color: '#EF4444' },
     { segmento: 'Región Sur',       descripcion: 'Gastrointestinal dominante',      casos: 5430, skus: 28, riesgo: 'alto',    tendencia: +12, color: '#F59E0B' },
-    { segmento: 'Región Occidente', descripcion: 'Mix crónico-respiratorio',        casos: 4210, skus: 30, riesgo: 'medio',   tendencia:  +9, color: '#008CAE' },
+    { segmento: 'Región Occidente', descripción: 'Mix crónico-respiratorio',        casos: 4210, skus: 30, riesgo: 'medio',   tendencia:  +9, color: '#A4D955' },
     { segmento: 'Región Bajío',     descripcion: 'Bajo riesgo, stock adecuado',     casos: 3870, skus: 25, riesgo: 'bajo',    tendencia:  +7, color: '#10B981' },
     { segmento: 'Región Sureste',   descripcion: 'Enfermedades tropicales activas', casos: 2980, skus: 20, riesgo: 'medio',   tendencia:  +5, color: '#8B5CF6' },
   ],
@@ -81,7 +81,7 @@ const segmentosTabla: Record<EjeClusters, SegmentoTabla[]> = {
     { segmento: 'Pediátrico 0-12',    descripcion: 'Mayor riesgo, alta rotación',      casos: 7120, skus: 38, riesgo: 'critico', tendencia: +22, color: '#F27405' },
     { segmento: 'Adulto Joven 18-40', descripcion: 'Demanda estable, analgésicos',     casos: 4980, skus: 28, riesgo: 'alto',    tendencia: +11, color: '#10B981' },
     { segmento: 'Adulto Medio 40-60', descripcion: 'Creciente, crónicos + agudos',     casos: 4120, skus: 32, riesgo: 'alto',    tendencia:  +9, color: '#8B5CF6' },
-    { segmento: 'Adulto Mayor 60+',   descripcion: 'Alta dependencia medicamentos',    casos: 5840, skus: 45, riesgo: 'medio',   tendencia:  +8, color: '#008CAE' },
+    { segmento: 'Adulto Mayor 60+',   descripcion: 'Alta dependencia medicamentos',    casos: 5840, skus: 45, riesgo: 'medio',   tendencia:  +8, color: '#A4D955' },
     { segmento: 'Embarazo/Lactancia', descripcion: 'Segmento especializado estable',   casos: 1980, skus: 15, riesgo: 'bajo',    tendencia:  +4, color: '#EC4899' },
   ],
 };
@@ -89,7 +89,7 @@ const segmentosTabla: Record<EjeClusters, SegmentoTabla[]> = {
 const nivelRiesgoCfg = {
   critico: { color: '#EF4444', bg: '#EF444415', label: 'Crítico' },
   alto:    { color: '#F59E0B', bg: '#F59E0B15', label: 'Alto'    },
-  medio:   { color: '#008CAE', bg: '#008CAE15', label: 'Medio'   },
+  medio:   { color: '#A4D955', bg: '#A4D95515', label: 'Medio'   },
   bajo:    { color: '#10B981', bg: '#10B98115', label: 'Bajo'    },
 };
 

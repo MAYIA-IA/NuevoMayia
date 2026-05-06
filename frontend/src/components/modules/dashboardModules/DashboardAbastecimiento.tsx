@@ -64,13 +64,13 @@ const categorias: Categoria[] = ['Todos', 'Antibióticos', 'Analgésicos', 'Vita
 const nivelCfg: Record<NivelRiesgo, { color: string; bg: string; label: string; icon: React.ReactNode }> = {
   critico: { color: '#EF4444', bg: '#EF444415', label: 'Crítico', icon: <AlertTriangle size={11} /> },
   alto:    { color: '#F59E0B', bg: '#F59E0B15', label: 'Alto',    icon: <Clock size={11} />          },
-  medio:   { color: '#008CAE', bg: '#008CAE15', label: 'Medio',   icon: <TrendingUp size={11} />     },
+  medio:   { color: '#A4D955', bg: '#A4D95515', label: 'Medio',   icon: <TrendingUp size={11} />     },
   ok:      { color: '#10B981', bg: '#10B98115', label: 'OK',      icon: <CheckCircle size={11} />    },
 };
 
 const tipoCfg: Record<Recomendacion['tipo'], { color: string; bg: string; label: string }> = {
   urgente:       { color: '#EF4444', bg: '#EF444415', label: 'Urgente'    },
-  transferencia: { color: '#008CAE', bg: '#008CAE15', label: 'Transfer.'  },
+  transferencia: { color: '#A4D955', bg: '#A4D95515', label: 'Transfer.'  },
   reposicion:    { color: '#10B981', bg: '#10B98115', label: 'Reposición' },
 };
 
@@ -169,7 +169,7 @@ export const DashboardAbastecimiento: React.FC = () => {
             {[
               { val: criticos,     label: 'críticos',       color: '#EF4444' },
               { val: altos,        label: 'en alerta',      color: '#F59E0B' },
-              { val: sucAfectadas, label: 'suc. en riesgo', color: '#008CAE' },
+              { val: sucAfectadas, label: 'suc. en riesgo', color: '#A4D955' },
             ].map((k, i) => (
               <div key={i} style={{
                 padding: '8px 4px', borderRadius: '12px',

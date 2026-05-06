@@ -36,10 +36,10 @@ const notificacionesEstaticas: Notification[] = [
 ];
 
 const sugerencias = [
-  { icono: '📊', texto: '¿Cuál es el KPI más bajo este mes?' },
-  { icono: '👥', texto: '¿Cuántos empleados están activos hoy?' },
-  { icono: '⚠️', texto: 'Muéstrame las alertas críticas' },
-  { icono: '📈', texto: '¿Cómo van las ventas este trimestre?' },
+  { icono: '🤖', texto: '¿Qué servicios de IA ofrece MAYiA?' },
+  { icono: '👤', texto: '¿Cómo funcionan los Empleados Digitales?' },
+  { icono: '🔐', texto: '¿Qué soluciones de ciberseguridad tienen?' },
+  { icono: '🎓', texto: '¿Qué es la Academia MAYiA?' },
 ];
 
 export const Header: React.FC<HeaderProps> = ({ title }) => {
@@ -185,54 +185,49 @@ export const Header: React.FC<HeaderProps> = ({ title }) => {
                 zIndex: 305,
                 display: 'flex',
                 flexDirection: 'column',
-                maxHeight: 'calc(100vh - 130px)',
+                height: '520px',
               }}
             >
-              {/* Sugerencias rápidas */}
+              {/* Chips de acceso rápido */}
               <div style={{
-                padding: '12px 16px 10px',
+                padding: '10px 16px',
                 borderBottom: `1px solid ${colores.borde}`,
+                display: 'flex', flexWrap: 'wrap', gap: '6px',
                 flexShrink: 0,
               }}>
-                <p style={{
-                  margin: '0 0 8px',
-                  fontSize: '10px',
-                  fontWeight: '700',
-                  color: colores.textoMedio,
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.1em',
-                }}>
-                  Sugerencias
-                </p>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
-                  {sugerencias.map((s, i) => (
-                    <button
-                      key={i}
-                      onClick={() => chatRef.current?.sendExternal(s.texto)}
-                      style={{
-                        display: 'flex', alignItems: 'center', gap: '6px',
-                        padding: '5px 12px',
-                        borderRadius: '999px',
-                        border: `1px solid ${colores.borde}`,
-                        backgroundColor: colores.fondoTerciario,
-                        color: colores.textoClaro,
-                        fontSize: '12px',
-                        cursor: 'pointer',
-                        transition: 'background-color 0.15s',
-                        whiteSpace: 'nowrap',
-                      }}
-                      onMouseEnter={e => (e.currentTarget.style.backgroundColor = colores.fondoSecundario)}
-                      onMouseLeave={e => (e.currentTarget.style.backgroundColor = colores.fondoTerciario)}
-                    >
-                      <span>{s.icono}</span>
-                      <span>{s.texto}</span>
-                    </button>
-                  ))}
-                </div>
+                {sugerencias.map((s, i) => (
+                  <button
+                    key={i}
+                    onClick={() => chatRef.current?.sendExternal(s.texto)}
+                    style={{
+                      display: 'flex', alignItems: 'center', gap: '5px',
+                      padding: '4px 11px',
+                      borderRadius: '999px',
+                      border: `1px solid ${colores.borde}`,
+                      backgroundColor: colores.fondoTerciario,
+                      color: colores.textoClaro,
+                      fontSize: '11px',
+                      cursor: 'pointer',
+                      transition: 'all 0.15s',
+                      whiteSpace: 'nowrap',
+                    }}
+                    onMouseEnter={e => {
+                      e.currentTarget.style.backgroundColor = colores.fondoSecundario;
+                      e.currentTarget.style.borderColor = colores.primario;
+                    }}
+                    onMouseLeave={e => {
+                      e.currentTarget.style.backgroundColor = colores.fondoTerciario;
+                      e.currentTarget.style.borderColor = colores.borde;
+                    }}
+                  >
+                    <span>{s.icono}</span>
+                    <span>{s.texto}</span>
+                  </button>
+                ))}
               </div>
 
-              {/* Chat */}
-              <div style={{ flex: 1, overflow: 'hidden', display: 'flex', flexDirection: 'column', minHeight: '420px' }}>
+              {/* Chat ocupa el resto */}
+              <div style={{ flex: 1, overflow: 'hidden', display: 'flex', flexDirection: 'column', minHeight: 0 }}>
                 <AsistenteIAChat ref={chatRef} />
               </div>
             </div>

@@ -58,7 +58,7 @@ const kpisData: Record<Periodo, KPI[]> = {
     {
       id: 'disponibilidad', titulo: 'Disponibilidad de Productos Críticos', descripcion: 'cobertura nacional',
       valor: 94.2, unidad: '%', meta: 98, cambio: +1.8,
-      icono: <Target size={20} />, color: '#008CAE',
+      icono: <Target size={20} />, color: '#A4D955',
       historial: generarHistorial(94, 7, 0.02), formato: 'porcentaje',
     },
     {
@@ -108,7 +108,7 @@ const kpisData: Record<Periodo, KPI[]> = {
     {
       id: 'disponibilidad', titulo: 'Disponibilidad de Productos Críticos', descripcion: 'cobertura nacional',
       valor: 96.1, unidad: '%', meta: 98, cambio: +2.4,
-      icono: <Target size={20} />, color: '#008CAE',
+      icono: <Target size={20} />, color: '#A4D955',
       historial: generarHistorial(96, 12, 0.02), formato: 'porcentaje',
     },
     {
@@ -158,7 +158,7 @@ const kpisData: Record<Periodo, KPI[]> = {
     {
       id: 'disponibilidad', titulo: 'Disponibilidad de Productos Críticos', descripcion: 'cobertura nacional',
       valor: 97.4, unidad: '%', meta: 98, cambio: +3.8,
-      icono: <Target size={20} />, color: '#008CAE',
+      icono: <Target size={20} />, color: '#A4D955',
       historial: generarHistorial(97, 16, 0.02), formato: 'porcentaje',
     },
     {

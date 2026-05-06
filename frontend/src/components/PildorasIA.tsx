@@ -245,7 +245,7 @@ const PildorasIA = () => {
       <div className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full pointer-events-none"
            style={{ background: 'radial-gradient(circle, rgba(163,230,53,0.10) 0%, transparent 70%)', filter: 'blur(40px)' }} />
       <div className="absolute bottom-1/3 right-0 w-[500px] h-[500px] rounded-full pointer-events-none"
-           style={{ background: 'radial-gradient(circle, rgba(34,211,238,0.08) 0%, transparent 70%)', filter: 'blur(40px)' }} />
+           style={{ background: 'radial-gradient(circle, rgba(163,230,53,0.06) 0%, transparent 70%)', filter: 'blur(40px)' }} />
 
       {/* ══════════════════════════════════════════════════════════════════════
           HEADER — solo logo centrado
@@ -280,7 +280,7 @@ const PildorasIA = () => {
             <h1 className="text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-none mb-6 tracking-tight">
               <span style={{ color: '#111827' }}>Innova.</span><br />
               <span className="neon-lime" style={{ color: '#4d7c0f', textShadow: 'none' }}>Automatiza.</span><br />
-              <span style={{ color: '#0891b2' }}>Crece.</span>
+              <span style={{ color: '#4d7c0f' }}>Crece.</span>
             </h1>
 
             <p className="text-base leading-relaxed mb-8 max-w-lg" style={{ color: '#6b7280' }}>

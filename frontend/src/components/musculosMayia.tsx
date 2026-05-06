@@ -245,7 +245,7 @@ const MusculosMAYiA = () => {
         className="absolute inset-0 pointer-events-none"
         style={{
           backgroundImage:
-            'linear-gradient(rgba(164,217,85,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(127,209,255,0.06) 1px, transparent 1px)',
+            'linear-gradient(rgba(164,217,85,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(164,217,85,0.04) 1px, transparent 1px)',
           backgroundSize: '40px 40px',
           zIndex: 1,
         }}
@@ -255,7 +255,7 @@ const MusculosMAYiA = () => {
       <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full pointer-events-none"
         style={{ background: 'rgba(164,217,85,0.07)', filter: 'blur(100px)', zIndex: 1 }} />
       <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] rounded-full pointer-events-none"
-        style={{ background: 'rgba(127,209,255,0.07)', filter: 'blur(100px)', zIndex: 1 }} />
+        style={{ background: 'rgba(164,217,85,0.05)', filter: 'blur(100px)', zIndex: 1 }} />
 
       <div className="relative container mx-auto px-6" style={{ zIndex: 2 }}>
 
@@ -277,7 +277,7 @@ const MusculosMAYiA = () => {
             {[0, 1, 2].map((i) => (
               <div key={i} style={{
                 width: 2, height: 6, borderRadius: 9999,
-                background: i === 0 ? '#A4D955' : i === 1 ? '#7FD1FF88' : '#7FD1FF33',
+                background: i === 0 ? '#A4D955' : i === 1 ? '#D6F0A088' : '#D6F0A033',
                 animation: `scrollDot 1.4s ease-in-out ${i * 0.2}s infinite`,
               }} />
             ))}

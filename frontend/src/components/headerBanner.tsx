@@ -37,13 +37,13 @@ export default function HeaderBanner() {
     <div className="w-full bg-[#0f0f1a] py-5 px-4 relative overflow-hidden">
       {/* Animated gradient border — top */}
       <div className="absolute top-0 left-0 right-0 h-[2px]" style={{
-        background: 'linear-gradient(90deg, transparent 0%, #A4D955 25%, #7FD1FF 50%, #A4D955 75%, transparent 100%)',
+        background: 'linear-gradient(90deg, transparent 0%, #A4D955 25%, #D6F0A0 50%, #A4D955 75%, transparent 100%)',
         backgroundSize: '200% 100%',
         animation: 'bannerBorder 3s linear infinite',
       }} />
       {/* Animated gradient border — bottom */}
       <div className="absolute bottom-0 left-0 right-0 h-[2px]" style={{
-        background: 'linear-gradient(90deg, transparent 0%, #7FD1FF 25%, #A4D955 50%, #7FD1FF 75%, transparent 100%)',
+        background: 'linear-gradient(90deg, transparent 0%, #D6F0A0 25%, #A4D955 50%, #D6F0A0 75%, transparent 100%)',
         backgroundSize: '200% 100%',
         animation: 'bannerBorder 3s linear infinite reverse',
       }} />

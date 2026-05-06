@@ -61,21 +61,21 @@ const enfermedadesPorPeriodo: Record<Periodo, EnfermedadData[]> = {
     { nombre: 'Gastrointestinal', casos: 5103,   casosHistorico: 4476,  cambio: +14, icono: <Droplets size={16} />,    color: '#F59E0B' },
     { nombre: 'Viral estacional', casos: 3870,   casosHistorico: 3252,  cambio: +19, icono: <Thermometer size={16} />, color: '#8B5CF6' },
     { nombre: 'Alérgica',         casos: 2241,   casosHistorico: 2384,  cambio:  -6, icono: <Activity size={16} />,    color: '#10B981' },
-    { nombre: 'Crónica',          casos: 1580,   casosHistorico: 1533,  cambio:  +3, icono: <Pill size={16} />,        color: '#008CAE' },
+    { nombre: 'Crónica',          casos: 1580,   casosHistorico: 1533,  cambio:  +3, icono: <Pill size={16} />,        color: '#A4D955' },
   ],
   '30d': [
     { nombre: 'Respiratoria',     casos: 33680,  casosHistorico: 26312, cambio: +28, icono: <Wind size={16} />,        color: '#EF4444' },
     { nombre: 'Gastrointestinal', casos: 20412,  casosHistorico: 17904, cambio: +14, icono: <Droplets size={16} />,    color: '#F59E0B' },
     { nombre: 'Viral estacional', casos: 15480,  casosHistorico: 13008, cambio: +19, icono: <Thermometer size={16} />, color: '#8B5CF6' },
     { nombre: 'Alérgica',         casos:  8964,  casosHistorico:  9536, cambio:  -6, icono: <Activity size={16} />,    color: '#10B981' },
-    { nombre: 'Crónica',          casos:  6320,  casosHistorico:  6132, cambio:  +3, icono: <Pill size={16} />,        color: '#008CAE' },
+    { nombre: 'Crónica',          casos:  6320,  casosHistorico:  6132, cambio:  +3, icono: <Pill size={16} />,        color: '#A4D955' },
   ],
   '90d': [
     { nombre: 'Respiratoria',     casos: 101040, casosHistorico: 78936, cambio: +28, icono: <Wind size={16} />,        color: '#EF4444' },
     { nombre: 'Gastrointestinal', casos:  61236, casosHistorico: 53712, cambio: +14, icono: <Droplets size={16} />,    color: '#F59E0B' },
     { nombre: 'Viral estacional', casos:  46440, casosHistorico: 39024, cambio: +19, icono: <Thermometer size={16} />, color: '#8B5CF6' },
     { nombre: 'Alérgica',         casos:  26892, casosHistorico: 28608, cambio:  -6, icono: <Activity size={16} />,    color: '#10B981' },
-    { nombre: 'Crónica',          casos:  18960, casosHistorico: 18396, cambio:  +3, icono: <Pill size={16} />,        color: '#008CAE' },
+    { nombre: 'Crónica',          casos:  18960, casosHistorico: 18396, cambio:  +3, icono: <Pill size={16} />,        color: '#A4D955' },
   ],
 };
 
@@ -93,7 +93,7 @@ const historicaSemanal = [
 const nivelConfig: Record<NivelRiesgo, { color: string; bg: string; label: string }> = {
   critico: { color: '#EF4444', bg: '#EF444418', label: 'Crítico' },
   alto:    { color: '#F59E0B', bg: '#F59E0B18', label: 'Alto'    },
-  medio:   { color: '#008CAE', bg: '#008CAE18', label: 'Medio'   },
+  medio:   { color: '#A4D955', bg: '#A4D95518', label: 'Medio'   },
   bajo:    { color: '#10B981', bg: '#10B98118', label: 'Bajo'    },
 };
 
@@ -188,7 +188,7 @@ export const DashboardEpidemiologico: React.FC = () => {
         <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
           <button
             onClick={() => setMostrarHistorico(p => !p)}
-            style={{ display: 'flex', alignItems: 'center', gap: '5px', padding: '6px 10px', borderRadius: '10px', border: 'none', fontSize: '11px', fontWeight: '700', cursor: 'pointer', transition: 'all 0.2s', background: mostrarHistorico ? '#008CAE20' : colores.fondoTerciario, color: mostrarHistorico ? '#008CAE' : colores.textoMedio, whiteSpace: 'nowrap' }}
+            style={{ display: 'flex', alignItems: 'center', gap: '5px', padding: '6px 10px', borderRadius: '10px', border: 'none', fontSize: '11px', fontWeight: '700', cursor: 'pointer', transition: 'all 0.2s', background: mostrarHistorico ? '#A4D95520' : colores.fondoTerciario, color: mostrarHistorico ? '#A4D955' : colores.textoMedio, whiteSpace: 'nowrap' }}
           >
             <History size={13} /> vs Hist.
           </button>

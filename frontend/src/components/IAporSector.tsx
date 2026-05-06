@@ -6,7 +6,7 @@ const IAPorSector = () => {
       category: "Finanzas",
       title: "Finanzas",
       image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=400&h=250&fit=crop",
-      gradient: "from-blue-600 to-purple-600",
+      gradient: "from-lime-600 to-green-700",
       services: [
         "Detección de Pagos y Fraudes",
         "Banca Personalizada (chatbots)",
@@ -18,7 +18,7 @@ const IAPorSector = () => {
       category: "Salud",
       title: "Salud",
       image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=400&h=250&fit=crop",
-      gradient: "from-green-600 to-teal-600",
+      gradient: "from-green-600 to-lime-600",
       services: [
         "Simulación de Moléculas",
         "Descubrimiento de Fármacos",
@@ -30,7 +30,7 @@ const IAPorSector = () => {
       category: "Retail",
       title: "Retail",
       image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400&h=250&fit=crop",
-      gradient: "from-cyan-600 to-blue-600",
+      gradient: "from-lime-500 to-green-600",
       services: [
         "Compras Personalizadas",
         "Tiendas Inteligentes y Cadena de Suministro",
@@ -107,7 +107,7 @@ const IAPorSector = () => {
       {/* Efectos de fondo */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-0 left-0 w-96 h-96 bg-lime-400/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-cyan-400/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-lime-400/5 rounded-full blur-3xl"></div>
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:32px_32px]"></div>
       </div>
 
@@ -115,16 +115,16 @@ const IAPorSector = () => {
         {/* Header mejorado */}
         <div className="mb-12 text-center">
           <div className="inline-block">
-            <h1 className="text-5xl lg:text-6xl font-bold mb-3 bg-gradient-to-r from-[#0a1f44] via-cyan-700 to-[#0a1f44] bg-clip-text text-transparent">
+            <h1 className="text-5xl lg:text-6xl font-bold mb-3 bg-gradient-to-r from-gray-900 via-lime-700 to-gray-900 bg-clip-text text-transparent">
               IA por Sector
             </h1>
-            <div className="h-1 bg-gradient-to-r from-lime-400 via-cyan-400 to-lime-400 rounded-full"></div>
+            <div className="h-1 bg-gradient-to-r from-lime-400 via-lime-500 to-lime-400 rounded-full"></div>
           </div>
           <p className="text-base text-gray-600 mt-6">
             Soluciones disponibles como 
-            <span className="mx-2 px-3 py-1 bg-gradient-to-r from-lime-400 to-cyan-400 text-gray-900 rounded-full text-sm font-bold">VaaS</span>
+            <span className="mx-2 px-3 py-1 bg-gradient-to-r from-lime-400 to-lime-600 text-gray-900 rounded-full text-sm font-bold">VaaS</span>
             y
-            <span className="ml-2 px-3 py-1 bg-gradient-to-r from-cyan-400 to-lime-400 text-gray-900 rounded-full text-sm font-bold">SaaS</span>
+            <span className="ml-2 px-3 py-1 bg-gradient-to-r from-lime-600 to-lime-400 text-gray-900 rounded-full text-sm font-bold">SaaS</span>
           </p>
         </div>
 

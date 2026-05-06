@@ -54,8 +54,8 @@ const estadosData: Record<string, EstadoInfo> = {
 
 const getColor = (casos: number, max: number, hovered: boolean, selected: boolean): string => {
   const t = casos / max;
-  if (selected) return '#008CAE';
-  if (hovered)  return '#3BA5C9';
+  if (selected) return '#A4D955';
+  if (hovered)  return '#7EBB2A';
   if (t > 0.8)  return '#EF4444';
   if (t > 0.6)  return '#F97316';
   if (t > 0.4)  return '#F59E0B';

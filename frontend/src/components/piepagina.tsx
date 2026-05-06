@@ -55,7 +55,7 @@ const Footer = () => {
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f08_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f08_1px,transparent_1px)] bg-[size:40px_40px]"></div>
         <div className="absolute top-0 left-0 w-96 h-96 bg-lime-400/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-cyan-400/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-lime-400/5 rounded-full blur-3xl"></div>
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
@@ -63,7 +63,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* Descubrir */}
           <div className="space-y-4">
-            <h3 className="text-lg font-bold mb-4 bg-gradient-to-r from-lime-400 to-cyan-400 bg-clip-text text-transparent">
+            <h3 className="text-lg font-bold mb-4 bg-gradient-to-r from-lime-400 to-lime-300 bg-clip-text text-transparent">
               Descubrir
             </h3>
             <ul className="space-y-2.5">
@@ -85,7 +85,7 @@ const Footer = () => {
 
           {/* Licencia y términos */}
           <div className="space-y-4">
-            <h3 className="text-lg font-bold mb-4 bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+            <h3 className="text-lg font-bold mb-4 bg-gradient-to-r from-lime-300 to-lime-500 bg-clip-text text-transparent">
               Licencia y términos
             </h3>
             <ul className="space-y-2.5">
@@ -95,9 +95,9 @@ const Footer = () => {
                     href={link.href}
                     onMouseEnter={() => setHoveredLink(link.label)}
                     onMouseLeave={() => setHoveredLink(null)}
-                    className="text-gray-400 hover:text-cyan-400 transition-colors duration-300 text-sm flex items-center gap-2 group"
+                    className="text-gray-400 hover:text-lime-400 transition-colors duration-300 text-sm flex items-center gap-2 group"
                   >
-                    <span className={`w-1.5 h-1.5 rounded-full bg-gray-600 group-hover:bg-cyan-400 transition-all duration-300 ${hoveredLink === link.label ? 'scale-150' : 'scale-100'}`}></span>
+                    <span className={`w-1.5 h-1.5 rounded-full bg-gray-600 group-hover:bg-lime-400 transition-all duration-300 ${hoveredLink === link.label ? 'scale-150' : 'scale-100'}`}></span>
                     {link.label}
                   </a>
                 </li>
@@ -161,7 +161,7 @@ const Footer = () => {
                   href={social.href}
                   onMouseEnter={() => setHoveredSocial(social.name)}
                   onMouseLeave={() => setHoveredSocial(null)}
-                  className="group relative w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gradient-to-r hover:from-lime-400 hover:to-cyan-400 transition-all duration-300 transform hover:scale-110"
+                  className="group relative w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gradient-to-r hover:from-lime-400 hover:to-lime-600 transition-all duration-300 transform hover:scale-110"
                   aria-label={social.name}
                 >
                   <svg className="w-5 h-5 text-gray-400 group-hover:text-gray-900 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -179,7 +179,7 @@ const Footer = () => {
             {/* Copyright */}
             <div className="text-center md:text-right">
               <p className="text-gray-400 text-sm">
-                © 2026 <span className="font-bold bg-gradient-to-r from-lime-400 to-cyan-400 bg-clip-text text-transparent">MAYiA</span>. Todos los derechos reservados.
+                © 2026 <span className="font-bold bg-gradient-to-r from-lime-400 to-lime-600 bg-clip-text text-transparent">MAYiA</span>. Todos los derechos reservados.
               </p>
               <p className="text-gray-500 text-xs mt-1">
                 Hecho con <span className="text-red-500">♥</span> en México
