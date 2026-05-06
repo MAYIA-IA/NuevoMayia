@@ -47,15 +47,13 @@ const Footer = () => {
     { name: 'YouTube', icon: 'M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.33z M9.75 15.02l5.75-3.27-5.75-3.27v6.54z', href: 'https://www.youtube.com/watch?v=kIkBfJ2yoXk' },
   ];
 
-
-
   return (
-    <footer className="w-full bg-gradient-to-b from-gray-900 via-[#0a1f44] to-black text-white pt-16 pb-8 relative overflow-hidden">
+    <footer className="w-full text-gray-700 pt-16 pb-8 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #f0fdf4 0%, #ffffff 100%)', borderTop: '1px solid #d1fae5' }}>
       {/* Efectos de fondo */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f08_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f08_1px,transparent_1px)] bg-[size:40px_40px]"></div>
-        <div className="absolute top-0 left-0 w-96 h-96 bg-lime-400/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-lime-400/5 rounded-full blur-3xl"></div>
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#a4d95510_1px,transparent_1px),linear-gradient(to_bottom,#a4d95510_1px,transparent_1px)] bg-[size:40px_40px]"></div>
+        <div className="absolute top-0 left-0 w-96 h-96 bg-lime-400/8 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-lime-400/8 rounded-full blur-3xl"></div>
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
@@ -63,7 +61,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* Descubrir */}
           <div className="space-y-4">
-            <h3 className="text-lg font-bold mb-4 bg-gradient-to-r from-lime-400 to-lime-300 bg-clip-text text-transparent">
+            <h3 className="text-lg font-bold mb-4" style={{ color: '#4d7c0f' }}>
               Descubrir
             </h3>
             <ul className="space-y-2.5">
@@ -73,9 +71,9 @@ const Footer = () => {
                     href={link.href}
                     onMouseEnter={() => setHoveredLink(link.label)}
                     onMouseLeave={() => setHoveredLink(null)}
-                    className="text-gray-400 hover:text-lime-400 transition-colors duration-300 text-sm flex items-center gap-2 group"
+                    className="text-gray-500 hover:text-lime-700 transition-colors duration-300 text-sm flex items-center gap-2 group"
                   >
-                    <span className={`w-1.5 h-1.5 rounded-full bg-gray-600 group-hover:bg-lime-400 transition-all duration-300 ${hoveredLink === link.label ? 'scale-150' : 'scale-100'}`}></span>
+                    <span className={`w-1.5 h-1.5 rounded-full bg-lime-300 group-hover:bg-lime-600 transition-all duration-300 ${hoveredLink === link.label ? 'scale-150' : 'scale-100'}`}></span>
                     {link.label}
                   </a>
                 </li>
@@ -85,7 +83,7 @@ const Footer = () => {
 
           {/* Licencia y términos */}
           <div className="space-y-4">
-            <h3 className="text-lg font-bold mb-4 bg-gradient-to-r from-lime-300 to-lime-500 bg-clip-text text-transparent">
+            <h3 className="text-lg font-bold mb-4" style={{ color: '#4d7c0f' }}>
               Licencia y términos
             </h3>
             <ul className="space-y-2.5">
@@ -95,9 +93,9 @@ const Footer = () => {
                     href={link.href}
                     onMouseEnter={() => setHoveredLink(link.label)}
                     onMouseLeave={() => setHoveredLink(null)}
-                    className="text-gray-400 hover:text-lime-400 transition-colors duration-300 text-sm flex items-center gap-2 group"
+                    className="text-gray-500 hover:text-lime-700 transition-colors duration-300 text-sm flex items-center gap-2 group"
                   >
-                    <span className={`w-1.5 h-1.5 rounded-full bg-gray-600 group-hover:bg-lime-400 transition-all duration-300 ${hoveredLink === link.label ? 'scale-150' : 'scale-100'}`}></span>
+                    <span className={`w-1.5 h-1.5 rounded-full bg-lime-300 group-hover:bg-lime-600 transition-all duration-300 ${hoveredLink === link.label ? 'scale-150' : 'scale-100'}`}></span>
                     {link.label}
                   </a>
                 </li>
@@ -107,7 +105,7 @@ const Footer = () => {
 
           {/* Recursos */}
           <div className="space-y-4">
-            <h3 className="text-lg font-bold mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+            <h3 className="text-lg font-bold mb-4" style={{ color: '#4d7c0f' }}>
               Recursos
             </h3>
             <ul className="space-y-2.5">
@@ -117,9 +115,9 @@ const Footer = () => {
                     href={link.href}
                     onMouseEnter={() => setHoveredLink(link.label)}
                     onMouseLeave={() => setHoveredLink(null)}
-                    className="text-gray-400 hover:text-purple-400 transition-colors duration-300 text-sm flex items-center gap-2 group"
+                    className="text-gray-500 hover:text-lime-700 transition-colors duration-300 text-sm flex items-center gap-2 group"
                   >
-                    <span className={`w-1.5 h-1.5 rounded-full bg-gray-600 group-hover:bg-purple-400 transition-all duration-300 ${hoveredLink === link.label ? 'scale-150' : 'scale-100'}`}></span>
+                    <span className={`w-1.5 h-1.5 rounded-full bg-lime-300 group-hover:bg-lime-600 transition-all duration-300 ${hoveredLink === link.label ? 'scale-150' : 'scale-100'}`}></span>
                     {link.label}
                   </a>
                 </li>
@@ -129,7 +127,7 @@ const Footer = () => {
 
           {/* Sobre nosotros */}
           <div className="space-y-4">
-            <h3 className="text-lg font-bold mb-4 bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent">
+            <h3 className="text-lg font-bold mb-4" style={{ color: '#4d7c0f' }}>
               Sobre nosotros
             </h3>
             <ul className="space-y-2.5">
@@ -139,9 +137,9 @@ const Footer = () => {
                     href={link.href}
                     onMouseEnter={() => setHoveredLink(link.label)}
                     onMouseLeave={() => setHoveredLink(null)}
-                    className="text-gray-400 hover:text-orange-400 transition-colors duration-300 text-sm flex items-center gap-2 group"
+                    className="text-gray-500 hover:text-lime-700 transition-colors duration-300 text-sm flex items-center gap-2 group"
                   >
-                    <span className={`w-1.5 h-1.5 rounded-full bg-gray-600 group-hover:bg-orange-400 transition-all duration-300 ${hoveredLink === link.label ? 'scale-150' : 'scale-100'}`}></span>
+                    <span className={`w-1.5 h-1.5 rounded-full bg-lime-300 group-hover:bg-lime-600 transition-all duration-300 ${hoveredLink === link.label ? 'scale-150' : 'scale-100'}`}></span>
                     {link.label}
                   </a>
                 </li>
@@ -151,7 +149,7 @@ const Footer = () => {
         </div>
 
         {/* Social Media y Copyright */}
-        <div className="pt-8 border-t border-gray-700/50">
+        <div className="pt-8 border-t border-lime-200">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             {/* Social Media */}
             <div className="flex items-center gap-4">
@@ -161,14 +159,15 @@ const Footer = () => {
                   href={social.href}
                   onMouseEnter={() => setHoveredSocial(social.name)}
                   onMouseLeave={() => setHoveredSocial(null)}
-                  className="group relative w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gradient-to-r hover:from-lime-400 hover:to-lime-600 transition-all duration-300 transform hover:scale-110"
+                  className="group relative w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110"
+                  style={{ background: '#f0fdf4', border: '1px solid #bbf7d0' }}
                   aria-label={social.name}
                 >
-                  <svg className="w-5 h-5 text-gray-400 group-hover:text-gray-900 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={social.icon} />
+                  <svg className="w-5 h-5 transition-colors" style={{ fill: '#4d7c0f' }} viewBox="0 0 24 24">
+                    <path d={social.icon} />
                   </svg>
                   {hoveredSocial === social.name && (
-                    <div className="absolute -top-10 bg-gray-900 text-white text-xs px-3 py-1 rounded-lg whitespace-nowrap">
+                    <div className="absolute -top-10 bg-gray-800 text-white text-xs px-3 py-1 rounded-lg whitespace-nowrap">
                       {social.name}
                     </div>
                   )}
@@ -178,10 +177,10 @@ const Footer = () => {
 
             {/* Copyright */}
             <div className="text-center md:text-right">
-              <p className="text-gray-400 text-sm">
-                © 2026 <span className="font-bold bg-gradient-to-r from-lime-400 to-lime-600 bg-clip-text text-transparent">MAYiA</span>. Todos los derechos reservados.
+              <p className="text-gray-500 text-sm">
+                © 2026 <span className="font-bold" style={{ color: '#4d7c0f' }}>MAYiA</span>. Todos los derechos reservados.
               </p>
-              <p className="text-gray-500 text-xs mt-1">
+              <p className="text-gray-400 text-xs mt-1">
                 Hecho con <span className="text-red-500">♥</span> en México
               </p>
             </div>
@@ -192,4 +191,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default Footer;

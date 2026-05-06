@@ -5,7 +5,7 @@ export default function BrandFooter() {
   const whatsappLink = `https://wa.me/${whatsappNumber.replace(/\+/g, '')}`;
 
   return (
-    <div className="w-full bg-[#0a0a14] py-6 sm:py-8 border-t border-white/10">
+    <div className="w-full py-6 sm:py-8 border-t-4" style={{ background: '#ffffff', borderTopColor: '#A4D955' }}>
       <div className="max-w-7xl mx-auto px-3 sm:px-4">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6">
           <div className="flex items-center gap-4 order-2 sm:order-1">

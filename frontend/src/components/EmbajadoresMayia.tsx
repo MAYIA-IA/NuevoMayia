@@ -38,16 +38,16 @@ function AvatarFallback({ nombre, color }: { nombre: string; color: string }) {
 
 export default function EmbajadoresMayia() {
   return (
-    <section style={{ background: '#0A0A14', padding: '80px 40px' }}>
+    <section style={{ background: 'linear-gradient(180deg, #ffffff 0%, #f0fdf4 100%)', padding: '80px 40px', borderTop: '4px solid #A4D955' }}>
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
         {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: 56 }}>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '5px 16px', borderRadius: 99, background: 'rgba(164,217,85,0.08)', border: '1px solid rgba(164,217,85,0.25)', marginBottom: 16 }}>
-            <span style={{ fontSize: 14 }}>✦</span>
-            <span style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', textTransform: 'uppercase' as const, color: '#A4D955' }}>Comunidad MAYiA</span>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '5px 16px', borderRadius: 99, background: 'rgba(164,217,85,0.15)', border: '1px solid rgba(164,217,85,0.5)', marginBottom: 16 }}>
+            <span style={{ fontSize: 14, color: '#4d7c0f' }}>✦</span>
+            <span style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', textTransform: 'uppercase' as const, color: '#4d7c0f' }}>Comunidad MAYiA</span>
           </div>
-          <h2 style={{ fontSize: 38, fontWeight: 800, color: '#ffffff', margin: '0 0 14px' }}>
-            Embajadores <span style={{ color: '#A4D955' }}>MAYiA</span>
+          <h2 style={{ fontSize: 38, fontWeight: 800, color: '#111827', margin: '0 0 14px' }}>
+            Embajadores <span style={{ color: '#65a30d' }}>MAYiA</span>
           </h2>
           <p style={{ fontSize: 15, color: '#6b7280', maxWidth: 560, margin: '0 auto' }}>
             Líderes que están transformando México con inteligencia artificial. Historias reales de impacto nacional.
@@ -59,9 +59,9 @@ export default function EmbajadoresMayia() {
           {EMBAJADORES.map(emb => (
             <div
               key={emb.id}
-              style={{ background: '#111118', border: '1px solid #1f1f2e', borderRadius: 22, overflow: 'hidden', transition: 'all 0.3s ease' }}
-              onMouseEnter={e => { e.currentTarget.style.borderColor = `${emb.color}50`; e.currentTarget.style.transform = 'translateY(-6px)'; e.currentTarget.style.boxShadow = `0 20px 60px ${emb.color}15`; }}
-              onMouseLeave={e => { e.currentTarget.style.borderColor = '#1f1f2e'; e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'; }}
+              style={{ background: '#ffffff', border: `1px solid ${emb.color}30`, borderRadius: 22, overflow: 'hidden', transition: 'all 0.3s ease', boxShadow: '0 2px 12px rgba(0,0,0,0.06)' }}
+              onMouseEnter={e => { e.currentTarget.style.borderColor = `${emb.color}70`; e.currentTarget.style.transform = 'translateY(-6px)'; e.currentTarget.style.boxShadow = `0 20px 60px ${emb.color}20`; }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = `${emb.color}30`; e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 2px 12px rgba(0,0,0,0.06)'; }}
             >
               {/* Foto + glow */}
               <div style={{ position: 'relative', height: 200, overflow: 'hidden' }}>
@@ -84,15 +84,15 @@ export default function EmbajadoresMayia() {
 
               {/* Info */}
               <div style={{ padding: '20px 22px 24px' }}>
-                <h3 style={{ fontSize: 17, fontWeight: 800, color: '#ffffff', margin: '0 0 4px' }}>{emb.nombre}</h3>
+                <h3 style={{ fontSize: 17, fontWeight: 800, color: '#111827', margin: '0 0 4px' }}>{emb.nombre}</h3>
                 <p style={{ fontSize: 11, color: emb.color, fontWeight: 600, margin: '0 0 2px' }}>{emb.titulo}</p>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 14 }}>
                   <span style={{ fontSize: 10, color: '#6b7280' }}>📍 {emb.ciudad}</span>
-                  <span style={{ color: '#374151' }}>·</span>
+                  <span style={{ color: '#d1d5db' }}>·</span>
                   <span style={{ fontSize: 10, color: '#6b7280' }}>{emb.sector}</span>
                 </div>
-                <div style={{ height: 1, background: '#1f1f2e', marginBottom: 14 }} />
-                <p style={{ fontSize: 12, color: '#9ca3af', lineHeight: 1.6, margin: 0, fontStyle: 'italic' }}>
+                <div style={{ height: 1, background: '#f3f4f6', marginBottom: 14 }} />
+                <p style={{ fontSize: 12, color: '#4b5563', lineHeight: 1.6, margin: 0, fontStyle: 'italic' }}>
                   "{emb.logro}"
                 </p>
               </div>
@@ -102,9 +102,9 @@ export default function EmbajadoresMayia() {
 
         {/* CTA */}
         <div style={{ textAlign: 'center', marginTop: 52 }}>
-          <p style={{ color: '#6b7280', fontSize: 14, marginBottom: 16 }}>¿Quieres ser Embajador MAYiA?</p>
+          <p style={{ color: '#4b5563', fontSize: 14, marginBottom: 16 }}>¿Quieres ser Embajador MAYiA?</p>
           <a href="https://api.whatsapp.com/send/?phone=525553315526" target="_blank" rel="noopener noreferrer"
-            style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '12px 28px', borderRadius: 12, background: 'linear-gradient(135deg, #A4D955, #65a30d)', color: '#0A0A14', fontWeight: 800, fontSize: 14, textDecoration: 'none', transition: 'all 0.2s' }}>
+            style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '12px 28px', borderRadius: 12, background: 'linear-gradient(135deg, #A4D955, #65a30d)', color: '#ffffff', fontWeight: 800, fontSize: 14, textDecoration: 'none', transition: 'all 0.2s', boxShadow: '0 4px 20px rgba(164,217,85,0.35)' }}>
             Postular mi candidatura →
           </a>
         </div>

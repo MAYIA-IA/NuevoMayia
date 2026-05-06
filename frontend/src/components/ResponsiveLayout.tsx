@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import {
   Menu, X, LayoutDashboard, TrendingUp, Shield,
-  Code2, GraduationCap, ChevronRight,
+  GraduationCap, ChevronRight, Newspaper, Handshake,
+  Trophy, Thermometer, Network, GitBranch, Star,
+  Building2, Layers, Users, Zap, MoreHorizontal,
 } from 'lucide-react';
 import { brandingConfig } from '../config/branding';
 import mayiaLogo from '../assets/logosNativos/mayiaLogoBlanco.png';
@@ -15,13 +17,27 @@ interface ResponsiveLayoutProps {
   children: React.ReactNode;
 }
 
-const menuItems = [
-  { id: 'dashboard',      nombre: 'Dashboard General', icono: LayoutDashboard },
-  { id: 'analiticos',     nombre: 'México es MAYiA',    icono: TrendingUp      },
-  { id: 'ciberseguridad', nombre: 'CiberSeguridad',     icono: Shield          },
-  { id: 'playground',     nombre: 'Playground',         icono: Code2           },
-  { id: 'academia',       nombre: 'Academia',            icono: GraduationCap   },
+// Todas las secciones — en orden de aparición
+const allSections = [
+  { id: 'dashboard',           nombre: 'Dashboard',           icono: LayoutDashboard },
+  { id: 'analiticos',          nombre: 'México es MAYiA',     icono: TrendingUp },
+  { id: 'noticias',            nombre: 'Noticias IA',         icono: Newspaper },
+  { id: 'partners',            nombre: 'Partners',            icono: Handshake },
+  { id: 'ia-empresarial',      nombre: 'I.A. Empresarial',    icono: Building2 },
+  { id: 'ia-sectores',         nombre: 'IA Sectores',         icono: Layers },
+  { id: 'termometro-ia',       nombre: 'Termómetro IA',       icono: Thermometer },
+  { id: 'hackaton',            nombre: 'Hackaton Intel',      icono: Trophy },
+  { id: 'empleados-digitales', nombre: 'Empleados Dig.',      icono: Users },
+  { id: 'pildoras-ia',         nombre: 'Píldoras IA',         icono: Zap },
+  { id: 'ciberseguridad',      nombre: 'Ciberseguridad',      icono: Shield },
+  { id: 'embajadores',         nombre: 'Embajadores',         icono: Star },
+  { id: 'organigrama',         nombre: 'Organigrama',         icono: GitBranch },
+  { id: 'academia',            nombre: 'Academia MAYiA',      icono: GraduationCap },
+  { id: 'networking',          nombre: 'Networking Hub',      icono: Network },
 ];
+
+// Los 4 que aparecen en la barra inferior
+const bottomNavItems = allSections.slice(0, 4);
 
 export const ResponsiveLayout: React.FC<ResponsiveLayoutProps> = ({
   activeSection,
@@ -52,7 +68,7 @@ export const ResponsiveLayout: React.FC<ResponsiveLayoutProps> = ({
     return () => { document.body.style.overflow = ''; };
   }, [drawerOpen]);
 
-  const activeItem = menuItems.find(m => m.id === activeSection);
+  const activeItem = allSections.find(m => m.id === activeSection);
 
   /* ─── DESKTOP ≥1024px ─── */
   if (!isMobile) {
@@ -90,8 +106,8 @@ export const ResponsiveLayout: React.FC<ResponsiveLayoutProps> = ({
           position: fixed;
           top: 0; left: 0; right: 0;
           height: 56px;
-          background: ${colores.fondoSecundario};
-          border-bottom: 1px solid ${colores.borde};
+          background: #000000;
+          border-bottom: 1px solid #1a1a1a;
           display: flex;
           align-items: center;
           justify-content: space-between;
@@ -106,8 +122,8 @@ export const ResponsiveLayout: React.FC<ResponsiveLayoutProps> = ({
         .rl-bottomnav {
           position: fixed;
           bottom: 0; left: 0; right: 0;
-          background: ${colores.fondoSecundario};
-          border-top: 1px solid ${colores.borde};
+          background: #000000;
+          border-top: 1px solid #1a1a1a;
           display: flex;
           justify-content: space-around;
           align-items: center;
@@ -248,7 +264,7 @@ export const ResponsiveLayout: React.FC<ResponsiveLayoutProps> = ({
 
       {/* ── Bottom nav ── */}
       <div className="rl-bottomnav">
-        {menuItems.map(item => {
+        {bottomNavItems.map(item => {
           const Icon = item.icono;
           const isActive = activeSection === item.id;
           return (
@@ -266,15 +282,27 @@ export const ResponsiveLayout: React.FC<ResponsiveLayoutProps> = ({
               }}>
                 <Icon size={16} color={isActive ? '#fff' : colores.textoMedio} />
               </div>
-              <span style={{
-                fontWeight: isActive ? 700 : 500,
-                color: isActive ? colores.primario : colores.textoOscuro,
-              }}>
+              <span style={{ fontWeight: isActive ? 700 : 500, color: isActive ? colores.primario : colores.textoOscuro }}>
                 {item.nombre}
               </span>
             </button>
           );
         })}
+        {/* Botón "Más" abre el drawer con todas las secciones */}
+        <button
+          className="rl-navitem"
+          onClick={() => setDrawerOpen(true)}
+          style={{ backgroundColor: 'transparent' }}
+        >
+          <div style={{
+            width: '32px', height: '32px', borderRadius: '10px',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            backgroundColor: colores.fondoTerciario, transition: 'all 0.2s',
+          }}>
+            <MoreHorizontal size={16} color={colores.textoMedio} />
+          </div>
+          <span style={{ fontWeight: 500, color: colores.textoOscuro }}>Más</span>
+        </button>
       </div>
 
       {/* ── Drawer ── */}
@@ -330,9 +358,9 @@ export const ResponsiveLayout: React.FC<ResponsiveLayoutProps> = ({
               </span>
             </div>
 
-            {/* Items */}
+            {/* Items — todas las secciones con scroll */}
             <nav style={{ flex: 1, padding: '0 12px', overflowY: 'auto' }}>
-              {menuItems.map(item => {
+              {allSections.map(item => {
                 const Icon = item.icono;
                 const isActive = activeSection === item.id;
                 return (
