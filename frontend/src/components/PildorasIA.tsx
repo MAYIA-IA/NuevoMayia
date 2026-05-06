@@ -214,11 +214,39 @@ const PildorasIA = () => {
             <p className="text-lg text-gray-500 mb-8 max-w-lg">Implementa agentes de inteligencia artificial listos para usar en tu empresa desde $1,900 MXN/mes.</p>
             <button onClick={openWA} className="btn-spring px-8 py-4 rounded-xl font-bold text-white" style={{ background: 'linear-gradient(135deg, #a3e635, #65a30d)' }}>Agendar ahora</button>
           </div>
-          <div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl">
-            <PildoraViewer />
+          <div className="fade-up relative">
+            <div
+              className="relative w-full rounded-2xl overflow-hidden float-orb"
+              style={{
+                aspectRatio: '4/3',
+                background: 'linear-gradient(135deg, rgba(163,230,53,0.04) 0%, rgba(34,211,238,0.04) 100%)',
+                border: '1px solid rgba(163,230,53,0.3)',
+                boxShadow: '0 8px 60px rgba(163,230,53,0.14), 0 0 100px rgba(34,211,238,0.08)',
+              }}
+            >
+              <PildoraViewer />
+              {/* corner decorators */}
+              {['top-0 left-0', 'top-0 right-0', 'bottom-0 left-0', 'bottom-0 right-0'].map((pos, i) => (
+                <div key={i} className={`absolute ${pos} w-6 h-6 pointer-events-none`}
+                     style={{
+                       borderTop:    pos.includes('top')    ? '2px solid #a3e635' : 'none',
+                       borderBottom: pos.includes('bottom') ? '2px solid #a3e635' : 'none',
+                       borderLeft:   pos.includes('left')   ? '2px solid #a3e635' : 'none',
+                       borderRight:  pos.includes('right')  ? '2px solid #a3e635' : 'none',
+                     }} />
+              ))}
+            </div>
           </div>
         </div>
       </section>
+
+      <style>{`
+        @keyframes floatOrb {
+          0%, 100% { transform: translateY(0) scale(1); opacity: 0.8; }
+          50%       { transform: translateY(-18px) scale(1.06); opacity: 1; }
+        }
+        .float-orb { animation: floatOrb 5s cubic-bezier(0.45, 0, 0.55, 1) infinite; }
+      `}</style>
 
       <div className="relative z-20">
         <AgentesConsultores />
