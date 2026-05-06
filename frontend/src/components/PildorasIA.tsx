@@ -602,40 +602,92 @@ const PildorasIA = () => {
       {/* ══════════════════════════════════════════════════════════════════════
           VIDEO MODAL
       ══════════════════════════════════════════════════════════════════════ */}
-      {selectedVideo && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4"
-          style={{ background: 'rgba(0,0,0,0.92)', backdropFilter: 'blur(8px)' }}
-          onClick={closeVideoModal}
-        >
-          <div className="relative w-full max-w-4xl modal-in" onClick={e => e.stopPropagation()}>
-            <button
-              onClick={closeVideoModal}
-              className="absolute -top-12 right-0 w-10 h-10 rounded-full flex items-center justify-center transition-colors"
-              style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)', color: 'white' }}
+      {selectedVideo && (() => {
+        const pildora = pildoras.find(p => p.id === selectedVideo);
+        return (
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8"
+            style={{ background: 'rgba(0,0,0,0.92)', backdropFilter: 'blur(10px)' }}
+            onClick={closeVideoModal}
+          >
+            <div
+              className="modal-in flex flex-col"
+              style={{ maxWidth: 'min(92vw, 900px)', maxHeight: '92vh', width: 'auto' }}
+              onClick={e => e.stopPropagation()}
             >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
+              {/* ── Barra superior integrada ── */}
+              <div style={{
+                display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12,
+                padding: '10px 14px',
+                background: 'rgba(255,255,255,0.05)',
+                border: '1px solid rgba(163,230,53,0.25)',
+                borderBottom: 'none',
+                borderRadius: '16px 16px 0 0',
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <div style={{
+                    width: 28, height: 28, borderRadius: '50%', flexShrink: 0,
+                    background: 'linear-gradient(135deg,#a3e635,#65a30d)',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    boxShadow: '0 0 10px rgba(163,230,53,0.5)',
+                  }}>
+                    <svg width={12} height={12} fill="#0a0f1e" viewBox="0 0 20 20">
+                      <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <div style={{ fontSize: 13, fontWeight: 700, color: '#fff', lineHeight: 1.2 }}>{pildora?.title}</div>
+                    <div style={{ fontSize: 10, color: 'rgba(163,230,53,.7)', marginTop: 1 }}>
+                      {pildora?.category} · ESC para cerrar
+                    </div>
+                  </div>
+                </div>
+                <button
+                  onClick={closeVideoModal}
+                  style={{
+                    width: 32, height: 32, borderRadius: '50%', flexShrink: 0,
+                    background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)',
+                    color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    cursor: 'pointer', transition: 'background 0.2s',
+                  }}
+                  onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.2)')}
+                  onMouseLeave={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.08)')}
+                >
+                  <svg width={14} height={14} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12"/>
+                  </svg>
+                </button>
+              </div>
 
-            <div className="rounded-2xl overflow-hidden"
-                 style={{ background: '#000', border: '1px solid rgba(163,230,53,0.3)', boxShadow: '0 0 60px rgba(163,230,53,0.2)' }}>
-              <video
-                ref={modalVideoRef}
-                src={pildoras.find(p => p.id === selectedVideo)?.video}
-                controls autoPlay
-                className="w-full aspect-video"
-              />
-            </div>
-
-            <div className="mt-4 text-center">
-              <h3 className="text-lg font-bold text-white">{pildoras.find(p => p.id === selectedVideo)?.title}</h3>
-              <p className="text-xs mt-1" style={{ color: 'rgba(255,255,255,0.3)' }}>Presiona ESC para cerrar</p>
+              {/* ── Vídeo adaptativo (portrait o landscape) ── */}
+              <div style={{
+                background: '#000',
+                border: '1px solid rgba(163,230,53,0.25)', borderTop: 'none',
+                borderRadius: '0 0 16px 16px',
+                overflow: 'hidden',
+                boxShadow: '0 0 80px rgba(163,230,53,0.18)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                maxHeight: 'calc(92vh - 62px)',
+              }}>
+                <video
+                  ref={modalVideoRef}
+                  src={pildora?.video}
+                  controls
+                  autoPlay
+                  style={{
+                    display: 'block',
+                    maxWidth: 'min(88vw, 900px)',
+                    maxHeight: 'calc(90vh - 62px)',
+                    width: 'auto',
+                    height: 'auto',
+                    objectFit: 'contain',
+                  }}
+                />
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        );
+      })()}
     </div>
   );
 };
