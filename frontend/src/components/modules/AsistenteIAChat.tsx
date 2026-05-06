@@ -161,7 +161,7 @@ export const AsistenteIAChat = forwardRef<AsistenteIAChatHandle>((_, ref) => {
       {/* ── Header ── */}
       <div style={{ padding: '14px 16px 10px', borderBottom: `1px solid ${colores.borde}`, display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <div style={{ width: 36, height: 36, borderRadius: '50%', background: `linear-gradient(135deg, ${colores.primario}, ${colores.primarioHover})`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 13, color: '#111', flexShrink: 0 }}>
+          <div style={{ width: 36, height: 36, borderRadius: '50%', background: `linear-gradient(135deg, ${colores.primario}, ${colores.primarioOscuro})`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 13, color: '#111', flexShrink: 0 }}>
             AI
           </div>
           <div>
@@ -197,7 +197,7 @@ export const AsistenteIAChat = forwardRef<AsistenteIAChatHandle>((_, ref) => {
         {noMessages && (
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', gap: 16 }}>
             <div style={{ textAlign: 'center' }}>
-              <div style={{ width: 52, height: 52, borderRadius: '50%', background: `linear-gradient(135deg, ${colores.primario}, ${colores.primarioHover})`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 900, fontSize: 18, color: '#111', margin: '0 auto 12px' }}>AI</div>
+              <div style={{ width: 52, height: 52, borderRadius: '50%', background: `linear-gradient(135deg, ${colores.primario}, ${colores.primarioOscuro})`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 900, fontSize: 18, color: '#111', margin: '0 auto 12px' }}>AI</div>
               <div style={{ fontWeight: 700, color: colores.textoClaro, fontSize: 15, marginBottom: 4 }}>¡Hola! Soy {ia.nombre}</div>
               <div style={{ fontSize: 12, color: colores.textoMedio, lineHeight: 1.5 }}>Pregúntame sobre los servicios,<br />soluciones y capacidades de MAYiA.</div>
             </div>
@@ -235,7 +235,7 @@ export const AsistenteIAChat = forwardRef<AsistenteIAChatHandle>((_, ref) => {
         {messages.map((m, i) => (
           <div key={i} style={{ display: 'flex', gap: 8, alignSelf: m.role === 'user' ? 'flex-end' : 'flex-start', maxWidth: '85%', animation: 'fadeInKpi 0.25s ease' }}>
             {m.role === 'assistant' && (
-              <div style={{ width: 28, height: 28, borderRadius: '50%', background: `linear-gradient(135deg, ${colores.primario}, ${colores.primarioHover})`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 11, color: '#111', flexShrink: 0, marginTop: 4 }}>AI</div>
+              <div style={{ width: 28, height: 28, borderRadius: '50%', background: `linear-gradient(135deg, ${colores.primario}, ${colores.primarioOscuro})`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 11, color: '#111', flexShrink: 0, marginTop: 4 }}>AI</div>
             )}
             <div style={{
               backgroundColor: m.role === 'user' ? colores.primario : colores.fondoTerciario,
@@ -254,7 +254,7 @@ export const AsistenteIAChat = forwardRef<AsistenteIAChatHandle>((_, ref) => {
         {/* Typing indicator */}
         {loading && (
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, alignSelf: 'flex-start' }}>
-            <div style={{ width: 28, height: 28, borderRadius: '50%', background: `linear-gradient(135deg, ${colores.primario}, ${colores.primarioHover})`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 11, color: '#111', flexShrink: 0 }}>AI</div>
+            <div style={{ width: 28, height: 28, borderRadius: '50%', background: `linear-gradient(135deg, ${colores.primario}, ${colores.primarioOscuro})`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 11, color: '#111', flexShrink: 0 }}>AI</div>
             <div style={{ background: colores.fondoTerciario, borderRadius: '16px 16px 16px 4px', padding: '10px 14px', display: 'flex', gap: 4 }}>
               {[0, 0.2, 0.4].map((d, i) => (
                 <div key={i} style={{ width: 7, height: 7, borderRadius: '50%', backgroundColor: colores.primario, animation: `bounce 1.2s ${d}s infinite` }} />
@@ -298,7 +298,7 @@ export const AsistenteIAChat = forwardRef<AsistenteIAChatHandle>((_, ref) => {
             disabled={loading || !input.trim() || backendStatus === 'offline'}
             style={{
               padding: '0 18px', borderRadius: 999, border: 'none',
-              background: `linear-gradient(135deg, ${colores.primario}, ${colores.primarioHover})`,
+              background: `linear-gradient(135deg, ${colores.primario}, ${colores.primarioOscuro})`,
               color: '#111', fontWeight: 700, cursor: 'pointer',
               opacity: (loading || !input.trim() || backendStatus === 'offline') ? 0.5 : 1,
               fontSize: 13, transition: 'opacity 0.2s',

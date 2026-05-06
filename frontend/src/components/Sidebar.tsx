@@ -58,49 +58,6 @@ interface ColoresType {
   [key: string]: string | undefined;
 }
 
-function SidebarGroup({
-  label,
-  isCollapsed,
-  children,
-}: {
-  label: string;
-  isCollapsed: boolean;
-  children: React.ReactNode;
-}) {
-  const { colores } = brandingConfig;
-  return (
-    <div style={{ marginTop: 8 }}>
-      {/* Etiqueta del grupo */}
-      <div
-        style={{
-          padding: isCollapsed ? '8px 0 4px' : '12px 16px 6px',
-          opacity: isCollapsed ? 0 : 1,
-          height: isCollapsed ? 0 : 'auto',
-          overflow: 'hidden',
-          transition: 'all 0.35s ease',
-        }}
-      >
-        <span
-          style={{
-            fontSize: 10,
-            fontWeight: 800,
-            textTransform: 'uppercase' as const,
-            letterSpacing: '0.12em',
-            color: colores.textoOscuro,
-            whiteSpace: 'nowrap',
-          }}
-        >
-          {label}
-        </span>
-      </div>
-      {/* Separador visible en modo colapsado */}
-      {isCollapsed && (
-        <div style={{ height: 1, background: colores.borde, margin: '8px 12px 4px' }} />
-      )}
-      <nav style={{ padding: '0 10px' }}>{children}</nav>
-    </div>
-  );
-}
 
 function SidebarItem({
   item,

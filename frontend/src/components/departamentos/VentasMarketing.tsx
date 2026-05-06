@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { TrendingUp } from 'lucide-react';
 import { brandingConfig } from '../../config/branding';
 
 export const VentasMarketing: React.FC = () => {

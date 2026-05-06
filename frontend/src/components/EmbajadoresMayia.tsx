@@ -12,6 +12,7 @@ const EMBAJADORES: Embajador[] = [
   { id:6, nombre:'Nombre Embajadora', titulo:'Directora Académica',               sector:'Educación',       ciudad:'Mérida, Yucatán',      logro:'Diseñó el primer plan de estudios de IA para bachillerato en el sureste de México.', foto:undefined, color:'#db2777', desde:'2026', badge:'EdTech',      emoji:'📚', impacto:'1er currículo IA bachillerato' },
 ];
 
+<<<<<<< HEAD
 const css = `
   @keyframes emb-fadeup { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
   @keyframes emb-pulse  { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.25);opacity:.5} }
@@ -22,6 +23,10 @@ const css = `
 `;
 
 function AvatarPlaceholder({ color, emoji }: { color:string; emoji:string }) {
+=======
+function AvatarFallback({ nombre, color }: { nombre: string; color: string }) {
+  void nombre;
+>>>>>>> 35e424aa448063dec2465c7c1fa9f32a4ad0dca2
   return (
     <div style={{ width:'100%', height:'100%', background:`linear-gradient(135deg,${color}12,${color}05)`, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', gap:10 }}>
       <span style={{ fontSize:54 }}>{emoji}</span>

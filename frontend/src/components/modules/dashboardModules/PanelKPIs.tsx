@@ -527,7 +527,7 @@ export const PanelKPIs: React.FC = () => {
                   <XAxis dataKey="label" tick={{ fontSize: 9, fill: colores.textoOscuro }} axisLine={false} tickLine={false} />
                   <Tooltip
                     contentStyle={{ background: colores.fondoSecundario, border: `1px solid ${colores.borde}`, borderRadius: '8px', fontSize: '11px' }}
-                    formatter={(val: number | undefined) => [`${val ?? ''}${kpiSeleccionado.unidad}`, kpiSeleccionado.titulo]}
+                    formatter={(val) => [`${val ?? ''}${kpiSeleccionado.unidad}`, kpiSeleccionado.titulo]}
                   />
                   <Area
                     type="monotone"
