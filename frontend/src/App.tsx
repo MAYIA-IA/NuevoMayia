@@ -55,7 +55,10 @@ function App() {
   useEffect(() => {
     const ids = [
       'dashboard', 'analiticos', 'ia-empresarial', 'ia-sectores',
-      'empleados-digitales', 'pildoras-ia', 'ciberseguridad', 'academia'
+      'empleados-digitales', 'pildoras-ia', 'ciberseguridad', 'academia',
+      // Secciones nuevas
+      'noticias', 'partners', 'termometro-ia', 'hackaton',
+      'embajadores', 'organigrama', 'networking',
     ];
 
     // Esperamos a que el DOM esté listo
@@ -106,20 +109,20 @@ function App() {
           <Analiticos />
         </div>
         <CertificacionesMarquee />
-        <NoticiasTicker />
-        <PartnersSection />
+        <div id="noticias"><NoticiasTicker /></div>
+        <div id="partners"><PartnersSection /></div>
 
         <div id="ia-empresarial"><IAEmpresarial /></div>
         <div id="ia-sectores"><IAPorSector /></div>
-        <TermometroIAMexico />
-        <HackatonMarketplace />
+        <div id="termometro-ia"><TermometroIAMexico /></div>
+        <div id="hackaton"><HackatonMarketplace /></div>
         <div id="empleados-digitales"><EmpleadosDigitales /></div>
         <div id="pildoras-ia"><PildorasIA /></div>
         <div id="ciberseguridad"><CiberseguridadIA /></div>
-        <EmbajadoresMayia />
-        <Organigrama />
+        <div id="embajadores"><EmbajadoresMayia /></div>
+        <div id="organigrama"><Organigrama /></div>
         <div id="academia"><AcademiaIA /></div>
-        <NetworkingHub />
+        <div id="networking"><NetworkingHub /></div>
 
         <BrandFooter />
         <Footer />
