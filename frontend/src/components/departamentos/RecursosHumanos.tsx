@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Users } from 'lucide-react';
 import { brandingConfig } from '../../config/branding';
 
 export const RecursosHumanos: React.FC = () => {

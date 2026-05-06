@@ -42,7 +42,7 @@ const sugerencias = [
   { icono: '🎓', texto: '¿Qué es la Academia MAYiA?' },
 ];
 
-export const Header: React.FC<HeaderProps> = ({ title }) => {
+export const Header: React.FC<HeaderProps> = ({ title: _title }) => {
   const { colores } = brandingConfig;
 
   const [notificacionesAbiertas, setNotificacionesAbiertas] = useState(false);

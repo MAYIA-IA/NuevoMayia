@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Building2 } from 'lucide-react';
 import { brandingConfig } from '../../config/branding';
 
 export const Administracion: React.FC = () => {

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { DollarSign } from 'lucide-react';
 import { brandingConfig } from '../../config/branding';
 
 export const FinanzasContabilidad: React.FC = () => {

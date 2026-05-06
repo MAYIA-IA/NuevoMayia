@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Cpu } from 'lucide-react';
 import { brandingConfig } from '../../config/branding';
 
 export const TecnologiasInformacion: React.FC = () => {

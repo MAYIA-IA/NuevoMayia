@@ -363,12 +363,11 @@ export const MapaCalorEstados: React.FC = () => {
                   }}
                   onMouseEnter={(e) => {
                     setHoveredEstado(id);
-                    const rect = (e.currentTarget.closest('svg') as SVGSVGElement).getBoundingClientRect();
                     const svgEl = e.currentTarget.closest('svg') as SVGSVGElement;
                     const pt = svgEl.createSVGPoint();
                     pt.x = e.clientX;
                     pt.y = e.clientY;
-                    const svgP = pt.matrixTransform(svgEl.getScreenCTM()!.inverse());
+                    pt.matrixTransform(svgEl.getScreenCTM()!.inverse());
                     // Use mouse position relative to the container div
                     const containerRect = (e.currentTarget.closest('div') as HTMLElement).getBoundingClientRect();
                     setTooltip({

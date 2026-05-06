@@ -28,7 +28,7 @@ const EMBAJADORES: Embajador[] = [
 ];
 
 function AvatarFallback({ nombre, color }: { nombre: string; color: string }) {
-  const initials = nombre.split(' ').filter(w => !['Nombre', 'Embajador', 'Embajadora'].includes(w)).map(w => w[0]).join('').slice(0, 2).toUpperCase() || 'MB';
+  void nombre;
   return (
     <div style={{ width: '100%', height: '100%', background: `${color}20`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <span style={{ fontSize: 36, fontWeight: 900, color }}>✦</span>

@@ -66,7 +66,7 @@ const segmentosTabla: Record<EjeClusters, SegmentoTabla[]> = {
     { segmento: 'Región Centro',    descripcion: '18 estados, mayor densidad',      casos: 9120, skus: 42, riesgo: 'critico', tendencia: +24, color: '#F27405' },
     { segmento: 'Región Norte',     descripcion: 'Presión en antibióticos',         casos: 6840, skus: 35, riesgo: 'critico', tendencia: +18, color: '#EF4444' },
     { segmento: 'Región Sur',       descripcion: 'Gastrointestinal dominante',      casos: 5430, skus: 28, riesgo: 'alto',    tendencia: +12, color: '#F59E0B' },
-    { segmento: 'Región Occidente', descripción: 'Mix crónico-respiratorio',        casos: 4210, skus: 30, riesgo: 'medio',   tendencia:  +9, color: '#A4D955' },
+    { segmento: 'Región Occidente', descripcion: 'Mix crónico-respiratorio',        casos: 4210, skus: 30, riesgo: 'medio',   tendencia:  +9, color: '#A4D955' },
     { segmento: 'Región Bajío',     descripcion: 'Bajo riesgo, stock adecuado',     casos: 3870, skus: 25, riesgo: 'bajo',    tendencia:  +7, color: '#10B981' },
     { segmento: 'Región Sureste',   descripcion: 'Enfermedades tropicales activas', casos: 2980, skus: 20, riesgo: 'medio',   tendencia:  +5, color: '#8B5CF6' },
   ],
@@ -196,7 +196,7 @@ export const ClustersSegmentacion: React.FC = () => {
                 />
                 <ZAxis type="number" dataKey="z" range={isMobile ? [40, 300] : [60, 500]} />
                 <Tooltip content={<CustomTooltip />} />
-                <Scatter data={burbujas} onClick={(data) => setClusterSeleccionado(prev => prev === data.id ? null : data.id)} style={{ cursor: 'pointer' }}>
+                <Scatter data={burbujas} onClick={(data) => { const d = data as unknown as { id: string }; setClusterSeleccionado(prev => prev === d.id ? null : d.id); }} style={{ cursor: 'pointer' }}>
                   {burbujas.map((b) => (
                     <Cell key={b.id} fill={b.color}
                       fillOpacity={clusterSeleccionado && clusterSeleccionado !== b.id ? 0.25 : 0.8}
