@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import NavigationBar from './components/navigationBar';
 import HeaderBanner from './components/headerBanner';
 
@@ -6,27 +6,44 @@ import { ResponsiveLayout } from './components/ResponsiveLayout';
 import { Sidebar } from './components/Sidebar';
 import { Header } from './components/Header';
 import { Dashboard as DashboardEnterprise } from './components/Dashboard';
-import { Analiticos } from './components/departamentos/Analiticos';
 import { brandingConfig } from './config/branding';
 import './responsive.css';
 
-import NoticiasTicker from './components/NoticiasTicker';
-import PartnersSection from './components/PartnersSection';
+// Componentes críticos (carga estática)
 import MusculosMAYiA from './components/musculosMayia';
 import CertificacionesMarquee from './components/CertificacionesMarquee';
-import IAEmpresarial from './components/IAEmpresarial';
-import IAPorSector from './components/IAporSector';
-import EmpleadosDigitales from './components/EmpleadosDigitales';
-import PildorasIA from './components/PildorasIA';
-import CiberseguridadIA from './components/CiberseguridadIA';
-import AcademiaIA from './components/AcademiaIA';
-import BrandFooter from './components/brandFooter';
-import Footer from './components/piepagina';
-import Organigrama from './components/Organigrama';
-import EmbajadoresMayia from './components/EmbajadoresMayia';
-import HackatonMarketplace from './components/HackatonMarketplace';
-import TermometroIAMexico from './components/TermometroIAMexico';
-import NetworkingHub from './components/NetworkingHub';
+import NoticiasTicker from './components/NoticiasTicker';
+
+// Componentes pesados (carga perezosa)
+const Analiticos = lazy(() => import('./components/departamentos/Analiticos').then(m => ({ default: m.Analiticos })));
+const PartnersSection = lazy(() => import('./components/PartnersSection'));
+const IAEmpresarial = lazy(() => import('./components/IAEmpresarial'));
+const IAPorSector = lazy(() => import('./components/IAporSector'));
+const EmpleadosDigitales = lazy(() => import('./components/EmpleadosDigitales'));
+const PildorasIA = lazy(() => import('./components/PildorasIA'));
+const CiberseguridadIA = lazy(() => import('./components/CiberseguridadIA'));
+const AcademiaIA = lazy(() => import('./components/AcademiaIA'));
+const BrandFooter = lazy(() => import('./components/brandFooter'));
+const Footer = lazy(() => import('./components/piepagina'));
+const Organigrama = lazy(() => import('./components/Organigrama'));
+const EmbajadoresMayia = lazy(() => import('./components/EmbajadoresMayia'));
+const HackatonMarketplace = lazy(() => import('./components/HackatonMarketplace'));
+const TermometroIAMexico = lazy(() => import('./components/TermometroIAMexico'));
+const NetworkingHub = lazy(() => import('./components/NetworkingHub'));
+
+// Fallback de carga premium
+const LoadingSection = () => (
+  <div style={{ height: '300px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#f8fdf1' }}>
+    <div className="loading-dots" style={{ display: 'flex', gap: '8px' }}>
+      <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#A4D955', animation: 'pulse 1s infinite' }}></div>
+      <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#A4D955', animation: 'pulse 1s infinite 0.2s' }}></div>
+      <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#A4D955', animation: 'pulse 1s infinite 0.4s' }}></div>
+    </div>
+    <style>{`
+      @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.5; } 50% { transform: scale(1.5); opacity: 1; } }
+    `}</style>
+  </div>
+);
 
 /* ── IDs de sección para scroll-spy ── */
 const SECTION_IDS = [
@@ -124,27 +141,29 @@ function App() {
 
   /* ── Contenido de la página (igual para mobile y desktop) ── */
   const pageContent = (
-    <div style={{ position: 'relative', backgroundColor: colores.fondoPrincipal }}>
-      <div id="dashboard"><DashboardEnterprise onSectionChange={handleNavClick} /></div>
-      <MusculosMAYiA />
-      <div id="analiticos" style={{ background: '#0A0A14' }}><Analiticos /></div>
-      <CertificacionesMarquee />
-      <div id="noticias"><NoticiasTicker /></div>
-      <div id="partners"><PartnersSection /></div>
-      <div id="ia-empresarial"><IAEmpresarial /></div>
-      <div id="ia-sectores"><IAPorSector /></div>
-      <div id="termometro-ia"><TermometroIAMexico /></div>
-      <div id="hackaton"><HackatonMarketplace /></div>
-      <div id="empleados-digitales"><EmpleadosDigitales /></div>
-      <div id="pildoras-ia"><PildorasIA /></div>
-      <div id="ciberseguridad"><CiberseguridadIA /></div>
-      <div id="embajadores"><EmbajadoresMayia /></div>
-      <div id="organigrama"><Organigrama /></div>
-      <div id="academia"><AcademiaIA /></div>
-      <div id="networking"><NetworkingHub /></div>
-      <BrandFooter />
-      <Footer />
-    </div>
+    <Suspense fallback={<LoadingSection />}>
+      <div style={{ position: 'relative', backgroundColor: colores.fondoPrincipal }}>
+        <div id="dashboard"><DashboardEnterprise onSectionChange={handleNavClick} /></div>
+        <MusculosMAYiA />
+        <div id="analiticos" style={{ background: '#0A0A14' }}><Analiticos /></div>
+        <CertificacionesMarquee />
+        <div id="noticias"><NoticiasTicker /></div>
+        <div id="partners"><PartnersSection /></div>
+        <div id="ia-empresarial"><IAEmpresarial /></div>
+        <div id="ia-sectores"><IAPorSector /></div>
+        <div id="termometro-ia"><TermometroIAMexico /></div>
+        <div id="hackaton"><HackatonMarketplace /></div>
+        <div id="empleados-digitales"><EmpleadosDigitales /></div>
+        <div id="pildoras-ia"><PildorasIA /></div>
+        <div id="ciberseguridad"><CiberseguridadIA /></div>
+        <div id="embajadores"><EmbajadoresMayia /></div>
+        <div id="organigrama"><Organigrama /></div>
+        <div id="academia"><AcademiaIA /></div>
+        <div id="networking"><NetworkingHub /></div>
+        <BrandFooter />
+        <Footer />
+      </div>
+    </Suspense>
   );
 
   return (

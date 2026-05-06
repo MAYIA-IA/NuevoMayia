@@ -1,5 +1,4 @@
-/* EmbajadoresMayia.tsx – fondo blanco premium */
-import { useState } from 'react';
+import { useState, memo } from 'react';
 
 interface Embajador { id:number; nombre:string; titulo:string; sector:string; ciudad:string; logro:string; foto?:string; color:string; desde:string; badge:string; emoji:string; impacto:string; }
 
@@ -30,6 +29,58 @@ function AvatarPlaceholder({ color, emoji }: { color:string; emoji:string }) {
   );
 }
 
+const EmbajadorCard = memo(({ emb, isHovered, onHover, index }: { emb: Embajador, isHovered: boolean, onHover: (id: number | null) => void, index: number }) => (
+  <div
+    className="emb-card"
+    style={{
+      animationDelay: `${index * 0.05}s`,
+      background: '#ffffff',
+      border: `1.5px solid ${isHovered ? emb.color + '55' : '#e5e7eb'}`,
+      borderRadius: 24,
+      overflow: 'hidden',
+      transition: 'all .4s cubic-bezier(.23,1,.32,1)',
+      transform: isHovered ? 'translateY(-8px)' : 'translateY(0)',
+      boxShadow: isHovered ? `0 24px 60px ${emb.color}18, 0 0 0 1px ${emb.color}15` : '0 2px 16px rgba(0,0,0,.06)',
+      cursor: 'default',
+    }}
+    onMouseEnter={() => onHover(emb.id)}
+    onMouseLeave={() => onHover(null)}
+  >
+    {/* Photo zone */}
+    <div style={{ position: 'relative', height: 200, overflow: 'hidden' }}>
+      <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(135deg,${emb.color}10,transparent 50%)`, zIndex: 1 }} />
+      <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 70, background: 'linear-gradient(to top,rgba(255,255,255,.95),transparent)', zIndex: 1 }} />
+      <div style={{ width: '100%', height: '100%' }}>
+        {emb.foto ? (
+          <img src={emb.foto} alt={emb.nombre} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+        ) : (
+          <AvatarPlaceholder color={emb.color} emoji={emb.emoji} />
+        )}
+      </div>
+      <div style={{ position: 'absolute', top: 14, right: 14, zIndex: 2, padding: '4px 12px', borderRadius: 99, background: `${emb.color}18`, border: `1px solid ${emb.color}40`, backdropFilter: 'blur(4px)', fontSize: 9, fontWeight: 800, color: emb.color, letterSpacing: '0.12em', textTransform: 'uppercase' }}>{emb.badge}</div>
+      <div style={{ position: 'absolute', top: 14, left: 14, zIndex: 2, padding: '4px 12px', borderRadius: 99, background: 'rgba(0,0,0,.45)', backdropFilter: 'blur(4px)', fontSize: 9, color: '#e5e7eb', fontWeight: 600 }}>Embajador desde {emb.desde}</div>
+      <div style={{ position: 'absolute', bottom: 14, left: '50%', transform: 'translateX(-50%)', zIndex: 2, padding: '5px 14px', borderRadius: 99, background: `${emb.color}18`, border: `1px solid ${emb.color}40`, backdropFilter: 'blur(4px)', fontSize: 10, fontWeight: 700, color: emb.color, whiteSpace: 'nowrap' }}>🎯 {emb.impacto}</div>
+    </div>
+
+    {/* Info */}
+    <div style={{ padding: '22px 24px 26px' }}>
+      <h3 style={{ fontSize: 18, fontWeight: 800, color: '#111827', margin: '0 0 4px' }}>{emb.nombre}</h3>
+      <p style={{ fontSize: 12, color: emb.color, fontWeight: 600, margin: '0 0 10px' }}>{emb.titulo}</p>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
+        <span style={{ fontSize: 11, color: '#6b7280' }}>📍 {emb.ciudad}</span>
+        <div style={{ width: 3, height: 3, borderRadius: '50%', background: '#d1d5db' }} />
+        <span style={{ fontSize: 10, padding: '2px 10px', borderRadius: 99, background: `${emb.color}10`, border: `1px solid ${emb.color}25`, color: emb.color, fontWeight: 600 }}>{emb.sector}</span>
+      </div>
+      <div style={{ height: 1, background: `linear-gradient(90deg,${emb.color}30,transparent)`, marginBottom: 14 }} />
+      <p style={{ fontSize: 13, color: '#6b7280', lineHeight: 1.7, margin: 0, fontStyle: 'italic' }}>
+        <span style={{ color: emb.color, fontSize: 20, lineHeight: 0.5, verticalAlign: 'middle', marginRight: 3 }}>"</span>
+        {emb.logro}
+        <span style={{ color: emb.color, fontSize: 20, lineHeight: 0.5, verticalAlign: 'middle', marginLeft: 3 }}>"</span>
+      </p>
+    </div>
+  </div>
+));
+
 export default function EmbajadoresMayia() {
   const [hov, setHov] = useState<number|null>(null);
 
@@ -37,14 +88,12 @@ export default function EmbajadoresMayia() {
     <section style={{ background:'linear-gradient(180deg,#f8fdf1 0%,#ffffff 40%,#f8fdf1 100%)', padding:'100px 40px', position:'relative', overflow:'hidden' }}>
       <style>{css}</style>
 
-      {/* BG decoration */}
       <div style={{ position:'absolute', inset:0, pointerEvents:'none' }}>
         <div style={{ position:'absolute', top:'5%', left:'8%', width:500, height:500, borderRadius:'50%', background:'radial-gradient(circle,rgba(164,217,85,.07) 0%,transparent 70%)', filter:'blur(70px)' }} />
         <div style={{ position:'absolute', bottom:'8%', right:'5%', width:400, height:400, borderRadius:'50%', background:'radial-gradient(circle,rgba(96,165,250,.05) 0%,transparent 70%)', filter:'blur(60px)' }} />
       </div>
 
       <div style={{ maxWidth:1200, margin:'0 auto', position:'relative', zIndex:1 }}>
-        {/* Header */}
         <div style={{ textAlign:'center', marginBottom:64 }}>
           <div style={{ display:'inline-flex', alignItems:'center', gap:10, padding:'6px 20px', borderRadius:99, background:'rgba(164,217,85,.12)', border:'1px solid rgba(164,217,85,.4)', marginBottom:20 }}>
             <span style={{ fontSize:14, animation:'emb-rotate 4s linear infinite', display:'inline-block' }}>✦</span>
@@ -58,7 +107,6 @@ export default function EmbajadoresMayia() {
             Líderes que están <strong style={{ color:'#4d7c0f' }}>transformando México</strong> con inteligencia artificial. Historias reales de impacto nacional.
           </p>
 
-          {/* Stats strip */}
           <div style={{ display:'flex', justifyContent:'center', gap:48, marginTop:36, flexWrap:'wrap' }}>
             {[{ v:'6+', l:'Embajadores activos', c:'#65a30d' }, { v:'6', l:'Estados representados', c:'#0284c7' }, { v:'100%', l:'Casos de éxito reales', c:'#db2777' }].map(s=>(
               <div key={s.l} style={{ textAlign:'center' }}>
@@ -69,58 +117,18 @@ export default function EmbajadoresMayia() {
           </div>
         </div>
 
-        {/* Grid */}
         <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(340px,1fr))', gap:24 }}>
           {EMBAJADORES.map((emb, i) => (
-            <div key={emb.id} className="emb-card"
-              style={{
-                animationDelay:`${i*.1}s`,
-                background:'#ffffff',
-                border:`1.5px solid ${hov===emb.id ? emb.color+'55' : '#e5e7eb'}`,
-                borderRadius:24, overflow:'hidden',
-                transition:'all .4s cubic-bezier(.23,1,.32,1)',
-                transform: hov===emb.id ? 'translateY(-8px)' : 'translateY(0)',
-                boxShadow: hov===emb.id ? `0 24px 60px ${emb.color}18, 0 0 0 1px ${emb.color}15` : '0 2px 16px rgba(0,0,0,.06)',
-                cursor:'default',
-              }}
-              onMouseEnter={()=>setHov(emb.id)} onMouseLeave={()=>setHov(null)}
-            >
-              {/* Photo zone */}
-              <div style={{ position:'relative', height:200, overflow:'hidden' }}>
-                <div style={{ position:'absolute', inset:0, background:`linear-gradient(135deg,${emb.color}10,transparent 50%)`, zIndex:1 }} />
-                <div style={{ position:'absolute', bottom:0, left:0, right:0, height:70, background:'linear-gradient(to top,rgba(255,255,255,.95),transparent)', zIndex:1 }} />
-                <div style={{ width:'100%', height:'100%' }}>
-                  {emb.foto ? <img src={emb.foto} alt={emb.nombre} style={{ width:'100%', height:'100%', objectFit:'cover' }}/> : <AvatarPlaceholder color={emb.color} emoji={emb.emoji}/>}
-                </div>
-                {/* Badge top right */}
-                <div style={{ position:'absolute', top:14, right:14, zIndex:2, padding:'4px 12px', borderRadius:99, background:`${emb.color}18`, border:`1px solid ${emb.color}40`, backdropFilter:'blur(4px)', fontSize:9, fontWeight:800, color:emb.color, letterSpacing:'0.12em', textTransform:'uppercase' }}>{emb.badge}</div>
-                {/* Desde top left */}
-                <div style={{ position:'absolute', top:14, left:14, zIndex:2, padding:'4px 12px', borderRadius:99, background:'rgba(0,0,0,.45)', backdropFilter:'blur(4px)', fontSize:9, color:'#e5e7eb', fontWeight:600 }}>Embajador desde {emb.desde}</div>
-                {/* Impact pill */}
-                <div style={{ position:'absolute', bottom:14, left:'50%', transform:'translateX(-50%)', zIndex:2, padding:'5px 14px', borderRadius:99, background:`${emb.color}18`, border:`1px solid ${emb.color}40`, backdropFilter:'blur(4px)', fontSize:10, fontWeight:700, color:emb.color, whiteSpace:'nowrap' }}>🎯 {emb.impacto}</div>
-              </div>
-
-              {/* Info */}
-              <div style={{ padding:'22px 24px 26px' }}>
-                <h3 style={{ fontSize:18, fontWeight:800, color:'#111827', margin:'0 0 4px' }}>{emb.nombre}</h3>
-                <p style={{ fontSize:12, color:emb.color, fontWeight:600, margin:'0 0 10px' }}>{emb.titulo}</p>
-                <div style={{ display:'flex', alignItems:'center', gap:8, marginBottom:16 }}>
-                  <span style={{ fontSize:11, color:'#6b7280' }}>📍 {emb.ciudad}</span>
-                  <div style={{ width:3, height:3, borderRadius:'50%', background:'#d1d5db' }} />
-                  <span style={{ fontSize:10, padding:'2px 10px', borderRadius:99, background:`${emb.color}10`, border:`1px solid ${emb.color}25`, color:emb.color, fontWeight:600 }}>{emb.sector}</span>
-                </div>
-                <div style={{ height:1, background:`linear-gradient(90deg,${emb.color}30,transparent)`, marginBottom:14 }} />
-                <p style={{ fontSize:13, color:'#6b7280', lineHeight:1.7, margin:0, fontStyle:'italic' }}>
-                  <span style={{ color:emb.color, fontSize:20, lineHeight:0.5, verticalAlign:'middle', marginRight:3 }}>"</span>
-                  {emb.logro}
-                  <span style={{ color:emb.color, fontSize:20, lineHeight:0.5, verticalAlign:'middle', marginLeft:3 }}>"</span>
-                </p>
-              </div>
-            </div>
+            <EmbajadorCard
+              key={emb.id}
+              emb={emb}
+              index={i}
+              isHovered={hov === emb.id}
+              onHover={setHov}
+            />
           ))}
         </div>
 
-        {/* CTA */}
         <div style={{ textAlign:'center', marginTop:64, padding:'44px 40px', borderRadius:28, background:'linear-gradient(135deg,rgba(164,217,85,.1),rgba(164,217,85,.04))', border:'1px solid rgba(164,217,85,.3)' }}>
           <div style={{ fontSize:32, marginBottom:12 }}>✦</div>
           <h3 style={{ fontSize:24, fontWeight:800, color:'#111827', margin:'0 0 8px' }}>¿Quieres ser Embajador MAYiA?</h3>
