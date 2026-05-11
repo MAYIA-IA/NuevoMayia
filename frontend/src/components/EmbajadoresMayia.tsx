@@ -1,14 +1,14 @@
 import { useState, memo } from 'react';
+import fotoJosue from '../assets/Embajadores/Josue.jpeg';
+import fotoMartin from '../assets/Embajadores/Martín.jpeg';
+import fotoDulce from '../assets/Embajadores/Dulce.jpeg';
 
-interface Embajador { id:number; nombre:string; titulo:string; sector:string; ciudad:string; logro:string; foto?:string; color:string; desde:string; badge:string; emoji:string; impacto:string; }
+interface Embajador { id:number; nombre:string; titulo:string; sector:string; ciudad:string; logro:string; foto?:string; color:string; desde:string; badge:string; impacto:string; }
 
 const EMBAJADORES: Embajador[] = [
-  { id:1, nombre:'Nombre Embajador',  titulo:'Director de Transformación Digital', sector:'Banca y Finanzas', ciudad:'Ciudad de México',    logro:'Implementó agentes IA que redujeron 78% el tiempo de aprobación crediticia.', foto:undefined, color:'#65a30d', desde:'2024', badge:'IA Financiera', emoji:'🏦', impacto:'-78% tiempo aprobación' },
-  { id:2, nombre:'Nombre Embajadora', titulo:'CEO & Co-Fundadora',                 sector:'HealthTech',      ciudad:'Guadalajara, Jalisco', logro:'Llevó detección temprana de enfermedades crónicas con IA a 12 hospitales públicos.', foto:undefined, color:'#0284c7', desde:'2024', badge:'IA Salud',      emoji:'🧬', impacto:'12 hospitales impactados' },
-  { id:3, nombre:'Nombre Embajador',  titulo:'VP de Operaciones',                  sector:'Manufactura',     ciudad:'Monterrey, N.L.',      logro:'Redujo el desperdicio industrial en 34% usando cámaras IA en línea de producción.', foto:undefined, color:'#d97706', desde:'2025', badge:'Vision IA',   emoji:'🏭', impacto:'-34% desperdicio' },
-  { id:4, nombre:'Nombre Embajadora', titulo:'Directora de Innovación',            sector:'Gobierno',        ciudad:'Puebla',               logro:'Primera funcionaria pública en México en implementar un chatbot IA para trámites ciudadanos.', foto:undefined, color:'#059669', desde:'2025', badge:'GovTech',     emoji:'🏛️', impacto:'1er chatbot gov MX' },
-  { id:5, nombre:'Nombre Embajador',  titulo:'Fundador & CTO',                     sector:'AgriTech',        ciudad:'Hermosillo, Sonora',   logro:'Optimizó el riego de 4,200 hectáreas con IA predictiva, ahorrando 40% del agua.', foto:undefined, color:'#7c3aed', desde:'2025', badge:'IA Campo',    emoji:'🌾', impacto:'-40% consumo agua' },
-  { id:6, nombre:'Nombre Embajadora', titulo:'Directora Académica',               sector:'Educación',       ciudad:'Mérida, Yucatán',      logro:'Diseñó el primer plan de estudios de IA para bachillerato en el sureste de México.', foto:undefined, color:'#db2777', desde:'2026', badge:'EdTech',      emoji:'📚', impacto:'1er currículo IA bachillerato' },
+  { id:1, nombre:'Josue', titulo:'Ingeniero de Inteligencia Artificial', sector:'Tecnología', ciudad:'Ciudad de México', logro:'Especialista en el diseño, desarrollo e implementación de modelos de aprendizaje automático y sistemas de inteligencia artificial para soluciones escalables.', foto:fotoJosue, color:'#0284c7', desde:'2024', badge:'IA', impacto:'Innovación' },
+  { id:2, nombre:'Martín', titulo:'Trainee de Operaciones en la Nube', sector:'Infraestructura', ciudad:'Ciudad de México', logro:'Enfocado en la administración, optimización y monitoreo continuo de plataformas y servicios basados en la nube.', foto:fotoMartin, color:'#d97706', desde:'2024', badge:'Cloud', impacto:'Escalabilidad' },
+  { id:3, nombre:'Dulce', titulo:'Gestión de Redes Sociales', sector:'Marketing', ciudad:'Ciudad de México', logro:'Experta en la creación de estrategias digitales, gestión de comunidades y posicionamiento de marca a través de plataformas sociales.', foto:fotoDulce, color:'#db2777', desde:'2024', badge:'Marketing', impacto:'Comunidad' },
 ];
 
 const css = `
@@ -20,10 +20,10 @@ const css = `
   .emb-cta-btn:hover { transform:translateY(-3px)!important; box-shadow:0 16px 50px rgba(164,217,85,.5)!important; }
 `;
 
-function AvatarPlaceholder({ color, emoji }: { color:string; emoji:string }) {
+function AvatarPlaceholder({ color }: { color:string }) {
   return (
     <div style={{ width:'100%', height:'100%', background:`linear-gradient(135deg,${color}12,${color}05)`, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', gap:10 }}>
-      <span style={{ fontSize:54 }}>{emoji}</span>
+      <span style={{ fontSize:54, color }}>•</span>
       <div style={{ width:56, height:2, borderRadius:99, background:`linear-gradient(90deg,transparent,${color},transparent)` }} />
     </div>
   );
@@ -54,12 +54,12 @@ const EmbajadorCard = memo(({ emb, isHovered, onHover, index }: { emb: Embajador
         {emb.foto ? (
           <img src={emb.foto} alt={emb.nombre} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
         ) : (
-          <AvatarPlaceholder color={emb.color} emoji={emb.emoji} />
+          <AvatarPlaceholder color={emb.color} />
         )}
       </div>
       <div style={{ position: 'absolute', top: 14, right: 14, zIndex: 2, padding: '4px 12px', borderRadius: 99, background: `${emb.color}18`, border: `1px solid ${emb.color}40`, backdropFilter: 'blur(4px)', fontSize: 9, fontWeight: 800, color: emb.color, letterSpacing: '0.12em', textTransform: 'uppercase' }}>{emb.badge}</div>
       <div style={{ position: 'absolute', top: 14, left: 14, zIndex: 2, padding: '4px 12px', borderRadius: 99, background: 'rgba(0,0,0,.45)', backdropFilter: 'blur(4px)', fontSize: 9, color: '#e5e7eb', fontWeight: 600 }}>Embajador desde {emb.desde}</div>
-      <div style={{ position: 'absolute', bottom: 14, left: '50%', transform: 'translateX(-50%)', zIndex: 2, padding: '5px 14px', borderRadius: 99, background: `${emb.color}18`, border: `1px solid ${emb.color}40`, backdropFilter: 'blur(4px)', fontSize: 10, fontWeight: 700, color: emb.color, whiteSpace: 'nowrap' }}>🎯 {emb.impacto}</div>
+      <div style={{ position: 'absolute', bottom: 14, left: '50%', transform: 'translateX(-50%)', zIndex: 2, padding: '5px 14px', borderRadius: 99, background: `${emb.color}18`, border: `1px solid ${emb.color}40`, backdropFilter: 'blur(4px)', fontSize: 10, fontWeight: 700, color: emb.color, whiteSpace: 'nowrap' }}>Impacto: {emb.impacto}</div>
     </div>
 
     {/* Info */}
@@ -67,7 +67,7 @@ const EmbajadorCard = memo(({ emb, isHovered, onHover, index }: { emb: Embajador
       <h3 style={{ fontSize: 18, fontWeight: 800, color: '#111827', margin: '0 0 4px' }}>{emb.nombre}</h3>
       <p style={{ fontSize: 12, color: emb.color, fontWeight: 600, margin: '0 0 10px' }}>{emb.titulo}</p>
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
-        <span style={{ fontSize: 11, color: '#6b7280' }}>📍 {emb.ciudad}</span>
+        <span style={{ fontSize: 11, color: '#6b7280' }}>Sede: {emb.ciudad}</span>
         <div style={{ width: 3, height: 3, borderRadius: '50%', background: '#d1d5db' }} />
         <span style={{ fontSize: 10, padding: '2px 10px', borderRadius: 99, background: `${emb.color}10`, border: `1px solid ${emb.color}25`, color: emb.color, fontWeight: 600 }}>{emb.sector}</span>
       </div>
@@ -108,7 +108,7 @@ export default function EmbajadoresMayia() {
           </p>
 
           <div style={{ display:'flex', justifyContent:'center', gap:48, marginTop:36, flexWrap:'wrap' }}>
-            {[{ v:'6+', l:'Embajadores activos', c:'#65a30d' }, { v:'6', l:'Estados representados', c:'#0284c7' }, { v:'100%', l:'Casos de éxito reales', c:'#db2777' }].map(s=>(
+            {[{ v:'3', l:'Embajadores activos', c:'#65a30d' }, { v:'1', l:'País representado', c:'#0284c7' }, { v:'100%', l:'Pasión por la tecnología', c:'#db2777' }].map(s=>(
               <div key={s.l} style={{ textAlign:'center' }}>
                 <div style={{ fontSize:26, fontWeight:900, color:s.c }}>{s.v}</div>
                 <div style={{ fontSize:10, color:'#9ca3af', textTransform:'uppercase', letterSpacing:'0.08em', marginTop:3 }}>{s.l}</div>

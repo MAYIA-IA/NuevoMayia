@@ -83,14 +83,10 @@ const MarkdownText = ({ text }: { text: string }) => {
 
 /* ── Sugerencias rápidas relacionadas con la página ─────────────────────── */
 const SUGERENCIAS = [
-  '¿Qué servicios de IA ofrece MAYiA?',
-  '¿Cómo funcionan los Empleados Digitales?',
-  '¿Cuánto cuesta una Píldora IA?',
-  '¿Qué sectores atiende MAYiA?',
-  '¿Cómo puedo agendar una demo?',
-  '¿Qué es la Academia MAYiA?',
-  '¿Tienen soluciones de ciberseguridad?',
-  '¿Qué infraestructura tiene MAYiA?',
+  { text: '¿Cuánto cuesta una Píldora IA? 💊', icon: '💰' },
+  { text: '¿Qué sectores atiende MAYiA? 🏢', icon: '🌐' },
+  { text: '¿Cómo puedo agendar una demo? 📅', icon: '🚀' },
+  { text: '¿Qué infraestructura tiene MAYiA? 🛠️', icon: '⚡' },
 ];
 
 /* ── Componente principal ────────────────────────────────────────────────── */
@@ -199,32 +195,39 @@ export const AsistenteIAChat = forwardRef<AsistenteIAChatHandle>((_, ref) => {
             <div style={{ textAlign: 'center' }}>
               <div style={{ width: 52, height: 52, borderRadius: '50%', background: `linear-gradient(135deg, ${colores.primario}, ${colores.primarioOscuro})`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 900, fontSize: 18, color: '#111', margin: '0 auto 12px' }}>AI</div>
               <div style={{ fontWeight: 700, color: colores.textoClaro, fontSize: 15, marginBottom: 4 }}>¡Hola! Soy {ia.nombre}</div>
-              <div style={{ fontSize: 12, color: colores.textoMedio, lineHeight: 1.5 }}>Pregúntame sobre los servicios,<br />soluciones y capacidades de MAYiA.</div>
+              <div style={{ fontSize: 12, color: colores.textoMedio, lineHeight: 1.5 }}>Pregúntame lo que necesites sobre MAYiA.<br />Estoy aquí para ayudarte.</div>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 7, width: '100%' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 8, width: '100%' }}>
               {SUGERENCIAS.map(s => (
                 <button
-                  key={s}
-                  onClick={() => sendMessage(s)}
+                  key={s.text}
+                  onClick={() => sendMessage(s.text)}
                   disabled={backendStatus === 'offline'}
                   style={{
-                    textAlign: 'left', background: colores.fondoSecundario, border: `1px solid ${colores.borde}`,
-                    borderRadius: 12, padding: '9px 13px', cursor: backendStatus === 'offline' ? 'not-allowed' : 'pointer',
-                    color: colores.textoMedio, fontSize: 12, lineHeight: 1.4, transition: 'all 0.2s',
+                    textAlign: 'left', background: 'rgba(255,255,255,0.03)', border: `1px solid ${colores.borde}`,
+                    borderRadius: 14, padding: '10px 14px', cursor: backendStatus === 'offline' ? 'not-allowed' : 'pointer',
+                    color: colores.textoClaro, fontSize: 12, lineHeight: 1.4, transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                    display: 'flex', alignItems: 'center', gap: 10,
                     opacity: backendStatus === 'offline' ? 0.5 : 1,
+                    boxShadow: '0 2px 4px rgba(0,0,0,0.02)',
                   }}
                   onMouseEnter={e => {
                     if (backendStatus !== 'offline') {
+                      (e.currentTarget as HTMLButtonElement).style.background = 'rgba(164, 217, 85, 0.08)';
                       (e.currentTarget as HTMLButtonElement).style.borderColor = colores.primario;
-                      (e.currentTarget as HTMLButtonElement).style.color = colores.textoClaro;
+                      (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(-2px)';
+                      (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 4px 12px rgba(164, 217, 85, 0.15)';
                     }
                   }}
                   onMouseLeave={e => {
+                    (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.03)';
                     (e.currentTarget as HTMLButtonElement).style.borderColor = colores.borde;
-                    (e.currentTarget as HTMLButtonElement).style.color = colores.textoMedio;
+                    (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(0)';
+                    (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 2px 4px rgba(0,0,0,0.02)';
                   }}
                 >
-                  {s}
+                  <span style={{ fontSize: 16 }}>{s.icon}</span>
+                  {s.text}
                 </button>
               ))}
             </div>

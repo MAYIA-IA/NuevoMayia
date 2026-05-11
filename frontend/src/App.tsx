@@ -68,36 +68,51 @@ function App() {
 
   /* ── Scroll-spy: funciona tanto en el body (mobile) como en #main-scroll-container (desktop) ── */
   useEffect(() => {
-    const setupObserver = () => {
-      // En mobile el root es el documento; en desktop es el contenedor del panel
-      const scrollRoot = isMobile ? null : document.getElementById('main-scroll-container');
+    let observer: IntersectionObserver | null = null;
 
-      const observer = new IntersectionObserver(
+    const setupObserver = () => {
+      const scrollRoot = isMobile ? null : document.getElementById('main-scroll-container');
+      
+      // Si estamos en desktop y no encontramos el contenedor, reintentamos en un momento
+      if (!isMobile && !scrollRoot) {
+        return false;
+      }
+
+      observer = new IntersectionObserver(
         (entries) => {
-          const visible = entries.filter(e => e.isIntersecting);
-          if (visible.length > 0) setActiveSection(visible[0].target.id);
+          // Buscamos la sección que esté más visible en la parte superior
+          const visible = entries.find(e => e.isIntersecting);
+          if (visible) {
+            setActiveSection(visible.target.id);
+          }
         },
         {
           root: scrollRoot,
           threshold: 0,
-          rootMargin: '-20% 0px -70% 0px',
+          // Detectamos cuando la sección entra en el 20% superior de la pantalla
+          rootMargin: '-15% 0px -80% 0px',
         }
       );
 
       SECTION_IDS.forEach(id => {
         const el = document.getElementById(id);
-        if (el) observer.observe(el);
+        if (el) observer?.observe(el);
       });
 
-      return observer;
+      return true;
     };
 
-    const t = setTimeout(() => {
-      const obs = setupObserver();
-      return () => obs.disconnect();
-    }, 800);
+    // Intentamos configurar el observador con un pequeño delay para permitir que el DOM se asiente
+    const timerId = setInterval(() => {
+      if (setupObserver()) {
+        clearInterval(timerId);
+      }
+    }, 1000);
 
-    return () => clearTimeout(t);
+    return () => {
+      clearInterval(timerId);
+      observer?.disconnect();
+    };
   }, [isMobile]);
 
   /* ── Navegación desde sidebar / bottom nav ── */
