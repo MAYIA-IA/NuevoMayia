@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import AmdLabModal from './AmdLabModal';
 
 
 /* ── Data ────────────────────────────────────────────────────────────────── */
@@ -51,17 +52,29 @@ const musculos: Musculo[] = [
   },
   {
     id: '04',
-    title: 'Laboratorios IA + Academia',
-    desc: 'I+D continuo y formación especializada. Innovamos hoy para que tu equipo lidere mañana.',
+    title: 'Laboratorio IA AMD',
+    desc: 'Ven y prueba aquí tus proyectos. Hardware acelerado para la nueva era de la inteligencia artificial.',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-7 h-7">
+        <rect x="4" y="4" width="16" height="16" rx="2" /><path d="M9 9h6M9 12h6M9 15h4" />
+        <circle cx="17" cy="15" r="1" fill="currentColor" />
+      </svg>
+    ),
+    accent: '#ED1C24', glow: 'rgba(237,28,36,0.25)', tag: 'AMD Partner',
+  },
+  {
+    id: '05',
+    title: 'Academia MAYiA',
+    desc: 'Formación especializada y capacitación. Innovamos hoy para que tu equipo lidere mañana.',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-7 h-7">
         <path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18" />
       </svg>
     ),
-    accent: '#8b35cc', glow: 'rgba(139,53,204,0.18)', tag: 'I+D',
+    accent: '#8b35cc', glow: 'rgba(139,53,204,0.18)', tag: 'Educación',
   },
   {
-    id: '05',
+    id: '06',
     title: 'Consultoría VATYCS',
     desc: 'Estrategia, gobierno e implementación. Llevamos a tu organización de la visión al valor real.',
     icon: (
@@ -72,7 +85,7 @@ const musculos: Musculo[] = [
     accent: '#0a8c5a', glow: 'rgba(10,140,90,0.18)', tag: 'Consultoría',
   },
   {
-    id: '06',
+    id: '07',
     title: 'Desarrollo IA Enterprise',
     desc: 'Apps a medida, agentes inteligentes e integración con tus sistemas. IA que trabaja con tu empresa.',
     icon: (
@@ -83,7 +96,7 @@ const musculos: Musculo[] = [
     accent: '#1a6bb5', glow: 'rgba(26,107,181,0.18)', tag: 'Dev',
   },
   {
-    id: '07',
+    id: '08',
     title: 'Marketplace + Píldoras IA',
     desc: 'Soluciones listas para usar. Rápido time-to-value sin grandes inversiones iniciales.',
     icon: (
@@ -94,7 +107,7 @@ const musculos: Musculo[] = [
     accent: '#c04a00', glow: 'rgba(192,74,0,0.18)', tag: 'Marketplace',
   },
   {
-    id: '08',
+    id: '09',
     title: 'Squad de Análisis de Datos',
     desc: 'Data engineering, Business Intelligence y MLOps. Tus datos convertidos en decisiones de negocio.',
     icon: (
@@ -106,7 +119,7 @@ const musculos: Musculo[] = [
     accent: '#a01ab5', glow: 'rgba(160,26,181,0.18)', tag: 'Data',
   },
   {
-    id: '09',
+    id: '10',
     title: 'Nube Soberana',
     desc: 'Datos y cómputo en México. Cumplimiento regulatorio, latencia óptima y control total.',
     icon: (
@@ -117,7 +130,7 @@ const musculos: Musculo[] = [
     accent: '#007a6e', glow: 'rgba(0,122,110,0.18)', tag: 'Cloud',
   },
   {
-    id: '10',
+    id: '11',
     title: 'SOC + Embajadores MAYiA',
     desc: '7 certificaciones ISO, ciberseguridad 24/7 y una comunidad que multiplica el impacto.',
     icon: (
@@ -130,9 +143,9 @@ const musculos: Musculo[] = [
 ];
 
 /* ── Card ────────────────────────────────────────────────────────────────── */
-interface MusculoCardProps { m: Musculo; index: number }
+interface MusculoCardProps { m: Musculo; index: number; onClick?: () => void }
 
-const MusculoCard = ({ m, index }: MusculoCardProps) => {
+const MusculoCard = ({ m, index, onClick }: MusculoCardProps) => {
   const [hovered, setHovered] = useState(false);
   const [visible, setVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -151,7 +164,8 @@ const MusculoCard = ({ m, index }: MusculoCardProps) => {
       ref={ref}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="relative"
+      onClick={onClick}
+      className={`relative ${m.id === '04' ? 'lg:col-span-2' : ''} ${onClick ? 'cursor-pointer' : ''}`}
       style={{
         opacity: visible ? 1 : 0,
         transform: visible ? 'translateY(0)' : 'translateY(32px)',
@@ -228,6 +242,7 @@ const MusculoCard = ({ m, index }: MusculoCardProps) => {
 /* ── Section ─────────────────────────────────────────────────────────────── */
 const MusculosMAYiA = () => {
   const [scrollHint, setScrollHint] = useState(true);
+  const [showAmdModal, setShowAmdModal] = useState(false);
 
   useEffect(() => {
     const onScroll = () => { if (window.scrollY > 80) setScrollHint(false); };
@@ -262,7 +277,14 @@ const MusculosMAYiA = () => {
 
         {/* Cards grid */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-          {musculos.map((m, i) => <MusculoCard key={m.id} m={m} index={i} />)}
+          {musculos.map((m, i) => (
+            <MusculoCard
+              key={m.id}
+              m={m}
+              index={i}
+              onClick={m.id === '04' ? () => setShowAmdModal(true) : undefined}
+            />
+          ))}
         </div>
 
         {/* Scroll hint */}
@@ -291,6 +313,7 @@ const MusculosMAYiA = () => {
           50% { transform: translateY(5px); opacity: 1; }
         }
       `}</style>
+      <AmdLabModal isOpen={showAmdModal} onClose={() => setShowAmdModal(false)} />
     </section>
   );
 };

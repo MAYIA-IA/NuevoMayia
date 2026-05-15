@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { MapPin, X, Zap, ChevronRight, Bot } from 'lucide-react';
 import { brandingConfig } from '../../../config/branding';
 import { mexicoEstadosPaths } from './mexicoStatePaths';
 
 const { colores } = brandingConfig;
 
-const COLOR_SELECTED = '#C0D966';
-const COLOR_HOVER = '#D4E87A';
+const COLOR_SELECTED = '#A4D955'; // MAYiA Green
+const COLOR_HOVER = '#FCD34D'; // Pastel yellow for hover
 
 interface EstadoEconomico {
   id: string;
@@ -21,22 +21,22 @@ interface EstadoEconomico {
 const ZONAS: Record<string, { label: string; color: string; ids: string[] }> = {
   Norte: {
     label: 'Norte',
-    color: '#3B82F6',
+    color: '#93C5FD', // Pastel Blue
     ids: ['MX_BC', 'MX_BS', 'MX_CH', 'MX_CO', 'MX_NL', 'MX_SO', 'MX_TM', 'MX_DG', 'MX_SI'],
   },
   'Bajío': {
     label: 'Bajío y Centro-Occidente',
-    color: '#F59E0B',
+    color: '#FDE047', // Pastel Yellow
     ids: ['MX_AG', 'MX_GT', 'MX_QT', 'MX_SL', 'MX_ZA', 'MX_JA', 'MX_MI', 'MX_CL', 'MX_NA'],
   },
   Centro: {
     label: 'Centro',
-    color: '#8B5CF6',
+    color: '#D8B4E2', // Pastel Purple
     ids: ['MX_DF', 'MX_EM', 'MX_PU', 'MX_HG', 'MX_MO', 'MX_TL'],
   },
   Sureste: {
     label: 'Sur y Sureste',
-    color: '#10B981',
+    color: '#6EE7B7', // Pastel Green
     ids: ['MX_CM', 'MX_CS', 'MX_GR', 'MX_OA', 'MX_QR', 'MX_TB', 'MX_VE', 'MX_YU'],
   },
 };
@@ -85,13 +85,13 @@ function getStateColor(id: string, hovered: boolean, selected: boolean, filtroZo
 
   if (filtroZona !== 'Todos') {
     const inZone = zona && zona[0] === filtroZona;
-    if (!inZone) return '#111111';
+    if (!inZone) return '#E5E7EB'; // Gris muy claro y plano para no seleccionados
     if (hovered) return COLOR_HOVER;
     return zona![1].color;
   }
 
-  if (hovered) return '#2a2a2a';
-  return '#000000';
+  if (hovered) return COLOR_HOVER;
+  return zona ? zona[1].color : '#E5E7EB'; // Color caricatura brillante por defecto
 }
 
 export const MexicoEsMayia: React.FC = () => {
@@ -99,8 +99,36 @@ export const MexicoEsMayia: React.FC = () => {
   const [hoveredEstado, setHoveredEstado] = useState<string | null>(null);
   const [filtroZona, setFiltroZona] = useState('Todos');
   const [tooltip, setTooltip] = useState<{ x: number; y: number; id: string } | null>(null);
+  
+  const [centroids, setCentroids] = useState<Record<string, { x: number, y: number }>>({});
+  const pathRefs = useRef<Record<string, SVGPathElement | null>>({});
+
+  useEffect(() => {
+    const calcCentroids = () => {
+      const c: Record<string, { x: number, y: number }> = {};
+      for (const [id, el] of Object.entries(pathRefs.current)) {
+        if (el) {
+          const bbox = el.getBBox();
+          c[id] = { x: bbox.x + bbox.width / 2, y: bbox.y + bbox.height / 2 };
+        }
+      }
+      setCentroids(c);
+    };
+    // Pequeño delay para asegurar que el SVG se renderizó con dimensiones correctas
+    setTimeout(calcCentroids, 100);
+    window.addEventListener('resize', calcCentroids);
+    return () => window.removeEventListener('resize', calcCentroids);
+  }, []);
 
   const detalle = selectedEstado ? estadosData[selectedEstado] : null;
+
+  // Orden para la conexión de red (Norte a Sur)
+  const connectionOrder = [
+    'MX_BC', 'MX_BS', 'MX_SO', 'MX_CH', 'MX_SI', 'MX_DG', 'MX_CO', 'MX_NL', 'MX_TM', 
+    'MX_ZA', 'MX_SL', 'MX_AG', 'MX_NA', 'MX_JA', 'MX_GT', 'MX_QT', 'MX_HG', 'MX_MI', 
+    'MX_EM', 'MX_DF', 'MX_TL', 'MX_PU', 'MX_MO', 'MX_GR', 'MX_VE', 'MX_OA', 'MX_TB', 
+    'MX_CS', 'MX_CM', 'MX_YU', 'MX_QR'
+  ];
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', background: colores.fondoPrincipal }}>
@@ -170,16 +198,16 @@ export const MexicoEsMayia: React.FC = () => {
               position: 'absolute',
               left: tooltip.x + 12,
               top: tooltip.y - 36,
-              background: '#1C1C2E',
-              color: '#fff',
-              padding: '7px 12px',
-              borderRadius: '10px',
-              fontSize: '12px',
-              fontWeight: '700',
+              background: '#ffffff',
+              color: '#1a1a1a',
+              padding: '8px 14px',
+              borderRadius: '12px',
+              fontSize: '13px',
+              fontWeight: '800',
               pointerEvents: 'none',
               zIndex: 10,
               whiteSpace: 'nowrap',
-              boxShadow: '0 4px 16px rgba(0,0,0,0.3)',
+              boxShadow: '0 8px 24px rgba(0,0,0,0.15), 0 0 0 1px rgba(0,0,0,0.05)',
             }}>
               <span style={{ marginRight: '6px' }}>{estadosData[tooltip.id].nombre}</span>
               <span style={{ color: estadosData[tooltip.id].zonaColor, fontSize: '11px', fontWeight: '600' }}>
@@ -216,10 +244,11 @@ export const MexicoEsMayia: React.FC = () => {
               return (
                 <path
                   key={id}
+                  ref={(el) => { pathRefs.current[id] = el; }}
                   d={path}
                   fill={fill}
-                  stroke={filtroZona !== 'Todos' && estadosData[id] && ZONAS[filtroZona] && !ZONAS[filtroZona].ids.includes(id) ? '#333333' : '#ffffff'}
-                  strokeWidth="1.4"
+                  stroke={filtroZona !== 'Todos' && estadosData[id] && ZONAS[filtroZona] && !ZONAS[filtroZona].ids.includes(id) ? '#D1D5DB' : '#ffffff'}
+                  strokeWidth="2"
                   style={{
                     transition: 'fill 0.22s ease, stroke 0.22s ease',
                     cursor: 'pointer',
@@ -293,6 +322,40 @@ export const MexicoEsMayia: React.FC = () => {
                 </g>
               );
             })()}
+
+            {/* Red de nodos futuristas interconectados */}
+            {Object.keys(centroids).length > 0 && (
+              <g>
+                {/* Animated glowing lines */}
+                <path
+                  d={connectionOrder.map((id, index) => {
+                    const p = centroids[id];
+                    if (!p) return '';
+                    return `${index === 0 ? 'M' : 'L'} ${p.x} ${p.y}`;
+                  }).join(' ')}
+                  fill="none"
+                  stroke={colores.primarioOscuro}
+                  strokeWidth="3"
+                  strokeDasharray="10 10"
+                  className="network-line-animation"
+                  style={{ pointerEvents: 'none', filter: 'drop-shadow(0 0 6px rgba(164,217,85,0.8))' }}
+                />
+                
+                {/* Nodos verdes estilo IA */}
+                {Object.entries(centroids).map(([id, p]) => (
+                  <circle
+                    key={`node-${id}`}
+                    cx={p.x}
+                    cy={p.y}
+                    r="5"
+                    fill="#ffffff"
+                    stroke={colores.primarioOscuro}
+                    strokeWidth="3"
+                    style={{ pointerEvents: 'none', filter: 'drop-shadow(0 0 8px rgba(164,217,85,0.7))' }}
+                  />
+                ))}
+              </g>
+            )}
           </svg>
 
           {/* Leyenda zonas */}
@@ -465,6 +528,13 @@ export const MexicoEsMayia: React.FC = () => {
         @keyframes borderPulse {
           0%, 100% { opacity: 0.6; stroke-width: 3; }
           50%       { opacity: 1;   stroke-width: 6; }
+        }
+        @keyframes dataFlow {
+          from { stroke-dashoffset: 40; }
+          to { stroke-dashoffset: 0; }
+        }
+        .network-line-animation {
+          animation: dataFlow 1s linear infinite;
         }
       `}</style>
     </div>

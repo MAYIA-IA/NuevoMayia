@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { brandingConfig } from '../config/branding';
 import { ArrowRight } from 'lucide-react';
+import WelcomeHub from './WelcomeHub';
 
 interface DashboardProps {
   onSectionChange?: (section: string) => void;
@@ -21,33 +22,10 @@ export const Dashboard: React.FC<DashboardProps> = ({ onSectionChange }) => {
     <div style={{ padding: isMobile ? '24px 16px' : '40px 32px' }}>
       <div style={{ maxWidth: '1600px', margin: '0 auto' }}>
         
-        {/* Welcome Header */}
-        <div style={{ marginBottom: '32px' }}>
-          <h1
-            style={{
-              fontSize: isMobile ? '36px' : '48px',
-              fontWeight: '400',
-              color: colores.textoClaro,
-              marginBottom: '12px',
-              letterSpacing: '-0.5px',
-              fontFamily: "'Inter', system-ui, sans-serif"
-            }}
-          >
-            Hola bienvenido a <span style={{ fontWeight: '800' }}>MAYiA</span>
-          </h1>
-          <p
-            style={{
-              fontSize: isMobile ? '24px' : '32px',
-              fontWeight: '300',
-              color: colores.textoMedio,
-              margin: 0,
-              letterSpacing: '-0.5px',
-              fontFamily: "'Inter', system-ui, sans-serif"
-            }}
-          >
-            ¿Qué deseas observar hoy?
-          </p>
-        </div>
+
+
+        {/* ── Welcome Hub: Interactive Section Navigator ── */}
+        <WelcomeHub onSectionChange={onSectionChange ?? (() => {})} />
 
         {/* Section title & Button */}
         <div style={{ marginBottom: '32px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px' }}>
