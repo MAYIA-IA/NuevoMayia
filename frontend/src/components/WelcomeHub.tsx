@@ -383,7 +383,6 @@ const WelcomeHub: React.FC<WelcomeHubProps> = ({ onSectionChange }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [showScrollHint, setShowScrollHint] = useState(true);
   const dragStartRef = useRef({ x: 0, y: 0, scrollLeft: 0, scrollTop: 0 });
-  const hasDraggedRef = useRef(false);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), 200);
