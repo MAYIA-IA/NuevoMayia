@@ -1,16 +1,17 @@
 /* NetworkingHub.tsx – fondo blanco premium */
 import { useState } from 'react';
+import { Users, Building2, User, MapPin, BarChart, Briefcase, Activity, ShoppingBag, Landmark } from 'lucide-react';
 
 type Tab = 'empresas' | 'talento';
 
-interface EmpresaCard { id:number; nombre:string; sector:string; ciudad:string; busca:string[]; tamaño:string; color:string; emoji:string; urgencia:'alta'|'media'|'normal'; }
+interface EmpresaCard { id:number; nombre:string; sector:string; ciudad:string; busca:string[]; tamaño:string; color:string; icon:any; urgencia:'alta'|'media'|'normal'; }
 interface TalentoCard { id:number; nombre:string; rol:string; especialidad:string[]; ciudad:string; disponibilidad:'inmediata'|'1mes'|'3meses'; nivel:'Junior'|'Mid'|'Senior'|'Lead'; color:string; salario:string; }
 
 const EMPRESAS: EmpresaCard[] = [
-  { id:1, nombre:'Fintech Nexus MX',   sector:'Finanzas',  ciudad:'CDMX',       busca:['ML Engineer','Data Scientist','NLP Specialist'],              tamaño:'51-200 empleados',  color:'#65a30d', emoji:'🏦', urgencia:'alta' },
-  { id:2, nombre:'SaludPlus Digital',  sector:'Salud',     ciudad:'Guadalajara', busca:['Computer Vision','MLOps','AI Product Manager'],              tamaño:'11-50 empleados',   color:'#059669', emoji:'🧬', urgencia:'alta' },
-  { id:3, nombre:'RetailMax México',   sector:'Retail',    ciudad:'Monterrey',   busca:['Recommendation Systems','Data Engineer','LLM Developer'],     tamaño:'500+ empleados',    color:'#d97706', emoji:'🛍️', urgencia:'media' },
-  { id:4, nombre:'GovTech Puebla',     sector:'Gobierno',  ciudad:'Puebla',      busca:['AI Consultant','Data Analyst','Chatbot Developer'],           tamaño:'200-500 empleados', color:'#0284c7', emoji:'🏛️', urgencia:'normal' },
+  { id:1, nombre:'Fintech Nexus MX',   sector:'Finanzas',  ciudad:'CDMX',       busca:['ML Engineer','Data Scientist','NLP Specialist'],              tamaño:'51-200 empleados',  color:'#65a30d', icon:Building2, urgencia:'alta' },
+  { id:2, nombre:'SaludPlus Digital',  sector:'Salud',     ciudad:'Guadalajara', busca:['Computer Vision','MLOps','AI Product Manager'],              tamaño:'11-50 empleados',   color:'#059669', icon:Activity, urgencia:'alta' },
+  { id:3, nombre:'RetailMax México',   sector:'Retail',    ciudad:'Monterrey',   busca:['Recommendation Systems','Data Engineer','LLM Developer'],     tamaño:'500+ empleados',    color:'#d97706', icon:ShoppingBag, urgencia:'media' },
+  { id:4, nombre:'GovTech Puebla',     sector:'Gobierno',  ciudad:'Puebla',      busca:['AI Consultant','Data Analyst','Chatbot Developer'],           tamaño:'200-500 empleados', color:'#0284c7', icon:Landmark, urgencia:'normal' },
 ];
 
 const TALENTO: TalentoCard[] = [
@@ -70,7 +71,7 @@ export default function NetworkingHub() {
         {/* Header */}
         <div style={{ textAlign:'center', marginBottom:52 }}>
           <div style={{ display:'inline-flex', alignItems:'center', gap:10, padding:'6px 20px', borderRadius:99, background:'rgba(164,217,85,.12)', border:'1px solid rgba(164,217,85,.4)', marginBottom:20 }}>
-            <span style={{ fontSize:14 }}>🤝</span>
+            <Users size={16} color="#4d7c0f" />
             <span style={{ fontSize:11, fontWeight:800, letterSpacing:'0.18em', textTransform:'uppercase', color:'#4d7c0f' }}>Red MAYiA</span>
           </div>
           <h2 style={{ fontSize:'clamp(28px,4vw,44px)', fontWeight:900, margin:'0 0 14px', color:'#111827', lineHeight:1.1 }}>
@@ -102,7 +103,10 @@ export default function NetworkingHub() {
               <button key={t} onClick={()=>setTab(t)}
                 style={{ padding:'11px 28px', borderRadius:12, border:'none', fontWeight:700, fontSize:13, cursor:'pointer', transition:'all .3s cubic-bezier(.23,1,.32,1)', background: tab===t?'linear-gradient(135deg,#A4D955,#65a30d)':'transparent', color: tab===t?'#ffffff':'#6b7280', boxShadow: tab===t?'0 4px 20px rgba(164,217,85,.35)':'none' }}
               >
-                {t==='empresas'?'🏢 Empresas buscando IA':'👤 Talento disponible'}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  {t === 'empresas' ? <Building2 size={16} /> : <User size={16} />}
+                  <span>{t === 'empresas' ? 'Empresas buscando IA' : 'Talento disponible'}</span>
+                </div>
               </button>
             ))}
           </div>
@@ -123,11 +127,11 @@ export default function NetworkingHub() {
 
                 {/* Header */}
                 <div style={{ display:'flex', alignItems:'flex-start', gap:14, marginBottom:18 }}>
-                  <div style={{ width:48, height:48, borderRadius:14, flexShrink:0, background:`${e.color}10`, border:`1.5px solid ${e.color}30`, display:'flex', alignItems:'center', justifyContent:'center', fontSize:22, boxShadow:hov===e.id*10?`0 0 18px ${e.color}25`:'none', transition:'box-shadow .3s' }}>{e.emoji}</div>
+                  <div style={{ width:48, height:48, borderRadius:14, flexShrink:0, background:`${e.color}10`, border:`1.5px solid ${e.color}30`, display:'flex', alignItems:'center', justifyContent:'center', boxShadow:hov===e.id*10?`0 0 18px ${e.color}25`:'none', transition:'box-shadow .3s' }}><e.icon size={22} color={e.color} /></div>
                   <div style={{ flex:1, minWidth:0 }}>
                     <div style={{ fontSize:14, fontWeight:700, color:'#111827', marginBottom:3 }}>{e.nombre}</div>
                     <div style={{ fontSize:11, color:'#6b7280', display:'flex', alignItems:'center', gap:5 }}>
-                      <span>{e.sector}</span><div style={{ width:3,height:3,borderRadius:'50%',background:'#d1d5db' }} /><span>📍 {e.ciudad}</span>
+                      <span>{e.sector}</span><div style={{ width:3,height:3,borderRadius:'50%',background:'#d1d5db' }} /><span style={{ display:'flex', alignItems:'center', gap:'3px' }}><MapPin size={12} /> {e.ciudad}</span>
                     </div>
                   </div>
                   <div style={{ padding:'3px 10px', borderRadius:99, background:urg.bg, border:`1px solid ${urg.border}`, fontSize:9, fontWeight:800, color:urg.color, whiteSpace:'nowrap', textTransform:'uppercase', letterSpacing:'0.08em' }}>{urg.label}</div>
@@ -141,7 +145,7 @@ export default function NetworkingHub() {
                   {e.busca.map(b=><span key={b} style={{ fontSize:10, padding:'4px 10px', borderRadius:99, background:`${e.color}08`, color:e.color, border:`1px solid ${e.color}25`, fontWeight:600 }}>{b}</span>)}
                 </div>
 
-                <div style={{ fontSize:10, color:'#9ca3af', marginBottom:18, display:'flex', alignItems:'center', gap:4 }}>📊 {e.tamaño}</div>
+                <div style={{ fontSize:10, color:'#9ca3af', marginBottom:18, display:'flex', alignItems:'center', gap:4 }}><BarChart size={12} /> {e.tamaño}</div>
 
                 <button style={{ width:'100%', padding:'11px', borderRadius:12, border:`1.5px solid ${e.color}40`, background:`${e.color}06`, color:e.color, fontWeight:700, fontSize:12, cursor:'pointer', transition:'all .3s' }}
                   onMouseEnter={el=>{el.currentTarget.style.background=`${e.color}12`;el.currentTarget.style.boxShadow=`0 4px 20px ${e.color}20`;}}
@@ -163,7 +167,7 @@ export default function NetworkingHub() {
 
                 {/* Header */}
                 <div style={{ display:'flex', alignItems:'flex-start', gap:14, marginBottom:18 }}>
-                  <div style={{ width:48, height:48, borderRadius:'50%', flexShrink:0, background:`${t.color}10`, border:`2px solid ${t.color}40`, display:'flex', alignItems:'center', justifyContent:'center', fontSize:20, boxShadow:hov===t.id?`0 0 18px ${t.color}35`:'none', transition:'box-shadow .3s' }}>👤</div>
+                  <div style={{ width:48, height:48, borderRadius:'50%', flexShrink:0, background:`${t.color}10`, border:`2px solid ${t.color}40`, display:'flex', alignItems:'center', justifyContent:'center', boxShadow:hov===t.id?`0 0 18px ${t.color}35`:'none', transition:'box-shadow .3s' }}><User size={22} color={t.color} /></div>
                   <div style={{ flex:1, minWidth:0 }}>
                     <div style={{ fontSize:14, fontWeight:700, color:'#111827', marginBottom:3 }}>{t.nombre}</div>
                     <div style={{ display:'flex', alignItems:'center', gap:6 }}>
@@ -182,7 +186,7 @@ export default function NetworkingHub() {
                 </div>
 
                 <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:8 }}>
-                  <span style={{ fontSize:11, color:'#6b7280' }}>📍 {t.ciudad}</span>
+                  <span style={{ fontSize:11, color:'#6b7280', display:'flex', alignItems:'center', gap:'3px' }}><MapPin size={11} /> {t.ciudad}</span>
                   <span style={{ fontSize:11, fontWeight:700, color:'#4d7c0f' }}>{t.salario}</span>
                 </div>
 
@@ -213,7 +217,7 @@ export default function NetworkingHub() {
           <a href="https://api.whatsapp.com/send/?phone=525553315526" target="_blank" rel="noopener noreferrer" className="nh-cta-btn"
             style={{ display:'inline-flex', alignItems:'center', gap:10, padding:'14px 36px', borderRadius:14, background:'linear-gradient(135deg,#A4D955,#65a30d)', color:'#fff', fontWeight:800, fontSize:14, textDecoration:'none', transition:'all .3s', boxShadow:'0 8px 30px rgba(164,217,85,.3)', animation:'nh-glow 3s infinite' }}
           >
-            {tab==='empresas'?'🏢 Publicar vacante IA':'👤 Crear mi perfil de talento'}
+            {tab === 'empresas' ? <><Building2 size={18} /> Publicar vacante IA</> : <><User size={18} /> Crear mi perfil de talento</>}
             <svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
           </a>
         </div>
