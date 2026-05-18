@@ -193,9 +193,9 @@ const AgentesConsultores = () => {
                         playsInline
                         onError={() => handleVideoError(consultor.id)}
                         onLoadedData={() => handleVideoLoad(consultor.id)}
-                        className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
+                        className="absolute inset-0 w-full h-full scale-[1.35] transition-transform duration-700 group-hover:scale-[1.45]"
                         poster={consultor.image}
-                        style={{ objectPosition: 'center center' }}
+                        style={{ objectFit: 'cover', objectPosition: 'center center' }}
                       >
                         <source src={consultor.videoPath} type="video/mp4" />
                         Tu navegador no soporta videos.
@@ -224,7 +224,8 @@ const AgentesConsultores = () => {
                     <img 
                       src={consultor.image} 
                       alt={consultor.title}
-                      className="w-full h-full object-contain transition-all duration-700 group-hover:scale-105"
+                      className="absolute inset-0 w-full h-full scale-[1.35] transition-transform duration-700 group-hover:scale-[1.45]"
+                      style={{ objectFit: 'cover', objectPosition: 'center center' }}
                     />
                   )}
                   
