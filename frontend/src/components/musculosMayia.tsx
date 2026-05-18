@@ -15,7 +15,7 @@ interface Musculo {
 const musculos: Musculo[] = [
   {
     id: '01',
-    title: 'MAYiA vive en 30 Centros de Datos Edge',
+    title: 'MAYiA Vive en 30 Centros de Datos Edgenet',
     desc: 'Red distribuida de infraestructura de alta disponibilidad ubicada estratégicamente en todo el país.',
     icon: (
       <svg className="w-full h-full drop-shadow-md tech-illustration-element" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
