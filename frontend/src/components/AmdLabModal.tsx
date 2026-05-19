@@ -205,7 +205,7 @@ const AmdLabModal: React.FC<AmdLabModalProps> = ({ isOpen, onClose }) => {
                 e.currentTarget.style.boxShadow = `0 4px 14px ${amdRed}40`;
               }}
             >
-              Contacta para agendar prueba
+              Contactanos para agendar prueba
               <ArrowRight size={16} />
             </button>
           </div>
