@@ -1,6 +1,6 @@
 /* NetworkingHub.tsx – fondo blanco premium */
 import { useState } from 'react';
-import { Users, Building2, User, MapPin, BarChart, Briefcase, Activity, ShoppingBag, Landmark } from 'lucide-react';
+import { Users, Building2, User, MapPin, BarChart, Activity, ShoppingBag, Landmark } from 'lucide-react';
 
 type Tab = 'empresas' | 'talento';
 
