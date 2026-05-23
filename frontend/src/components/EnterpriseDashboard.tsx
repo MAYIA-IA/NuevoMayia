@@ -6,6 +6,7 @@ import {
 } from 'lucide-react';
 import mayiaLogoBlanco from '../assets/logosNativos/mayiaLogoBlanco.png';
 import flaiLogo from '../assets/logosNativos/logo-FLAI.png';
+import flaiNubeIcon from '../assets/logosNativos/1. NUBE_FINAL_FLAI (1).png';
 
 const CATEGORIES = ['Infraestructura', 'Desarrollo', 'Operación', 'Monitoreo', 'Capacitación'];
 
@@ -193,8 +194,8 @@ export default function EnterpriseDashboard() {
           <Wrapper category="Infraestructura">
             <div style={{ background: '#ffffff', borderRadius: 16, padding: 24, border: '1px solid #e5e7eb', boxShadow: '0 4px 12px rgba(0,0,0,0.03)', display: 'flex', flexDirection: 'column', height: '100%' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 16 }}>
-                <div style={{ width: 64, height: 64, borderRadius: 12, background: 'linear-gradient(135deg, #2e1065, #4c1d95)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <Cloud size={32} color="#ddd6fe" fill="#ddd6fe" />
+                <div style={{ width: 64, height: 64, borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+                  <img src={flaiNubeIcon} alt="Icono FLAI" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 </div>
                 <h3 style={{ fontSize: 22, fontWeight: 600, color: '#111827', margin: 0, display: 'flex', alignItems: 'center' }}>
                   <img src={flaiLogo} alt="FLAI Nube" style={{ height: '36px', objectFit: 'contain' }} />
