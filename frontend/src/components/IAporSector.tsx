@@ -129,7 +129,7 @@ const IAPorSector = () => {
         </div>
 
         {/* Sección de 8 sectores detallados - TODOS CON MISMA ALTURA */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
           {sectoresDetallados.map((sector) => (
             <div 
               key={sector.id}
