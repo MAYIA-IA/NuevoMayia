@@ -1,21 +1,14 @@
 import React, { useState } from 'react';
 import {
   LayoutDashboard,
-  TrendingUp,
   Building2,
-  Layers,
   Users,
-  Zap,
   Shield,
   GraduationCap,
   ChevronLeft,
-  Newspaper,
   Handshake,
-  Trophy,
-  Thermometer,
-  Network,
-  GitBranch,
-  Star,
+  FileText,
+  Megaphone,
 } from 'lucide-react';
 import { brandingConfig } from '../config/branding';
 import mayiaLogo from '../assets/logosNativos/mayiaLogoBlanco.png';
@@ -27,23 +20,14 @@ interface SidebarProps {
 
 /* ── Datos de menú ─────────────────────────────────────────────── */
 
-// Orden de aparición en la página (de arriba a abajo)
+// Menú principal (Ligero y enfocado a negocio)
 const menuItems = [
-  { id: 'dashboard',           nombre: 'Dashboard',           icono: LayoutDashboard },
-  { id: 'analiticos',          nombre: 'México es MAYiA',     icono: TrendingUp },
-  { id: 'noticias',            nombre: 'Noticias IA',         icono: Newspaper },
-  { id: 'partners',            nombre: 'Partners',            icono: Handshake },
-  { id: 'ia-empresarial',      nombre: 'I.A. Empresarial',    icono: Building2 },
-  { id: 'ia-sectores',         nombre: 'IA Sectores',         icono: Layers },
-  { id: 'termometro-ia',       nombre: 'Termómetro IA MX',    icono: Thermometer },
-  { id: 'hackaton',            nombre: 'Hackaton Intel',      icono: Trophy },
+  { id: 'dashboard',           nombre: 'Centro de Control',   icono: LayoutDashboard },
+  { id: 'ia-empresarial',      nombre: 'Soluciones I.A.',     icono: Building2 },
   { id: 'empleados-digitales', nombre: 'Empleados Digitales', icono: Users },
-  { id: 'pildoras-ia',         nombre: 'Píldoras IA',         icono: Zap },
-  { id: 'ciberseguridad',      nombre: 'Ciberseguridad',      icono: Shield },
-  { id: 'embajadores',         nombre: 'Embajadores',         icono: Star },
-  { id: 'organigrama',         nombre: 'Organigrama',         icono: GitBranch },
+  { id: 'ciberseguridad',      nombre: 'SOC Ciberseguridad',  icono: Shield },
   { id: 'academia',            nombre: 'Academia MAYiA',      icono: GraduationCap },
-  { id: 'networking',          nombre: 'Networking Hub',      icono: Network },
+  { id: 'partners',            nombre: 'Partners',            icono: Handshake },
 ];
 
 /* ── Sub-componentes ───────────────────────────────────────────── */
@@ -143,9 +127,9 @@ function SidebarItem({
 
 export const Sidebar: React.FC<SidebarProps> = ({ activeSection, onSectionChange }) => {
   const { empresa, colores } = brandingConfig;
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(true);
 
-  const sidebarWidth = isCollapsed ? '72px' : '240px';
+  const sidebarWidth = isCollapsed ? '72px' : '220px';
 
   return (
     <div
@@ -174,8 +158,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeSection, onSectionChange
           color: '#000',
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'center',
-          border: `3px solid ${colores.fondoPrincipal}`,
+          border: '3px solid #000000',
           cursor: 'pointer',
           zIndex: 100,
           boxShadow: '0 4px 12px rgba(0,0,0,0.15)',

@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, memo } from 'react';
+import { X } from 'lucide-react';
 import video1 from '../assets/PildorasIA/Imagen2.mp4';
 import video2 from '../assets/PildorasIA/WhCF.mp4';
 import video3 from '../assets/PildorasIA/Recomendadora.mp4';
@@ -205,16 +206,16 @@ const PildorasIA = () => {
       </header>
 
       <section className="relative z-10 px-6 md:px-12 pt-16 pb-20">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 2xl:grid-cols-2 gap-8 2xl:gap-12 items-center">
           <div className="fade-up">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-8 badge-pulse" style={{ background: 'rgba(163,230,53,0.12)', border: '1px solid rgba(163,230,53,0.4)' }}>
               <span className="text-xs font-semibold uppercase" style={{ color: '#4d7c0f' }}>Soluciones IA Pre-configuradas</span>
             </div>
-            <h1 className="text-5xl lg:text-7xl font-extrabold mb-6" style={{ color: '#111827' }}>Innova. Automatiza. Crece.</h1>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl 2xl:text-7xl font-extrabold mb-6" style={{ color: '#111827' }}>Innova. Automatiza. Crece.</h1>
             <p className="text-lg text-gray-500 mb-8 max-w-lg">Implementa agentes de inteligencia artificial listos para usar en tu empresa desde $1,900 MXN/mes.</p>
             <button onClick={openWA} className="btn-spring px-8 py-4 rounded-xl font-bold text-white" style={{ background: 'linear-gradient(135deg, #a3e635, #65a30d)' }}>Agendar ahora</button>
           </div>
-          <div className="fade-up relative">
+          <div className="fade-up relative mt-8 2xl:mt-0 max-w-md mx-auto 2xl:max-w-none 2xl:mx-0 w-full">
             <div
               className="relative w-full rounded-2xl overflow-hidden float-orb"
               style={{
@@ -280,7 +281,7 @@ const PildorasIA = () => {
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ background: 'rgba(0,0,0,0.9)', backdropFilter: 'blur(10px)' }} onClick={closeVideoModal}>
             <div className="modal-in relative w-full max-w-4xl rounded-2xl overflow-hidden bg-black" onClick={e => e.stopPropagation()}>
               <video ref={modalVideoRef} src={pildora?.video} controls autoPlay className="w-full aspect-video" />
-              <button onClick={closeVideoModal} className="absolute top-4 right-4 text-white bg-black/50 p-2 rounded-full">✕</button>
+              <button onClick={closeVideoModal} className="absolute top-4 right-4 text-white bg-black/50 p-2 rounded-full hover:bg-black/70 transition-colors"><X size={20} /></button>
             </div>
           </div>
         );

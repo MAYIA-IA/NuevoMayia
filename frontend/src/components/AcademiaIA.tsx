@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Clock } from "lucide-react";
 import { cursos } from "../data/cursosAcademia";
 import type { Curso } from "../data/cursosAcademia";
 
@@ -54,15 +55,11 @@ const AcademiaIA = () => {
     }
   };
 
-  const col1Cursos = cursos.slice(0, 16);
-  const col2Cursos = cursos.slice(16, 32);
-
-  // Duplicar para el scroll infinito
-  const infiniteCol1 = [...col1Cursos, ...col1Cursos];
-  const infiniteCol2 = [...col2Cursos, ...col2Cursos];
+  // Cursos completos para el grid
+  const todosLosCursos = cursos;
 
   const CourseCard = ({ curso }: { curso: Curso }) => (
-    <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 mb-4 flex flex-col gap-2 hover:shadow-md transition-shadow group cursor-pointer relative overflow-hidden shrink-0 w-full" onClick={openWA}>
+    <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 flex flex-col gap-2 hover:shadow-md transition-shadow group cursor-pointer relative overflow-hidden shrink-0 w-[280px] sm:w-[320px]" onClick={openWA}>
       <div className={`absolute top-0 right-0 w-16 h-16 bg-gradient-to-br ${curso.gradient} opacity-10 blur-xl group-hover:opacity-20 transition-opacity`}></div>
       <div className="flex items-start gap-3 relative z-10">
         <div className={`w-10 h-10 rounded-lg flex items-center justify-center shrink-0 bg-gradient-to-br ${curso.gradient} text-white shadow-sm`}>
@@ -77,7 +74,9 @@ const AcademiaIA = () => {
       </div>
       <div className="flex items-center justify-between mt-1 relative z-10">
         <span className={`text-[9px] px-2 py-0.5 rounded-full font-bold border ${getNivelColor(curso.nivel)}`}>{curso.nivel}</span>
-        <span className="text-[10px] font-semibold text-gray-600 border border-gray-200 bg-gray-50 px-2 py-0.5 rounded-md">⏱️ {curso.duracion}</span>
+        <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-gray-600 border border-gray-200 bg-gray-50 px-2 py-0.5 rounded-md group-hover:border-lime-200 transition-colors">
+          <Clock size={10} className="group-hover:rotate-12 transition-transform duration-300" /> {curso.duracion}
+        </span>
       </div>
     </div>
   );
@@ -86,26 +85,11 @@ const AcademiaIA = () => {
     <section id="academia" className="w-full bg-gradient-to-b from-white via-slate-50 to-white py-16 lg:py-24 relative overflow-hidden">
       {/* Estilos para el scroll vertical infinito */}
       <style>{`
-        @keyframes scrollVertical {
-          0% { transform: translateY(0); }
-          100% { transform: translateY(-50%); }
-        }
-        @keyframes scrollVerticalReverse {
-          0% { transform: translateY(-50%); }
-          100% { transform: translateY(0); }
-        }
-        .animate-marquee-vertical {
-          animation: scrollVertical 50s linear infinite;
-        }
-        .animate-marquee-vertical-reverse {
-          animation: scrollVerticalReverse 50s linear infinite;
-        }
-        .pause-on-hover:hover {
-          animation-play-state: paused;
-        }
-        .mask-vertical-edges {
-          mask-image: linear-gradient(to bottom, transparent, black 5%, black 95%, transparent);
-          -webkit-mask-image: linear-gradient(to bottom, transparent, black 5%, black 95%, transparent);
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { scrollbar-width: none; }
+        .mask-horizontal-edges {
+          mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+          -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
         }
       `}</style>
 
@@ -117,10 +101,10 @@ const AcademiaIA = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
-        <div className="flex flex-col lg:flex-row items-center gap-10 xl:gap-16 h-full lg:h-[650px]">
+        <div className="flex flex-col 2xl:flex-row items-center gap-10 2xl:gap-16 h-full 2xl:h-[650px]">
           
           {/* COLUMNA IZQUIERDA: Header, Info y CTA */}
-          <div className="flex-1 w-full lg:max-w-xl flex flex-col justify-center gap-8">
+          <div className="flex-1 w-full 2xl:max-w-xl flex flex-col justify-center gap-8">
             
             {/* Header */}
             <div>
@@ -129,7 +113,7 @@ const AcademiaIA = () => {
                 <span className="text-xs font-semibold text-gray-700 tracking-wide">Formación Profesional en IA</span>
               </div>
 
-              <h2 className="text-4xl lg:text-5xl font-extrabold mb-3 leading-tight text-gray-900">
+              <h2 className="text-4xl md:text-5xl 2xl:text-6xl font-extrabold mb-3 leading-tight text-gray-900">
                 Academia <span className="bg-gradient-to-r from-lime-500 via-cyan-500 to-lime-500 bg-clip-text text-transparent">MAYiA®</span>
               </h2>
 
@@ -190,22 +174,21 @@ const AcademiaIA = () => {
 
           </div>
 
-          {/* COLUMNA DERECHA: Catálogo de Cursos Infinito */}
-          <div className="flex-1 w-full h-[500px] lg:h-full relative mask-vertical-edges flex gap-4 overflow-hidden rounded-2xl bg-gray-50/50 p-2">
-            {/* Gradientes laterales o sombras decorativas */}
-            <div className="absolute inset-0 pointer-events-none rounded-2xl shadow-inner z-20"></div>
-
-            {/* Columna 1 - Sube */}
-            <div className="flex-1 flex flex-col gap-4 animate-marquee-vertical pause-on-hover">
-              {infiniteCol1.map((curso, idx) => (
-                <CourseCard key={`col1-${curso.id}-${idx}`} curso={curso} />
-              ))}
+          {/* COLUMNA DERECHA / ABAJO: Catálogo de Cursos (Scroll Manual) */}
+          <div className="flex-1 w-full relative mask-horizontal-edges rounded-2xl bg-gray-50/50 py-6 px-2">
+            {/* Instrucción visual sutil */}
+            <div className="absolute top-2 right-6 text-[10px] font-bold text-gray-400 uppercase tracking-widest flex items-center gap-1 z-30">
+              Desliza para ver más
+              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
             </div>
 
-            {/* Columna 2 - Baja */}
-            <div className="flex-1 flex flex-col gap-4 animate-marquee-vertical-reverse pause-on-hover">
-              {infiniteCol2.map((curso, idx) => (
-                <CourseCard key={`col2-${curso.id}-${idx}`} curso={curso} />
+            <div className="grid grid-rows-2 grid-flow-col gap-4 overflow-x-auto hide-scrollbar snap-x pb-4 pt-4 px-4 w-full h-full content-center">
+              {todosLosCursos.map((curso) => (
+                <div key={`curso-${curso.id}`} className="snap-start">
+                  <CourseCard curso={curso} />
+                </div>
               ))}
             </div>
           </div>

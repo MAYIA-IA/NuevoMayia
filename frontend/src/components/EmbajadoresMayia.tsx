@@ -1,4 +1,5 @@
 import { useState, memo } from 'react';
+import { Sparkles } from 'lucide-react';
 import fotoJosue from '../assets/Embajadores/Josue.jpeg';
 import fotoMartin from '../assets/Embajadores/Martín.jpeg';
 import fotoDulce from '../assets/Embajadores/Dulce.jpeg';
@@ -96,7 +97,7 @@ export default function EmbajadoresMayia() {
       <div style={{ maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 1 }}>
         <div style={{ textAlign: 'center', marginBottom: 64 }}>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '6px 20px', borderRadius: 99, background: 'rgba(164,217,85,.12)', border: '1px solid rgba(164,217,85,.4)', marginBottom: 20 }}>
-            <span style={{ fontSize: 14, animation: 'emb-rotate 4s linear infinite', display: 'inline-block' }}>✦</span>
+            <Sparkles size={14} style={{ animation: 'emb-rotate 4s linear infinite', display: 'inline-block', color: '#4d7c0f' }} />
             <span style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#4d7c0f' }}>Red de Pioneros MAYiA</span>
           </div>
           <h2 style={{ fontSize: 'clamp(28px,4vw,48px)', fontWeight: 900, margin: '0 0 16px', color: '#111827', lineHeight: 1.1 }}>
@@ -130,7 +131,7 @@ export default function EmbajadoresMayia() {
         </div>
 
         <div style={{ textAlign: 'center', marginTop: 64, padding: '44px 40px', borderRadius: 28, background: 'linear-gradient(135deg,rgba(164,217,85,.1),rgba(164,217,85,.04))', border: '1px solid rgba(164,217,85,.3)' }}>
-          <div style={{ fontSize: 32, marginBottom: 12 }}>✦</div>
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 12 }}><Sparkles size={32} className="animate-pulse" style={{ color: '#65a30d' }} /></div>
           <h3 style={{ fontSize: 24, fontWeight: 800, color: '#111827', margin: '0 0 8px' }}>¿Tienes la visión para cambiar el mundo?</h3>
           <p style={{ fontSize: 14, color: '#6b7280', margin: '0 0 28px', maxWidth: 500, marginInline: 'auto' }}>Suma tu talento a nuestra red de pioneros y sé el impulso de la revolución tecnológica en México.</p>
           <a href="https://api.whatsapp.com/send/?phone=525553315526" target="_blank" rel="noopener noreferrer" className="emb-cta-btn"

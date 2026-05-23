@@ -71,10 +71,10 @@ const CiberseguridadIA = () => {
       </div>
 
       <div className="container mx-auto px-4 relative z-10 max-w-7xl">
-        <div className="flex flex-col lg:flex-row items-center gap-10 xl:gap-16">
+        <div className="flex flex-col 2xl:flex-row items-center gap-10 2xl:gap-16">
           
           {/* COLUMNA IZQUIERDA: Header, Threats & CTA */}
-          <div className="flex-1 w-full lg:max-w-xl flex flex-col gap-8">
+          <div className="flex-1 w-full 2xl:max-w-xl flex flex-col gap-8">
             
             {/* Header */}
             <div>
@@ -83,7 +83,7 @@ const CiberseguridadIA = () => {
                 <span className="text-xs font-semibold text-gray-600 tracking-wide">Ciberseguridad Especializada en IA</span>
               </div>
 
-              <h2 className="text-4xl lg:text-5xl font-extrabold mb-4 leading-tight">
+              <h2 className="text-4xl md:text-5xl 2xl:text-5xl font-extrabold mb-4 leading-tight">
                 <span className="text-gray-900">Protege tus</span><br />
                 <span className="bg-gradient-to-r from-lime-500 via-lime-400 to-lime-500 bg-clip-text text-transparent">
                   Sistemas de IA

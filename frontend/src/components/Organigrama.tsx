@@ -1,31 +1,32 @@
 /* Organigrama.tsx – fondo blanco premium */
 import { useState } from 'react';
+import { Crown, Settings, Brain, Wrench, Laptop, TrendingUp, Handshake, Megaphone, Zap, Building, Star, Sparkles, BarChart, Waves, User } from 'lucide-react';
 
-interface OrgNode { id:string; nombre:string; cargo:string; depto:string; foto?:string; color?:string; emoji?:string; hijos?:OrgNode[]; }
+interface OrgNode { id:string; nombre:string; cargo:string; depto:string; foto?:string; color?:string; icon?:any; hijos?:OrgNode[]; }
 
 const ORGANIGRAMA: OrgNode = {
-  id:'ceo', nombre:'CEO MAYiA', cargo:'Chief Executive Officer', depto:'Dirección General', color:'#65a30d', emoji:'👑',
+  id:'ceo', nombre:'CEO MAYiA', cargo:'Chief Executive Officer', depto:'Dirección General', color:'#65a30d', icon: Crown,
   hijos: [
-    { id:'cto', nombre:'CTO', cargo:'Chief Technology Officer', depto:'Tecnología', color:'#0284c7', emoji:'⚙️',
+    { id:'cto', nombre:'CTO', cargo:'Chief Technology Officer', depto:'Tecnología', color:'#0284c7', icon: Settings,
       hijos: [
-        { id:'arch',  nombre:'AI Architect', cargo:'Lead AI Architect',      depto:'Ingeniería', color:'#0ea5e9', emoji:'🧠' },
-        { id:'mlops', nombre:'MLOps Lead',   cargo:'Infraestructura IA',     depto:'Ingeniería', color:'#0ea5e9', emoji:'🔧' },
-        { id:'dev',   nombre:'Dev Lead',     cargo:'Desarrollo de Producto', depto:'Ingeniería', color:'#0ea5e9', emoji:'💻' },
+        { id:'arch',  nombre:'AI Architect', cargo:'Lead AI Architect',      depto:'Ingeniería', color:'#0ea5e9', icon: Brain },
+        { id:'mlops', nombre:'MLOps Lead',   cargo:'Infraestructura IA',     depto:'Ingeniería', color:'#0ea5e9', icon: Wrench },
+        { id:'dev',   nombre:'Dev Lead',     cargo:'Desarrollo de Producto', depto:'Ingeniería', color:'#0ea5e9', icon: Laptop },
       ]},
-    { id:'cco', nombre:'CCO', cargo:'Chief Commercial Officer', depto:'Comercial', color:'#d97706', emoji:'📈',
+    { id:'cco', nombre:'CCO', cargo:'Chief Commercial Officer', depto:'Comercial', color:'#d97706', icon: TrendingUp,
       hijos: [
-        { id:'ventas', nombre:'Dir. Ventas',    cargo:'Sales Director',     depto:'Ventas',    color:'#f59e0b', emoji:'🤝' },
-        { id:'mkt',    nombre:'Dir. Marketing', cargo:'Marketing Director', depto:'Marketing', color:'#f59e0b', emoji:'📣' },
+        { id:'ventas', nombre:'Dir. Ventas',    cargo:'Sales Director',     depto:'Ventas',    color:'#f59e0b', icon: Handshake },
+        { id:'mkt',    nombre:'Dir. Marketing', cargo:'Marketing Director', depto:'Marketing', color:'#f59e0b', icon: Megaphone },
       ]},
-    { id:'coo', nombre:'COO', cargo:'Chief Operations Officer', depto:'Operaciones', color:'#059669', emoji:'⚡',
+    { id:'coo', nombre:'COO', cargo:'Chief Operations Officer', depto:'Operaciones', color:'#059669', icon: Zap,
       hijos: [
-        { id:'ops', nombre:'Dir. Ops',        cargo:'Operations Director', depto:'Ops',      color:'#10b981', emoji:'🏗️' },
-        { id:'cs',  nombre:'Customer Success',cargo:'CS Director',         depto:'Clientes', color:'#10b981', emoji:'⭐' },
+        { id:'ops', nombre:'Dir. Ops',        cargo:'Operations Director', depto:'Ops',      color:'#10b981', icon: Building },
+        { id:'cs',  nombre:'Customer Success',cargo:'CS Director',         depto:'Clientes', color:'#10b981', icon: Star },
       ]},
-    { id:'cdo', nombre:'CDO', cargo:'Chief Data Officer', depto:'Datos & IA', color:'#7c3aed', emoji:'🔮',
+    { id:'cdo', nombre:'CDO', cargo:'Chief Data Officer', depto:'Datos & IA', color:'#7c3aed', icon: Sparkles,
       hijos: [
-        { id:'data', nombre:'Data Lead',       cargo:'Ciencia de Datos',   depto:'Datos', color:'#8b5cf6', emoji:'📊' },
-        { id:'lake', nombre:'MAYiA Lake Lead', cargo:'Soberanía del Dato', depto:'Datos', color:'#8b5cf6', emoji:'🌊' },
+        { id:'data', nombre:'Data Lead',       cargo:'Ciencia de Datos',   depto:'Datos', color:'#8b5cf6', icon: BarChart },
+        { id:'lake', nombre:'MAYiA Lake Lead', cargo:'Soberanía del Dato', depto:'Datos', color:'#8b5cf6', icon: Waves },
       ]},
   ],
 };
@@ -41,7 +42,7 @@ function OrgCard({ node, isRoot=false }: { node:OrgNode; isRoot?:boolean }) {
   const [hov, setHov] = useState(false);
   const c = node.color || '#65a30d';
   return (
-    <div className="org-card"
+    <div className="org-card group"
       style={{
         background: hov ? '#ffffff' : '#ffffff',
         border:`1.5px solid ${hov ? c+'70' : c+'30'}`,
@@ -61,15 +62,15 @@ function OrgCard({ node, isRoot=false }: { node:OrgNode; isRoot?:boolean }) {
       <div style={{ position:'absolute', top:0, right:0, width:44, height:44, borderRadius:'0 18px 0 44px', background:`${c}12` }} />
 
       {/* Avatar */}
-      <div style={{
+      <div className="group-hover:scale-110 group-hover:rotate-6" style={{
         width: isRoot ? 58 : 44, height: isRoot ? 58 : 44,
         borderRadius:'50%', background:`${c}12`, border:`2px solid ${c}40`,
         margin:'0 auto 10px', display:'flex', alignItems:'center', justifyContent:'center',
-        fontSize: isRoot ? 24 : 18,
+        fontSize: isRoot ? 24 : 18, color: c,
         boxShadow: hov ? `0 0 18px ${c}30` : 'none',
-        transition:'box-shadow .3s',
+        transition:'all .3s',
       }}>
-        {node.foto ? <img src={node.foto} alt={node.nombre} style={{ width:'100%', height:'100%', objectFit:'cover', borderRadius:'50%' }}/> : node.emoji||'👤'}
+        {node.foto ? <img src={node.foto} alt={node.nombre} style={{ width:'100%', height:'100%', objectFit:'cover', borderRadius:'50%' }}/> : (node.icon ? <node.icon size={isRoot ? 28 : 20} /> : <User size={isRoot ? 28 : 20} />)}
       </div>
 
       <div style={{ fontSize: isRoot ? 14 : 12, fontWeight:800, color:'#111827', marginBottom:3 }}>{node.nombre}</div>

@@ -80,13 +80,15 @@ export const ResponsiveLayout: React.FC<ResponsiveLayoutProps> = ({
         background: colores.fondoPrincipal,
       }}>
         {sidebar}
-        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden', minWidth: 0 }}>
           {header}
-          <div id="main-scroll-container" style={{ flex: 1, overflowY: 'auto' }}>
-            {children}
+          <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
+            <div id="main-scroll-container" style={{ flex: 1, overflowY: 'auto' }}>
+              {children}
+            </div>
+            {sidebarR}
           </div>
         </div>
-        {sidebarR}
       </div>
     );
   }

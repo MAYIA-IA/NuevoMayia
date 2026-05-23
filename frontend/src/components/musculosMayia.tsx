@@ -336,101 +336,66 @@ const MusculoCard = ({ m, index, onClick }: MusculoCardProps) => {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       onClick={onClick}
-      className={`relative tech-card-wrapper ${m.id === '04' ? 'lg:col-span-2' : ''} cursor-pointer`}
+      className="relative tech-card-wrapper cursor-pointer"
       style={{
         opacity: visible ? 1 : 0,
-        transform: visible ? 'translateY(0)' : 'translateY(40px)',
-        transition: `opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1) ${index * 0.05}s, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) ${index * 0.05}s`,
+        transform: visible ? 'translateY(0)' : 'translateY(20px)',
+        transition: `opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1) ${index * 0.05}s, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1) ${index * 0.05}s`,
       }}
     >
-      {/* Dynamic radial glow behind the card (technology contrast) */}
+      {/* Dynamic radial glow behind the card */}
       <div
         className="absolute inset-0 rounded-2xl -z-10 scale-105 pointer-events-none"
         style={{
           background: m.glow,
-          filter: 'blur(24px)',
+          filter: 'blur(16px)',
           opacity: hovered ? 1 : 0,
           transition: 'opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
         }}
       />
 
-      {/* Card Body */}
+      {/* Card Body - Compact Horizontal Layout */}
       <div
-        className="h-full rounded-2xl p-5 flex flex-col justify-between gap-4"
+        className="h-full rounded-2xl p-4 flex items-center gap-4"
         style={{
-          border: `1.5px solid ${hovered ? m.accent : 'rgba(0,0,0,0.06)'}`,
+          border: `1.5px solid ${hovered ? m.accent : '#e5e7eb'}`,
           background: hovered
-            ? 'linear-gradient(145deg, #ffffff 0%, #f9fbf7 100%)'
-            : 'linear-gradient(145deg, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.65) 100%)',
+            ? 'linear-gradient(145deg, #ffffff 0%, #f8fafc 100%)'
+            : 'linear-gradient(145deg, #f8fafc 0%, #ffffff 100%)',
           backdropFilter: 'blur(12px)',
-          transform: hovered ? 'translateY(-6px)' : 'translateY(0)',
-          transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+          transform: hovered ? 'translateY(-4px)' : 'translateY(0)',
+          transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
           boxShadow: hovered
-            ? `0 20px 40px ${m.glow}, 0 4px 12px rgba(0,0,0,0.03)`
-            : '0 2px 10px rgba(0,0,0,0.04)',
+            ? `0 10px 30px ${m.glow}, 0 4px 12px rgba(0,0,0,0.05)`
+            : '0 2px 8px rgba(0,0,0,0.03)',
         }}
       >
-        {/* Top bar: ID and tag */}
-        <div className="flex items-center justify-between">
-          <span className="font-mono text-[10px] font-extrabold tracking-widest" style={{ color: m.accent, opacity: 0.9 }}>
-            {m.id}
-          </span>
-          <span
-            className="text-[8px] font-extrabold tracking-wider px-2 py-0.5 rounded-full border uppercase"
-            style={{
-              background: `${m.accent}12`,
-              color: m.accent,
-              borderColor: `${m.accent}25`
-            }}
-          >
-            {m.tag}
-          </span>
-        </div>
-
-        {/* Central visual area - Tech Illustration */}
+        {/* Icon Area */}
         <div
-          className="w-full h-24 flex items-center justify-center select-none overflow-hidden my-1 relative"
+          className="w-12 h-12 flex-shrink-0 flex items-center justify-center relative select-none"
           style={{
-            transform: hovered ? 'scale(1.06)' : 'scale(1)',
-            transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)'
+            transform: hovered ? 'scale(1.1)' : 'scale(1)',
+            transition: 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
           }}
         >
           {m.icon}
         </div>
 
-        {/* Bottom area: Title & description */}
-        <div className="flex flex-col gap-1.5 mt-auto">
+        {/* Text Area */}
+        <div className="flex flex-col gap-1">
+          <span
+            className="text-[9px] font-extrabold tracking-wider uppercase"
+            style={{ color: m.accent }}
+          >
+            {m.id} · {m.tag}
+          </span>
           <h3
-            className="font-bold text-[13px] leading-snug tracking-tight"
-            style={{
-              color: '#0A0F1D',
-              transition: 'color 0.3s ease'
-            }}
+            className="font-bold text-[13px] leading-tight"
+            style={{ color: '#111827' }}
           >
             {m.title}
           </h3>
-          <p
-            className="text-[11px] leading-relaxed"
-            style={{
-              color: '#4B5563',
-              fontWeight: 400
-            }}
-          >
-            {m.desc}
-          </p>
         </div>
-
-        {/* Bottom animated accent line */}
-        <div
-          className="h-1 w-full rounded-full"
-          style={{
-            background: `linear-gradient(90deg, ${m.accent}, transparent)`,
-            transform: hovered ? 'scaleX(1)' : 'scaleX(0)',
-            transformOrigin: 'left',
-            transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
-            opacity: 0.7
-          }}
-        />
       </div>
     </div>
   );
@@ -450,12 +415,12 @@ const MusculosMAYiA = () => {
   return (
     <section className="relative py-20 overflow-hidden" style={{ background: '#ffffff' }}>
 
-      {/* Subtle grid texture — lighter on white */}
+      {/* Subtle grid texture — darker for enterprise grey */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           backgroundImage:
-            'linear-gradient(rgba(164,217,85,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(164,217,85,0.03) 1px, transparent 1px)',
+            'linear-gradient(rgba(164,217,85,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(164,217,85,0.08) 1px, transparent 1px)',
           backgroundSize: '40px 40px',
           zIndex: 1,
         }}
@@ -463,14 +428,14 @@ const MusculosMAYiA = () => {
 
       {/* Soft ambient blobs */}
       <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full pointer-events-none"
-        style={{ background: 'rgba(164,217,85,0.06)', filter: 'blur(110px)', zIndex: 1 }} />
-      <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] rounded-full pointer-events-none"
         style={{ background: 'rgba(164,217,85,0.04)', filter: 'blur(110px)', zIndex: 1 }} />
+      <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] rounded-full pointer-events-none"
+        style={{ background: 'rgba(164,217,85,0.03)', filter: 'blur(110px)', zIndex: 1 }} />
 
       <div className="relative container mx-auto px-6" style={{ zIndex: 2 }}>
 
         {/* Cards grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4">
           {musculos.map((m, i) => (
             <MusculoCard
               key={m.id}
@@ -486,7 +451,7 @@ const MusculosMAYiA = () => {
           className="flex flex-col items-center gap-2 mt-14 pointer-events-none"
           style={{ opacity: scrollHint ? 1 : 0, transition: 'opacity 0.8s ease' }}
         >
-          <span className="text-[10px] font-mono tracking-widest uppercase" style={{ color: '#9ca3af' }}>
+          <span className="text-[10px] font-mono tracking-widest uppercase" style={{ color: '#4b5563' }}>
             Descubre más
           </span>
           <div className="flex flex-col gap-1 items-center">

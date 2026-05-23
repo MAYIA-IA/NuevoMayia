@@ -1,6 +1,7 @@
 import { useState, useEffect, lazy, Suspense } from 'react';
-import NavigationBar from './components/navigationBar';
 import HeaderBanner from './components/headerBanner';
+import AcademiaBanner from './components/AcademiaBanner';
+import SeoHub from './components/SeoHub';
 
 import { ResponsiveLayout } from './components/ResponsiveLayout';
 import { Sidebar } from './components/Sidebar';
@@ -13,27 +14,31 @@ import './responsive.css';
 import MusculosMAYiA from './components/musculosMayia';
 import CertificacionesMarquee from './components/CertificacionesMarquee';
 import NoticiasTicker from './components/NoticiasTicker';
+import EnterpriseDashboard from './components/EnterpriseDashboard';
 
 // Componentes pesados (carga perezosa)
 const Analiticos = lazy(() => import('./components/departamentos/Analiticos').then(m => ({ default: m.Analiticos })));
 const PartnersSection = lazy(() => import('./components/PartnersSection'));
+const EcosistemaMayia = lazy(() => import('./components/EcosistemaMayia'));
 const IAEmpresarial = lazy(() => import('./components/IAEmpresarial'));
-const IAPorSector = lazy(() => import('./components/IAporSector'));
 const EmpleadosDigitales = lazy(() => import('./components/EmpleadosDigitales'));
 const PildorasIA = lazy(() => import('./components/PildorasIA'));
 const CiberseguridadIA = lazy(() => import('./components/CiberseguridadIA'));
 const AcademiaIA = lazy(() => import('./components/AcademiaIA'));
 const BrandFooter = lazy(() => import('./components/brandFooter'));
 const Footer = lazy(() => import('./components/piepagina'));
-const Organigrama = lazy(() => import('./components/Organigrama'));
 const EmbajadoresMayia = lazy(() => import('./components/EmbajadoresMayia'));
 const HackatonMarketplace = lazy(() => import('./components/HackatonMarketplace'));
 const TermometroIAMexico = lazy(() => import('./components/TermometroIAMexico'));
 const NetworkingHub = lazy(() => import('./components/NetworkingHub'));
+const Blog = lazy(() => import('./components/Blog'));
+const SalaPrensa = lazy(() => import('./components/SalaPrensa'));
+const Agente33 = lazy(() => import('./components/Agente33'));
+const Lumel = lazy(() => import('./components/Lumel'));
 
 // Fallback de carga premium
 const LoadingSection = () => (
-  <div style={{ height: '300px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#f8fdf1' }}>
+  <div style={{ height: '300px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#0A0A14' }}>
     <div className="loading-dots" style={{ display: 'flex', gap: '8px' }}>
       <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#A4D955', animation: 'pulse 1s infinite' }}></div>
       <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#A4D955', animation: 'pulse 1s infinite 0.2s' }}></div>
@@ -47,10 +52,10 @@ const LoadingSection = () => (
 
 /* ── IDs de sección para scroll-spy ── */
 const SECTION_IDS = [
-  'dashboard', 'analiticos', 'noticias', 'partners',
-  'ia-empresarial', 'ia-sectores', 'termometro-ia', 'hackaton',
-  'empleados-digitales', 'pildoras-ia', 'ciberseguridad',
-  'embajadores', 'organigrama', 'academia', 'networking',
+  'dashboard', 'enterprise-dashboard', 'analiticos', 'noticias', 'ecosistema', 'partners',
+  'ia-empresarial', 'termometro-ia', 'hackaton',
+  'empleados-digitales', 'agente-33', 'lumel', 'pildoras-ia', 'ciberseguridad',
+  'embajadores', 'academia', 'networking', 'blog', 'sala-prensa',
 ];
 
 function App() {
@@ -66,21 +71,19 @@ function App() {
     return () => window.removeEventListener('resize', check);
   }, []);
 
-  /* ── Scroll-spy: funciona tanto en el body (mobile) como en #main-scroll-container (desktop) ── */
+  /* ── Scroll-spy ── */
   useEffect(() => {
     let observer: IntersectionObserver | null = null;
 
     const setupObserver = () => {
       const scrollRoot = isMobile ? null : document.getElementById('main-scroll-container');
       
-      // Si estamos en desktop y no encontramos el contenedor, reintentamos en un momento
       if (!isMobile && !scrollRoot) {
         return false;
       }
 
       observer = new IntersectionObserver(
         (entries) => {
-          // Buscamos la sección que esté más visible en la parte superior
           const visible = entries.find(e => e.isIntersecting);
           if (visible) {
             setActiveSection(visible.target.id);
@@ -89,7 +92,6 @@ function App() {
         {
           root: scrollRoot,
           threshold: 0,
-          // Detectamos cuando la sección entra en el 20% superior de la pantalla
           rootMargin: '-15% 0px -80% 0px',
         }
       );
@@ -102,7 +104,6 @@ function App() {
       return true;
     };
 
-    // Intentamos configurar el observador con un pequeño delay para permitir que el DOM se asiente
     const timerId = setInterval(() => {
       if (setupObserver()) {
         clearInterval(timerId);
@@ -115,19 +116,17 @@ function App() {
     };
   }, [isMobile]);
 
-  /* ── Navegación desde sidebar / bottom nav ── */
+  /* ── Navegación ── */
   const handleNavClick = (section: string) => {
     setActiveSection(section);
     const el = document.getElementById(section);
     if (!el) return;
 
     if (isMobile) {
-      // En mobile, el scroll es del body
       const topbarHeight = 56;
       const y = el.getBoundingClientRect().top + window.scrollY - topbarHeight;
       window.scrollTo({ top: y, behavior: 'smooth' });
     } else {
-      // En desktop, el scroll es del contenedor del panel
       const container = document.getElementById('main-scroll-container');
       if (container) {
         const containerRect = container.getBoundingClientRect();
@@ -142,39 +141,95 @@ function App() {
 
   const getTitulo = () => {
     const titulos: Record<string, string> = {
-      dashboard: 'Dashboard', analiticos: 'México es MAYiA',
-      noticias: 'Noticias IA', partners: 'Partners',
-      'ia-empresarial': 'I.A. Empresarial', 'ia-sectores': 'IA Sectores',
-      'termometro-ia': 'Termómetro IA', hackaton: 'Hackaton Intel',
-      'empleados-digitales': 'Empleados Digitales', 'pildoras-ia': 'Píldoras IA',
-      ciberseguridad: 'Ciberseguridad', embajadores: 'Embajadores',
-      organigrama: 'Organigrama', academia: 'Academia MAYiA',
+      dashboard: 'Dashboard',
+      'enterprise-dashboard': 'Centro de Control',
+      analiticos: 'México es MAYiA',
+      noticias: 'Noticias IA',
+      ecosistema: 'Ecosistema',
+      partners: 'Partners',
+      'ia-empresarial': 'I.A. Empresarial',
+      'termometro-ia': 'Termómetro IA',
+      hackaton: 'Hackaton Intel',
+      'empleados-digitales': 'Empleados Digitales',
+      'pildoras-ia': 'Píldoras IA',
+      ciberseguridad: 'Ciberseguridad',
+      embajadores: 'Embajadores',
+      academia: 'Academia MAYiA',
       networking: 'Networking Hub',
+      blog: 'Blog',
+      'sala-prensa': 'Sala de Prensa',
+      'agente-33': 'Agente 33',
+      lumel: 'Lumel',
     };
     return titulos[activeSection] || 'Dashboard';
   };
 
-  /* ── Contenido de la página (igual para mobile y desktop) ── */
+  /* ── Contenido principal (reorganizado) ── */
   const pageContent = (
     <Suspense fallback={<LoadingSection />}>
       <div style={{ position: 'relative', backgroundColor: colores.fondoPrincipal }}>
-        <div id="dashboard"><DashboardEnterprise onSectionChange={handleNavClick} /></div>
+        {/* 1. Dashboard welcome (Oculto para prueba de versión compacta) */}
+        {/* <div id="dashboard"><DashboardEnterprise onSectionChange={handleNavClick} /></div> */}
+        
+        {/* 2. Enterprise Dashboard interactivo (Ahora versión compacta y principal) */}
+        <div id="dashboard">
+          <EnterpriseDashboard />
+        </div>
+        
+        {/* 3. Músculos MAYIA (ahora en gris enterprise) */}
         <MusculosMAYiA />
+        
+        {/* 4. Analíticos */}
         <div id="analiticos" style={{ background: '#0A0A14' }}><Analiticos /></div>
+        
+        {/* 5. Certificaciones marquee */}
         <CertificacionesMarquee />
+        
+        {/* 6. Noticias (con noticias reales indexadas) */}
         <div id="noticias"><NoticiasTicker /></div>
+        
+        {/* 6.5 Blog y Sala de Prensa */}
+        <div id="blog"><Blog /></div>
+        <div id="sala-prensa"><SalaPrensa /></div>
+        
+        {/* 7. Ecosistema MAYIA (partners visuales) */}
+        <div id="ecosistema"><EcosistemaMayia /></div>
+        
+        {/* 8. Partners técnicos */}
         <div id="partners"><PartnersSection /></div>
+        
+        {/* 9. IA Empresarial */}
         <div id="ia-empresarial"><IAEmpresarial /></div>
-        <div id="ia-sectores"><IAPorSector /></div>
+        
+        {/* 10. Termómetro IA */}
         <div id="termometro-ia"><TermometroIAMexico /></div>
-        <div id="hackaton"><HackatonMarketplace /></div>
+        
+        {/* 11. Empleados Digitales */}
         <div id="empleados-digitales"><EmpleadosDigitales /></div>
+        
+        {/* 11.5 Agentes Especializados */}
+        <div id="agente-33"><Agente33 /></div>
+        <div id="lumel"><Lumel /></div>
+        
+        {/* 12. Píldoras IA */}
         <div id="pildoras-ia"><PildorasIA /></div>
+        
+        {/* 13. Ciberseguridad */}
         <div id="ciberseguridad"><CiberseguridadIA /></div>
+        
+        {/* 14. Embajadores */}
         <div id="embajadores"><EmbajadoresMayia /></div>
-        <div id="organigrama"><Organigrama /></div>
+        
+        {/* 15. Academia */}
         <div id="academia"><AcademiaIA /></div>
+        
+        {/* 16. Networking */}
         <div id="networking"><NetworkingHub /></div>
+        
+        {/* 17. Marketplace (al final del scroll) */}
+        <div id="hackaton"><HackatonMarketplace /></div>
+        
+        {/* 18. Footer */}
         <BrandFooter />
         <Footer />
       </div>
@@ -182,23 +237,28 @@ function App() {
   );
 
   return (
-    <div style={{ background: '#0A0A14', minHeight: '100vh' }}>
-      {/* NavigationBar + HeaderBanner — sólo en desktop (mobile los omite el propio componente o quedan antes del panel) */}
+    <div style={{ 
+      background: '#0A0A14', 
+      minHeight: '100vh',
+      ...(isMobile ? {} : { height: '100vh', display: 'flex', flexDirection: 'column', overflow: 'hidden' })
+    }}>
+      {/* AcademiaBanner — siempre visible arriba */}
       {!isMobile && (
-        <div style={{ position: 'relative', zIndex: 100 }}>
-          <NavigationBar />
+        <div style={{ flexShrink: 0, position: 'relative', zIndex: 100 }}>
+          {/* HeaderBanner only, AcademiaBanner moved to right sidebar */}
           <HeaderBanner />
         </div>
       )}
 
-      {/* ── DESKTOP: layout panel con sidebar fijo ── */}
+      {/* ── DESKTOP: layout panel con sidebar fijo + right sidebar ── */}
       {!isMobile && (
-        <div style={{ height: 'calc(100vh - 0px)', position: 'relative', overflow: 'hidden' }}>
+        <div style={{ flex: 1, position: 'relative', overflow: 'hidden' }}>
           <ResponsiveLayout
             activeSection={activeSection}
             onSectionChange={handleNavClick}
             header={<Header title={getTitulo()} />}
             sidebar={<Sidebar activeSection={activeSection} onSectionChange={handleNavClick} />}
+            sidebarR={<SeoHub activeSection={activeSection} onSectionChange={handleNavClick} />}
           >
             {pageContent}
           </ResponsiveLayout>

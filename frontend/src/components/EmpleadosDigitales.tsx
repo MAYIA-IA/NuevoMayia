@@ -1,5 +1,6 @@
 import robotVideo from "../assets/AgentesConsultores/Robot_Asistente_con_Variaciones_de_Vestimenta.mp4";
 import { useState, useEffect, useRef } from 'react';
+import { Briefcase, Package, Calendar, BarChart3 } from 'lucide-react';
 
 const EmpleadosDigitales = () => {
   const [activeConversation, setActiveConversation] = useState<number>(0);
@@ -31,7 +32,7 @@ const EmpleadosDigitales = () => {
       id: 1,
       text: "Procesé tu solicitud de crédito. Todo aprobado en 3 minutos. ¿Te envío los documentos?",
       user: "Ana - Finanzas",
-      avatar: "💼",
+      icon: Briefcase,
       position: "top-left",
       color: "from-lime-500 to-green-600",
       tag: "Finanzas"
@@ -40,7 +41,7 @@ const EmpleadosDigitales = () => {
       id: 2,
       text: "Detecté que necesitas reabastecer 12 productos prioritarios. ¿Genero la orden de compra?",
       user: "Marco - Inventario",
-      avatar: "📦",
+      icon: Package,
       position: "top-right",
       color: "from-lime-500 to-green-600",
       tag: "Operaciones"
@@ -49,7 +50,7 @@ const EmpleadosDigitales = () => {
       id: 3,
       text: "Tu junta de mañana está confirmada. Ya envié el brief y materiales a todos los participantes.",
       user: "Sofia - Asistente",
-      avatar: "📅",
+      icon: Calendar,
       position: "bottom-left",
       color: "from-purple-500 to-pink-600",
       tag: "Productividad"
@@ -58,7 +59,7 @@ const EmpleadosDigitales = () => {
       id: 4,
       text: "Las conversiones subieron 28% esta semana. El ROI de la campaña actual es excelente.",
       user: "David - Marketing",
-      avatar: "📊",
+      icon: BarChart3,
       position: "bottom-right",
       color: "from-orange-500 to-red-600",
       tag: "Ventas"
@@ -82,10 +83,10 @@ const EmpleadosDigitales = () => {
       </div>
 
       <div className="container mx-auto max-w-7xl px-4 lg:px-8 relative z-10">
-        <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
+        <div className="flex flex-col 2xl:flex-row items-center gap-8 2xl:gap-12">
           
           {/* LEFT SIDE: Info, Stats & CTA */}
-          <div className="w-full lg:w-5/12 flex flex-col">
+          <div className="w-full 2xl:w-5/12 flex flex-col">
             {/* Header modernizado */}
             <div className="text-left mb-6">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-lime-50 border border-lime-200 rounded-full mb-4">
@@ -93,7 +94,7 @@ const EmpleadosDigitales = () => {
                 <span className="text-xs font-medium text-gray-600">Empleados Digitales Inteligentes</span>
               </div>
 
-              <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
+              <h2 className="text-3xl lg:text-4xl 2xl:text-5xl font-bold text-gray-900 mb-4 leading-tight">
                 Aumenta la productividad
               </h2>
               <p className="text-base text-gray-600 mb-4 max-w-lg">
@@ -152,7 +153,7 @@ const EmpleadosDigitales = () => {
           </div>
 
           {/* RIGHT SIDE: Visuals (Conversations + Video) */}
-          <div className="w-full lg:w-7/12 flex flex-col md:flex-row items-center justify-center gap-6 lg:gap-10">
+          <div className="w-full 2xl:w-7/12 flex flex-wrap xl:flex-nowrap items-center justify-center gap-6 xl:gap-10">
             
             {/* Conversations */}
             <div className="flex-1 w-full max-w-sm relative">
@@ -182,7 +183,7 @@ const EmpleadosDigitales = () => {
                         {/* Usuario */}
                         <div className="flex items-center gap-3 mb-3">
                           <div className="w-10 h-10 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-lg border border-white/20 shadow-inner">
-                            {conv.avatar}
+                            <conv.icon size={20} className={`text-white transition-all ${activeConversation === index && isTyping ? 'animate-bounce' : ''}`} />
                           </div>
                           <div>
                             <div className="text-sm font-bold text-white leading-tight">{conv.user}</div>

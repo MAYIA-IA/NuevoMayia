@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
+import { TrendingUp, Bot, Trophy, BarChart2, Lock, Globe, Lightbulb, GraduationCap, Handshake } from 'lucide-react';
 
-import imagen1 from '../assets/carousel/1. - ConsultorIA.png';
-import imagen2 from '../assets/carousel/2.-Agentes.png';
-import imagen3 from '../assets/carousel/3.-Marketplace.png';
-import imagen4 from '../assets/carousel/4.-Cámaras.png';
-import imagen5 from '../assets/carousel/5.-Origen.png';
+import imagen1 from '../assets/news/news1.png';
+import imagen2 from '../assets/news/news2.png';
+import imagen3 from '../assets/news/news3.png';
+import imagen4 from '../assets/news/news4.png';
+import imagen5 from '../assets/news/news5.png';
 
 /* ── Datos de noticias – editar aquí ────────────────────────────── */
 interface NewsItem {
@@ -17,75 +18,81 @@ interface NewsItem {
   source: string;
   time: string;
   badge?: string;
+  url: string;
 }
 
 const newsItems: NewsItem[] = [
   {
     id: 1,
-    image: imagen5,
-    category: 'MERCADO IA',
-    categoryColor: '#A4D955',
-    headline: 'MAYiA alcanza 30 centros de datos EdgeNet en México',
-    summary: 'La infraestructura soberana de IA más grande del país suma nuevo nodo en Monterrey, elevando la capacidad de cómputo a 4.2 PFLOPS disponibles para PyMES.',
-    source: 'MAYiA Research',
-    time: 'Hace 2h',
-    badge: 'EXCLUSIVO',
+    image: imagen1,
+    category: 'INFRAESTRUCTURA',
+    categoryColor: '#ef4444',
+    headline: 'MAYIA, primer centro de inteligencia artificial con sello Hecho en México, inicia operaciones',
+    summary: 'MAYIA inicia operaciones como el primer centro de inteligencia artificial con sello Hecho en México, ofreciendo infraestructura soberana para empresas y posicionando al país en la carrera tecnológica global.',
+    source: 'DataCenter Dynamics',
+    time: 'Reciente',
+    badge: 'LANZAMIENTO',
+    url: 'https://www.datacenterdynamics.com/es/noticias/mayia-primer-centro-de-inteligencia-artificial-con-sello-hecho-en-mexico-inicia-operaciones/',
   },
   {
     id: 2,
     image: imagen2,
-    category: 'INVERSIÓN',
-    categoryColor: '#34d399',
-    headline: 'Demanda de agentes IA en México crece 340% en Q1 2026',
-    summary: 'El mercado de automatización inteligente supera los $12,000 MDP en México. Sectores Finanzas y Salud lideran la adopción de empleados digitales.',
-    source: 'Bloomberg MX',
-    time: 'Hace 4h',
+    category: 'SOBERANÍA DIGITAL',
+    categoryColor: '#0071C5',
+    headline: 'MAYIA: primer centro de IA con sello Hecho en México',
+    summary: 'El centro de inteligencia artificial MAYIA apuesta por la soberanía digital y la infraestructura local para democratizar la IA en el país, impulsando el desarrollo tecnológico independiente.',
+    source: 'Expansión',
+    time: 'Reciente',
     badge: 'TENDENCIA',
+    url: 'https://expansion.mx/tecnologia/2025/06/05/mayia-primer-centro-de-ia-con-sello-hecho-en-mexico',
   },
   {
     id: 3,
-    image: imagen1,
-    category: 'TECNOLOGÍA',
-    categoryColor: '#f59e0b',
-    headline: 'Metodología VATYCS genera ROI promedio de 4.8x en 90 días',
-    summary: 'Estudio independiente sobre 47 empresas mexicanas confirma que la implementación estructurada de IA supera a proyectos ad-hoc en velocidad y rentabilidad.',
-    source: 'Forbes México',
-    time: 'Hace 6h',
+    image: imagen3,
+    category: 'INNOVACIÓN',
+    categoryColor: '#a78bfa',
+    headline: 'MAYIA centro de inteligencia artificial mexicano',
+    summary: 'Conoce MAYIA, el centro de inteligencia artificial que busca posicionar a México como referente tecnológico en América Latina, brindando soluciones avanzadas para múltiples industrias.',
+    source: 'La Tank Media',
+    time: 'Reciente',
+    url: 'https://latank.media/mayia-centro-de-inteligencia-artificial-mexicano/',
   },
   {
     id: 4,
-    image: imagen3,
-    category: 'MARKETPLACE',
-    categoryColor: '#a78bfa',
-    headline: 'Hackaton Intel × MAYiA abre convocatoria para startups IA',
-    summary: 'El primer marketplace de ideas de IA en México recibe proyectos de jóvenes desarrolladores. Premio mayor: $500,000 MXN en infraestructura y mentoría.',
-    source: 'MAYiA Press',
-    time: 'Hace 8h',
+    image: imagen4,
+    category: 'PYMES',
+    categoryColor: '#f59e0b',
+    headline: 'Nace MAYIA, el primer centro de IA 100% mexicano para PyMES y soberanía digital',
+    summary: 'MAYIA nace como el primer centro de IA 100% mexicano enfocado en PyMES y soberanía digital, con presencia en los 32 estados del país para acelerar la transformación digital de los negocios locales.',
+    source: 'Maya Comunicación',
+    time: 'Reciente',
     badge: 'NUEVO',
+    url: 'https://mayacomunicacion.com.mx/nace-mayia-el-primer-centro-de-inteligencia-artificial-100-mexicano-para-pymes-y-soberania-digital/',
   },
   {
     id: 5,
-    image: imagen4,
-    category: 'SEGURIDAD',
-    categoryColor: '#ef4444',
-    headline: 'Cámaras IA detectan fraudes en retail con 99.2% de precisión',
-    summary: 'El sistema Vision IA de MAYiA procesa 2.4M de frames diarios en más de 300 tiendas, reduciendo merma desconocida en un 67% en el primer trimestre de implementación.',
-    source: 'El Economista',
-    time: 'Hace 10h',
+    image: imagen5,
+    category: 'OFICIAL',
+    categoryColor: '#34d399',
+    headline: 'Comunicado oficial: MAYIA abre operaciones',
+    summary: 'MAYIA, el centro de inteligencia artificial con sello Hecho en México, anuncia oficialmente el inicio de operaciones a nivel nacional y su compromiso con la adopción ética de la IA.',
+    source: 'Agencia El Universal',
+    time: 'Reciente',
+    url: 'https://agenciaeluniversal.mx/productos/comunicado/12612',
   },
 ];
 
 /* ── Ticker horizontal (barra superior) ─────────────────────────── */
 const TICKER_ITEMS = [
-  '📈 Demanda IA México +340% Q1 2026',
-  '🤖 MAYiA Lake: 2.1PB datos soberanos procesados',
-  '🏆 Hackaton Intel × MAYiA: $500K MXN en premios',
-  '📊 Termómetro IA: Escasez de talento IA en 78% de sectores',
-  '🔐 Ciberseguridad IA: 99.9% de modelos protegidos',
-  '🌐 EdgeNet: 30 nodos activos en México',
-  '💡 Innovación del mes: Agente fiscal autónomo',
-  '🎓 Academia MAYiA: 1,200 certificaciones emitidas',
-  '🤝 Partners: AMD, Intel, Lenovo, IBM Quantum',
+  { text: 'Demanda IA México +340% Q1 2026', icon: TrendingUp },
+  { text: 'MAYiA Lake: 2.1PB datos soberanos procesados', icon: Bot },
+  { text: 'Hackaton Intel × MAYiA: $500K MXN en premios', icon: Trophy },
+  { text: 'Termómetro IA: Escasez de talento IA en 78% de sectores', icon: BarChart2 },
+  { text: 'Ciberseguridad IA: 99.9% de modelos protegidos', icon: Lock },
+  { text: 'EdgeNet: 30 nodos activos en México', icon: Globe },
+  { text: 'Innovación del mes: Agente fiscal autónomo', icon: Lightbulb },
+  { text: 'Academia MAYiA: 1,200 certificaciones emitidas', icon: GraduationCap },
+  { text: 'Partners: AMD, Intel, Lenovo, IBM Quantum', icon: Handshake },
 ];
 
 function NewsTicker() {
@@ -121,6 +128,9 @@ function NewsTicker() {
           <span
             key={i}
             style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 8,
               fontSize: 11,
               color: i % 2 === 0 ? '#A4D955' : '#9ca3af',
               fontWeight: i % 2 === 0 ? 700 : 400,
@@ -128,7 +138,8 @@ function NewsTicker() {
               letterSpacing: '0.04em',
             }}
           >
-            {item}
+            <item.icon size={14} className={i % 2 === 0 ? "animate-pulse" : ""} />
+            {item.text}
           </span>
         ))}
       </div>
@@ -170,8 +181,8 @@ export default function NoticiasTicker() {
       <div style={{ padding: '40px 40px 24px', maxWidth: 1400, margin: '0 auto' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-            <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#ef4444', boxShadow: '0 0 8px #ef4444', animation: 'pulse 1.5s infinite' }} />
-            <span style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#6b7280' }}>En vivo · Noticias IA</span>
+            <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#A4D955', boxShadow: '0 0 8px #A4D955', animation: 'pulse 1.5s infinite' }} />
+            <span style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#6b7280' }}>MAYIA EN MEDIOS · NOTICIAS INDEXADAS</span>
           </div>
           <div style={{ display: 'flex', gap: 8 }}>
             {newsItems.map((_, i) => (
@@ -272,19 +283,23 @@ export default function NoticiasTicker() {
               {item.summary}
             </p>
 
-            <button style={{
+            <a 
+              href={item.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
               marginTop: 16,
               display: 'inline-flex', alignItems: 'center', gap: 6,
-              padding: '8px 18px', borderRadius: 10, border: 'none',
-              background: '#A4D955', color: '#0A0A14',
+              padding: '10px 20px', borderRadius: 10, border: 'none',
+              background: '#A4D955', color: '#0A0A14', textDecoration: 'none',
               fontWeight: 700, fontSize: 12, cursor: 'pointer',
               transition: 'all 0.2s',
             }}>
-              Leer más
+              Leer noticia completa
               <svg width={12} height={12} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
-            </button>
+            </a>
           </div>
         </div>
 
@@ -334,6 +349,8 @@ export default function NoticiasTicker() {
           ))}
         </div>
       </div>
+
+
 
       <style>{`@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }`}</style>
     </div>

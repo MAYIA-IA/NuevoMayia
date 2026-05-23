@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, forwardRef, useImperativeHandle } from 'react';
+import { CircleDollarSign, Globe, CalendarDays, Server } from 'lucide-react';
 import { brandingConfig } from '../../config/branding';
 
 const { colores, ia } = brandingConfig;
@@ -83,10 +84,10 @@ const MarkdownText = ({ text }: { text: string }) => {
 
 /* ── Sugerencias rápidas relacionadas con la página ─────────────────────── */
 const SUGERENCIAS = [
-  { text: '¿Cuánto cuesta una Píldora IA? 💊', icon: '💰' },
-  { text: '¿Qué sectores atiende MAYiA? 🏢', icon: '🌐' },
-  { text: '¿Cómo puedo agendar una demo? 📅', icon: '🚀' },
-  { text: '¿Qué infraestructura tiene MAYiA? 🛠️', icon: '⚡' },
+  { text: '¿Cuánto cuesta una Píldora IA?', icon: CircleDollarSign },
+  { text: '¿Qué sectores atiende MAYiA?', icon: Globe },
+  { text: '¿Cómo puedo agendar una demo?', icon: CalendarDays },
+  { text: '¿Qué infraestructura tiene MAYiA?', icon: Server },
 ];
 
 /* ── Componente principal ────────────────────────────────────────────────── */
@@ -226,7 +227,7 @@ export const AsistenteIAChat = forwardRef<AsistenteIAChatHandle>((_, ref) => {
                     (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 2px 4px rgba(0,0,0,0.02)';
                   }}
                 >
-                  <span style={{ fontSize: 16 }}>{s.icon}</span>
+                  <span style={{ display: 'inline-flex', alignItems: 'center' }}><s.icon size={16} /></span>
                   {s.text}
                 </button>
               ))}

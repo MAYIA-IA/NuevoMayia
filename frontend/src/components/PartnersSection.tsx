@@ -1,11 +1,12 @@
 /* PartnersSection.tsx – fondo blanco premium */
 import { useState } from 'react';
+import { Zap, Cpu, Server, Atom } from 'lucide-react';
 
 const PARTNERS = [
-  { name: 'AMD',       tagline: 'Procesadores IA de alto rendimiento',        color: '#ED1C24', logoText: 'AMD',      stat: '4x',    statLabel: 'más rendimiento IA',   icon: '⚡', description: 'Arquitectura RDNA y EPYC diseñada para workloads de inteligencia artificial en producción.' },
-  { name: 'Intel',     tagline: 'Xeon para infraestructura empresarial',       color: '#0071C5', logoText: 'intel',    stat: '30+',   statLabel: 'nodos certificados',    icon: '🔵', description: 'Procesadores Xeon Scalable y Gaudi para aceleración de modelos de lenguaje y visión.' },
-  { name: 'Lenovo',    tagline: 'Servidores ThinkSystem para EdgeNet',         color: '#E2231A', logoText: 'Lenovo',   stat: '99.9%', statLabel: 'uptime garantizado',     icon: '🖥️', description: 'Infraestructura ThinkSystem optimizada para despliegues IA en el borde y en la nube.' },
-  { name: 'IBM Quantum', tagline: 'Cómputo cuántico aplicado a IA',           color: '#1F70C1', logoText: 'IBM Q',    stat: '127+',  statLabel: 'qubits disponibles',     icon: '🔮', description: 'Acceso a hardware cuántico real para investigación y optimización de algoritmos de IA.' },
+  { name: 'AMD',       tagline: 'Procesadores IA de alto rendimiento',        color: '#ED1C24', logoText: 'AMD',      stat: '4x',    statLabel: 'más rendimiento IA',   icon: Zap, description: 'Arquitectura RDNA y EPYC diseñada para workloads de inteligencia artificial en producción.' },
+  { name: 'Intel',     tagline: 'Xeon para infraestructura empresarial',       color: '#0071C5', logoText: 'intel',    stat: '30+',   statLabel: 'nodos certificados',    icon: Cpu, description: 'Procesadores Xeon Scalable y Gaudi para aceleración de modelos de lenguaje y visión.' },
+  { name: 'Lenovo',    tagline: 'Servidores ThinkSystem para EdgeNet',         color: '#E2231A', logoText: 'Lenovo',   stat: '99.9%', statLabel: 'uptime garantizado',     icon: Server, description: 'Infraestructura ThinkSystem optimizada para despliegues IA en el borde y en la nube.' },
+  { name: 'IBM Quantum', tagline: 'Cómputo cuántico aplicado a IA',           color: '#1F70C1', logoText: 'IBM Q',    stat: '127+',  statLabel: 'qubits disponibles',     icon: Atom, description: 'Acceso a hardware cuántico real para investigación y optimización de algoritmos de IA.' },
 ];
 
 const css = `
@@ -52,7 +53,7 @@ export default function PartnersSection() {
         {/* Cards */}
         <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(260px,1fr))', gap:24 }}>
           {PARTNERS.map((p, i) => (
-            <div key={p.name} className="ps-card"
+            <div key={p.name} className="ps-card group"
               style={{
                 animationDelay:`${i*.1}s`,
                 background: hov===p.name ? '#ffffff' : '#ffffff',
@@ -91,7 +92,9 @@ export default function PartnersSection() {
                   <div style={{ fontSize:28, fontWeight:900, color:p.color, lineHeight:1 }}>{p.stat}</div>
                   <div style={{ fontSize:10, color:'#9ca3af', marginTop:2 }}>{p.statLabel}</div>
                 </div>
-                <div style={{ marginLeft:'auto', fontSize:26 }}>{p.icon}</div>
+                <div style={{ marginLeft:'auto', color:p.color }} className="group-hover:scale-110 group-hover:-rotate-12 transition-transform duration-300">
+                  <p.icon size={26} strokeWidth={2} />
+                </div>
               </div>
             </div>
           ))}

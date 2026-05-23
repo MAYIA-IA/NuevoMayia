@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {
   ArrowUpRight, ArrowRightLeft, Package, TrendingUp,
   ChevronRight, Truck, AlertTriangle, CheckCircle,
-  Clock, MapPin, Zap, Filter, RefreshCw, Timer, ArrowDown,
+  Clock, MapPin, Zap, Filter, RefreshCw, Timer, ArrowDown, Lightbulb
 } from 'lucide-react';
 import { brandingConfig } from '../../../config/branding';
 
@@ -314,7 +314,7 @@ export const DashboardAbastecimiento: React.FC = () => {
                     <span style={{ fontSize: '11px', color: colores.textoClaro, fontWeight: '600' }}>{r.hacia}</span>
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
-                    <span style={{ fontSize: '11px', color: colores.textoMedio }}>💡 {r.impacto}</span>
+                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', fontSize: '11px', color: colores.textoMedio }}><Lightbulb size={11} color={colores.primario} /> {r.impacto}</span>
                     <button onClick={() => aceptarRec(r.id)} style={{
                       padding: '7px 14px', borderRadius: '10px', border: 'none', fontSize: '12px',
                       fontWeight: '700', cursor: 'pointer', transition: 'all 0.2s', flexShrink: 0,

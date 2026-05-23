@@ -1,16 +1,17 @@
 /* TermometroIAMexico.tsx – fondo blanco premium */
 import { useState, useEffect, useRef } from 'react';
+import { Landmark, Dna, Factory, ShoppingBag, Radio, Building2, Thermometer, BriefcaseBusiness, CircleDollarSign, AlertTriangle } from 'lucide-react';
 
-interface DatoSector { sector:string; oferta:number; demanda:number; salarioMedio:number; crecimiento:number; color:string; emoji:string; }
+interface DatoSector { sector:string; oferta:number; demanda:number; salarioMedio:number; crecimiento:number; color:string; icon:any; }
 interface IndicadorMercado { label:string; valor:string; tendencia:'up'|'down'|'neutral'; cambio:string; color:string; icon:string; }
 
 const BASE_DATOS: DatoSector[] = [
-  { sector:'Finanzas & Banca',     oferta:23, demanda:89, salarioMedio:52000, crecimiento:67, color:'#65a30d', emoji:'🏦' },
-  { sector:'Salud & Biotech',      oferta:18, demanda:76, salarioMedio:48000, crecimiento:82, color:'#059669', emoji:'🧬' },
-  { sector:'Manufactura',          oferta:31, demanda:72, salarioMedio:41000, crecimiento:45, color:'#0284c7', emoji:'🏭' },
-  { sector:'Retail & eCommerce',   oferta:29, demanda:68, salarioMedio:38000, crecimiento:54, color:'#d97706', emoji:'🛍️' },
-  { sector:'Telecomunicaciones',   oferta:35, demanda:65, salarioMedio:55000, crecimiento:38, color:'#7c3aed', emoji:'📡' },
-  { sector:'Gobierno & Educación', oferta:12, demanda:58, salarioMedio:32000, crecimiento:91, color:'#db2777', emoji:'🏛️' },
+  { sector:'Finanzas & Banca',     oferta:23, demanda:89, salarioMedio:52000, crecimiento:67, color:'#65a30d', icon: Landmark },
+  { sector:'Salud & Biotech',      oferta:18, demanda:76, salarioMedio:48000, crecimiento:82, color:'#059669', icon: Dna },
+  { sector:'Manufactura',          oferta:31, demanda:72, salarioMedio:41000, crecimiento:45, color:'#0284c7', icon: Factory },
+  { sector:'Retail & eCommerce',   oferta:29, demanda:68, salarioMedio:38000, crecimiento:54, color:'#d97706', icon: ShoppingBag },
+  { sector:'Telecomunicaciones',   oferta:35, demanda:65, salarioMedio:55000, crecimiento:38, color:'#7c3aed', icon: Radio },
+  { sector:'Gobierno & Educación', oferta:12, demanda:58, salarioMedio:32000, crecimiento:91, color:'#db2777', icon: Building2 },
 ];
 
 function getDatos(): DatoSector[] {
@@ -18,10 +19,10 @@ function getDatos(): DatoSector[] {
 }
 function getIndicadores(): IndicadorMercado[] {
   return [
-    { label:'Índice de Escasez IA', valor:'77.4%', tendencia:'up',  cambio:'+3.2 pts',           color:'#ef4444', icon:'🌡️' },
-    { label:'Vacantes Activas MX',  valor:(18400+Math.floor(Math.random()*200)).toLocaleString(), tendencia:'up',  cambio:'+12% mensual',         color:'#65a30d', icon:'💼' },
-    { label:'Salario Promedio IA',  valor:'$43,800',                tendencia:'up',  cambio:'+8.4% anual',          color:'#0284c7', icon:'💰' },
-    { label:'Brechas por cubrir',   valor:'78%',                    tendencia:'down',cambio:'Demanda insatisfecha', color:'#d97706', icon:'⚠️' },
+    { label:'Índice de Escasez IA', valor:'77.4%', tendencia:'up',  cambio:'+3.2 pts',           color:'#ef4444', icon: 'Thermometer' },
+    { label:'Vacantes Activas MX',  valor:(18400+Math.floor(Math.random()*200)).toLocaleString(), tendencia:'up',  cambio:'+12% mensual',         color:'#65a30d', icon: 'BriefcaseBusiness' },
+    { label:'Salario Promedio IA',  valor:'$43,800',                tendencia:'up',  cambio:'+8.4% anual',          color:'#0284c7', icon: 'CircleDollarSign' },
+    { label:'Brechas por cubrir',   valor:'78%',                    tendencia:'down',cambio:'Demanda insatisfecha', color:'#d97706', icon: 'AlertTriangle' },
   ];
 }
 
@@ -46,8 +47,10 @@ function BarraDual({ d, animated }: { d:DatoSector; animated:boolean }) {
   return (
     <div style={{ marginBottom:22 }}>
       <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:8 }}>
-        <div style={{ display:'flex', alignItems:'center', gap:8 }}>
-          <span style={{ fontSize:16 }}>{d.emoji}</span>
+        <div className="group" style={{ display:'flex', alignItems:'center', gap:8, cursor:'default' }}>
+          <div className="w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:rotate-3 shadow-sm" style={{ background: `${d.color}15`, color: d.color }}>
+            <d.icon size={18} strokeWidth={2.5} />
+          </div>
           <span style={{ fontSize:13, fontWeight:700, color:'#111827' }}>{d.sector}</span>
         </div>
         <div style={{ display:'flex', gap:10, fontSize:11 }}>
@@ -127,20 +130,25 @@ export default function TermometroIAMexico() {
 
         {/* KPIs */}
         <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(220px,1fr))', gap:18, marginBottom:40 }}>
-          {indicadores.map(ind => (
-            <div key={ind.label}
-              style={{ background: hovKpi===ind.label ? '#ffffff' : '#ffffff', border:`1.5px solid ${hovKpi===ind.label ? ind.color+'50' : '#e5e7eb'}`, borderRadius:18, padding:'22px 24px', transition:'all .3s cubic-bezier(.23,1,.32,1)', cursor:'default', boxShadow: hovKpi===ind.label ? `0 12px 40px ${ind.color}15` : '0 2px 12px rgba(0,0,0,.05)', transform: hovKpi===ind.label ? 'translateY(-4px)' : 'translateY(0)', position:'relative', overflow:'hidden', animation:'tm-fadeup .6s ease both' }}
-              onMouseEnter={()=>setHovKpi(ind.label)} onMouseLeave={()=>setHovKpi(null)}
-            >
-              <div style={{ position:'absolute', top:12, right:14, fontSize:22 }}>{ind.icon}</div>
-              <div style={{ position:'absolute', top:0, right:0, width:70, height:70, borderRadius:'0 18px 0 70px', background:`${ind.color}08` }} />
-              <div style={{ fontSize:30, fontWeight:900, color:ind.color, marginBottom:6, lineHeight:1 }}>{ind.valor}</div>
-              <div style={{ fontSize:12, fontWeight:600, color:'#374151', marginBottom:6 }}>{ind.label}</div>
-              <div style={{ display:'inline-flex', alignItems:'center', gap:4, fontSize:11, padding:'2px 10px', borderRadius:99, background: ind.tendencia==='up'?'rgba(5,150,105,.1)':'rgba(239,68,68,.1)', color: ind.tendencia==='up'?'#059669':'#ef4444' }}>
-                {ind.tendencia==='up'?'↑':'↓'} {ind.cambio}
+          {indicadores.map(ind => {
+            const IconComp = ind.icon === 'Thermometer' ? Thermometer : ind.icon === 'BriefcaseBusiness' ? BriefcaseBusiness : ind.icon === 'CircleDollarSign' ? CircleDollarSign : AlertTriangle;
+            return (
+              <div key={ind.label} className="group"
+                style={{ background: hovKpi===ind.label ? '#ffffff' : '#ffffff', border:`1.5px solid ${hovKpi===ind.label ? ind.color+'50' : '#e5e7eb'}`, borderRadius:18, padding:'22px 24px', transition:'all .3s cubic-bezier(.23,1,.32,1)', cursor:'default', boxShadow: hovKpi===ind.label ? `0 12px 40px ${ind.color}15` : '0 2px 12px rgba(0,0,0,.05)', transform: hovKpi===ind.label ? 'translateY(-4px)' : 'translateY(0)', position:'relative', overflow:'hidden', animation:'tm-fadeup .6s ease both' }}
+                onMouseEnter={()=>setHovKpi(ind.label)} onMouseLeave={()=>setHovKpi(null)}
+              >
+                <div className="absolute top-4 right-4 text-gray-400 group-hover:scale-110 transition-transform duration-300" style={{ color: ind.color }}>
+                  <IconComp size={24} className="group-hover:animate-pulse" />
+                </div>
+                <div style={{ position:'absolute', top:0, right:0, width:70, height:70, borderRadius:'0 18px 0 70px', background:`${ind.color}08` }} />
+                <div style={{ fontSize:30, fontWeight:900, color:ind.color, marginBottom:6, lineHeight:1 }}>{ind.valor}</div>
+                <div style={{ fontSize:12, fontWeight:600, color:'#374151', marginBottom:6 }}>{ind.label}</div>
+                <div style={{ display:'inline-flex', alignItems:'center', gap:4, fontSize:11, padding:'2px 10px', borderRadius:99, background: ind.tendencia==='up'?'rgba(5,150,105,.1)':'rgba(239,68,68,.1)', color: ind.tendencia==='up'?'#059669':'#ef4444' }}>
+                  {ind.tendencia==='up'?'↑':'↓'} {ind.cambio}
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Barras */}

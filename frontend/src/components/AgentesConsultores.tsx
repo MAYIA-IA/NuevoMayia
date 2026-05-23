@@ -146,8 +146,8 @@ const AgentesConsultores = () => {
           </h2>
         </div>
 
-        {/* Cards Grid - Más compacto y elegante */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        {/* Cards Grid - Ajustado a 2xl para evitar que se aplaste con sidebars */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-4 gap-6 mb-12">
           {consultores.map((consultor) => {
             const hasValidVideo = !videoErrors[consultor.id];
             
@@ -267,7 +267,7 @@ const AgentesConsultores = () => {
                   </div>
 
                   {/* Precio y CTA */}
-                  <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                  <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-gray-100">
                     <div>
                       <div className="text-xs text-gray-500 mb-1">PROMOCIÓN</div>
                       <div className="text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">

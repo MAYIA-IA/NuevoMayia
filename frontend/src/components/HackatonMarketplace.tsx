@@ -3,6 +3,7 @@
    Para añadir proyectos reales: edita el array PROYECTOS.
 */
 import { useState } from 'react';
+import { Zap, Trophy, Medal, Target, FileSignature, ThumbsUp, Rocket } from 'lucide-react';
 
 interface Proyecto {
   id: number;
@@ -27,11 +28,11 @@ const PROYECTOS: Proyecto[] = [
   { id: 6, titulo: 'FinQauntum - Trading Cuántico', equipo: 'Q-Finance', descripcion: 'Algoritmo de optimización de portafolio usando computación cuántica e IBM Quantum para maximizar retorno ajustado al riesgo en mercados latinoamericanos.', categoria: 'FinTech', tecnologias: ['IBM Quantum', 'Qiskit', 'Python'], votos: 367, estado: 'inscrito', color: '#f472b6' },
 ];
 
-const ESTADOS: Record<Proyecto['estado'], { label: string; color: string; bg: string }> = {
-  ganador:   { label: '🏆 Ganador',    color: '#A4D955', bg: 'rgba(164,217,85,0.15)' },
-  finalista: { label: '🥇 Finalista',  color: '#f59e0b', bg: 'rgba(245,158,11,0.15)' },
-  semifinal: { label: '🎯 Semifinal',  color: '#60a5fa', bg: 'rgba(96,165,250,0.15)' },
-  inscrito:  { label: '📝 Inscrito',   color: '#9ca3af', bg: 'rgba(156,163,175,0.1)'  },
+const ESTADOS: Record<Proyecto['estado'], { label: string; color: string; bg: string; icon: any }> = {
+  ganador:   { label: 'Ganador',    color: '#A4D955', bg: 'rgba(164,217,85,0.15)', icon: Trophy },
+  finalista: { label: 'Finalista',  color: '#f59e0b', bg: 'rgba(245,158,11,0.15)', icon: Medal },
+  semifinal: { label: 'Semifinal',  color: '#60a5fa', bg: 'rgba(96,165,250,0.15)', icon: Target },
+  inscrito:  { label: 'Inscrito',   color: '#9ca3af', bg: 'rgba(156,163,175,0.1)' , icon: FileSignature },
 };
 
 const CATEGORIAS = ['Todas', 'AgriTech', 'LegalTech', 'HealthTech', 'GovTech', 'EdTech', 'FinTech'];
@@ -47,7 +48,7 @@ export default function HackatonMarketplace() {
         <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 24, alignItems: 'flex-end', marginBottom: 48, flexWrap: 'wrap' as const }}>
           <div>
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '5px 16px', borderRadius: 99, background: 'rgba(164,217,85,0.1)', border: '1px solid rgba(164,217,85,0.3)', marginBottom: 16 }}>
-              <span style={{ fontSize: 12 }}>⚡</span>
+              <Zap size={14} className="animate-pulse" style={{ color: '#A4D955' }} />
               <span style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase' as const, color: '#4d7c0f' }}>Hackaton Desarrolladores Intel × MAYiA</span>
             </div>
             <h2 style={{ fontSize: 38, fontWeight: 800, color: '#111827', margin: '0 0 12px', lineHeight: 1.2 }}>
@@ -83,7 +84,7 @@ export default function HackatonMarketplace() {
           {proyectosFiltrados.map(p => {
             const est = ESTADOS[p.estado];
             return (
-              <div key={p.id}
+              <div key={p.id} className="group"
                 style={{ background: '#fafafa', border: `1px solid ${p.estado === 'ganador' ? p.color + '60' : '#f3f4f6'}`, borderRadius: 18, overflow: 'hidden', transition: 'all 0.3s', boxShadow: p.estado === 'ganador' ? `0 4px 24px ${p.color}20` : 'none' }}
                 onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = `0 12px 40px ${p.color}18`; e.currentTarget.style.borderColor = `${p.color}50`; }}
                 onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = p.estado === 'ganador' ? `0 4px 24px ${p.color}20` : 'none'; e.currentTarget.style.borderColor = p.estado === 'ganador' ? p.color + '60' : '#f3f4f6'; }}
@@ -92,8 +93,8 @@ export default function HackatonMarketplace() {
                 <div style={{ height: 4, background: `linear-gradient(to right, ${p.color}, ${p.color}80)` }} />
                 <div style={{ padding: '20px 22px 22px' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 12 }}>
-                    <span style={{ fontSize: 9, fontWeight: 800, padding: '3px 10px', borderRadius: 99, background: est.bg, color: est.color, letterSpacing: '0.06em' }}>
-                      {est.label}
+                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: 9, fontWeight: 800, padding: '3px 10px', borderRadius: 99, background: est.bg, color: est.color, letterSpacing: '0.06em' }}>
+                      <est.icon size={12} /> {est.label}
                     </span>
                     <span style={{ fontSize: 10, color: '#9ca3af' }}>#{p.id.toString().padStart(3, '0')}</span>
                   </div>
@@ -110,7 +111,7 @@ export default function HackatonMarketplace() {
 
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid #f3f4f6', paddingTop: 12 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-                      <span style={{ fontSize: 14 }}>👍</span>
+                      <span className="group-hover:scale-125 transition-transform duration-300"><ThumbsUp size={14} style={{ color: '#111827' }} /></span>
                       <span style={{ fontSize: 13, fontWeight: 700, color: '#111827' }}>{p.votos.toLocaleString()}</span>
                       <span style={{ fontSize: 10, color: '#9ca3af' }}>votos</span>
                     </div>
@@ -126,7 +127,9 @@ export default function HackatonMarketplace() {
 
         {/* CTA inscripción */}
         <div style={{ marginTop: 52, background: 'linear-gradient(135deg, #0A0A14 0%, #111118 100%)', borderRadius: 24, padding: '40px', display: 'flex', flexDirection: 'column' as const, alignItems: 'center', textAlign: 'center' as const }}>
-          <span style={{ fontSize: 28, marginBottom: 12 }}>🚀</span>
+          <div className="bg-gradient-to-br from-gray-800 to-gray-900 p-4 rounded-full mb-4 shadow-[0_0_20px_rgba(164,217,85,0.2)]">
+            <Rocket size={32} className="text-lime-500 animate-pulse" />
+          </div>
           <h3 style={{ fontSize: 24, fontWeight: 800, color: '#ffffff', margin: '0 0 10px' }}>¿Tienes una idea que transforme México?</h3>
           <p style={{ fontSize: 14, color: '#6b7280', margin: '0 0 24px', maxWidth: 440 }}>Inscríbete al Hackaton Intel × MAYiA. La próxima startup unicornio mexicana puede ser la tuya.</p>
           <a href="https://api.whatsapp.com/send/?phone=525553315526" target="_blank" rel="noopener noreferrer"
