@@ -7,8 +7,6 @@ import {
   GraduationCap,
   ChevronLeft,
   Handshake,
-  FileText,
-  Megaphone,
 } from 'lucide-react';
 import { brandingConfig } from '../config/branding';
 import mayiaLogo from '../assets/logosNativos/mayiaLogoBlanco.png';
@@ -127,7 +125,7 @@ function SidebarItem({
 
 export const Sidebar: React.FC<SidebarProps> = ({ activeSection, onSectionChange }) => {
   const { empresa, colores } = brandingConfig;
-  const [isCollapsed, setIsCollapsed] = useState(true);
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   const sidebarWidth = isCollapsed ? '72px' : '220px';
 

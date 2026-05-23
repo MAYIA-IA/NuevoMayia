@@ -133,7 +133,7 @@ const mapHubIdToSection = (id: string): string | null => {
     case 'embajadores':
       return 'embajadores';
     case 'foro-retail':
-      return 'ia-empresarial';
+      return 'ia-por-sector';
     case 'hackathon':
       return 'hackaton';
     case 'visitas-intel':
@@ -277,7 +277,7 @@ export default function SeoHub({ activeSection, onSectionChange }: SeoHubProps) 
         flexDirection: 'column',
         position: 'relative',
         transition: 'width 0.45s cubic-bezier(0.25, 1, 0.2, 1)',
-        zIndex: 350,
+        zIndex: 250,
       }}
     >
       <style>{hubCss}</style>

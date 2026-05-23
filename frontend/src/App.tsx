@@ -1,12 +1,10 @@
 import { useState, useEffect, lazy, Suspense } from 'react';
 import HeaderBanner from './components/headerBanner';
-import AcademiaBanner from './components/AcademiaBanner';
 import SeoHub from './components/SeoHub';
 
 import { ResponsiveLayout } from './components/ResponsiveLayout';
 import { Sidebar } from './components/Sidebar';
 import { Header } from './components/Header';
-import { Dashboard as DashboardEnterprise } from './components/Dashboard';
 import { brandingConfig } from './config/branding';
 import './responsive.css';
 
@@ -21,6 +19,7 @@ const Analiticos = lazy(() => import('./components/departamentos/Analiticos').th
 const PartnersSection = lazy(() => import('./components/PartnersSection'));
 const EcosistemaMayia = lazy(() => import('./components/EcosistemaMayia'));
 const IAEmpresarial = lazy(() => import('./components/IAEmpresarial'));
+const IAporSector = lazy(() => import('./components/IAporSector'));
 const EmpleadosDigitales = lazy(() => import('./components/EmpleadosDigitales'));
 const PildorasIA = lazy(() => import('./components/PildorasIA'));
 const CiberseguridadIA = lazy(() => import('./components/CiberseguridadIA'));
@@ -38,7 +37,7 @@ const Lumel = lazy(() => import('./components/Lumel'));
 
 // Fallback de carga premium
 const LoadingSection = () => (
-  <div style={{ height: '300px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#0A0A14' }}>
+  <div style={{ height: '300px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#FFFFFF' }}>
     <div className="loading-dots" style={{ display: 'flex', gap: '8px' }}>
       <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#A4D955', animation: 'pulse 1s infinite' }}></div>
       <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#A4D955', animation: 'pulse 1s infinite 0.2s' }}></div>
@@ -53,7 +52,7 @@ const LoadingSection = () => (
 /* ── IDs de sección para scroll-spy ── */
 const SECTION_IDS = [
   'dashboard', 'enterprise-dashboard', 'analiticos', 'noticias', 'ecosistema', 'partners',
-  'ia-empresarial', 'termometro-ia', 'hackaton',
+  'ia-empresarial', 'ia-por-sector', 'termometro-ia', 'hackaton',
   'empleados-digitales', 'agente-33', 'lumel', 'pildoras-ia', 'ciberseguridad',
   'embajadores', 'academia', 'networking', 'blog', 'sala-prensa',
 ];
@@ -148,6 +147,7 @@ function App() {
       ecosistema: 'Ecosistema',
       partners: 'Partners',
       'ia-empresarial': 'I.A. Empresarial',
+      'ia-por-sector': 'IA por Sector',
       'termometro-ia': 'Termómetro IA',
       hackaton: 'Hackaton Intel',
       'empleados-digitales': 'Empleados Digitales',
@@ -200,6 +200,9 @@ function App() {
         
         {/* 9. IA Empresarial */}
         <div id="ia-empresarial"><IAEmpresarial /></div>
+        
+        {/* 9.5 IA por Sector */}
+        <div id="ia-por-sector"><IAporSector /></div>
         
         {/* 10. Termómetro IA */}
         <div id="termometro-ia"><TermometroIAMexico /></div>
