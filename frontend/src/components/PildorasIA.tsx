@@ -277,11 +277,58 @@ const PildorasIA = () => {
 
       {selectedVideo && (() => {
         const pildora = PILDORAS_DATA.find(p => p.id === selectedVideo);
+        if (!pildora) return null;
         return (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ background: 'rgba(0,0,0,0.9)', backdropFilter: 'blur(10px)' }} onClick={closeVideoModal}>
-            <div className="modal-in relative w-full max-w-4xl rounded-2xl overflow-hidden bg-black" onClick={e => e.stopPropagation()}>
-              <video ref={modalVideoRef} src={pildora?.video} controls autoPlay className="w-full aspect-video" />
-              <button onClick={closeVideoModal} className="absolute top-4 right-4 text-white bg-black/50 p-2 rounded-full hover:bg-black/70 transition-colors"><X size={20} /></button>
+          <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 md:p-6" style={{ backgroundColor: 'rgba(0, 0, 0, 0.4)', backdropFilter: 'blur(8px)' }} onClick={closeVideoModal}>
+            <div className="modal-in relative w-full max-w-[850px] max-h-[90vh] bg-white rounded-[20px] overflow-hidden flex flex-col md:flex-row" style={{ boxShadow: `0 20px 60px rgba(0,0,0,0.15), 0 0 40px ${pildora.accent}20`, border: '1px solid rgba(0,0,0,0.05)' }} onClick={e => e.stopPropagation()}>
+              
+              <button onClick={closeVideoModal} className="absolute top-4 right-4 w-9 h-9 rounded-full flex items-center justify-center z-20 text-gray-800 bg-white/80 backdrop-blur-sm border border-gray-200 shadow-sm hover:bg-gray-100 transition-colors">
+                <X size={18} />
+              </button>
+              
+              {/* Left Column: Video */}
+              <div className="flex-1 bg-black relative flex items-center justify-center max-h-[50vh] md:max-h-[90vh]">
+                <video ref={modalVideoRef} src={pildora.video} controls autoPlay playsInline className="w-full h-full object-contain" />
+              </div>
+
+              {/* Right Column: Info */}
+              <div className="flex-1 p-6 md:p-8 flex flex-col bg-[#f8f9fa] overflow-y-auto">
+                <div className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-6 self-start" style={{ backgroundColor: `${pildora.accent}15`, color: pildora.accent }}>
+                  {pildora.category}
+                </div>
+                
+                <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900 mb-6 leading-tight">
+                  {pildora.title}
+                </h2>
+                
+                <div className="flex flex-col gap-4 mb-8 flex-1">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="w-2 h-2 rounded-full" style={{ backgroundColor: pildora.accent, boxShadow: `0 0 8px ${pildora.accent}` }} />
+                    <span className="text-[11px] font-bold text-gray-600 uppercase tracking-widest">Características Clave</span>
+                  </div>
+                  {pildora.features.map((feat: any, idx: number) => (
+                    <div key={idx} className="flex items-center gap-3">
+                       <div className="w-8 h-8 rounded-lg flex flex-shrink-0 items-center justify-center bg-white border border-gray-100 shadow-sm">
+                         <svg className="w-4 h-4" style={{ color: pildora.accent === '#a3e635' ? '#65a30d' : pildora.accent }} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" /></svg>
+                       </div>
+                       <span className="text-[14px] font-medium text-gray-700">{feat}</span>
+                    </div>
+                  ))}
+                </div>
+                
+                <div className="mt-auto pt-6 border-t border-gray-200">
+                  <div className="flex items-end justify-between mb-5">
+                    <div>
+                      <div className="text-xs font-semibold text-gray-500 mb-1 tracking-wider uppercase">Inversión Mensual</div>
+                      <div className="text-3xl font-extrabold text-gray-900">$1,900 <span className="text-sm font-normal text-gray-500">MXN</span></div>
+                    </div>
+                  </div>
+                  <button onClick={openWA} className="btn-spring w-full py-4 rounded-xl font-bold text-white flex items-center justify-center gap-2" style={{ background: pildora.accent === '#a3e635' ? 'linear-gradient(135deg, #a3e635, #65a30d)' : 'linear-gradient(135deg, #22d3ee, #0891b2)', boxShadow: `0 8px 20px ${pildora.accent}40` }}>
+                    Implementar ahora
+                  </button>
+                </div>
+              </div>
+
             </div>
           </div>
         );
