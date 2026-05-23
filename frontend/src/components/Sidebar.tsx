@@ -174,7 +174,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeSection, onSectionChange
       <div
         style={{
           flexShrink: 0,
-          background: '#000000',
+          background: 'gray',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
