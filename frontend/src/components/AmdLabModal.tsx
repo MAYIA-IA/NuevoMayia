@@ -57,7 +57,7 @@ const AmdLabModal: React.FC<AmdLabModalProps> = ({ isOpen, onClose }) => {
           width: '100%',
           maxWidth: '850px',
           maxHeight: '90vh',
-          backgroundColor: '#ffffff', // Fondo blanco limpio
+          backgroundColor: '#ffffff', 
           borderRadius: '20px',
           border: `1px solid rgba(0,0,0,0.05)`,
           boxShadow: `0 20px 60px rgba(0,0,0,0.15), 0 0 40px rgba(237,28,36,0.05)`,
@@ -205,7 +205,7 @@ const AmdLabModal: React.FC<AmdLabModalProps> = ({ isOpen, onClose }) => {
                 e.currentTarget.style.boxShadow = `0 4px 14px ${amdRed}40`;
               }}
             >
-              Contacta para agendar prueba
+              Contactanos para agendar prueba
               <ArrowRight size={16} />
             </button>
           </div>
