@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Clock } from "lucide-react";
 import { cursos } from "../data/cursosAcademia";
 import type { Curso } from "../data/cursosAcademia";
+import academiaLogo from "../assets/logosNativos/academia-horizontal.png";
 
 const WA_URL = 'https://api.whatsapp.com/send/?phone=525553315526&text&type=phone_number&app_absent=0';
 const openWA = () => window.open(WA_URL, '_blank', 'noopener,noreferrer');
@@ -113,9 +114,9 @@ const AcademiaIA = () => {
                 <span className="text-xs font-semibold text-gray-700 tracking-wide">Formación Profesional en IA</span>
               </div>
 
-              <h2 className="text-4xl md:text-5xl 2xl:text-6xl font-extrabold mb-3 leading-tight text-gray-900">
-                Academia <span className="bg-gradient-to-r from-lime-500 via-cyan-500 to-lime-500 bg-clip-text text-transparent">MAYiA®</span>
-              </h2>
+              <div className="mb-3">
+                <img src={academiaLogo} alt="Academia MAYiA" className="h-12 md:h-16 2xl:h-20 object-contain" />
+              </div>
 
               <p className="text-sm md:text-base text-gray-600 max-w-lg mb-6 leading-relaxed">
                 Formación especializada en Inteligencia Artificial aplicada a negocio, industria y sector público con los mejores expertos certificados del mercado.
