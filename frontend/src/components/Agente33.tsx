@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Shield, Zap, Target, Activity, Code, Cpu, ShieldAlert, ArrowRight } from 'lucide-react';
 
 const FEATURES = [
@@ -9,8 +8,6 @@ const FEATURES = [
 ];
 
 const Agente33 = () => {
-  const [hoveredFeature, setHoveredFeature] = useState<number | null>(null);
-
   return (
     <section className="relative w-full py-24 bg-white overflow-hidden text-gray-600 font-sans">
       
@@ -51,8 +48,6 @@ const Agente33 = () => {
                 <div 
                   key={idx} 
                   className="group flex items-start gap-4 p-4 rounded-2xl transition-all duration-300 hover:bg-gray-50 border border-transparent hover:border-gray-200"
-                  onMouseEnter={() => setHoveredFeature(idx)}
-                  onMouseLeave={() => setHoveredFeature(null)}
                 >
                   <div className="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center shrink-0 border border-emerald-200 group-hover:scale-110 transition-transform">
                     <feat.icon size={20} className="text-emerald-600" />
