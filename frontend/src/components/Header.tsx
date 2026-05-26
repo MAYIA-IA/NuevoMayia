@@ -8,7 +8,6 @@ import {
   Bot,
   CalendarDays,
   Sparkles,
-  MessageCircle,
   Mail,
   Phone,
 } from 'lucide-react';

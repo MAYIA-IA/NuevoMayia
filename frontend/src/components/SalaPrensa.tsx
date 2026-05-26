@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Download, FileText, Mail, Phone, ExternalLink, Globe, PlayCircle, Mic, User } from 'lucide-react';
+import { Download, FileText, Mail, Phone, Globe, PlayCircle, Mic, User } from 'lucide-react';
 
 const COMUNICADOS = [
   {

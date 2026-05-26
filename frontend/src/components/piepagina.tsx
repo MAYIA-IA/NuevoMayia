@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Heart } from 'lucide-react';
 import hechoEnMexicoLogo from '../assets/logosNativos/hechoEnMexicoRed.jpg';
 
 const Footer = () => {
