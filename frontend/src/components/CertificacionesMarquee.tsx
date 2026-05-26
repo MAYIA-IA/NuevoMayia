@@ -1,19 +1,36 @@
+import imgFirst from '../assets/ISOS/FIRST.avif';
+import imgIqnet from '../assets/ISOS/IQNET RCMark_NegCMYK.avif';
+import imgIso27001 from '../assets/ISOS/ISO 27001 - Negro_edited.avif';
+import imgKaspersky from '../assets/ISOS/KASPERSKy.avif';
+import imgNetwork from '../assets/ISOS/Network_Security_Badge.avif';
+import imgPcnse from '../assets/ISOS/PCNSE.avif';
+import imgIso27034 from '../assets/ISOS/ISO_27034.svg';
+import imgIso27017 from '../assets/ISOS/ISO_27017.svg';
+import imgIso9001 from '../assets/ISOS/ISO_9001.svg';
+import imgIso37001 from '../assets/ISOS/ISO_37001.svg';
+import imgIso42001 from '../assets/ISOS/ISO_42001.svg';
+import imgIso27018 from '../assets/ISOS/ISO_27018.svg';
+import imgSoc2 from '../assets/ISOS/SOC_2.svg';
+
 export default function CertificacionesMarquee() {
   type CertEntry =
     | { type: 'logo'; name: string; img: string; dark?: boolean }
     | { type: 'badge'; name: string; sub: string; color: string };
 
   const certifications: CertEntry[] = [
-    { type: 'badge', name: 'ISO', sub: '27001', color: '#a3e635' },
-    { type: 'badge', name: 'ISO', sub: '27034', color: '#22d3ee' },
-    { type: 'badge', name: 'ISO', sub: '27017', color: '#a3e635' },
-    { type: 'badge', name: 'ISO', sub: '9001',  color: '#22d3ee' },
-    { type: 'badge', name: 'ISO', sub: '37001', color: '#a3e635' },
-    { type: 'badge', name: 'ISO', sub: '42001', color: '#22d3ee' },
-    { type: 'badge', name: 'ISO', sub: '27018', color: '#a3e635' },
-    { type: 'badge', name: 'SOC', sub: '2',     color: '#818cf8' },
-    { type: 'badge', name: 'IQNet', sub: 'RCMark', color: '#374151' },
-    { type: 'badge', name: 'PCNSE', sub: 'Cert', color: '#374151' },
+    { type: 'logo', name: 'FIRST', img: imgFirst, dark: true },
+    { type: 'logo', name: 'IQNET', img: imgIqnet, dark: true },
+    { type: 'logo', name: 'ISO 27001', img: imgIso27001, dark: true },
+    { type: 'logo', name: 'KASPERSKY', img: imgKaspersky },
+    { type: 'logo', name: 'Network Security', img: imgNetwork },
+    { type: 'logo', name: 'PCNSE', img: imgPcnse },
+    { type: 'logo', name: 'ISO 27034', img: imgIso27034 },
+    { type: 'logo', name: 'ISO 27017', img: imgIso27017 },
+    { type: 'logo', name: 'ISO 9001', img: imgIso9001 },
+    { type: 'logo', name: 'ISO 37001', img: imgIso37001 },
+    { type: 'logo', name: 'ISO 42001', img: imgIso42001 },
+    { type: 'logo', name: 'ISO 27018', img: imgIso27018 },
+    { type: 'logo', name: 'SOC 2', img: imgSoc2 },
   ];
 
   // Duplicamos los elementos para crear el efecto de scroll infinito continuo
@@ -54,13 +71,13 @@ export default function CertificacionesMarquee() {
           >
             {cert.type === 'logo' ? (
               <div
-                className="flex items-center justify-center transform transition-all duration-300 group-hover:scale-110 shadow-sm rounded-xl overflow-hidden"
-                style={{ width: 90, height: 50, background: cert.dark ? 'rgba(255,255,255,0.03)' : 'transparent', padding: '6px' }}
+                className="flex items-center justify-center transform transition-all duration-300 group-hover:scale-110 rounded-xl overflow-hidden"
+                style={{ width: 90, height: 75, background: cert.dark ? '#111827' : 'transparent', padding: '6px' }}
               >
                 <img 
                   src={cert.img} 
                   alt={cert.name} 
-                  className="max-w-full max-h-full object-contain filter grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300" 
+                  className="max-w-full max-h-full object-contain filter transition-all duration-300" 
                 />
               </div>
             ) : (

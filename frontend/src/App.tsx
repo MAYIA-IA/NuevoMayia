@@ -24,7 +24,6 @@ const EmpleadosDigitales = lazy(() => import('./components/EmpleadosDigitales'))
 const PildorasIA = lazy(() => import('./components/PildorasIA'));
 const CiberseguridadIA = lazy(() => import('./components/CiberseguridadIA'));
 const AcademiaIA = lazy(() => import('./components/AcademiaIA'));
-const BrandFooter = lazy(() => import('./components/brandFooter'));
 const Footer = lazy(() => import('./components/piepagina'));
 const EmbajadoresMayia = lazy(() => import('./components/EmbajadoresMayia'));
 const HackatonMarketplace = lazy(() => import('./components/HackatonMarketplace'));
@@ -233,7 +232,6 @@ function App() {
         <div id="hackaton"><HackatonMarketplace /></div>
         
         {/* 18. Footer */}
-        <BrandFooter />
         <Footer />
       </div>
     </Suspense>

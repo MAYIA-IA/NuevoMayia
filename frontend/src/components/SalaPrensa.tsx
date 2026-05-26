@@ -155,14 +155,7 @@ const SalaPrensa = () => {
               </div>
             </div>
 
-            {/* RRSS Link */}
-            <a href="https://www.linkedin.com/company/mayia-edgenet/" target="_blank" rel="noopener noreferrer" className="flex items-center justify-between p-6 bg-gray-50 border border-gray-200 rounded-2xl hover:bg-gray-100 hover:border-gray-300 transition-all group">
-              <span className="font-bold text-gray-700 group-hover:text-gray-900">Síguenos en LinkedIn</span>
-              <ExternalLink size={18} className="text-gray-400 group-hover:text-cyan-500" />
-            </a>
-
           </div>
-
         </div>
       </div>
     </section>

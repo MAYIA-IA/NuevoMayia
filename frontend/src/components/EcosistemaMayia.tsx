@@ -51,9 +51,9 @@ const PARTNERS: Partner[] = [
     url: 'https://www.lenovo.com',
   },
   {
-    name: 'VATYCS',
+    name: 'VALTYCS',
     desc: 'Consultoría estratégica para implementación de IA. Metodología de éxito y ROI medible.',
-    logoText: 'VATYCS',
+    logoText: 'VALTYCS',
     color: '#0a8c5a',
     url: '#',
   },

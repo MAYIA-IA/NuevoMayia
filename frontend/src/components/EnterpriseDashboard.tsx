@@ -7,6 +7,7 @@ import {
 import mayiaLogoBlanco from '../assets/logosNativos/mayiaLogoBlanco.png';
 import flaiLogo from '../assets/logosNativos/logo-FLAI.png';
 import flaiNubeIcon from '../assets/logosNativos/1. NUBE_FINAL_FLAI (1).png';
+import mayiaLakeImg from '../assets/logosNativos/MAYiA_LAKE.jpeg';
 
 const CATEGORIES = ['Infraestructura', 'Desarrollo', 'Operación', 'Monitoreo', 'Capacitación'];
 
@@ -213,7 +214,7 @@ export default function EnterpriseDashboard() {
                 <div style={{ width: 48, height: 48, borderRadius: 12, background: '#f3e8ff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <ShieldAlert size={24} color="#9333ea" />
                 </div>
-                <h3 style={{ fontSize: 20, fontWeight: 600, color: '#111827', margin: 0, lineHeight: 1.2 }}>Soc IA<br/>Ciberseguridad</h3>
+                <h3 style={{ fontSize: 20, fontWeight: 600, color: '#111827', margin: 0, lineHeight: 1.2 }}>SOC IA<br/>Ciberseguridad</h3>
               </div>
               <p style={{ fontSize: 14, color: '#374151', lineHeight: 1.5, margin: '0 0 20px' }}>
                 Protege tu empresa con un centro de monitoreo inteligente. Detecta amenazas, responde más rápido y fortalece tu seguridad digital con IA en tiempo real.
@@ -237,7 +238,17 @@ export default function EnterpriseDashboard() {
 
           {/* --- Desarrollo --- */}
           <Wrapper category="Desarrollo">
-            <StandardCard icon={Database} color="#ca8a04" bg="#fef08a" title="Mayia Lake Analíticos" desc="Convierte tus datos en decisiones inteligentes. Descubre oportunidades ocultas, anticipa riesgos y visualiza el crecimiento de tu negocio con analítica impulsada por IA." />
+            <div style={{ background: '#ffffff', borderRadius: 16, padding: 24, border: '1px solid #e5e7eb', boxShadow: '0 4px 12px rgba(0,0,0,0.03)', display: 'flex', flexDirection: 'column', height: '100%' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 16 }}>
+                <div style={{ width: 48, height: 48, borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, overflow: 'hidden' }}>
+                  <img src={mayiaLakeImg} alt="Mayia Lake" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                </div>
+                <h3 style={{ fontSize: 20, fontWeight: 600, color: '#111827', margin: 0, lineHeight: 1.2 }}>Mayia Lake Analíticos</h3>
+              </div>
+              <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.6, margin: 0 }}>
+                Convierte tus datos en decisiones inteligentes. Descubre oportunidades ocultas, anticipa riesgos y visualiza el crecimiento de tu negocio con analítica impulsada por IA.
+              </p>
+            </div>
           </Wrapper>
           <Wrapper category="Desarrollo">
             <StandardCard icon={Briefcase} color="#2563eb" bg="#dbeafe" title="Desarrollo IA Empresarial" desc="Diseñamos soluciones de IA personalizadas que optimizan procesos, mejoran la toma de decisiones y generan un retorno de inversión claro y medible." />

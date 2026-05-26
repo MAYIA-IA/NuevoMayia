@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import MusculoModal from './MusculoModal';
+import edgeNetLogo from '../assets/logosNativos/logo-EdgeNet-fondo-oscuro.png';
+import flaiNubeIcon from '../assets/logosNativos/1. NUBE_FINAL_FLAI (1).png';
 
 /* ── Data ────────────────────────────────────────────────────────────────── */
 interface Musculo {
@@ -18,28 +20,7 @@ const musculos: Musculo[] = [
     title: 'MAYiA Vive en 30 Centros de Datos Edgenet',
     desc: 'Red distribuida de infraestructura de alta disponibilidad ubicada estratégicamente en todo el país.',
     icon: (
-      <svg className="w-full h-full drop-shadow-md tech-illustration-element" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="grad01" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="#5aab00" stopOpacity="0.9" />
-            <stop offset="100%" stopColor="#7EBB2A" stopOpacity="0.2" />
-          </linearGradient>
-        </defs>
-        {/* Server Rack Box */}
-        <rect x="35" y="15" width="30" height="50" rx="4" fill="url(#grad01)" stroke="#5aab00" strokeWidth="2" />
-        {/* Server Blades */}
-        <rect x="39" y="22" width="22" height="6" rx="1" fill="#0B0F19" stroke="#5aab00" strokeWidth="1" />
-        <rect x="39" y="32" width="22" height="6" rx="1" fill="#0B0F19" stroke="#5aab00" strokeWidth="1" />
-        <rect x="39" y="42" width="22" height="6" rx="1" fill="#0B0F19" stroke="#5aab00" strokeWidth="1" />
-        <rect x="39" y="52" width="22" height="6" rx="1" fill="#0B0F19" stroke="#5aab00" strokeWidth="1" />
-        {/* Blinking LEDs */}
-        <circle cx="56" cy="25" r="1.5" fill="#fff" className="animate-pulse" />
-        <circle cx="56" cy="35" r="1.5" fill="#fff" />
-        <circle cx="56" cy="45" r="1.5" fill="#fff" className="animate-pulse" />
-        <circle cx="56" cy="55" r="1.5" fill="#fff" />
-        {/* Network Base */}
-        <path d="M20 70 L80 70" stroke="#5aab00" strokeWidth="2" strokeDasharray="4 4" />
-      </svg>
+      <img src={edgeNetLogo} alt="EdgeNet" className="w-full h-full object-contain drop-shadow-md tech-illustration-element" />
     ),
     accent: '#5aab00', glow: 'rgba(90,171,0,0.22)', tag: 'Infraestructura',
   },
@@ -139,7 +120,7 @@ const musculos: Musculo[] = [
   },
   {
     id: '06',
-    title: 'Consultoría VATYCS',
+    title: 'Consultoría VALTYCS',
     desc: 'Estrategia, gobierno e implementación. Llevamos a tu organización de la visión al valor real.',
     icon: (
       <svg className="w-full h-full drop-shadow-md tech-illustration-element" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -239,21 +220,7 @@ const musculos: Musculo[] = [
     title: 'Nube Soberana',
     desc: 'Datos y cómputo en México. Cumplimiento regulatorio, latencia óptima y control total.',
     icon: (
-      <svg className="w-full h-full drop-shadow-md tech-illustration-element" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="grad10" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#007a6e" stopOpacity="0.9" />
-            <stop offset="100%" stopColor="#00d2d3" stopOpacity="0.2" />
-          </linearGradient>
-        </defs>
-        {/* Cloud Shape */}
-        <path d="M30 50 A 15 15 0 0 1 35 22 A 20 20 0 0 1 70 25 A 15 15 0 0 1 75 50 Z" fill="url(#grad10)" stroke="#007a6e" strokeWidth="2" strokeLinejoin="round" />
-        {/* Checkmark / Secure Center */}
-        <circle cx="53" cy="38" r="8" fill="#0B0F19" stroke="#00d2d3" strokeWidth="1.5" />
-        <path d="M49 38 L52 41 L57 35" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="animate-pulse" />
-        {/* Raining Data Lines */}
-        <path d="M35 55 L35 65 M45 55 L45 70 M55 55 L55 60 M65 55 L65 65" stroke="#00d2d3" strokeWidth="2" strokeLinecap="round" strokeDasharray="2 4" />
-      </svg>
+      <img src={flaiNubeIcon} alt="Nube FLAI" className="w-full h-full object-contain drop-shadow-md tech-illustration-element" />
     ),
     accent: '#007a6e', glow: 'rgba(0,122,110,0.22)', tag: 'Cloud',
   },
