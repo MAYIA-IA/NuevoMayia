@@ -300,7 +300,7 @@ const MusculoModal: React.FC<MusculoModalProps> = ({ isOpen, onClose, musculo })
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', flex: 1 }}>
-              {features.map((item, idx) => (
+              {features.map((item: any, idx: number) => (
                 <div key={idx} style={{ display: 'flex', gap: '14px', alignItems: 'flex-start' }}>
                   <div style={{ width: '40px', height: '40px', borderRadius: '10px', backgroundColor: `${accent}10`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, border: `1px solid ${accent}20` }}>
                     <item.icon color={accent} size={20} />

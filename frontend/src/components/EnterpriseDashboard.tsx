@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
-  Database, Cloud, ShieldAlert, FlaskConical, FileText, Wrench, Calendar, 
+  Database, ShieldAlert, FlaskConical, FileText, Wrench, Calendar,
   Briefcase, LineChart, ShoppingBag, GraduationCap, GitBranch, ScanEye
 } from 'lucide-react';
 import mayiaLogoBlanco from '../assets/logosNativos/mayiaLogoBlanco.png';
