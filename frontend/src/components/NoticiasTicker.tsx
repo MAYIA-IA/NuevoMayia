@@ -80,6 +80,138 @@ const newsItems: NewsItem[] = [
     time: 'Reciente',
     url: 'https://agenciaeluniversal.mx/productos/comunicado/12612',
   },
+  {
+    id: 6,
+    image: imagen1,
+    category: 'INFRAESTRUCTURA',
+    categoryColor: '#ef4444',
+    headline: 'Edgenet Data Technologies da el banderazo de salida a la primera red mexicana de centros de datos',
+    summary: 'La primera red mexicana de centros de datos de Edgenet inicia operaciones para potenciar el cómputo y la IA.',
+    source: 'eSemanal',
+    time: 'Noticia del Día',
+    url: 'https://esemanal.mx/2025/06/edgenet-data-technologies-da-el-banderazo-de-salida-la-primera-red-mexicana-de-centros-de-datos/',
+  },
+  {
+    id: 7,
+    image: imagen2,
+    category: 'CENTROS DE DATOS',
+    categoryColor: '#0071C5',
+    headline: 'Surge Edgenet primera red mexicana de centros de datos con IA',
+    summary: 'La red mexicana Edgenet habilita avanzadas capacidades de inteligencia artificial en todos sus nodos.',
+    source: 'Eje Central',
+    time: 'Noticia del Día',
+    url: 'https://www.ejecentral.com.mx/nuestro-eje/surge-edgenet-primera-red-mexicana-de-centros-de-datos-con-ia',
+  },
+  {
+    id: 8,
+    image: imagen3,
+    category: 'INNOVACIÓN',
+    categoryColor: '#a78bfa',
+    headline: 'Edgenet rompe la centralización del data center en México',
+    summary: 'Descentralizando el poder de cómputo en el país y acercando la nube al borde (edge computing).',
+    source: 'Infochannel',
+    time: 'Noticia del Día',
+    url: 'https://infochannel.info/edgenet-rompe-la-centralizacion-del-data-center-en-mexico/',
+  },
+  {
+    id: 9,
+    image: imagen4,
+    category: 'TENDENCIAS',
+    categoryColor: '#f59e0b',
+    headline: 'Centros de datos de borde crecen a doble dígito en México',
+    summary: 'El crecimiento de data centers al borde está revolucionando el sector tecnológico mexicano a ritmos acelerados.',
+    source: 'El Economista',
+    time: 'Noticia del Día',
+    url: 'https://www.eleconomista.com.mx/tecnologia/centros-datos-borde-crecen-doble-digito-mexico-20250607-762641.html',
+  },
+  {
+    id: 10,
+    image: imagen5,
+    category: 'LANZAMIENTO',
+    categoryColor: '#34d399',
+    headline: 'Edgenet centros de datos México',
+    summary: 'Continúa la expansión acelerada de la infraestructura de Edgenet en territorio nacional.',
+    source: 'ITSitio',
+    time: 'Noticia del Día',
+    url: 'https://www.itsitio.com/mx/eventos/edgenet-centros-de-datos-mexico/',
+  },
+  {
+    id: 11,
+    image: imagen1,
+    category: 'INFRAESTRUCTURA',
+    categoryColor: '#ef4444',
+    headline: 'Edgenet expande capacidad de centros de datos',
+    summary: 'Nuevos desarrollos en el ecosistema de centros de datos e infraestructura digital por parte de Edgenet.',
+    source: 'MobileTime',
+    time: 'Noticia del Día',
+    url: 'https://mobiletime.la/noticias/05/06/2025/edgenet-centros-de-datos-mexico/',
+  },
+  {
+    id: 12,
+    image: imagen2,
+    category: 'OPERACIONES',
+    categoryColor: '#0071C5',
+    headline: 'Edgenet Data Technologies inicia operaciones',
+    summary: 'Comienza formalmente operaciones Edgenet con una ambiciosa estrategia nacional.',
+    source: 'ITSeller',
+    time: 'Noticia del Día',
+    url: 'https://itseller.mx/2025/06/06/edgenet-data-technologies-inicia-operaciones/',
+  },
+  {
+    id: 13,
+    image: imagen3,
+    category: 'EXPANSIÓN',
+    categoryColor: '#a78bfa',
+    headline: 'Edgenet lanza red nacional 30 centros de datos México',
+    summary: 'Despliegue estratégico de 30 centros de datos a nivel nacional impulsando la conectividad total.',
+    source: 'DPLNews',
+    time: 'Noticia del Día',
+    url: 'https://dplnews.com/edgenet-lanza-red-nacional-30-centros-de-datos-mexico/',
+  },
+  {
+    id: 14,
+    image: imagen4,
+    category: 'PARTNERS',
+    categoryColor: '#f59e0b',
+    headline: 'Intel y Edgenet lanzan la primera red mexicana de centros de datos IA ready',
+    summary: 'Colaboración clave de Intel para lanzar la red de centros de datos optimizados exclusivamente para IA.',
+    source: 'iWorld',
+    time: 'Noticia del Día',
+    url: 'https://iworld.com.mx/intel-y-edgenet-lanzan-la-primera-red-mexicana-de-centros-de-datos-ia-ready/',
+  },
+  {
+    id: 15,
+    image: imagen5,
+    category: 'SOBERANÍA DIGITAL',
+    categoryColor: '#34d399',
+    headline: 'Edgenet, VCP Tecnología y Lenovo impulsando la soberanía tecnológica',
+    summary: 'Alianza tecnológica tripartita enfocada en impulsar la soberanía tecnológica y de datos en el país.',
+    source: 'VCP Tecnología',
+    time: 'Noticia del Día',
+    url: 'https://www.vcptecnologia.com/post/edgenet-vcp-tecnología-y-lenovo-impulsando-la-soberanía-tecnológica-en-méxico',
+  },
+  {
+    id: 16,
+    image: imagen1,
+    category: 'REGIONAL',
+    categoryColor: '#ef4444',
+    headline: 'Edgenet habilita 30 centros de datos en el país',
+    summary: 'Habilitación de tres decenas de centros de datos listos para operar y almacenar información sensible.',
+    source: 'Heraldo de México',
+    time: 'Noticia del Día',
+    url: 'https://quintanaroo.heraldodemexico.com.mx/local/2025/6/9/edgenet-habilita-30-centros-de-datos-en-el-pais-9867.html',
+  },
+  {
+    id: 17,
+    image: imagen2,
+    category: 'LIDERAZGO',
+    categoryColor: '#0071C5',
+    headline: 'Edgenet lanza 30 centros de datos y se posiciona como líder en México',
+    summary: 'Consolidación de liderazgo absoluto en infraestructura de centros de datos distribuidos.',
+    source: 'Dinero en Imagen',
+    time: 'Noticia del Día',
+    url: 'https://www.dineroenimagen.com/hacker/edgenet-lanza-30-centros-de-datos-y-se-posiciona-como-lider-en-mexico/176716',
+  }
 ];
 
 /* ── Ticker horizontal (barra superior) ─────────────────────────── */
@@ -154,8 +286,8 @@ function NewsTicker() {
   );
 }
 
-/* ── Componente principal ────────────────────────────────────────── */
-export default function NoticiasTicker() {
+/* ── Componente de Bloque de Noticias ───────────────────────────── */
+function NewsBlock({ title, items }: { title: string; items: NewsItem[] }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -163,50 +295,48 @@ export default function NoticiasTicker() {
   useEffect(() => {
     if (!isPaused) {
       intervalRef.current = setInterval(() => {
-        setCurrentIndex(prev => (prev + 1) % newsItems.length);
+        setCurrentIndex(prev => (prev + 1) % items.length);
       }, 5000);
     }
     return () => { if (intervalRef.current) clearInterval(intervalRef.current); };
-  }, [isPaused]);
+  }, [isPaused, items.length]);
 
   const goTo = (i: number) => setCurrentIndex(i);
-  const item = newsItems[currentIndex];
+  const item = items[currentIndex] || items[0];
 
   return (
-    <div style={{ background: '#ffffff' }}>
-      {/* Barra de ticker */}
-      <NewsTicker />
-
-      {/* Header de sección */}
-      <div style={{ padding: '40px 40px 24px', maxWidth: 1400, margin: '0 auto' }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-            <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#A4D955', boxShadow: '0 0 8px #A4D955', animation: 'pulse 1.5s infinite' }} />
-            <span style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#6b7280' }}>MAYIA EN MEDIOS · NOTICIAS INDEXADAS</span>
-          </div>
-          <div style={{ display: 'flex', gap: 8 }}>
-            {newsItems.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => goTo(i)}
-                style={{
-                  width: i === currentIndex ? 28 : 8,
-                  height: 8,
-                  borderRadius: 99,
-                  border: 'none',
-                  background: i === currentIndex ? '#A4D955' : '#e5e7eb',
-                  cursor: 'pointer',
-                  transition: 'all 0.3s ease',
-                }}
-              />
-            ))}
-          </div>
+    <div style={{ padding: '0 40px 40px', maxWidth: 1400, margin: '0 auto' }}>
+      {/* Header del bloque */}
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12, marginBottom: 24 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+          <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#A4D955', boxShadow: '0 0 8px #A4D955', animation: 'pulse 1.5s infinite' }} />
+          <span style={{ fontSize: 13, fontWeight: 800, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#111827' }}>
+            {title}
+          </span>
+        </div>
+        <div style={{ display: 'flex', gap: 8, overflowX: 'auto', paddingBottom: 4, maxWidth: '50vw' }} className="hide-scrollbar">
+          {items.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => goTo(i)}
+              style={{
+                flexShrink: 0,
+                width: i === currentIndex ? 28 : 8,
+                height: 8,
+                borderRadius: 99,
+                border: 'none',
+                background: i === currentIndex ? '#A4D955' : '#e5e7eb',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+              }}
+            />
+          ))}
         </div>
       </div>
 
       {/* Main content */}
       <div
-        style={{ padding: '0 40px 40px', maxWidth: 1400, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 340px', gap: 24 }}
+        style={{ display: 'grid', gridTemplateColumns: '1fr 340px', gap: 24 }}
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
       >
@@ -216,13 +346,13 @@ export default function NoticiasTicker() {
             position: 'relative',
             borderRadius: 20,
             overflow: 'hidden',
-            height: 440,
+            height: 480,
             cursor: 'pointer',
             boxShadow: '0 8px 40px rgba(0,0,0,0.12)',
           }}
         >
           {/* Imagen con transición */}
-          {newsItems.map((n, idx) => (
+          {items.map((n, idx) => (
             <img
               key={n.id}
               src={n.image}
@@ -241,13 +371,13 @@ export default function NoticiasTicker() {
           {/* Overlay gradiente */}
           <div style={{
             position: 'absolute', inset: 0,
-            background: 'linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.4) 40%, transparent 70%)',
+            background: 'linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.5) 50%, transparent 80%)',
           }} />
 
           {/* Contenido sobre la imagen */}
-          <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '28px 32px' }}>
+          <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '32px 36px' }}>
             {/* Fuente y tiempo */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 10 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 12 }}>
               <span style={{
                 fontSize: 9, fontWeight: 800, letterSpacing: '0.15em',
                 textTransform: 'uppercase', padding: '3px 10px',
@@ -266,20 +396,20 @@ export default function NoticiasTicker() {
                   {item.badge}
                 </span>
               )}
-              <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)', marginLeft: 'auto' }}>
+              <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.7)', marginLeft: 'auto', fontWeight: 600 }}>
                 {item.source} · {item.time}
               </span>
             </div>
 
             <h2 style={{
-              fontSize: 24, fontWeight: 800, color: '#ffffff',
-              lineHeight: 1.3, marginBottom: 10,
+              fontSize: 28, fontWeight: 800, color: '#ffffff',
+              lineHeight: 1.3, marginBottom: 12,
               textShadow: '0 2px 12px rgba(0,0,0,0.5)',
             }}>
               {item.headline}
             </h2>
 
-            <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.72)', lineHeight: 1.6, maxWidth: 600 }}>
+            <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.85)', lineHeight: 1.6, maxWidth: 650 }}>
               {item.summary}
             </p>
 
@@ -288,15 +418,15 @@ export default function NoticiasTicker() {
               target="_blank"
               rel="noopener noreferrer"
               style={{
-              marginTop: 16,
+              marginTop: 20,
               display: 'inline-flex', alignItems: 'center', gap: 6,
-              padding: '10px 20px', borderRadius: 10, border: 'none',
+              padding: '12px 24px', borderRadius: 12, border: 'none',
               background: '#A4D955', color: '#0A0A14', textDecoration: 'none',
               fontWeight: 700, fontSize: 12, cursor: 'pointer',
               transition: 'all 0.2s',
             }}>
               Leer noticia completa
-              <svg width={12} height={12} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg width={14} height={14} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </a>
@@ -304,8 +434,8 @@ export default function NoticiasTicker() {
         </div>
 
         {/* Lista lateral de noticias */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-          {newsItems.map((n, i) => (
+        <div className="custom-news-scrollbar" style={{ display: 'flex', flexDirection: 'column', gap: 12, maxHeight: 480, overflowY: 'auto', paddingRight: 10 }}>
+          {items.map((n, i) => (
             <button
               key={n.id}
               onClick={() => goTo(i)}
@@ -318,6 +448,7 @@ export default function NoticiasTicker() {
                 outline: i === currentIndex ? '2px solid #A4D955' : '2px solid transparent',
                 outlineOffset: 1,
                 boxShadow: i === currentIndex ? '0 4px 16px rgba(164,217,85,0.15)' : 'none',
+                flexShrink: 0
               }}
             >
               <img
@@ -341,7 +472,7 @@ export default function NoticiasTicker() {
                 }}>
                   {n.headline}
                 </p>
-                <span style={{ fontSize: 10, color: '#9ca3af', marginTop: 4, display: 'block' }}>
+                <span style={{ fontSize: 10, color: '#9ca3af', marginTop: 4, display: 'block', fontWeight: 600 }}>
                   {n.source} · {n.time}
                 </span>
               </div>
@@ -349,10 +480,35 @@ export default function NoticiasTicker() {
           ))}
         </div>
       </div>
+    </div>
+  );
+}
 
+/* ── Componente principal ────────────────────────────────────────── */
+export default function NoticiasTicker() {
+  const typedNewsItems = newsItems.map(n => ({ ...n, type: n.id <= 5 ? 'MAYIA' : 'EDGENET' }));
+  const mayiaNews = typedNewsItems.filter(n => n.type === 'MAYIA');
+  const edgenetNews = typedNewsItems.filter(n => n.type === 'EDGENET');
 
+  return (
+    <div style={{ background: '#ffffff', paddingBottom: 40 }}>
+      {/* Barra de ticker */}
+      <NewsTicker />
 
-      <style>{`@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }`}</style>
+      <div style={{ paddingTop: 40 }}>
+        <NewsBlock title="MAYiA NOTICIAS" items={mayiaNews} />
+        <NewsBlock title="EDGENET NOTICIAS" items={edgenetNews} />
+      </div>
+
+      <style>{`
+        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { scrollbar-width: none; }
+        .custom-news-scrollbar::-webkit-scrollbar { width: 5px; }
+        .custom-news-scrollbar::-webkit-scrollbar-track { background: #f3f4f6; border-radius: 10px; }
+        .custom-news-scrollbar::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 10px; }
+        .custom-news-scrollbar::-webkit-scrollbar-thumb:hover { background: #9ca3af; }
+      `}</style>
     </div>
   );
 }
