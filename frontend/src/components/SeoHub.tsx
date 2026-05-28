@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import {
   Newspaper, Radio, Mic2, Medal,
   Cpu, Building2, HelpCircle,

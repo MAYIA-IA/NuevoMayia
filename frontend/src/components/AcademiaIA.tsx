@@ -8,40 +8,8 @@ const WA_URL = 'https://api.whatsapp.com/send/?phone=525553315526&text&type=phon
 const openWA = () => window.open(WA_URL, '_blank', 'noopener,noreferrer');
 
 const AcademiaIA = () => {
-  const [hoveredFeature, setHoveredFeature] = useState<number | null>(null);
   const [showAllCourses, setShowAllCourses] = useState(false);
   const [expandedCourseId, setExpandedCourseId] = useState<number | null>(null);
-
-  const features = [
-    {
-      id: 1,
-      icon: "M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253",
-      title: "Certificaciones",
-      description: "Programas avalados.",
-      color: "from-cyan-500 to-blue-600"
-    },
-    {
-      id: 2,
-      icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z",
-      title: "Expertos",
-      description: "Instructores élite.",
-      color: "from-lime-500 to-green-600"
-    },
-    {
-      id: 3,
-      icon: "M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z",
-      title: "Casos Reales",
-      description: "Proyectos prácticos.",
-      color: "from-purple-500 to-pink-600"
-    },
-    {
-      id: 4,
-      icon: "M13 10V3L4 14h7v7l9-11h-7z",
-      title: "Implementación",
-      description: "Directo a producción.",
-      color: "from-orange-500 to-red-600"
-    }
-  ];
 
   const stats = [
     { value: "500+", label: "Empresas capacitadas" },
