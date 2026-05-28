@@ -1,6 +1,6 @@
 /* PartnersSection.tsx – fondo blanco premium */
 import { useState } from 'react';
-import { Zap, Cpu, Server, Atom } from 'lucide-react';
+import { Zap, Cpu, Server, Atom, ChevronDown, ChevronUp } from 'lucide-react';
 
 const PARTNERS = [
   { name: 'AMD',       tagline: 'Procesadores IA de alto rendimiento',        color: '#ED1C24', logoText: 'AMD',      stat: '4x',    statLabel: 'más rendimiento IA',   icon: Zap, description: 'Arquitectura RDNA y EPYC diseñada para workloads de inteligencia artificial en producción.' },
@@ -15,10 +15,57 @@ const css = `
   @keyframes ps-glow    { 0%,100%{box-shadow:0 8px 30px rgba(164,217,85,.2)} 50%{box-shadow:0 8px 50px rgba(164,217,85,.45)} }
   .ps-card { animation: ps-fadeup .55s ease both; }
   .ps-cta-btn:hover { transform:translateY(-2px)!important; box-shadow:0 14px 40px rgba(164,217,85,.5)!important; }
+  .ps-layout {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    gap: 48px;
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .ps-left {
+    flex: 1 1 350px;
+    max-width: 450px;
+  }
+  .ps-right {
+    flex: 1.5 1 500px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .ps-text-col {
+    text-align: left;
+  }
+  @media (max-width: 1024px) {
+    .ps-layout {
+      flex-direction: column;
+      gap: 32px;
+    }
+    .ps-left {
+      max-width: 100%;
+    }
+    .ps-right {
+      width: 100%;
+      flex: 1 1 auto;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+    .ps-text-col {
+      text-align: center;
+    }
+    .ps-left-cta {
+      justify-content: center;
+    }
+  }
 `;
 
 export default function PartnersSection() {
   const [hov, setHov] = useState<string | null>(null);
+  const [expandedPartner, setExpandedPartner] = useState<string | null>(null);
 
   return (
     <section style={{ background: 'linear-gradient(180deg,#ffffff 0%,#f8fdf1 50%,#ffffff 100%)', padding: '100px 40px', position: 'relative', overflow: 'hidden' }}>
@@ -34,83 +81,103 @@ export default function PartnersSection() {
         </svg>
       </div>
 
-      <div style={{ maxWidth:1200, margin:'0 auto', position:'relative', zIndex:1 }}>
-        {/* Header */}
-        <div style={{ textAlign:'center', marginBottom:64 }}>
+      <div className="ps-layout">
+        {/* Left Col */}
+        <div className="ps-text-col ps-left">
           <div style={{ display:'inline-flex', alignItems:'center', gap:10, padding:'6px 20px', borderRadius:99, background:'rgba(164,217,85,.12)', border:'1px solid rgba(164,217,85,.4)', marginBottom:20 }}>
             <div style={{ width:7, height:7, borderRadius:'50%', background:'#65a30d', animation:'ps-pulse 2s infinite' }} />
             <span style={{ fontSize:11, fontWeight:800, letterSpacing:'0.18em', textTransform:'uppercase', color:'#4d7c0f' }}>Alianzas tecnológicas</span>
           </div>
-          <h2 style={{ fontSize:'clamp(28px,4vw,44px)', fontWeight:900, margin:'0 0 16px', color:'#111827', lineHeight:1.1 }}>
+          <h2 style={{ fontSize:'clamp(28px,4vw,36px)', fontWeight:900, margin:'0 0 16px', color:'#111827', lineHeight:1.1 }}>
             Infraestructura respaldada<br />
             <span style={{ background:'linear-gradient(135deg,#4d7c0f,#A4D955)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text' }}>por los mejores del mundo</span>
           </h2>
-          <p style={{ fontSize:15, color:'#6b7280', maxWidth:540, margin:'0 auto', lineHeight:1.7 }}>
+          <p style={{ fontSize:15, color:'#6b7280', maxWidth:'100%', margin:'0 0 24px', lineHeight:1.6 }}>
             MAYiA opera con hardware de clase <strong style={{ color:'#4d7c0f' }}>enterprise</strong> y acceso a tecnologías de frontera para garantizar el más alto rendimiento en IA.
           </p>
-        </div>
 
-        {/* Cards */}
-        <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(260px,1fr))', gap:24 }}>
-          {PARTNERS.map((p, i) => (
-            <div key={p.name} className="ps-card group"
-              style={{
-                animationDelay:`${i*.1}s`,
-                background: hov===p.name ? '#ffffff' : '#ffffff',
-                border:`1.5px solid ${hov===p.name ? p.color+'60' : '#e5e7eb'}`,
-                borderRadius:24, padding:'32px 28px',
-                boxShadow: hov===p.name ? `0 20px 60px ${p.color}18, 0 0 0 1px ${p.color}15` : '0 2px 16px rgba(0,0,0,.06)',
-                transform: hov===p.name ? 'translateY(-8px)' : 'translateY(0)',
-                transition:'all .35s cubic-bezier(.23,1,.32,1)',
-                cursor:'default', position:'relative', overflow:'hidden',
-              }}
-              onMouseEnter={()=>setHov(p.name)} onMouseLeave={()=>setHov(null)}
+          <div className="ps-left-cta" style={{ display: 'flex', marginTop: 16 }}>
+            <a href="https://api.whatsapp.com/send/?phone=525553315526" target="_blank" rel="noopener noreferrer" className="ps-cta-btn"
+              style={{ display:'inline-flex', alignItems:'center', gap:10, padding:'12px 28px', borderRadius:14, background:'linear-gradient(135deg,#A4D955,#65a30d)', color:'#fff', fontWeight:800, fontSize:14, textDecoration:'none', transition:'all .3s', boxShadow:'0 8px 30px rgba(164,217,85,.3)', animation:'ps-glow 3s infinite' }}
             >
-              {/* Corner accent */}
-              <div style={{ position:'absolute', top:0, right:0, width:90, height:90, borderRadius:'0 24px 0 90px', background:`linear-gradient(225deg,${p.color}14,transparent)` }} />
-              {/* Top glow */}
-              <div style={{ position:'absolute', top:-30, right:-30, width:120, height:120, borderRadius:'50%', background:`${p.color}10`, filter:'blur(30px)', opacity: hov===p.name ? 1 : 0.3, transition:'opacity .35s' }} />
-
-              {/* Logo + badge */}
-              <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-start', marginBottom:24 }}>
-                <div style={{ fontSize:30, fontWeight:900, color:p.color, letterSpacing:'-1px', lineHeight:1 }}>{p.logoText}</div>
-                <div style={{ display:'inline-flex', alignItems:'center', gap:5, padding:'4px 12px', borderRadius:99, background:`${p.color}10`, border:`1px solid ${p.color}30` }}>
-                  <svg width={9} height={9} viewBox="0 0 20 20" fill={p.color}><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/></svg>
-                  <span style={{ fontSize:9, fontWeight:800, color:p.color, letterSpacing:'0.1em', textTransform:'uppercase' as const }}>Certificado</span>
-                </div>
-              </div>
-
-              {/* Divider */}
-              <div style={{ height:1, background:`linear-gradient(90deg,${p.color}50,transparent)`, marginBottom:20 }} />
-
-              <p style={{ fontSize:13, color:'#6b7280', margin:'0 0 12px', lineHeight:1.6, fontWeight:500 }}>{p.tagline}</p>
-              <p style={{ fontSize:12, color:'#9ca3af', margin:'0 0 24px', lineHeight:1.7 }}>{p.description}</p>
-
-              {/* Stat box */}
-              <div style={{ display:'flex', alignItems:'center', gap:12, padding:'14px 18px', borderRadius:14, background:`${p.color}08`, border:`1px solid ${p.color}20` }}>
-                <div>
-                  <div style={{ fontSize:28, fontWeight:900, color:p.color, lineHeight:1 }}>{p.stat}</div>
-                  <div style={{ fontSize:10, color:'#9ca3af', marginTop:2 }}>{p.statLabel}</div>
-                </div>
-                <div style={{ marginLeft:'auto', color:p.color }} className="group-hover:scale-110 group-hover:-rotate-12 transition-transform duration-300">
-                  <p.icon size={26} strokeWidth={2} />
-                </div>
-              </div>
-            </div>
-          ))}
+              Ser Partner MAYiA
+              <svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+            </a>
+          </div>
         </div>
 
-        {/* CTA */}
-        <div style={{ marginTop:56, textAlign:'center', padding:'32px 40px', borderRadius:24, background:'linear-gradient(135deg,rgba(164,217,85,.08),rgba(164,217,85,.03))', border:'1px solid rgba(164,217,85,.25)' }}>
-          <p style={{ fontSize:15, color:'#374151', margin:'0 0 20px' }}>
-            ¿Tu empresa quiere convertirse en <span style={{ color:'#4d7c0f', fontWeight:700 }}>partner tecnológico de MAYiA</span>?
-          </p>
-          <a href="https://api.whatsapp.com/send/?phone=525553315526" target="_blank" rel="noopener noreferrer" className="ps-cta-btn"
-            style={{ display:'inline-flex', alignItems:'center', gap:10, padding:'13px 32px', borderRadius:14, background:'linear-gradient(135deg,#A4D955,#65a30d)', color:'#fff', fontWeight:800, fontSize:14, textDecoration:'none', transition:'all .3s', boxShadow:'0 8px 30px rgba(164,217,85,.3)', animation:'ps-glow 3s infinite' }}
-          >
-            Ser Partner MAYiA
-            <svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
-          </a>
+        {/* Right Col: 2x2 Grid */}
+        <div className="ps-right">
+          {PARTNERS.map((p, i) => {
+            const isHov = hov === p.name;
+            const isExpanded = expandedPartner === p.name;
+            return (
+              <div key={p.name} className="ps-card group"
+                style={{
+                  animationDelay:`${i*.1}s`,
+                  background: isHov ? '#ffffff' : '#ffffff',
+                  border:`1.5px solid ${isHov ? p.color+'60' : '#e5e7eb'}`,
+                  borderRadius:16, padding:'16px 20px',
+                  boxShadow: isHov ? `0 12px 30px ${p.color}15, 0 0 0 1px ${p.color}15` : '0 2px 8px rgba(0,0,0,.04)',
+                  transform: isHov ? 'translateY(-4px)' : 'translateY(0)',
+                  transition:'all .35s cubic-bezier(.23,1,.32,1)',
+                  cursor:'pointer', position:'relative', overflow:'hidden',
+                  display: 'flex', flexDirection: 'column'
+                }}
+                onMouseEnter={()=>setHov(p.name)} onMouseLeave={()=>setHov(null)}
+                onClick={() => setExpandedPartner(isExpanded ? null : p.name)}
+              >
+                {/* Corner accent */}
+                <div style={{ position:'absolute', top:0, right:0, width:60, height:60, borderRadius:'0 16px 0 60px', background:`linear-gradient(225deg,${p.color}12,transparent)` }} />
+                
+                {/* Header (Always Visible) */}
+                <div style={{ display:'flex', flexWrap: 'nowrap', justifyContent:'space-between', alignItems:'center', gap: 8, zIndex: 1, position: 'relative' }}>
+                  <div style={{ fontSize:18, fontWeight:900, color:p.color, letterSpacing:'-0.5px', lineHeight:1 }}>{p.logoText}</div>
+                  
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <div style={{ display:'inline-flex', alignItems:'center', gap:4, padding:'3px 8px', borderRadius:99, background:`${p.color}10`, border:`1px solid ${p.color}25` }}>
+                      <svg width={7} height={7} viewBox="0 0 20 20" fill={p.color}><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/></svg>
+                      <span style={{ fontSize:7, fontWeight:800, color:p.color, letterSpacing:'0.05em', textTransform:'uppercase' as const }}>Certificado</span>
+                    </div>
+                    <div style={{
+                      background: isHov ? `${p.color}15` : '#f3f4f6', 
+                      borderRadius: '50%', padding: 4, display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      transition: 'all 0.3s ease'
+                    }}>
+                      {isExpanded ? <ChevronUp size={14} color={isHov ? p.color : '#9ca3af'} /> : <ChevronDown size={14} color={isHov ? p.color : '#9ca3af'} />}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Collapsible Content */}
+                <div style={{
+                  maxHeight: isExpanded ? 500 : 0,
+                  opacity: isExpanded ? 1 : 0,
+                  overflow: 'hidden',
+                  transition: 'all 0.4s cubic-bezier(0.25, 1, 0.5, 1)',
+                  marginTop: isExpanded ? 16 : 0,
+                  display: 'flex', flexDirection: 'column', flex: isExpanded ? 1 : 0
+                }}>
+                  {/* Divider */}
+                  <div style={{ height:1, background:`linear-gradient(90deg,${p.color}40,transparent)`, marginBottom:10 }} />
+
+                  <p style={{ fontSize:12, color:'#4b5563', margin:'0 0 6px', lineHeight:1.3, fontWeight:700 }}>{p.tagline}</p>
+                  <p style={{ fontSize:11, color:'#6b7280', margin:'0 0 12px', lineHeight:1.4, flex: 1 }}>{p.description}</p>
+
+                  {/* Stat box */}
+                  <div style={{ display:'flex', alignItems:'center', gap:8, padding:'10px 12px', borderRadius:12, background:`${p.color}08`, border:`1px solid ${p.color}15`, marginTop: 'auto' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                      <div style={{ fontSize:20, fontWeight:900, color:p.color, lineHeight:1 }}>{p.stat}</div>
+                      <div style={{ fontSize:8, color:'#9ca3af', marginTop:2, textTransform: 'uppercase', lineHeight: 1.1 }}>{p.statLabel}</div>
+                    </div>
+                    <div style={{ marginLeft:'auto', color:p.color, flexShrink: 0 }} className="group-hover:scale-110 group-hover:-rotate-12 transition-transform duration-300">
+                      <p.icon size={20} strokeWidth={2} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

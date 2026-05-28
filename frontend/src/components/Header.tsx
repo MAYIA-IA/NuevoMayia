@@ -8,7 +8,6 @@ import {
   Bot,
   CalendarDays,
   Sparkles,
-  MessageCircle,
   Mail,
   Phone,
 } from 'lucide-react';
@@ -182,8 +181,8 @@ export const Header: React.FC<HeaderProps> = ({ title: _title }) => {
       <header
         style={{
           height: '72px',
-          backgroundColor: '#000000',
-          borderBottom: '1px solid #1a1a1a',
+          backgroundColor: '#5a5a5a',
+          borderBottom: '1px solid rgba(0,0,0,0.2)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
@@ -212,9 +211,9 @@ export const Header: React.FC<HeaderProps> = ({ title: _title }) => {
               borderRadius: chatAbierto ? '14px 14px 0 0' : '999px',
               background: chatAbierto
                 ? colores.fondoPrincipal
-                : 'linear-gradient(135deg, #111111 0%, #1a1a1a 100%)',
-              border: `1.5px solid ${chatAbierto ? colores.primario : '#2a2a2a'}`,
-              borderBottom: chatAbierto ? `1px solid #1e1e1e` : `1.5px solid #2a2a2a`,
+                : 'linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.6) 100%)',
+              border: `1.5px solid ${chatAbierto ? colores.primario : 'rgba(255,255,255,0.15)'}`,
+              borderBottom: chatAbierto ? `1px solid #1e1e1e` : `1.5px solid rgba(255,255,255,0.15)`,
               cursor: 'text',
               transition: 'all 0.25s cubic-bezier(.23,1,.32,1)',
               boxShadow: chatAbierto
@@ -254,8 +253,8 @@ export const Header: React.FC<HeaderProps> = ({ title: _title }) => {
                   padding: '6px', display: 'flex', borderRadius: '50%',
                   transition: 'background 0.2s',
                 }}
-                onMouseEnter={e => (e.currentTarget.style.background = '#3a3a3a')}
-                onMouseLeave={e => (e.currentTarget.style.background = '#2a2a2a')}
+                onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.2)')}
+                onMouseLeave={e => (e.currentTarget.style.background = 'rgba(0,0,0,0.3)')}
               >
                 <X size={15} style={{ color: '#aaaaaa' }} />
               </button>
@@ -379,8 +378,8 @@ export const Header: React.FC<HeaderProps> = ({ title: _title }) => {
           <div style={{
             display: 'flex', alignItems: 'center', gap: '7px',
             padding: '7px 14px', borderRadius: '999px',
-            backgroundColor: '#1a1a1a',
-            border: '1px solid #333333',
+            backgroundColor: 'rgba(0,0,0,0.3)',
+            border: '1px solid rgba(255,255,255,0.15)',
             marginRight: '4px',
           }}>
             <CalendarDays size={14} style={{ color: '#888888' }} />
@@ -393,9 +392,9 @@ export const Header: React.FC<HeaderProps> = ({ title: _title }) => {
           <div ref={notifRef} style={{ position: 'relative' }}>
             <button
               onClick={() => setNotificacionesAbiertas(!notificacionesAbiertas)}
-              style={iconBtnStyle('#1a1a1a')}
-              onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#2a2a2a')}
-              onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#1a1a1a')}
+              style={{ ...iconBtnStyle('rgba(0,0,0,0.3)'), border: '1px solid rgba(255,255,255,0.15)' }}
+              onMouseEnter={e => (e.currentTarget.style.backgroundColor = 'rgba(0,0,0,0.5)')}
+              onMouseLeave={e => (e.currentTarget.style.backgroundColor = 'rgba(0,0,0,0.3)')}
             >
               <Bell size={19} style={{ color: '#ffffff' }} />
               {notificacionesNoLeidas > 0 && (
@@ -479,7 +478,7 @@ export const Header: React.FC<HeaderProps> = ({ title: _title }) => {
           <button
             style={{
               width: '42px', height: '42px', borderRadius: '50%',
-              backgroundColor: '#000000', border: '2px solid #333333',
+              backgroundColor: 'rgba(0,0,0,0.3)', border: '2px solid rgba(255,255,255,0.15)',
               cursor: 'pointer', display: 'flex', alignItems: 'center',
               justifyContent: 'center', overflow: 'hidden', padding: '2px',
               transition: 'transform 0.2s',

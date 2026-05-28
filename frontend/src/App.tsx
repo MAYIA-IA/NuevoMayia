@@ -9,10 +9,10 @@ import { brandingConfig } from './config/branding';
 import './responsive.css';
 
 // Componentes críticos (carga estática)
-import MusculosMAYiA from './components/musculosMayia';
 import CertificacionesMarquee from './components/CertificacionesMarquee';
 import NoticiasTicker from './components/NoticiasTicker';
 import EnterpriseDashboard from './components/EnterpriseDashboard';
+import SocialPopover from './components/SocialPopover';
 
 // Componentes pesados (carga perezosa)
 const Analiticos = lazy(() => import('./components/departamentos/Analiticos').then(m => ({ default: m.Analiticos })));
@@ -23,6 +23,7 @@ const IAporSector = lazy(() => import('./components/IAporSector'));
 const EmpleadosDigitales = lazy(() => import('./components/EmpleadosDigitales'));
 const PildorasIA = lazy(() => import('./components/PildorasIA'));
 const CiberseguridadIA = lazy(() => import('./components/CiberseguridadIA'));
+const FlaiInfoModal = lazy(() => import('./components/FlaiInfoModal'));
 const AcademiaIA = lazy(() => import('./components/AcademiaIA'));
 const Footer = lazy(() => import('./components/piepagina'));
 const EmbajadoresMayia = lazy(() => import('./components/EmbajadoresMayia'));
@@ -31,8 +32,6 @@ const TermometroIAMexico = lazy(() => import('./components/TermometroIAMexico'))
 const NetworkingHub = lazy(() => import('./components/NetworkingHub'));
 const Blog = lazy(() => import('./components/Blog'));
 const SalaPrensa = lazy(() => import('./components/SalaPrensa'));
-const Agente33 = lazy(() => import('./components/Agente33'));
-const Lumel = lazy(() => import('./components/Lumel'));
 
 // Fallback de carga premium
 const LoadingSection = () => (
@@ -52,12 +51,14 @@ const LoadingSection = () => (
 const SECTION_IDS = [
   'dashboard', 'enterprise-dashboard', 'analiticos', 'noticias', 'ecosistema', 'partners',
   'ia-empresarial', 'ia-por-sector', 'termometro-ia', 'hackaton',
-  'empleados-digitales', 'agente-33', 'lumel', 'pildoras-ia', 'ciberseguridad',
+  'empleados-digitales', 'pildoras-ia', 'ciberseguridad',
   'embajadores', 'academia', 'networking', 'blog', 'sala-prensa',
 ];
 
 function App() {
   const [activeSection, setActiveSection] = useState('dashboard');
+  const [activeSocialModal, setActiveSocialModal] = useState<string | null>(null);
+  const [socialModalYPos, setSocialModalYPos] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
   const { colores } = brandingConfig;
 
@@ -116,6 +117,10 @@ function App() {
 
   /* ── Navegación ── */
   const handleNavClick = (section: string) => {
+    if (section === 'polos-desarrollo') {
+      handleOpenSocialModal('analiticos', window.innerHeight / 2);
+      return;
+    }
     setActiveSection(section);
     const el = document.getElementById(section);
     if (!el) return;
@@ -135,6 +140,11 @@ function App() {
         el.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }
+  };
+
+  const handleOpenSocialModal = (id: string, yPos: number) => {
+    setSocialModalYPos(yPos);
+    setActiveSocialModal(id);
   };
 
   const getTitulo = () => {
@@ -157,8 +167,6 @@ function App() {
       networking: 'Networking Hub',
       blog: 'Blog',
       'sala-prensa': 'Sala de Prensa',
-      'agente-33': 'Agente 33',
-      lumel: 'Lumel',
     };
     return titulos[activeSection] || 'Dashboard';
   };
@@ -171,25 +179,18 @@ function App() {
         {/* <div id="dashboard"><DashboardEnterprise onSectionChange={handleNavClick} /></div> */}
         
         {/* 2. Enterprise Dashboard interactivo (Ahora versión compacta y principal) */}
-        <div id="dashboard">
-          <EnterpriseDashboard />
+        <div id="dashboard" className="scroll-mt-20">
+          <EnterpriseDashboard 
+            onOpenMap={() => handleOpenSocialModal('analiticos', window.innerHeight / 2)} 
+            onOpenFlaiInfo={() => handleOpenSocialModal('flai-info', window.innerHeight / 2)}
+          />
         </div>
-        
-        {/* 3. Músculos MAYIA (ahora en gris enterprise) */}
-        <MusculosMAYiA />
-        
-        {/* 4. Analíticos */}
-        <div id="analiticos" style={{ background: '#0A0A14' }}><Analiticos /></div>
         
         {/* 5. Certificaciones marquee */}
         <CertificacionesMarquee />
         
-        {/* 6. Noticias (con noticias reales indexadas) */}
-        <div id="noticias"><NoticiasTicker /></div>
-        
-        {/* 6.5 Blog y Sala de Prensa */}
-        <div id="blog"><Blog /></div>
-        <div id="sala-prensa"><SalaPrensa /></div>
+        {/* Las secciones sociales (Noticias, Blog, Sala Prensa, Embajadores, Networking) 
+            fueron extraídas al SocialPopover */}
         
         {/* 7. Ecosistema MAYIA (partners visuales) */}
         <div id="ecosistema"><EcosistemaMayia /></div>
@@ -203,33 +204,20 @@ function App() {
         {/* 9.5 IA por Sector */}
         <div id="ia-por-sector"><IAporSector /></div>
         
-        {/* 10. Termómetro IA */}
-        <div id="termometro-ia"><TermometroIAMexico /></div>
-        
         {/* 11. Empleados Digitales */}
         <div id="empleados-digitales"><EmpleadosDigitales /></div>
         
-        {/* 11.5 Agentes Especializados */}
-        <div id="agente-33"><Agente33 /></div>
-        <div id="lumel"><Lumel /></div>
-        
+        {/* 11.5 Marketplace de Soluciones */}
+        <div id="hackaton"><HackatonMarketplace /></div>
+
         {/* 12. Píldoras IA */}
         <div id="pildoras-ia"><PildorasIA /></div>
         
         {/* 13. Ciberseguridad */}
         <div id="ciberseguridad"><CiberseguridadIA /></div>
         
-        {/* 14. Embajadores */}
-        <div id="embajadores"><EmbajadoresMayia /></div>
-        
         {/* 15. Academia */}
         <div id="academia"><AcademiaIA /></div>
-        
-        {/* 16. Networking */}
-        <div id="networking"><NetworkingHub /></div>
-        
-        {/* 17. Marketplace (al final del scroll) */}
-        <div id="hackaton"><HackatonMarketplace /></div>
         
         {/* 18. Footer */}
         <Footer />
@@ -259,7 +247,7 @@ function App() {
             onSectionChange={handleNavClick}
             header={<Header title={getTitulo()} />}
             sidebar={<Sidebar activeSection={activeSection} onSectionChange={handleNavClick} />}
-            sidebarR={<SeoHub activeSection={activeSection} onSectionChange={handleNavClick} />}
+            sidebarR={<SeoHub activeSection={activeSection} onSectionChange={handleNavClick} onOpenSocialModal={handleOpenSocialModal} />}
           >
             {pageContent}
           </ResponsiveLayout>
@@ -277,6 +265,24 @@ function App() {
           {pageContent}
         </ResponsiveLayout>
       )}
+
+      {/* ── SOCIAL POPOVER MODAL ── */}
+      <SocialPopover 
+        isOpen={activeSocialModal !== null} 
+        onClose={() => setActiveSocialModal(null)} 
+        yPos={socialModalYPos}
+      >
+        <Suspense fallback={<LoadingSection />}>
+          {activeSocialModal === 'noticias-rt' && <NoticiasTicker />}
+          {activeSocialModal === 'blog' && <Blog />}
+          {activeSocialModal === 'sala-prensa' && <SalaPrensa />}
+          {activeSocialModal === 'embajadores' && <EmbajadoresMayia />}
+          {activeSocialModal === 'red-ia' && <NetworkingHub />}
+          {activeSocialModal === 'temp-ia' && <TermometroIAMexico />}
+          {activeSocialModal === 'analiticos' && <Analiticos />}
+          {activeSocialModal === 'flai-info' && <FlaiInfoModal />}
+        </Suspense>
+      </SocialPopover>
     </div>
   );
 }

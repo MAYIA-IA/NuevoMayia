@@ -5,8 +5,13 @@ import {
   Users,
   Shield,
   GraduationCap,
-  ChevronLeft,
   Handshake,
+  Map,
+  ChevronLeft,
+  Network,
+  Pill,
+  ShoppingBag,
+  Factory,
 } from 'lucide-react';
 import { brandingConfig } from '../config/branding';
 import mayiaLogo from '../assets/logosNativos/mayiaLogoBlanco.png';
@@ -21,11 +26,16 @@ interface SidebarProps {
 // Menú principal (Ligero y enfocado a negocio)
 const menuItems = [
   { id: 'dashboard',           nombre: 'Centro de Control',   icono: LayoutDashboard },
+  { id: 'ecosistema',          nombre: 'Ecosistema MAYiA',    icono: Network },
+  { id: 'partners',            nombre: 'Partners',            icono: Handshake },
   { id: 'ia-empresarial',      nombre: 'Soluciones I.A.',     icono: Building2 },
+  { id: 'ia-por-sector',       nombre: 'IA por Sector',       icono: Factory },
   { id: 'empleados-digitales', nombre: 'Empleados Digitales', icono: Users },
+  { id: 'hackaton',            nombre: 'Marketplace',         icono: ShoppingBag },
+  { id: 'pildoras-ia',         nombre: 'Píldoras IA',         icono: Pill },
   { id: 'ciberseguridad',      nombre: 'SOC Ciberseguridad',  icono: Shield },
   { id: 'academia',            nombre: 'Academia MAYiA',      icono: GraduationCap },
-  { id: 'partners',            nombre: 'Partners',            icono: Handshake },
+  { id: 'polos-desarrollo',    nombre: 'Polos de desarrollo inteligente', icono: Map },
 ];
 
 /* ── Sub-componentes ───────────────────────────────────────────── */
@@ -184,7 +194,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeSection, onSectionChange
       <div
         style={{
           flexShrink: 0,
-          background: 'gray',
+          background: '#5a5a5a',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -234,9 +244,10 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeSection, onSectionChange
             />
           ))}
         </nav>
+      </div>
 
-        {/* Floating Social Media Icons */}
-        <div style={{
+      {/* Floating Social Media Icons */}
+      <div style={{
           display: 'flex',
           flexDirection: isCollapsed ? 'column' : 'row',
           justifyContent: 'center',
@@ -285,7 +296,6 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeSection, onSectionChange
             </a>
           ))}
         </div>
-      </div>
     </div>
   );
 };

@@ -1,9 +1,13 @@
-/* HackatonMarketplace.tsx
-   Marketplace de ideas del Hackaton Desarrolladores Intel × MAYiA
-   Para añadir proyectos reales: edita el array PROYECTOS.
+/* HackatonMarketplace.tsx -> Marketplace.tsx
+   Marketplace de Soluciones de IA
+   Muestra los proyectos y agentes desarrollados.
 */
 import { useState } from 'react';
-import { Zap, Trophy, Medal, Target, FileSignature, ThumbsUp, Rocket } from 'lucide-react';
+import { createPortal } from 'react-dom';
+import { Zap, Trophy, Medal, Target, FileSignature, ThumbsUp, Rocket, X, ShoppingCart } from 'lucide-react';
+import lumelImg from '../assets/Marketplace/lumel.png';
+import agente33Img from '../assets/Marketplace/agente33.png';
+import GalagaBg from './GalagaBg';
 
 interface Proyecto {
   id: number;
@@ -13,131 +17,245 @@ interface Proyecto {
   categoria: string;
   tecnologias: string[];
   votos: number;
-  estado: 'inscrito' | 'semifinal' | 'finalista' | 'ganador';
+  estado: 'destacado' | 'popular' | 'nuevo' | 'inscrito';
   premio?: string;
   color: string;
+  imagen: string;
 }
 
-/* ── EDITAR AQUÍ: proyectos del hackaton ── */
+/* ── EDITAR AQUÍ: proyectos del marketplace ── */
 const PROYECTOS: Proyecto[] = [
-  { id: 1, titulo: 'AgroIA - Predicción de Cosechas', equipo: 'Team Colibri', descripcion: 'Modelo de visión computacional que predice rendimiento de cosechas con drones y datos climáticos del CONAGUA en tiempo real.', categoria: 'AgriTech', tecnologias: ['TensorFlow', 'Intel OpenVINO', 'Python'], votos: 847, estado: 'ganador', premio: '$200,000 MXN', color: '#A4D955' },
-  { id: 2, titulo: 'LegalBot MX', equipo: 'Lex Machina', descripcion: 'Asistente legal IA entrenado en el marco jurídico mexicano, capaz de redactar contratos y analizar riesgo regulatorio para PyMES.', categoria: 'LegalTech', tecnologias: ['LLM', 'RAG', 'FastAPI'], votos: 612, estado: 'finalista', color: '#60a5fa' },
-  { id: 3, titulo: 'SaludIA Rural', equipo: 'CodeMed', descripcion: 'Diagnóstico médico básico vía WhatsApp para comunidades sin acceso a especialistas. Operado por agentes IA y validado por médicos remotamente.', categoria: 'HealthTech', tecnologias: ['Twilio', 'MAYiA API', 'Node.js'], votos: 589, estado: 'finalista', color: '#34d399' },
-  { id: 4, titulo: 'MuniBot - Trámites sin Filas', equipo: 'GovHackers', descripcion: 'Plataforma de automatización de trámites municipales con reconocimiento de documentos y firma digital para 15 municipios piloto.', categoria: 'GovTech', tecnologias: ['OCR', 'Blockchain', 'React'], votos: 445, estado: 'semifinal', color: '#f59e0b' },
-  { id: 5, titulo: 'EduAgent - Tutor Personalizado', equipo: 'Aprende+', descripcion: 'Tutor IA adaptativo para secundaria que ajusta el nivel, ritmo y estilo de enseñanza según el progreso individual de cada estudiante.', categoria: 'EdTech', tecnologias: ['GPT-4', 'Next.js', 'PostgreSQL'], votos: 398, estado: 'semifinal', color: '#a78bfa' },
-  { id: 6, titulo: 'FinQauntum - Trading Cuántico', equipo: 'Q-Finance', descripcion: 'Algoritmo de optimización de portafolio usando computación cuántica e IBM Quantum para maximizar retorno ajustado al riesgo en mercados latinoamericanos.', categoria: 'FinTech', tecnologias: ['IBM Quantum', 'Qiskit', 'Python'], votos: 367, estado: 'inscrito', color: '#f472b6' },
+  { id: 1, titulo: 'Lumel', equipo: 'Equipo de RRHH', descripcion: 'La Inteligencia Artificial no tiene por qué ser fría. Lumel combina procesamiento de lenguaje natural avanzado con un entendimiento profundo del comportamiento humano, ideal para recursos humanos.', categoria: 'RRHH', tecnologias: ['Empatía Cognitiva', 'LLM', 'MAYiA API'], votos: 984, estado: 'popular', color: '#f472b6', imagen: lumelImg },
+  { id: 2, titulo: 'Agente 33', equipo: 'Seguridad MAYiA', descripcion: 'La máxima expresión de inteligencia artificial táctica. Agente 33 no solo monitorea, neutraliza. Diseñado para entornos empresariales de alta exigencia.', categoria: 'Seguridad', tecnologias: ['Computer Vision', 'Defensa Neuronal', 'Respuesta Autónoma'], votos: 1250, estado: 'destacado', color: '#10b981', imagen: agente33Img },
+  { id: 3, titulo: 'MCP CDMX', equipo: 'Claude Impact', descripcion: 'Asistente de IA soberana de la CDMX. Permite a los usuarios consultar datos sobre movilidad, medio ambiente y finanzas utilizando herramientas MCP en tiempo real.', categoria: 'GovTech', tecnologias: ['CopilotKit', 'MCP', 'React'], votos: 890, estado: 'nuevo', color: '#f97316', imagen: 'galaga' },
 ];
 
 const ESTADOS: Record<Proyecto['estado'], { label: string; color: string; bg: string; icon: any }> = {
-  ganador:   { label: 'Ganador',    color: '#A4D955', bg: 'rgba(164,217,85,0.15)', icon: Trophy },
-  finalista: { label: 'Finalista',  color: '#f59e0b', bg: 'rgba(245,158,11,0.15)', icon: Medal },
-  semifinal: { label: 'Semifinal',  color: '#60a5fa', bg: 'rgba(96,165,250,0.15)', icon: Target },
-  inscrito:  { label: 'Inscrito',   color: '#9ca3af', bg: 'rgba(156,163,175,0.1)' , icon: FileSignature },
+  destacado: { label: 'Destacado',  color: '#A4D955', bg: 'rgba(164,217,85,0.15)', icon: Trophy },
+  popular:   { label: 'Popular',    color: '#f59e0b', bg: 'rgba(245,158,11,0.15)', icon: ThumbsUp },
+  nuevo:     { label: 'Nuevo',      color: '#f97316', bg: 'rgba(249,115,22,0.15)', icon: Zap },
+  inscrito:  { label: 'En desarrollo', color: '#9ca3af', bg: 'rgba(156,163,175,0.1)' , icon: Rocket },
 };
 
-const CATEGORIAS = ['Todas', 'AgriTech', 'LegalTech', 'HealthTech', 'GovTech', 'EdTech', 'FinTech'];
+const CATEGORIAS = ['Todas', 'RRHH', 'Seguridad', 'GovTech'];
 
 export default function HackatonMarketplace() {
   const [filtro, setFiltro] = useState('Todas');
+  const [showList, setShowList] = useState(false);
   const proyectosFiltrados = filtro === 'Todas' ? PROYECTOS : PROYECTOS.filter(p => p.categoria === filtro);
 
   return (
-    <section style={{ background: '#ffffff', padding: '80px 40px' }}>
-      <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-        {/* Header */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 24, alignItems: 'flex-end', marginBottom: 48, flexWrap: 'wrap' as const }}>
-          <div>
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '5px 16px', borderRadius: 99, background: 'rgba(164,217,85,0.1)', border: '1px solid rgba(164,217,85,0.3)', marginBottom: 16 }}>
-              <Zap size={14} className="animate-pulse" style={{ color: '#A4D955' }} />
-              <span style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase' as const, color: '#4d7c0f' }}>Hackaton Desarrolladores Intel × MAYiA</span>
-            </div>
-            <h2 style={{ fontSize: 38, fontWeight: 800, color: '#111827', margin: '0 0 12px', lineHeight: 1.2 }}>
-              Marketplace de<br /><span style={{ color: '#4d7c0f' }}>Ideas con IA</span>
-            </h2>
-            <p style={{ fontSize: 14, color: '#6b7280', maxWidth: 460, margin: 0 }}>
-              Jóvenes desarrolladores compiten con soluciones reales de IA para México. Vota, conecta e invierte en la próxima generación.
-            </p>
-          </div>
-          {/* Stats */}
-          <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap' as const }}>
-            {[{ v: '$500K', l: 'MXN en premios' }, { v: '48', l: 'equipos inscritos' }, { v: '6', l: 'categorías activas' }].map(s => (
-              <div key={s.l} style={{ textAlign: 'center' }}>
-                <div style={{ fontSize: 28, fontWeight: 900, color: '#111827' }}>{s.v}</div>
-                <div style={{ fontSize: 10, color: '#9ca3af', textTransform: 'uppercase' as const, letterSpacing: '0.08em' }}>{s.l}</div>
+    <>
+      <section id="hackaton" className="w-full bg-white relative overflow-hidden flex flex-col h-[80vh] min-h-[580px] py-4 lg:py-6">
+        <div className="container m-auto max-w-7xl px-4 lg:px-8 relative z-10">
+        <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-10">
+          
+          {/* LEFT SIDE: Info & Join */}
+          <div className="w-full lg:w-5/12 flex flex-col">
+            <div className="text-left mb-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-lime-50 border border-lime-200 rounded-full mb-3">
+                <Zap size={14} className="animate-pulse text-lime-500" />
+                <span className="text-[9px] sm:text-[10px] font-bold text-lime-700 tracking-wider uppercase">Ecosistema Inteligente MAYiA</span>
               </div>
-            ))}
-          </div>
-        </div>
+              <h2 className="text-2xl lg:text-4xl font-extrabold text-gray-900 mb-3 leading-tight">
+                Marketplace de<br /><span className="text-lime-600">Soluciones IA</span>
+              </h2>
+              <p className="text-xs sm:text-sm text-gray-600 mb-4 max-w-md">
+                Explora agentes, modelos y soluciones integrales creadas para resolver problemas específicos en tu industria. Conecta e invierte en el futuro.
+              </p>
 
-        {/* Filtros */}
-        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' as const, marginBottom: 32 }}>
-          {CATEGORIAS.map(cat => (
-            <button key={cat} onClick={() => setFiltro(cat)}
-              style={{ padding: '6px 16px', borderRadius: 99, border: `1px solid ${filtro === cat ? '#A4D955' : '#e5e7eb'}`, background: filtro === cat ? 'rgba(164,217,85,0.1)' : '#f9fafb', color: filtro === cat ? '#4d7c0f' : '#6b7280', fontSize: 12, fontWeight: 600, cursor: 'pointer', transition: 'all 0.2s' }}>
-              {cat}
-            </button>
-          ))}
-        </div>
-
-        {/* Grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: 20 }}>
-          {proyectosFiltrados.map(p => {
-            const est = ESTADOS[p.estado];
-            return (
-              <div key={p.id} className="group"
-                style={{ background: '#fafafa', border: `1px solid ${p.estado === 'ganador' ? p.color + '60' : '#f3f4f6'}`, borderRadius: 18, overflow: 'hidden', transition: 'all 0.3s', boxShadow: p.estado === 'ganador' ? `0 4px 24px ${p.color}20` : 'none' }}
-                onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = `0 12px 40px ${p.color}18`; e.currentTarget.style.borderColor = `${p.color}50`; }}
-                onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = p.estado === 'ganador' ? `0 4px 24px ${p.color}20` : 'none'; e.currentTarget.style.borderColor = p.estado === 'ganador' ? p.color + '60' : '#f3f4f6'; }}
-              >
-                {/* Top bar */}
-                <div style={{ height: 4, background: `linear-gradient(to right, ${p.color}, ${p.color}80)` }} />
-                <div style={{ padding: '20px 22px 22px' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 12 }}>
-                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: 9, fontWeight: 800, padding: '3px 10px', borderRadius: 99, background: est.bg, color: est.color, letterSpacing: '0.06em' }}>
-                      <est.icon size={12} /> {est.label}
-                    </span>
-                    <span style={{ fontSize: 10, color: '#9ca3af' }}>#{p.id.toString().padStart(3, '0')}</span>
+              {/* Stats inline */}
+              <div className="flex gap-4 sm:gap-6 mb-5">
+                {[{ v: '+12', l: 'proyectos' }, { v: '3', l: 'top' }, { v: '3', l: 'categorías' }].map(s => (
+                  <div key={s.l} className="text-left">
+                    <div className="text-xl sm:text-2xl font-black text-gray-900 leading-none mb-1">{s.v}</div>
+                    <div className="text-[8px] sm:text-[9px] text-gray-500 uppercase tracking-widest">{s.l}</div>
                   </div>
-                  <h3 style={{ fontSize: 16, fontWeight: 800, color: '#111827', margin: '0 0 4px' }}>{p.titulo}</h3>
-                  <p style={{ fontSize: 11, color: p.color, fontWeight: 600, margin: '0 0 10px' }}>por {p.equipo} · {p.categoria}</p>
-                  <p style={{ fontSize: 12, color: '#6b7280', lineHeight: 1.6, margin: '0 0 14px' }}>{p.descripcion}</p>
+                ))}
+              </div>
 
-                  {/* Tech tags */}
-                  <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' as const, marginBottom: 16 }}>
-                    {p.tecnologias.map(t => (
-                      <span key={t} style={{ fontSize: 9, fontWeight: 600, padding: '2px 8px', borderRadius: 6, background: '#f3f4f6', color: '#374151' }}>{t}</span>
-                    ))}
-                  </div>
-
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid #f3f4f6', paddingTop: 12 }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-                      <span className="group-hover:scale-125 transition-transform duration-300"><ThumbsUp size={14} style={{ color: '#111827' }} /></span>
-                      <span style={{ fontSize: 13, fontWeight: 700, color: '#111827' }}>{p.votos.toLocaleString()}</span>
-                      <span style={{ fontSize: 10, color: '#9ca3af' }}>votos</span>
-                    </div>
-                    {p.premio && (
-                      <span style={{ fontSize: 12, fontWeight: 800, color: '#A4D955', background: 'rgba(164,217,85,0.1)', padding: '4px 12px', borderRadius: 99, border: '1px solid rgba(164,217,85,0.3)' }}>{p.premio}</span>
-                    )}
-                  </div>
+              {/* Join CTA integrated */}
+              <div className="bg-gray-900 rounded-2xl p-4 shadow-xl relative overflow-hidden group border border-gray-800">
+                <div className="absolute top-0 right-0 p-3 opacity-10">
+                   <Rocket size={48} className="text-lime-500" />
                 </div>
+                <h3 className="text-sm sm:text-base font-bold text-white mb-1.5 relative z-10">¿Tienes una solución de IA para empresas?</h3>
+                <p className="text-[10px] sm:text-xs text-gray-400 mb-3 max-w-[250px] relative z-10">Integra tu proyecto al ecosistema y llega a miles de corporativos.</p>
+                <a href="https://api.whatsapp.com/send/?phone=525553315526" target="_blank" rel="noopener noreferrer"
+                   className="inline-flex items-center gap-1.5 bg-gradient-to-r from-lime-400 to-lime-600 text-gray-900 font-bold text-[10px] sm:text-xs px-4 py-2 rounded-lg hover:scale-105 transition-transform relative z-10 shadow-lg">
+                  Unirse al Marketplace
+                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                </a>
               </div>
-            );
-          })}
-        </div>
-
-        {/* CTA inscripción */}
-        <div style={{ marginTop: 52, background: 'linear-gradient(135deg, #0A0A14 0%, #111118 100%)', borderRadius: 24, padding: '40px', display: 'flex', flexDirection: 'column' as const, alignItems: 'center', textAlign: 'center' as const }}>
-          <div className="bg-gradient-to-br from-gray-800 to-gray-900 p-4 rounded-full mb-4 shadow-[0_0_20px_rgba(164,217,85,0.2)]">
-            <Rocket size={32} className="text-lime-500 animate-pulse" />
+            </div>
           </div>
-          <h3 style={{ fontSize: 24, fontWeight: 800, color: '#ffffff', margin: '0 0 10px' }}>¿Tienes una idea que transforme México?</h3>
-          <p style={{ fontSize: 14, color: '#6b7280', margin: '0 0 24px', maxWidth: 440 }}>Inscríbete al Hackaton Intel × MAYiA. La próxima startup unicornio mexicana puede ser la tuya.</p>
-          <a href="https://api.whatsapp.com/send/?phone=525553315526" target="_blank" rel="noopener noreferrer"
-            style={{ padding: '12px 32px', borderRadius: 12, background: 'linear-gradient(135deg, #A4D955, #65a30d)', color: '#0A0A14', fontWeight: 800, fontSize: 14, textDecoration: 'none' }}>
-            Inscribir mi equipo →
-          </a>
+
+          {/* RIGHT SIDE: Filters & Grid */}
+          <div className="w-full lg:w-7/12 flex flex-col">
+            {/* Filtros */}
+            <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-4 justify-start lg:justify-end">
+              {CATEGORIAS.map(cat => (
+                <button key={cat} onClick={() => setFiltro(cat)}
+                  className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all ${
+                    filtro === cat ? 'bg-lime-100 border border-lime-400 text-lime-700 shadow-sm' : 'bg-gray-50 border border-gray-200 text-gray-500 hover:bg-gray-100'
+                  }`}>
+                  {cat}
+                </button>
+              ))}
+            </div>
+
+            {/* Grid Dinámico */}
+            <div className={`grid gap-3 ${
+              proyectosFiltrados.length === 1 ? 'grid-cols-1' :
+              proyectosFiltrados.length === 2 ? 'grid-cols-1 sm:grid-cols-2' :
+              'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
+            }`}>
+              {proyectosFiltrados.map(p => {
+                const est = ESTADOS[p.estado];
+                return (
+                  <div key={p.id} className="group relative rounded-2xl overflow-hidden cursor-pointer bg-gray-900 border border-gray-800 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 h-[280px] lg:h-[340px]"
+                    style={{ boxShadow: p.estado === 'destacado' ? `0 10px 40px ${p.color}20` : '' }}
+                  >
+                    {/* Background */}
+                    <div className="absolute inset-0 z-0">
+                      {p.imagen === 'galaga' ? (
+                        <div className="w-full h-full scale-[1.2] opacity-60 group-hover:scale-100 transition-transform duration-700">
+                          <GalagaBg />
+                        </div>
+                      ) : (
+                        <img src={p.imagen} alt={p.titulo} className="w-full h-full object-cover opacity-60 group-hover:scale-110 group-hover:opacity-40 transition-all duration-700" />
+                      )}
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A14] via-[#0A0A14]/60 to-transparent" />
+                    </div>
+
+                    {/* Content */}
+                    <div className="absolute inset-0 p-5 flex flex-col justify-end z-10">
+                      
+                      {/* Top Badge */}
+                      <div className="absolute top-4 right-4">
+                        <span className="inline-flex items-center gap-1.5 text-[9px] font-bold px-2.5 py-1 rounded-full bg-black/50 backdrop-blur-md border" style={{ color: est.color, borderColor: `${p.color}40`}}>
+                          <est.icon size={12} /> {est.label}
+                        </span>
+                      </div>
+
+                      <div className="transform translate-y-6 lg:translate-y-8 transition-transform duration-500 ease-[cubic-bezier(0.2,0.8,0.2,1)] group-hover:translate-y-0">
+                        <p className="text-[9px] sm:text-[10px] font-bold mb-1 tracking-wider uppercase" style={{ color: p.color }}>{p.categoria}</p>
+                        <h3 className="text-xl lg:text-2xl font-extrabold text-white mb-2 leading-tight drop-shadow-md">{p.titulo}</h3>
+                        
+                        {/* Tech tags */}
+                        <div className="flex flex-wrap gap-1.5 mb-2 sm:mb-3">
+                          {p.tecnologias.map(t => (
+                            <span key={t} className="text-[7px] sm:text-[8px] font-bold px-1.5 py-0.5 rounded bg-white/10 backdrop-blur-sm text-gray-200 border border-white/5">{t}</span>
+                          ))}
+                        </div>
+
+                        {/* Desc & extra (shown on hover) */}
+                        <div className="max-h-0 opacity-0 overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0.8,0.2,1)] group-hover:max-h-48 group-hover:opacity-100 group-hover:mt-2">
+                          <p className="text-[9px] sm:text-[10px] text-gray-300 leading-snug mb-3 line-clamp-2">{p.descripcion}</p>
+                          
+                          <div className="flex justify-between items-center pt-2 border-t border-white/10">
+                            <div className="flex items-center gap-1 text-white shrink-0">
+                              <ThumbsUp size={10} className="text-gray-400" />
+                              <span className="text-[9px] sm:text-[10px] font-bold">{p.votos.toLocaleString()}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Full list button */}
+            <div className="mt-5 flex justify-center lg:justify-end">
+              <button 
+                onClick={() => setShowList(true)}
+                className="bg-gray-900 hover:bg-gray-800 text-white font-bold text-xs px-5 py-2.5 rounded-full border border-gray-700 shadow-lg flex items-center gap-2 transition-all hover:scale-105"
+              >
+                <ShoppingCart size={14} className="text-lime-400" />
+                Mostrar lista completa
+              </button>
+            </div>
+          </div>
+
         </div>
       </div>
-    </section>
+      </section>
+
+      {/* Modal Lista Completa (Light Theme - React Portal para sobreponer a todo) */}
+      {showList && typeof document !== 'undefined' && createPortal(
+        <div className="fixed inset-0 z-[999999] flex items-center justify-center p-4 sm:p-6 bg-gray-900/40 backdrop-blur-sm">
+          <div className="bg-white w-full max-w-4xl max-h-[90vh] rounded-3xl shadow-2xl flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-300">
+            {/* Header */}
+            <div className="px-6 py-4 border-b border-gray-200 flex justify-between items-center bg-gray-50">
+              <h2 className="text-xl font-extrabold text-gray-900 flex items-center gap-2">
+                <ShoppingCart className="text-lime-600" />
+                Marketplace Completo
+              </h2>
+              <button onClick={() => setShowList(false)} className="text-gray-500 hover:text-gray-900 bg-gray-200 hover:bg-gray-300 p-2 rounded-full transition-colors">
+                <X size={18} />
+              </button>
+            </div>
+            
+            {/* List */}
+            <div className="p-6 overflow-y-auto flex-1 space-y-6 bg-white">
+              {PROYECTOS.map(p => {
+                const est = ESTADOS[p.estado];
+                return (
+                  <div key={p.id} className="flex flex-col sm:flex-row gap-6 bg-white p-4 rounded-2xl border border-gray-200 shadow-sm hover:border-lime-500 hover:shadow-md transition-all">
+                    {/* Visual */}
+                    <div className="w-full sm:w-1/3 h-48 sm:h-auto rounded-xl overflow-hidden relative shrink-0 border border-gray-100">
+                      {p.imagen === 'galaga' ? (
+                        <GalagaBg />
+                      ) : (
+                        <img src={p.imagen} alt={p.titulo} className="w-full h-full object-cover" />
+                      )}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                      <div className="absolute bottom-2 left-2 flex items-center gap-1.5 text-[9px] font-bold px-2 py-1 rounded-full bg-white/90 backdrop-blur-md shadow-sm" style={{ color: est.color }}>
+                        <est.icon size={10} /> {est.label}
+                      </div>
+                    </div>
+                    
+                    {/* Data */}
+                    <div className="flex-1 flex flex-col justify-between">
+                      <div>
+                        <div className="flex justify-between items-start mb-2">
+                          <div>
+                            <span className="text-[10px] font-bold uppercase tracking-wider" style={{ color: p.color }}>{p.categoria}</span>
+                            <h3 className="text-2xl font-bold text-gray-900">{p.titulo}</h3>
+                          </div>
+                          {/* Price Tag */}
+                          <div className="bg-lime-50 border border-lime-200 px-3 py-1.5 rounded-lg text-right shrink-0 shadow-sm">
+                            <div className="text-[9px] text-lime-700 font-bold uppercase">Precio Promocional</div>
+                            <div className="text-xs sm:text-sm font-black text-lime-600">$10.00 Pesos Mexicanos</div>
+                          </div>
+                        </div>
+                        <p className="text-sm text-gray-600 mb-4">{p.descripcion}</p>
+                        
+                        {/* Tech */}
+                        <div className="flex flex-wrap gap-2 mb-4">
+                          {p.tecnologias.map(t => (
+                            <span key={t} className="text-[10px] font-medium px-2 py-1 rounded bg-gray-100 text-gray-700 border border-gray-200">{t}</span>
+                          ))}
+                        </div>
+                      </div>
+                      
+                      <div className="flex justify-end gap-3 pt-4 border-t border-gray-100">
+                        <button className="text-gray-500 hover:text-gray-900 font-bold text-xs px-4 py-2 transition-colors">Ver demo</button>
+                        <button className="bg-gradient-to-r from-lime-400 to-lime-600 text-gray-900 font-bold text-xs px-6 py-2 rounded-lg hover:scale-105 transition-transform shadow-md">
+                          Adquirir
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>,
+        document.body
+      )}
+    </>
   );
 }

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ExternalLink, Handshake } from 'lucide-react';
+import { ExternalLink, Handshake, ChevronDown, ChevronUp } from 'lucide-react';
 import edgeNetLogo from '../assets/logosNativos/edgeNetLogoBlanco.png';
 import flaiLogo from '../assets/logosNativos/logo-FLAI.png';
 
@@ -68,12 +68,56 @@ const css = `
   .eco-card:hover {
     transform: translateY(-4px) !important;
   }
+  .eco-text-col {
+    text-align: left;
+  }
+  .eco-layout {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    gap: 48px;
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .eco-left {
+    flex: 1 1 300px;
+    max-width: 450px;
+  }
+  .eco-right {
+    flex: 1.5 1 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  @media (max-width: 1024px) {
+    .eco-layout {
+      flex-direction: column;
+      gap: 32px;
+    }
+    .eco-left {
+      max-width: 100%;
+    }
+    .eco-right {
+      width: 100%;
+      flex: 1 1 auto;
+    }
+    .eco-text-col {
+      text-align: center;
+      margin-bottom: 0px;
+    }
+  }
 `;
 
 /* ── Component ──────────────────────────────────────────────── */
 
 export default function EcosistemaMayia() {
   const [hov, setHov] = useState<string | null>(null);
+  const [expanded, setExpanded] = useState(false);
 
   return (
     <section
@@ -81,18 +125,18 @@ export default function EcosistemaMayia() {
       aria-label="Ecosistema MAYIA — Partners y aliados tecnológicos"
       style={{
         background: 'linear-gradient(180deg, #ffffff 0%, #f8fdf1 50%, #ffffff 100%)',
-        padding: '80px 40px',
+        padding: '40px',
         position: 'relative',
         overflow: 'hidden',
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
       }}
     >
       <style>{css}</style>
 
       {/* Background grid */}
-      <div style={{
-        position: 'absolute', inset: 0, pointerEvents: 'none',
-        opacity: 0.025,
-      }}>
+      <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', opacity: 0.025 }}>
         <svg width="100%" height="100%">
           <defs>
             <pattern id="grid-eco" width="56" height="56" patternUnits="userSpaceOnUse">
@@ -105,21 +149,21 @@ export default function EcosistemaMayia() {
 
       {/* Ambient blobs */}
       <div style={{
-        position: 'absolute', top: '-5%', left: '-5%',
+        position: 'absolute', top: '10%', left: '-5%',
         width: 400, height: 400, borderRadius: '50%',
         background: 'radial-gradient(circle, rgba(164,217,85,0.06) 0%, transparent 70%)',
         filter: 'blur(60px)', pointerEvents: 'none',
       }} />
 
-      <div style={{ maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 1 }}>
-        {/* Header */}
-        <div style={{ textAlign: 'center', marginBottom: 56 }}>
+      <div className="eco-layout">
+        {/* Left Col */}
+        <div className="eco-text-col eco-left">
           <div style={{
             display: 'inline-flex', alignItems: 'center', gap: 8,
             padding: '5px 16px', borderRadius: 99,
             background: 'rgba(164,217,85,0.1)',
             border: '1px solid rgba(164,217,85,0.3)',
-            marginBottom: 16,
+            marginBottom: 20,
           }}>
             <span style={{
               display: 'inline-flex', alignItems: 'center', gap: 6,
@@ -132,9 +176,9 @@ export default function EcosistemaMayia() {
           </div>
 
           <h2 style={{
-            fontSize: 'clamp(28px, 4vw, 40px)',
+            fontSize: 'clamp(28px, 4vw, 36px)',
             fontWeight: 900, margin: '0 0 12px', color: '#111827',
-            lineHeight: 1.15,
+            lineHeight: 1.1,
             fontFamily: "'Inter', system-ui, sans-serif",
           }}>
             Ecosistema <span style={{
@@ -146,21 +190,34 @@ export default function EcosistemaMayia() {
           </h2>
 
           <p style={{
-            fontSize: 14, color: '#6b7280', maxWidth: 500,
-            margin: '0 auto', lineHeight: 1.7,
+            fontSize: 14, color: '#6b7280', maxWidth: '100%',
+            margin: '0 0 20px', lineHeight: 1.5,
             fontFamily: "'Inter', system-ui, sans-serif",
           }}>
             Conectamos con los mejores aliados tecnológicos para construir
-            la infraestructura de IA más poderosa de México.
+            la infraestructura de inteligencia artificial soberana más poderosa de México.
           </p>
+
+          <button
+            onClick={() => setExpanded(!expanded)}
+            style={{
+              display: 'inline-flex', alignItems: 'center', gap: 6,
+              padding: '8px 16px', borderRadius: 8,
+              background: '#f3f4f6', color: '#374151',
+              border: '1px solid #e5e7eb',
+              fontSize: 13, fontWeight: 600, cursor: 'pointer',
+              transition: 'all 0.2s ease',
+            }}
+            onMouseEnter={e => e.currentTarget.style.background = '#e5e7eb'}
+            onMouseLeave={e => e.currentTarget.style.background = '#f3f4f6'}
+          >
+            {expanded ? 'Ocultar detalles' : 'Ver toda la información'} 
+            {expanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+          </button>
         </div>
 
-        {/* Partner cards grid */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-          gap: 20,
-        }}>
+        {/* Right Col: Stacked Horizontal Cards */}
+        <div className="eco-right">
           {PARTNERS.map(p => {
             const isHov = hov === p.name;
             return (
@@ -173,65 +230,67 @@ export default function EcosistemaMayia() {
                 onMouseEnter={() => setHov(p.name)}
                 onMouseLeave={() => setHov(null)}
                 style={{
-                  display: 'flex', flexDirection: 'column',
-                  padding: '28px 24px', borderRadius: 20,
+                  display: 'flex', flexDirection: 'row',
+                  alignItems: 'center',
+                  padding: '12px 16px', borderRadius: 12,
                   background: '#ffffff',
                   border: `1.5px solid ${isHov ? `${p.color}50` : '#e5e7eb'}`,
                   boxShadow: isHov
-                    ? `0 16px 48px ${p.color}15`
-                    : '0 2px 12px rgba(0,0,0,0.04)',
+                    ? `0 8px 16px ${p.color}15`
+                    : '0 2px 4px rgba(0,0,0,0.02)',
                   textDecoration: 'none',
                   position: 'relative', overflow: 'hidden',
                   cursor: 'pointer',
                 }}
               >
-                {/* Corner accent */}
+                {/* Accent glow on hover */}
                 <div style={{
-                  position: 'absolute', top: 0, right: 0,
-                  width: 80, height: 80, borderRadius: '0 20px 0 80px',
-                  background: `linear-gradient(225deg, ${p.color}10, transparent)`,
+                  position: 'absolute', top: 0, bottom: 0, left: 0,
+                  width: 4, background: isHov ? p.color : 'transparent',
+                  transition: 'background 0.3s ease'
                 }} />
 
-                {/* Logo + external link */}
+                {/* Logo Area */}
                 <div style={{
-                  display: 'flex', justifyContent: 'space-between',
-                  alignItems: 'center', marginBottom: 16,
+                  width: 90, flexShrink: 0, display: 'flex', alignItems: 'center',
+                  borderRight: `1px solid ${isHov ? `${p.color}30` : '#f3f4f6'}`,
+                  marginRight: 16, paddingRight: 16, transition: 'border-color 0.3s ease'
                 }}>
                   {p.logo ? (
                     <img
                       src={p.logo}
                       alt={p.name}
-                      style={{
-                        height: 28, objectFit: 'contain',
-                        filter: 'brightness(0) invert(0)',
-                      }}
+                      style={{ height: 20, objectFit: 'contain' }}
                     />
                   ) : (
                     <span style={{
-                      fontSize: 22, fontWeight: 900, color: p.color,
-                      letterSpacing: '-1px',
-                      fontFamily: "'Inter', system-ui, sans-serif",
+                      fontSize: 16, fontWeight: 900, color: p.color,
+                      letterSpacing: '-0.5px', fontFamily: "'Inter', system-ui, sans-serif",
                     }}>
                       {p.logoText}
                     </span>
                   )}
-                  <ExternalLink size={14} color={isHov ? p.color : '#9ca3af'} />
                 </div>
 
-                {/* Divider */}
-                <div style={{
-                  height: 1, marginBottom: 14,
-                  background: `linear-gradient(90deg, ${p.color}40, transparent)`,
-                }} />
-
                 {/* Description */}
-                <p style={{
-                  margin: 0, fontSize: 13, color: '#6b7280',
-                  lineHeight: 1.6,
-                  fontFamily: "'Inter', system-ui, sans-serif",
-                }}>
-                  {p.desc}
-                </p>
+                <div style={{ flex: 1, display: 'flex', alignItems: 'center' }}>
+                  <p style={{
+                    margin: 0, fontSize: 12, color: '#4b5563',
+                    lineHeight: 1.3, fontFamily: "'Inter', system-ui, sans-serif",
+                    display: expanded ? 'block' : '-webkit-box', 
+                    WebkitLineClamp: expanded ? 'unset' : 2, 
+                    WebkitBoxOrient: 'vertical',
+                    overflow: expanded ? 'visible' : 'hidden', 
+                    textOverflow: expanded ? 'clip' : 'ellipsis'
+                  }}>
+                    {p.desc}
+                  </p>
+                </div>
+
+                {/* Link Icon */}
+                <div style={{ marginLeft: 12, display: 'flex', alignItems: 'center' }}>
+                  <ExternalLink size={14} color={isHov ? p.color : '#9ca3af'} />
+                </div>
               </a>
             );
           })}

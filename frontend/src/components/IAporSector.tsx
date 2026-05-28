@@ -1,11 +1,14 @@
+import { useState } from 'react';
+
 const IAPorSector = () => {
+  const [activeSector, setActiveSector] = useState<number>(1);
 
   const sectoresDetallados = [
     {
       id: 1,
       category: "Finanzas",
       title: "Finanzas",
-      image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=400&h=250&fit=crop",
+      image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1600&q=80&fit=crop",
       gradient: "from-lime-600 to-green-700",
       services: [
         "Detección de Pagos y Fraudes",
@@ -17,7 +20,7 @@ const IAPorSector = () => {
       id: 2,
       category: "Salud",
       title: "Salud",
-      image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=400&h=250&fit=crop",
+      image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1600&q=80&fit=crop",
       gradient: "from-green-600 to-lime-600",
       services: [
         "Simulación de Moléculas",
@@ -29,7 +32,7 @@ const IAPorSector = () => {
       id: 3,
       category: "Retail",
       title: "Retail",
-      image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400&h=250&fit=crop",
+      image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1600&q=80&fit=crop",
       gradient: "from-lime-500 to-green-600",
       services: [
         "Compras Personalizadas",
@@ -42,7 +45,7 @@ const IAPorSector = () => {
       id: 4,
       category: "Ingeniería",
       title: "Ingeniería y Construcción",
-      image: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=400&h=250&fit=crop",
+      image: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=1600&q=80&fit=crop",
       gradient: "from-orange-600 to-red-600",
       services: [
         "Acelerar Flujos de Trabajo de Diseño",
@@ -54,7 +57,7 @@ const IAPorSector = () => {
       id: 5,
       category: "Medios",
       title: "Medios y Entretenimiento",
-      image: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=400&h=250&fit=crop",
+      image: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=1600&q=80&fit=crop",
       gradient: "from-pink-600 to-purple-600",
       services: [
         "Desarrollo de Personajes",
@@ -66,7 +69,7 @@ const IAPorSector = () => {
       id: 6,
       category: "Manufactura",
       title: "Manufactura",
-      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=250&fit=crop",
+      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1600&q=80&fit=crop",
       gradient: "from-lime-600 to-green-600",
       services: [
         "La Fábrica Habilitada por IA",
@@ -79,7 +82,7 @@ const IAPorSector = () => {
       id: 7,
       category: "Público",
       title: "Sector Público",
-      image: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=400&h=250&fit=crop",
+      image: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=1600&q=80&fit=crop",
       gradient: "from-indigo-600 to-purple-600",
       services: [
         "Chatbots para la Participación Ciudadana",
@@ -92,7 +95,7 @@ const IAPorSector = () => {
       id: 8,
       category: "Energía",
       title: "Energía",
-      image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=400&h=250&fit=crop",
+      image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=1600&q=80&fit=crop",
       gradient: "from-yellow-600 to-orange-600",
       services: [
         "Gemelos Digitales",
@@ -128,69 +131,73 @@ const IAPorSector = () => {
           </p>
         </div>
 
-        {/* Sección de 8 sectores detallados - TODOS CON MISMA ALTURA */}
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
-          {sectoresDetallados.map((sector) => (
-            <div 
-              key={sector.id}
-              className="group relative bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-200 transition-all duration-500 hover:shadow-2xl hover:scale-105 flex flex-col h-full"
-            >
-              {/* Image con overlay - ALTURA FIJA */}
-              <div className="relative h-48 overflow-hidden flex-shrink-0">
+        {/* Galería de Paneles Expansivos (Flex Cards) */}
+        <div className="w-full flex flex-col md:flex-row h-[70vh] min-h-[500px] gap-2 rounded-3xl overflow-hidden shadow-2xl bg-gray-900 border border-gray-800">
+          {sectoresDetallados.map((sector) => {
+            const isActive = activeSector === sector.id;
+            return (
+              <div 
+                key={sector.id}
+                onMouseEnter={() => setActiveSector(sector.id)}
+                onClick={() => setActiveSector(sector.id)}
+                className="relative group cursor-pointer overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] flex-shrink-0 md:flex-shrink"
+                style={{ flex: isActive ? 6 : 1 }}
+              >
+                {/* Imagen de Fondo */}
                 <img 
                   src={sector.image} 
                   alt={sector.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  className={`absolute inset-0 w-full h-full object-cover transition-transform duration-1000 ease-out ${isActive ? 'scale-105' : 'scale-100 grayscale-[30%]'}`}
                 />
-                <div className={`absolute inset-0 bg-gradient-to-br ${sector.gradient} opacity-60 mix-blend-multiply transition-opacity duration-500 group-hover:opacity-80`}></div>
                 
-                {/* Título sobre imagen */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <h3 className="text-2xl font-bold text-white text-center px-4 transform transition-all duration-500 group-hover:scale-110">
-                    {sector.title}
+                {/* Overlay oscurecedor */}
+                <div className={`absolute inset-0 transition-all duration-700 ${isActive ? 'bg-gradient-to-t from-black/90 via-black/40 to-transparent' : 'bg-black/70 group-hover:bg-black/50'}`}></div>
+                
+                {/* Contenido INACTIVO (Texto Rotado en Desktop, Normal en Mobile) */}
+                <div className={`absolute inset-0 flex flex-col items-center justify-center transition-opacity duration-500 delay-100 ${isActive ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+                  <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center mb-4 md:mb-8 backdrop-blur-md">
+                     <svg className="w-4 h-4 text-white/70" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" /></svg>
+                  </div>
+                  <h3 className="text-white font-bold tracking-widest uppercase md:-rotate-90 whitespace-nowrap text-xs md:text-sm opacity-80 group-hover:opacity-100 transition-opacity">
+                    {sector.category}
                   </h3>
                 </div>
 
-                {/* Badge de categoría */}
-                <div className={`absolute top-4 right-4 px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold ${sector.gradient} bg-clip-text text-transparent transform translate-x-20 group-hover:translate-x-0 transition-transform duration-500`}>
-                  {sector.category}
-                </div>
-              </div>
-
-              {/* Content - FLEX-GROW PARA OCUPAR ESPACIO RESTANTE */}
-              <div className="p-6 flex flex-col flex-grow">
-                {/* Lista de servicios con altura fija y scroll si es necesario */}
-                <div className="flex-grow mb-4">
-                  <ul className="space-y-2.5 h-full">
+                {/* Contenido ACTIVO */}
+                <div className={`absolute inset-0 p-6 md:p-8 flex flex-col justify-end transition-all duration-700 transform delay-100 ${isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8 pointer-events-none'}`}>
+                  
+                  {/* Badge */}
+                  <div className={`self-start px-4 py-1.5 bg-gradient-to-r ${sector.gradient} text-white rounded-full text-xs font-bold mb-4 shadow-lg flex items-center gap-2`}>
+                    <div className="w-1.5 h-1.5 bg-white rounded-full animate-pulse"></div>
+                    {sector.category}
+                  </div>
+                  
+                  {/* Título grande */}
+                  <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white mb-4 leading-tight drop-shadow-md text-balance break-words">
+                    {sector.title}
+                  </h3>
+                  
+                  {/* Lista de servicios (Oculta en móviles muy pequeños, visible en desktop) */}
+                  <ul className="space-y-2.5 mb-8 max-w-md hidden sm:block">
                     {sector.services.map((service, index) => (
-                      <li 
-                        key={index} 
-                        className="flex items-start gap-2 text-xs text-gray-700 leading-relaxed group/item"
-                      >
-                        <svg className={`w-4 h-4 flex-shrink-0 mt-0.5 bg-gradient-to-br ${sector.gradient} text-transparent`} fill="currentColor" viewBox="0 0 20 20">
+                      <li key={index} className="flex items-start gap-3 text-sm text-gray-200">
+                        <svg className={`w-5 h-5 flex-shrink-0 mt-0.5 text-white`} fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                         </svg>
-                        <span className="flex-1 group-hover/item:text-gray-900 transition-colors line-clamp-2">
-                          {service}
-                        </span>
+                        <span className="font-medium text-shadow-sm">{service}</span>
                       </li>
                     ))}
                   </ul>
-                </div>
 
-                {/* Botón de reserva - SIEMPRE EN LA PARTE INFERIOR */}
-                <div className="mt-auto">
-                  <button onClick={() => window.open('https://api.whatsapp.com/send/?phone=525553315526&text&type=phone_number&app_absent=0','_blank','noopener,noreferrer')} className={`w-full bg-gradient-to-r ${sector.gradient} text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300 hover:scale-105 shadow-md hover:shadow-xl relative overflow-hidden group/btn`}>
-                    <span className="relative z-10 text-sm">Agendar Demo</span>
-                    <div className="absolute inset-0 bg-white/20 transform scale-x-0 group-hover/btn:scale-x-100 transition-transform origin-left duration-300"></div>
+                  {/* Botón CTA */}
+                  <button onClick={() => window.open('https://api.whatsapp.com/send/?phone=525553315526&text&type=phone_number&app_absent=0','_blank','noopener,noreferrer')} className={`w-fit bg-white text-gray-900 hover:bg-gray-100 font-bold py-3 px-8 rounded-xl transition-all duration-300 hover:scale-105 shadow-xl flex items-center gap-2 group/btn`}>
+                    Agendar Demo para {sector.category}
+                    <svg className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                   </button>
                 </div>
               </div>
-
-              {/* Línea decorativa inferior */}
-              <div className={`h-1 bg-gradient-to-r ${sector.gradient} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left flex-shrink-0`}></div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </div>

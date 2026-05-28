@@ -108,7 +108,7 @@ export const ResponsiveLayout: React.FC<ResponsiveLayoutProps> = ({
           position: fixed;
           top: 0; left: 0; right: 0;
           height: 56px;
-          background: #000000;
+          background: #5a5a5a;
           border-bottom: 1px solid #1a1a1a;
           display: flex;
           align-items: center;

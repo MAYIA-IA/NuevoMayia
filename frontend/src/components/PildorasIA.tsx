@@ -29,6 +29,8 @@ const THUMBNAILS: Record<number, string> = {
   10: 'https://images.unsplash.com/photo-1585206031650-9e9a7c87dcfe?q=80&w=387&auto=format&fit=crop',
   11: 'https://images.unsplash.com/photo-1559581958-df379578606a?q=80&w=1002&auto=format&fit=crop',
   12: 'https://images.unsplash.com/photo-1580795478949-1b81005b91ba?q=80&w=1170&auto=format&fit=crop',
+  13: 'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?q=80&w=1170&auto=format&fit=crop',
+  14: 'https://images.unsplash.com/photo-1493612276216-ee3925520721?q=80&w=400&auto=format&fit=crop',
 };
 
 const PILDORAS_DATA = [
@@ -48,90 +50,85 @@ const PILDORAS_DATA = [
 
 const FILTERS = ['Todas', 'Finanzas', 'Seguridad', 'Ventas', 'RRHH', 'Automatización'];
 
-const PildoraCard = memo(({ pildora, isHovered, onHover, onClick }: any) => {
+const COLLAGE_SIZES: Record<number, string> = {
+  1: 'w-[calc(60%-6px)] h-40 flex-grow',
+  2: 'w-[calc(40%-6px)] h-40 flex-grow',
+  3: 'w-full h-28 flex-grow',
+  4: 'w-[calc(33.33%-6px)] h-32 flex-grow',
+  5: 'w-[calc(33.33%-6px)] h-32 flex-grow',
+  6: 'w-[calc(33.33%-6px)] h-32 flex-grow',
+  7: 'w-[calc(50%-6px)] h-48 flex-grow',
+  8: 'w-[calc(50%-6px)] h-48 flex-grow',
+  9: 'w-full h-32 flex-grow',
+  10: 'w-[calc(40%-6px)] h-36 flex-grow',
+  11: 'w-[calc(60%-6px)] h-36 flex-grow',
+  12: 'w-full h-24 flex-grow',
+};
+
+const PildoraExpandible = memo(({ pildora, isHovered, isOtherHovered, onHover, onClick }: any) => {
+  const baseSize = COLLAGE_SIZES[pildora.id] || 'w-[calc(50%-6px)] h-32 flex-grow';
+
   return (
     <div
       onMouseEnter={() => onHover(pildora.id)}
       onMouseLeave={() => onHover(null)}
-      onClick={() => onClick(pildora.id)}
-      className="card-hover group relative rounded-2xl overflow-hidden flex flex-col cursor-pointer shrink-0 snap-start w-[280px] sm:w-[320px]"
-      style={{
-        background: '#fff',
-        border: `1px solid ${isHovered ? pildora.accent + '88' : 'rgba(0,0,0,0.08)'}`,
-        boxShadow: isHovered ? `0 12px 40px ${pildora.accent}30` : '0 2px 12px rgba(0,0,0,0.06)',
+      onClick={() => isHovered && onClick(pildora.id)}
+      className={`group relative transition-all duration-[800ms] ease-[cubic-bezier(0.4,0,0.2,1)] overflow-hidden cursor-pointer shrink-0 box-border
+        ${isHovered 
+          ? 'w-full h-[450px] lg:h-[520px] rounded-[32px] shadow-[0_0_50px_rgba(163,230,53,0.3)] z-50 order-first lg:order-none border-2 border-lime-400/50' 
+          : isOtherHovered
+            ? 'w-0 h-0 opacity-0 m-0 p-0 border-0'
+            : `${baseSize} rounded-2xl shadow-lg border border-white/40 hover:border-lime-400 hover:shadow-[0_0_20px_rgba(163,230,53,0.5)]`
+        }
+      `}
+      style={{ 
+         background: isHovered ? '#000' : `linear-gradient(135deg, ${pildora.accent}dd, ${pildora.accent}99)`,
+         backdropFilter: 'blur(8px)'
       }}
     >
-      <div className="relative h-44 bg-black overflow-hidden">
-        <img
-          src={THUMBNAILS[pildora.id]}
-          alt={pildora.title}
-          loading="lazy"
-          className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
-          style={{ opacity: isHovered ? 0 : 1 }}
-        />
-        {isHovered && (
-          <video
-            src={pildora.video}
-            autoPlay muted loop playsInline
-            className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
-            style={{ opacity: 1 }}
-          />
-        )}
-
-        <div className="absolute inset-0" style={{ background: `linear-gradient(to top, rgba(10,15,30,0.85) 0%, transparent 60%)` }} />
-        <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full backdrop-blur-md text-xs font-bold"
-             style={{ background: 'rgba(10,15,30,0.75)', border: `1px solid ${pildora.accent}55`, color: pildora.accent }}>
-          {pildora.category}
-        </div>
-        <div className="absolute top-3 right-3 flex items-center gap-1.5 px-2 py-1 rounded-full backdrop-blur-md"
-             style={{ background: 'rgba(10,15,30,0.75)', border: '1px solid rgba(255,255,255,0.12)' }}>
-          <div className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
-          <span className="text-xs text-white">Video</span>
-        </div>
-        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <div className="w-12 h-12 rounded-full flex items-center justify-center backdrop-blur-sm"
-               style={{ background: 'rgba(163,230,53,0.15)', border: `1px solid ${pildora.accent}88` }}>
-            <svg className="w-5 h-5 ml-0.5" style={{ color: pildora.accent }} fill="currentColor" viewBox="0 0 20 20">
-              <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
-            </svg>
-          </div>
-        </div>
+      {/* Las puertas del ascensor (El color de la píldora original que se parte por la mitad con un brillo) */}
+      <div className={`absolute top-0 left-0 w-full h-1/2 transition-transform duration-[800ms] ease-[cubic-bezier(0.4,0,0.2,1)] z-30 ${isHovered ? '-translate-y-full' : 'translate-y-0'}`} 
+           style={{ background: `linear-gradient(to bottom, ${pildora.accent}, ${pildora.accent}ee)`, borderBottom: '1px solid rgba(255,255,255,0.2)' }}>
+      </div>
+      <div className={`absolute bottom-0 left-0 w-full h-1/2 transition-transform duration-[800ms] ease-[cubic-bezier(0.4,0,0.2,1)] z-30 ${isHovered ? 'translate-y-full' : 'translate-y-0'}`} 
+           style={{ background: `linear-gradient(to top, ${pildora.accent}, ${pildora.accent}ee)`, borderTop: '1px solid rgba(255,255,255,0.2)' }}>
       </div>
 
-      <div className="p-4 flex flex-col flex-grow">
-        <div className="flex items-start gap-3 mb-3">
-          <div className="w-9 h-9 rounded-lg flex-shrink-0 flex items-center justify-center"
-               style={{ background: `${pildora.accent}14`, border: `1px solid ${pildora.accent}33` }}>
-            <svg className="w-4 h-4" style={{ color: pildora.accent }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={pildora.icon} />
+      {/* Contenido Píldora Cerrada (Texto visible solo cuando está cerrada) */}
+      <div className={`absolute inset-0 flex flex-col items-center justify-center gap-1 sm:gap-2 px-4 transition-opacity duration-300 z-40 pointer-events-none ${isHovered ? 'opacity-0 delay-0' : 'opacity-100 delay-[400ms]'}`}>
+        <svg className="w-8 h-8 sm:w-10 sm:h-10 text-gray-900/80 shrink-0 drop-shadow-md" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={pildora.icon} />
+        </svg>
+        <span className="text-sm sm:text-base font-extrabold text-gray-900 text-center leading-tight drop-shadow-[0_2px_4px_rgba(255,255,255,0.5)] tracking-wide">{pildora.title}</span>
+      </div>
+
+      {/* Contenido Píldora Abierta (Revelado detrás de las puertas) */}
+      <div className={`absolute inset-0 z-10 bg-black transition-opacity duration-[800ms] ${isHovered ? 'opacity-100 delay-[200ms]' : 'opacity-0'}`}>
+        <img src={THUMBNAILS[pildora.id]} className="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-overlay" />
+        {isHovered && (
+           <video src={pildora.video} autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-screen" />
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#05050A] via-[#05050A]/70 to-transparent" />
+        
+        {/* Información revelada gigante */}
+        <div className={`absolute inset-0 flex flex-col items-center justify-center p-6 transition-all duration-[800ms] delay-[300ms] ${isHovered ? 'opacity-100 scale-100' : 'opacity-0 scale-90 pointer-events-none'}`}>
+          <div className="absolute top-5 left-5 px-3 py-1.5 rounded-full text-[10px] font-extrabold bg-black/40 backdrop-blur-md uppercase tracking-widest text-white border border-white/20 shadow-lg">
+            {pildora.category}
+          </div>
+          
+          <button className="w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center text-gray-900 shadow-[0_0_50px_rgba(255,255,255,0.3)] hover:scale-110 transition-transform mb-4 lg:mb-6 animate-pulse" style={{ backgroundColor: pildora.accent, border: '2px solid rgba(255,255,255,0.5)' }}>
+            <svg className="w-8 h-8 sm:w-10 sm:h-10 ml-1" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
             </svg>
-          </div>
-          <h3 className="text-sm font-bold leading-tight mt-1" style={{ color: isHovered ? '#111827' : '#374151', transition: 'color 0.3s' }}>
-            {pildora.title}
-          </h3>
-        </div>
-        <div className="flex flex-wrap gap-1.5 mb-4">
-          {pildora.features.map((feat: any, i: number) => (
-            <span key={i} className="text-xs px-2 py-0.5 rounded-full" style={{ background: 'rgba(0,0,0,0.05)', color: '#6b7280', border: '1px solid rgba(0,0,0,0.08)' }}>
-              {feat}
-            </span>
-          ))}
-        </div>
-        <div className="mt-auto pt-4" style={{ borderTop: '1px solid rgba(0,0,0,0.07)' }}>
-          <div className="flex items-end justify-between mb-3">
-            <div>
-              <div className="text-xs mb-0.5" style={{ color: '#9ca3af' }}>PROMOCIÓN</div>
-              <div className="text-2xl font-extrabold" style={{ color: '#111827' }}>$1,900</div>
-              <div className="text-xs" style={{ color: '#9ca3af' }}>MXN/mes</div>
-            </div>
-            <div className="px-2.5 py-1 rounded-full text-xs font-bold" style={{ background: `${pildora.accent}22`, color: pildora.accent, border: `1px solid ${pildora.accent}44` }}>
-              −50%
-            </div>
-          </div>
-          <button className="btn-spring w-full py-2.5 rounded-xl font-bold text-xs flex items-center justify-center gap-2" onClick={(e) => { e.stopPropagation(); openWA(); }}
-            style={{ background: `linear-gradient(135deg, ${pildora.accent}, ${pildora.accent === '#a3e635' ? '#65a30d' : '#0891b2'})`, color: '#0a0f1e', boxShadow: `0 0 16px ${pildora.accent}44` }}>
-            Agendar ahora
           </button>
+          
+          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white text-center leading-tight mb-4 drop-shadow-2xl">{pildora.title}</h3>
+          
+          <div className="flex flex-wrap gap-2 justify-center max-w-lg mb-6">
+            {pildora.features.map((feat: any, i: number) => (
+              <span key={i} className="text-xs sm:text-sm px-3 py-1.5 rounded-full bg-white/5 text-gray-100 border border-white/10 backdrop-blur-md shadow-inner">{feat}</span>
+            ))}
+          </div>
         </div>
       </div>
     </div>
@@ -142,8 +139,6 @@ const PildorasIA = () => {
   const [hoveredId, setHoveredId] = useState<number | null>(null);
   const [selectedVideo, setSelectedVideo] = useState<number | null>(null);
   const [activeFilter, setActiveFilter] = useState('Todas');
-  const [isPaused, setIsPaused] = useState(false);
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
   const modalVideoRef = useRef<HTMLVideoElement | null>(null);
 
   const filteredPildoras = activeFilter === 'Todas'
@@ -165,130 +160,107 @@ const PildorasIA = () => {
     return () => window.removeEventListener('keydown', handleEsc);
   }, []);
 
-  useEffect(() => {
-    if (isPaused) return;
-    const interval = setInterval(() => {
-      const container = scrollContainerRef.current;
-      if (container) {
-        const cardWidth = 340;
-        const maxScroll = container.scrollWidth - container.clientWidth;
-        if (container.scrollLeft >= maxScroll - 20) {
-          container.scrollTo({ left: 0, behavior: 'smooth' });
-        } else {
-          container.scrollBy({ left: cardWidth, behavior: 'smooth' });
-        }
-      }
-    }, 3500);
-    return () => clearInterval(interval);
-  }, [isPaused]);
-
   return (
-    <div id="pildoras-ia" className="w-full relative overflow-hidden" style={{ background: 'linear-gradient(160deg, #ffffff 0%, #f8fafc 40%, #f0fdf4 100%)', fontFamily: "'Sora', sans-serif" }}>
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap');
-        .dot-grid { background-image: radial-gradient(circle, rgba(163,230,53,0.25) 1px, transparent 1px); background-size: 32px 32px; }
-        .badge-pulse { animation: pulseGlow 2.4s infinite; }
-        @keyframes pulseGlow { 0%, 100% { transform: scale(1); opacity: 0.8; } 50% { transform: scale(1.02); opacity: 1; } }
-        .card-hover { transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease; }
-        .card-hover:hover { transform: translateY(-6px) scale(1.01); }
-        .hide-scrollbar::-webkit-scrollbar { display: none; }
-        .hide-scrollbar { scrollbar-width: none; }
-        .btn-spring { transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
-        .btn-spring:hover { transform: scale(1.05); }
-        .modal-in { animation: modalIn 0.4s ease-out; }
-        @keyframes modalIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
-      `}</style>
+    <>
+      <section id="pildoras-ia" className="w-full relative overflow-hidden flex flex-col h-[80vh] min-h-[600px] py-4 lg:py-6" style={{ background: 'linear-gradient(160deg, #ffffff 0%, #f8fafc 40%, #f0fdf4 100%)', fontFamily: "'Sora', sans-serif" }}>
+        <style>{`
+          @import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap');
+          .dot-grid { background-image: radial-gradient(circle, rgba(163,230,53,0.25) 1px, transparent 1px); background-size: 32px 32px; }
+          .badge-pulse { animation: pulseGlow 2.4s infinite; }
+          @keyframes pulseGlow { 0%, 100% { transform: scale(1); opacity: 0.8; } 50% { transform: scale(1.02); opacity: 1; } }
+          .hide-scrollbar::-webkit-scrollbar { display: none; }
+          .hide-scrollbar { scrollbar-width: none; }
+          .btn-spring { transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
+          .btn-spring:hover { transform: scale(1.05); }
+          .modal-in { animation: modalIn 0.4s ease-out; }
+          @keyframes modalIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        `}</style>
 
-      <div className="absolute inset-0 dot-grid opacity-60 pointer-events-none" />
+        <div className="absolute inset-0 dot-grid opacity-60 pointer-events-none" />
 
-      <header className="relative z-30 flex items-center justify-center px-6 pt-10 pb-2">
-        <img src={logoSrc} alt="Píldoras IA" className="h-14 lg:h-16 object-contain" />
-      </header>
-
-      <section className="relative z-10 px-6 md:px-12 pt-16 pb-20">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 2xl:grid-cols-2 gap-8 2xl:gap-12 items-center">
-          <div className="fade-up">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-8 badge-pulse" style={{ background: 'rgba(163,230,53,0.12)', border: '1px solid rgba(163,230,53,0.4)' }}>
-              <span className="text-xs font-semibold uppercase" style={{ color: '#4d7c0f' }}>Soluciones IA Pre-configuradas</span>
+        <div className="container m-auto max-w-7xl px-4 lg:px-8 relative z-10 flex flex-col lg:flex-row gap-6 lg:gap-10 h-full">
+          
+          {/* LEFT SIDE: Info & 3D */}
+          <div className="w-full lg:w-5/12 flex flex-col justify-center h-full relative">
+            <div className="flex items-center gap-3 mb-6">
+              <img src={logoSrc} alt="Píldoras IA" className="h-10 lg:h-12 object-contain" />
             </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl 2xl:text-7xl font-extrabold mb-6" style={{ color: '#111827' }}>Innova. Automatiza. Crece.</h1>
-            <p className="text-lg text-gray-500 mb-8 max-w-lg">Implementa agentes de inteligencia artificial listos para usar en tu empresa desde $1,900 MXN/mes.</p>
-            <button onClick={openWA} className="btn-spring px-8 py-4 rounded-xl font-bold text-white" style={{ background: 'linear-gradient(135deg, #a3e635, #65a30d)' }}>Agendar ahora</button>
+            
+            <div className="relative z-20">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-4 lg:mb-6 badge-pulse" style={{ background: 'rgba(163,230,53,0.12)', border: '1px solid rgba(163,230,53,0.4)' }}>
+                <span className="text-[10px] lg:text-xs font-semibold uppercase tracking-wider" style={{ color: '#4d7c0f' }}>Soluciones IA Pre-configuradas</span>
+              </div>
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold mb-4 leading-tight" style={{ color: '#111827' }}>
+                Innova.<br className="hidden lg:block"/>Automatiza.<br className="hidden lg:block"/>Crece.
+              </h1>
+              <p className="text-sm lg:text-base text-gray-600 mb-6 lg:mb-8 max-w-sm leading-relaxed">
+                Implementa agentes de inteligencia artificial listos para usar en tu empresa desde $1,900 MXN/mes.
+              </p>
+              <button onClick={openWA} className="btn-spring px-6 py-3 rounded-xl font-bold text-white shadow-lg flex items-center justify-center gap-2 w-full sm:w-auto" style={{ background: 'linear-gradient(135deg, #a3e635, #65a30d)' }}>
+                Agendar ahora
+              </button>
+            </div>
+            
+            {/* 3D Viewer subtle in background */}
+            <div className="absolute right-0 bottom-0 w-64 h-64 lg:w-96 lg:h-96 opacity-30 pointer-events-none transition-all duration-1000" style={{ transform: 'translate(10%, 10%)' }}>
+               <PildoraViewer />
+            </div>
           </div>
-          <div className="fade-up relative mt-8 2xl:mt-0 max-w-md mx-auto 2xl:max-w-none 2xl:mx-0 w-full">
-            <div
-              className="relative w-full rounded-2xl overflow-hidden float-orb"
-              style={{
-                aspectRatio: '4/3',
-                background: 'linear-gradient(135deg, rgba(163,230,53,0.04) 0%, rgba(34,211,238,0.04) 100%)',
-                border: '1px solid rgba(163,230,53,0.3)',
-                boxShadow: '0 8px 60px rgba(163,230,53,0.14), 0 0 100px rgba(34,211,238,0.08)',
-              }}
-            >
-              <PildoraViewer />
-              {/* corner decorators */}
-              {['top-0 left-0', 'top-0 right-0', 'bottom-0 left-0', 'bottom-0 right-0'].map((pos, i) => (
-                <div key={i} className={`absolute ${pos} w-6 h-6 pointer-events-none`}
-                     style={{
-                       borderTop:    pos.includes('top')    ? '2px solid #a3e635' : 'none',
-                       borderBottom: pos.includes('bottom') ? '2px solid #a3e635' : 'none',
-                       borderLeft:   pos.includes('left')   ? '2px solid #a3e635' : 'none',
-                       borderRight:  pos.includes('right')  ? '2px solid #a3e635' : 'none',
-                     }} />
+
+          {/* RIGHT SIDE: Filters & Expanding Grid */}
+          <div className="w-full lg:w-7/12 flex flex-col h-full bg-white/60 rounded-3xl border border-white shadow-2xl backdrop-blur-xl p-4 lg:p-6 overflow-hidden relative z-20">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 gap-3 lg:gap-4 shrink-0">
+              <h2 className="text-lg lg:text-xl font-extrabold text-gray-900 flex items-center gap-2">
+                <div className="w-2 h-2 rounded-full bg-lime-500 animate-pulse"/>
+                Catálogo Dinámico
+              </h2>
+              <div className="flex flex-wrap gap-1.5 lg:gap-2">
+                {FILTERS.map(f => (
+                  <button key={f} onClick={() => setActiveFilter(f)} className="px-2.5 py-1 rounded-full text-[9px] lg:text-[10px] font-bold transition-all hover:scale-105"
+                    style={activeFilter === f ? { background: '#a3e635', color: '#111827', boxShadow: '0 4px 12px rgba(163,230,53,0.3)' } : { background: '#fff', border: '1px solid #e5e7eb', color: '#4b5563' }}>
+                    {f}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Expanding Collage Grid container */}
+            <div className="flex-1 relative overflow-y-auto pr-3 hide-scrollbar w-full flex flex-wrap content-start gap-2 lg:gap-3 p-1">
+              {filteredPildoras.map((p) => (
+                <PildoraExpandible 
+                  key={p.id} 
+                  pildora={p} 
+                  isHovered={hoveredId === p.id} 
+                  isOtherHovered={hoveredId !== null && hoveredId !== p.id} 
+                  onHover={setHoveredId} 
+                  onClick={setSelectedVideo} 
+                />
               ))}
             </div>
           </div>
         </div>
       </section>
 
-      <style>{`
-        @keyframes floatOrb {
-          0%, 100% { transform: translateY(0) scale(1); opacity: 0.8; }
-          50%       { transform: translateY(-18px) scale(1.06); opacity: 1; }
-        }
-        .float-orb { animation: floatOrb 5s cubic-bezier(0.45, 0, 0.55, 1) infinite; }
-      `}</style>
-
-      <div className="relative z-20">
+      {/* AGENTES CONSULTORES OUTSIDE ONESHOT */}
+      <section className="relative z-20 bg-white">
         <AgentesConsultores />
-      </div>
-
-      <section className="relative z-10 px-6 md:px-12 pb-24 pt-16">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
-            <h2 className="text-3xl md:text-4xl font-extrabold">Catálogo de Píldoras</h2>
-            <div className="flex flex-wrap gap-2">
-              {FILTERS.map(f => (
-                <button key={f} onClick={() => setActiveFilter(f)} className="px-4 py-1.5 rounded-full text-xs font-semibold transition-all"
-                  style={activeFilter === f ? { background: '#a3e635', color: '#111827' } : { background: '#fff', border: '1px solid #e5e7eb' }}>
-                  {f}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div ref={scrollContainerRef} onMouseEnter={() => setIsPaused(true)} onMouseLeave={() => setIsPaused(false)} className="flex overflow-x-auto gap-5 pb-8 snap-x hide-scrollbar">
-            {filteredPildoras.map((p) => (
-              <PildoraCard key={p.id} pildora={p} isHovered={hoveredId === p.id} onHover={setHoveredId} onClick={setSelectedVideo} />
-            ))}
-          </div>
-        </div>
       </section>
 
+      {/* Video Modal */}
       {selectedVideo && (() => {
         const pildora = PILDORAS_DATA.find(p => p.id === selectedVideo);
         if (!pildora) return null;
         return (
-          <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 md:p-6" style={{ backgroundColor: 'rgba(0, 0, 0, 0.4)', backdropFilter: 'blur(8px)' }} onClick={closeVideoModal}>
-            <div className="modal-in relative w-full max-w-[850px] max-h-[90vh] bg-white rounded-[20px] overflow-hidden flex flex-col md:flex-row" style={{ boxShadow: `0 20px 60px rgba(0,0,0,0.15), 0 0 40px ${pildora.accent}20`, border: '1px solid rgba(0,0,0,0.05)' }} onClick={e => e.stopPropagation()}>
+          <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 md:p-6" style={{ backgroundColor: 'rgba(0, 0, 0, 0.6)', backdropFilter: 'blur(8px)' }} onClick={closeVideoModal}>
+            <div className="modal-in relative w-full max-w-[850px] max-h-[90vh] bg-white rounded-[20px] overflow-hidden flex flex-col md:flex-row shadow-2xl" style={{ border: '1px solid rgba(255,255,255,0.1)' }} onClick={e => e.stopPropagation()}>
               
               <button onClick={closeVideoModal} className="absolute top-4 right-4 w-9 h-9 rounded-full flex items-center justify-center z-20 text-gray-800 bg-white/80 backdrop-blur-sm border border-gray-200 shadow-sm hover:bg-gray-100 transition-colors">
                 <X size={18} />
               </button>
               
               {/* Left Column: Video */}
-              <div className="flex-1 bg-black relative flex items-center justify-center max-h-[50vh] md:max-h-[90vh]">
-                <video ref={modalVideoRef} src={pildora.video} controls autoPlay playsInline className="w-full h-full object-contain" />
+              <div className="flex-1 bg-black relative flex items-center justify-center max-h-[40vh] md:max-h-[90vh]">
+                <video ref={modalVideoRef} src={pildora.video} controls autoPlay playsInline className="w-full h-full object-cover" />
               </div>
 
               {/* Right Column: Info */}
@@ -333,7 +305,7 @@ const PildorasIA = () => {
           </div>
         );
       })()}
-    </div>
+    </>
   );
 };
 

@@ -6,8 +6,6 @@ import {
   ExternalLink, ChevronRight,
 } from 'lucide-react';
 import { brandingConfig } from '../config/branding';
-import AcademiaBanner from './AcademiaBanner';
-
 const { colores } = brandingConfig;
 
 /* ── Hub modules data ──────────────────────────────────────── */
@@ -26,63 +24,24 @@ const MODULES_TOP: HubModule[] = [
   { id: 'blog', icon: Newspaper, label: 'Blog', desc: 'Artículos sobre IA y tecnología', color: '#A4D955', badge: 'Nuevo' },
   { id: 'noticias-rt', icon: Radio, label: 'Noticias en Tiempo Real', desc: 'Actualización constante del mundo IA', color: '#ef4444', badge: 'En vivo' },
   { id: 'sala-prensa', icon: Mic2, label: 'Sala de Prensa', desc: 'Comunicados oficiales MAYIA', color: '#60a5fa' },
-  { id: 'pildoras', icon: Zap, label: 'Píldoras IA', desc: 'Soluciones rápidas listas para implementar', color: '#f59e0b' },
+];
+
+const MODULES_ABOUT: HubModule[] = [
+  { id: 'quienes', icon: Building2, label: 'Quiénes Somos', desc: 'El primer centro de inteligencia artificial 100% mexicano. Infraestructura, talento y visión para la soberanía digital de México.', color: '#A4D955' },
+  { id: 'que-hacemos', icon: Cpu, label: 'Qué Hacemos', desc: 'Desarrollamos, implementamos y operamos soluciones de IA para empresas, gobierno e industria en los 32 estados del país.', color: '#60a5fa' },
+  { id: 'conoce-mas', icon: HelpCircle, label: 'Conoce Más', desc: 'Descubre nuestro ecosistema de infraestructura, academia, consultoría y desarrollo de inteligencia artificial enterprise.', color: '#a78bfa' },
 ];
 
 const MODULES_COMMUNITY: HubModule[] = [
   { id: 'embajadores', icon: Medal, label: 'Embajadores', desc: 'Red de líderes IA', color: '#d97706' },
-  { id: 'foro-retail', icon: ShoppingCart, label: 'Foro Retail', desc: 'IA aplicada al comercio', color: '#10b981' },
-  { id: 'wai', icon: Globe, label: 'WAI', desc: 'Women in AI México', color: '#ec4899' },
-  { id: 'hackathon', icon: Trophy, label: 'Hackathon', desc: 'Innovación abierta Intel × MAYIA', color: '#8b5cf6' },
+  { id: 'red-ia', icon: Network, label: 'Red de IA+', desc: 'Comunidad nacional de IA', color: '#6366f1' },
 ];
 
 const MODULES_ECOSYSTEM: HubModule[] = [
-  { id: 'visitas-intel', icon: Cpu, label: 'Visitas Intel', desc: 'Laboratorio de hardware', color: '#0071C5' },
-  { id: 'agente-33', icon: Bot, label: 'Agente 33', desc: 'Asistente IA táctico y seguridad', color: '#10b981' },
-  { id: 'lumel', icon: Lightbulb, label: 'Lumel', desc: 'Inteligencia Emocional IA', color: '#f472b6' },
   { id: 'temp-ia', icon: Thermometer, label: 'Temperatura de la IA', desc: 'Pulso del mercado IA México', color: '#ef4444' },
-  { id: 'red-ia', icon: Network, label: 'Red de IA+', desc: 'Comunidad nacional de IA', color: '#6366f1' },
-  { id: 'tendencias', icon: TrendingUp, label: 'Tendencias IA', desc: 'Lo que viene en inteligencia artificial', color: '#14b8a6' },
 ];
 
-/* ── About MAYIA cards ─────────────────────────────────────── */
 
-const ABOUT_CARDS = [
-  {
-    id: 'quienes',
-    title: 'Quiénes somos',
-    desc: 'El primer centro de inteligencia artificial 100% mexicano. Infraestructura, talento y visión para la soberanía digital de México.',
-    icon: Building2,
-    color: '#A4D955',
-  },
-  {
-    id: 'que-hacemos',
-    title: 'Qué hacemos',
-    desc: 'Desarrollamos, implementamos y operamos soluciones de IA para empresas, gobierno e industria en los 32 estados del país.',
-    icon: Cpu,
-    color: '#60a5fa',
-  },
-  {
-    id: 'conoce-mas',
-    title: 'Conoce más',
-    desc: 'Descubre nuestro ecosistema de infraestructura, academia, consultoría y desarrollo de inteligencia artificial enterprise.',
-    icon: HelpCircle,
-    color: '#a78bfa',
-  },
-];
-
-/* ── Sector map ────────────────────────────────────────────── */
-
-const SECTORS = [
-  { label: 'Finanzas', color: '#A4D955' },
-  { label: 'Salud', color: '#34d399' },
-  { label: 'Retail', color: '#f59e0b' },
-  { label: 'Manufactura', color: '#60a5fa' },
-  { label: 'Energía', color: '#f472b6' },
-  { label: 'Gobierno', color: '#8b5cf6' },
-  { label: 'Educación', color: '#14b8a6' },
-  { label: 'Logística', color: '#ef4444' },
-];
 
 /* ── Styles ─────────────────────────────────────────────────── */
 
@@ -159,22 +118,37 @@ const mapHubIdToSection = (id: string): string | null => {
   }
 };
 
+export interface SeoHubProps {
+  activeSection?: string;
+  onSectionChange?: (section: string) => void;
+  onOpenSocialModal?: (id: string, yPos: number) => void;
+}
+
+const SOCIAL_IDS = ['noticias-rt', 'blog', 'sala-prensa', 'embajadores', 'red-ia', 'temp-ia'];
+
 function HubCard({ 
   mod, 
   activeSection, 
-  onSectionChange 
+  onSectionChange,
+  onOpenSocialModal
 }: { 
   mod: HubModule; 
   activeSection?: string; 
   onSectionChange?: (section: string) => void; 
+  onOpenSocialModal?: (id: string, yPos: number) => void;
 }) {
   const Icon = mod.icon;
   const targetSection = mapHubIdToSection(mod.id);
   const isActive = targetSection && activeSection === targetSection;
 
+  const isSocial = SOCIAL_IDS.includes(mod.id);
+
   const handleClick = (e: React.MouseEvent) => {
-    if (targetSection && onSectionChange) {
-      e.preventDefault();
+    e.preventDefault();
+    if (isSocial && onOpenSocialModal) {
+      const rect = e.currentTarget.getBoundingClientRect();
+      onOpenSocialModal(mod.id, rect.top + rect.height / 2);
+    } else if (targetSection && onSectionChange) {
       onSectionChange(targetSection);
     }
   };
@@ -240,7 +214,7 @@ function HubCard({
         <div style={{
           fontSize: 10, color: isActive ? `${colores.primario}bb` : '#6b7280', lineHeight: 1.3,
           fontFamily: "'Inter', system-ui, sans-serif",
-          whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
+          marginTop: 2,
           transition: 'all 0.2s',
         }}>
           {mod.desc}
@@ -253,12 +227,7 @@ function HubCard({
 
 /* ── Main Component ─────────────────────────────────────────── */
 
-export interface SeoHubProps {
-  activeSection?: string;
-  onSectionChange?: (section: string) => void;
-}
-
-export default function SeoHub({ activeSection, onSectionChange }: SeoHubProps) {
+export default function SeoHub({ activeSection, onSectionChange, onOpenSocialModal }: SeoHubProps) {
   const [hovAbout, setHovAbout] = useState<string | null>(null);
 
   const sidebarWidth = '320px';
@@ -331,89 +300,17 @@ export default function SeoHub({ activeSection, onSectionChange }: SeoHubProps) 
           scrollbarColor: `${colores.borde} transparent`,
         }}
       >
-        {/* Academia Banner inside right sidebar */}
-            <div style={{ padding: '12px 10px', maxWidth: 300, margin: '0 auto' }}>
-              <AcademiaBanner compact />
-            </div>
+            <SectionLabel label="Nosotros" />
+            {MODULES_ABOUT.map(m => (
+              <HubCard 
+                key={m.id} 
+                mod={m} 
+                activeSection={activeSection} 
+                onSectionChange={onSectionChange} 
+                onOpenSocialModal={onOpenSocialModal}
+              />
+            ))}
 
-            <SectionLabel label="Sobre MAYIA" />
-            <div style={{ padding: '0 8px 8px' }}>
-              {ABOUT_CARDS.map(card => {
-                const Icon = card.icon;
-                const isHov = hovAbout === card.id;
-                const targetSection = mapHubIdToSection(card.id);
-                const isActive = targetSection && activeSection === targetSection;
-
-                const handleClick = (e: React.MouseEvent) => {
-                  if (targetSection && onSectionChange) {
-                    e.preventDefault();
-                    onSectionChange(targetSection);
-                  }
-                };
-
-                return (
-                  <article
-                    key={card.id}
-                    onMouseEnter={() => setHovAbout(card.id)}
-                    onMouseLeave={() => setHovAbout(null)}
-                    onClick={handleClick}
-                    style={{
-                      padding: '12px 14px', marginBottom: 6,
-                      borderRadius: 12, 
-                      cursor: targetSection ? 'pointer' : 'default',
-                      background: isActive ? `${colores.primario}12` : (isHov ? colores.fondoTerciario : colores.fondoSecundario),
-                      border: `1px solid ${isActive ? colores.primario : (isHov ? colores.primario : colores.borde)}`,
-                      transition: 'all 0.25s',
-                      boxShadow: isActive ? `0 0 10px ${colores.primario}20` : 'none',
-                    }}
-                  >
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
-                      <Icon size={14} color={isActive ? colores.primario : card.color} />
-                      <h3 style={{
-                        margin: 0, fontSize: 12, fontWeight: 700, 
-                        color: isActive ? colores.primario : (colores.textoClaro || '#1A202C'),
-                        fontFamily: "'Inter', system-ui, sans-serif",
-                      }}>
-                        {card.title}
-                      </h3>
-                    </div>
-                    <p style={{
-                      margin: 0, fontSize: 10, color: isActive ? `${colores.primario}aa` : '#6b7280', lineHeight: 1.5,
-                      fontFamily: "'Inter', system-ui, sans-serif",
-                    }}>
-                      {card.desc}
-                    </p>
-                  </article>
-                );
-              })}
-            </div>
-
-            {/* ── Mapa por Sector ── */}
-            <SectionLabel label="Mapa por Sector" />
-            <div style={{
-              display: 'flex', flexWrap: 'wrap', gap: 6,
-              padding: '4px 16px 12px',
-            }}>
-              {SECTORS.map(s => (
-                <span
-                  key={s.label}
-                  style={{
-                    display: 'inline-flex', alignItems: 'center', gap: 4,
-                    padding: '4px 10px', borderRadius: 99,
-                    background: `${s.color}12`,
-                    border: `1px solid ${s.color}25`,
-                    fontSize: 10, fontWeight: 600, color: s.color,
-                    fontFamily: "'Inter', system-ui, sans-serif",
-                    cursor: 'default',
-                  }}
-                >
-                  <Map size={9} />
-                  {s.label}
-                </span>
-              ))}
-            </div>
-
-            {/* ── Content Hub Modules ── */}
             <SectionLabel label="Contenido y Noticias" />
             {MODULES_TOP.map(m => (
               <HubCard 
@@ -421,6 +318,7 @@ export default function SeoHub({ activeSection, onSectionChange }: SeoHubProps) 
                 mod={m} 
                 activeSection={activeSection} 
                 onSectionChange={onSectionChange} 
+                onOpenSocialModal={onOpenSocialModal}
               />
             ))}
 
@@ -431,6 +329,7 @@ export default function SeoHub({ activeSection, onSectionChange }: SeoHubProps) 
                 mod={m} 
                 activeSection={activeSection} 
                 onSectionChange={onSectionChange} 
+                onOpenSocialModal={onOpenSocialModal}
               />
             ))}
 
@@ -441,6 +340,7 @@ export default function SeoHub({ activeSection, onSectionChange }: SeoHubProps) 
                 mod={m} 
                 activeSection={activeSection} 
                 onSectionChange={onSectionChange} 
+                onOpenSocialModal={onOpenSocialModal}
               />
             ))}
 

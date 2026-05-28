@@ -1,33 +1,134 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
-  Database, ShieldAlert, FlaskConical, FileText, Wrench, Calendar,
-  Briefcase, LineChart, ShoppingBag, GraduationCap, GitBranch, ScanEye
+  Database, FlaskConical, FileText, Wrench, Calendar,
+  Briefcase, LineChart, ShoppingBag, GraduationCap, GitBranch, ScanEye,
+  BookOpen, Award, Users, MoreVertical, Info
 } from 'lucide-react';
-import mayiaLogoBlanco from '../assets/logosNativos/mayiaLogoBlanco.png';
+import logoMaia from '../assets/logosNativos/logoMaia.png';
+import academiaLogo from '../assets/logosNativos/academia-horizontal.png';
 import flaiLogo from '../assets/logosNativos/logo-FLAI.png';
 import flaiNubeIcon from '../assets/logosNativos/1. NUBE_FINAL_FLAI (1).png';
 import mayiaLakeImg from '../assets/logosNativos/MAYiA_LAKE.jpeg';
+import cyberpeaceLogo from '../assets/SOC/cyberpeaceLogo.png';
+import cyberpeaceVid from '../assets/SOC/cyberpeaceVid.mp4';
+import CalendarModal from './CalendarModal';
 
-const CATEGORIES = ['Infraestructura', 'Desarrollo', 'Operación', 'Monitoreo', 'Capacitación'];
+const CATEGORIES = ['Infraestructura', 'Desarrollo', 'Modelos', 'Agentes', 'Operación', 'Monitoreo', 'Capacitación'];
 
-export default function EnterpriseDashboard() {
+function SocCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
+  const handleAgendarCita = () => {
+    window.open("https://api.whatsapp.com/send/?phone=525553315526&text&type=phone_number&app_absent=0", '_blank');
+  };
+
+  return (
+    <div style={{ 
+      background: '#ffffff', borderRadius: 16, border: '1px solid #e5e7eb', 
+      boxShadow: '0 4px 12px rgba(0,0,0,0.03)', display: 'flex', flexDirection: 'column', height: '100%', position: 'relative' 
+    }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '20px 20px 12px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+          <div style={{ width: 40, height: 40, borderRadius: 10, background: '#111827', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 6 }}>
+            <img src={cyberpeaceLogo} alt="CyberPeace SOC" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+          </div>
+          <div>
+            <h3 style={{ margin: 0, fontSize: 18, fontWeight: 800, color: '#111827' }}>SOC IA CyberPeace</h3>
+            <p style={{ margin: 0, fontSize: 12, color: '#6b7280', fontWeight: 600 }}>Ciberseguridad 360°</p>
+          </div>
+        </div>
+      </div>
+
+      <div style={{ margin: '0 20px 16px', borderRadius: 12, overflow: 'hidden', height: 160, position: 'relative', background: '#0A0A14' }}>
+        <video 
+            autoPlay loop muted playsInline
+            style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.85 }}
+        >
+            <source src={cyberpeaceVid} type="video/mp4" />
+        </video>
+        <div style={{ position: 'absolute', top: 12, left: 12, display: 'flex', flexDirection: 'column', gap: 6 }}>
+           {["CACERÍA DE AMENAZAS", "INTELIGENCIA IA", "EVALUACIÓN RIESGOS"].map((f, i) => (
+             <span key={i} style={{ background: 'rgba(59,130,246,0.85)', backdropFilter: 'blur(4px)', color: '#fff', fontSize: 9, fontWeight: 800, padding: '4px 8px', borderRadius: 6, border: '1px solid rgba(125,209,255,0.4)', letterSpacing: '0.04em' }}>{f}</span>
+           ))}
+        </div>
+      </div>
+
+      <div style={{ display: 'flex', justifyContent: 'space-around', padding: '0 20px 16px', marginTop: 'auto' }}>
+        <div style={{ textAlign: 'center' }}>
+          <p style={{ margin: 0, fontSize: 15, fontWeight: 800, color: '#111827' }}>FIRST</p>
+          <p style={{ margin: 0, fontSize: 11, color: '#6b7280', fontWeight: 600 }}>Miembro</p>
+        </div>
+        <div style={{ textAlign: 'center' }}>
+          <p style={{ margin: 0, fontSize: 15, fontWeight: 800, color: '#3b82f6' }}>ISO 27001</p>
+          <p style={{ margin: 0, fontSize: 11, color: '#6b7280', fontWeight: 600 }}>Seguridad</p>
+        </div>
+        <div style={{ textAlign: 'center' }}>
+          <p style={{ margin: 0, fontSize: 15, fontWeight: 800, color: '#10b981' }}>24/7</p>
+          <p style={{ margin: 0, fontSize: 11, color: '#6b7280', fontWeight: 600 }}>Monitoreo</p>
+        </div>
+      </div>
+
+      <div style={{ padding: '0 20px 20px', display: 'flex', flexWrap: 'wrap', gap: 6, justifyContent: 'center' }}>
+        {['ISO 42001', 'ISO 27034', 'ISO 27017', 'ISO 9001', 'ISO 37001', 'ISO 27018'].map(cert => (
+          <span key={cert} style={{ fontSize: 9, fontWeight: 700, padding: '4px 8px', borderRadius: 99, background: '#f3f4f6', color: '#4b5563', border: '1px solid #e5e7eb' }}>
+            {cert}
+          </span>
+        ))}
+      </div>
+
+      <div style={{ display: 'flex', gap: 8, padding: '0 20px 20px' }}>
+        <button 
+          onClick={handleAgendarCita}
+          style={{ 
+            background: 'linear-gradient(to right, #1d4ed8, #3b82f6)', color: '#ffffff', border: 'none', borderRadius: 8, padding: '10px 0', fontSize: 13, fontWeight: 700, 
+            display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', flex: 1, justifyContent: 'center', transition: 'all 0.2s',
+            boxShadow: '0 4px 12px rgba(59,130,246,0.2)'
+          }}
+          onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 6px 16px rgba(59,130,246,0.3)'; }}
+          onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 12px rgba(59,130,246,0.2)'; }}
+        >
+          Proteger ahora
+        </button>
+        <button 
+          onClick={onOpenInfo}
+          style={{ 
+            background: '#f3f4f6', color: '#374151', border: '1px solid #e5e7eb', borderRadius: 8, padding: '10px 0', fontSize: 13, fontWeight: 600, 
+            display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', flex: 1, justifyContent: 'center', transition: 'all 0.2s' 
+          }}
+          onMouseEnter={e => { e.currentTarget.style.background = '#e5e7eb'; }}
+          onMouseLeave={e => { e.currentTarget.style.background = '#f3f4f6'; }}
+        >
+          Conocer más &rarr;
+        </button>
+      </div>
+    </div>
+  );
+}
+
+export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo }: { onOpenMap?: () => void, onOpenFlaiInfo?: () => void }) {
   const [activeTab, setActiveTab] = useState('Infraestructura');
+  const [calendarPos, setCalendarPos] = useState<{x: number, y: number} | null>(null);
 
   const Wrapper = ({ category, children }: { category: string, children: React.ReactNode }) => {
     const isMatch = activeTab === category;
     return (
-      <div style={{
-        position: 'relative',
-        height: '100%',
-        borderRadius: '16px',
-        padding: isMatch ? '4px' : '0px',
-        transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
-        transform: isMatch ? 'translateY(-6px)' : 'translateY(0)',
-        boxShadow: isMatch ? '0 0 30px rgba(164,217,85,0.5), 0 0 15px rgba(164,217,85,0.8)' : 'none',
-        zIndex: isMatch ? 10 : 1,
-        overflow: isMatch ? 'hidden' : 'visible',
-      }}>
+      <motion.div
+        layout
+        initial={false}
+        animate={{ 
+          y: isMatch ? -6 : 0,
+          boxShadow: isMatch ? '0 0 30px rgba(164,217,85,0.5), 0 0 15px rgba(164,217,85,0.8)' : 'none'
+        }}
+        transition={{ type: 'spring', stiffness: 350, damping: 30 }}
+        style={{
+          position: 'relative',
+          height: '100%',
+          borderRadius: '16px',
+          padding: isMatch ? '4px' : '0px',
+          zIndex: isMatch ? 10 : 1,
+          order: isMatch ? -1 : 0,
+          overflow: isMatch ? 'hidden' : 'visible',
+        }}
+      >
         {isMatch && (
           <div style={{
             position: 'absolute',
@@ -48,7 +149,7 @@ export default function EnterpriseDashboard() {
         }}>
           {children}
         </div>
-      </div>
+      </motion.div>
     );
   };
 
@@ -80,47 +181,33 @@ export default function EnterpriseDashboard() {
               </h1>
               <div 
                 style={{
-                  background: '#0A0A14',
-                  borderRadius: '16px', 
-                  padding: '10px 24px', 
                   display: 'inline-flex', 
                   alignItems: 'center', 
                   justifyContent: 'center',
-                  boxShadow: '0 8px 20px rgba(0,0,0,0.15), inset 0 1px 2px rgba(255,255,255,0.05)',
-                  border: '1px solid rgba(255,255,255,0.08)',
                   transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
-                  cursor: 'default',
                   position: 'relative',
-                  overflow: 'hidden'
+                  padding: '4px',
                 }}
                 onMouseEnter={e => {
                   e.currentTarget.style.transform = 'translateY(-3px)';
-                  e.currentTarget.style.boxShadow = '0 12px 30px rgba(164,217,85,0.25), inset 0 1px 2px rgba(255,255,255,0.1)';
-                  e.currentTarget.style.borderColor = 'rgba(164,217,85,0.4)';
                 }}
                 onMouseLeave={e => {
                   e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.15), inset 0 1px 2px rgba(255,255,255,0.05)';
-                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)';
                 }}
               >
                 <img 
-                  src={mayiaLogoBlanco} 
+                  src={logoMaia} 
                   alt="MAYIA" 
-                  style={{ height: '36px', objectFit: 'contain', position: 'relative', zIndex: 1, filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.5))' }} 
+                  style={{ height: '48px', objectFit: 'contain', position: 'relative', zIndex: 1 }} 
                 />
               </div>
             </div>
             <h2 style={{ fontSize: 26, fontWeight: 400, color: '#374151', margin: 0 }}>
-              ¿Qué solución de I.A. necesitas hoy?
+              ¿Qué solución de IA necesitas implementar hoy?
             </h2>
           </div>
           
-          {/* Toggle Models / Agents */}
-          <div style={{ display: 'flex', background: '#f3f4f6', borderRadius: 99, padding: 4, border: '1px solid #e5e7eb' }}>
-            <button style={{ background: '#ffffff', border: 'none', padding: '8px 20px', borderRadius: 99, fontSize: 14, fontWeight: 600, color: '#111827', boxShadow: '0 1px 3px rgba(0,0,0,0.1)', cursor: 'pointer' }}>Models</button>
-            <button style={{ background: 'transparent', border: 'none', padding: '8px 20px', borderRadius: 99, fontSize: 14, fontWeight: 500, color: '#6b7280', cursor: 'pointer' }}>Agents</button>
-          </div>
+
         </div>
 
         {/* Categories */}
@@ -154,7 +241,7 @@ export default function EnterpriseDashboard() {
         </div>
 
         {/* All Cards Grid */}
-        <div style={{ 
+        <motion.div layout style={{ 
           display: 'grid', 
           gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', 
           gap: 24 
@@ -167,64 +254,39 @@ export default function EnterpriseDashboard() {
                 <div style={{ width: 64, height: 64, borderRadius: 12, background: '#0f172a', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <Database size={28} color="#38bdf8" />
                 </div>
-                <h3 style={{ fontSize: 22, fontWeight: 600, color: '#111827', margin: 0 }}>IA Privada</h3>
+                <h3 style={{ fontSize: 20, fontWeight: 600, color: '#111827', margin: 0, lineHeight: 1.2 }}>Fábrica de IA,<br/>IA Privada</h3>
               </div>
-              <div style={{ display: 'flex', gap: 8, marginBottom: 20 }}>
+              <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
                 <div style={{ flex: 1, background: '#f0f9ff', borderRadius: 8, padding: '12px 8px', textAlign: 'center' }}>
-                  <div style={{ fontSize: 22, fontWeight: 700, color: '#0ea5e9' }}>12</div>
-                  <div style={{ fontSize: 9, fontWeight: 700, color: '#7dd3fc', textTransform: 'uppercase' }}>Zonas Activas</div>
+                  <div style={{ fontSize: 22, fontWeight: 700, color: '#0ea5e9' }}>30</div>
+                  <div style={{ fontSize: 9, fontWeight: 700, color: '#7dd3fc', textTransform: 'uppercase' }}>Centros datos</div>
                 </div>
                 <div style={{ flex: 1, background: '#f0fdf4', borderRadius: 8, padding: '12px 8px', textAlign: 'center' }}>
-                  <div style={{ fontSize: 22, fontWeight: 700, color: '#10b981' }}>94.3%</div>
-                  <div style={{ fontSize: 9, fontWeight: 700, color: '#6ee7b7', textTransform: 'uppercase' }}>Precisión IA</div>
+                  <div style={{ fontSize: 22, fontWeight: 700, color: '#10b981' }}>24</div>
+                  <div style={{ fontSize: 9, fontWeight: 700, color: '#6ee7b7', textTransform: 'uppercase' }}>Estados</div>
                 </div>
                 <div style={{ flex: 1, background: '#fff7ed', borderRadius: 8, padding: '12px 8px', textAlign: 'center' }}>
-                  <div style={{ fontSize: 22, fontWeight: 700, color: '#f59e0b' }}>3</div>
-                  <div style={{ fontSize: 9, fontWeight: 700, color: '#fcd34d', textTransform: 'uppercase' }}>Alertas Stock</div>
+                  <div style={{ fontSize: 16, fontWeight: 700, color: '#f59e0b', marginTop: 4 }}>99.98%</div>
+                  <div style={{ fontSize: 9, fontWeight: 700, color: '#fcd34d', textTransform: 'uppercase' }}>TIER III SLA</div>
                 </div>
               </div>
+              <p style={{ fontSize: 14, color: '#374151', lineHeight: 1.5, margin: '0 0 20px', fontWeight: 500 }}>
+                Somos la red de inteligencia artificial más grande del país
+              </p>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 'auto' }}>
-                <span style={{ fontSize: 13, color: '#4b5563', fontWeight: 500, lineHeight: 1.3 }}>Presencia a<br/>nivel nacional</span>
-                <button style={{ background: '#111827', color: '#ffffff', border: 'none', borderRadius: 8, padding: '12px 16px', fontSize: 12, fontWeight: 600, display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer' }}>
-                  <Calendar size={14} /> <span style={{ textAlign: 'left', lineHeight: 1.2 }}>Agendar cita para<br/>cotización</span>
+                <button onClick={onOpenMap} style={{ background: '#111827', color: '#ffffff', border: 'none', borderRadius: 8, padding: '12px 16px', fontSize: 13, fontWeight: 600, display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', width: '100%', justifyContent: 'center', transition: 'transform 0.2s' }} onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.02)'} onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}>
+                   Descubre porque &rarr;
                 </button>
               </div>
             </div>
           </Wrapper>
 
           <Wrapper category="Infraestructura">
-            <div style={{ background: '#ffffff', borderRadius: 16, padding: 24, border: '1px solid #e5e7eb', boxShadow: '0 4px 12px rgba(0,0,0,0.03)', display: 'flex', flexDirection: 'column', height: '100%' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 16 }}>
-                <div style={{ width: 64, height: 64, borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
-                  <img src={flaiNubeIcon} alt="Icono FLAI" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                </div>
-                <h3 style={{ fontSize: 22, fontWeight: 600, color: '#111827', margin: 0, display: 'flex', alignItems: 'center' }}>
-                  <img src={flaiLogo} alt="FLAI Nube" style={{ height: '36px', objectFit: 'contain' }} />
-                </h3>
-              </div>
-              <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.6, margin: 0 }}>
-                Lleva tu operación a una nube inteligente, segura y escalable. Centraliza datos, automatiza procesos y activa soluciones de IA listas para crecer con tu negocio.
-              </p>
-            </div>
+            <FlaiCard onOpenInfo={onOpenFlaiInfo} />
           </Wrapper>
 
           <Wrapper category="Infraestructura">
-            <div style={{ background: '#ffffff', borderRadius: 16, padding: 24, border: '1px solid #e5e7eb', boxShadow: '0 4px 12px rgba(0,0,0,0.03)', display: 'flex', flexDirection: 'column', height: '100%' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 16 }}>
-                <div style={{ width: 48, height: 48, borderRadius: 12, background: '#f3e8ff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <ShieldAlert size={24} color="#9333ea" />
-                </div>
-                <h3 style={{ fontSize: 20, fontWeight: 600, color: '#111827', margin: 0, lineHeight: 1.2 }}>SOC IA<br/>Ciberseguridad</h3>
-              </div>
-              <p style={{ fontSize: 14, color: '#374151', lineHeight: 1.5, margin: '0 0 20px' }}>
-                Protege tu empresa con un centro de monitoreo inteligente. Detecta amenazas, responde más rápido y fortalece tu seguridad digital con IA en tiempo real.
-              </p>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 'auto' }}>
-                {['ISO 27034', 'ISO 27017', 'ISO 9001', 'ISO 37001', 'ISO 27018'].map(iso => (
-                  <span key={iso} style={{ background: '#1e1b4b', color: '#e0e7ff', fontSize: 10, fontWeight: 600, padding: '6px 10px', borderRadius: 99 }}>{iso}</span>
-                ))}
-              </div>
-            </div>
+            <SocCard onOpenInfo={() => alert('Sección de Más Información CyberPeace SOC en construcción.')} />
           </Wrapper>
 
           <Wrapper category="Infraestructura">
@@ -245,9 +307,20 @@ export default function EnterpriseDashboard() {
                 </div>
                 <h3 style={{ fontSize: 20, fontWeight: 600, color: '#111827', margin: 0, lineHeight: 1.2 }}>Mayia Lake Analíticos</h3>
               </div>
-              <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.6, margin: 0 }}>
+              <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.6, margin: 0, marginBottom: 20 }}>
                 Convierte tus datos en decisiones inteligentes. Descubre oportunidades ocultas, anticipa riesgos y visualiza el crecimiento de tu negocio con analítica impulsada por IA.
               </p>
+              <div style={{ display: 'flex', marginTop: 'auto' }}>
+                <button style={{ 
+                  background: '#f3f4f6', color: '#374151', border: '1px solid #e5e7eb', borderRadius: 8, padding: '10px 16px', fontSize: 13, fontWeight: 600, 
+                  display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', width: '100%', justifyContent: 'center', transition: 'all 0.2s' 
+                }}
+                onMouseEnter={e => { e.currentTarget.style.background = '#e5e7eb'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
+                onMouseLeave={e => { e.currentTarget.style.background = '#f3f4f6'; e.currentTarget.style.transform = 'translateY(0)'; }}
+                >
+                  Conocer más &rarr;
+                </button>
+              </div>
             </div>
           </Wrapper>
           <Wrapper category="Desarrollo">
@@ -281,17 +354,207 @@ export default function EnterpriseDashboard() {
 
           {/* --- Capacitación --- */}
           <Wrapper category="Capacitación">
-            <StandardCard icon={GraduationCap} color="#ea580c" bg="#ffedd5" title="Academia Mayia" desc="Conoce nuestros 32 cursos de Inteligencia Artificial para equipos de trabajo de Negocios y Equipos Tech con Certificación." />
+            <div style={{ background: '#ffffff', borderRadius: 16, padding: 24, border: '1px solid #e5e7eb', boxShadow: '0 4px 12px rgba(0,0,0,0.03)', display: 'flex', flexDirection: 'column', height: '100%' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 16 }}>
+                <div style={{ width: 48, height: 48, borderRadius: 12, background: '#ffedd5', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <GraduationCap size={24} color="#ea580c" />
+                </div>
+                <div style={{ flex: 1, display: 'flex', alignItems: 'center' }}>
+                  <img src={academiaLogo} alt="Academia MAYiA" style={{ height: '32px', objectFit: 'contain' }} />
+                </div>
+              </div>
+              <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.6, margin: '0 0 20px' }}>
+                Conoce nuestros 32 cursos de Inteligencia Artificial para equipos de trabajo de Negocios y Equipos Tech con Certificación.
+              </p>
+              
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginBottom: 16 }}>
+                {[
+                  { icon: BookOpen, value: '32', label: 'Cursos', color: '#84cc16' },
+                  { icon: Award, value: '6+', label: 'Certificaciones', color: '#3b82f6' },
+                  { icon: Briefcase, value: 'B2B', label: 'IA para negocios', color: '#f59e0b' },
+                  { icon: Users, value: 'Tech', label: 'IA para equipos', color: '#8b5cf6' },
+                ].map((h, i) => (
+                  <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '10px 12px', borderRadius: 10, background: '#f9fafb', border: '1px solid #f3f4f6' }}>
+                    <h.icon size={18} color={h.color} style={{ flexShrink: 0 }} />
+                    <div style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.2 }}>
+                      <span style={{ fontSize: 14, fontWeight: 800, color: '#111827' }}>{h.value}</span>
+                      <span style={{ fontSize: 11, fontWeight: 600, color: '#6b7280' }}>{h.label}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              
+              <div style={{ display: 'flex', gap: 8, marginTop: 'auto' }}>
+                <a
+                  href="https://api.whatsapp.com/send/?phone=525553315526&text&type=phone_number&app_absent=0"
+                  target="_blank" rel="noopener noreferrer"
+                  style={{
+                    flex: 1,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+                    padding: '10px 12px', borderRadius: 8,
+                    background: 'linear-gradient(135deg, #A4D955, #65a30d)',
+                    color: '#000000', fontWeight: 700, fontSize: 13, textDecoration: 'none',
+                    boxShadow: '0 4px 12px rgba(164,217,85,0.3)',
+                    transition: 'transform 0.2s'
+                  }}
+                  onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-2px)'}
+                  onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0)'}
+                >
+                  Cotizar cursos
+                </a>
+                <button
+                  onClick={(e) => {
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    setCalendarPos({ x: rect.right + 12, y: rect.top - 140 });
+                  }}
+                  style={{
+                    flex: 1,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+                    padding: '10px 12px', borderRadius: 8,
+                    background: '#f3f4f6', border: '1px solid #e5e7eb', cursor: 'pointer',
+                    color: '#374151', fontWeight: 600, fontSize: 13, textDecoration: 'none',
+                    transition: 'all 0.2s'
+                  }}
+                  onMouseEnter={e => { e.currentTarget.style.background = '#e5e7eb'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
+                  onMouseLeave={e => { e.currentTarget.style.background = '#f3f4f6'; e.currentTarget.style.transform = 'translateY(0)'; }}
+                >
+                  Revisar fechas
+                </button>
+              </div>
+            </div>
           </Wrapper>
 
-        </div>
+        </motion.div>
       </div>
+
+      {calendarPos && (
+        <div style={{
+          position: 'fixed',
+          top: 0, left: 0, right: 0, bottom: 0,
+          zIndex: 99999,
+        }} onClick={() => setCalendarPos(null)}>
+          <div style={{
+            position: 'absolute',
+            left: Math.min(calendarPos.x, window.innerWidth - 280),
+            top: Math.max(20, Math.min(calendarPos.y, window.innerHeight - 380)),
+          }} onClick={e => e.stopPropagation()}>
+            <CalendarModal onClose={() => setCalendarPos(null)} />
+          </div>
+        </div>
+      )}
+
     </section>
   );
 }
 
-// Helper component for standard cards
-function StandardCard({ icon: Icon, color, bg, title, desc }: { icon: any, color: string, bg: string, title: string, desc: string }) {
+function FlaiCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const handleAgendarCita = () => {
+    window.open("https://api.whatsapp.com/send/?phone=525553315526&text&type=phone_number&app_absent=0", '_blank');
+    setMenuOpen(false);
+  };
+
+  const handleMasInformacion = () => {
+    setMenuOpen(false);
+    if (onOpenInfo) onOpenInfo();
+  };
+
+  return (
+    <div style={{ 
+      background: '#ffffff', borderRadius: 16, border: '1px solid #e5e7eb', 
+      boxShadow: '0 4px 12px rgba(0,0,0,0.03)', display: 'flex', flexDirection: 'column', height: '100%', position: 'relative' 
+    }}>
+      {/* Header */}
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '20px 20px 12px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+          <div style={{ width: 40, height: 40, borderRadius: 10, background: 'linear-gradient(135deg, #DC2626, #991B1B)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 6 }}>
+            <img src={flaiLogo} alt="FLAI" style={{ width: '100%', height: '100%', objectFit: 'contain', filter: 'brightness(0) invert(1)' }} />
+          </div>
+          <div>
+            <h3 style={{ margin: 0, fontSize: 18, fontWeight: 700, color: '#111827' }}>FLAI</h3>
+            <p style={{ margin: 0, fontSize: 12, color: '#6b7280', fontWeight: 600 }}>Nube Soberana</p>
+          </div>
+        </div>
+        
+        <div style={{ position: 'relative' }}>
+          <button 
+            onClick={() => setMenuOpen(!menuOpen)}
+            style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#9ca3af', padding: 4, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 8, transition: 'all 0.2s' }}
+            onMouseEnter={e => e.currentTarget.style.background = '#f3f4f6'}
+            onMouseLeave={e => e.currentTarget.style.background = 'none'}
+          >
+            <MoreVertical size={20} />
+          </button>
+          
+          {menuOpen && (
+            <>
+              <div style={{ position: 'fixed', inset: 0, zIndex: 30 }} onClick={() => setMenuOpen(false)} />
+              <div style={{ position: 'absolute', right: 0, top: 32, background: '#ffffff', borderRadius: 12, boxShadow: '0 10px 25px rgba(0,0,0,0.1)', border: '1px solid #f3f4f6', overflow: 'hidden', zIndex: 40, minWidth: 200 }}>
+                <button 
+                  onClick={handleAgendarCita}
+                  style={{ width: '100%', padding: '12px 16px', textAlign: 'left', fontSize: 13, color: '#374151', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, transition: 'background 0.2s' }}
+                  onMouseEnter={e => e.currentTarget.style.background = '#f9fafb'}
+                  onMouseLeave={e => e.currentTarget.style.background = 'none'}
+                >
+                  <Calendar size={16} /> Agendar cita
+                </button>
+                <button 
+                  onClick={handleMasInformacion}
+                  style={{ width: '100%', padding: '12px 16px', textAlign: 'left', fontSize: 13, color: '#374151', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, transition: 'background 0.2s' }}
+                  onMouseEnter={e => e.currentTarget.style.background = '#f9fafb'}
+                  onMouseLeave={e => e.currentTarget.style.background = 'none'}
+                >
+                  <Info size={16} /> Más información
+                </button>
+              </div>
+            </>
+          )}
+        </div>
+      </div>
+
+      {/* Image Area */}
+      <div style={{ margin: '0 20px 16px', borderRadius: 12, overflow: 'hidden', height: 160, background: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <img 
+          src={flaiNubeIcon} 
+          alt="FLAI Nube" 
+          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+        />
+      </div>
+
+      {/* Stats */}
+      <div style={{ display: 'flex', justifyContent: 'space-around', padding: '0 20px 20px' }}>
+        <div style={{ textAlign: 'center' }}>
+          <p style={{ margin: 0, fontSize: 15, fontWeight: 800, color: '#111827' }}>100%</p>
+          <p style={{ margin: 0, fontSize: 11, color: '#6b7280', fontWeight: 600 }}>Soberana</p>
+        </div>
+        <div style={{ textAlign: 'center' }}>
+          <p style={{ margin: 0, fontSize: 15, fontWeight: 800, color: '#DC2626' }}>1era</p>
+          <p style={{ margin: 0, fontSize: 11, color: '#6b7280', fontWeight: 600 }}>Nube IA</p>
+        </div>
+        <div style={{ textAlign: 'center' }}>
+          <p style={{ margin: 0, fontSize: 15, fontWeight: 800, color: '#006847' }}>30</p>
+          <p style={{ margin: 0, fontSize: 11, color: '#6b7280', fontWeight: 600 }}>Centros</p>
+        </div>
+      </div>
+
+      <div style={{ display: 'flex', marginTop: 'auto', padding: '0 20px 20px' }}>
+        <button 
+          onClick={handleAgendarCita}
+          style={{ 
+            background: 'linear-gradient(135deg, #DC2626, #991B1B)', color: '#ffffff', border: 'none', borderRadius: 8, padding: '10px 16px', fontSize: 13, fontWeight: 600, 
+            display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', width: '100%', justifyContent: 'center', transition: 'all 0.2s' 
+          }}
+          onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 6px 12px rgba(220,38,38,0.2)'; }}
+          onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'; }}
+        >
+          Cotiza ahora &rarr;
+        </button>
+      </div>
+    </div>
+  );
+}
+function StandardCard({ icon: Icon, color, bg, title, desc, children }: { icon: any, color: string, bg: string, title: string, desc: string, children?: React.ReactNode }) {
   return (
     <div style={{ background: '#ffffff', borderRadius: 16, padding: 24, border: '1px solid #e5e7eb', boxShadow: '0 4px 12px rgba(0,0,0,0.03)', display: 'flex', flexDirection: 'column', height: '100%' }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 16 }}>
@@ -300,9 +563,21 @@ function StandardCard({ icon: Icon, color, bg, title, desc }: { icon: any, color
         </div>
         <h3 style={{ fontSize: 20, fontWeight: 600, color: '#111827', margin: 0, lineHeight: 1.2 }}>{title}</h3>
       </div>
-      <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.6, margin: 0 }}>
+      <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.6, margin: 0, marginBottom: 20 }}>
         {desc}
       </p>
+      {children && <div>{children}</div>}
+      <div style={{ display: 'flex', marginTop: 'auto', paddingTop: children ? 20 : 0 }}>
+        <button style={{ 
+          background: '#f3f4f6', color: '#374151', border: '1px solid #e5e7eb', borderRadius: 8, padding: '10px 16px', fontSize: 13, fontWeight: 600, 
+          display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', width: '100%', justifyContent: 'center', transition: 'all 0.2s' 
+        }}
+        onMouseEnter={e => { e.currentTarget.style.background = '#e5e7eb'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
+        onMouseLeave={e => { e.currentTarget.style.background = '#f3f4f6'; e.currentTarget.style.transform = 'translateY(0)'; }}
+        >
+          Conocer más &rarr;
+        </button>
+      </div>
     </div>
   );
 }
