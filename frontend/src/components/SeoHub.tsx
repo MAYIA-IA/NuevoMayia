@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import {
-  Newspaper, Radio, Mic2, Zap, Medal, ShoppingCart,
-  Globe, Trophy, Cpu, Bot, Lightbulb, Thermometer,
-  Network, TrendingUp, Building2, Map, HelpCircle,
+  Newspaper, Radio, Mic2, Medal,
+  Cpu, Building2, HelpCircle,
+  Network, Thermometer,
   ExternalLink, ChevronRight,
 } from 'lucide-react';
 import { brandingConfig } from '../config/branding';
@@ -228,8 +228,6 @@ function HubCard({
 /* ── Main Component ─────────────────────────────────────────── */
 
 export default function SeoHub({ activeSection, onSectionChange, onOpenSocialModal }: SeoHubProps) {
-  const [hovAbout, setHovAbout] = useState<string | null>(null);
-
   const sidebarWidth = '320px';
 
   return (

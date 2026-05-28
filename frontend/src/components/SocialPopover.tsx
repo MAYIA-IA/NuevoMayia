@@ -11,7 +11,7 @@ interface SocialPopoverProps {
   yPos: number; // Center Y coordinate of the trigger button in viewport
 }
 
-const SocialPopover: React.FC<SocialPopoverProps> = ({ isOpen, onClose, children, yPos }) => {
+const SocialPopover: React.FC<SocialPopoverProps> = ({ isOpen, onClose, children }) => {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -26,11 +26,6 @@ const SocialPopover: React.FC<SocialPopoverProps> = ({ isOpen, onClose, children
   }, [isOpen]);
 
   if (!mounted) return null;
-
-  // The sidebar width is 320px (from SeoHub.tsx)
-  // We want the tail to touch the sidebar.
-  const tailSize = 16;
-  const rightOffset = 320; // Exact width of the sidebar
 
   return (
     <div
