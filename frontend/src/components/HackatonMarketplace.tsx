@@ -4,7 +4,7 @@
 */
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
-import { Zap, Trophy, Medal, Target, ThumbsUp, Rocket, X, ShoppingCart } from 'lucide-react';
+import { Zap, Trophy, ThumbsUp, Rocket, X, ShoppingCart } from 'lucide-react';
 import lumelImg from '../assets/Marketplace/lumel.png';
 import agente33Img from '../assets/Marketplace/agente33.png';
 import GalagaBg from './GalagaBg';
