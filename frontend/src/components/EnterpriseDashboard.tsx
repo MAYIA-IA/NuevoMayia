@@ -303,22 +303,38 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo }: { onO
             <div style={{ background: '#ffffff', borderRadius: 16, padding: 24, border: '1px solid #e5e7eb', boxShadow: '0 4px 12px rgba(0,0,0,0.03)', display: 'flex', flexDirection: 'column', height: '100%' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 16 }}>
                 <div style={{ width: 48, height: 48, borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, overflow: 'hidden' }}>
-                  <img src={mayiaLakeImg} alt="Mayia Lake" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  <img src={mayiaLakeImg} alt="MAYiA Lake" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 </div>
-                <h3 style={{ fontSize: 20, fontWeight: 600, color: '#111827', margin: 0, lineHeight: 1.2 }}>Mayia Lake Analíticos</h3>
+                <h3 style={{ fontSize: 20, fontWeight: 600, color: '#111827', margin: 0, lineHeight: 1.2 }}>MAYiA Lake</h3>
               </div>
               <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.6, margin: 0, marginBottom: 20 }}>
-                Convierte tus datos en decisiones inteligentes. Descubre oportunidades ocultas, anticipa riesgos y visualiza el crecimiento de tu negocio con analítica impulsada por IA.
+                Conoce cómo le puedes dar valor a tus datos. Descubre oportunidades ocultas y visualiza el crecimiento de tu negocio con analítica IA.
               </p>
-              <div style={{ display: 'flex', marginTop: 'auto' }}>
-                <button style={{ 
-                  background: '#f3f4f6', color: '#374151', border: '1px solid #e5e7eb', borderRadius: 8, padding: '10px 16px', fontSize: 13, fontWeight: 600, 
-                  display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', width: '100%', justifyContent: 'center', transition: 'all 0.2s' 
-                }}
-                onMouseEnter={e => { e.currentTarget.style.background = '#e5e7eb'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
-                onMouseLeave={e => { e.currentTarget.style.background = '#f3f4f6'; e.currentTarget.style.transform = 'translateY(0)'; }}
+              <div style={{ display: 'flex', gap: 8, marginTop: 'auto', flexDirection: 'column' }}>
+                <button 
+                  onClick={() => window.open('https://edgenet.mx', '_blank')}
+                  style={{ 
+                    background: '#f3f4f6', color: '#374151', border: '1px solid #e5e7eb', borderRadius: 8, padding: '10px 16px', fontSize: 13, fontWeight: 600, 
+                    display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', width: '100%', justifyContent: 'center', transition: 'all 0.2s' 
+                  }}
+                  onMouseEnter={e => { e.currentTarget.style.background = '#e5e7eb'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
+                  onMouseLeave={e => { e.currentTarget.style.background = '#f3f4f6'; e.currentTarget.style.transform = 'translateY(0)'; }}
                 >
-                  Conocer más &rarr;
+                  ROI de los datos (Edgenet) &rarr;
+                </button>
+                <button 
+                  onClick={(e) => {
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    setCalendarPos({ x: rect.right + 12, y: Math.max(20, rect.top - 140) });
+                  }}
+                  style={{ 
+                    background: '#2563eb', color: '#ffffff', border: 'none', borderRadius: 8, padding: '10px 16px', fontSize: 13, fontWeight: 600, 
+                    display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', width: '100%', justifyContent: 'center', transition: 'all 0.2s' 
+                  }}
+                  onMouseEnter={e => { e.currentTarget.style.background = '#1d4ed8'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
+                  onMouseLeave={e => { e.currentTarget.style.background = '#2563eb'; e.currentTarget.style.transform = 'translateY(0)'; }}
+                >
+                  Contacta tu cita
                 </button>
               </div>
             </div>
