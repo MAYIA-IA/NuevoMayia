@@ -5,26 +5,22 @@ const Footer = () => {
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
 
   const plataformaLinks = [
-    { label: 'Dashboard Principal', href: '#dashboard' },
-    { label: 'Píldoras IA', href: '#pildoras-ia' },
-    { label: 'Academia MAYiA', href: '#academia' },
-    { label: 'Networking Hub', href: '#networking' },
+    { label: 'Centro de Control', href: '#dashboard' },
+    { label: 'Ecosistema MAYiA', href: '#ecosistema' },
+    { label: 'Partners Tecnológicos', href: '#partners' },
     { label: 'Hackatón Marketplace', href: '#hackaton' },
   ];
 
   const solucionesLinks = [
-    { label: 'México es MAYiA', href: '#analiticos' },
+    { label: 'IA Empresarial', href: '#ia-empresarial' },
+    { label: 'IA por Sector', href: '#ia-por-sector' },
     { label: 'Empleados Digitales', href: '#empleados-digitales' },
     { label: 'Ciberseguridad IA', href: '#ciberseguridad' },
-    { label: 'IA Empresarial', href: '#ia-empresarial' },
-    { label: 'IA por Sectores', href: '#ia-sectores' },
   ];
 
   const comunidadLinks = [
-    { label: 'Embajadores MAYiA', href: '#embajadores' },
-    { label: 'Partners y Alianzas', href: '#partners' },
-    { label: 'Organigrama', href: '#organigrama' },
-    { label: 'Noticias IA', href: '#noticias' },
+    { label: 'Academia MAYiA', href: '#academia' },
+    { label: 'Píldoras IA', href: '#pildoras-ia' },
   ];
 
   const legalesLinks = [
@@ -36,9 +32,20 @@ const Footer = () => {
   const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (href.startsWith('#')) {
       e.preventDefault();
-      const target = document.getElementById(href.substring(1));
+      const id = href.substring(1);
+      const target = document.getElementById(id);
       if (target) {
-        target.scrollIntoView({ behavior: 'smooth' });
+        const container = document.getElementById('main-scroll-container');
+        if (container && window.innerWidth >= 1024) {
+          const containerRect = container.getBoundingClientRect();
+          const targetRect = target.getBoundingClientRect();
+          const y = targetRect.top - containerRect.top + container.scrollTop;
+          container.scrollTo({ top: y, behavior: 'smooth' });
+        } else {
+          const topbarHeight = 56;
+          const y = target.getBoundingClientRect().top + window.scrollY - topbarHeight;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
       }
     }
   };
@@ -83,9 +90,9 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Comunidad */}
+          {/* Educación */}
           <div className="space-y-4">
-            <h3 className="text-lg font-bold mb-4" style={{ color: '#4d7c0f' }}>Comunidad</h3>
+            <h3 className="text-lg font-bold mb-4" style={{ color: '#4d7c0f' }}>Educación</h3>
             <ul className="space-y-2.5">
               {comunidadLinks.map((link) => (
                 <li key={link.label}>
