@@ -135,182 +135,147 @@ const AgentesConsultores = () => {
   }, [hoveredId, videoErrors, videoLoaded]);
 
   return (
-    <div id="agentes-ia" className="w-full py-12 relative z-10">
+    <div id="agentes-ia" className="w-full relative z-10 bg-white flex flex-col h-[80vh] min-h-[600px] overflow-hidden" style={{ fontFamily: "'Sora', sans-serif" }}>
+      {/* Background subtle gradient for depth instead of dark */}
+      <div className="absolute inset-0 bg-gradient-to-b from-gray-50 via-white to-gray-50 pointer-events-none z-0" />
 
-      <div className="container mx-auto px-4 relative z-10 max-w-7xl">
-        {/* Header modernizado */}
-        <div className="text-center mb-12">
-          <h2 className="text-4xl lg:text-5xl font-bold mb-2">
-            <span style={{ color: '#111827' }}>Agentes</span>
-            <span className="bg-gradient-to-r from-lime-500 to-lime-400 bg-clip-text text-transparent"> Especializados</span>
+      <div className="w-full max-w-[1800px] mx-auto px-4 lg:px-8 pt-6 lg:pt-10 pb-4 relative z-10 shrink-0">
+        <div className="text-center">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-3 lg:mb-4 bg-gray-100 border border-gray-200">
+             <span className="w-2 h-2 rounded-full bg-cyan-500 animate-pulse"></span>
+             <span className="text-[10px] lg:text-xs font-bold text-gray-700 uppercase tracking-wider">Consultoría Estratégica</span>
+          </div>
+          <h2 className="text-3xl lg:text-5xl font-extrabold mb-2 tracking-tight">
+            <span className="text-gray-900">Agentes</span>
+            <span className="bg-gradient-to-r from-cyan-500 to-blue-600 bg-clip-text text-transparent"> Especializados</span>
           </h2>
         </div>
+      </div>
 
-        {/* Cards Grid - Ajustado a 2xl para evitar que se aplaste con sidebars */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-4 gap-6 mb-12">
-          {consultores.map((consultor) => {
-            const hasValidVideo = !videoErrors[consultor.id];
-            
-            return (
-              <div 
-                key={consultor.id}
-                onMouseEnter={() => {
-                  setHoveredId(consultor.id);
-                  // Si el usuario ya interactuó antes, esto permitirá el autoplay
-                  if (!userInteracted[consultor.id]) {
-                    handleCardInteraction(consultor.id);
-                  }
-                }}
-                onMouseLeave={() => setHoveredId(null)}
-                onClick={() => {
-                  setSelectedId(selectedId === consultor.id ? null : consultor.id);
-                  handleCardInteraction(consultor.id);
-                }}
-                className={`group relative bg-white rounded-2xl overflow-hidden border-2 transition-all duration-500 cursor-pointer ${
-                  selectedId === consultor.id 
-                    ? 'border-lime-400 shadow-2xl scale-[1.02]' 
-                    : 'border-gray-200 shadow-lg hover:shadow-xl'
-                }`}
-              >
-                {/* Badge en esquina */}
-                <div className={`absolute top-3 right-3 z-20 px-3 py-1 bg-gradient-to-r ${consultor.color} text-white text-xs font-bold rounded-full shadow-lg transform transition-all duration-300 ${
-                  hoveredId === consultor.id ? 'scale-110' : 'scale-100'
-                }`}>
-                  {consultor.badge}
-                </div>
+      {/* Full-Height Flex Accordion Container */}
+      <div className="flex-1 w-full max-w-[1800px] mx-auto px-4 lg:px-8 pb-6 lg:pb-10 flex flex-col lg:flex-row gap-2 lg:gap-4 overflow-hidden relative z-10">
+        {consultores.map((consultor) => {
+          const hasValidVideo = !videoErrors[consultor.id];
+          const isHovered = hoveredId === consultor.id;
+          const isSelected = selectedId === consultor.id;
+          const isActive = isHovered || isSelected;
 
-                {/* Media Section - AJUSTADO PARA IMÁGENES VERTICALES */}
-                <div className="relative h-96 overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
-                  {hasValidVideo ? (
-                    <>
-                      <video
-                        ref={el => {
-                          videoRefs.current[consultor.id] = el;
-                        }}
-                        muted
-                        loop
-                        preload="auto"
-                        playsInline
-                        onError={() => handleVideoError(consultor.id)}
-                        onLoadedData={() => handleVideoLoad(consultor.id)}
-                        className="absolute inset-0 w-full h-full scale-[1.35] transition-transform duration-700 group-hover:scale-[1.45]"
-                        poster={consultor.image}
-                        style={{ objectFit: 'cover', objectPosition: 'center center' }}
-                      >
-                        <source src={consultor.videoPath} type="video/mp4" />
-                        Tu navegador no soporta videos.
-                      </video>
-                      
-                      {/* Overlay de invitación a hover */}
-                      {!userInteracted[consultor.id] && hoveredId !== consultor.id && (
-                        <div className="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                          <div className="bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg flex items-center gap-2">
-                            <svg className="w-4 h-4 text-gray-700" fill="currentColor" viewBox="0 0 20 20">
-                              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
-                            </svg>
-                            <span className="text-xs font-medium text-gray-700">Ver preview</span>
-                          </div>
-                        </div>
-                      )}
-                      
-                      {/* Indicador de video */}
-                      <div className="absolute top-2 left-2 z-10 bg-black/70 text-white rounded-full p-1.5">
-                        <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
-                        </svg>
-                      </div>
-                    </>
-                  ) : (
-                    <img 
-                      src={consultor.image} 
-                      alt={consultor.title}
-                      className="absolute inset-0 w-full h-full scale-[1.35] transition-transform duration-700 group-hover:scale-[1.45]"
-                      style={{ objectFit: 'cover', objectPosition: 'center center' }}
-                    />
-                  )}
-                  
-                  {/* Overlay gradient - más sutil para no opacar la imagen */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${consultor.color} opacity-20 mix-blend-multiply group-hover:opacity-30 transition-opacity duration-500`}></div>
-                  
-                  {/* Título sobre media - con mejor fondo para legibilidad */}
-                  <div className="absolute inset-0 flex flex-col items-center justify-end pb-6 px-4 bg-gradient-to-t from-black/60 via-black/20 to-transparent">
-                    <h3 className="text-2xl font-bold text-white mb-1 drop-shadow-2xl">
-                      {consultor.title}
-                    </h3>
-                    <p className="text-sm text-white/95 font-medium drop-shadow-lg">
-                      {consultor.subtitle}
-                    </p>
+          return (
+            <div 
+              key={consultor.id}
+              onMouseEnter={() => {
+                setHoveredId(consultor.id);
+                if (!userInteracted[consultor.id]) handleCardInteraction(consultor.id);
+              }}
+              onMouseLeave={() => setHoveredId(null)}
+              onClick={() => {
+                setSelectedId(selectedId === consultor.id ? null : consultor.id);
+                handleCardInteraction(consultor.id);
+              }}
+              className={`group relative overflow-hidden rounded-2xl lg:rounded-[32px] transition-all duration-[800ms] ease-[cubic-bezier(0.25,1,0.5,1)] cursor-pointer flex-shrink-0 lg:flex-shrink border border-gray-200 bg-gray-100
+                ${isActive 
+                  ? 'flex-[2.5] lg:flex-[3] shadow-[0_20px_50px_rgba(0,0,0,0.15)]' 
+                  : 'flex-1 lg:flex-1 opacity-80 hover:opacity-100 hover:border-gray-300'}
+              `}
+            >
+              {/* Media Section (Video/Imagen a pantalla completa) */}
+              <div className="absolute inset-0 z-0">
+                {hasValidVideo ? (
+                  <video
+                    ref={el => { videoRefs.current[consultor.id] = el; }}
+                    muted loop preload="auto" playsInline
+                    onError={() => handleVideoError(consultor.id)}
+                    onLoadedData={() => handleVideoLoad(consultor.id)}
+                    className={`absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] ease-out origin-center ${isActive ? 'scale-100' : 'scale-[1.15] grayscale-[40%]'}`}
+                    poster={consultor.image}
+                  >
+                    <source src={consultor.videoPath} type="video/mp4" />
+                  </video>
+                ) : (
+                  <img 
+                    src={consultor.image} alt={consultor.title}
+                    className={`absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] ease-out ${isActive ? 'scale-100' : 'scale-[1.15] grayscale-[40%]'}`}
+                  />
+                )}
+                
+                {/* Degradados para legibilidad */}
+                <div className={`absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent transition-opacity duration-700 ${isActive ? 'opacity-90' : 'opacity-80'}`} />
+                <div className={`absolute inset-0 bg-gradient-to-b ${consultor.color} mix-blend-multiply transition-opacity duration-700 ${isActive ? 'opacity-20' : 'opacity-60'}`} />
+                
+                {/* Borde brillante superior cuando está activo */}
+                <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${consultor.color} transition-opacity duration-500 ${isActive ? 'opacity-100' : 'opacity-0'}`} />
+              </div>
+
+              {/* Contenido (Textos, Precios, CTA) */}
+              <div className={`absolute inset-0 z-10 flex flex-col justify-end p-4 lg:p-6 transition-all duration-700 ${isActive ? 'translate-y-0' : 'translate-y-2 lg:translate-y-6'}`}>
+                
+                {/* Badge Superior (Solo visible si activo) */}
+                <div className={`flex items-center gap-2 transition-all duration-500 overflow-hidden ${isActive ? 'opacity-100 max-h-10 mb-2' : 'opacity-0 max-h-0 mb-0'}`}>
+                  <div className={`px-3 py-1 bg-gradient-to-r ${consultor.color} text-white text-[9px] font-black rounded-full shadow-lg uppercase tracking-widest`}>
+                    {consultor.badge}
                   </div>
                 </div>
 
-                {/* Content Section */}
-                <div className="p-5">
-                  {/* Features tags */}
-                  <div className="flex flex-wrap gap-2 mb-4">
+                {/* Título (Siempre visible, cambia de tamaño) */}
+                <div className="flex items-center gap-3">
+                  <h3 className={`font-black text-white leading-tight drop-shadow-2xl transition-all duration-500 origin-left
+                    ${isActive ? 'text-2xl lg:text-3xl mb-1' : 'text-lg lg:text-xl mb-0 truncate'}`}>
+                    {consultor.title}
+                  </h3>
+                  {/* Icono de + para indicar expansión cuando no está activo */}
+                  <div className={`w-8 h-8 rounded-full border border-white/20 flex items-center justify-center text-white backdrop-blur-sm transition-opacity duration-300 ${isActive ? 'opacity-0 hidden' : 'opacity-100 lg:flex hidden shrink-0'}`}>
+                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>
+                  </div>
+                </div>
+                
+                {/* Subtítulo (Solo activo) */}
+                <p className={`text-gray-300 font-medium drop-shadow transition-all duration-500 overflow-hidden
+                  ${isActive ? 'text-xs lg:text-sm opacity-100 max-h-16 mb-3' : 'text-[10px] opacity-0 max-h-0 mb-0'}`}>
+                  {consultor.subtitle}
+                </p>
+
+                {/* Contenedor Inferior Expansible (Features, Desc, Precio, CTA) - CON OVERFLOW AUTO */}
+                <div className={`overflow-y-auto hide-scrollbar transition-all duration-[800ms] ease-[cubic-bezier(0.25,1,0.5,1)] ${isActive ? 'max-h-[220px] lg:max-h-[350px] opacity-100' : 'max-h-0 opacity-0'}`}>
+                  
+                  {/* Features */}
+                  <div className="flex flex-wrap gap-1.5 lg:gap-2 mb-3">
                     {consultor.features.map((feature, idx) => (
-                      <span 
-                        key={idx}
-                        className={`text-xs px-2 py-1 rounded-full bg-gradient-to-r ${consultor.color} bg-opacity-10 text-gray-700 font-medium`}
-                      >
+                      <span key={idx} className="text-[9px] lg:text-[10px] px-2 py-1 rounded-full bg-white/10 text-white backdrop-blur-md border border-white/10 shadow-inner font-medium">
                         {feature}
                       </span>
                     ))}
                   </div>
 
-                  {/* Description */}
-                  <div className={`overflow-hidden transition-all duration-500 ${
-                    selectedId === consultor.id ? 'max-h-32 opacity-100 mb-4' : 'max-h-0 opacity-0'
-                  }`}>
-                    <p className="text-sm text-gray-600 leading-relaxed">
-                      {consultor.description}
-                    </p>
-                  </div>
+                  {/* Descripción Larga */}
+                  <p className="text-xs text-gray-300 leading-relaxed mb-4">
+                    {consultor.description}
+                  </p>
 
-                  {/* Precio y CTA */}
-                  <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-gray-100">
+                  {/* Footer de Tarjeta (Precio y Botón) */}
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pt-3 border-t border-white/10 mt-auto">
                     <div>
-                      <div className="text-xs text-gray-500 mb-1">PROMOCIÓN</div>
-                      <div className="text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
-                        $98,000
+                      <div className="text-[9px] font-bold text-gray-400 mb-0.5 tracking-widest uppercase">Inversión</div>
+                      <div className="text-lg lg:text-2xl font-black text-white drop-shadow-md whitespace-nowrap">
+                        $98,000 <span className="text-[10px] lg:text-xs font-medium text-gray-400">MXN</span>
                       </div>
-                      <div className="text-xs text-gray-500">MXN</div>
                     </div>
 
                     <button
-                      className={`group/btn px-4 py-2 rounded-lg font-semibold text-sm transition-all duration-300 bg-gradient-to-r ${consultor.color} text-white hover:scale-105 shadow-md hover:shadow-lg`}
+                      className={`w-full sm:w-auto px-4 py-2 lg:py-2 rounded-lg font-bold text-[10px] lg:text-[11px] uppercase tracking-wider text-white shadow-[0_5px_15px_rgba(0,0,0,0.4)] hover:scale-105 transition-transform bg-gradient-to-r ${consultor.color} border border-white/20 whitespace-nowrap`}
                       onClick={(e) => {
                         e.stopPropagation();
                         window.open('https://api.whatsapp.com/send/?phone=525553315526&text&type=phone_number&app_absent=0','_blank','noopener,noreferrer');
                       }}
                     >
-                      <span className="flex items-center gap-1">
-                        Comprar
-                        <svg className="w-4 h-4 group-hover/btn:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                        </svg>
-                      </span>
+                      Implementar
                     </button>
                   </div>
-
-                  {/* Indicador de más info */}
-                  {selectedId !== consultor.id && (
-                    <button className="w-full mt-4 text-xs text-cyan-600 hover:text-cyan-700 font-medium flex items-center justify-center gap-1">
-                      Ver detalles
-                      <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </button>
-                  )}
                 </div>
 
-                {/* Línea decorativa inferior */}
-                <div className={`h-1 bg-gradient-to-r ${consultor.color} transform transition-transform duration-500 ${
-                  hoveredId === consultor.id || selectedId === consultor.id ? 'scale-x-100' : 'scale-x-0'
-                } origin-left`}></div>
               </div>
-            );
-          })}
-        </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
