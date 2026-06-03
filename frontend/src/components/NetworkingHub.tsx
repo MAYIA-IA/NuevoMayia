@@ -55,7 +55,7 @@ export default function NetworkingHub() {
   const [hov, setHov] = useState<number|null>(null);
 
   return (
-    <section style={{ background:'linear-gradient(180deg,#f8fdf1 0%,#ffffff 40%,#f8fdf1 100%)', padding:'100px 40px', position:'relative', overflow:'hidden' }}>
+    <section style={{ background:'linear-gradient(180deg,#f8fdf1 0%,#ffffff 40%,#f8fdf1 100%)', padding:'32px 24px', position:'relative', overflow:'hidden' }}>
       <style>{css}</style>
 
       {/* BG */}
@@ -69,7 +69,7 @@ export default function NetworkingHub() {
 
       <div style={{ maxWidth:1200, margin:'0 auto', position:'relative', zIndex:1 }}>
         {/* Header */}
-        <div style={{ textAlign:'center', marginBottom:52 }}>
+        <div style={{ textAlign:'center', marginBottom:32 }}>
           <div style={{ display:'inline-flex', alignItems:'center', gap:10, padding:'6px 20px', borderRadius:99, background:'rgba(164,217,85,.12)', border:'1px solid rgba(164,217,85,.4)', marginBottom:20 }}>
             <Users size={16} color="#4d7c0f" />
             <span style={{ fontSize:11, fontWeight:800, letterSpacing:'0.18em', textTransform:'uppercase', color:'#4d7c0f' }}>Red MAYiA</span>
@@ -84,7 +84,7 @@ export default function NetworkingHub() {
         </div>
 
         {/* Stats */}
-        <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(160px,1fr))', gap:16, marginBottom:48 }}>
+        <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(160px,1fr))', gap:16, marginBottom:32 }}>
           {STATS.map(s=>(
             <div key={s.l} style={{ textAlign:'center', padding:'22px 16px', background:'#ffffff', border:`1px solid ${s.c}25`, borderRadius:18, boxShadow:`0 2px 14px ${s.c}10`, transition:'all .3s' }}
               onMouseEnter={e=>{e.currentTarget.style.boxShadow=`0 8px 30px ${s.c}20`;e.currentTarget.style.transform='translateY(-3px)';e.currentTarget.style.borderColor=`${s.c}50`;}}
@@ -97,7 +97,7 @@ export default function NetworkingHub() {
         </div>
 
         {/* Tabs */}
-        <div style={{ display:'flex', justifyContent:'center', marginBottom:36 }}>
+        <div style={{ display:'flex', justifyContent:'center', marginBottom:24 }}>
           <div style={{ display:'flex', gap:4, background:'#f3f4f6', borderRadius:16, padding:4, border:'1px solid #e5e7eb' }}>
             {(['empresas','talento'] as Tab[]).map(t=>(
               <button key={t} onClick={()=>setTab(t)}
@@ -207,7 +207,7 @@ export default function NetworkingHub() {
         </div>
 
         {/* CTA */}
-        <div style={{ textAlign:'center', marginTop:56, padding:'40px', borderRadius:28, background:'linear-gradient(135deg,rgba(164,217,85,.1),rgba(164,217,85,.04))', border:'1px solid rgba(164,217,85,.3)' }}>
+        <div style={{ textAlign:'center', marginTop:32, padding:'24px', borderRadius:28, background:'linear-gradient(135deg,rgba(164,217,85,.1),rgba(164,217,85,.04))', border:'1px solid rgba(164,217,85,.3)' }}>
           <h3 style={{ fontSize:22, fontWeight:800, color:'#111827', margin:'0 0 8px' }}>
             {tab==='empresas'?'¿Buscas talento IA para tu empresa?':'¿Eres un profesional de IA?'}
           </h3>

@@ -63,7 +63,7 @@ const Blog = () => {
   const gridPosts = filteredPosts.filter(p => p.id !== featuredPost?.id);
 
   return (
-    <section className="relative w-full py-24 overflow-hidden" style={{ background: 'linear-gradient(180deg, #f0fdf4 0%, #ffffff 100%)' }}>
+    <section className="relative w-full py-8 overflow-hidden" style={{ background: 'linear-gradient(180deg, #f0fdf4 0%, #ffffff 100%)' }}>
       
       {/* Background Decorators */}
       <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full blur-[100px] pointer-events-none" style={{ background: 'rgba(164,217,85,0.1)' }} />
@@ -73,16 +73,16 @@ const Blog = () => {
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
         
         {/* Header Section */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
           <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6" style={{ background: 'rgba(164,217,85,0.15)', border: '1px solid rgba(164,217,85,0.3)' }}>
-              <Sparkles size={16} className="text-lime-600 animate-pulse" />
-              <span className="text-sm font-bold text-lime-700 tracking-wide uppercase">Insights & Conocimiento</span>
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-4" style={{ background: 'rgba(164,217,85,0.15)', border: '1px solid rgba(164,217,85,0.3)' }}>
+              <Sparkles size={14} className="text-lime-600 animate-pulse" />
+              <span className="text-xs font-bold text-lime-700 tracking-wide uppercase">Insights & Conocimiento</span>
             </div>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight mb-6">
+            <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 leading-tight mb-4">
               Blog de <span className="text-transparent bg-clip-text bg-gradient-to-r from-lime-600 to-lime-400">MAYiA</span>
             </h2>
-            <p className="text-lg text-gray-500 leading-relaxed">
+            <p className="text-base text-gray-500 leading-relaxed">
               Explora las últimas tendencias en Inteligencia Artificial, descubrimientos tecnológicos y casos de éxito de cómo las empresas mexicanas están transformando su futuro.
             </p>
           </div>
@@ -101,12 +101,12 @@ const Blog = () => {
         </div>
 
         {/* Categories Filter */}
-        <div className="flex flex-wrap items-center gap-3 mb-12">
+        <div className="flex flex-wrap items-center gap-2 mb-8">
           {CATEGORIES.map(category => (
             <button
               key={category}
               onClick={() => setActiveCategory(category)}
-              className="px-5 py-2.5 rounded-xl text-sm font-bold transition-all duration-300"
+              className="px-4 py-2 rounded-xl text-xs font-bold transition-all duration-300"
               style={{
                 background: activeCategory === category ? '#a4d955' : '#ffffff',
                 color: activeCategory === category ? '#111827' : '#6b7280',
@@ -122,7 +122,7 @@ const Blog = () => {
 
         {/* Featured Post (Only if filtered list has it) */}
         {featuredPost && (
-          <a href={featuredPost.url} target="_blank" rel="noopener noreferrer" className="block mb-12 group cursor-pointer" onMouseEnter={() => setHoveredPost(featuredPost.id)} onMouseLeave={() => setHoveredPost(null)}>
+          <a href={featuredPost.url} target="_blank" rel="noopener noreferrer" className="block mb-8 group cursor-pointer" onMouseEnter={() => setHoveredPost(featuredPost.id)} onMouseLeave={() => setHoveredPost(null)}>
             <div className="grid grid-cols-1 2xl:grid-cols-2 gap-0 bg-white rounded-3xl overflow-hidden transition-all duration-500 hover:-translate-y-2" style={{ border: '1px solid #f3f4f6', boxShadow: hoveredPost === featuredPost.id ? '0 24px 50px rgba(164,217,85,0.15)' : '0 12px 30px rgba(0,0,0,0.04)' }}>
               <div className="relative h-72 lg:h-auto overflow-hidden">
                 <img 
@@ -132,8 +132,8 @@ const Blog = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
-              <div className="p-8 md:p-12 flex flex-col justify-center">
-                <div className="flex items-center gap-4 mb-6">
+              <div className="p-6 md:p-8 flex flex-col justify-center">
+                <div className="flex items-center gap-3 mb-4">
                   <span className="px-3 py-1 rounded-full text-xs font-bold bg-lime-100 text-lime-700 border border-lime-200 flex items-center gap-1.5">
                     <Tag size={12} /> {featuredPost.category}
                   </span>
@@ -141,10 +141,10 @@ const Blog = () => {
                     <Calendar size={14} /> {featuredPost.date}
                   </span>
                 </div>
-                <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4 leading-tight group-hover:text-lime-600 transition-colors">
+                <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 leading-tight group-hover:text-lime-600 transition-colors">
                   {featuredPost.title}
                 </h3>
-                <p className="text-gray-500 leading-relaxed mb-8">
+                <p className="text-sm text-gray-500 leading-relaxed mb-6">
                   {featuredPost.excerpt}
                 </p>
                 <div className="mt-auto flex items-center justify-between pt-6 border-t border-gray-100">
@@ -167,7 +167,7 @@ const Blog = () => {
         )}
 
         {/* Regular Posts Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {gridPosts.map(post => (
             <a 
               href={post.url}

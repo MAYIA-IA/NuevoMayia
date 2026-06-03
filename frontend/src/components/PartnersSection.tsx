@@ -1,12 +1,13 @@
 /* PartnersSection.tsx – fondo blanco premium */
 import { useState } from 'react';
 import { Zap, Cpu, Server, Atom, ChevronDown, ChevronUp } from 'lucide-react';
+import amdLogo from '../assets/amd_logo.svg';
+import intelLogo from '../assets/intel_logo.svg';
 
 const PARTNERS = [
-  { name: 'AMD',       tagline: 'Procesadores IA de alto rendimiento',        color: '#ED1C24', logoText: 'AMD',      stat: '4x',    statLabel: 'más rendimiento IA',   icon: Zap, description: 'Arquitectura RDNA y EPYC diseñada para workloads de inteligencia artificial en producción.' },
-  { name: 'Intel',     tagline: 'Xeon para infraestructura empresarial',       color: '#0071C5', logoText: 'intel',    stat: '30+',   statLabel: 'nodos certificados',    icon: Cpu, description: 'Procesadores Xeon Scalable y Gaudi para aceleración de modelos de lenguaje y visión.' },
-  { name: 'Lenovo',    tagline: 'Servidores ThinkSystem para EdgeNet',         color: '#E2231A', logoText: 'Lenovo',   stat: '99.9%', statLabel: 'uptime garantizado',     icon: Server, description: 'Infraestructura ThinkSystem optimizada para despliegues IA en el borde y en la nube.' },
-  { name: 'IBM Quantum', tagline: 'Cómputo cuántico aplicado a IA',           color: '#1F70C1', logoText: 'IBM Q',    stat: '127+',  statLabel: 'qubits disponibles',     icon: Atom, description: 'Acceso a hardware cuántico real para investigación y optimización de algoritmos de IA.' },
+  { name: 'AMD',       tagline: 'Procesadores IA de alto rendimiento',        color: '#ED1C24', logoText: 'AMD',      logoImg: amdLogo, imgHeight: 16, stat: '4x',    statLabel: 'más rendimiento IA',   icon: Zap, description: 'Arquitectura RDNA y EPYC diseñada para workloads de inteligencia artificial en producción.' },
+  { name: 'Intel',     tagline: 'Xeon para infraestructura empresarial',       color: '#0071C5', logoText: 'intel',    logoImg: intelLogo, imgHeight: 52, stat: '30+',   statLabel: 'nodos certificados',    icon: Cpu, description: 'Procesadores Xeon Scalable y Gaudi para aceleración de modelos de lenguaje y visión.' },
+  { name: 'Lenovo',    tagline: 'Servidores ThinkSystem para EdgeNet',         color: '#E2231A', logoText: 'Lenovo',   imgHeight: 26, stat: '99.9%', statLabel: 'uptime garantizado',     icon: Server, description: 'Infraestructura ThinkSystem optimizada para despliegues IA en el borde y en la nube.' },
 ];
 
 const css = `
@@ -21,7 +22,7 @@ const css = `
     flex-wrap: nowrap;
     align-items: center;
     justify-content: center;
-    gap: 48px;
+    gap: 32px;
     width: 100%;
     max-width: 1300px;
     margin: 0 auto;
@@ -30,10 +31,10 @@ const css = `
   }
   .ps-left {
     flex: 1 1 350px;
-    max-width: 450px;
+    max-width: 400px;
   }
   .ps-right {
-    flex: 1.5 1 500px;
+    flex: 2 1 500px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
@@ -111,13 +112,15 @@ export default function PartnersSection() {
           {PARTNERS.map((p, i) => {
             const isHov = hov === p.name;
             const isExpanded = expandedPartner === p.name;
+            const isLastOdd = i === PARTNERS.length - 1 && PARTNERS.length % 2 !== 0;
             return (
               <div key={p.name} className="ps-card group"
                 style={{
+                  gridColumn: isLastOdd ? '1 / -1' : 'auto',
                   animationDelay:`${i*.1}s`,
                   background: isHov ? '#ffffff' : '#ffffff',
                   border:`1.5px solid ${isHov ? p.color+'60' : '#e5e7eb'}`,
-                  borderRadius:16, padding:'16px 20px',
+                  borderRadius:16, padding:'16px 14px',
                   boxShadow: isHov ? `0 12px 30px ${p.color}15, 0 0 0 1px ${p.color}15` : '0 2px 8px rgba(0,0,0,.04)',
                   transform: isHov ? 'translateY(-4px)' : 'translateY(0)',
                   transition:'all .35s cubic-bezier(.23,1,.32,1)',
@@ -131,10 +134,14 @@ export default function PartnersSection() {
                 <div style={{ position:'absolute', top:0, right:0, width:60, height:60, borderRadius:'0 16px 0 60px', background:`linear-gradient(225deg,${p.color}12,transparent)` }} />
                 
                 {/* Header (Always Visible) */}
-                <div style={{ display:'flex', flexWrap: 'nowrap', justifyContent:'space-between', alignItems:'center', gap: 8, zIndex: 1, position: 'relative' }}>
-                  <div style={{ fontSize:18, fontWeight:900, color:p.color, letterSpacing:'-0.5px', lineHeight:1 }}>{p.logoText}</div>
+                <div style={{ display:'flex', flexWrap: 'nowrap', justifyContent:'space-between', alignItems:'center', gap: 6, zIndex: 1, position: 'relative' }}>
+                  {p.logoImg ? (
+                    <img src={p.logoImg} alt={p.name} style={{ height: p.imgHeight || 24, maxWidth: '40%', objectFit: 'contain', objectPosition: 'left center', flexShrink: 1 }} />
+                  ) : (
+                    <div style={{ fontSize: p.imgHeight || 24, fontWeight:900, color:p.color, letterSpacing:'-0.5px', lineHeight:1, minWidth:0, overflow:'hidden', textOverflow:'ellipsis' }}>{p.logoText}</div>
+                  )}
                   
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexShrink: 0 }}>
                     <div style={{ display:'inline-flex', alignItems:'center', gap:4, padding:'3px 8px', borderRadius:99, background:`${p.color}10`, border:`1px solid ${p.color}25` }}>
                       <svg width={7} height={7} viewBox="0 0 20 20" fill={p.color}><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/></svg>
                       <span style={{ fontSize:7, fontWeight:800, color:p.color, letterSpacing:'0.05em', textTransform:'uppercase' as const }}>Certificado</span>

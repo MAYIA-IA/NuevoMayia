@@ -86,7 +86,7 @@ export default function EmbajadoresMayia() {
   const [hov, setHov] = useState<number | null>(null);
 
   return (
-    <section style={{ background: 'linear-gradient(180deg,#f8fdf1 0%,#ffffff 40%,#f8fdf1 100%)', padding: '100px 40px', position: 'relative', overflow: 'hidden' }}>
+    <section style={{ background: 'linear-gradient(180deg,#f8fdf1 0%,#ffffff 40%,#f8fdf1 100%)', padding: '32px 24px', position: 'relative', overflow: 'hidden' }}>
       <style>{css}</style>
 
       <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}>
@@ -95,7 +95,7 @@ export default function EmbajadoresMayia() {
       </div>
 
       <div style={{ maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 1 }}>
-        <div style={{ textAlign: 'center', marginBottom: 64 }}>
+        <div style={{ textAlign: 'center', marginBottom: 32 }}>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '6px 20px', borderRadius: 99, background: 'rgba(164,217,85,.12)', border: '1px solid rgba(164,217,85,.4)', marginBottom: 20 }}>
             <Sparkles size={14} style={{ animation: 'emb-rotate 4s linear infinite', display: 'inline-block', color: '#4d7c0f' }} />
             <span style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#4d7c0f' }}>Red de Pioneros MAYiA</span>
@@ -130,7 +130,7 @@ export default function EmbajadoresMayia() {
           ))}
         </div>
 
-        <div style={{ textAlign: 'center', marginTop: 64, padding: '44px 40px', borderRadius: 28, background: 'linear-gradient(135deg,rgba(164,217,85,.1),rgba(164,217,85,.04))', border: '1px solid rgba(164,217,85,.3)' }}>
+        <div style={{ textAlign: 'center', marginTop: 32, padding: '24px', borderRadius: 28, background: 'linear-gradient(135deg,rgba(164,217,85,.1),rgba(164,217,85,.04))', border: '1px solid rgba(164,217,85,.3)' }}>
           <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 12 }}><Sparkles size={32} className="animate-pulse" style={{ color: '#65a30d' }} /></div>
           <h3 style={{ fontSize: 24, fontWeight: 800, color: '#111827', margin: '0 0 8px' }}>¿Tienes la visión para cambiar el mundo?</h3>
           <p style={{ fontSize: 14, color: '#6b7280', margin: '0 0 28px', maxWidth: 500, marginInline: 'auto' }}>Suma tu talento a nuestra red de pioneros y sé el impulso de la revolución tecnológica en México.</p>

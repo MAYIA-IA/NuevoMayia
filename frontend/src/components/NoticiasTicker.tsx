@@ -224,7 +224,7 @@ const TICKER_ITEMS = [
   { text: 'EdgeNet: 30 nodos activos en México', icon: Globe },
   { text: 'Innovación del mes: Agente fiscal autónomo', icon: Lightbulb },
   { text: 'Academia MAYiA: 1,200 certificaciones emitidas', icon: GraduationCap },
-  { text: 'Partners: AMD, Intel, Lenovo, IBM Quantum', icon: Handshake },
+  { text: 'Partners: AMD, Intel, Lenovo', icon: Handshake },
 ];
 
 function NewsTicker() {
@@ -305,9 +305,9 @@ function NewsBlock({ title, items }: { title: string; items: NewsItem[] }) {
   const item = items[currentIndex] || items[0];
 
   return (
-    <div style={{ padding: '0 40px 40px', maxWidth: 1400, margin: '0 auto' }}>
+    <div style={{ padding: '0 24px 24px', maxWidth: 1400, margin: '0 auto' }}>
       {/* Header del bloque */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12, marginBottom: 24 }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12, marginBottom: 16 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
           <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#A4D955', boxShadow: '0 0 8px #A4D955', animation: 'pulse 1.5s infinite' }} />
           <span style={{ fontSize: 13, fontWeight: 800, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#111827' }}>
@@ -346,7 +346,7 @@ function NewsBlock({ title, items }: { title: string; items: NewsItem[] }) {
             position: 'relative',
             borderRadius: 20,
             overflow: 'hidden',
-            height: 480,
+            height: 400,
             cursor: 'pointer',
             boxShadow: '0 8px 40px rgba(0,0,0,0.12)',
           }}
@@ -375,7 +375,7 @@ function NewsBlock({ title, items }: { title: string; items: NewsItem[] }) {
           }} />
 
           {/* Contenido sobre la imagen */}
-          <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '32px 36px' }}>
+          <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '24px' }}>
             {/* Fuente y tiempo */}
             <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 12 }}>
               <span style={{
@@ -402,8 +402,8 @@ function NewsBlock({ title, items }: { title: string; items: NewsItem[] }) {
             </div>
 
             <h2 style={{
-              fontSize: 28, fontWeight: 800, color: '#ffffff',
-              lineHeight: 1.3, marginBottom: 12,
+              fontSize: 22, fontWeight: 800, color: '#ffffff',
+              lineHeight: 1.3, marginBottom: 8,
               textShadow: '0 2px 12px rgba(0,0,0,0.5)',
             }}>
               {item.headline}
@@ -418,7 +418,7 @@ function NewsBlock({ title, items }: { title: string; items: NewsItem[] }) {
               target="_blank"
               rel="noopener noreferrer"
               style={{
-              marginTop: 20,
+              marginTop: 12,
               display: 'inline-flex', alignItems: 'center', gap: 6,
               padding: '12px 24px', borderRadius: 12, border: 'none',
               background: '#A4D955', color: '#0A0A14', textDecoration: 'none',
@@ -434,7 +434,7 @@ function NewsBlock({ title, items }: { title: string; items: NewsItem[] }) {
         </div>
 
         {/* Lista lateral de noticias */}
-        <div className="custom-news-scrollbar" style={{ display: 'flex', flexDirection: 'column', gap: 12, maxHeight: 480, overflowY: 'auto', paddingRight: 10 }}>
+        <div className="custom-news-scrollbar" style={{ display: 'flex', flexDirection: 'column', gap: 12, maxHeight: 400, overflowY: 'auto', paddingRight: 10 }}>
           {items.map((n, i) => (
             <button
               key={n.id}
@@ -491,11 +491,11 @@ export default function NoticiasTicker() {
   const edgenetNews = typedNewsItems.filter(n => n.type === 'EDGENET');
 
   return (
-    <div style={{ background: '#ffffff', paddingBottom: 40 }}>
+    <div style={{ background: '#ffffff', paddingBottom: 24 }}>
       {/* Barra de ticker */}
       <NewsTicker />
 
-      <div style={{ paddingTop: 40 }}>
+      <div style={{ paddingTop: 24 }}>
         <NewsBlock title="MAYiA NOTICIAS" items={mayiaNews} />
         <NewsBlock title="EDGENET NOTICIAS" items={edgenetNews} />
       </div>

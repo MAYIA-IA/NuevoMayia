@@ -32,7 +32,7 @@ const SalaPrensa = () => {
   const [hoveredCom, setHoveredCom] = useState<number | null>(null);
 
   return (
-    <section className="relative w-full py-24 bg-white overflow-hidden text-gray-600">
+    <section className="relative w-full py-8 bg-white overflow-hidden text-gray-600">
       
       {/* Background Decorators */}
       <div className="absolute top-0 right-0 w-[800px] h-[800px] rounded-full blur-[150px] pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(164,217,85,0.08) 0%, transparent 70%)' }} />
@@ -41,15 +41,15 @@ const SalaPrensa = () => {
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
         
         {/* Header */}
-        <div className="mb-20">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6 bg-cyan-50 border border-cyan-100 shadow-sm">
-            <Globe size={16} className="text-cyan-500" />
-            <span className="text-sm font-bold text-cyan-800 tracking-wide uppercase">Centro de Medios</span>
+        <div className="mb-10">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-4 bg-cyan-50 border border-cyan-100 shadow-sm">
+            <Globe size={14} className="text-cyan-500" />
+            <span className="text-xs font-bold text-cyan-800 tracking-wide uppercase">Centro de Medios</span>
           </div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight mb-6">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 leading-tight mb-4">
             Sala de <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-lime-500">Prensa</span>
           </h2>
-          <p className="text-lg text-gray-500 max-w-2xl leading-relaxed">
+          <p className="text-base text-gray-500 max-w-2xl leading-relaxed">
             Toda la información oficial, comunicados de prensa, recursos gráficos y contacto para medios de comunicación interesados en MAYiA.
           </p>
         </div>
@@ -58,8 +58,8 @@ const SalaPrensa = () => {
           
           {/* Main Column: Comunicados */}
           <div className="2xl:col-span-8">
-            <h3 className="text-2xl font-bold text-gray-900 mb-8 flex items-center gap-3">
-              <FileText className="text-cyan-500" /> Últimos Comunicados
+            <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-3">
+              <FileText className="text-cyan-500" size={20} /> Últimos Comunicados
             </h3>
             
             <div className="space-y-4">
@@ -89,9 +89,9 @@ const SalaPrensa = () => {
               ))}
             </div>
 
-            <div className="mt-16">
-              <h3 className="text-2xl font-bold text-gray-900 mb-8 flex items-center gap-3">
-                <Mic className="text-lime-500" /> En los Medios
+            <div className="mt-8">
+              <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-3">
+                <Mic className="text-lime-500" size={20} /> En los Medios
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
                 {ENLACES_MEDIOS.map((enlace, idx) => (
@@ -109,13 +109,13 @@ const SalaPrensa = () => {
           </div>
 
           {/* Sidebar Column: Media Kit & Contact */}
-          <div className="2xl:col-span-4 space-y-8">
+          <div className="2xl:col-span-4 space-y-6">
             
             {/* Media Kit */}
-            <div className="bg-gradient-to-br from-gray-50 to-white border border-gray-200 rounded-3xl p-8 relative overflow-hidden group shadow-sm">
+            <div className="bg-gradient-to-br from-gray-50 to-white border border-gray-200 rounded-3xl p-6 relative overflow-hidden group shadow-sm">
               <div className="absolute -right-6 -top-6 w-32 h-32 bg-cyan-100 rounded-full blur-2xl group-hover:bg-cyan-200 transition-all" />
-              <h4 className="text-xl font-bold text-gray-900 mb-4 relative z-10">Media Kit</h4>
-              <p className="text-sm text-gray-500 mb-8 relative z-10">
+              <h4 className="text-lg font-bold text-gray-900 mb-3 relative z-10">Media Kit</h4>
+              <p className="text-xs text-gray-500 mb-6 relative z-10">
                 Descarga nuestro logotipo oficial en alta resolución, manual de identidad gráfica y fotografías corporativas.
               </p>
               <button className="w-full py-3 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-white font-bold flex items-center justify-center gap-2 transition-colors relative z-10 shadow-lg shadow-cyan-500/20">
@@ -124,8 +124,8 @@ const SalaPrensa = () => {
             </div>
 
             {/* Contacto de Prensa */}
-            <div className="bg-white border border-gray-200 rounded-3xl p-8 shadow-sm">
-              <h4 className="text-xl font-bold text-gray-900 mb-6">Contacto de Prensa</h4>
+            <div className="bg-white border border-gray-200 rounded-3xl p-6 shadow-sm">
+              <h4 className="text-lg font-bold text-gray-900 mb-4">Contacto de Prensa</h4>
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center shrink-0">
