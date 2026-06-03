@@ -9,8 +9,10 @@ export default function HeaderBanner() {
   });
 
   useEffect(() => {
-    // Fecha objetivo: 18 de Agosto 2026 19:00 CET
-    const targetDate = new Date('2026-08-18T19:00:00+02:00');
+    // Fecha objetivo: 
+    // 25 de Junio 2026 12:00 CET
+    
+    const targetDate = new Date('2026-06-25T12:00:00+02:00');
 
     const calculateTimeLeft = () => {
       const now = new Date();
@@ -82,9 +84,9 @@ export default function HeaderBanner() {
         <div className="text-center">
           <div className="text-xs font-mono text-lime-400 tracking-widest uppercase mb-1">Próximo evento</div>
           <div className="text-white font-bold text-lg leading-tight">
-            Metodología Éxito Nvidia para tu empresa
+            Visita a la Universidad de Tlaxcala
           </div>
-          <div className="text-gray-400 text-sm mt-0.5">18 de Agosto 2026 · 19:00 hrs CET</div>
+          <div className="text-gray-400 text-sm mt-0.5">25 de Junio 2026 · 12:00 hrs CET</div>
         </div>
 
         {/* CTA */}
