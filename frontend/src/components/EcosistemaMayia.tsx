@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { ExternalLink, Handshake, ChevronDown, ChevronUp } from 'lucide-react';
 import edgeNetLogo from '../assets/logosNativos/edgeNetLogoBlanco.png';
 import flaiLogo from '../assets/logosNativos/logo-FLAI.png';
+import amdLogo from '../assets/amd_logo.svg';
+import intelLogo from '../assets/intel_logo.svg';
 
 /* ── Partners data ──────────────────────────────────────────── */
 
@@ -9,6 +11,7 @@ interface Partner {
   name: string;
   desc: string;
   logo?: string;
+  imgHeight?: number;
   logoText?: string;
   color: string;
   url: string;
@@ -32,14 +35,16 @@ const PARTNERS: Partner[] = [
   {
     name: 'AMD',
     desc: 'Procesadores EPYC y GPUs Instinct para aceleración de workloads de IA en producción enterprise.',
-    logoText: 'AMD',
+    logo: amdLogo,
+    imgHeight: 14,
     color: '#ED1C24',
     url: 'https://www.amd.com',
   },
   {
     name: 'Intel',
     desc: 'Xeon Scalable y Gaudi para inferencia y entrenamiento de modelos de lenguaje y visión.',
-    logoText: 'intel',
+    logo: intelLogo,
+    imgHeight: 36,
     color: '#0071C5',
     url: 'https://www.intel.com',
   },
@@ -47,6 +52,7 @@ const PARTNERS: Partner[] = [
     name: 'Lenovo',
     desc: 'Servidores ThinkSystem optimizados para IA en el borde y en la nube empresarial.',
     logoText: 'Lenovo',
+    imgHeight: 20,
     color: '#E2231A',
     url: 'https://www.lenovo.com',
   },
@@ -260,11 +266,11 @@ export default function EcosistemaMayia() {
                     <img
                       src={p.logo}
                       alt={p.name}
-                      style={{ height: 20, objectFit: 'contain' }}
+                      style={{ height: p.imgHeight || 20, maxWidth: '100%', objectFit: 'contain' }}
                     />
                   ) : (
                     <span style={{
-                      fontSize: 16, fontWeight: 900, color: p.color,
+                      fontSize: p.imgHeight || 16, fontWeight: 900, color: p.color,
                       letterSpacing: '-0.5px', fontFamily: "'Inter', system-ui, sans-serif",
                     }}>
                       {p.logoText}
