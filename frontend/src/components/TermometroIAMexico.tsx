@@ -89,7 +89,7 @@ export default function TermometroIAMexico() {
   }, []);
 
   return (
-    <section style={{ background:'linear-gradient(180deg,#ffffff 0%,#f8fdf1 50%,#ffffff 100%)', padding:'100px 40px', position:'relative', overflow:'hidden' }}>
+    <section style={{ background:'linear-gradient(180deg,#ffffff 0%,#f8fdf1 50%,#ffffff 100%)', padding:'32px 24px', position:'relative', overflow:'hidden' }}>
       <style>{css}</style>
 
       {/* Bg decoration */}
@@ -100,7 +100,7 @@ export default function TermometroIAMexico() {
 
       <div style={{ maxWidth:1200, margin:'0 auto', position:'relative', zIndex:1 }}>
         {/* Header */}
-        <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-start', flexWrap:'wrap', gap:20, marginBottom:52 }}>
+        <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-start', flexWrap:'wrap', gap:20, marginBottom:24 }}>
           <div>
             <div style={{ display:'inline-flex', alignItems:'center', gap:10, padding:'6px 18px', borderRadius:99, background:'rgba(239,68,68,.07)', border:'1px solid rgba(239,68,68,.25)', marginBottom:20 }}>
               <div style={{ position:'relative', width:10, height:10 }}>
@@ -129,7 +129,7 @@ export default function TermometroIAMexico() {
         </div>
 
         {/* KPIs */}
-        <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(220px,1fr))', gap:18, marginBottom:40 }}>
+        <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(220px,1fr))', gap:18, marginBottom:24 }}>
           {indicadores.map(ind => {
             const IconComp = ind.icon === 'Thermometer' ? Thermometer : ind.icon === 'BriefcaseBusiness' ? BriefcaseBusiness : ind.icon === 'CircleDollarSign' ? CircleDollarSign : AlertTriangle;
             return (
@@ -152,7 +152,7 @@ export default function TermometroIAMexico() {
         </div>
 
         {/* Barras */}
-        <div style={{ background:'#ffffff', borderRadius:24, padding:'32px 36px', border:'1px solid #e5e7eb', boxShadow:'0 2px 20px rgba(0,0,0,.06)' }}>
+        <div style={{ background:'#ffffff', borderRadius:24, padding:'24px', border:'1px solid #e5e7eb', boxShadow:'0 2px 20px rgba(0,0,0,.06)' }}>
           <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:32 }}>
             <h3 style={{ fontSize:17, fontWeight:700, color:'#111827', margin:0 }}>Oferta vs Demanda por Sector</h3>
             <div style={{ display:'flex', gap:20, fontSize:11 }}>

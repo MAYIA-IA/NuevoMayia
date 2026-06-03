@@ -58,19 +58,20 @@ const SocialPopover: React.FC<SocialPopoverProps> = ({ isOpen, onClose, children
       <div
         style={{
           position: 'relative',
-          width: '100%',
-          maxWidth: '1000px',
-          height: '90vh',
-          backgroundColor: '#0A0A14', // MAYIA dark theme background
+          width: '95%',
+          maxWidth: '850px',
+          height: 'auto',
+          maxHeight: '85vh',
+          backgroundColor: '#ffffff', // Light theme background
           borderRadius: '24px',
-          border: `1px solid ${colores.primario}40`,
-          boxShadow: `0 20px 60px rgba(0,0,0,0.5), 0 0 40px ${colores.primario}15`,
+          border: `1px solid #e5e7eb`,
+          boxShadow: `0 25px 50px -12px rgba(0,0,0,0.25), 0 0 40px ${colores.primario}20`,
           overflow: 'hidden', // Contains the child scroll
           display: 'flex',
           flexDirection: 'column',
           opacity: isOpen ? 1 : 0,
-          transform: isOpen ? 'scale(1) translateX(0)' : 'scale(0.95) translateX(-20px)',
-          transition: 'all 0.4s cubic-bezier(0.25, 1, 0.2, 1)',
+          transform: isOpen ? 'scale(1) translateY(0)' : 'scale(0.9) translateY(40px)',
+          transition: 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
           zIndex: 10,
         }}
       >
@@ -84,25 +85,25 @@ const SocialPopover: React.FC<SocialPopoverProps> = ({ isOpen, onClose, children
             width: '40px',
             height: '40px',
             borderRadius: '50%',
-            backgroundColor: 'rgba(255,255,255,0.05)',
-            border: '1px solid rgba(255,255,255,0.1)',
+            backgroundColor: '#f3f4f6',
+            border: '1px solid #e5e7eb',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            color: '#fff',
+            color: '#4b5563',
             cursor: 'pointer',
             zIndex: 100,
             transition: 'all 0.2s',
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = `${colores.primario}25`;
-            e.currentTarget.style.borderColor = `${colores.primario}50`;
-            e.currentTarget.style.color = colores.primario;
+            e.currentTarget.style.backgroundColor = colores.primario;
+            e.currentTarget.style.borderColor = colores.primario;
+            e.currentTarget.style.color = '#ffffff';
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.05)';
-            e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
-            e.currentTarget.style.color = '#fff';
+            e.currentTarget.style.backgroundColor = '#f3f4f6';
+            e.currentTarget.style.borderColor = '#e5e7eb';
+            e.currentTarget.style.color = '#4b5563';
           }}
         >
           <X size={20} />
@@ -118,17 +119,17 @@ const SocialPopover: React.FC<SocialPopoverProps> = ({ isOpen, onClose, children
       
       <style>{`
         .social-popover-scroll::-webkit-scrollbar {
-          width: 8px;
+          width: 6px;
         }
         .social-popover-scroll::-webkit-scrollbar-track {
-          background: rgba(255,255,255,0.02);
+          background: transparent;
         }
         .social-popover-scroll::-webkit-scrollbar-thumb {
-          background: ${colores.primario}40;
+          background: #d1d5db;
           border-radius: 10px;
         }
         .social-popover-scroll::-webkit-scrollbar-thumb:hover {
-          background: ${colores.primario}80;
+          background: #9ca3af;
         }
       `}</style>
     </div>
