@@ -1,6 +1,6 @@
 /* PartnersSection.tsx – fondo blanco premium */
 import { useState } from 'react';
-import { Zap, Cpu, Server, Atom, ChevronDown, ChevronUp } from 'lucide-react';
+import { Zap, Cpu, Server, ChevronDown, ChevronUp } from 'lucide-react';
 import amdLogo from '../assets/amd_logo.svg';
 import intelLogo from '../assets/intel_logo.svg';
 
