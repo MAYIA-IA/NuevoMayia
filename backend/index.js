@@ -3,7 +3,6 @@ dotenv.config();
 
 import express from 'express';
 import cors from 'cors';
-import { testConnection } from './config/database.js';
 import { initGeminiClient } from './config/gemini.js';
 import chatRoutes from './routes/chatRoutes.js';
 import departamentosRoutes from './routes/departamentosRoutes.js';
@@ -12,9 +11,22 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 // Middleware
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://localhost:5174',
+  // FRONTEND_URL puede traer varios dominios separados por coma
+  ...(process.env.FRONTEND_URL?.split(',').map((o) => o.trim()) || []),
+].filter(Boolean);
+
 app.use(
   cors({
-    origin: 'http://localhost:5173', // o 3000 según tu frontend
+    origin: (origin, callback) => {
+      // permite herramientas sin origin (curl, Postman) y los orígenes en la lista
+      if (!origin || allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+      return callback(new Error('Origen no permitido por CORS'));
+    },
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type'],
   })
@@ -31,30 +43,19 @@ app.get('/health', (req, res) => {
   res.json({ status: 'ok', message: 'Dashboard IA Backend running' });
 });
 
-// Iniciar servidor
-async function startServer() {
-  try {
-    console.log('Iniciando servidor...\n');
-    
-    // Verificar API Key
-    if (!process.env.GEMINI_API_KEY) {
-      throw new Error('GEMINI_API_KEY no está configurada');
-    }
-    
-    // Inicializar Gemini
-    initGeminiClient();
-    
-    // Probar conexión a BD (Quitamos la conexión a DB porque no es necesaria en este caso)
-    // await testConnection();
-    
-    app.listen(PORT, () => {
-      console.log(`\nServidor corriendo en http://localhost:${PORT}`);
-      console.log(`API disponible en http://localhost:${PORT}/api`);
-    });
-  } catch (error) {
-    console.error('❌ Error al iniciar el servidor:', error.message);
-    process.exit(1);
-  }
+// Inicializar Gemini al cargar el módulo (funciona en local y en serverless/Vercel)
+if (process.env.GEMINI_API_KEY) {
+  initGeminiClient();
+} else {
+  console.error('⚠️ GEMINI_API_KEY no está configurada');
 }
 
-startServer();
+// Servidor local: solo escucha cuando NO corre en Vercel (serverless)
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`\nServidor corriendo en http://localhost:${PORT}`);
+    console.log(`API disponible en http://localhost:${PORT}/api`);
+  });
+}
+
+export default app;

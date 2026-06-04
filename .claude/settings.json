@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find /Users/martinfranciscocortesbuendia/Desktop/EdgeNET -name PartnersSection.tsx 2>/dev/null)",
+      "Read(//Users/martinfranciscocortesbuendia/Desktop/EdgeNET/**)",
+      "Bash(node --check services/geminiService.js)"
+    ]
+  }
+}

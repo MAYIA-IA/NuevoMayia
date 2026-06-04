@@ -4,6 +4,9 @@ import { brandingConfig } from '../../config/branding';
 
 const { colores, ia } = brandingConfig;
 
+// URL del backend: en producción se define VITE_API_URL; en local cae a localhost
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+
 type ChatMessage = {
   role: 'user' | 'assistant';
   content: string;
@@ -109,7 +112,7 @@ export const AsistenteIAChat = forwardRef<AsistenteIAChatHandle>((_, ref) => {
 
   const checkBackend = async () => {
     try {
-      const r = await fetch('http://localhost:3001/health');
+      const r = await fetch(`${API_URL}/health`);
       setBackendStatus(r.ok ? 'online' : 'offline');
     } catch {
       setBackendStatus('offline');
@@ -126,7 +129,7 @@ export const AsistenteIAChat = forwardRef<AsistenteIAChatHandle>((_, ref) => {
     setLoading(true);
 
     try {
-      const r = await fetch('http://localhost:3001/api/chat/message', {
+      const r = await fetch(`${API_URL}/api/chat/message`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ mensaje: contenido, departamento: 'general' }),
