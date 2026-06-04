@@ -120,7 +120,7 @@ Certificaciones internacionales
 Hecho en México 🇲🇽
 
 CONTACTO:
-- WhatsApp: +52 55 1228 3568
+- WhatsApp: +52 56 5133 6439
 - Ubicación: Ciudad de México, México
 
 ${contexto && contexto.length > 0 ? `\n📊 DATOS ESPECÍFICOS DE LA BASE DE DATOS:\n${JSON.stringify(contexto, null, 2)}\n` : ''}
