@@ -22,7 +22,7 @@ export function initGeminiClient() {
     console.log('Cliente de Google Gemini inicializado (gemini-2.5-flash)');
     return true;
   } catch (error) {
-    console.error('❌ Error inicializando Gemini:', error.message);
+    console.error('Error inicializando Gemini:', error.message);
     throw error;
   }
 }

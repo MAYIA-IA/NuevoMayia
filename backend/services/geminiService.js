@@ -12,7 +12,7 @@ export async function generarRespuestaIA(mensaje, contexto, departamento) {
     const response = await result.response;
     const texto = response.text();
 
-    console.log('🤖 Respuesta generada por Gemini');
+    console.log('Respuesta generada por Gemini');
     return texto;
 
   } catch (error) {
@@ -111,13 +111,13 @@ SERVICIOS Y PRODUCTOS DE MAYiA:
    - Partners: NVIDIA, Lenovo
 
 CARACTERÍSTICAS DISTINTIVAS:
-✅ Primera plataforma IA integral de México
-✅ Soberanía de datos garantizada
-✅ Implementación en 2-4 meses
-✅ ROI medible (2-3x promedio)
-✅ Soporte 24/7 internacional
-✅ Certificaciones internacionales
-✅ Hecho en México 🇲🇽
+Primera plataforma IA integral de México
+Soberanía de datos garantizada
+Implementación en 2-4 meses
+ROI medible (2-3x promedio)
+Soporte 24/7 internacional
+Certificaciones internacionales
+Hecho en México 🇲🇽
 
 CONTACTO:
 - WhatsApp: +52 55 1228 3568
