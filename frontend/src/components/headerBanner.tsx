@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 // URL del formulario de registro de Google Forms (Reemplaza este enlace con el de tu propio formulario)
-const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfp-2g9lZ5i17z4p_YJdFk2n9m4j_Jm3_zX-qg7p_F1L-Q/viewform";
+const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSf6ZYXkGXrLuQAuNpx3gBvb5f51hQv5LPqcKnb0HdLuhHU3Dg/viewform?usp=publish-editor";
 
 export default function HeaderBanner() {
   const [timeLeft, setTimeLeft] = useState({
