@@ -119,6 +119,11 @@ Soporte 24/7 internacional
 Certificaciones internacionales
 Hecho en México 🇲🇽
 
+PRÓXIMO EVENTO:
+- Webinar "Agencia 33: grafos de conocimiento"
+- Fecha: 25 de Junio 2026 · 12:00 hrs CET
+- Si preguntan por eventos, webinars o actividades próximas, menciona este evento e invita a reservar lugar.
+
 CONTACTO:
 - WhatsApp: +52 56 5133 6439
 - Ubicación: Ciudad de México, México
