@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
 
+// URL del formulario de registro de Google Forms (Reemplaza este enlace con el de tu propio formulario)
+const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfp-2g9lZ5i17z4p_YJdFk2n9m4j_Jm3_zX-qg7p_F1L-Q/viewform";
+
 export default function HeaderBanner() {
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
@@ -90,9 +93,14 @@ export default function HeaderBanner() {
         </div>
 
         {/* CTA */}
-        <button className="bg-lime-400 hover:bg-lime-300 text-gray-900 font-bold px-7 py-3 rounded-xl text-sm transition-all duration-300 hover:scale-105 shadow-lg shadow-lime-400/20 whitespace-nowrap">
+        <a 
+          href={GOOGLE_FORM_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-lime-400 hover:bg-lime-300 text-gray-900 font-bold px-7 py-3 rounded-xl text-sm transition-all duration-300 hover:scale-105 shadow-lg shadow-lime-400/20 whitespace-nowrap text-center"
+        >
           RESERVA AQUÍ
-        </button>
+        </a>
       </div>
     </div>
   );
