@@ -26,8 +26,7 @@ interface SidebarProps {
 // Menú principal (Ligero y enfocado a negocio)
 const menuItems = [
   { id: 'dashboard',           nombre: 'Centro de Control',   icono: LayoutDashboard },
-  { id: 'ecosistema',          nombre: 'Ecosistema MAYiA',    icono: Network },
-  { id: 'partners',            nombre: 'Partners',            icono: Handshake },
+  { id: 'hubs-digitales',      nombre: 'Hubs Digitales',      icono: Network },
   { id: 'ia-empresarial',      nombre: 'Soluciones I.A.',     icono: Building2 },
   { id: 'ia-por-sector',       nombre: 'IA por Sector',       icono: Factory },
   { id: 'empleados-digitales', nombre: 'Empleados Digitales', icono: Users },

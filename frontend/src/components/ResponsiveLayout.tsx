@@ -4,6 +4,7 @@ import {
   GraduationCap, ChevronRight, Newspaper, Handshake,
   Trophy, Thermometer, Network, GitBranch, Star,
   Building2, Layers, Users, Zap, MoreHorizontal,
+  Sparkles, Mail, Phone, Map, Factory, Pill, ShoppingBag,
 } from 'lucide-react';
 import { brandingConfig } from '../config/branding';
 import mayiaLogo from '../assets/logosNativos/mayiaLogoBlanco.png';
@@ -15,25 +16,21 @@ interface ResponsiveLayoutProps {
   sidebar: React.ReactNode;
   sidebarR?: React.ReactNode;
   children: React.ReactNode;
+  onOpenChat?: () => void;
 }
 
-// Todas las secciones — en orden de aparición
+// Todas las secciones — en orden de aparición (Sincronizado con desktop)
 const allSections = [
-  { id: 'dashboard',           nombre: 'Dashboard',           icono: LayoutDashboard },
-  { id: 'analiticos',          nombre: 'México es MAYiA',     icono: TrendingUp },
-  { id: 'noticias',            nombre: 'Noticias IA',         icono: Newspaper },
-  { id: 'partners',            nombre: 'Partners',            icono: Handshake },
-  { id: 'ia-empresarial',      nombre: 'I.A. Empresarial',    icono: Building2 },
-  { id: 'ia-sectores',         nombre: 'IA Sectores',         icono: Layers },
-  { id: 'termometro-ia',       nombre: 'Termómetro IA',       icono: Thermometer },
-  { id: 'hackaton',            nombre: 'Hackaton Intel',      icono: Trophy },
-  { id: 'empleados-digitales', nombre: 'Empleados Dig.',      icono: Users },
-  { id: 'pildoras-ia',         nombre: 'Píldoras IA',         icono: Zap },
-  { id: 'ciberseguridad',      nombre: 'Ciberseguridad',      icono: Shield },
-  { id: 'embajadores',         nombre: 'Embajadores',         icono: Star },
-  { id: 'organigrama',         nombre: 'Organigrama',         icono: GitBranch },
+  { id: 'dashboard',           nombre: 'Centro de Control',   icono: LayoutDashboard },
+  { id: 'hubs-digitales',      nombre: 'Hubs Digitales',      icono: Network },
+  { id: 'ia-empresarial',      nombre: 'Soluciones I.A.',     icono: Building2 },
+  { id: 'ia-por-sector',       nombre: 'IA por Sector',       icono: Factory },
+  { id: 'empleados-digitales', nombre: 'Empleados Digitales', icono: Users },
+  { id: 'hackaton',            nombre: 'Marketplace',         icono: ShoppingBag },
+  { id: 'pildoras-ia',         nombre: 'Píldoras IA',         icono: Pill },
+  { id: 'ciberseguridad',      nombre: 'SOC Ciberseguridad',  icono: Shield },
   { id: 'academia',            nombre: 'Academia MAYiA',      icono: GraduationCap },
-  { id: 'networking',          nombre: 'Networking Hub',      icono: Network },
+  { id: 'polos-desarrollo',    nombre: 'Polos de desarrollo', icono: Map },
 ];
 
 // Los 4 que aparecen en la barra inferior
@@ -46,9 +43,11 @@ export const ResponsiveLayout: React.FC<ResponsiveLayoutProps> = ({
   sidebar,
   sidebarR,
   children,
+  onOpenChat,
 }) => {
   const { colores, empresa } = brandingConfig;
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [drawerROpen, setDrawerROpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -61,12 +60,13 @@ export const ResponsiveLayout: React.FC<ResponsiveLayoutProps> = ({
   const handleSectionChange = (section: string) => {
     onSectionChange(section);
     setDrawerOpen(false);
+    setDrawerROpen(false);
   };
 
   useEffect(() => {
-    document.body.style.overflow = drawerOpen ? 'hidden' : '';
+    document.body.style.overflow = (drawerOpen || drawerROpen) ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
-  }, [drawerOpen]);
+  }, [drawerOpen, drawerROpen]);
 
   const activeItem = allSections.find(m => m.id === activeSection);
 
@@ -108,13 +108,14 @@ export const ResponsiveLayout: React.FC<ResponsiveLayoutProps> = ({
           position: fixed;
           top: 0; left: 0; right: 0;
           height: 56px;
-          background: #5a5a5a;
-          border-bottom: 1px solid #1a1a1a;
+          background: #0A0A14;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
           display: flex;
           align-items: center;
           justify-content: space-between;
           padding: 0 14px;
           z-index: 500;
+          backdrop-filter: blur(10px);
         }
 
         /* Espacio para la topbar */
@@ -180,11 +181,30 @@ export const ResponsiveLayout: React.FC<ResponsiveLayoutProps> = ({
           from { transform: translateX(-100%); } to { transform: translateX(0); }
         }
 
+        /* Drawer derecho panel */
+        .rl-drawer-right {
+          position: fixed;
+          right: 0; top: 0; bottom: 0;
+          width: 320px;
+          max-width: 85vw;
+          background: ${colores.fondoSecundario};
+          border-left: 1px solid ${colores.borde};
+          display: flex;
+          flex-direction: column;
+          z-index: 1000;
+          animation: rl-slidein-right 0.25s ease;
+          box-shadow: -8px 0 40px rgba(0,0,0,0.4);
+        }
+
+        @keyframes rl-slidein-right {
+          from { transform: translateX(100%); } to { transform: translateX(0); }
+        }
+
         /* Botón hamburguesa */
         .rl-hambtn {
           width: 40px; height: 40px; border-radius: 10px;
-          background: ${colores.fondoTerciario};
-          border: 1px solid ${colores.borde};
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(255, 255, 255, 0.1);
           cursor: pointer;
           display: flex; align-items: center; justify-content: center;
         }
@@ -198,6 +218,33 @@ export const ResponsiveLayout: React.FC<ResponsiveLayoutProps> = ({
           font-size: 12px; font-weight: 700;
           color: ${colores.primario};
           white-space: nowrap;
+        }
+        @media (max-width: 500px) {
+          .rl-pill { display: none; }
+        }
+
+        /* Topbar Actions container */
+        .rl-topbar-actions {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+        .rl-topbar-action-btn {
+          width: 36px;
+          height: 36px;
+          border-radius: 8px;
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          color: #ffffff;
+          transition: all 0.2s;
+        }
+        .rl-topbar-action-btn:active {
+          transform: scale(0.95);
+          background: rgba(255, 255, 255, 0.1);
         }
 
         /* Bottom nav item */
@@ -230,7 +277,7 @@ export const ResponsiveLayout: React.FC<ResponsiveLayoutProps> = ({
       {/* ── Top bar ── */}
       <div className="rl-topbar">
         <button className="rl-hambtn" onClick={() => setDrawerOpen(true)}>
-          <Menu size={20} color={colores.textoClaro} />
+          <Menu size={20} color="#ffffff" />
         </button>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -238,16 +285,42 @@ export const ResponsiveLayout: React.FC<ResponsiveLayoutProps> = ({
             src={mayiaLogo}
             alt={empresa.nombre}
             style={{ height: '28px', objectFit: 'contain' }}
-            onError={e => { (e.target as HTMLImageElement).style.display = 'none'; }}
+            onError={e => {
+              (e.target as HTMLImageElement).style.display = 'none';
+              const txtSpan = document.getElementById('rl-topbar-logo-text');
+              if (txtSpan) txtSpan.style.display = 'inline';
+            }}
+            onLoad={e => {
+              const txtSpan = document.getElementById('rl-topbar-logo-text');
+              if (txtSpan) txtSpan.style.display = 'none';
+            }}
           />
-          <span style={{ fontSize: '15px', fontWeight: '700', color: colores.textoClaro }}>
+          <span
+            id="rl-topbar-logo-text"
+            style={{ fontSize: '15px', fontWeight: '700', color: '#ffffff', display: 'none' }}
+          >
             {empresa.nombre}
           </span>
         </div>
 
-        <div className="rl-pill">
-          {activeItem && <activeItem.icono size={12} color={colores.primario} />}
-          <span>{activeItem?.nombre ?? 'Dashboard'}</span>
+        <div className="rl-topbar-actions">
+          {onOpenChat && (
+            <button className="rl-topbar-action-btn" onClick={onOpenChat} aria-label="Asistente IA">
+              <Sparkles size={16} color={colores.primario} />
+            </button>
+          )}
+          <a href="https://api.whatsapp.com/send/?phone=525651336439" target="_blank" rel="noopener noreferrer" className="rl-topbar-action-btn" aria-label="WhatsApp">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style={{ width: 16, height: 16 }} />
+          </a>
+          {sidebarR && (
+            <button className="rl-topbar-action-btn" onClick={() => setDrawerROpen(true)} aria-label="Hub Digital">
+              <Newspaper size={16} color={colores.primario} />
+            </button>
+          )}
+          <div className="rl-pill">
+            {activeItem && <activeItem.icono size={12} color={colores.primario} />}
+            <span>{activeItem?.nombre ?? 'Dashboard'}</span>
+          </div>
         </div>
       </div>
 
@@ -391,6 +464,28 @@ export const ResponsiveLayout: React.FC<ResponsiveLayoutProps> = ({
               })}
             </nav>
 
+            {/* Contactos Rápidos en el Drawer */}
+            <div style={{
+              padding: '12px 20px',
+              borderTop: `1px solid ${colores.borde}`,
+              display: 'flex',
+              justifyContent: 'space-around',
+              gap: '8px'
+            }}>
+              <a href="https://api.whatsapp.com/send/?phone=525651336439" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '6px', textDecoration: 'none', color: '#25D366', fontSize: '12px', fontWeight: 'bold' }}>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style={{ width: 16, height: 16 }} />
+                <span>WhatsApp</span>
+              </a>
+              <a href="mailto:admin@mayia.mx" style={{ display: 'flex', alignItems: 'center', gap: '6px', textDecoration: 'none', color: '#0284c7', fontSize: '12px', fontWeight: 'bold' }}>
+                <Mail size={16} />
+                <span>Email</span>
+              </a>
+              <a href="tel:+525651336439" style={{ display: 'flex', alignItems: 'center', gap: '6px', textDecoration: 'none', color: '#7c3aed', fontSize: '12px', fontWeight: 'bold' }}>
+                <Phone size={16} />
+                <span>Llamar</span>
+              </a>
+            </div>
+
             {/* Footer */}
             <div style={{
               padding: '16px 20px',
@@ -398,6 +493,38 @@ export const ResponsiveLayout: React.FC<ResponsiveLayoutProps> = ({
               fontSize: '11px', color: colores.textoOscuro, textAlign: 'center',
             }}>
               Hub Digital · {empresa.nombre}
+            </div>
+          </div>
+        </>
+      )}
+
+      {/* ── Drawer Derecho (SeoHub) ── */}
+      {drawerROpen && sidebarR && (
+        <>
+          <div className="rl-overlay" onClick={() => setDrawerROpen(false)} />
+          <div className="rl-drawer-right">
+            {/* Header drawer R */}
+            <div style={{
+              padding: '20px',
+              borderBottom: `1px solid ${colores.borde}`,
+              display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+              background: '#0A0A14',
+            }}>
+              <span style={{ fontSize: '14px', fontWeight: '800', color: '#ffffff' }}>Hub SEO · Contenido</span>
+              <button
+                onClick={() => setDrawerROpen(false)}
+                style={{
+                  width: '32px', height: '32px', borderRadius: '8px',
+                  background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', cursor: 'pointer',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                }}
+              >
+                <X size={16} color="#ffffff" />
+              </button>
+            </div>
+            {/* Contenido */}
+            <div style={{ flex: 1, overflowY: 'auto' }} onClick={() => setDrawerROpen(false)}>
+              {sidebarR}
             </div>
           </div>
         </>

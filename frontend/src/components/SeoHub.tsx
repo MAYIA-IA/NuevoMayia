@@ -123,7 +123,7 @@ export interface SeoHubProps {
   onOpenSocialModal?: (id: string, yPos: number) => void;
 }
 
-const SOCIAL_IDS = ['noticias-rt', 'blog', 'sala-prensa', 'embajadores', 'red-ia', 'temp-ia'];
+const SOCIAL_IDS = ['noticias-rt', 'blog', 'sala-prensa', 'embajadores', 'red-ia', 'temp-ia', 'quienes'];
 
 function HubCard({ 
   mod, 

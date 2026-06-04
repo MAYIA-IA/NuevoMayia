@@ -3,7 +3,7 @@ import flaiLogo from '../assets/logosNativos/logo-FLAI.png';
 
 export default function FlaiInfoModal() {
   const handleAgendarCita = () => {
-    window.open("https://api.whatsapp.com/send/?phone=525553315526&text&type=phone_number&app_absent=0", '_blank');
+    window.open("https://calendly.com/mayiainteligencia/consulta-mayia", '_blank');
   };
 
   return (

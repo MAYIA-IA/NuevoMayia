@@ -16,8 +16,7 @@ import SocialPopover from './components/SocialPopover';
 
 // Componentes pesados (carga perezosa)
 const Analiticos = lazy(() => import('./components/departamentos/Analiticos').then(m => ({ default: m.Analiticos })));
-const PartnersSection = lazy(() => import('./components/PartnersSection'));
-const EcosistemaMayia = lazy(() => import('./components/EcosistemaMayia'));
+const HubsDigitales = lazy(() => import('./components/HubsDigitales'));
 const IAEmpresarial = lazy(() => import('./components/IAEmpresarial'));
 const IAporSector = lazy(() => import('./components/IAporSector'));
 const EmpleadosDigitales = lazy(() => import('./components/EmpleadosDigitales'));
@@ -32,6 +31,8 @@ const TermometroIAMexico = lazy(() => import('./components/TermometroIAMexico'))
 const NetworkingHub = lazy(() => import('./components/NetworkingHub'));
 const Blog = lazy(() => import('./components/Blog'));
 const SalaPrensa = lazy(() => import('./components/SalaPrensa'));
+const AsistenteIAChat = lazy(() => import('./components/modules/AsistenteIAChat').then(m => ({ default: m.AsistenteIAChat })));
+const QuienesSomosModal = lazy(() => import('./components/QuienesSomosModal'));
 
 // Fallback de carga premium
 const LoadingSection = () => (
@@ -49,7 +50,7 @@ const LoadingSection = () => (
 
 /* ── IDs de sección para scroll-spy ── */
 const SECTION_IDS = [
-  'dashboard', 'enterprise-dashboard', 'analiticos', 'noticias', 'ecosistema', 'partners',
+  'dashboard', 'enterprise-dashboard', 'analiticos', 'noticias', 'hubs-digitales',
   'ia-empresarial', 'ia-por-sector', 'termometro-ia', 'hackaton',
   'empleados-digitales', 'pildoras-ia', 'ciberseguridad',
   'embajadores', 'academia', 'networking', 'blog', 'sala-prensa',
@@ -153,8 +154,7 @@ function App() {
       'enterprise-dashboard': 'Centro de Control',
       analiticos: 'México es MAYiA',
       noticias: 'Noticias IA',
-      ecosistema: 'Ecosistema',
-      partners: 'Partners',
+      'hubs-digitales': 'Hubs Digitales',
       'ia-empresarial': 'I.A. Empresarial',
       'ia-por-sector': 'IA por Sector',
       'termometro-ia': 'Termómetro IA',
@@ -192,11 +192,8 @@ function App() {
         {/* Las secciones sociales (Noticias, Blog, Sala Prensa, Embajadores, Networking) 
             fueron extraídas al SocialPopover */}
         
-        {/* 7. Ecosistema MAYIA (partners visuales) */}
-        <div id="ecosistema"><EcosistemaMayia /></div>
-        
-        {/* 8. Partners técnicos */}
-        <div id="partners"><PartnersSection /></div>
+        {/* 7. Hubs Digitales */}
+        <div id="hubs-digitales"><HubsDigitales /></div>
         
         {/* 9. IA Empresarial */}
         <div id="ia-empresarial"><IAEmpresarial /></div>
@@ -261,6 +258,8 @@ function App() {
           onSectionChange={handleNavClick}
           header={<Header title={getTitulo()} />}
           sidebar={<Sidebar activeSection={activeSection} onSectionChange={handleNavClick} />}
+          sidebarR={<SeoHub activeSection={activeSection} onSectionChange={handleNavClick} onOpenSocialModal={handleOpenSocialModal} />}
+          onOpenChat={() => handleOpenSocialModal('chat-ia', window.innerHeight / 2)}
         >
           {pageContent}
         </ResponsiveLayout>
@@ -281,6 +280,8 @@ function App() {
           {activeSocialModal === 'temp-ia' && <TermometroIAMexico />}
           {activeSocialModal === 'analiticos' && <Analiticos />}
           {activeSocialModal === 'flai-info' && <FlaiInfoModal />}
+          {activeSocialModal === 'chat-ia' && <div style={{ height: '500px', display: 'flex', flexDirection: 'column' }}><AsistenteIAChat /></div>}
+          {activeSocialModal === 'quienes' && <QuienesSomosModal />}
         </Suspense>
       </SocialPopover>
     </div>

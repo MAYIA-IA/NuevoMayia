@@ -5,7 +5,7 @@ import { brandingConfig } from '../config/branding';
 
 const { colores } = brandingConfig;
 
-const WA_URL = 'https://api.whatsapp.com/send/?phone=525553315526&text&type=phone_number&app_absent=0';
+const WA_URL = 'https://calendly.com/mayiainteligencia/consulta-mayia';
 
 const highlights = [
   { icon: BookOpen, value: '32', label: 'Cursos de IA', color: '#A4D955' },

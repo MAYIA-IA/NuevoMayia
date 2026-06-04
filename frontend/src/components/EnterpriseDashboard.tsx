@@ -18,7 +18,7 @@ const CATEGORIES = ['Infraestructura', 'Desarrollo', 'Modelos', 'Agentes', 'Oper
 
 function SocCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
   const handleAgendarCita = () => {
-    window.open("https://api.whatsapp.com/send/?phone=525553315526&text&type=phone_number&app_absent=0", '_blank');
+    window.open("https://calendly.com/mayiainteligencia/consulta-mayia", '_blank');
   };
 
   return (
@@ -402,7 +402,7 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo }: { onO
               
               <div style={{ display: 'flex', gap: 8, marginTop: 'auto' }}>
                 <a
-                  href="https://api.whatsapp.com/send/?phone=525553315526&text&type=phone_number&app_absent=0"
+                  href="https://calendly.com/mayiainteligencia/consulta-mayia"
                   target="_blank" rel="noopener noreferrer"
                   style={{
                     flex: 1,
@@ -467,7 +467,7 @@ function FlaiCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const handleAgendarCita = () => {
-    window.open("https://api.whatsapp.com/send/?phone=525553315526&text&type=phone_number&app_absent=0", '_blank');
+    window.open("https://calendly.com/mayiainteligencia/consulta-mayia", '_blank');
     setMenuOpen(false);
   };
 

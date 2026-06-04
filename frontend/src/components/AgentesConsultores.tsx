@@ -33,6 +33,14 @@ const AgentesConsultores = () => {
   const [videoLoaded, setVideoLoaded] = useState<{[key: number]: boolean}>({});
   const [userInteracted, setUserInteracted] = useState<{[key: number]: boolean}>({});
   const videoRefs = useRef<VideoRefs>({});
+  const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' ? window.innerWidth < 1024 : false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 1024);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
 
   const consultores: Consultor[] = [
     {
@@ -94,14 +102,16 @@ const AgentesConsultores = () => {
   };
 
   // Función para manejar el primer click/interacción en una card
-  const handleCardInteraction = (id: number) => {
-    setUserInteracted(prev => ({ ...prev, [id]: true }));
+  const handleCardInteraction = (id: number | null) => {
+    if (id !== null) {
+      setUserInteracted(prev => ({ ...prev, [id]: true }));
+    }
     setHoveredId(id);
   };
 
   // Manejar hover para reproducir/pausar video
   useEffect(() => {
-    if (hoveredId !== null && !videoErrors[hoveredId] && videoLoaded[hoveredId]) {
+    if (hoveredId !== null && !videoErrors[hoveredId]) {
       const video = videoRefs.current[hoveredId];
       if (video) {
         // Resetear el video al inicio antes de reproducir
@@ -115,7 +125,6 @@ const AgentesConsultores = () => {
               console.log(`Video ${hoveredId} reproduciéndose correctamente`);
             })
             .catch(error => {
-              
               if (error.name === 'NotAllowedError' || error.name === 'AbortError') {
                 console.log(`Autoplay bloqueado para video ${hoveredId}. Se requiere interacción del usuario.`);
               } else {
@@ -132,10 +141,10 @@ const AgentesConsultores = () => {
         }
       });
     }
-  }, [hoveredId, videoErrors, videoLoaded]);
+  }, [hoveredId, videoErrors]);
 
   return (
-    <div id="agentes-ia" className="w-full relative z-10 bg-white flex flex-col h-[80vh] min-h-[600px] overflow-hidden" style={{ fontFamily: "'Sora', sans-serif" }}>
+    <div id="agentes-ia" className="w-full relative z-10 bg-white flex flex-col lg:h-[80vh] lg:min-h-[600px] lg:overflow-hidden h-auto py-10" style={{ fontFamily: "'Sora', sans-serif" }}>
       {/* Background subtle gradient for depth instead of dark */}
       <div className="absolute inset-0 bg-gradient-to-b from-gray-50 via-white to-gray-50 pointer-events-none z-0" />
 
@@ -153,7 +162,7 @@ const AgentesConsultores = () => {
       </div>
 
       {/* Full-Height Flex Accordion Container */}
-      <div className="flex-1 w-full max-w-[1800px] mx-auto px-4 lg:px-8 pb-6 lg:pb-10 flex flex-col lg:flex-row gap-2 lg:gap-4 overflow-hidden relative z-10">
+      <div className="flex-1 w-full max-w-[1800px] mx-auto px-4 lg:px-8 pb-6 lg:pb-10 flex flex-col lg:flex-row gap-4 lg:gap-4 lg:overflow-hidden relative z-10">
         {consultores.map((consultor) => {
           const hasValidVideo = !videoErrors[consultor.id];
           const isHovered = hoveredId === consultor.id;
@@ -164,18 +173,23 @@ const AgentesConsultores = () => {
             <div 
               key={consultor.id}
               onMouseEnter={() => {
+                if (isMobile) return;
                 setHoveredId(consultor.id);
                 if (!userInteracted[consultor.id]) handleCardInteraction(consultor.id);
               }}
-              onMouseLeave={() => setHoveredId(null)}
-              onClick={() => {
-                setSelectedId(selectedId === consultor.id ? null : consultor.id);
-                handleCardInteraction(consultor.id);
+              onMouseLeave={() => {
+                if (isMobile) return;
+                setHoveredId(null);
               }}
-              className={`group relative overflow-hidden rounded-2xl lg:rounded-[32px] transition-all duration-[800ms] ease-[cubic-bezier(0.25,1,0.5,1)] cursor-pointer flex-shrink-0 lg:flex-shrink border border-gray-200 bg-gray-100
+              onClick={() => {
+                const nextId = selectedId === consultor.id ? null : consultor.id;
+                setSelectedId(nextId);
+                handleCardInteraction(nextId);
+              }}
+              className={`group relative overflow-hidden rounded-2xl lg:rounded-[32px] transition-all duration-[800ms] ease-[cubic-bezier(0.25,1,0.5,1)] cursor-pointer flex-shrink-0 lg:flex-shrink border border-gray-200 bg-gray-100 lg:h-full
                 ${isActive 
-                  ? 'flex-[2.5] lg:flex-[3] shadow-[0_20px_50px_rgba(0,0,0,0.15)]' 
-                  : 'flex-1 lg:flex-1 opacity-80 hover:opacity-100 hover:border-gray-300'}
+                  ? 'h-[450px] lg:flex-[3] shadow-[0_20px_50px_rgba(0,0,0,0.15)]' 
+                  : 'h-[100px] lg:flex-1 opacity-80 hover:opacity-100 hover:border-gray-300'}
               `}
             >
               {/* Media Section (Video/Imagen a pantalla completa) */}
@@ -183,11 +197,12 @@ const AgentesConsultores = () => {
                 {hasValidVideo ? (
                   <video
                     ref={el => { videoRefs.current[consultor.id] = el; }}
-                    muted loop preload="auto" playsInline
+                    muted loop preload={isMobile ? "none" : "auto"} playsInline
                     onError={() => handleVideoError(consultor.id)}
                     onLoadedData={() => handleVideoLoad(consultor.id)}
                     className={`absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] ease-out origin-center ${isActive ? 'scale-100' : 'scale-[1.15] grayscale-[40%]'}`}
                     poster={consultor.image}
+                    style={{ objectPosition: isMobile ? 'center 20%' : 'center' }}
                   >
                     <source src={consultor.videoPath} type="video/mp4" />
                   </video>
@@ -195,6 +210,7 @@ const AgentesConsultores = () => {
                   <img 
                     src={consultor.image} alt={consultor.title}
                     className={`absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] ease-out ${isActive ? 'scale-100' : 'scale-[1.15] grayscale-[40%]'}`}
+                    style={{ objectPosition: isMobile ? 'center 20%' : 'center' }}
                   />
                 )}
                 
@@ -234,8 +250,8 @@ const AgentesConsultores = () => {
                   {consultor.subtitle}
                 </p>
 
-                {/* Contenedor Inferior Expansible (Features, Desc, Precio, CTA) - CON OVERFLOW AUTO */}
-                <div className={`overflow-y-auto hide-scrollbar transition-all duration-[800ms] ease-[cubic-bezier(0.25,1,0.5,1)] ${isActive ? 'max-h-[220px] lg:max-h-[350px] opacity-100' : 'max-h-0 opacity-0'}`}>
+                {/* Contenedor Inferior Expansible (Features, Desc) - CON OVERFLOW AUTO y Flex-1 */}
+                <div className={`overflow-y-auto hide-scrollbar transition-all duration-[800ms] ease-[cubic-bezier(0.25,1,0.5,1)] ${isActive ? 'flex-1 opacity-100 my-2 lg:my-3' : 'max-h-0 opacity-0 pointer-events-none'}`}>
                   
                   {/* Features */}
                   <div className="flex flex-wrap gap-1.5 lg:gap-2 mb-3">
@@ -247,12 +263,14 @@ const AgentesConsultores = () => {
                   </div>
 
                   {/* Descripción Larga */}
-                  <p className="text-xs text-gray-300 leading-relaxed mb-4">
+                  <p className="text-xs text-gray-300 leading-relaxed mb-1">
                     {consultor.description}
                   </p>
+                </div>
 
-                  {/* Footer de Tarjeta (Precio y Botón) */}
-                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pt-3 border-t border-white/10 mt-auto">
+                {/* Footer de Tarjeta (Precio y Botón) - Fuera del scroll, siempre visible al estar activo */}
+                <div className={`transition-all duration-[800ms] ease-[cubic-bezier(0.25,1,0.5,1)] ${isActive ? 'opacity-100 max-h-24 border-t border-white/10 pt-3 mt-auto' : 'opacity-0 max-h-0 overflow-hidden mt-0 pt-0'}`}>
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                     <div>
                       <div className="text-[9px] font-bold text-gray-400 mb-0.5 tracking-widest uppercase">Inversión</div>
                       <div className="text-lg lg:text-2xl font-black text-white drop-shadow-md whitespace-nowrap">
@@ -264,7 +282,7 @@ const AgentesConsultores = () => {
                       className={`w-full sm:w-auto px-4 py-2 lg:py-2 rounded-lg font-bold text-[10px] lg:text-[11px] uppercase tracking-wider text-white shadow-[0_5px_15px_rgba(0,0,0,0.4)] hover:scale-105 transition-transform bg-gradient-to-r ${consultor.color} border border-white/20 whitespace-nowrap`}
                       onClick={(e) => {
                         e.stopPropagation();
-                        window.open('https://api.whatsapp.com/send/?phone=525553315526&text&type=phone_number&app_absent=0','_blank','noopener,noreferrer');
+                        window.open('https://calendly.com/mayiainteligencia/consulta-mayia','_blank','noopener,noreferrer');
                       }}
                     >
                       Implementar

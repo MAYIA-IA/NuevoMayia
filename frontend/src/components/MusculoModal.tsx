@@ -314,7 +314,7 @@ const MusculoModal: React.FC<MusculoModalProps> = ({ isOpen, onClose, musculo })
             </div>
 
             <button
-              onClick={() => window.open('https://api.whatsapp.com/send/?phone=525553315526', '_blank')}
+              onClick={() => window.open('https://calendly.com/mayiainteligencia/consulta-mayia', '_blank')}
               style={{
                 marginTop: '32px',
                 width: '100%',

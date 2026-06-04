@@ -1,7 +1,15 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const IAPorSector = () => {
   const [activeSector, setActiveSector] = useState<number>(1);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
 
   const sectoresDetallados = [
     {
@@ -132,16 +140,17 @@ const IAPorSector = () => {
         </div>
 
         {/* Galería de Paneles Expansivos (Flex Cards) */}
-        <div className="w-full flex flex-col md:flex-row h-[70vh] min-h-[500px] gap-2 rounded-3xl overflow-hidden shadow-2xl bg-gray-900 border border-gray-800">
+        <div className="w-full flex flex-col md:flex-row md:h-[70vh] md:min-h-[500px] h-auto gap-2 rounded-3xl overflow-hidden shadow-2xl bg-gray-900 border border-gray-800">
           {sectoresDetallados.map((sector) => {
             const isActive = activeSector === sector.id;
             return (
               <div 
                 key={sector.id}
-                onMouseEnter={() => setActiveSector(sector.id)}
+                onMouseEnter={() => !isMobile && setActiveSector(sector.id)}
                 onClick={() => setActiveSector(sector.id)}
-                className="relative group cursor-pointer overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] flex-shrink-0 md:flex-shrink"
-                style={{ flex: isActive ? 6 : 1 }}
+                className={`relative group cursor-pointer overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] flex-shrink-0 md:flex-shrink md:h-full
+                  ${isActive ? 'h-[340px] md:flex-[6]' : 'h-[64px] md:flex-1'}
+                `}
               >
                 {/* Imagen de Fondo */}
                 <img 
@@ -155,7 +164,7 @@ const IAPorSector = () => {
                 
                 {/* Contenido INACTIVO (Texto Rotado en Desktop, Normal en Mobile) */}
                 <div className={`absolute inset-0 flex flex-col items-center justify-center transition-opacity duration-500 delay-100 ${isActive ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
-                  <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center mb-4 md:mb-8 backdrop-blur-md">
+                  <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center mb-4 md:mb-8 backdrop-blur-md hidden md:flex">
                      <svg className="w-4 h-4 text-white/70" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" /></svg>
                   </div>
                   <h3 className="text-white font-bold tracking-widest uppercase md:-rotate-90 whitespace-nowrap text-xs md:text-sm opacity-80 group-hover:opacity-100 transition-opacity">
@@ -190,7 +199,7 @@ const IAPorSector = () => {
                   </ul>
 
                   {/* Botón CTA */}
-                  <button onClick={() => window.open('https://api.whatsapp.com/send/?phone=525553315526&text&type=phone_number&app_absent=0','_blank','noopener,noreferrer')} className={`w-fit bg-white text-gray-900 hover:bg-gray-100 font-bold py-3 px-8 rounded-xl transition-all duration-300 hover:scale-105 shadow-xl flex items-center gap-2 group/btn`}>
+                  <button onClick={() => window.open('https://calendly.com/mayiainteligencia/consulta-mayia','_blank','noopener,noreferrer')} className={`w-fit bg-white text-gray-900 hover:bg-gray-100 font-bold py-3 px-8 rounded-xl transition-all duration-300 hover:scale-105 shadow-xl flex items-center gap-2 group/btn`}>
                     Agendar Demo para {sector.category}
                     <svg className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                   </button>

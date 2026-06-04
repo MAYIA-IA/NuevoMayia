@@ -51,30 +51,30 @@ const WhatsappIcon = (props: any) => (
 const CONTACTOS = [
   {
     id: 'whatsapp',
-    href: 'https://api.whatsapp.com/send/?phone=525553315526',
+    href: 'https://api.whatsapp.com/send/?phone=525651336439',
     icon: WhatsappIcon,
     label: 'WhatsApp',
-    tooltip: '+52 55 5331 5526',
+    tooltip: '+52 56 5133 6439',
     bg: '#25D366',
     hoverBg: '#1ebe5d',
     pulse: true,
   },
   {
     id: 'email',
-    href: 'mailto:contacto@mayia.mx',
+    href: 'mailto:admin@mayia.mx',
     icon: Mail,
     label: 'Email',
-    tooltip: 'contacto@mayia.mx',
+    tooltip: 'admin@mayia.mx',
     bg: '#0284c7',
     hoverBg: '#0369a1',
     pulse: false,
   },
   {
     id: 'phone',
-    href: 'tel:+525553315526',
+    href: 'tel:+525651336439',
     icon: Phone,
     label: 'Llamar',
-    tooltip: '+52 55 5331 5526',
+    tooltip: '+52 56 5133 6439',
     bg: '#7c3aed',
     hoverBg: '#6d28d9',
     pulse: false,
@@ -388,8 +388,8 @@ export const Header: React.FC<HeaderProps> = ({ title: _title }) => {
             </span>
           </div>
 
-          {/* Notificaciones */}
-          <div ref={notifRef} style={{ position: 'relative' }}>
+          {/* Notificaciones (Ocultas por ahora) */}
+          <div ref={notifRef} style={{ position: 'relative', display: 'none' }}>
             <button
               onClick={() => setNotificacionesAbiertas(!notificacionesAbiertas)}
               style={{ ...iconBtnStyle('rgba(0,0,0,0.3)'), border: '1px solid rgba(255,255,255,0.15)' }}

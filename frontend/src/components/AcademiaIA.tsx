@@ -4,7 +4,7 @@ import { cursos } from "../data/cursosAcademia";
 import type { Curso } from "../data/cursosAcademia";
 import academiaLogo from "../assets/logosNativos/academia-horizontal.png";
 
-const WA_URL = 'https://api.whatsapp.com/send/?phone=525553315526&text&type=phone_number&app_absent=0';
+const WA_URL = 'https://calendly.com/mayiainteligencia/consulta-mayia';
 const openWA = () => window.open(WA_URL, '_blank', 'noopener,noreferrer');
 
 const AcademiaIA = () => {
@@ -37,7 +37,7 @@ const AcademiaIA = () => {
         className={`bg-white rounded-xl p-4 shadow-sm border transition-all duration-300 flex flex-col group cursor-pointer relative overflow-hidden w-full shrink-0 min-h-[90px]
           ${isExpanded ? 'border-lime-300 ring-2 ring-lime-400/20 shadow-md' : 'border-gray-100 hover:shadow-lg hover:border-gray-200'}
         `}
-        onClick={() => !isExpanded && setExpandedCourseId(curso.id)}
+        onClick={() => setExpandedCourseId(isExpanded ? null : curso.id)}
       >
         <div className={`absolute top-0 right-0 w-32 h-full bg-gradient-to-l ${curso.gradient} opacity-5 group-hover:opacity-10 transition-opacity`}></div>
         

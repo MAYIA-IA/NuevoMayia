@@ -136,22 +136,22 @@ const SalaPrensa = () => {
                     <div className="text-sm text-gray-500">Equipo de Comunicación MAYiA</div>
                   </div>
                 </div>
-                <div className="flex items-center gap-4 group cursor-pointer">
+                <a href="mailto:admin@mayia.mx" className="flex items-center gap-4 group cursor-pointer">
                   <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center shrink-0 group-hover:bg-cyan-50 group-hover:text-cyan-500 transition-colors">
                     <Mail size={18} />
                   </div>
                   <div className="text-sm font-semibold text-gray-700 group-hover:text-cyan-600 transition-colors">
-                    prensa@mayia.ai
+                    admin@mayia.mx
                   </div>
-                </div>
-                <div className="flex items-center gap-4 group cursor-pointer">
+                </a>
+                <a href="tel:+525651336439" className="flex items-center gap-4 group cursor-pointer">
                   <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center shrink-0 group-hover:bg-lime-50 group-hover:text-lime-500 transition-colors">
                     <Phone size={18} />
                   </div>
                   <div className="text-sm font-semibold text-gray-700 group-hover:text-lime-600 transition-colors">
-                    +52 55 5331 5526
+                    +52 56 5133 6439
                   </div>
-                </div>
+                </a>
               </div>
             </div>
 

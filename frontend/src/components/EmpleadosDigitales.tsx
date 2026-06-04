@@ -74,7 +74,7 @@ const EmpleadosDigitales = () => {
   ];
 
   return (
-    <div id="empleados-digitales" className="w-full bg-white py-6 lg:py-10 relative overflow-hidden flex flex-col justify-center h-[80vh] min-h-[500px]">
+    <div id="empleados-digitales" className="w-full bg-white py-6 lg:py-10 relative overflow-hidden flex flex-col justify-center lg:h-[80vh] lg:min-h-[500px] h-auto min-h-0">
       {/* Efectos de fondo mejorados */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:40px_40px]"></div>
@@ -122,7 +122,7 @@ const EmpleadosDigitales = () => {
 
             {/* CTA Section Compacto */}
             <div className="flex flex-row gap-3 items-center mt-2">
-              <button onClick={() => window.open('https://api.whatsapp.com/send/?phone=525553315526&text&type=phone_number&app_absent=0','_blank','noopener,noreferrer')} className="bg-gradient-to-r from-lime-400 to-lime-600 hover:from-lime-500 hover:to-lime-700 text-gray-900 font-bold py-2 px-5 rounded-lg text-xs transition-all duration-300 shadow-md hover:scale-105 flex items-center gap-1">
+              <button onClick={() => window.open('https://calendly.com/mayiainteligencia/consulta-mayia','_blank','noopener,noreferrer')} className="bg-gradient-to-r from-lime-400 to-lime-600 hover:from-lime-500 hover:to-lime-700 text-gray-900 font-bold py-2 px-5 rounded-lg text-xs transition-all duration-300 shadow-md hover:scale-105 flex items-center gap-1">
                 Solicitar demo
                 <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />

@@ -46,7 +46,7 @@ export default function HackatonMarketplace() {
 
   return (
     <>
-      <section id="hackaton" className="w-full bg-white relative overflow-hidden flex flex-col h-[80vh] min-h-[580px] py-4 lg:py-6">
+      <section id="hackaton" className="w-full bg-white relative overflow-hidden flex flex-col lg:h-[80vh] lg:min-h-[580px] h-auto py-4 lg:py-6">
         <div className="container m-auto max-w-7xl px-4 lg:px-8 relative z-10">
         <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-10">
           
@@ -81,7 +81,7 @@ export default function HackatonMarketplace() {
                 </div>
                 <h3 className="text-sm sm:text-base font-bold text-white mb-1.5 relative z-10">¿Tienes una solución de IA para empresas?</h3>
                 <p className="text-[10px] sm:text-xs text-gray-400 mb-3 max-w-[250px] relative z-10">Integra tu proyecto al ecosistema y llega a miles de corporativos.</p>
-                <a href="https://api.whatsapp.com/send/?phone=525553315526" target="_blank" rel="noopener noreferrer"
+                <a href="https://calendly.com/mayiainteligencia/consulta-mayia" target="_blank" rel="noopener noreferrer"
                    className="inline-flex items-center gap-1.5 bg-gradient-to-r from-lime-400 to-lime-600 text-gray-900 font-bold text-[10px] sm:text-xs px-4 py-2 rounded-lg hover:scale-105 transition-transform relative z-10 shadow-lg">
                   Unirse al Marketplace
                   <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
@@ -138,7 +138,7 @@ export default function HackatonMarketplace() {
                         </span>
                       </div>
 
-                      <div className="transform translate-y-6 lg:translate-y-8 transition-transform duration-500 ease-[cubic-bezier(0.2,0.8,0.2,1)] group-hover:translate-y-0">
+                      <div className="transform translate-y-0 lg:translate-y-8 transition-transform duration-500 ease-[cubic-bezier(0.2,0.8,0.2,1)] lg:group-hover:translate-y-0">
                         <p className="text-[9px] sm:text-[10px] font-bold mb-1 tracking-wider uppercase" style={{ color: p.color }}>{p.categoria}</p>
                         <h3 className="text-xl lg:text-2xl font-extrabold text-white mb-2 leading-tight drop-shadow-md">{p.titulo}</h3>
                         
@@ -150,7 +150,7 @@ export default function HackatonMarketplace() {
                         </div>
 
                         {/* Desc & extra (shown on hover) */}
-                        <div className="max-h-0 opacity-0 overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0.8,0.2,1)] group-hover:max-h-48 group-hover:opacity-100 group-hover:mt-2">
+                        <div className="max-h-48 opacity-100 mt-2 lg:max-h-0 lg:opacity-0 overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0.8,0.2,1)] lg:group-hover:max-h-48 lg:group-hover:opacity-100 lg:group-hover:mt-2">
                           <p className="text-[9px] sm:text-[10px] text-gray-300 leading-snug mb-3 line-clamp-2">{p.descripcion}</p>
                           
                           <div className="flex justify-between items-center pt-2 border-t border-white/10">

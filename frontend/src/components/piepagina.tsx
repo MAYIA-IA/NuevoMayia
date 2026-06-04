@@ -6,8 +6,7 @@ const Footer = () => {
 
   const plataformaLinks = [
     { label: 'Centro de Control', href: '#dashboard' },
-    { label: 'Ecosistema MAYiA', href: '#ecosistema' },
-    { label: 'Partners Tecnológicos', href: '#partners' },
+    { label: 'Hubs Digitales', href: '#hubs-digitales' },
     { label: 'Hackatón Marketplace', href: '#hackaton' },
   ];
 

@@ -13,7 +13,7 @@ import logoSrc from '../assets/PildorasIA/Imagen6.png';
 import PildoraViewer from './PildoraViewer';
 import AgentesConsultores from './AgentesConsultores';
 
-const WA_URL = 'https://api.whatsapp.com/send/?phone=525553315526&text&type=phone_number&app_absent=0';
+const WA_URL = 'https://calendly.com/mayiainteligencia/consulta-mayia';
 const openWA = () => window.open(WA_URL, '_blank', 'noopener,noreferrer');
 
 const THUMBNAILS: Record<number, string> = {
@@ -65,14 +65,33 @@ const COLLAGE_SIZES: Record<number, string> = {
   12: 'w-full h-24 flex-grow',
 };
 
-const PildoraExpandible = memo(({ pildora, isHovered, isOtherHovered, onHover, onClick }: any) => {
-  const baseSize = COLLAGE_SIZES[pildora.id] || 'w-[calc(50%-6px)] h-32 flex-grow';
+const PildoraExpandible = memo(({ pildora, isHovered, isOtherHovered, onHover, onClick, isMobile }: any) => {
+  const baseSize = isMobile ? 'w-[calc(50%-4px)] h-28 flex-grow' : (COLLAGE_SIZES[pildora.id] || 'w-[calc(50%-6px)] h-32 flex-grow');
 
   return (
     <div
-      onMouseEnter={() => onHover(pildora.id)}
-      onMouseLeave={() => onHover(null)}
-      onClick={() => isHovered && onClick(pildora.id)}
+      onMouseEnter={() => {
+        const isMobileDevice = window.innerWidth < 1024;
+        if (!isMobileDevice) onHover(pildora.id);
+      }}
+      onMouseLeave={() => {
+        const isMobileDevice = window.innerWidth < 1024;
+        if (!isMobileDevice) onHover(null);
+      }}
+      onClick={() => {
+        const isMobileDevice = window.innerWidth < 1024;
+        if (isMobileDevice) {
+          if (isHovered) {
+            onHover(null); // Collapse
+          } else {
+            onHover(pildora.id); // Expand
+          }
+        } else {
+          if (isHovered) {
+            onClick(pildora.id); // Open video modal
+          }
+        }
+      }}
       className={`group relative transition-all duration-[800ms] ease-[cubic-bezier(0.4,0,0.2,1)] overflow-hidden cursor-pointer shrink-0 box-border
         ${isHovered 
           ? 'w-full h-[450px] lg:h-[520px] rounded-[32px] shadow-[0_0_50px_rgba(163,230,53,0.3)] z-50 order-first lg:order-none border-2 border-lime-400/50' 
@@ -105,7 +124,7 @@ const PildoraExpandible = memo(({ pildora, isHovered, isOtherHovered, onHover, o
       {/* Contenido Píldora Abierta (Revelado detrás de las puertas) */}
       <div className={`absolute inset-0 z-10 bg-black transition-opacity duration-[800ms] ${isHovered ? 'opacity-100 delay-[200ms]' : 'opacity-0'}`}>
         <img src={THUMBNAILS[pildora.id]} className="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-overlay" />
-        {isHovered && (
+        {isHovered && !isMobile && (
            <video src={pildora.video} autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-screen" />
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-[#05050A] via-[#05050A]/70 to-transparent" />
@@ -116,7 +135,14 @@ const PildoraExpandible = memo(({ pildora, isHovered, isOtherHovered, onHover, o
             {pildora.category}
           </div>
           
-          <button className="w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center text-gray-900 shadow-[0_0_50px_rgba(255,255,255,0.3)] hover:scale-110 transition-transform mb-4 lg:mb-6 animate-pulse" style={{ backgroundColor: pildora.accent, border: '2px solid rgba(255,255,255,0.5)' }}>
+          <button 
+            onClick={(e) => {
+              e.stopPropagation();
+              onClick(pildora.id); // Open video modal on play button click
+            }}
+            className="w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center text-gray-900 shadow-[0_0_50px_rgba(255,255,255,0.3)] hover:scale-110 transition-transform mb-4 lg:mb-6 animate-pulse" 
+            style={{ backgroundColor: pildora.accent, border: '2px solid rgba(255,255,255,0.5)' }}
+          >
             <svg className="w-8 h-8 sm:w-10 sm:h-10 ml-1" fill="currentColor" viewBox="0 0 20 20">
               <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
             </svg>
@@ -140,6 +166,14 @@ const PildorasIA = () => {
   const [selectedVideo, setSelectedVideo] = useState<number | null>(null);
   const [activeFilter, setActiveFilter] = useState('Todas');
   const modalVideoRef = useRef<HTMLVideoElement | null>(null);
+  const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' ? window.innerWidth < 1024 : false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 1024);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
 
   const filteredPildoras = activeFilter === 'Todas'
     ? PILDORAS_DATA
@@ -162,7 +196,7 @@ const PildorasIA = () => {
 
   return (
     <>
-      <section id="pildoras-ia" className="w-full relative overflow-hidden flex flex-col h-[80vh] min-h-[600px] py-4 lg:py-6" style={{ background: 'linear-gradient(160deg, #ffffff 0%, #f8fafc 40%, #f0fdf4 100%)', fontFamily: "'Sora', sans-serif" }}>
+      <section id="pildoras-ia" className="w-full relative overflow-hidden flex flex-col lg:h-[80vh] lg:min-h-[600px] h-auto py-10" style={{ background: 'linear-gradient(160deg, #ffffff 0%, #f8fafc 40%, #f0fdf4 100%)', fontFamily: "'Sora', sans-serif" }}>
         <style>{`
           @import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap');
           .dot-grid { background-image: radial-gradient(circle, rgba(163,230,53,0.25) 1px, transparent 1px); background-size: 32px 32px; }
@@ -234,6 +268,7 @@ const PildorasIA = () => {
                   isOtherHovered={hoveredId !== null && hoveredId !== p.id} 
                   onHover={setHoveredId} 
                   onClick={setSelectedVideo} 
+                  isMobile={isMobile}
                 />
               ))}
             </div>
