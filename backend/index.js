@@ -14,7 +14,8 @@ const PORT = process.env.PORT || 3001;
 const allowedOrigins = [
   'http://localhost:5173',
   'http://localhost:5174',
-  process.env.FRONTEND_URL,
+  // FRONTEND_URL puede traer varios dominios separados por coma
+  ...(process.env.FRONTEND_URL?.split(',').map((o) => o.trim()) || []),
 ].filter(Boolean);
 
 app.use(
