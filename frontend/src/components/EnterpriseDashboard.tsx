@@ -254,7 +254,7 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo }: { onO
                 <div style={{ width: 64, height: 64, borderRadius: 12, background: '#0f172a', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <Database size={28} color="#38bdf8" />
                 </div>
-                <h3 style={{ fontSize: 20, fontWeight: 600, color: '#111827', margin: 0, lineHeight: 1.2 }}>Fábrica de IA,<br/>IA Privada</h3>
+                <h3 style={{ fontSize: 20, fontWeight: 600, color: '#111827', margin: 0, lineHeight: 1.2 }}>Fábrica para tu IA Privada</h3>
               </div>
               <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
                 <div style={{ flex: 1, background: '#f0f9ff', borderRadius: 8, padding: '12px 8px', textAlign: 'center' }}>
@@ -267,7 +267,7 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo }: { onO
                 </div>
                 <div style={{ flex: 1, background: '#fff7ed', borderRadius: 8, padding: '12px 8px', textAlign: 'center' }}>
                   <div style={{ fontSize: 16, fontWeight: 700, color: '#f59e0b', marginTop: 4 }}>99.98%</div>
-                  <div style={{ fontSize: 9, fontWeight: 700, color: '#fcd34d', textTransform: 'uppercase' }}>TIER III SLA</div>
+                  <div style={{ fontSize: 9, fontWeight: 700, color: '#fcd34d', textTransform: 'uppercase' }}>TIER III</div>
                 </div>
               </div>
               <p style={{ fontSize: 14, color: '#374151', lineHeight: 1.5, margin: '0 0 20px', fontWeight: 500 }}>

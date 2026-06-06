@@ -26,7 +26,7 @@ const MODULES_TOP: HubModule[] = [
 ];
 
 const MODULES_ABOUT: HubModule[] = [
-  { id: 'quienes', icon: Building2, label: 'Quiénes Somos', desc: 'El primer centro de inteligencia artificial 100% mexicano. Infraestructura, talento y visión para la soberanía digital de México.', color: '#A4D955' },
+  { id: 'quienes', icon: Building2, label: 'Quiénes Somos', desc: 'Fábrica mexicana de IA aplicada. Ayudamos a empresas e industrias a implementar IA de forma segura, estratégica, privada y medible.', color: '#A4D955' },
   { id: 'que-hacemos', icon: Cpu, label: 'Qué Hacemos', desc: 'Desarrollamos, implementamos y operamos soluciones de IA para empresas, gobierno e industria en los 32 estados del país.', color: '#60a5fa' },
   { id: 'conoce-mas', icon: HelpCircle, label: 'Conoce Más', desc: 'Descubre nuestro ecosistema de infraestructura, academia, consultoría y desarrollo de inteligencia artificial enterprise.', color: '#a78bfa' },
 ];
@@ -272,7 +272,7 @@ export default function SeoHub({ activeSection, onSectionChange, onOpenSocialMod
               textTransform: 'uppercase', color: '#A4D955',
               fontFamily: "'Inter', system-ui, sans-serif",
             }}>
-              Hub SEO · MAYIA
+              Unidad de inteligencia · MAYIA
             </span>
           </div>
           <p style={{
