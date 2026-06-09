@@ -3,6 +3,7 @@ import {
   Cpu, Building2, HelpCircle,
   Network, Thermometer,
   ExternalLink, ChevronRight,
+  BookOpen,
 } from 'lucide-react';
 import { brandingConfig } from '../config/branding';
 const { colores } = brandingConfig;
@@ -29,6 +30,7 @@ const MODULES_ABOUT: HubModule[] = [
   { id: 'quienes', icon: Building2, label: 'Quiénes Somos', desc: 'Fábrica mexicana de IA aplicada. Ayudamos a empresas e industrias a implementar IA de forma segura, estratégica, privada y medible.', color: '#A4D955' },
   { id: 'que-hacemos', icon: Cpu, label: 'Qué Hacemos', desc: 'Desarrollamos, implementamos y operamos soluciones de IA para empresas, gobierno e industria en los 32 estados del país.', color: '#60a5fa' },
   { id: 'conoce-mas', icon: HelpCircle, label: 'Conoce Más', desc: 'Descubre nuestro ecosistema de infraestructura, academia, consultoría y desarrollo de inteligencia artificial enterprise.', color: '#a78bfa' },
+  { id: 'origen-marca', icon: BookOpen, label: 'El origen de nuestra marca', desc: 'Descubre la raíz histórica detrás de MAYIA: la unión de la inteligencia ancestral maya y la IA.', color: '#A4D955' },
 ];
 
 const MODULES_COMMUNITY: HubModule[] = [
@@ -123,7 +125,7 @@ export interface SeoHubProps {
   onOpenSocialModal?: (id: string, yPos: number) => void;
 }
 
-const SOCIAL_IDS = ['noticias-rt', 'blog', 'sala-prensa', 'embajadores', 'red-ia', 'temp-ia', 'quienes'];
+const SOCIAL_IDS = ['noticias-rt', 'blog', 'sala-prensa', 'embajadores', 'red-ia', 'temp-ia', 'quienes', 'origen-marca'];
 
 function HubCard({ 
   mod, 
@@ -144,7 +146,10 @@ function HubCard({
 
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    if (isSocial && onOpenSocialModal) {
+    if (mod.id === 'conoce-mas' && onOpenSocialModal) {
+      const rect = e.currentTarget.getBoundingClientRect();
+      onOpenSocialModal('fabrica-ia', rect.top + rect.height / 2);
+    } else if (isSocial && onOpenSocialModal) {
       const rect = e.currentTarget.getBoundingClientRect();
       onOpenSocialModal(mod.id, rect.top + rect.height / 2);
     } else if (targetSection && onSectionChange) {
