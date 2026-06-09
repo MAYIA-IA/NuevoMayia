@@ -217,13 +217,9 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo }: { onOpenMap?: () => void;
         </div>
       </div>
 
-      {/* Description & 3 buttons box (Blue bordered) */}
+      {/* Description & 3 buttons box (Clean borderless) */}
       <div style={{
         margin: '0 20px 16px',
-        padding: '16px',
-        borderRadius: 18,
-        border: '2px solid rgba(72, 129, 235, 0.6)',
-        background: 'rgba(72, 129, 235, 0.02)',
         display: 'flex',
         flexDirection: 'column',
         gap: 12
@@ -329,13 +325,11 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo }: { onOpenMap?: () => void;
         </div>
       </div>
 
-      {/* Footer Container (Green bordered) */}
+      {/* Footer Container (Clean borderless with divider) */}
       <div style={{
         margin: '0 20px 20px',
-        padding: '12px 16px',
-        borderRadius: 16,
-        border: '2px solid rgba(34, 197, 94, 0.5)',
-        background: 'rgba(34, 197, 94, 0.02)',
+        padding: '16px 0 0',
+        borderTop: '1px solid #E5E7EB',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -1966,17 +1960,11 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
               bg="rgba(220,38,38,0.15)" 
               title="Desarrollo IA Estatal" 
               desc="Modernizamos servicios públicos, superamos la atención ciudadana y toma decisiones en tiempo real basadas en datos abiertos con soluciones de IA diseñadas para instituciones gubernamentales." 
-              videoSrc="/assets/images/productos/ParqueSeguro.mp4"
               stats={[
                 { value: "100k+", label: "Ciudadanos Activos" },
                 { value: "24/7", label: "Servicios Digitales" },
                 { value: "Seguros", label: "Datos de Gobierno" }
               ]}
-              videoOverlay={
-                <div style={{ position: 'absolute', top: 10, left: 10, background: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(4px)', padding: '4px 10px', borderRadius: 20, fontSize: 10, fontWeight: 700, color: '#dc2626', border: '1px solid rgba(220,38,38,0.2)' }}>
-                  🏛 GovTech Platform
-                </div>
-              }
             />
           </Wrapper>
 
@@ -2008,17 +1996,11 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
               bg="rgba(22,163,74,0.15)" 
               title="Desarrollo IA en Computer Vision" 
               desc="Haz que tus sistemas vean, detecten y actúen. Implementamos visión artificial para inspección, seguridad, conteo, reconocimiento y automatización visual en tiempo real." 
-              videoSrc="/assets/images/productos/camara2.mp4"
               stats={[
                 { value: "30 FPS", label: "Procesamiento Live" },
                 { value: "99.5%", label: "Precisión Visual" },
                 { value: "Edge/Cloud", label: "Despliegue" }
               ]}
-              videoOverlay={
-                <div style={{ position: 'absolute', top: 10, left: 10, background: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(4px)', padding: '4px 10px', borderRadius: 20, fontSize: 10, fontWeight: 700, color: '#16a34a', border: '1px solid rgba(22,163,74,0.2)' }}>
-                  👁 Vision Stream Analyzer
-                </div>
-              }
             />
           </Wrapper>
 
