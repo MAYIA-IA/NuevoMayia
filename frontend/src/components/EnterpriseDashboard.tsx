@@ -10,6 +10,18 @@ import academiaLogo from '../assets/logosNativos/academia-horizontal.png';
 import flaiLogo from '../assets/logosNativos/1. NUBE_FINAL_FLAI (1).png';
 import mayiaLakeLogo from '../assets/logosNativos/MAYiA_LAKE.jpeg';
 
+const hexToRgba = (hex: string, alpha: number) => {
+  if (!hex || typeof hex !== 'string') return `rgba(164, 217, 85, ${alpha})`;
+  const cleanHex = hex.replace('#', '');
+  if (cleanHex.length === 6) {
+    const r = parseInt(cleanHex.substring(0, 2), 16);
+    const g = parseInt(cleanHex.substring(2, 4), 16);
+    const b = parseInt(cleanHex.substring(4, 6), 16);
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+  }
+  return hex;
+};
+
 const CATEGORIES = ['Infraestructura', 'Desarrollo', 'Modelos', 'Agentes', 'Operación', 'Monitoreo', 'Capacitación'];// --- SUB-COMPONENTE: EdgenetCard ("Fábrica para tu IA Privada") ---
 function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOpenMap?: () => void; onOpenFabricaInfo?: () => void; onOpenDiagnostico?: () => void }) {
   const [isHovered, setIsHovered] = useState(false);
@@ -43,10 +55,14 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOp
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => { setIsHovered(false); setMenuOpen(false); }}
       style={{
-        background: '#FFFFFF', 
         borderRadius: 24, 
         border: `2px solid ${isHovered ? '#4881EB' : '#E5E7EB'}`,
-        boxShadow: isHovered ? '0 20px 40px rgba(72, 129, 235, 0.25), 0 0 20px rgba(72, 129, 235, 0.15)' : 'none',
+        boxShadow: isHovered 
+          ? '0 20px 40px -8px rgba(72, 129, 235, 0.35), 0 0 24px 2px rgba(72, 129, 235, 0.20), inset 0 0 24px 2px rgba(72, 129, 235, 0.18)' 
+          : 'none',
+        background: isHovered 
+          ? 'radial-gradient(120% 120% at 50% 50%, rgba(255, 255, 255, 0) 30%, rgba(72, 129, 235, 0.08) 100%)' 
+          : '#FFFFFF',
         display: 'flex', 
         flexDirection: 'column', 
         height: '100%', 
@@ -415,10 +431,14 @@ function FlaiCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => { setIsHovered(false); setMenuOpen(false); }}
       style={{
-        background: '#FFFFFF', 
         borderRadius: 24, 
         border: `2px solid ${isHovered ? '#DC2626' : '#E5E7EB'}`,
-        boxShadow: isHovered ? '0 20px 40px rgba(220, 38, 38, 0.25), 0 0 20px rgba(220, 38, 38, 0.15)' : 'none',
+        boxShadow: isHovered 
+          ? '0 20px 40px -8px rgba(220, 38, 38, 0.35), 0 0 24px 2px rgba(220, 38, 38, 0.20), inset 0 0 24px 2px rgba(220, 38, 38, 0.18)' 
+          : 'none',
+        background: isHovered 
+          ? 'radial-gradient(120% 120% at 50% 50%, rgba(255, 255, 255, 0) 30%, rgba(220, 38, 38, 0.08) 100%)' 
+          : '#FFFFFF',
         display: 'flex', 
         flexDirection: 'column', 
         height: '100%', 
@@ -593,10 +613,14 @@ function SocCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => { setIsHovered(false); setMenuOpen(false); }}
       style={{ 
-        background: '#FFFFFF', 
         borderRadius: 24, 
         border: `2px solid ${isHovered ? '#4881EB' : '#E5E7EB'}`, 
-        boxShadow: isHovered ? '0 20px 40px rgba(72, 129, 235, 0.25), 0 0 20px rgba(72, 129, 235, 0.15)' : 'none', 
+        boxShadow: isHovered 
+          ? '0 20px 40px -8px rgba(72, 129, 235, 0.35), 0 0 24px 2px rgba(72, 129, 235, 0.20), inset 0 0 24px 2px rgba(72, 129, 235, 0.18)' 
+          : 'none', 
+        background: isHovered 
+          ? 'radial-gradient(120% 120% at 50% 50%, rgba(255, 255, 255, 0) 30%, rgba(72, 129, 235, 0.08) 100%)' 
+          : '#FFFFFF',
         display: 'flex', 
         flexDirection: 'column', 
         height: '100%', 
@@ -805,10 +829,14 @@ function MayiaCard() {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => { setIsHovered(false); setMenuOpen(false); }}
       style={{
-        background: '#FFFFFF', 
         borderRadius: 24, 
         border: `2px solid ${isHovered ? '#A4D955' : '#E5E7EB'}`,
-        boxShadow: isHovered ? '0 20px 40px rgba(164, 217, 85, 0.25), 0 0 20px rgba(164, 217, 85, 0.15)' : 'none',
+        boxShadow: isHovered 
+          ? '0 20px 40px -8px rgba(164, 217, 85, 0.35), 0 0 24px 2px rgba(164, 217, 85, 0.20), inset 0 0 24px 2px rgba(164, 217, 85, 0.18)' 
+          : 'none',
+        background: isHovered 
+          ? 'radial-gradient(120% 120% at 50% 50%, rgba(255, 255, 255, 0) 30%, rgba(164, 217, 85, 0.08) 100%)' 
+          : '#FFFFFF',
         display: 'flex', 
         flexDirection: 'column', 
         height: '100%', 
@@ -1087,11 +1115,15 @@ function StandardCard({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       style={{ 
-        background: '#FFFFFF', 
         borderRadius: 24, 
         padding: 24, 
         border: `2px solid ${isHovered ? color : '#E5E7EB'}`, 
-        boxShadow: isHovered ? `0 20px 40px ${color}25, 0 0 20px ${color}15` : 'none', 
+        boxShadow: isHovered 
+          ? `0 20px 40px -8px ${hexToRgba(color, 0.35)}, 0 0 24px 2px ${hexToRgba(color, 0.20)}, inset 0 0 24px 2px ${hexToRgba(color, 0.18)}` 
+          : 'none', 
+        background: isHovered 
+          ? `radial-gradient(120% 120% at 50% 50%, rgba(255, 255, 255, 0) 30%, ${hexToRgba(color, 0.08)} 100%)` 
+          : '#FFFFFF',
         display: 'flex', 
         flexDirection: 'column', 
         height: '100%',
@@ -1272,11 +1304,15 @@ function AcademiaCard() {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => { setIsHovered(false); setMenuOpen(false); }}
       style={{ 
-        background: '#FFFFFF', 
         borderRadius: 24, 
         padding: 24, 
         border: `2px solid ${isHovered ? '#A4D955' : '#E5E7EB'}`, 
-        boxShadow: isHovered ? '0 20px 40px rgba(164, 217, 85, 0.25), 0 0 20px rgba(164, 217, 85, 0.15)' : 'none', 
+        boxShadow: isHovered 
+          ? '0 20px 40px -8px rgba(164, 217, 85, 0.35), 0 0 24px 2px rgba(164, 217, 85, 0.20), inset 0 0 24px 2px rgba(164, 217, 85, 0.18)' 
+          : 'none', 
+        background: isHovered 
+          ? 'radial-gradient(120% 120% at 50% 50%, rgba(255, 255, 255, 0) 30%, rgba(164, 217, 85, 0.08) 100%)' 
+          : '#FFFFFF',
         display: 'flex', 
         flexDirection: 'column', 
         height: '100%',
