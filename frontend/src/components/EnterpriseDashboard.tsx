@@ -9,6 +9,7 @@ import logoMaia from '../assets/logosNativos/logoMaia.png';
 import academiaLogo from '../assets/logosNativos/academia-horizontal.png';
 import flaiLogo from '../assets/logosNativos/1. NUBE_FINAL_FLAI (1).png';
 import mayiaLakeLogo from '../assets/logosNativos/MAYiA_LAKE.jpeg';
+import ajoloteVideo from '../assets/AJOLOTE.mp4';
 
 const hexToRgba = (hex: string, alpha: number) => {
   if (!hex || typeof hex !== 'string') return `rgba(164, 217, 85, ${alpha})`;
@@ -908,7 +909,7 @@ function MayiaCard() {
           autoPlay loop muted playsInline preload="metadata"
           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
         >
-          <source src="/assets/images/productos/biExp.mp4" type="video/mp4" />
+          <source src={ajoloteVideo} type="video/mp4" />
         </video>
       </div>
 
