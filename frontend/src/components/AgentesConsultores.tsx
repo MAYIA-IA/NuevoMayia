@@ -270,19 +270,17 @@ const AgentesConsultores = () => {
 
                 {/* Footer de Tarjeta (Precio y Botón) - Fuera del scroll, siempre visible al estar activo */}
                 <div className={`transition-all duration-[800ms] ease-[cubic-bezier(0.25,1,0.5,1)] ${isActive ? 'opacity-100 max-h-24 border-t border-white/10 pt-3 mt-auto' : 'opacity-0 max-h-0 overflow-hidden mt-0 pt-0'}`}>
-                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-                    <div>
-                      <div className="text-[9px] font-bold text-gray-400 mb-0.5 tracking-widest uppercase">Inversión</div>
-                      <div className="text-lg lg:text-2xl font-black text-white drop-shadow-md whitespace-nowrap">
-                        $98,000 <span className="text-[10px] lg:text-xs font-medium text-gray-400">MXN</span>
-                      </div>
-                    </div>
-
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-end gap-3">
                     <button
                       className={`w-full sm:w-auto px-4 py-2 lg:py-2 rounded-lg font-bold text-[10px] lg:text-[11px] uppercase tracking-wider text-white shadow-[0_5px_15px_rgba(0,0,0,0.4)] hover:scale-105 transition-transform bg-gradient-to-r ${consultor.color} border border-white/20 whitespace-nowrap`}
                       onClick={(e) => {
                         e.stopPropagation();
-                        window.open('https://calendly.com/mayiainteligencia/consulta-mayia','_blank','noopener,noreferrer');
+                        const rect = e.currentTarget.getBoundingClientRect();
+                        if ((window as any).openCalendly) {
+                          (window as any).openCalendly({ x: rect.right + 12, y: rect.top - 140 });
+                        } else {
+                          window.open('https://calendly.com/mayiainteligencia/consulta-mayia','_blank','noopener,noreferrer');
+                        }
                       }}
                     >
                       Implementar

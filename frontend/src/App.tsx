@@ -13,6 +13,7 @@ import CertificacionesMarquee from './components/CertificacionesMarquee';
 import NoticiasTicker from './components/NoticiasTicker';
 import EnterpriseDashboard from './components/EnterpriseDashboard';
 import SocialPopover from './components/SocialPopover';
+import CalendarModal from './components/CalendarModal';
 
 // Componentes pesados (carga perezosa)
 const Analiticos = lazy(() => import('./components/departamentos/Analiticos').then(m => ({ default: m.Analiticos })));
@@ -23,6 +24,7 @@ const EmpleadosDigitales = lazy(() => import('./components/EmpleadosDigitales'))
 const PildorasIA = lazy(() => import('./components/PildorasIA'));
 const CiberseguridadIA = lazy(() => import('./components/CiberseguridadIA'));
 const FlaiInfoModal = lazy(() => import('./components/FlaiInfoModal'));
+const FabricaIaModal = lazy(() => import('./components/FabricaIaModal'));
 const AcademiaIA = lazy(() => import('./components/AcademiaIA'));
 const Footer = lazy(() => import('./components/piepagina'));
 const EmbajadoresMayia = lazy(() => import('./components/EmbajadoresMayia'));
@@ -60,8 +62,18 @@ function App() {
   const [activeSection, setActiveSection] = useState('dashboard');
   const [activeSocialModal, setActiveSocialModal] = useState<string | null>(null);
   const [socialModalYPos, setSocialModalYPos] = useState(0);
+  const [globalCalendarPos, setGlobalCalendarPos] = useState<{x: number, y: number} | null>(null);
   const [isMobile, setIsMobile] = useState(false);
   const { colores } = brandingConfig;
+
+  useEffect(() => {
+    (window as any).openCalendly = (rect: { x: number, y: number }) => {
+      setGlobalCalendarPos(rect);
+    };
+    return () => {
+      (window as any).openCalendly = undefined;
+    };
+  }, []);
 
   /* ── Detectar mobile ── */
   useEffect(() => {
@@ -120,6 +132,10 @@ function App() {
   const handleNavClick = (section: string) => {
     if (section === 'polos-desarrollo') {
       handleOpenSocialModal('analiticos', window.innerHeight / 2);
+      return;
+    }
+    if (section === 'fabrica-ia') {
+      handleOpenSocialModal('fabrica-ia', window.innerHeight / 2);
       return;
     }
     setActiveSection(section);
@@ -183,6 +199,7 @@ function App() {
           <EnterpriseDashboard 
             onOpenMap={() => handleOpenSocialModal('analiticos', window.innerHeight / 2)} 
             onOpenFlaiInfo={() => handleOpenSocialModal('flai-info', window.innerHeight / 2)}
+            onOpenFabricaInfo={() => handleOpenSocialModal('fabrica-ia', window.innerHeight / 2)}
           />
         </div>
         
@@ -280,10 +297,30 @@ function App() {
           {activeSocialModal === 'temp-ia' && <TermometroIAMexico />}
           {activeSocialModal === 'analiticos' && <Analiticos />}
           {activeSocialModal === 'flai-info' && <FlaiInfoModal />}
+          {activeSocialModal === 'fabrica-ia' && <FabricaIaModal />}
           {activeSocialModal === 'chat-ia' && <div style={{ height: '500px', display: 'flex', flexDirection: 'column' }}><AsistenteIAChat /></div>}
           {activeSocialModal === 'quienes' && <QuienesSomosModal />}
         </Suspense>
       </SocialPopover>
+
+      {globalCalendarPos && (
+        <div style={{
+          position: 'fixed',
+          top: 0, left: 0, right: 0, bottom: 0,
+          zIndex: 99999,
+          backgroundColor: 'rgba(0,0,0,0.2)',
+          backdropFilter: 'blur(2px)'
+        }} onClick={() => setGlobalCalendarPos(null)}>
+          <div style={{
+            position: 'absolute',
+            left: window.innerWidth < 600 ? '50%' : `${Math.min(globalCalendarPos.x, window.innerWidth - 460)}px`,
+            top: window.innerWidth < 600 ? '50%' : `${Math.max(20, Math.min(globalCalendarPos.y, window.innerHeight - 640))}px`,
+            transform: window.innerWidth < 600 ? 'translate(-50%, -50%)' : 'none',
+          }} onClick={e => e.stopPropagation()}>
+            <CalendarModal onClose={() => setGlobalCalendarPos(null)} />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

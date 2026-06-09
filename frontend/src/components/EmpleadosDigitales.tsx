@@ -122,7 +122,17 @@ const EmpleadosDigitales = () => {
 
             {/* CTA Section Compacto */}
             <div className="flex flex-row gap-3 items-center mt-2">
-              <button onClick={() => window.open('https://calendly.com/mayiainteligencia/consulta-mayia','_blank','noopener,noreferrer')} className="bg-gradient-to-r from-lime-400 to-lime-600 hover:from-lime-500 hover:to-lime-700 text-gray-900 font-bold py-2 px-5 rounded-lg text-xs transition-all duration-300 shadow-md hover:scale-105 flex items-center gap-1">
+              <button 
+                onClick={(e) => {
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  if ((window as any).openCalendly) {
+                    (window as any).openCalendly({ x: rect.right + 12, y: rect.top - 140 });
+                  } else {
+                    window.open('https://calendly.com/mayiainteligencia/consulta-mayia','_blank','noopener,noreferrer');
+                  }
+                }} 
+                className="bg-gradient-to-r from-lime-400 to-lime-600 hover:from-lime-500 hover:to-lime-700 text-gray-900 font-bold py-2 px-5 rounded-lg text-xs transition-all duration-300 shadow-md hover:scale-105 flex items-center gap-1"
+              >
                 Solicitar demo
                 <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />

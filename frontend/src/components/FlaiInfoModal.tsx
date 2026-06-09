@@ -2,8 +2,13 @@ import { ExternalLink, Calendar } from 'lucide-react';
 import flaiLogo from '../assets/logosNativos/logo-FLAI.png';
 
 export default function FlaiInfoModal() {
-  const handleAgendarCita = () => {
-    window.open("https://calendly.com/mayiainteligencia/consulta-mayia", '_blank');
+  const handleAgendarCita = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    if ((window as any).openCalendly) {
+      (window as any).openCalendly({ x: rect.right + 12, y: rect.top - 140 });
+    } else {
+      window.open("https://calendly.com/mayiainteligencia/consulta-mayia", '_blank');
+    }
   };
 
   return (

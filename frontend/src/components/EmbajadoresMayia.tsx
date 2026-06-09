@@ -135,6 +135,15 @@ export default function EmbajadoresMayia() {
           <h3 style={{ fontSize: 24, fontWeight: 800, color: '#111827', margin: '0 0 8px' }}>¿Tienes la visión para cambiar el mundo?</h3>
           <p style={{ fontSize: 14, color: '#6b7280', margin: '0 0 28px', maxWidth: 500, marginInline: 'auto' }}>Suma tu talento a nuestra red de pioneros y sé el impulso de la revolución tecnológica en México.</p>
           <a href="https://calendly.com/mayiainteligencia/consulta-mayia" target="_blank" rel="noopener noreferrer" className="emb-cta-btn"
+            onClick={(e) => {
+              e.preventDefault();
+              const rect = e.currentTarget.getBoundingClientRect();
+              if ((window as any).openCalendly) {
+                (window as any).openCalendly({ x: rect.right + 12, y: rect.top - 140 });
+              } else {
+                window.open('https://calendly.com/mayiainteligencia/consulta-mayia', '_blank');
+              }
+            }}
             style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '14px 36px', borderRadius: 14, background: 'linear-gradient(135deg,#A4D955,#65a30d)', color: '#fff', fontWeight: 800, fontSize: 15, textDecoration: 'none', transition: 'all .3s', boxShadow: '0 8px 30px rgba(164,217,85,.3)', animation: 'emb-glow 3s infinite' }}
           >
             Inicia tu Legado

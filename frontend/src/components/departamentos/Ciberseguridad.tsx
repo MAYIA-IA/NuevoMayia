@@ -14,7 +14,7 @@ export const Ciberseguridad: React.FC = () => {
   }, []);
 
   const cards = [
-    { id: 1, titulo: 'CIBER RIESGO',                descripcion: 'Consultor Digital para portafolio estratégico - $98,000',           mediaSrc: '/assets/ciberS/ciberS1.png' },
+    { id: 1, titulo: 'CIBER RIESGO',                descripcion: 'Consultor Digital para portafolio estratégico',           mediaSrc: '/assets/ciberS/ciberS1.png' },
     { id: 2, titulo: 'Soluciones de Ciberseguridad', descripcion: 'Técnico IA especializado para MIPYME',                              mediaSrc: '/assets/ciberS/ciberS2.png' },
     { id: 3, titulo: 'Centro de Ciberresiliencia',   descripcion: 'Protección especializada para Inteligencia Artificial',             mediaSrc: '/assets/ciberS/ciberS3.png' },
     { id: 4, titulo: 'Monitoreo 24/7 en I.A. NOC',  descripcion: 'Vigilancia física y virtual continua',                              mediaSrc: '/assets/ciberS/ciberS4.png' },

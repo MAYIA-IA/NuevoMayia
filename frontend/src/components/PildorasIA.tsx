@@ -14,7 +14,14 @@ import PildoraViewer from './PildoraViewer';
 import AgentesConsultores from './AgentesConsultores';
 
 const WA_URL = 'https://calendly.com/mayiainteligencia/consulta-mayia';
-const openWA = () => window.open(WA_URL, '_blank', 'noopener,noreferrer');
+const openWA = (e?: React.MouseEvent) => {
+  if (e && (window as any).openCalendly) {
+    const rect = e.currentTarget.getBoundingClientRect();
+    (window as any).openCalendly({ x: rect.right + 12, y: rect.top - 140 });
+  } else {
+    window.open(WA_URL, '_blank', 'noopener,noreferrer');
+  }
+};
 
 const THUMBNAILS: Record<number, string> = {
   1: 'https://images.unsplash.com/photo-1762151717091-4e0633e0c431?q=80&w=386&auto=format&fit=crop',
@@ -228,9 +235,9 @@ const PildorasIA = () => {
                 Innova.<br className="hidden lg:block"/>Automatiza.<br className="hidden lg:block"/>Crece.
               </h1>
               <p className="text-sm lg:text-base text-gray-600 mb-6 lg:mb-8 max-w-sm leading-relaxed">
-                Implementa agentes de inteligencia artificial listos para usar en tu empresa desde $1,900 MXN/mes.
+                Implementa agentes de inteligencia artificial listos para usar en tu empresa.
               </p>
-              <button onClick={openWA} className="btn-spring px-6 py-3 rounded-xl font-bold text-white shadow-lg flex items-center justify-center gap-2 w-full sm:w-auto" style={{ background: 'linear-gradient(135deg, #a3e635, #65a30d)' }}>
+              <button onClick={(e) => openWA(e)} className="btn-spring px-6 py-3 rounded-xl font-bold text-white shadow-lg flex items-center justify-center gap-2 w-full sm:w-auto" style={{ background: 'linear-gradient(135deg, #a3e635, #65a30d)' }}>
                 Agendar ahora
               </button>
             </div>
@@ -324,13 +331,8 @@ const PildorasIA = () => {
                 </div>
                 
                 <div className="mt-auto pt-6 border-t border-gray-200">
-                  <div className="flex items-end justify-between mb-5">
-                    <div>
-                      <div className="text-xs font-semibold text-gray-500 mb-1 tracking-wider uppercase">Inversión Mensual</div>
-                      <div className="text-3xl font-extrabold text-gray-900">$1,900 <span className="text-sm font-normal text-gray-500">MXN</span></div>
-                    </div>
-                  </div>
-                  <button onClick={openWA} className="btn-spring w-full py-4 rounded-xl font-bold text-white flex items-center justify-center gap-2" style={{ background: pildora.accent === '#a3e635' ? 'linear-gradient(135deg, #a3e635, #65a30d)' : 'linear-gradient(135deg, #22d3ee, #0891b2)', boxShadow: `0 8px 20px ${pildora.accent}40` }}>
+
+                  <button onClick={(e) => openWA(e)} className="btn-spring w-full py-4 rounded-xl font-bold text-white flex items-center justify-center gap-2" style={{ background: pildora.accent === '#a3e635' ? 'linear-gradient(135deg, #a3e635, #65a30d)' : 'linear-gradient(135deg, #22d3ee, #0891b2)', boxShadow: `0 8px 20px ${pildora.accent}40` }}>
                     Implementar ahora
                   </button>
                 </div>

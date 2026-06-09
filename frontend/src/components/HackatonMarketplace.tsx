@@ -82,6 +82,15 @@ export default function HackatonMarketplace() {
                 <h3 className="text-sm sm:text-base font-bold text-white mb-1.5 relative z-10">¿Tienes una solución de IA para empresas?</h3>
                 <p className="text-[10px] sm:text-xs text-gray-400 mb-3 max-w-[250px] relative z-10">Integra tu proyecto al ecosistema y llega a miles de corporativos.</p>
                 <a href="https://calendly.com/mayiainteligencia/consulta-mayia" target="_blank" rel="noopener noreferrer"
+                   onClick={(e) => {
+                     e.preventDefault();
+                     const rect = e.currentTarget.getBoundingClientRect();
+                     if ((window as any).openCalendly) {
+                       (window as any).openCalendly({ x: rect.right + 12, y: rect.top - 140 });
+                     } else {
+                       window.open('https://calendly.com/mayiainteligencia/consulta-mayia', '_blank');
+                     }
+                   }}
                    className="inline-flex items-center gap-1.5 bg-gradient-to-r from-lime-400 to-lime-600 text-gray-900 font-bold text-[10px] sm:text-xs px-4 py-2 rounded-lg hover:scale-105 transition-transform relative z-10 shadow-lg">
                   Unirse al Marketplace
                   <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
@@ -225,11 +234,7 @@ export default function HackatonMarketplace() {
                             <span className="text-[10px] font-bold uppercase tracking-wider" style={{ color: p.color }}>{p.categoria}</span>
                             <h3 className="text-2xl font-bold text-gray-900">{p.titulo}</h3>
                           </div>
-                          {/* Price Tag */}
-                          <div className="bg-lime-50 border border-lime-200 px-3 py-1.5 rounded-lg text-right shrink-0 shadow-sm">
-                            <div className="text-[9px] text-lime-700 font-bold uppercase">Precio Promocional</div>
-                            <div className="text-xs sm:text-sm font-black text-lime-600">$10.00 Pesos Mexicanos</div>
-                          </div>
+
                         </div>
                         <p className="text-sm text-gray-600 mb-4">{p.descripcion}</p>
                         

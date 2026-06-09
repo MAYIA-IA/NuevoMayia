@@ -9,14 +9,14 @@ export const Administracion: React.FC = () => {
     {
       id: 1,
       titulo: 'ESTRATEGIA IA',
-      descripcion: 'Consultor Digital para portafolio de sistemas de IA - $98,000',
+      descripcion: 'Consultor Digital para portafolio de sistemas de IA',
       mediaType: 'image',
       mediaSrc: '/assets/adminD/adminD1.png',
     },
     {
       id: 2,
       titulo: 'INNOVACIÓN EMPRESARIAL',
-      descripcion: 'Democratiza la innovación con IA generativa - $98,000',
+      descripcion: 'Democratiza la innovación con IA generativa',
       mediaType: 'image',
       mediaSrc: '/assets/adminD/adminD2.png',
     },

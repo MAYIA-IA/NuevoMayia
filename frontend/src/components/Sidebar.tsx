@@ -12,6 +12,7 @@ import {
   Pill,
   ShoppingBag,
   Factory,
+  Cpu,
 } from 'lucide-react';
 import { brandingConfig } from '../config/branding';
 import mayiaLogo from '../assets/logosNativos/mayiaLogoBlanco.png';
@@ -26,9 +27,10 @@ interface SidebarProps {
 // Menú principal (Ligero y enfocado a negocio)
 const menuItems = [
   { id: 'dashboard',           nombre: 'Centro de Control',   icono: LayoutDashboard },
+  { id: 'fabrica-ia',          nombre: 'Fábrica de IA',       icono: Factory },
   { id: 'hubs-digitales',      nombre: 'Hubs Digitales',      icono: Network },
   { id: 'ia-empresarial',      nombre: 'Soluciones I.A.',     icono: Building2 },
-  { id: 'ia-por-sector',       nombre: 'IA por Sector',       icono: Factory },
+  { id: 'ia-por-sector',       nombre: 'IA por Sector',       icono: Cpu },
   { id: 'empleados-digitales', nombre: 'Empleados Digitales', icono: Users },
   { id: 'hackaton',            nombre: 'Marketplace',         icono: ShoppingBag },
   { id: 'pildoras-ia',         nombre: 'Píldoras IA',         icono: Pill },

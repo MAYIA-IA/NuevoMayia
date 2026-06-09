@@ -148,7 +148,17 @@ const CiberseguridadIA = () => {
 
             {/* CTA Final Compacto */}
             <div className="flex flex-col sm:flex-row gap-3 mt-2">
-              <button onClick={() => window.open('https://calendly.com/mayiainteligencia/consulta-mayia','_blank','noopener,noreferrer')} className="group relative bg-gray-900 hover:bg-black text-white font-bold py-3 px-6 rounded-xl text-xs transition-all shadow-lg flex-1 flex items-center justify-center whitespace-nowrap">
+              <button 
+                onClick={(e) => {
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  if ((window as any).openCalendly) {
+                    (window as any).openCalendly({ x: rect.right + 12, y: rect.top - 140 });
+                  } else {
+                    window.open('https://calendly.com/mayiainteligencia/consulta-mayia','_blank','noopener,noreferrer');
+                  }
+                }} 
+                className="group relative bg-gray-900 hover:bg-black text-white font-bold py-3 px-6 rounded-xl text-xs transition-all shadow-lg flex-1 flex items-center justify-center whitespace-nowrap"
+              >
                 Solicitar Auditoría
                 <svg className="w-4 h-4 ml-2 text-lime-400 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />

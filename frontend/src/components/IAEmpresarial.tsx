@@ -112,7 +112,17 @@ const IAEmpresarial = () => {
             </div>
 
             {/* CTA principal */}
-            <button onClick={() => window.open('https://calendly.com/mayiainteligencia/consulta-mayia','_blank','noopener,noreferrer')} className="group self-start relative bg-gradient-to-r from-lime-400 to-lime-600 hover:from-lime-500 hover:to-lime-700 text-gray-900 font-bold py-2.5 px-5 rounded-lg text-sm transition-all duration-300 hover:scale-105 hover:shadow-xl shadow-lg mt-2">
+            <button 
+              onClick={(e) => {
+                const rect = e.currentTarget.getBoundingClientRect();
+                if ((window as any).openCalendly) {
+                  (window as any).openCalendly({ x: rect.right + 12, y: rect.top - 140 });
+                } else {
+                  window.open('https://calendly.com/mayiainteligencia/consulta-mayia','_blank','noopener,noreferrer');
+                }
+              }} 
+              className="group self-start relative bg-gradient-to-r from-lime-400 to-lime-600 hover:from-lime-500 hover:to-lime-700 text-gray-900 font-bold py-2.5 px-5 rounded-lg text-sm transition-all duration-300 hover:scale-105 hover:shadow-xl shadow-lg mt-2"
+            >
               <span className="relative z-10 flex items-center gap-2">
                 Agendar consultoría gratuita
                 <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">

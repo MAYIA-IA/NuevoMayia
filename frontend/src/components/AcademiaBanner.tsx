@@ -256,6 +256,17 @@ export default function AcademiaBanner({ compact = false }: { compact?: boolean 
               href={cta.href}
               target={cta.external ? '_blank' : undefined}
               rel={cta.external ? 'noopener noreferrer' : undefined}
+              onClick={(e) => {
+                if (cta.href === WA_URL) {
+                  e.preventDefault();
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  if ((window as any).openCalendly) {
+                    (window as any).openCalendly({ x: rect.right + 12, y: rect.top - 140 });
+                  } else {
+                    window.open(WA_URL, '_blank');
+                  }
+                }
+              }}
               style={{
                 display: 'inline-flex', alignItems: 'center', gap: 6,
                 padding: cta.primary ? '9px 20px' : '9px 16px',

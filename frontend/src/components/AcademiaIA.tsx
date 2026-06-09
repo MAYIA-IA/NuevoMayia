@@ -5,7 +5,14 @@ import type { Curso } from "../data/cursosAcademia";
 import academiaLogo from "../assets/logosNativos/academia-horizontal.png";
 
 const WA_URL = 'https://calendly.com/mayiainteligencia/consulta-mayia';
-const openWA = () => window.open(WA_URL, '_blank', 'noopener,noreferrer');
+const openWA = (e?: React.MouseEvent) => {
+  if (e && (window as any).openCalendly) {
+    const rect = e.currentTarget.getBoundingClientRect();
+    (window as any).openCalendly({ x: rect.right + 12, y: rect.top - 140 });
+  } else {
+    window.open(WA_URL, '_blank', 'noopener,noreferrer');
+  }
+};
 
 const AcademiaIA = () => {
   const [showAllCourses, setShowAllCourses] = useState(false);
@@ -75,7 +82,7 @@ const AcademiaIA = () => {
                 Cerrar
               </button>
               
-              <button onClick={(e) => { e.stopPropagation(); openWA(); }} className="flex items-center justify-center gap-2 px-5 py-2.5 bg-gradient-to-r from-gray-900 to-gray-800 hover:from-black hover:to-gray-900 text-white rounded-lg text-xs font-bold transition-all hover:-translate-y-0.5 shadow-[0_4px_15px_rgba(0,0,0,0.15)] whitespace-nowrap">
+              <button onClick={(e) => { e.stopPropagation(); openWA(e); }} className="flex items-center justify-center gap-2 px-5 py-2.5 bg-gradient-to-r from-gray-900 to-gray-800 hover:from-black hover:to-gray-900 text-white rounded-lg text-xs font-bold transition-all hover:-translate-y-0.5 shadow-[0_4px_15px_rgba(0,0,0,0.15)] whitespace-nowrap">
                 Inscribirme
                 <svg className="w-4 h-4 text-lime-400" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12.01 2.013c-5.506 0-9.974 4.468-9.974 9.974 0 1.764.461 3.486 1.336 5.006L2.013 21.99l5.127-1.344a9.904 9.904 0 004.87 1.268h.004c5.505 0 9.972-4.469 9.972-9.975 0-2.668-1.039-5.177-2.925-7.065-1.888-1.888-4.398-2.927-7.065-2.927zm5.955 14.331c-.247.697-1.428 1.337-1.992 1.405-.515.06-1.18.15-3.376-.757-2.652-1.096-4.356-3.805-4.488-3.98-.133-.176-1.074-1.43-1.074-2.73 0-1.3.67-1.944.912-2.203.242-.259.525-.324.701-.324.175 0 .351.002.508.01.164.007.382-.065.597.457.227.55 .772 1.886.843 2.027.07.142.117.307.03.52-.087.213-.133.344-.265.5-.132.155-.28.329-.401.455-.132.134-.271.282-.12.544.152.26.674 1.112 1.446 1.8.995.888 1.825 1.166 2.086 1.299.26.133.413.113.565-.044.153-.158.658-.767.834-1.03.175-.262.35-.218.59-.126.24.092 1.516.716 1.776.845.26.13.434.195.496.303.062.108.062.63-.185 1.327z"/>

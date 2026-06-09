@@ -199,7 +199,17 @@ const IAPorSector = () => {
                   </ul>
 
                   {/* Botón CTA */}
-                  <button onClick={() => window.open('https://calendly.com/mayiainteligencia/consulta-mayia','_blank','noopener,noreferrer')} className={`w-fit bg-white text-gray-900 hover:bg-gray-100 font-bold py-3 px-8 rounded-xl transition-all duration-300 hover:scale-105 shadow-xl flex items-center gap-2 group/btn`}>
+                  <button 
+                    onClick={(e) => {
+                      const rect = e.currentTarget.getBoundingClientRect();
+                      if ((window as any).openCalendly) {
+                        (window as any).openCalendly({ x: rect.right + 12, y: rect.top - 140 });
+                      } else {
+                        window.open('https://calendly.com/mayiainteligencia/consulta-mayia','_blank','noopener,noreferrer');
+                      }
+                    }} 
+                    className={`w-fit bg-white text-gray-900 hover:bg-gray-100 font-bold py-3 px-8 rounded-xl transition-all duration-300 hover:scale-105 shadow-xl flex items-center gap-2 group/btn`}
+                  >
                     Agendar Demo para {sector.category}
                     <svg className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                   </button>

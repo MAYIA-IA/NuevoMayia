@@ -177,7 +177,14 @@ const AmdLabModal: React.FC<AmdLabModalProps> = ({ isOpen, onClose }) => {
             </div>
 
             <button
-              onClick={() => window.open('https://calendly.com/mayiainteligencia/consulta-mayia', '_blank')}
+              onClick={(e) => {
+                const rect = e.currentTarget.getBoundingClientRect();
+                if ((window as any).openCalendly) {
+                  (window as any).openCalendly({ x: rect.right + 12, y: rect.top - 140 });
+                } else {
+                  window.open('https://calendly.com/mayiainteligencia/consulta-mayia', '_blank');
+                }
+              }}
               style={{
                 marginTop: '32px',
                 width: '100%',

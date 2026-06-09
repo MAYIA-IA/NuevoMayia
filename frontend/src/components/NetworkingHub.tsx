@@ -215,6 +215,15 @@ export default function NetworkingHub() {
             {tab==='empresas'?'Publica tu vacante y conecta con los mejores perfiles de México.':'Crea tu perfil y conecta con empresas que necesitan tu talento.'}
           </p>
           <a href="https://calendly.com/mayiainteligencia/consulta-mayia" target="_blank" rel="noopener noreferrer" className="nh-cta-btn"
+            onClick={(e) => {
+              e.preventDefault();
+              const rect = e.currentTarget.getBoundingClientRect();
+              if ((window as any).openCalendly) {
+                (window as any).openCalendly({ x: rect.right + 12, y: rect.top - 140 });
+              } else {
+                window.open('https://calendly.com/mayiainteligencia/consulta-mayia', '_blank');
+              }
+            }}
             style={{ display:'inline-flex', alignItems:'center', gap:10, padding:'14px 36px', borderRadius:14, background:'linear-gradient(135deg,#A4D955,#65a30d)', color:'#fff', fontWeight:800, fontSize:14, textDecoration:'none', transition:'all .3s', boxShadow:'0 8px 30px rgba(164,217,85,.3)', animation:'nh-glow 3s infinite' }}
           >
             {tab === 'empresas' ? <><Building2 size={18} /> Publicar vacante IA</> : <><User size={18} /> Crear mi perfil de talento</>}
