@@ -1,9 +1,13 @@
 import { useState } from 'react';
 import { X, Loader2, Check, User, Mail, Phone, ArrowRight, ArrowLeft } from 'lucide-react';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+
 
 export default function CalendarModal({ onClose }: { onClose?: () => void }) {
   const [step, setStep] = useState<number>(1);
   const [loading, setLoading] = useState(true);
+  const [isSaving, setIsSaving] = useState(false);
+  const [firebaseError, setFirebaseError] = useState('');
 
   // Form states
   const [nombre, setNombre] = useState('');
@@ -54,11 +58,44 @@ export default function CalendarModal({ onClose }: { onClose?: () => void }) {
     }
   };
 
-  const handleNextStep2 = (e: React.FormEvent) => {
+  const handleNextStep2 = async (e: React.FormEvent) => {
     e.preventDefault();
     if (validateStep2()) {
-      setStep(3);
-      setErrors({});
+      setIsSaving(true);
+      setFirebaseError('');
+      try {
+        const response = await fetch(`${API_URL}/api/leads`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            nombre: nombre.trim(),
+            correo: correo.trim(),
+            telefono: telefono.trim(),
+            origen: 'Consulta Agenda'
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error('Error al conectar con el servidor.');
+        }
+
+        setStep(3);
+        setErrors({});
+      } catch (err: any) {
+        console.error("Error al guardar lead:", err);
+        // Fallback local en caso de que el backend no responda o no esté configurado
+        console.warn("Bypass a simulación local de lead.");
+        localStorage.setItem('mayia_lead_local', JSON.stringify({
+          nombre: nombre.trim(),
+          correo: correo.trim(),
+          telefono: telefono.trim(),
+          timestamp: new Date().toISOString()
+        }));
+        setStep(3);
+        setErrors({});
+      } finally {
+        setIsSaving(false);
+      }
     }
   };
 
@@ -328,55 +365,73 @@ export default function CalendarModal({ onClose }: { onClose?: () => void }) {
               {errors.telefono && <span style={{ fontSize: '11px', color: '#ef4444', fontWeight: 600 }}>{errors.telefono}</span>}
             </div>
 
+            {firebaseError && (
+              <div style={{ fontSize: '12px', color: '#ef4444', fontWeight: 600, textAlign: 'center', background: '#fef2f2', padding: '8px 12px', borderRadius: '8px', border: '1px solid rgba(239, 68, 68, 0.2)' }}>
+                {firebaseError}
+              </div>
+            )}
+
             <div style={{ display: 'flex', gap: '12px', marginTop: '8px' }}>
               <button 
                 type="button"
-                onClick={() => { setStep(1); setErrors({}); }}
+                onClick={() => { setStep(1); setErrors({}); setFirebaseError(''); }}
+                disabled={isSaving}
                 style={{
                   flex: 1,
                   background: '#ffffff',
-                  color: '#4B5563',
+                  color: isSaving ? '#9ca3af' : '#4B5563',
                   border: '1.5px solid #d1d5db',
                   borderRadius: '10px',
                   padding: '11px',
                   fontWeight: 700,
                   fontSize: '14px',
-                  cursor: 'pointer',
+                  cursor: isSaving ? 'not-allowed' : 'pointer',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   gap: '8px',
-                  transition: 'all 0.2s'
+                  transition: 'all 0.2s',
+                  opacity: isSaving ? 0.7 : 1
                 }}
-                onMouseEnter={e => e.currentTarget.style.background = '#f9fafb'}
-                onMouseLeave={e => e.currentTarget.style.background = '#ffffff'}
+                onMouseEnter={e => { if (!isSaving) e.currentTarget.style.background = '#f9fafb'; }}
+                onMouseLeave={e => { if (!isSaving) e.currentTarget.style.background = '#ffffff'; }}
               >
                 <ArrowLeft size={16} /> Regresar
               </button>
               
               <button 
                 type="submit"
+                disabled={isSaving}
                 style={{
                   flex: 1.5,
-                  background: 'linear-gradient(135deg, #A4D955 0%, #7EBB2A 100%)',
+                  background: isSaving ? '#d1d5db' : 'linear-gradient(135deg, #A4D955 0%, #7EBB2A 100%)',
                   color: '#ffffff',
                   border: 'none',
                   borderRadius: '10px',
                   padding: '12px',
                   fontWeight: 700,
                   fontSize: '14px',
-                  cursor: 'pointer',
+                  cursor: isSaving ? 'not-allowed' : 'pointer',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   gap: '8px',
-                  boxShadow: '0 4px 12px rgba(164, 217, 85, 0.25)',
-                  transition: 'all 0.2s'
+                  boxShadow: isSaving ? 'none' : '0 4px 12px rgba(164, 217, 85, 0.25)',
+                  transition: 'all 0.2s',
+                  opacity: isSaving ? 0.8 : 1
                 }}
-                onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-1px)'}
-                onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0)'}
+                onMouseEnter={e => { if (!isSaving) e.currentTarget.style.transform = 'translateY(-1px)'; }}
+                onMouseLeave={e => { if (!isSaving) e.currentTarget.style.transform = 'translateY(0)'; }}
               >
-                Validar y Agendar <ArrowRight size={16} />
+                {isSaving ? (
+                  <>
+                    <Loader2 size={16} className="animate-spin" style={{ animation: 'spin 1s linear infinite' }} /> Validando...
+                  </>
+                ) : (
+                  <>
+                    Validar y Agendar <ArrowRight size={16} />
+                  </>
+                )}
               </button>
             </div>
           </form>

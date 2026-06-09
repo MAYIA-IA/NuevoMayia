@@ -6,6 +6,7 @@ import cors from 'cors';
 import { initGeminiClient } from './config/gemini.js';
 import chatRoutes from './routes/chatRoutes.js';
 import departamentosRoutes from './routes/departamentosRoutes.js';
+import leadsRoutes from './routes/leadsRoutes.js';
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -37,6 +38,7 @@ app.use(express.json());
 // Routes
 app.use('/api/chat', chatRoutes);
 app.use('/api/departamentos', departamentosRoutes);
+app.use('/api/leads', leadsRoutes);
 
 // Health check
 app.get('/health', (req, res) => {
