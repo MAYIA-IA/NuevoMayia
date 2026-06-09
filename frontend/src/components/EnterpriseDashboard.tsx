@@ -14,6 +14,18 @@ const CATEGORIES = ['Infraestructura', 'Desarrollo', 'Modelos', 'Agentes', 'Oper
 function EdgenetCard({ onOpenMap, onOpenFabricaInfo }: { onOpenMap?: () => void; onOpenFabricaInfo?: () => void }) {
   const [isHovered, setIsHovered] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  
+  const mainVideoRef = useRef<HTMLVideoElement>(null);
+  const iconVideoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (mainVideoRef.current) {
+      mainVideoRef.current.playbackRate = 0.5; // 45% speed
+    }
+    if (iconVideoRef.current) {
+      iconVideoRef.current.playbackRate = 0.5; // 50% speed
+    }
+  }, []);
 
   const handleAgendarCita = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -60,6 +72,7 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo }: { onOpenMap?: () => void;
             position: 'relative' 
           }}>
             <video 
+              ref={iconVideoRef}
               autoPlay 
               loop 
               muted 
@@ -114,6 +127,7 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo }: { onOpenMap?: () => void;
         transition: 'all 0.3s ease'
       }}>
         <video 
+          ref={mainVideoRef}
           autoPlay loop muted playsInline preload="metadata"
           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
         >
