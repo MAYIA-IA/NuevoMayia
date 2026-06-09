@@ -99,6 +99,7 @@ export const MexicoEsMayia: React.FC = () => {
   const [hoveredEstado, setHoveredEstado] = useState<string | null>(null);
   const [filtroZona, setFiltroZona] = useState('Todos');
   const [tooltip, setTooltip] = useState<{ x: number; y: number; id: string } | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
   
   const [centroids, setCentroids] = useState<Record<string, { x: number, y: number }>>({});
   const pathRefs = useRef<Record<string, SVGPathElement | null>>({});
@@ -114,10 +115,16 @@ export const MexicoEsMayia: React.FC = () => {
       }
       setCentroids(c);
     };
+    
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 1024);
+      calcCentroids();
+    };
+    
     // Pequeño delay para asegurar que el SVG se renderizó con dimensiones correctas
-    setTimeout(calcCentroids, 100);
-    window.addEventListener('resize', calcCentroids);
-    return () => window.removeEventListener('resize', calcCentroids);
+    setTimeout(handleResize, 100);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   const detalle = selectedEstado ? estadosData[selectedEstado] : null;
@@ -131,24 +138,25 @@ export const MexicoEsMayia: React.FC = () => {
   ];
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', background: colores.fondoPrincipal }}>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100%', background: colores.fondoPrincipal }}>
 
       {/* Header */}
-      <div style={{ padding: '28px 32px 0' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '6px' }}>
+      <div style={{ padding: isMobile ? '24px 16px 0' : '28px 32px 0', fontFamily: 'Outfit, sans-serif' }}>
+        <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', marginBottom: '6px' }}>
           <div style={{
             width: '36px', height: '36px', borderRadius: '12px',
             background: `linear-gradient(135deg, ${COLOR_SELECTED} 0%, #a8c44a 100%)`,
             display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+            marginTop: '2px'
           }}>
             <Bot size={18} color="#fff" />
           </div>
-          <h2 style={{ fontSize: '24px', fontWeight: '900', color: colores.textoClaro, margin: 0, letterSpacing: '-0.5px' }}>
-            México es MAYiA
+          <h2 style={{ fontSize: isMobile ? '18px' : '22px', fontWeight: '800', color: colores.textoClaro, margin: 0, letterSpacing: '-0.5px', lineHeight: '1.25' }}>
+            Inteligencia Artificial empresarial para los motores económicos de México
           </h2>
         </div>
-        <p style={{ fontSize: '13px', color: colores.textoMedio, margin: '0 0 20px 48px' }}>
-          Inteligencia artificial aplicada a los motores económicos de cada estado
+        <p style={{ fontSize: '13px', color: colores.textoMedio, margin: isMobile ? '6px 0 20px 0' : '6px 0 20px 48px', lineHeight: '1.5' }}>
+          Descubre cómo MAYiA desarrolla soluciones de Inteligencia Artificial por estado, industria y vocación productiva para acelerar la competitividad de México
         </p>
 
         {/* Zona filters */}
@@ -185,9 +193,9 @@ export const MexicoEsMayia: React.FC = () => {
       {/* Content: mapa + panel */}
       <div style={{
         display: 'grid',
-        gridTemplateColumns: '1fr 280px',
+        gridTemplateColumns: isMobile ? '1fr' : '1fr 280px',
         gap: '24px',
-        padding: '20px 32px 32px',
+        padding: isMobile ? '16px' : '20px 32px 32px',
         alignItems: 'start',
       }}>
 
