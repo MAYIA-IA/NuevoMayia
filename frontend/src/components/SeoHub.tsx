@@ -177,14 +177,16 @@ function HubCard({
       }}
       onMouseEnter={e => {
         if (!isActive) {
-          e.currentTarget.style.borderColor = `${mod.color}40`;
-          e.currentTarget.style.background = `${mod.color}08`;
+          e.currentTarget.style.borderColor = mod.color;
+          e.currentTarget.style.background = `radial-gradient(circle, rgba(255,255,255,0) 30%, ${mod.color}15 100%)`;
+          e.currentTarget.style.boxShadow = `0 8px 20px -4px ${mod.color}30, 0 0 12px 1px ${mod.color}20, inset 0 0 16px ${mod.color}15`;
         }
       }}
       onMouseLeave={e => {
         if (!isActive) {
           e.currentTarget.style.borderColor = colores.borde;
           e.currentTarget.style.background = colores.fondoSecundario;
+          e.currentTarget.style.boxShadow = 'none';
         }
       }}
     >

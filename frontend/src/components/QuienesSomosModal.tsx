@@ -186,9 +186,13 @@ export default function QuienesSomosModal() {
                   className="bg-white rounded-2xl p-5 border transition-all duration-300 flex flex-col justify-between"
                   style={{
                     borderColor: isHovered ? pillar.color : '#e5e7eb',
-                    boxShadow: isHovered ? `0 12px 24px ${pillar.color}15` : 'none',
+                    boxShadow: isHovered 
+                      ? `0 20px 40px -8px ${pillar.color}35, 0 0 24px 2px ${pillar.color}20, inset 0 0 24px 2px ${pillar.color}1c` 
+                      : 'none',
                     transform: isHovered ? 'translateY(-4px)' : 'translateY(0)',
-                    backgroundColor: isHovered ? pillar.bgGlow : '#ffffff'
+                    background: isHovered 
+                      ? `radial-gradient(120% 120% at 50% 50%, rgba(255, 255, 255, 0) 30%, ${pillar.color}0f 100%)` 
+                      : '#ffffff'
                   }}
                 >
                   <div>
