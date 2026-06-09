@@ -1,8 +1,8 @@
 import { useState, memo } from 'react';
 import { Sparkles } from 'lucide-react';
-import fotoJosue from '../assets/Embajadores/Josue.jpeg';
-import fotoMartin from '../assets/Embajadores/Martín.jpeg';
-import fotoDulce from '../assets/Embajadores/Dulce.jpeg';
+import fotoJosue from '../assets/Embajadores/Josue.webp';
+import fotoMartin from '../assets/Embajadores/Martín.webp';
+import fotoDulce from '../assets/Embajadores/Dulce.webp';
 
 interface Embajador { id: number; nombre: string; titulo: string; sector: string; ciudad: string; logro: string; foto?: string; color: string; desde: string; badge: string; impacto: string; }
 

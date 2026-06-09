@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { X, Cpu, Server, Zap, ArrowRight, Activity } from 'lucide-react';
-import amdLogo from '../assets/logosNativos/amd.png';
+import amdLogo from '../assets/logosNativos/amd.webp';
 
 interface AmdLabModalProps {
   isOpen: boolean;

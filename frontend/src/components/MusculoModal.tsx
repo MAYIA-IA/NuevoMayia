@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { X, ArrowRight, CheckCircle, Zap, Shield, Server } from 'lucide-react';
-import amdLogo from '../assets/logosNativos/amd.png';
+import amdLogo from '../assets/logosNativos/amd.webp';
 
 interface Musculo {
   id: string;

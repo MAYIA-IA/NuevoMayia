@@ -2,7 +2,7 @@ export const brandingConfig = {
   empresa: {
     nombre: "MAYIA",
     eslogan: "",
-    logo: "/assets/logosNativos/mayiaLogoBlanco.png",
+    logo: "/assets/logosNativos/mayiaLogoBlanco.webp",
   },
   
   colores: {

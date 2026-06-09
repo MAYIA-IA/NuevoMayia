@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import MusculoModal from './MusculoModal';
-import edgeNetLogo from '../assets/logosNativos/logo-EdgeNet-fondo-oscuro.png';
-import flaiNubeIcon from '../assets/logosNativos/1. NUBE_FINAL_FLAI (1).png';
+import edgeNetLogo from '../assets/logosNativos/logo-EdgeNet-fondo-oscuro.webp';
+import flaiNubeIcon from '../assets/logosNativos/1. NUBE_FINAL_FLAI (1).webp';
 
 /* ── Data ────────────────────────────────────────────────────────────────── */
 interface Musculo {

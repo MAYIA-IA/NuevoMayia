@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Clock } from "lucide-react";
 import { cursos } from "../data/cursosAcademia";
 import type { Curso } from "../data/cursosAcademia";
-import academiaLogo from "../assets/logosNativos/academia-horizontal.png";
+import academiaLogo from "../assets/logosNativos/academia-horizontal.webp";
 
 const WA_URL = 'https://calendly.com/mayiainteligencia/consulta-mayia';
 const openWA = (e?: React.MouseEvent) => {

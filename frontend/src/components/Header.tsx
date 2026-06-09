@@ -14,7 +14,7 @@ import {
 import { brandingConfig } from '../config/branding';
 import { AsistenteIAChat } from './modules/AsistenteIAChat';
 import type { AsistenteIAChatHandle } from './modules/AsistenteIAChat';
-import mayiaLogo from '../assets/logosNativos/mayiaLogoBlanco.png';
+import mayiaLogo from '../assets/logosNativos/mayiaLogoBlanco.webp';
 
 interface HeaderProps {
   title: string;

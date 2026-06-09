@@ -1,15 +1,15 @@
 import { useState, useRef, useEffect, memo } from 'react';
 import { X } from 'lucide-react';
-import video1 from '../assets/PildorasIA/Imagen2.mp4';
-import video2 from '../assets/PildorasIA/WhCF.mp4';
-import video3 from '../assets/PildorasIA/Recomendadora.mp4';
-import video4 from '../assets/PildorasIA/Ciberseguridad.mp4';
-import video5 from '../assets/PildorasIA/CamarasSeguridad.mp4';
-import video6 from '../assets/PildorasIA/CamarasPlacas.mp4';
-import video7 from '../assets/PildorasIA/PrevencionRobo.mp4';
-import video8 from '../assets/PildorasIA/OperacionSucursales.mp4';
+import video1 from '../assets/PildorasIA/Imagen2.webm';
+import video2 from '../assets/PildorasIA/WhCF.webm';
+import video3 from '../assets/PildorasIA/Recomendadora.webm';
+import video4 from '../assets/PildorasIA/Ciberseguridad.webm';
+import video5 from '../assets/PildorasIA/CamarasSeguridad.webm';
+import video6 from '../assets/PildorasIA/CamarasPlacas.webm';
+import video7 from '../assets/PildorasIA/PrevencionRobo.webm';
+import video8 from '../assets/PildorasIA/OperacionSucursales.webm';
 
-import logoSrc from '../assets/PildorasIA/Imagen6.png';
+import logoSrc from '../assets/PildorasIA/Imagen6.webp';
 import PildoraViewer from './PildoraViewer';
 import AgentesConsultores from './AgentesConsultores';
 

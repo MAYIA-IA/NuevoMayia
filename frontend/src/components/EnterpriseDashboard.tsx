@@ -1,15 +1,55 @@
-import { useState, useEffect, useRef, useMemo } from 'react';
+import { useState, useEffect, useRef, useMemo, forwardRef, useImperativeHandle } from 'react';
 import { motion } from 'framer-motion';
 import { 
   Database, FlaskConical, FileText, Wrench, Calendar,
   Briefcase, LineChart, ShoppingBag, GraduationCap, GitBranch, ScanEye,
   BookOpen, Award, Users, MoreVertical, Info, Cloud
 } from 'lucide-react';
-import logoMaia from '../assets/logosNativos/logoMaia.png';
-import academiaLogo from '../assets/logosNativos/academia-horizontal.png';
-import flaiLogo from '../assets/logosNativos/1. NUBE_FINAL_FLAI (1).png';
-import mayiaLakeLogo from '../assets/logosNativos/MAYiA_LAKE.jpeg';
-import ajoloteVideo from '../assets/AJOLOTE.mp4';
+import logoMaia from '../assets/logosNativos/logoMaia.webp';
+import academiaLogo from '../assets/logosNativos/academia-horizontal.webp';
+import flaiLogo from '../assets/logosNativos/1. NUBE_FINAL_FLAI (1).webp';
+import mayiaLakeLogo from '../assets/logosNativos/MAYiA_LAKE.webp';
+import ajoloteVideo from '../assets/AJOLOTE.webm';
+
+// --- COMPONENTE DE OPTIMIZACIÓN: LazyVideo para carga bajo demanda ---
+const LazyVideo = forwardRef<HTMLVideoElement, any>(({ src, videoSrc, children, ...props }, ref) => {
+  const [shouldLoad, setShouldLoad] = useState(false);
+  const internalRef = useRef<HTMLVideoElement>(null);
+
+  useImperativeHandle(ref, () => internalRef.current!);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setShouldLoad(true);
+            observer.disconnect();
+          }
+        });
+      },
+      { rootMargin: '200px' } // Cargar el video 200px antes de que entre al viewport
+    );
+
+    if (internalRef.current) {
+      observer.observe(internalRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  const actualSrc = src || videoSrc;
+
+  return (
+    <video ref={internalRef} {...props}>
+      {shouldLoad && (
+        children ? children : <source src={actualSrc} type={actualSrc?.endsWith('.webm') ? 'video/webm' : 'video/mp4'} />
+      )}
+    </video>
+  );
+});
 
 const hexToRgba = (hex: string, alpha: number) => {
   if (!hex || typeof hex !== 'string') return `rgba(164, 217, 85, ${alpha})`;
@@ -74,7 +114,7 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOp
     >
       <div style={{ display: 'flex', alignItems: 'center', padding: '20px 20px 12px', justifyContent: 'space-between' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          {/* Icon Video Frame for jaguar.mp4 */}
+          {/* Icon Video Frame for jaguar.webm */}
           <div style={{ 
             width: 52, 
             height: 52, 
@@ -88,16 +128,15 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOp
             justifyContent: 'center', 
             position: 'relative' 
           }}>
-            <video 
+            <LazyVideo 
               ref={iconVideoRef}
               autoPlay 
               loop 
               muted 
               playsInline 
               style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-            >
-              <source src="/assets/images/jaguar.mp4" type="video/mp4" />
-            </video>
+              videoSrc="/assets/images/jaguar.webm"
+            />
           </div>
           <div>
             <h3 style={{ margin: 0, fontSize: 17, fontWeight: 800, color: '#111827', lineHeight: 1.2 }}>Fábrica de Inteligencia Artificial</h3>
@@ -144,13 +183,12 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOp
         boxShadow: isHovered ? '0 0 20px rgba(34, 197, 94, 0.25)' : 'none',
         transition: 'all 0.3s ease'
       }}>
-        <video 
+        <LazyVideo 
           ref={mainVideoRef}
           autoPlay loop muted playsInline preload="metadata"
           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-        >
-          <source src="/assets/images/productos/drpVideo.mp4" type="video/mp4" />
-        </video>
+          videoSrc="/assets/images/productos/drpVideo.webm"
+        />
 
         {/* Left overlays: Nuestros servidores, Modo Hibrido, Modo on premise */}
         <div style={{ position: 'absolute', top: 8, left: 8, display: 'flex', flexDirection: 'column', gap: 4 }}>
@@ -518,12 +556,11 @@ function FlaiCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
         boxShadow: isHovered ? '0 0 20px rgba(220, 38, 38, 0.4), inset 0 0 20px rgba(220, 38, 38, 0.05)' : 'none',
         transition: 'all 0.3s ease'
       }}>
-        <video 
+        <LazyVideo 
           autoPlay loop muted playsInline preload="metadata"
           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-        >
-          <source src="/assets/images/productos/flaiMarcoVideo.mp4" type="video/mp4" />
-        </video>
+          videoSrc="/assets/images/productos/flaiMarcoVideo.webm"
+        />
       </div>
 
       {/* Stats */}
@@ -633,7 +670,7 @@ function SocCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '20px 20px 12px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
           <div style={{ width: 44, height: 44, borderRadius: 10, background: '#ffffff', border: '1px solid #E5E7EB', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 6 }}>
-            <img src="/assets/images/productos/cyberpeaceLogo.png" alt="CyberPeace SOC" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+            <img src="/assets/images/productos/cyberpeaceLogo.webp" alt="CyberPeace SOC" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
           </div>
           <div>
             <h3 style={{ margin: 0, fontSize: 18, fontWeight: 800, color: '#111827' }}>SOC IA CyberPeace</h3>
@@ -687,12 +724,11 @@ function SocCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
         boxShadow: isHovered ? '0 0 20px rgba(72, 129, 235, 0.4), inset 0 0 20px rgba(72, 129, 235, 0.05)' : 'none',
         transition: 'all 0.3s ease'
       }}>
-        <video 
+        <LazyVideo 
             autoPlay loop muted playsInline preload="metadata"
             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-        >
-            <source src="/assets/images/productos/cyberpeaceVid.mp4" type="video/mp4" />
-        </video>
+            videoSrc="/assets/images/productos/cyberpeaceVid.webm"
+        />
         <div style={{ position: 'absolute', top: 12, left: 12, display: 'flex', flexDirection: 'column', gap: 6, maxWidth: '80%', zIndex: 5 }}>
            {["CACERÍA DE AMENAZAS", "INTELIGENCIA DE AMENAZAS", "EVALUACIÓN DE RIESGOS", "ESTRATEGIA Y GOBIERNO DE CIBERSEGURIDAD", "GESTIÓN DE RESPUESTAS Y CONTENCIÓN DE INCIDENTES"].map((f, i) => (
              <span key={i} style={{ background: 'rgba(72,129,235,0.85)', backdropFilter: 'blur(4px)', color: '#ffffff', fontSize: 8, fontWeight: 800, padding: '4px 8px', borderRadius: 6, border: '1px solid rgba(125,209,255,0.4)', letterSpacing: '0.04em', width: 'fit-content' }}>{f}</span>
@@ -904,13 +940,12 @@ function MayiaCard() {
         boxShadow: isHovered ? '0 0 20px rgba(164, 217, 85, 0.4), inset 0 0 20px rgba(164, 217, 85, 0.05)' : 'none',
         transition: 'all 0.3s ease'
       }}>
-        <video 
+        <LazyVideo 
           ref={videoRef}
           autoPlay loop muted playsInline preload="metadata"
           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-        >
-          <source src={ajoloteVideo} type="video/mp4" />
-        </video>
+          videoSrc={ajoloteVideo}
+        />
       </div>
 
       {/* Stats - Grid de 3 */}
@@ -1152,12 +1187,11 @@ function StandardCard({
           boxShadow: isHovered ? `0 0 20px ${color}40, inset 0 0 20px ${color}05` : 'none',
           transition: 'all 0.3s ease'
         }}>
-          <video 
+          <LazyVideo 
             autoPlay loop muted playsInline preload="metadata"
             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-          >
-            <source src={videoSrc} type="video/mp4" />
-          </video>
+            videoSrc={videoSrc}
+          />
           {videoOverlay && videoOverlay}
         </div>
       )}
@@ -1379,12 +1413,11 @@ function AcademiaCard() {
         boxShadow: isHovered ? '0 0 20px rgba(164, 217, 85, 0.4), inset 0 0 20px rgba(164, 217, 85, 0.05)' : 'none',
         transition: 'all 0.3s ease'
       }}>
-        <video 
+        <LazyVideo 
           autoPlay loop muted playsInline preload="metadata"
           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-        >
-          <source src="/assets/images/productos/astronautaSaludo.mp4" type="video/mp4" />
-        </video>
+          videoSrc="/assets/images/productos/astronautaSaludo.webm"
+        />
         
         {/* Overlay gradient */}
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 60%)', pointerEvents: 'none' }} />
@@ -1923,7 +1956,7 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
               bg="rgba(234,88,12,0.15)" 
               title="ROI Discovery" 
               desc="Descubre cuánto valor puede generar la IA en tu empresa. Analizamos procesos, costos y oportunidades para identificar dónde implementar IA con mayor retorno." 
-              videoSrc="/assets/images/productos/mabePanel.mp4"
+              videoSrc="/assets/images/productos/mabePanel.webm"
               stats={[
                 { value: "10x+", label: "ROI Estimado" },
                 { value: "4 Semanas", label: "De análisis" },
@@ -1949,7 +1982,7 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
               bg="rgba(37,99,235,0.15)" 
               title="Desarrollo IA Empresarial" 
               desc="Diseñamos soluciones de IA personalizadas que optimizan procesos, mejoran la toma de decisiones y generan un retorno de inversión claro y medible." 
-              videoSrc="/assets/images/productos/portalia.mp4"
+              videoSrc="/assets/images/productos/portalia.webm"
               stats={[
                 { value: "99.9%", label: "Precisión Modelos" },
                 { value: "90%", label: "Automatización" },
@@ -1970,7 +2003,7 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
               bg="rgba(147,51,234,0.15)" 
               title="Desarrollo IA en Organigrama" 
               desc="Identifica qué áreas de tu empresa pueden ser potenciadas con IA. Desarrollamos empleados digitales inteligentes para transformar funciones, equipos y flujos de trabajo en todo tu organigrama." 
-              videoSrc="/assets/images/robotAbajo.mp4"
+              videoSrc="/assets/images/robotAbajo.webm"
               stats={[
                 { value: "5+", label: "Roles de Agentes" },
                 { value: "60%", label: "Ahorro de Tiempo" },
@@ -1991,7 +2024,7 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
               bg="rgba(22,163,74,0.15)" 
               title="Desarrollo IA por Sector" 
               desc="Tu industria ya opera con inteligencia artificial. Creamos soluciones especializadas para tu sector, adaptadas a tus retos, clientes y oportunidades reales." 
-              videoSrc="/assets/images/productos/prediccionVent.mp4"
+              videoSrc="/assets/images/productos/prediccionVent.webm"
               stats={[
                 { value: "10+", label: "Sectores Clave" },
                 { value: "Real-Time", label: "Procesamiento" },
@@ -2027,7 +2060,7 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
               bg="rgba(234,88,12,0.15)" 
               title="Desarrollo IA PYME" 
               desc="Conoce las Píldoras de IA. Automatiza tareas, vende mejor, atiende más rápido y compite con tecnología accesible para pequeñas y medianas empresas." 
-              videoSrc="/assets/images/productos/whatsFaq.mp4"
+              videoSrc="/assets/images/productos/whatsFaq.webm"
               stats={[
                 { value: "Asequible", label: "Inversión Pyme" },
                 { value: "1 Semana", label: "Despliegue Rápido" },
@@ -2063,7 +2096,7 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
               bg="rgba(220,38,38,0.15)" 
               title="Market Place de Soluciones" 
               desc="Encuentra soluciones de IA listas para implementar. Explora herramientas, agentes y automatizaciones creadas para resolver problemas reales de negocio." 
-              videoSrc="/assets/images/productos/portalia.mp4"
+              videoSrc="/assets/images/productos/portalia.webm"
               stats={[
                 { value: "50+", label: "Apps Listas" },
                 { value: "1-Click", label: "Instalación" },
@@ -2085,7 +2118,7 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
               bg="rgba(220,38,38,0.15)" 
               title="Monitoreo de Modelos IA" 
               desc="Supervisa el desempeño de tus modelos, automatizaciones y agentes inteligentes en tiempo real. Detecta fallas, mide resultados y mejora continuamente tus soluciones de IA." 
-              videoSrc="/assets/images/productos/deteccionAnomalias.mp4"
+              videoSrc="/assets/images/productos/deteccionAnomalias.webm"
               stats={[
                 { value: "Real-Time", label: "Latencia & Drift" },
                 { value: "Mailing", label: "Alertas Activas" },

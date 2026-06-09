@@ -15,7 +15,7 @@ import {
   Cpu,
 } from 'lucide-react';
 import { brandingConfig } from '../config/branding';
-import mayiaLogo from '../assets/logosNativos/mayiaLogoBlanco.png';
+import mayiaLogo from '../assets/logosNativos/mayiaLogoBlanco.webp';
 
 interface SidebarProps {
   activeSection: string;

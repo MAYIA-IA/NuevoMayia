@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import hechoEnMexicoLogo from '../assets/logosNativos/hechoEnMexicoRed.jpg';
+import hechoEnMexicoLogo from '../assets/logosNativos/hechoEnMexicoRed.webp';
 
 const Footer = () => {
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);

@@ -32,7 +32,7 @@ export const TecnologiasInformacion: React.FC = () => {
       titulo: 'Seguridad',
       descripcion: 'Ciberseguridad y protección de datos',
       mediaType: 'image',
-      mediaSrc: '../../../public/assets/tecInfo/seguridad.png',
+      mediaSrc: '../../../public/assets/tecInfo/seguridad.webp',
     },
     {
       id: 5,

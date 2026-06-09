@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import mayiaLogo from '../assets/logosNativos/mayiaLogoBlanco.png';
+import mayiaLogo from '../assets/logosNativos/mayiaLogoBlanco.webp';
 
 interface NavItem {
   label: string;

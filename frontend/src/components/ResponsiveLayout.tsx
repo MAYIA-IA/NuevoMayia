@@ -7,7 +7,7 @@ import {
   Sparkles, Mail, Phone, Map, Factory, Pill, ShoppingBag,
 } from 'lucide-react';
 import { brandingConfig } from '../config/branding';
-import mayiaLogo from '../assets/logosNativos/mayiaLogoBlanco.png';
+import mayiaLogo from '../assets/logosNativos/mayiaLogoBlanco.webp';
 
 interface ResponsiveLayoutProps {
   activeSection: string;

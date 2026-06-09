@@ -1,5 +1,5 @@
 import { ExternalLink, Calendar } from 'lucide-react';
-import flaiLogo from '../assets/logosNativos/logo-FLAI.png';
+import flaiLogo from '../assets/logosNativos/logo-FLAI.webp';
 
 export default function FlaiInfoModal() {
   const handleAgendarCita = (e: React.MouseEvent<HTMLButtonElement>) => {

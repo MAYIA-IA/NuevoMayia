@@ -1,14 +1,14 @@
 import { useState, useRef, useEffect } from 'react';
 
-import img1 from "../assets/AgentesConsultores/Agente1.jpeg";
-import img2 from "../assets/AgentesConsultores/Agente2.jpeg";
-import img3 from "../assets/AgentesConsultores/Agente3.jpeg";
-import img4 from "../assets/AgentesConsultores/Agente4.jpeg";
+import img1 from "../assets/AgentesConsultores/Agente1.webp";
+import img2 from "../assets/AgentesConsultores/Agente2.webp";
+import img3 from "../assets/AgentesConsultores/Agente3.webp";
+import img4 from "../assets/AgentesConsultores/Agente4.webp";
 
-import video1 from "../assets/AgentesConsultores/Agente1.mp4";
-import video2 from "../assets/AgentesConsultores/Agente2.mp4";
-import video3 from "../assets/AgentesConsultores/Agente3.mp4";
-import video4 from "../assets/AgentesConsultores/Agente4.mp4";
+import video1 from "../assets/AgentesConsultores/Agente1.webm";
+import video2 from "../assets/AgentesConsultores/Agente2.webm";
+import video3 from "../assets/AgentesConsultores/Agente3.webm";
+import video4 from "../assets/AgentesConsultores/Agente4.webm";
 
 interface Consultor {
   id: number;

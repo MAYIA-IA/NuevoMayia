@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import { TrendingUp, Bot, Trophy, BarChart2, Lock, Globe, Lightbulb, GraduationCap, Handshake } from 'lucide-react';
 
-import imagen1 from '../assets/news/news1.png';
-import imagen2 from '../assets/news/news2.png';
-import imagen3 from '../assets/news/news3.png';
-import imagen4 from '../assets/news/news4.png';
-import imagen5 from '../assets/news/news5.png';
+import imagen1 from '../assets/news/news1.webp';
+import imagen2 from '../assets/news/news2.webp';
+import imagen3 from '../assets/news/news3.webp';
+import imagen4 from '../assets/news/news4.webp';
+import imagen5 from '../assets/news/news5.webp';
 
 /* ── Datos de noticias – editar aquí ────────────────────────────── */
 interface NewsItem {

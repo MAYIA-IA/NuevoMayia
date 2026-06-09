@@ -11,11 +11,11 @@ import './responsive.css';
 // Componentes críticos (carga estática)
 import CertificacionesMarquee from './components/CertificacionesMarquee';
 import NoticiasTicker from './components/NoticiasTicker';
-import EnterpriseDashboard from './components/EnterpriseDashboard';
 import SocialPopover from './components/SocialPopover';
 import CalendarModal from './components/CalendarModal';
 
 // Componentes pesados (carga perezosa)
+const EnterpriseDashboard = lazy(() => import('./components/EnterpriseDashboard'));
 const Analiticos = lazy(() => import('./components/departamentos/Analiticos').then(m => ({ default: m.Analiticos })));
 const HubsDigitales = lazy(() => import('./components/HubsDigitales'));
 const IAEmpresarial = lazy(() => import('./components/IAEmpresarial'));

@@ -1,4 +1,4 @@
-import robotVideo from "../assets/AgentesConsultores/Robot_Asistente_con_Variaciones_de_Vestimenta.mp4";
+import robotVideo from "../assets/AgentesConsultores/Robot_Asistente_con_Variaciones_de_Vestimenta.webm";
 import { useState, useEffect, useRef } from 'react';
 import { Briefcase, Package, Calendar, BarChart3 } from 'lucide-react';
 
