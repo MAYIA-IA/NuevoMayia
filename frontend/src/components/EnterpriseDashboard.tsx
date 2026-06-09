@@ -11,7 +11,7 @@ import flaiLogo from '../assets/logosNativos/1. NUBE_FINAL_FLAI (1).png';
 import mayiaLakeLogo from '../assets/logosNativos/MAYiA_LAKE.jpeg';
 
 const CATEGORIES = ['Infraestructura', 'Desarrollo', 'Modelos', 'Agentes', 'Operación', 'Monitoreo', 'Capacitación'];// --- SUB-COMPONENTE: EdgenetCard ("Fábrica para tu IA Privada") ---
-function EdgenetCard({ onOpenMap, onOpenFabricaInfo }: { onOpenMap?: () => void; onOpenFabricaInfo?: () => void }) {
+function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOpenMap?: () => void; onOpenFabricaInfo?: () => void; onOpenDiagnostico?: () => void }) {
   const [isHovered, setIsHovered] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   
@@ -119,7 +119,8 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo }: { onOpenMap?: () => void;
         margin: '0 20px 16px', 
         borderRadius: 16, 
         overflow: 'hidden', 
-        height: 180, 
+        flex: 1,
+        minHeight: 180, 
         position: 'relative', 
         background: '#F9FAFB',
         border: `2px solid ${isHovered ? '#22c55e' : 'transparent'}`,
@@ -282,7 +283,7 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo }: { onOpenMap?: () => void;
           <button
             onClick={(e) => {
               e.stopPropagation();
-              handleAgendarCita(e);
+              if (onOpenDiagnostico) onOpenDiagnostico();
             }}
             style={{
               background: 'linear-gradient(135deg, #0f766e, #0d9488)',
@@ -348,7 +349,7 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo }: { onOpenMap?: () => void;
         alignItems: 'center',
         justifyContent: 'space-between',
         gap: 12,
-        marginTop: 'auto'
+        marginTop: 16
       }}>
         <span style={{ 
           fontSize: 12, 
@@ -1677,7 +1678,7 @@ function AcademiaCard() {
 }
 
 // --- COMPONENTE PRINCIPAL ---
-export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenFabricaInfo }: { onOpenMap?: () => void, onOpenFlaiInfo?: () => void, onOpenFabricaInfo?: () => void }) {
+export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenFabricaInfo, onOpenDiagnostico }: { onOpenMap?: () => void, onOpenFlaiInfo?: () => void, onOpenFabricaInfo?: () => void, onOpenDiagnostico?: () => void }) {
   const [activeTab, setActiveTab] = useState('Infraestructura');
 
   const Wrapper = ({ category, children }: { category: string, children: React.ReactNode }) => {
@@ -1857,7 +1858,7 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
           
           {/* --- CATEGORIA: Infraestructura --- */}
           <Wrapper category="Infraestructura">
-            <EdgenetCard onOpenMap={onOpenMap} onOpenFabricaInfo={onOpenFabricaInfo} />
+            <EdgenetCard onOpenMap={onOpenMap} onOpenFabricaInfo={onOpenFabricaInfo} onOpenDiagnostico={onOpenDiagnostico} />
           </Wrapper>
 
           <Wrapper category="Infraestructura">

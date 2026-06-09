@@ -35,6 +35,8 @@ const Blog = lazy(() => import('./components/Blog'));
 const SalaPrensa = lazy(() => import('./components/SalaPrensa'));
 const AsistenteIAChat = lazy(() => import('./components/modules/AsistenteIAChat').then(m => ({ default: m.AsistenteIAChat })));
 const QuienesSomosModal = lazy(() => import('./components/QuienesSomosModal'));
+const DiagnosticoEmpresaModal = lazy(() => import('./components/DiagnosticoEmpresaModal'));
+const OrigenMarcaModal = lazy(() => import('./components/OrigenMarcaModal'));
 
 // Fallback de carga premium
 const LoadingSection = () => (
@@ -168,7 +170,7 @@ function App() {
     const titulos: Record<string, string> = {
       dashboard: 'Dashboard',
       'enterprise-dashboard': 'Centro de Control',
-      analiticos: 'México es MAYiA',
+      analiticos: 'Motores Económicos de México',
       noticias: 'Noticias IA',
       'hubs-digitales': 'Hubs Digitales',
       'ia-empresarial': 'I.A. Empresarial',
@@ -200,6 +202,7 @@ function App() {
             onOpenMap={() => handleOpenSocialModal('analiticos', window.innerHeight / 2)} 
             onOpenFlaiInfo={() => handleOpenSocialModal('flai-info', window.innerHeight / 2)}
             onOpenFabricaInfo={() => handleOpenSocialModal('fabrica-ia', window.innerHeight / 2)}
+            onOpenDiagnostico={() => handleOpenSocialModal('diagnostico-empresa', window.innerHeight / 2)}
           />
         </div>
         
@@ -300,6 +303,8 @@ function App() {
           {activeSocialModal === 'fabrica-ia' && <FabricaIaModal />}
           {activeSocialModal === 'chat-ia' && <div style={{ height: '500px', display: 'flex', flexDirection: 'column' }}><AsistenteIAChat /></div>}
           {activeSocialModal === 'quienes' && <QuienesSomosModal />}
+          {activeSocialModal === 'diagnostico-empresa' && <DiagnosticoEmpresaModal onClose={() => setActiveSocialModal(null)} />}
+          {activeSocialModal === 'origen-marca' && <OrigenMarcaModal />}
         </Suspense>
       </SocialPopover>
 
