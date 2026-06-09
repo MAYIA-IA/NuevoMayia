@@ -108,7 +108,7 @@ SERVICIOS Y PRODUCTOS DE MAYiA:
    - Red nacional de centros de datos
    - Modelos de IA nativos de México
    - 100% Soberanía de datos
-   - Partners: NVIDIA, Lenovo
+   - Partners: AMD
 
 CARACTERÍSTICAS DISTINTIVAS:
 Primera plataforma IA integral de México
