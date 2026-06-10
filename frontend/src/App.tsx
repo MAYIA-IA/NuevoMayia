@@ -1,4 +1,4 @@
-import { useState, useEffect, lazy, Suspense } from 'react';
+import { useState, useEffect, lazy, Suspense, useRef } from 'react';
 import HeaderBanner from './components/headerBanner';
 import SeoHub from './components/SeoHub';
 
@@ -51,6 +51,38 @@ const LoadingSection = () => (
     `}</style>
   </div>
 );
+
+// Contenedor inteligente de carga perezosa para optimizar la carga de toda la página
+function LazySection({ children, height = '300px', ...props }: any) {
+  const [shouldRender, setShouldRender] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setShouldRender(true);
+            observer.disconnect();
+          }
+        });
+      },
+      { rootMargin: '300px' } // Renderiza la sección cuando está a 300px o menos
+    );
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  return (
+    <div ref={containerRef} style={{ minHeight: shouldRender ? 'auto' : height }} {...props}>
+      {shouldRender ? children : null}
+    </div>
+  );
+}
 
 /* ── IDs de sección para scroll-spy ── */
 const SECTION_IDS = [
@@ -213,31 +245,31 @@ function App() {
             fueron extraídas al SocialPopover */}
         
         {/* 7. Hubs Digitales */}
-        <div id="hubs-digitales"><HubsDigitales /></div>
+        <LazySection id="hubs-digitales" height="400px"><HubsDigitales /></LazySection>
         
         {/* 9. IA Empresarial */}
-        <div id="ia-empresarial"><IAEmpresarial /></div>
+        <LazySection id="ia-empresarial" height="400px"><IAEmpresarial /></LazySection>
         
         {/* 9.5 IA por Sector */}
-        <div id="ia-por-sector"><IAporSector /></div>
+        <LazySection id="ia-por-sector" height="400px"><IAporSector /></LazySection>
         
         {/* 11. Empleados Digitales */}
-        <div id="empleados-digitales"><EmpleadosDigitales /></div>
+        <LazySection id="empleados-digitales" height="400px"><EmpleadosDigitales /></LazySection>
         
         {/* 11.5 Marketplace de Soluciones */}
-        <div id="hackaton"><HackatonMarketplace /></div>
+        <LazySection id="hackaton" height="400px"><HackatonMarketplace /></LazySection>
 
         {/* 12. Píldoras IA */}
-        <div id="pildoras-ia"><PildorasIA /></div>
+        <LazySection id="pildoras-ia" height="400px"><PildorasIA /></LazySection>
         
         {/* 13. Ciberseguridad */}
-        <div id="ciberseguridad"><CiberseguridadIA /></div>
+        <LazySection id="ciberseguridad" height="400px"><CiberseguridadIA /></LazySection>
         
         {/* 15. Academia */}
-        <div id="academia"><AcademiaIA /></div>
+        <LazySection id="academia" height="400px"><AcademiaIA /></LazySection>
         
         {/* 18. Footer */}
-        <Footer />
+        <LazySection height="200px"><Footer /></LazySection>
       </div>
     </Suspense>
   );

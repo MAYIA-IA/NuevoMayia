@@ -11,14 +11,42 @@ import flaiLogo from '../assets/logosNativos/1. NUBE_FINAL_FLAI (1).webp';
 import mayiaLakeLogo from '../assets/logosNativos/MAYiA_LAKE.webp';
 import ajoloteVideo from '../assets/AJOLOTE.webm';
 
+const hexToRgba = (hex: string, alpha: number) => {
+  if (!hex || typeof hex !== 'string') return `rgba(164, 217, 85, ${alpha})`;
+  const cleanHex = hex.replace('#', '');
+  if (cleanHex.length === 6) {
+    const r = parseInt(cleanHex.substring(0, 2), 16);
+    const g = parseInt(cleanHex.substring(2, 4), 16);
+    const b = parseInt(cleanHex.substring(4, 6), 16);
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+  }
+  return hex;
+};
+
+// Hook personalizado para detectar dispositivos móviles (<768px)
+const useIsMobile = () => {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const media = window.matchMedia('(max-width: 768px)');
+    setIsMobile(media.matches);
+    const listener = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    media.addEventListener('change', listener);
+    return () => media.removeEventListener('change', listener);
+  }, []);
+  return isMobile;
+};
+
 // --- COMPONENTE DE OPTIMIZACIÓN: LazyVideo para carga bajo demanda ---
-const LazyVideo = forwardRef<HTMLVideoElement, any>(({ src, videoSrc, children, ...props }, ref) => {
+const LazyVideo = forwardRef<HTMLVideoElement, any>(({ src, videoSrc, children, accentColor, ...props }, ref) => {
   const [shouldLoad, setShouldLoad] = useState(false);
   const internalRef = useRef<HTMLVideoElement>(null);
+  const isMobile = useIsMobile();
 
   useImperativeHandle(ref, () => internalRef.current!);
 
   useEffect(() => {
+    if (isMobile) return;
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -38,7 +66,40 @@ const LazyVideo = forwardRef<HTMLVideoElement, any>(({ src, videoSrc, children, 
     return () => {
       observer.disconnect();
     };
-  }, []);
+  }, [isMobile]);
+
+  if (isMobile) {
+    const colorFinal = accentColor || '#A4D955';
+    return (
+      <div 
+        ref={internalRef as any}
+        style={{ 
+          width: '100%', 
+          height: '100%', 
+          background: 'linear-gradient(135deg, #090e1a 0%, #151d30 100%)', 
+          display: 'flex', 
+          alignItems: 'center', 
+          justifyContent: 'center',
+          position: 'relative',
+          overflow: 'hidden'
+        }}
+      >
+        <motion.div 
+          animate={{ scale: [0.9, 1.15], opacity: [0.7, 1] }}
+          transition={{ duration: 2.5, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
+          style={{
+            position: 'absolute',
+            width: '120px',
+            height: '120px',
+            borderRadius: '50%',
+            background: `radial-gradient(circle, ${hexToRgba(colorFinal, 0.25)} 0%, rgba(0,0,0,0) 70%)`,
+            filter: 'blur(8px)',
+          }}
+        />
+        <span style={{ fontSize: 28, opacity: 0.25, filter: 'drop-shadow(0 0 8px ' + colorFinal + ')' }}>⚡</span>
+      </div>
+    );
+  }
 
   const actualSrc = src || videoSrc;
 
@@ -50,18 +111,6 @@ const LazyVideo = forwardRef<HTMLVideoElement, any>(({ src, videoSrc, children, 
     </video>
   );
 });
-
-const hexToRgba = (hex: string, alpha: number) => {
-  if (!hex || typeof hex !== 'string') return `rgba(164, 217, 85, ${alpha})`;
-  const cleanHex = hex.replace('#', '');
-  if (cleanHex.length === 6) {
-    const r = parseInt(cleanHex.substring(0, 2), 16);
-    const g = parseInt(cleanHex.substring(2, 4), 16);
-    const b = parseInt(cleanHex.substring(4, 6), 16);
-    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
-  }
-  return hex;
-};
 
 const CATEGORIES = ['Infraestructura', 'Desarrollo', 'Modelos', 'Agentes', 'Operación', 'Monitoreo', 'Capacitación'];// --- SUB-COMPONENTE: EdgenetCard ("Fábrica para tu IA Privada") ---
 function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOpenMap?: () => void; onOpenFabricaInfo?: () => void; onOpenDiagnostico?: () => void }) {
@@ -136,6 +185,7 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOp
               playsInline 
               style={{ width: '100%', height: '100%', objectFit: 'cover' }}
               videoSrc="/assets/images/jaguar.webm"
+              accentColor="#22c55e"
             />
           </div>
           <div>
@@ -188,6 +238,7 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOp
           autoPlay loop muted playsInline preload="metadata"
           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           videoSrc="/assets/images/productos/drpVideo.webm"
+          accentColor="#22c55e"
         />
 
         {/* Left overlays: Nuestros servidores, Modo Hibrido, Modo on premise */}
@@ -560,6 +611,7 @@ function FlaiCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
           autoPlay loop muted playsInline preload="metadata"
           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           videoSrc="/assets/images/productos/flaiMarcoVideo.webm"
+          accentColor="#DC2626"
         />
       </div>
 
@@ -728,6 +780,7 @@ function SocCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
             autoPlay loop muted playsInline preload="metadata"
             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
             videoSrc="/assets/images/productos/cyberpeaceVid.webm"
+            accentColor="#4881EB"
         />
         <div style={{ position: 'absolute', top: 12, left: 12, display: 'flex', flexDirection: 'column', gap: 6, maxWidth: '80%', zIndex: 5 }}>
            {["CACERÍA DE AMENAZAS", "INTELIGENCIA DE AMENAZAS", "EVALUACIÓN DE RIESGOS", "ESTRATEGIA Y GOBIERNO DE CIBERSEGURIDAD", "GESTIÓN DE RESPUESTAS Y CONTENCIÓN DE INCIDENTES"].map((f, i) => (
@@ -945,6 +998,7 @@ function MayiaCard() {
           autoPlay loop muted playsInline preload="metadata"
           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           videoSrc={ajoloteVideo}
+          accentColor="#A4D955"
         />
       </div>
 
@@ -1191,6 +1245,7 @@ function StandardCard({
             autoPlay loop muted playsInline preload="metadata"
             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
             videoSrc={videoSrc}
+            accentColor={color}
           />
           {videoOverlay && videoOverlay}
         </div>
@@ -1417,6 +1472,7 @@ function AcademiaCard() {
           autoPlay loop muted playsInline preload="metadata"
           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           videoSrc="/assets/images/productos/astronautaSaludo.webm"
+          accentColor="#A4D955"
         />
         
         {/* Overlay gradient */}
