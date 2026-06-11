@@ -2271,7 +2271,7 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
               bg="rgba(234,88,12,0.15)" 
               title="ROI Discovery" 
               desc="Descubre cuánto valor puede generar la IA en tu empresa. Analizamos procesos, costos y oportunidades para identificar dónde implementar IA con mayor retorno." 
-              videoSrc="/assets/images/productos/mabePanel.webm"
+              videoSrc="/assets/images/productos/portalia.webm"
               stats={[
                 { value: "10x+", label: "ROI Estimado" },
                 { value: "4 Semanas", label: "De análisis" },
@@ -2301,7 +2301,7 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
               bg="rgba(37,99,235,0.15)" 
               title="Desarrollo IA Empresarial" 
               desc="Diseñamos soluciones de IA personalizadas que optimizan procesos, mejoran la toma de decisiones y generan un retorno de inversión claro y medible." 
-              videoSrc="/assets/images/productos/portalia.webm"
+              videoSrc="/assets/images/productos/mabePanel.webm"
               stats={[
                 { value: "99.9%", label: "Precisión Modelos" },
                 { value: "90%", label: "Automatización" },

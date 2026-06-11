@@ -1,13 +1,36 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
-    <defs>
-      <linearGradient id="grad9001" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.1" />
-        <stop offset="100%" stop-color="#f59e0b" stop-opacity="0.3" />
-      </linearGradient>
-    </defs>
-    <circle cx="100" cy="100" r="90" fill="url(#grad9001)" stroke="#f59e0b" stroke-width="6" />
-    <circle cx="100" cy="100" r="80" fill="none" stroke="#f59e0b" stroke-width="2" stroke-dasharray="4 4" />
-    <text x="100" y="90" font-family="system-ui, sans-serif" font-size="42" font-weight="900" fill="#1f2937" text-anchor="middle">ISO</text>
-    <text x="100" y="135" font-family="system-ui, sans-serif" font-size="36" font-weight="800" fill="#f59e0b" text-anchor="middle">9001</text>
-    <path d="M80 160 L100 175 L120 160" fill="none" stroke="#f59e0b" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
-  </svg>
+  <!-- Outer Ring -->
+  <circle cx="100" cy="100" r="92" fill="#0054A6" />
+  <circle cx="100" cy="100" r="85" fill="none" stroke="#FFFFFF" stroke-width="2" />
+  
+  <!-- Outer text -->
+  <path id="textPath1" d="M 25,100 A 75,75 0 0,1 175,100" fill="none" />
+  <path id="textPath2" d="M 175,100 A 75,75 0 0,1 25,100" fill="none" />
+  
+  <text font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#FFFFFF" letter-spacing="2">
+    <textPath href="#textPath1" startOffset="50%" text-anchor="middle">
+      QUALITY MANAGEMENT
+    </textPath>
+  </text>
+  <text font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#FFFFFF" letter-spacing="2">
+    <textPath href="#textPath2" startOffset="50%" text-anchor="middle">
+      ★ CERTIFIED ★
+    </textPath>
+  </text>
+
+  <!-- Inner Circle -->
+  <circle cx="100" cy="100" r="54" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="2" />
+  
+  <!-- Grid Globe Lines -->
+  <circle cx="100" cy="100" r="42" fill="none" stroke="#0054A6" stroke-width="1.5" />
+  <ellipse cx="100" cy="100" rx="20" ry="42" fill="none" stroke="#0054A6" stroke-width="1.5" />
+  <ellipse cx="100" cy="100" rx="42" ry="12" fill="none" stroke="#0054A6" stroke-width="1" />
+  <line x1="100" y1="58" x2="100" y2="142" stroke="#0054A6" stroke-width="1.5" />
+  <line x1="58" y1="100" x2="142" y2="100" stroke="#0054A6" stroke-width="1.5" />
+
+  <!-- Center Text Badge Overlay -->
+  <rect x="52" y="86" width="96" height="28" rx="6" fill="#0054A6" stroke="#FFFFFF" stroke-width="2" />
+  <text x="100" y="105" font-family="Arial Black, sans-serif" font-size="14" font-weight="900" fill="#FFFFFF" text-anchor="middle">
+    ISO 9001
+  </text>
+</svg>

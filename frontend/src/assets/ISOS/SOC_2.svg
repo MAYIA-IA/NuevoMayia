@@ -1,13 +1,43 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
-    <defs>
-      <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.1" />
-        <stop offset="100%" stop-color="#3b82f6" stop-opacity="0.3" />
-      </linearGradient>
-    </defs>
-    <circle cx="100" cy="100" r="90" fill="url(#grad2)" stroke="#3b82f6" stroke-width="6" />
-    <circle cx="100" cy="100" r="80" fill="none" stroke="#3b82f6" stroke-width="2" stroke-dasharray="4 4" />
-    <text x="100" y="90" font-family="system-ui, sans-serif" font-size="42" font-weight="900" fill="#1f2937" text-anchor="middle">SOC</text>
-    <text x="100" y="135" font-family="system-ui, sans-serif" font-size="36" font-weight="800" fill="#3b82f6" text-anchor="middle">2</text>
-    <path d="M80 160 L100 175 L120 160" fill="none" stroke="#3b82f6" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
-  </svg>
+  <defs>
+    <linearGradient id="socGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#002F6C" />
+      <stop offset="100%" stop-color="#0054A6" />
+    </linearGradient>
+  </defs>
+
+  <!-- Outer Ring -->
+  <circle cx="100" cy="100" r="92" fill="url(#socGrad)" />
+  <circle cx="100" cy="100" r="85" fill="none" stroke="#0082C8" stroke-width="3" />
+  
+  <!-- Curved text paths -->
+  <path id="socPathTop" d="M 25,100 A 75,75 0 0,1 175,100" fill="none" />
+  <path id="socPathBottom" d="M 175,100 A 75,75 0 0,1 25,100" fill="none" />
+  
+  <text font-family="Arial Black, Arial, sans-serif" font-size="10" font-weight="900" fill="#FFFFFF" letter-spacing="1">
+    <textPath href="#socPathTop" startOffset="50%" text-anchor="middle">
+      AICPA SOC 2 TYPE II
+    </textPath>
+  </text>
+  
+  <text font-family="Arial, sans-serif" font-size="8.5" font-weight="bold" fill="#0082C8" letter-spacing="1">
+    <textPath href="#socPathBottom" startOffset="50%" text-anchor="middle">
+      TRUST SERVICES CRITERIA
+    </textPath>
+  </text>
+
+  <!-- Inner Circle Seal -->
+  <circle cx="100" cy="100" r="54" fill="#FFFFFF" stroke="#0082C8" stroke-width="2" />
+  
+  <!-- Shield graphic in center -->
+  <path d="M100,66 L124,74 C124,92 114,106 100,112 C86,106 76,92 76,74 Z" fill="#002F6C" stroke="#0082C8" stroke-width="2" />
+  
+  <!-- Checkmark in shield -->
+  <path d="M90,86 L97,93 L110,80" fill="none" stroke="#0082C8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+
+  <!-- Bold SOC Text overlay -->
+  <rect x="52" y="116" width="96" height="22" rx="4" fill="#0082C8" />
+  <text x="100" y="132" font-family="Arial Black, sans-serif" font-size="12" font-weight="900" fill="#FFFFFF" text-anchor="middle">
+    SECURE
+  </text>
+</svg>

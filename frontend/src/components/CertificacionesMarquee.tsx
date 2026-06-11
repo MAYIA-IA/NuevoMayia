@@ -72,7 +72,7 @@ export default function CertificacionesMarquee() {
             {cert.type === 'logo' ? (
               <div
                 className="flex items-center justify-center transform transition-all duration-300 group-hover:scale-110 rounded-xl overflow-hidden"
-                style={{ width: 90, height: 75, background: cert.dark ? '#111827' : 'transparent', padding: '6px' }}
+                style={{ width: 130, height: 110, background: cert.dark ? '#111827' : 'transparent', padding: '4px' }}
               >
                 <img 
                   src={cert.img} 
@@ -83,7 +83,7 @@ export default function CertificacionesMarquee() {
             ) : (
               <div
                 className="flex flex-col items-center justify-center transform transition-all duration-300 group-hover:scale-110 rounded-xl bg-white shadow-sm hover:shadow-md"
-                style={{ width: 80, height: 80, border: `1px solid ${cert.color}44` }}
+                style={{ width: 110, height: 110, border: `1px solid ${cert.color}44` }}
               >
                 <span className="text-sm font-extrabold" style={{ color: cert.color, lineHeight: 1 }}>{cert.name}</span>
                 <span className="text-base font-black leading-none mt-1 text-gray-800">{cert.sub}</span>
