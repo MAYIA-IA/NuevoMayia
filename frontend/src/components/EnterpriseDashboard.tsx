@@ -867,7 +867,7 @@ function SocCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
 }
 
 // --- SUB-COMPONENTE: MayiaCard (MAYiA Lake / IA para Empresas) ---
-function MayiaCard() {
+function MayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
   const [isHovered, setIsHovered] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [showInfoModal, setShowInfoModal] = useState(false);
@@ -887,7 +887,11 @@ function MayiaCard() {
 
   const handleMasInformacion = (e: React.MouseEvent) => {
     e.stopPropagation();
-    setShowInfoModal(true);
+    if (onOpenInfo) {
+      onOpenInfo();
+    } else {
+      setShowInfoModal(true);
+    }
     setMenuOpen(false);
   };
 
@@ -939,11 +943,11 @@ function MayiaCard() {
       <div style={{ display: 'flex', alignItems: 'center', padding: '20px 20px 12px', justifyContent: 'space-between' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
           <div style={{ width: 44, height: 44, borderRadius: '50%', background: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', border: '1.5px solid #A4D955' }}>
-            <img src={mayiaLakeLogo} alt="MAYiA Lake" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            <img src={mayiaLakeLogo} alt="MAYiA Lakehouse" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           </div>
           <div>
-            <h3 style={{ margin: 0, fontSize: 18, fontWeight: 800, color: '#111827' }}>MAYiA Lake</h3>
-            <p style={{ margin: 0, fontSize: 12, color: '#4B5563', fontWeight: 600 }}>IA Para Empresas</p>
+            <h3 style={{ margin: 0, fontSize: 18, fontWeight: 800, color: '#111827' }}>MAYiA Lakehouse</h3>
+            <p style={{ margin: 0, fontSize: 12, color: '#4B5563', fontWeight: 600 }}>Prepara tus datos para la IA</p>
           </div>
         </div>
 
@@ -1000,168 +1004,423 @@ function MayiaCard() {
           videoSrc={ajoloteVideo}
           accentColor="#A4D955"
         />
-      </div>
-
-      {/* Stats - Grid de 3 */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8, margin: '0 20px 12px' }}>
-        {[
-          { title: 'FÁBRICA IA', label1: 'Privada para', label2: 'tu empresa' },
-          { title: 'CONSULTORÍA', label1: 'Modelo', label2: 'StrategyOps' },
-          { title: 'LABORATORIO', label1: 'Pruebas de', label2: 'concepto' }
-        ].map((h, i) => (
-          <div key={i} style={{ 
-            background: 'linear-gradient(135deg, #F9FAFB, #F3F4F6)', borderRadius: 12, padding: '8px', 
-            border: '1px solid rgba(0, 0, 0, 0.08)', display: 'flex', flexDirection: 'column', 
-            alignItems: 'center', justifyContent: 'center'
-          }}>
-            <span style={{ fontSize: 9, fontWeight: 800, color: '#5EA500', marginBottom: 2, textAlign: 'center' }}>{h.title}</span>
-            <span style={{ fontSize: 7, color: '#4B5563', textAlign: 'center', lineHeight: 1.1 }}>{h.label1}</span>
-            <span style={{ fontSize: 7, color: '#4B5563', textAlign: 'center', lineHeight: 1.1 }}>{h.label2}</span>
-          </div>
-        ))}
-      </div>
-
-      {/* Big Stat Banner */}
-      <div style={{ margin: '0 20px 16px' }}>
+        {/* Overlays en el video */}
         <div style={{ 
-          background: 'linear-gradient(to right, rgba(72,129,235,0.06), rgba(164,217,85,0.06), rgba(72,129,235,0.06))', 
-          borderRadius: 12, padding: '10px 12px', border: '1px solid rgba(164, 217, 85, 0.15)', display: 'flex', 
-          flexDirection: 'column', alignItems: 'center', justifyContent: 'center'
+          position: 'absolute', 
+          bottom: 12, 
+          left: 12, 
+          display: 'flex', 
+          gap: 6,
+          zIndex: 5 
         }}>
-          <span style={{ fontSize: 13, fontWeight: 800, color: '#111827', textAlign: 'center', letterSpacing: '0.05em' }}>PLATAFORMAS DE IA</span>
-          <span style={{ fontSize: 8, fontWeight: 700, color: '#4B5563', textAlign: 'center', marginTop: 1 }}>PERSONALIZADAS</span>
+          {['INGESTA', 'RECOLECCIÓN'].map((txt) => (
+            <span 
+              key={txt} 
+              style={{ 
+                background: 'rgba(255, 255, 255, 0.9)', 
+                backdropFilter: 'blur(4px)', 
+                color: '#111827', 
+                fontSize: 9, 
+                fontWeight: 800, 
+                padding: '4px 8px', 
+                borderRadius: 6, 
+                border: '1px solid rgba(164, 217, 85, 0.25)',
+                letterSpacing: '0.04em',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
+              }}
+            >
+              {txt}
+            </span>
+          ))}
         </div>
       </div>
 
-      <div style={{ display: 'flex', gap: 8, padding: '0 20px 20px', marginTop: 'auto', flexDirection: 'column' }}>
-        <button 
-          onClick={() => window.open('https://edgenet.mx', '_blank')}
+      {/* Cuadros azules enfilados - Distribución simétrica */}
+      <div style={{ 
+        display: 'grid', 
+        gridTemplateColumns: '1fr 1fr', 
+        gap: 6, 
+        margin: '0 20px 16px' 
+      }}>
+        {['ALMACENAMIENTO', 'CÓMPUTO', 'CONSUMO', 'LINAJE'].map((txt) => (
+          <div 
+            key={txt} 
+            style={{ 
+              background: 'rgba(59, 130, 246, 0.08)', 
+              border: '1.5px solid rgba(59, 130, 246, 0.35)', 
+              color: '#2563eb', 
+              borderRadius: 8, 
+              padding: '6px 4px', 
+              fontSize: 9, 
+              fontWeight: 800, 
+              textAlign: 'center', 
+              boxShadow: '0 2px 4px rgba(59, 130, 246, 0.04)',
+              letterSpacing: '0.02em',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              lineHeight: 1.1
+            }}
+          >
+            {txt}
+          </div>
+        ))}
+        <div 
           style={{ 
-            background: '#F3F4F6', color: '#374151', border: '1px solid #D1D5DB', borderRadius: 8, padding: '10px 16px', fontSize: 13, fontWeight: 600, 
-            display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', width: '100%', justifyContent: 'center', transition: 'all 0.2s' 
+            gridColumn: 'span 2',
+            background: 'rgba(59, 130, 246, 0.08)', 
+            border: '1.5px solid rgba(59, 130, 246, 0.35)', 
+            color: '#2563eb', 
+            borderRadius: 8, 
+            padding: '6px 4px', 
+            fontSize: 9, 
+            fontWeight: 800, 
+            textAlign: 'center', 
+            boxShadow: '0 2px 4px rgba(59, 130, 246, 0.04)',
+            letterSpacing: '0.02em',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            lineHeight: 1.1
           }}
-          onMouseEnter={e => { e.currentTarget.style.background = '#E5E7EB'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
-          onMouseLeave={e => { e.currentTarget.style.background = '#F3F4F6'; e.currentTarget.style.transform = 'translateY(0)'; }}
         >
-          ROI de los datos (Edgenet) &rarr;
-        </button>
+          CALIDAD DE DATOS
+        </div>
+      </div>
+
+      {/* Descripción */}
+      <p style={{ 
+        fontSize: 13, 
+        color: '#4B5563', 
+        lineHeight: 1.5, 
+        margin: '0 20px 20px', 
+        fontWeight: 500 
+      }}>
+        Elimina los silos, unifica tus datos, obtén información estratégica en tiempo real y potencia tu IA empresarial y agéntica.
+        <br /><br />
+        Conoce el servicio de nuestros <strong>SQUADS</strong> de especialistas MAYIA, vamos a tu empresa y te apoyamos a preparar tu datos para la IA.
+      </p>
+
+      {/* Botones de acción */}
+      <div style={{ display: 'flex', gap: 8, padding: '0 20px 20px', marginTop: 'auto' }}>
         <button 
-          onClick={handleAgendarCita}
+          onClick={handleMasInformacion}
           style={{ 
-            background: 'linear-gradient(135deg, #A4D955, #7EBB2A)', color: '#111827', border: 'none', borderRadius: 8, padding: '10px 16px', fontSize: 13, fontWeight: 700, 
-            display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', width: '100%', justifyContent: 'center', transition: 'all 0.2s',
+            background: 'linear-gradient(135deg, #A4D955, #7EBB2A)', 
+            color: '#111827', 
+            border: 'none', 
+            borderRadius: 8, 
+            padding: '10px 16px', 
+            fontSize: 13, 
+            fontWeight: 700, 
+            cursor: 'pointer', 
+            flex: 1, 
+            justifyContent: 'center', 
+            display: 'flex',
+            alignItems: 'center',
+            gap: 6,
+            transition: 'all 0.2s',
             boxShadow: '0 4px 12px rgba(164,217,85,0.2)'
           }}
           onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 6px 16px rgba(164,217,85,0.4)'; }}
           onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 12px rgba(164,217,85,0.2)'; }}
         >
-          Contacta tu cita
+          Conoce más
+        </button>
+        <button 
+          onClick={handleAgendarCita}
+          style={{ 
+            background: 'linear-gradient(135deg, #A4D955, #7EBB2A)', 
+            color: '#111827', 
+            border: 'none', 
+            borderRadius: 8, 
+            padding: '10px 16px', 
+            fontSize: 13, 
+            fontWeight: 700, 
+            cursor: 'pointer', 
+            flex: 1, 
+            justifyContent: 'center', 
+            display: 'flex',
+            alignItems: 'center',
+            gap: 6,
+            transition: 'all 0.2s',
+            boxShadow: '0 4px 12px rgba(164,217,85,0.2)'
+          }}
+          onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 6px 16px rgba(164,217,85,0.4)'; }}
+          onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 12px rgba(164,217,85,0.2)'; }}
+        >
+          Agenda tu cita
         </button>
       </div>
 
-      {/* Modal de Información */}
-      {showInfoModal && (
-        <div 
-          className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-[99999] p-4" 
-          onClick={() => setShowInfoModal(false)}
-        >
-          <div 
-            style={{
-              background: '#FFFFFF',
-              borderRadius: 24,
-              maxWidth: 600,
-              width: '100%',
-              maxHeight: '90vh',
-              overflowY: 'auto',
-              border: '2px solid rgba(164, 217, 85, 0.3)',
-              boxShadow: '0 20px 50px rgba(0,0,0,0.15)',
-              display: 'flex',
-              flexDirection: 'column',
-            }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Header del Modal */}
-            <div style={{
-              background: 'linear-gradient(to right, #A4D955, #4881EB)',
-              padding: '24px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              position: 'sticky',
-              top: 0,
-              zIndex: 10
-            }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                <div style={{ width: 44, height: 44, borderRadius: '50%', background: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', border: '1.5px solid #FFFFFF' }}>
-                  <img src={mayiaLakeLogo} alt="MAYiA Lake" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                </div>
-                <h2 style={{ fontSize: 22, fontWeight: 800, color: '#FFFFFF', margin: 0 }}>MAYiA Lake</h2>
-              </div>
-              <button 
-                onClick={() => setShowInfoModal(false)}
-                style={{
-                  width: 32, height: 32, borderRadius: '50%', background: 'rgba(255,255,255,0.2)', border: 'none',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FFFFFF', cursor: 'pointer',
-                  fontWeight: 'bold', fontSize: 16, transition: 'background 0.2s'
-                }}
-                onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.3)'}
-                onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.2)'}
-              >
-                ✕
-              </button>
-            </div>
 
-            {/* Contenido del Modal */}
-            <div style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: 20 }}>
-              <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.6, margin: 0 }}>
-                <span style={{ fontWeight: 800, color: '#5EA500' }}>MAYiA Lake</span> es tu aliado en inteligencia artificial empresarial, ofreciendo soluciones personalizadas desde la consultoría hasta la implementación completa.
-              </p>
+    </div>
+  );
+}
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-                {[
-                  {
-                    title: 'Fábrica de IA Privada',
-                    text: 'Infraestructura dedicada exclusivamente para tu empresa, garantizando privacidad y control total.'
-                  },
-                  {
-                    title: 'Consultoría Estratégica',
-                    text: 'Modelo StrategyOps para transformar tu negocio con inteligencia artificial de manera efectiva.'
-                  },
-                  {
-                    title: 'Laboratorio de Innovación',
-                    text: 'Espacio para pruebas de concepto y desarrollo de soluciones personalizadas antes de la implementación.'
-                  },
-                  {
-                    title: 'Plataformas Personalizadas',
-                    text: 'Desarrollo de soluciones de IA adaptadas específicamente a las necesidades de tu industria.'
-                  }
-                ].map((feature, idx) => (
-                  <div key={idx} style={{ background: '#F9FAFB', borderRadius: 12, padding: '16px', border: '1px solid rgba(164, 217, 85, 0.15)' }}>
-                    <h3 style={{ margin: '0 0 6px', fontSize: 15, fontWeight: 700, color: '#5EA500' }}>{feature.title}</h3>
-                    <p style={{ margin: 0, fontSize: 13, color: '#4B5563', lineHeight: 1.5 }}>{feature.text}</p>
-                  </div>
-                ))}
-              </div>
+// --- SUB-COMPONENTE: SquadsMayiaCard (Squads / Ingenieros IA) ---
+function SquadsMayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
+  const [isHovered, setIsHovered] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
-              <button 
-                onClick={(e) => {
-                  setShowInfoModal(false);
-                  handleAgendarCita(e);
-                }}
-                style={{ 
-                  background: 'linear-gradient(135deg, #A4D955, #7EBB2A)', color: '#111827', border: 'none', borderRadius: 8, padding: '14px 16px', 
-                  fontSize: 14, fontWeight: 700, cursor: 'pointer', width: '100%', textAlign: 'center', transition: 'all 0.2s',
-                  boxShadow: '0 4px 12px rgba(164,217,85,0.2)', marginTop: 8
-                }}
-                onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 6px 16px rgba(164,217,85,0.3)'; }}
-                onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 12px rgba(164,217,85,0.2)'; }}
-              >
-                Agendar Cotización
-              </button>
-            </div>
+  const handleAgendarCita = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const rect = e.currentTarget.getBoundingClientRect();
+    if ((window as any).openCalendly) {
+      (window as any).openCalendly({ x: rect.right + 12, y: Math.max(20, rect.top - 140) });
+    } else {
+      window.open("https://calendly.com/mayiainteligencia/consulta-mayia", '_blank');
+    }
+    setMenuOpen(false);
+  };
+
+  const handleMasInformacion = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (onOpenInfo) {
+      onOpenInfo();
+    }
+    setMenuOpen(false);
+  };
+
+  useEffect(() => {
+    const playVideos = async () => {
+      try {
+        if (videoRef.current) {
+          await videoRef.current.play();
+        }
+      } catch (error) {
+        console.log("Autoplay requiere interacción del usuario");
+      }
+    };
+    playVideos();
+    return () => {
+      if (videoRef.current) videoRef.current.pause();
+    };
+  }, []);
+
+  return (
+    <div 
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => { setIsHovered(false); setMenuOpen(false); }}
+      style={{
+        borderRadius: 24, 
+        border: `2px solid ${isHovered ? '#A4D955' : '#E5E7EB'}`,
+        boxShadow: isHovered 
+          ? '0 20px 40px -8px rgba(164, 217, 85, 0.35), 0 0 24px 2px rgba(164, 217, 85, 0.20), inset 0 0 24px 2px rgba(164, 217, 85, 0.18)' 
+          : 'none',
+        background: isHovered 
+          ? 'radial-gradient(120% 120% at 50% 50%, rgba(255, 255, 255, 0) 30%, rgba(164, 217, 85, 0.08) 100%)' 
+          : '#FFFFFF',
+        display: 'flex', 
+        flexDirection: 'column', 
+        height: '100%', 
+        position: 'relative',
+        overflow: 'hidden',
+        transition: 'all 0.3s ease-in-out'
+      }}
+    >
+      {/* Header */}
+      <div style={{ display: 'flex', alignItems: 'center', padding: '20px 20px 12px', justifyContent: 'space-between' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+          <div style={{ width: 44, height: 44, borderRadius: '50%', background: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', border: '1.5px solid #A4D955' }}>
+            <Users size={22} color="#A4D955" />
+          </div>
+          <div>
+            <h3 style={{ margin: 0, fontSize: 18, fontWeight: 800, color: '#111827' }}>Squads MAYiA</h3>
+            <p style={{ margin: 0, fontSize: 11, color: '#4B5563', fontWeight: 600 }}>Consultores e Ingenieros de IA</p>
           </div>
         </div>
-      )}
+
+        <div style={{ position: 'relative', zIndex: 10 }}>
+          <button 
+            onClick={() => setMenuOpen(!menuOpen)}
+            style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#6B7280', padding: 4, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 8, transition: 'all 0.2s' }}
+          >
+            <MoreVertical size={20} />
+          </button>
+          
+          {menuOpen && (
+            <>
+              <div style={{ position: 'fixed', inset: 0, zIndex: 30 }} onClick={() => setMenuOpen(false)} />
+              <div style={{ position: 'absolute', right: 0, top: 32, background: '#FFFFFF', borderRadius: 12, boxShadow: '0 10px 25px rgba(0,0,0,0.1)', border: '1px solid #E5E7EB', overflow: 'hidden', zIndex: 40, minWidth: 200 }}>
+                <button 
+                  onClick={handleAgendarCita}
+                  style={{ width: '100%', padding: '12px 16px', textAlign: 'left', fontSize: 13, color: '#374151', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, transition: 'background 0.2s' }}
+                  onMouseEnter={e => e.currentTarget.style.background = 'rgba(164,217,85,0.08)'}
+                  onMouseLeave={e => e.currentTarget.style.background = 'none'}
+                >
+                  <Calendar size={16} /> Agendar cita
+                </button>
+                <button 
+                  onClick={handleMasInformacion}
+                  style={{ width: '100%', padding: '12px 16px', textAlign: 'left', fontSize: 13, color: '#374151', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, transition: 'background 0.2s' }}
+                  onMouseEnter={e => e.currentTarget.style.background = 'rgba(164,217,85,0.08)'}
+                  onMouseLeave={e => e.currentTarget.style.background = 'none'}
+                >
+                  <Info size={16} /> Más información
+                </button>
+              </div>
+            </>
+          )}
+        </div>
+      </div>
+
+      {/* Video Area */}
+      <div style={{ 
+        margin: '0 20px 16px', 
+        borderRadius: 16, 
+        overflow: 'hidden', 
+        height: 180, 
+        position: 'relative', 
+        background: '#F9FAFB',
+        border: `2px solid ${isHovered ? '#A4D955' : 'transparent'}`,
+        boxShadow: isHovered ? '0 0 20px rgba(164, 217, 85, 0.4), inset 0 0 20px rgba(164, 217, 85, 0.05)' : 'none',
+        transition: 'all 0.3s ease'
+      }}>
+        <LazyVideo 
+          ref={videoRef}
+          autoPlay loop muted playsInline preload="metadata"
+          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          videoSrc="/assets/images/productos/astronautaSaludo.webm"
+          accentColor="#A4D955"
+        />
+        {/* Animated Badge Container */}
+        <div style={{ 
+          position: 'absolute', 
+          bottom: 12, 
+          left: 12, 
+          zIndex: 5 
+        }}>
+          <motion.div
+            animate={{
+              borderColor: ['#20e0c0', '#A4D955', '#20e0c0'],
+              boxShadow: [
+                '0 0 8px rgba(32, 224, 192, 0.4)',
+                '0 0 16px rgba(164, 217, 85, 0.6)',
+                '0 0 8px rgba(32, 224, 192, 0.4)'
+              ]
+            }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              ease: 'easeInOut'
+            }}
+            style={{
+              background: 'rgba(10, 10, 20, 0.85)', 
+              backdropFilter: 'blur(4px)', 
+              color: '#A4D955', 
+              fontSize: 9, 
+              fontWeight: 800, 
+              padding: '6px 12px', 
+              borderRadius: 8, 
+              borderWidth: 1.5,
+              borderStyle: 'solid',
+              letterSpacing: '0.06em',
+            }}
+          >
+            HUMAN AS A SERVICE
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Descripción */}
+      <p style={{ 
+        fontSize: 13, 
+        color: '#4B5563', 
+        lineHeight: 1.5, 
+        margin: '0 20px 20px', 
+        fontWeight: 500 
+      }}>
+        Nuestros expertos se integran temporalmente en tu empresa para desarrollar soluciones a medida y acelerar la implementación segura de tu business workflow y agentes inteligentes.
+      </p>
+
+      {/* Grid 2x2 Animado */}
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, margin: '0 20px 20px' }}>
+        {[
+          { text: "INFRAESTRUCTURA / NUBE\nDRP / DATA CENTER", color: "#4881EB", bg: "rgba(72,129,235,0.06)", borderColor: "rgba(72,129,235,0.25)" },
+          { text: "ANÁLISIS DE DATOS\nINTELIGENCIA ARTIFICIAL", color: "#A4D955", bg: "rgba(164,217,85,0.06)", borderColor: "rgba(164,217,85,0.25)" },
+          { text: "CIBERSEGURIDAD Y GOBERNANZA", color: "#dc2626", bg: "rgba(220,38,38,0.06)", borderColor: "rgba(220,38,38,0.25)" },
+          { text: "ACADEMIA DE IA PARA GRUPOS DE TRABAJO", color: "#ea580c", bg: "rgba(234,88,12,0.06)", borderColor: "rgba(234,88,12,0.25)" }
+        ].map((item, idx) => (
+          <motion.div
+            key={idx}
+            whileHover={{ scale: 1.03, borderColor: item.color, boxShadow: `0 4px 12px ${hexToRgba(item.color, 0.15)}` }}
+            style={{
+              background: item.bg,
+              border: `1.5px solid ${item.borderColor}`,
+              borderRadius: 12,
+              padding: '12px 8px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              textAlign: 'center',
+              fontSize: 9,
+              fontWeight: 800,
+              color: item.color,
+              minHeight: 52,
+              whiteSpace: 'pre-line',
+              lineHeight: 1.3,
+              cursor: 'default',
+              transition: 'all 0.2s ease-in-out'
+            }}
+          >
+            {item.text}
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Botones de acción */}
+      <div style={{ display: 'flex', gap: 8, padding: '0 20px 20px', marginTop: 'auto' }}>
+        <button 
+          onClick={handleMasInformacion}
+          style={{ 
+            background: 'linear-gradient(135deg, #A4D955, #7EBB2A)', 
+            color: '#111827', 
+            border: 'none', 
+            borderRadius: 8, 
+            padding: '10px 16px', 
+            fontSize: 13, 
+            fontWeight: 700, 
+            cursor: 'pointer', 
+            flex: 1, 
+            justifyContent: 'center', 
+            display: 'flex',
+            alignItems: 'center',
+            gap: 6,
+            transition: 'all 0.2s',
+            boxShadow: '0 4px 12px rgba(164,217,85,0.2)'
+          }}
+          onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 6px 16px rgba(164,217,85,0.4)'; }}
+          onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 12px rgba(164,217,85,0.2)'; }}
+        >
+          Conoce más
+        </button>
+        <button 
+          onClick={handleAgendarCita}
+          style={{ 
+            background: 'linear-gradient(135deg, #A4D955, #7EBB2A)', 
+            color: '#111827', 
+            border: 'none', 
+            borderRadius: 8, 
+            padding: '10px 16px', 
+            fontSize: 13, 
+            fontWeight: 700, 
+            cursor: 'pointer', 
+            flex: 1, 
+            justifyContent: 'center', 
+            display: 'flex',
+            alignItems: 'center',
+            gap: 6,
+            transition: 'all 0.2s',
+            boxShadow: '0 4px 12px rgba(164,217,85,0.2)'
+          }}
+          onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 6px 16px rgba(164,217,85,0.4)'; }}
+          onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 12px rgba(164,217,85,0.2)'; }}
+        >
+          Agenda tu cita
+        </button>
+      </div>
     </div>
   );
 }
@@ -1804,7 +2063,7 @@ function AcademiaCard() {
 }
 
 // --- COMPONENTE PRINCIPAL ---
-export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenFabricaInfo, onOpenDiagnostico }: { onOpenMap?: () => void, onOpenFlaiInfo?: () => void, onOpenFabricaInfo?: () => void, onOpenDiagnostico?: () => void }) {
+export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenFabricaInfo, onOpenDiagnostico, onOpenLakehouseInfo, onOpenSquadsInfo }: { onOpenMap?: () => void, onOpenFlaiInfo?: () => void, onOpenFabricaInfo?: () => void, onOpenDiagnostico?: () => void, onOpenLakehouseInfo?: () => void, onOpenSquadsInfo?: () => void }) {
   const [activeTab, setActiveTab] = useState('Infraestructura');
 
   const Wrapper = ({ category, children }: { category: string, children: React.ReactNode }) => {
@@ -2028,7 +2287,11 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
 
           {/* --- CATEGORIA: Desarrollo --- */}
           <Wrapper category="Desarrollo">
-            <MayiaCard />
+            <MayiaCard onOpenInfo={onOpenLakehouseInfo} />
+          </Wrapper>
+
+          <Wrapper category="Desarrollo">
+            <SquadsMayiaCard onOpenInfo={onOpenSquadsInfo} />
           </Wrapper>
 
           <Wrapper category="Desarrollo">

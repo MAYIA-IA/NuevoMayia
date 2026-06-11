@@ -25,6 +25,8 @@ const PildorasIA = lazy(() => import('./components/PildorasIA'));
 const CiberseguridadIA = lazy(() => import('./components/CiberseguridadIA'));
 const FlaiInfoModal = lazy(() => import('./components/FlaiInfoModal'));
 const FabricaIaModal = lazy(() => import('./components/FabricaIaModal'));
+const MayiaLakehouseModal = lazy(() => import('./components/MayiaLakehouseModal'));
+const SquadsMayiaModal = lazy(() => import('./components/SquadsMayiaModal'));
 const AcademiaIA = lazy(() => import('./components/AcademiaIA'));
 const Footer = lazy(() => import('./components/piepagina'));
 const EmbajadoresMayia = lazy(() => import('./components/EmbajadoresMayia'));
@@ -235,6 +237,8 @@ function App() {
             onOpenFlaiInfo={() => handleOpenSocialModal('flai-info', window.innerHeight / 2)}
             onOpenFabricaInfo={() => handleOpenSocialModal('fabrica-ia', window.innerHeight / 2)}
             onOpenDiagnostico={() => handleOpenSocialModal('diagnostico-empresa', window.innerHeight / 2)}
+            onOpenLakehouseInfo={() => handleOpenSocialModal('lakehouse-info', window.innerHeight / 2)}
+            onOpenSquadsInfo={() => handleOpenSocialModal('squads-info', window.innerHeight / 2)}
           />
         </div>
         
@@ -333,6 +337,8 @@ function App() {
           {activeSocialModal === 'analiticos' && <Analiticos />}
           {activeSocialModal === 'flai-info' && <FlaiInfoModal />}
           {activeSocialModal === 'fabrica-ia' && <FabricaIaModal />}
+          {activeSocialModal === 'lakehouse-info' && <MayiaLakehouseModal />}
+          {activeSocialModal === 'squads-info' && <SquadsMayiaModal />}
           {activeSocialModal === 'chat-ia' && <div style={{ height: '500px', display: 'flex', flexDirection: 'column' }}><AsistenteIAChat /></div>}
           {activeSocialModal === 'quienes' && <QuienesSomosModal />}
           {activeSocialModal === 'diagnostico-empresa' && <DiagnosticoEmpresaModal onClose={() => setActiveSocialModal(null)} />}
