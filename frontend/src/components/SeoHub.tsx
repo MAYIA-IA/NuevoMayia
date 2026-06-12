@@ -141,6 +141,7 @@ function HubCard({
   const Icon = mod.icon;
   const targetSection = mapHubIdToSection(mod.id);
   const isActive = targetSection && activeSection === targetSection;
+  const isAbout = ['quienes', 'que-hacemos', 'conoce-mas', 'origen-marca'].includes(mod.id);
 
   const isSocial = SOCIAL_IDS.includes(mod.id);
 
@@ -168,11 +169,11 @@ function HubCard({
         display: 'flex', alignItems: 'center', gap: 10,
         padding: '10px 14px', margin: '0 8px 4px',
         borderRadius: 10,
-        background: isActive ? `${colores.primario}12` : colores.fondoSecundario,
-        border: `1px solid ${isActive ? colores.primario : colores.borde}`,
+        background: isActive ? (isAbout ? 'rgba(0, 0, 0, 0.05)' : `${colores.primario}12`) : colores.fondoSecundario,
+        border: `1px solid ${isActive ? (isAbout ? '#111827' : colores.primario) : colores.borde}`,
         textDecoration: 'none',
         cursor: 'pointer',
-        boxShadow: isActive ? `0 0 12px ${colores.primario}25` : 'none',
+        boxShadow: isActive ? (isAbout ? '0 2px 8px rgba(0,0,0,0.04)' : `0 0 12px ${colores.primario}25`) : 'none',
         transition: 'all 0.25s cubic-bezier(.23,1,.32,1)',
       }}
       onMouseEnter={e => {
@@ -192,16 +193,16 @@ function HubCard({
     >
       <div style={{
         width: 30, height: 30, borderRadius: 8,
-        background: isActive ? `${colores.primario}20` : `${mod.color}15`,
+        background: isActive ? (isAbout ? 'rgba(0, 0, 0, 0.08)' : `${colores.primario}20`) : `${mod.color}15`,
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         flexShrink: 0,
         transition: 'all 0.2s',
       }}>
-        <Icon size={14} color={isActive ? colores.primario : mod.color} />
+        <Icon size={14} color={isActive ? (isAbout ? '#111827' : colores.primario) : mod.color} />
       </div>
       <div style={{ flex: 1, minWidth: 0 }}>
         <div style={{
-          fontSize: 11, fontWeight: 700, color: isActive ? colores.primario : (colores.textoClaro || '#1A202C'),
+          fontSize: 11, fontWeight: 700, color: isActive ? (isAbout ? '#111827' : colores.primario) : (colores.textoClaro || '#1A202C'),
           display: 'flex', alignItems: 'center', gap: 6,
           fontFamily: "'Inter', system-ui, sans-serif",
           transition: 'all 0.2s',
@@ -210,15 +211,15 @@ function HubCard({
           {mod.badge && (
             <span style={{
               fontSize: 8, fontWeight: 800, padding: '1px 6px',
-              borderRadius: 99, background: isActive ? `${colores.primario}25` : `${mod.color}20`,
-              color: isActive ? colores.primario : mod.color, letterSpacing: '0.05em',
+              borderRadius: 99, background: isActive ? (isAbout ? 'rgba(0, 0, 0, 0.1)' : `${colores.primario}25`) : `${mod.color}20`,
+              color: isActive ? (isAbout ? '#111827' : mod.color) : mod.color, letterSpacing: '0.05em',
             }}>
               {mod.badge}
             </span>
           )}
         </div>
         <div style={{
-          fontSize: 10, color: isActive ? `${colores.primario}bb` : '#6b7280', lineHeight: 1.3,
+          fontSize: 10, color: isActive ? (isAbout ? '#4b5563' : `${colores.primario}bb`) : '#6b7280', lineHeight: 1.3,
           fontFamily: "'Inter', system-ui, sans-serif",
           marginTop: 2,
           transition: 'all 0.2s',
@@ -226,7 +227,7 @@ function HubCard({
           {mod.desc}
         </div>
       </div>
-      <ChevronRight size={12} color={isActive ? colores.primario : '#4b5563'} style={{ flexShrink: 0, transition: 'all 0.2s' }} />
+      <ChevronRight size={12} color={isActive ? (isAbout ? '#111827' : colores.primario) : '#4b5563'} style={{ flexShrink: 0, transition: 'all 0.2s' }} />
     </a>
   );
 }
