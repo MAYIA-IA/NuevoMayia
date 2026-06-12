@@ -81,7 +81,11 @@ function LazySection({ children, height = '300px', ...props }: any) {
 
   return (
     <div ref={containerRef} style={{ minHeight: shouldRender ? 'auto' : height }} {...props}>
-      {shouldRender ? children : null}
+      {shouldRender ? (
+        <Suspense fallback={<LoadingSection />}>
+          {children}
+        </Suspense>
+      ) : null}
     </div>
   );
 }
