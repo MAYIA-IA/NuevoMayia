@@ -1,15 +1,17 @@
-import { useState, useEffect, useRef, useMemo, forwardRef, useImperativeHandle } from 'react';
+import { useState, useEffect, useRef, useMemo, forwardRef, useImperativeHandle, Fragment } from 'react';
 import { motion } from 'framer-motion';
 import { 
   Database, FlaskConical, FileText, Wrench, Calendar,
   Briefcase, LineChart, ShoppingBag, GraduationCap, GitBranch, ScanEye,
-  BookOpen, Award, Users, MoreVertical, Info, Cloud
+  BookOpen, Award, Users, MoreVertical, Info, Cloud, Target, TrendingUp
 } from 'lucide-react';
 import logoMaia from '../assets/logosNativos/logoMaia.webp';
 import academiaLogo from '../assets/logosNativos/academia-horizontal.webp';
 import flaiLogo from '../assets/logosNativos/1. NUBE_FINAL_FLAI (1).webp';
 import mayiaLakeLogo from '../assets/logosNativos/MAYiA_LAKE.webp';
 import ajoloteVideo from '../assets/AJOLOTE.webm';
+import roiVideo from '../assets/ROI_Video.mp4';
+import squadVideo from '../assets/SQUAD_MAYIA.mp4';
 
 const hexToRgba = (hex: string, alpha: number) => {
   if (!hex || typeof hex !== 'string') return `rgba(164, 217, 85, ${alpha})`;
@@ -161,7 +163,7 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOp
         transition: 'all 0.3s ease-in-out'
       }}
     >
-      <div style={{ display: 'flex', alignItems: 'center', padding: '20px 20px 12px', justifyContent: 'space-between' }}>
+      <div style={{ display: 'flex', alignItems: 'center', padding: '0 20px', justifyContent: 'space-between', height: 90 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
           {/* Icon Video Frame for jaguar.webm */}
           <div style={{ 
@@ -170,8 +172,8 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOp
             borderRadius: 14, 
             overflow: 'hidden', 
             background: '#090d16', 
-            border: '2px solid #22c55e', 
-            boxShadow: '0 4px 12px rgba(34, 197, 94, 0.4), inset 0 0 6px rgba(255, 255, 255, 0.15)', 
+            border: '2px solid #4881EB', 
+            boxShadow: '0 4px 12px rgba(72, 129, 235, 0.4), inset 0 0 6px rgba(255, 255, 255, 0.15)', 
             display: 'flex', 
             alignItems: 'center', 
             justifyContent: 'center', 
@@ -185,12 +187,12 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOp
               playsInline 
               style={{ width: '100%', height: '100%', objectFit: 'cover' }}
               videoSrc="/assets/images/jaguar.webm"
-              accentColor="#22c55e"
+              accentColor="#4881EB"
             />
           </div>
           <div>
             <h3 style={{ margin: 0, fontSize: 17, fontWeight: 800, color: '#111827', lineHeight: 1.2 }}>Fábrica de Inteligencia Artificial</h3>
-            <p style={{ margin: 0, fontSize: 11, color: '#22c55e', fontWeight: 800, letterSpacing: '0.05em', marginTop: 2 }}>IA PRIVADA MAYIA</p>
+            <p style={{ margin: 0, fontSize: 11, color: '#4B5563', fontWeight: 600, letterSpacing: '0.05em', marginTop: 2 }}>IA Privada Mayia</p>
           </div>
         </div>
 
@@ -205,14 +207,14 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOp
           {menuOpen && (
             <>
               <div style={{ position: 'fixed', inset: 0, zIndex: 30 }} onClick={() => setMenuOpen(false)} />
-              <div style={{ position: 'absolute', right: 0, top: 32, background: '#FFFFFF', borderRadius: 12, boxShadow: '0 10px 25px rgba(0,0,0,0.1)', border: '1px solid #E5E7EB', overflow: 'hidden', zIndex: 40, minWidth: 200 }}>
+              <div style={{ position: 'absolute', right: 0, top: 32, background: '#FFFFFF', borderRadius: 12, boxShadow: '0 10px 25px rgba(0,0,0,0.1)', border: '1px solid #E5E7EB', overflow: 'hidden', zIndex: 40, width: 'max-content', minWidth: 280 }}>
                 <button 
                   onClick={handleAgendarCita}
                   style={{ width: '100%', padding: '12px 16px', textAlign: 'left', fontSize: 13, color: '#374151', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, transition: 'background 0.2s' }}
                   onMouseEnter={e => e.currentTarget.style.background = 'rgba(72,129,235,0.08)'}
                   onMouseLeave={e => e.currentTarget.style.background = 'none'}
                 >
-                  <Calendar size={16} /> Agendar cita
+                  <Calendar size={16} /> Conversa con el Agentico de Fábrica de IA
                 </button>
               </div>
             </>
@@ -225,12 +227,11 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOp
         margin: '0 20px 16px', 
         borderRadius: 16, 
         overflow: 'hidden', 
-        flex: 1,
-        minHeight: 180, 
+        height: 180, 
         position: 'relative', 
         background: '#F9FAFB',
-        border: `2px solid ${isHovered ? '#22c55e' : 'transparent'}`,
-        boxShadow: isHovered ? '0 0 20px rgba(34, 197, 94, 0.25)' : 'none',
+        border: `2px solid ${isHovered ? '#4881EB' : 'transparent'}`,
+        boxShadow: isHovered ? '0 0 20px rgba(72, 129, 235, 0.25)' : 'none',
         transition: 'all 0.3s ease'
       }}>
         <LazyVideo 
@@ -238,7 +239,7 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOp
           autoPlay loop muted playsInline preload="metadata"
           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           videoSrc="/assets/images/productos/drpVideo.webm"
-          accentColor="#22c55e"
+          accentColor="#4881EB"
         />
 
         {/* Left overlays: Nuestros servidores, Modo Hibrido, Modo on premise */}
@@ -263,14 +264,14 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOp
                 boxShadow: '0 1px 3px rgba(0, 0, 0, 0.05)'
               }}
             >
-              <span style={{ fontSize: 8, color: '#374151', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.02em' }}>{text}</span>
+              <span style={{ fontSize: 8, color: '#374151', fontWeight: 800, letterSpacing: '0.02em' }}>{text}</span>
               <motion.div
                 style={{
                   width: 5,
                   height: 5,
                   borderRadius: '50%',
-                  backgroundColor: '#22c55e',
-                  boxShadow: '0 0 4px #22c55e',
+                  backgroundColor: '#4881EB',
+                  boxShadow: '0 0 4px #4881EB',
                   flexShrink: 0,
                 }}
                 animate={{
@@ -291,21 +292,21 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOp
         <div style={{ position: 'absolute', top: 8, right: 8 }}>
           <motion.div
             style={{
-              background: 'rgba(220, 252, 231, 0.95)', 
-              border: '1px solid #22c55e',
+              background: 'rgba(219, 234, 254, 0.95)', 
+              border: '1px solid #4881EB',
               borderRadius: 6,
               padding: '3.5px 8px',
               display: 'flex',
               alignItems: 'center',
               gap: 5,
-              boxShadow: '0 2px 6px rgba(34, 197, 94, 0.15)',
+              boxShadow: '0 2px 6px rgba(72, 129, 235, 0.15)',
             }}
             animate={{
               scale: [1, 1.01, 1],
               boxShadow: [
-                '0 2px 6px rgba(34, 197, 94, 0.1)',
-                '0 2px 12px rgba(34, 197, 94, 0.4)',
-                '0 2px 6px rgba(34, 197, 94, 0.1)',
+                '0 2px 6px rgba(72, 129, 235, 0.1)',
+                '0 2px 12px rgba(72, 129, 235, 0.4)',
+                '0 2px 6px rgba(72, 129, 235, 0.1)',
               ]
             }}
             transition={{
@@ -314,14 +315,14 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOp
               ease: "easeInOut"
             }}
           >
-            <span style={{ fontSize: 8.5, color: '#166534', fontWeight: 900, letterSpacing: '0.03em' }}>ACTIVO</span>
+            <span style={{ fontSize: 8.5, color: '#1e40af', fontWeight: 900, letterSpacing: '0.03em' }}>Activo</span>
             <motion.div
               style={{
                 width: 5,
                 height: 5,
                 borderRadius: '50%',
-                backgroundColor: '#22c55e',
-                boxShadow: '0 0 4px #22c55e',
+                backgroundColor: '#4881EB',
+                boxShadow: '0 0 4px #4881EB',
                 flexShrink: 0,
               }}
               animate={{
@@ -338,25 +339,27 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOp
         </div>
       </div>
 
-      {/* Description & 3 buttons box (Clean borderless) */}
+      {/* Wrapper to distribute remaining space vertically */}
       <div style={{
-        margin: '0 20px 16px',
+        flex: 1,
         display: 'flex',
         flexDirection: 'column',
-        gap: 12
+        justifyContent: 'space-between'
       }}>
+        {/* Description */}
         <p style={{
-          margin: 0,
-          fontSize: 12.5,
+          margin: '0 20px',
+          fontSize: 13,
           color: '#374151',
-          lineHeight: 1.5,
+          lineHeight: 1.6,
           fontWeight: 600,
           textAlign: 'justify'
         }}>
           Construye tu estrategia de inteligencia artificial sobre infraestructura segura, soberana y preparada para crecer. GPUs, Servidores, Data Centers IA Ready, Redes, Almacenamiento, Energía.
         </p>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8 }}>
+        {/* 3 buttons grid */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8, margin: '0 20px' }}>
           <button
             onClick={(e) => {
               e.stopPropagation();
@@ -367,8 +370,8 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOp
               color: '#ffffff',
               border: 'none',
               borderRadius: 4,
-              padding: '10px 4px',
-              fontSize: 9.5,
+              padding: '12px 6px',
+              fontSize: 10,
               fontWeight: 800,
               cursor: 'pointer',
               display: 'flex',
@@ -376,7 +379,6 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOp
               justifyContent: 'center',
               textAlign: 'center',
               lineHeight: 1.1,
-              textTransform: 'uppercase',
               transition: 'all 0.2s',
               boxShadow: '0 2px 6px rgba(30, 58, 138, 0.15)'
             }}
@@ -392,12 +394,12 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOp
               if (onOpenDiagnostico) onOpenDiagnostico();
             }}
             style={{
-              background: 'linear-gradient(135deg, #0f766e, #0d9488)',
+              background: 'linear-gradient(135deg, #1d4ed8, #3b82f6)',
               color: '#ffffff',
               border: 'none',
               borderRadius: 4,
-              padding: '10px 4px',
-              fontSize: 9.5,
+              padding: '12px 6px',
+              fontSize: 10,
               fontWeight: 800,
               cursor: 'pointer',
               display: 'flex',
@@ -405,14 +407,13 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOp
               justifyContent: 'center',
               textAlign: 'center',
               lineHeight: 1.1,
-              textTransform: 'uppercase',
               transition: 'all 0.2s',
-              boxShadow: '0 2px 6px rgba(15, 118, 110, 0.15)'
+              boxShadow: '0 2px 6px rgba(30, 58, 138, 0.15)'
             }}
-            onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.boxShadow = '0 4px 10px rgba(15, 118, 110, 0.25)'; }}
-            onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 2px 6px rgba(15, 118, 110, 0.15)'; }}
+            onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.boxShadow = '0 4px 10px rgba(30, 58, 138, 0.25)'; }}
+            onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 2px 6px rgba(30, 58, 138, 0.15)'; }}
           >
-            Realiza tu diagnostico
+            Realiza tu diagnóstico
           </button>
 
           <button
@@ -425,8 +426,8 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOp
               color: '#ffffff',
               border: 'none',
               borderRadius: 4,
-              padding: '10px 4px',
-              fontSize: 9.5,
+              padding: '12px 6px',
+              fontSize: 10,
               fontWeight: 800,
               cursor: 'pointer',
               display: 'flex',
@@ -434,7 +435,6 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOp
               justifyContent: 'center',
               textAlign: 'center',
               lineHeight: 1.1,
-              textTransform: 'uppercase',
               transition: 'all 0.2s',
               boxShadow: '0 2px 6px rgba(30, 58, 138, 0.15)'
             }}
@@ -444,51 +444,50 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOp
             Agenda una cita
           </button>
         </div>
-      </div>
 
-      {/* Footer Container (Clean borderless with divider) */}
-      <div style={{
-        margin: '0 20px 20px',
-        padding: '16px 0 0',
-        borderTop: '1px solid #E5E7EB',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        gap: 12,
-        marginTop: 16
-      }}>
-        <span style={{ 
-          fontSize: 12, 
-          color: '#374151', 
-          fontWeight: 700, 
-          lineHeight: 1.4,
-          flex: 1
+        {/* Footer Container (Clean borderless with divider) */}
+        <div style={{
+          margin: '0 20px 20px',
+          padding: '16px 0 0',
+          borderTop: '1px solid #E5E7EB',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: 12
         }}>
-          Somos la red de inteligencia artificial más grande del país
-        </span>
+          <span style={{ 
+            fontSize: 12, 
+            color: '#374151', 
+            fontWeight: 700, 
+            lineHeight: 1.4,
+            flex: 1
+          }}>
+            Somos la red de inteligencia artificial más grande del país
+          </span>
 
-        <button
-          onClick={onOpenMap}
-          style={{
-            background: '#111827',
-            color: '#ffffff',
-            border: 'none',
-            borderRadius: 8,
-            padding: '10px 14px',
-            fontSize: 11,
-            fontWeight: 800,
-            cursor: 'pointer',
-            whiteSpace: 'nowrap',
-            transition: 'all 0.2s',
-            display: 'flex',
-            alignItems: 'center',
-            gap: 6
-          }}
-          onMouseEnter={e => { e.currentTarget.style.background = '#1f2937'; e.currentTarget.style.transform = 'scale(1.03)'; }}
-          onMouseLeave={e => { e.currentTarget.style.background = '#111827'; e.currentTarget.style.transform = 'scale(1)'; }}
-        >
-          Descubre porque &rarr;
-        </button>
+          <button
+            onClick={onOpenMap}
+            style={{
+              background: '#111827',
+              color: '#ffffff',
+              border: 'none',
+              borderRadius: 8,
+              padding: '10px 14px',
+              fontSize: 11,
+              fontWeight: 800,
+              cursor: 'pointer',
+              whiteSpace: 'nowrap',
+              transition: 'all 0.2s',
+              display: 'flex',
+              alignItems: 'center',
+              gap: 6
+            }}
+            onMouseEnter={e => { e.currentTarget.style.background = '#4881EB'; e.currentTarget.style.transform = 'scale(1.03)'; }}
+            onMouseLeave={e => { e.currentTarget.style.background = '#111827'; e.currentTarget.style.transform = 'scale(1)'; }}
+          >
+            Descubre porque &rarr;
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -538,7 +537,7 @@ function FlaiCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
       }}
     >
       {/* Header */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '20px 20px 12px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 20px', height: 90 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
           <div style={{ 
             width: 44, 
@@ -572,22 +571,14 @@ function FlaiCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
           {menuOpen && (
             <>
               <div style={{ position: 'fixed', inset: 0, zIndex: 30 }} onClick={() => setMenuOpen(false)} />
-              <div style={{ position: 'absolute', right: 0, top: 32, background: '#FFFFFF', borderRadius: 12, boxShadow: '0 10px 25px rgba(0,0,0,0.1)', border: '1px solid #E5E7EB', overflow: 'hidden', zIndex: 40, minWidth: 200 }}>
+              <div style={{ position: 'absolute', right: 0, top: 32, background: '#FFFFFF', borderRadius: 12, boxShadow: '0 10px 25px rgba(0,0,0,0.1)', border: '1px solid #E5E7EB', overflow: 'hidden', zIndex: 40, width: 'max-content', minWidth: 260 }}>
                 <button 
                   onClick={handleAgendarCita}
                   style={{ width: '100%', padding: '12px 16px', textAlign: 'left', fontSize: 13, color: '#374151', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, transition: 'background 0.2s' }}
                   onMouseEnter={e => e.currentTarget.style.background = 'rgba(220,38,38,0.08)'}
                   onMouseLeave={e => e.currentTarget.style.background = 'none'}
                 >
-                  <Calendar size={16} /> Agendar cita
-                </button>
-                <button 
-                  onClick={handleMasInformacion}
-                  style={{ width: '100%', padding: '12px 16px', textAlign: 'left', fontSize: 13, color: '#374151', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, transition: 'background 0.2s' }}
-                  onMouseEnter={e => e.currentTarget.style.background = 'rgba(220,38,38,0.08)'}
-                  onMouseLeave={e => e.currentTarget.style.background = 'none'}
-                >
-                  <Info size={16} /> Más información
+                  <Calendar size={16} /> Conversa con el Agentico de FLAI
                 </button>
               </div>
             </>
@@ -615,51 +606,70 @@ function FlaiCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
         />
       </div>
 
-      {/* Stats */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8, margin: '0 20px 16px' }}>
+      {/* Stats en una sola línea horizontal (solo letras rojas) */}
+      <div style={{ 
+        display: 'flex', 
+        flexWrap: 'wrap',
+        justifyContent: 'center', 
+        alignItems: 'center',
+        margin: '0 20px 12px',
+        padding: '8px 12px',
+        background: '#F9FAFB',
+        border: '1px solid rgba(0,0,0,0.04)',
+        borderRadius: 10,
+        gap: '6px 12px'
+      }}>
         {[
-          { value: '100% México', label: 'Datos en México', color: '#006847' },
-          { value: '1era Nube', label: 'IA Soberana', color: '#DC2626' },
-          { value: '30 CDN', label: 'Centros de Datos', color: '#006847' }
-        ].map((s, idx) => (
-          <div key={idx} style={{ 
-            display: 'flex', 
-            flexDirection: 'column', 
-            alignItems: 'center', 
-            justifyContent: 'center', 
-            padding: '10px 4px', 
-            background: 'linear-gradient(135deg, #F9FAFB, #F3F4F6)', 
-            border: '1px solid rgba(0,0,0,0.06)', 
-            borderRadius: 12,
-            lineHeight: 1.2
-          }}>
-            <span style={{ fontSize: 13, fontWeight: 800, color: s.color, textAlign: 'center' }}>{s.value}</span>
-            <span style={{ fontSize: 8, fontWeight: 600, color: '#6B7280', textAlign: 'center', marginTop: 3 }}>{s.label}</span>
+          '100% México',
+          '1era Nube Soberana',
+          '30 CDN'
+        ].map((stat, idx) => (
+          <div 
+            key={idx} 
+            style={{ 
+              fontSize: 9.5,
+              fontWeight: 800, 
+              color: '#DC2626', 
+              whiteSpace: 'nowrap',
+              borderRight: idx < 2 ? '1px solid #E5E7EB' : 'none',
+              paddingRight: idx < 2 ? 12 : 0
+            }}
+          >
+            {stat}
           </div>
         ))}
       </div>
 
-      <p style={{ fontSize: 14, color: '#4B5563', lineHeight: 1.5, margin: '0 20px 16px', fontWeight: 500 }}>
+      <p style={{ fontSize: 14, color: '#4B5563', lineHeight: 1.5, margin: '0 20px 16px', fontWeight: 500, textAlign: 'justify' }}>
         La primera nube de Inteligencia Artificial soberana de México. Resguarda tus datos dentro del territorio nacional con procesamiento GPU de altísimo rendimiento.
       </p>
 
-      {/* Características Clave / Tags */}
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, margin: '0 20px 16px' }}>
+      {/* Características Clave / Tags en Grid 2x2 */}
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, margin: '0 20px 16px' }}>
         {['GPU AMD MI300X', 'Soberanía Digital', 'Baja Latencia Edge', 'Cumplimiento Local'].map((tag, idx) => (
-          <span 
-            key={idx} 
+          <motion.div
+            key={idx}
+            whileHover={{ scale: 1.03, borderColor: '#DC2626', boxShadow: '0 4px 12px rgba(220, 38, 38, 0.12)' }}
             style={{ 
               fontSize: 10, 
-              fontWeight: 700, 
-              padding: '6px 12px', 
-              borderRadius: 99, 
-              background: 'rgba(220, 38, 38, 0.05)', 
+              fontWeight: 800, 
+              padding: '10px 8px', 
+              borderRadius: 12, 
+              background: 'rgba(220, 38, 38, 0.04)', 
               color: '#DC2626', 
-              border: '1px solid rgba(220, 38, 38, 0.15)' 
+              border: '1.5px solid rgba(220, 38, 38, 0.15)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              textAlign: 'center',
+              cursor: 'default',
+              minHeight: 40,
+              boxShadow: '0 2px 4px rgba(220, 38, 38, 0.02)',
+              transition: 'all 0.2s ease-in-out'
             }}
           >
             {tag}
-          </span>
+          </motion.div>
         ))}
       </div>
 
@@ -719,7 +729,7 @@ function SocCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
         transition: 'all 0.3s ease-in-out'
       }}
     >
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '20px 20px 12px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 20px', height: 90 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
           <div style={{ width: 44, height: 44, borderRadius: 10, background: '#ffffff', border: '1px solid #E5E7EB', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 6 }}>
             <img src="/assets/images/productos/cyberpeaceLogo.webp" alt="CyberPeace SOC" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
@@ -741,22 +751,14 @@ function SocCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
           {menuOpen && (
             <>
               <div style={{ position: 'fixed', inset: 0, zIndex: 30 }} onClick={() => setMenuOpen(false)} />
-              <div style={{ position: 'absolute', right: 0, top: 32, background: '#FFFFFF', borderRadius: 12, boxShadow: '0 10px 25px rgba(0,0,0,0.1)', border: '1px solid #E5E7EB', overflow: 'hidden', zIndex: 40, minWidth: 200 }}>
+              <div style={{ position: 'absolute', right: 0, top: 32, background: '#FFFFFF', borderRadius: 12, boxShadow: '0 10px 25px rgba(0,0,0,0.1)', border: '1px solid #E5E7EB', overflow: 'hidden', zIndex: 40, width: 'max-content', minWidth: 280 }}>
                 <button 
                   onClick={handleAgendarCita}
                   style={{ width: '100%', padding: '12px 16px', textAlign: 'left', fontSize: 13, color: '#374151', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, transition: 'background 0.2s' }}
                   onMouseEnter={e => e.currentTarget.style.background = 'rgba(72,129,235,0.08)'}
                   onMouseLeave={e => e.currentTarget.style.background = 'none'}
                 >
-                  <Calendar size={16} /> Agendar cita
-                </button>
-                <button 
-                  onClick={onOpenInfo}
-                  style={{ width: '100%', padding: '12px 16px', textAlign: 'left', fontSize: 13, color: '#374151', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, transition: 'background 0.2s' }}
-                  onMouseEnter={e => e.currentTarget.style.background = 'rgba(72,129,235,0.08)'}
-                  onMouseLeave={e => e.currentTarget.style.background = 'none'}
-                >
-                  <Info size={16} /> Más información
+                  <Calendar size={16} /> Conversa con el Agentico de SOC IA CyberPeace
                 </button>
               </div>
             </>
@@ -783,7 +785,7 @@ function SocCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
             accentColor="#4881EB"
         />
         <div style={{ position: 'absolute', top: 12, left: 12, display: 'flex', flexDirection: 'column', gap: 6, maxWidth: '80%', zIndex: 5 }}>
-           {["CACERÍA DE AMENAZAS", "INTELIGENCIA DE AMENAZAS", "EVALUACIÓN DE RIESGOS", "ESTRATEGIA Y GOBIERNO DE CIBERSEGURIDAD", "GESTIÓN DE RESPUESTAS Y CONTENCIÓN DE INCIDENTES"].map((f, i) => (
+           {["Cacería de Amenazas", "Inteligencia de Amenazas", "Evaluación de Riesgos", "Estrategia y Gobierno de Ciberseguridad", "Gestión de Respuestas y Contención de Incidentes"].map((f, i) => (
              <span key={i} style={{ background: 'rgba(72,129,235,0.85)', backdropFilter: 'blur(4px)', color: '#ffffff', fontSize: 8, fontWeight: 800, padding: '4px 8px', borderRadius: 6, border: '1px solid rgba(125,209,255,0.4)', letterSpacing: '0.04em', width: 'fit-content' }}>{f}</span>
            ))}
         </div>
@@ -940,13 +942,15 @@ function MayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
       }}
     >
       {/* Header */}
-      <div style={{ display: 'flex', alignItems: 'center', padding: '20px 20px 12px', justifyContent: 'space-between' }}>
+      <div style={{ display: 'flex', alignItems: 'center', padding: '0 20px', justifyContent: 'space-between', height: 90 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
           <div style={{ width: 44, height: 44, borderRadius: '50%', background: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', border: '1.5px solid #A4D955' }}>
             <img src={mayiaLakeLogo} alt="MAYiA Lakehouse" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           </div>
           <div>
-            <h3 style={{ margin: 0, fontSize: 18, fontWeight: 800, color: '#111827' }}>MAYiA Lakehouse</h3>
+            <h3 style={{ margin: 0, fontSize: 18, fontWeight: 800, color: '#111827', display: 'flex', alignItems: 'center', gap: 4 }}>
+              <img src={logoMaia} alt="MAYiA" style={{ height: '15px', objectFit: 'contain' }} /> Lakehouse
+            </h3>
             <p style={{ margin: 0, fontSize: 12, color: '#4B5563', fontWeight: 600 }}>Prepara tus datos para la IA</p>
           </div>
         </div>
@@ -962,22 +966,14 @@ function MayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
           {menuOpen && (
             <>
               <div style={{ position: 'fixed', inset: 0, zIndex: 30 }} onClick={() => setMenuOpen(false)} />
-              <div style={{ position: 'absolute', right: 0, top: 32, background: '#FFFFFF', borderRadius: 12, boxShadow: '0 10px 25px rgba(0,0,0,0.1)', border: '1px solid #E5E7EB', overflow: 'hidden', zIndex: 40, minWidth: 200 }}>
+              <div style={{ position: 'absolute', right: 0, top: 32, background: '#FFFFFF', borderRadius: 12, boxShadow: '0 10px 25px rgba(0,0,0,0.1)', border: '1px solid #E5E7EB', overflow: 'hidden', zIndex: 40, width: 'max-content', minWidth: 280 }}>
                 <button 
                   onClick={handleAgendarCita}
                   style={{ width: '100%', padding: '12px 16px', textAlign: 'left', fontSize: 13, color: '#374151', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, transition: 'background 0.2s' }}
                   onMouseEnter={e => e.currentTarget.style.background = 'rgba(164,217,85,0.08)'}
                   onMouseLeave={e => e.currentTarget.style.background = 'none'}
                 >
-                  <Calendar size={16} /> Agendar cita
-                </button>
-                <button 
-                  onClick={handleMasInformacion}
-                  style={{ width: '100%', padding: '12px 16px', textAlign: 'left', fontSize: 13, color: '#374151', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, transition: 'background 0.2s' }}
-                  onMouseEnter={e => e.currentTarget.style.background = 'rgba(164,217,85,0.08)'}
-                  onMouseLeave={e => e.currentTarget.style.background = 'none'}
-                >
-                  <Info size={16} /> Más información
+                  <Calendar size={16} /> Conversa con el Agentico de MAYiA Lakehouse
                 </button>
               </div>
             </>
@@ -1004,87 +1000,80 @@ function MayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
           videoSrc={ajoloteVideo}
           accentColor="#A4D955"
         />
-        {/* Overlays en el video */}
-        <div style={{ 
-          position: 'absolute', 
-          bottom: 12, 
-          left: 12, 
-          display: 'flex', 
-          gap: 6,
-          zIndex: 5 
-        }}>
-          {['INGESTA', 'RECOLECCIÓN'].map((txt) => (
-            <span 
-              key={txt} 
-              style={{ 
-                background: 'rgba(255, 255, 255, 0.9)', 
-                backdropFilter: 'blur(4px)', 
-                color: '#111827', 
-                fontSize: 9, 
-                fontWeight: 800, 
-                padding: '4px 8px', 
-                borderRadius: 6, 
-                border: '1px solid rgba(164, 217, 85, 0.25)',
-                letterSpacing: '0.04em',
-                boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
-              }}
-            >
-              {txt}
-            </span>
-          ))}
-        </div>
+        {/* Overlays en el video removidos */}
       </div>
 
-      {/* Cuadros azules enfilados - Distribución simétrica */}
+      {/* Diagrama de flujo de datos - Cuadrícula Justificada y Ordenada */}
       <div style={{ 
         display: 'grid', 
-        gridTemplateColumns: '1fr 1fr', 
-        gap: 6, 
-        margin: '0 20px 16px' 
+        gridTemplateColumns: '1fr auto 1fr auto 1fr', 
+        gap: '10px 6px', 
+        margin: '0 20px 16px',
+        alignItems: 'center',
+        background: 'transparent'
       }}>
-        {['ALMACENAMIENTO', 'CÓMPUTO', 'CONSUMO', 'LINAJE'].map((txt) => (
-          <div 
-            key={txt} 
-            style={{ 
-              background: 'rgba(59, 130, 246, 0.08)', 
-              border: '1.5px solid rgba(59, 130, 246, 0.35)', 
-              color: '#2563eb', 
-              borderRadius: 8, 
-              padding: '6px 4px', 
-              fontSize: 9, 
-              fontWeight: 800, 
-              textAlign: 'center', 
-              boxShadow: '0 2px 4px rgba(59, 130, 246, 0.04)',
-              letterSpacing: '0.02em',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              lineHeight: 1.1
-            }}
-          >
-            {txt}
-          </div>
+        {[
+          ['Ingesta', 'Recolección', 'Almacenamiento'],
+          ['Cómputo', 'Consumo', 'Linaje']
+        ].map((row, rIdx) => (
+          <Fragment key={rIdx}>
+            {row.map((txt, idx) => (
+              <Fragment key={txt}>
+                <div style={{ 
+                  background: '#111827', 
+                  color: '#ffffff', 
+                  borderRadius: 6, 
+                  padding: '6px 4px', 
+                  fontSize: 8.5, 
+                  fontWeight: 800, 
+                  textAlign: 'center', 
+                  letterSpacing: '0.02em',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  lineHeight: 1.1,
+                  whiteSpace: 'nowrap',
+                  boxShadow: '0 2px 4px rgba(0,0,0,0.08)'
+                }}>
+                  {txt}
+                </div>
+                {idx < 2 ? (
+                  <span style={{ 
+                    color: '#A4D955', 
+                    fontWeight: 900, 
+                    fontSize: 12,
+                    userSelect: 'none',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}>
+                    →
+                  </span>
+                ) : null}
+              </Fragment>
+            ))}
+          </Fragment>
         ))}
-        <div 
-          style={{ 
-            gridColumn: 'span 2',
-            background: 'rgba(59, 130, 246, 0.08)', 
-            border: '1.5px solid rgba(59, 130, 246, 0.35)', 
-            color: '#2563eb', 
-            borderRadius: 8, 
-            padding: '6px 4px', 
-            fontSize: 9, 
+        {/* Último elemento centrado ocupando toda la fila */}
+        <div style={{ gridColumn: 'span 5', display: 'flex', justifyContent: 'center', marginTop: 2 }}>
+          <div style={{ 
+            background: '#111827', 
+            color: '#ffffff', 
+            borderRadius: 6, 
+            padding: '6px 16px', 
+            fontSize: 8.5, 
             fontWeight: 800, 
             textAlign: 'center', 
-            boxShadow: '0 2px 4px rgba(59, 130, 246, 0.04)',
             letterSpacing: '0.02em',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            lineHeight: 1.1
-          }}
-        >
-          CALIDAD DE DATOS
+            lineHeight: 1.1,
+            whiteSpace: 'nowrap',
+            boxShadow: '0 2px 4px rgba(0,0,0,0.08)'
+          }}>
+            Calidad de Datos
+          </div>
         </div>
       </div>
 
@@ -1094,11 +1083,12 @@ function MayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
         color: '#4B5563', 
         lineHeight: 1.5, 
         margin: '0 20px 20px', 
-        fontWeight: 500 
+        fontWeight: 500,
+        textAlign: 'justify'
       }}>
         Elimina los silos, unifica tus datos, obtén información estratégica en tiempo real y potencia tu IA empresarial y agéntica.
         <br /><br />
-        Conoce el servicio de nuestros <strong>SQUADS</strong> de especialistas MAYIA, vamos a tu empresa y te apoyamos a preparar tu datos para la IA.
+        Conoce el servicio de nuestros <strong>Squads</strong> de especialistas MAYIA, vamos a tu empresa y te apoyamos a preparar tu datos para la IA.
       </p>
 
       {/* Botones de acción */}
@@ -1205,12 +1195,12 @@ function SquadsMayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
       onMouseLeave={() => { setIsHovered(false); setMenuOpen(false); }}
       style={{
         borderRadius: 24, 
-        border: `2px solid ${isHovered ? '#A4D955' : '#E5E7EB'}`,
+        border: `2px solid ${isHovered ? '#14b8a6' : '#E5E7EB'}`,
         boxShadow: isHovered 
-          ? '0 20px 40px -8px rgba(164, 217, 85, 0.35), 0 0 24px 2px rgba(164, 217, 85, 0.20), inset 0 0 24px 2px rgba(164, 217, 85, 0.18)' 
+          ? '0 20px 40px -8px rgba(20, 184, 166, 0.35), 0 0 24px 2px rgba(20, 184, 166, 0.20), inset 0 0 24px 2px rgba(20, 184, 166, 0.18)' 
           : 'none',
         background: isHovered 
-          ? 'radial-gradient(120% 120% at 50% 50%, rgba(255, 255, 255, 0) 30%, rgba(164, 217, 85, 0.08) 100%)' 
+          ? 'radial-gradient(120% 120% at 50% 50%, rgba(255, 255, 255, 0) 30%, rgba(20, 184, 166, 0.08) 100%)' 
           : '#FFFFFF',
         display: 'flex', 
         flexDirection: 'column', 
@@ -1221,10 +1211,10 @@ function SquadsMayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
       }}
     >
       {/* Header */}
-      <div style={{ display: 'flex', alignItems: 'center', padding: '20px 20px 12px', justifyContent: 'space-between' }}>
+      <div style={{ display: 'flex', alignItems: 'center', padding: '0 20px', justifyContent: 'space-between', height: 90 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          <div style={{ width: 44, height: 44, borderRadius: '50%', background: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', border: '1.5px solid #A4D955' }}>
-            <Users size={22} color="#A4D955" />
+          <div style={{ width: 44, height: 44, borderRadius: '50%', background: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', border: '1.5px solid #14b8a6' }}>
+            <Users size={22} color="#14b8a6" />
           </div>
           <div>
             <h3 style={{ margin: 0, fontSize: 18, fontWeight: 800, color: '#111827' }}>Squads MAYiA</h3>
@@ -1243,22 +1233,14 @@ function SquadsMayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
           {menuOpen && (
             <>
               <div style={{ position: 'fixed', inset: 0, zIndex: 30 }} onClick={() => setMenuOpen(false)} />
-              <div style={{ position: 'absolute', right: 0, top: 32, background: '#FFFFFF', borderRadius: 12, boxShadow: '0 10px 25px rgba(0,0,0,0.1)', border: '1px solid #E5E7EB', overflow: 'hidden', zIndex: 40, minWidth: 200 }}>
+              <div style={{ position: 'absolute', right: 0, top: 32, background: '#FFFFFF', borderRadius: 12, boxShadow: '0 10px 25px rgba(0,0,0,0.1)', border: '1px solid #E5E7EB', overflow: 'hidden', zIndex: 40, width: 'max-content', minWidth: 280 }}>
                 <button 
                   onClick={handleAgendarCita}
                   style={{ width: '100%', padding: '12px 16px', textAlign: 'left', fontSize: 13, color: '#374151', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, transition: 'background 0.2s' }}
-                  onMouseEnter={e => e.currentTarget.style.background = 'rgba(164,217,85,0.08)'}
+                  onMouseEnter={e => e.currentTarget.style.background = 'rgba(20,184,166,0.08)'}
                   onMouseLeave={e => e.currentTarget.style.background = 'none'}
                 >
-                  <Calendar size={16} /> Agendar cita
-                </button>
-                <button 
-                  onClick={handleMasInformacion}
-                  style={{ width: '100%', padding: '12px 16px', textAlign: 'left', fontSize: 13, color: '#374151', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, transition: 'background 0.2s' }}
-                  onMouseEnter={e => e.currentTarget.style.background = 'rgba(164,217,85,0.08)'}
-                  onMouseLeave={e => e.currentTarget.style.background = 'none'}
-                >
-                  <Info size={16} /> Más información
+                  <Calendar size={16} /> Conversa con el Agentico de Squads MAYiA
                 </button>
               </div>
             </>
@@ -1274,18 +1256,56 @@ function SquadsMayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
         height: 180, 
         position: 'relative', 
         background: '#F9FAFB',
-        border: `2px solid ${isHovered ? '#A4D955' : 'transparent'}`,
-        boxShadow: isHovered ? '0 0 20px rgba(164, 217, 85, 0.4), inset 0 0 20px rgba(164, 217, 85, 0.05)' : 'none',
+        border: `2px solid ${isHovered ? '#14b8a6' : 'transparent'}`,
+        boxShadow: isHovered ? '0 0 20px rgba(20, 184, 166, 0.4), inset 0 0 20px rgba(20, 184, 166, 0.05)' : 'none',
         transition: 'all 0.3s ease'
       }}>
         <LazyVideo 
           ref={videoRef}
           autoPlay loop muted playsInline preload="metadata"
           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-          videoSrc="/assets/images/productos/astronautaSaludo.webm"
-          accentColor="#A4D955"
+          videoSrc={squadVideo}
+          accentColor="#14b8a6"
         />
-        {/* Animated Badge Container */}
+        {/* Animated Badge Container - Top Left */}
+        <div style={{ 
+          position: 'absolute', 
+          top: 6, 
+          left: 6, 
+          zIndex: 5 
+        }}>
+          <motion.div
+            animate={{
+              borderColor: ['#20e0c0', '#14b8a6', '#20e0c0'],
+              boxShadow: [
+                '0 0 4px rgba(32, 224, 192, 0.3)',
+                '0 0 8px rgba(20, 184, 166, 0.5)',
+                '0 0 4px rgba(32, 224, 192, 0.3)'
+              ]
+            }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              ease: 'easeInOut'
+            }}
+            style={{
+              background: 'rgba(10, 10, 20, 0.85)', 
+              backdropFilter: 'blur(4px)', 
+              color: '#14b8a6', 
+              fontSize: 7.5, 
+              fontWeight: 800, 
+              padding: '3px 6px', 
+              borderRadius: 6, 
+              borderWidth: 1,
+              borderStyle: 'solid',
+              letterSpacing: '0.04em',
+            }}
+          >
+            Forward-Deployed Engineers
+          </motion.div>
+        </div>
+
+        {/* Animated Badge Container - Bottom Left */}
         <div style={{ 
           position: 'absolute', 
           bottom: 12, 
@@ -1294,10 +1314,10 @@ function SquadsMayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
         }}>
           <motion.div
             animate={{
-              borderColor: ['#20e0c0', '#A4D955', '#20e0c0'],
+              borderColor: ['#20e0c0', '#14b8a6', '#20e0c0'],
               boxShadow: [
                 '0 0 8px rgba(32, 224, 192, 0.4)',
-                '0 0 16px rgba(164, 217, 85, 0.6)',
+                '0 0 16px rgba(20, 184, 166, 0.6)',
                 '0 0 8px rgba(32, 224, 192, 0.4)'
               ]
             }}
@@ -1309,7 +1329,7 @@ function SquadsMayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
             style={{
               background: 'rgba(10, 10, 20, 0.85)', 
               backdropFilter: 'blur(4px)', 
-              color: '#A4D955', 
+              color: '#14b8a6', 
               fontSize: 9, 
               fontWeight: 800, 
               padding: '6px 12px', 
@@ -1319,7 +1339,7 @@ function SquadsMayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
               letterSpacing: '0.06em',
             }}
           >
-            HUMAN AS A SERVICE
+            Human as a Service
           </motion.div>
         </div>
       </div>
@@ -1330,7 +1350,8 @@ function SquadsMayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
         color: '#4B5563', 
         lineHeight: 1.5, 
         margin: '0 20px 20px', 
-        fontWeight: 500 
+        fontWeight: 500,
+        textAlign: 'justify'
       }}>
         Nuestros expertos se integran temporalmente en tu empresa para desarrollar soluciones a medida y acelerar la implementación segura de tu business workflow y agentes inteligentes.
       </p>
@@ -1338,10 +1359,10 @@ function SquadsMayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
       {/* Grid 2x2 Animado */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, margin: '0 20px 20px' }}>
         {[
-          { text: "INFRAESTRUCTURA / NUBE\nDRP / DATA CENTER", color: "#4881EB", bg: "rgba(72,129,235,0.06)", borderColor: "rgba(72,129,235,0.25)" },
-          { text: "ANÁLISIS DE DATOS\nINTELIGENCIA ARTIFICIAL", color: "#A4D955", bg: "rgba(164,217,85,0.06)", borderColor: "rgba(164,217,85,0.25)" },
-          { text: "CIBERSEGURIDAD Y GOBERNANZA", color: "#dc2626", bg: "rgba(220,38,38,0.06)", borderColor: "rgba(220,38,38,0.25)" },
-          { text: "ACADEMIA DE IA PARA GRUPOS DE TRABAJO", color: "#ea580c", bg: "rgba(234,88,12,0.06)", borderColor: "rgba(234,88,12,0.25)" }
+          { text: "Infraestructura / Nube\nDRP / Data Center", color: "#4881EB", bg: "rgba(72,129,235,0.06)", borderColor: "rgba(72,129,235,0.25)" },
+          { text: "Análisis de Datos\nInteligencia Artificial", color: "#14b8a6", bg: "rgba(20,184,166,0.06)", borderColor: "rgba(20,184,166,0.25)" },
+          { text: "Ciberseguridad y Gobernanza", color: "#dc2626", bg: "rgba(220,38,38,0.06)", borderColor: "rgba(220,38,38,0.25)" },
+          { text: "Academia de IA para Grupos de Trabajo", color: "#ea580c", bg: "rgba(234,88,12,0.06)", borderColor: "rgba(234,88,12,0.25)" }
         ].map((item, idx) => (
           <motion.div
             key={idx}
@@ -1375,8 +1396,8 @@ function SquadsMayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
         <button 
           onClick={handleMasInformacion}
           style={{ 
-            background: 'linear-gradient(135deg, #A4D955, #7EBB2A)', 
-            color: '#111827', 
+            background: 'linear-gradient(135deg, #14b8a6, #0d9488)', 
+            color: '#ffffff', 
             border: 'none', 
             borderRadius: 8, 
             padding: '10px 16px', 
@@ -1389,18 +1410,18 @@ function SquadsMayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
             alignItems: 'center',
             gap: 6,
             transition: 'all 0.2s',
-            boxShadow: '0 4px 12px rgba(164,217,85,0.2)'
+            boxShadow: '0 4px 12px rgba(20,184,166,0.2)'
           }}
-          onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 6px 16px rgba(164,217,85,0.4)'; }}
-          onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 12px rgba(164,217,85,0.2)'; }}
+          onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 6px 16px rgba(20,184,166,0.4)'; }}
+          onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 12px rgba(20,184,166,0.2)'; }}
         >
           Conoce más
         </button>
         <button 
           onClick={handleAgendarCita}
           style={{ 
-            background: 'linear-gradient(135deg, #A4D955, #7EBB2A)', 
-            color: '#111827', 
+            background: 'linear-gradient(135deg, #14b8a6, #0d9488)', 
+            color: '#ffffff', 
             border: 'none', 
             borderRadius: 8, 
             padding: '10px 16px', 
@@ -1413,14 +1434,379 @@ function SquadsMayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
             alignItems: 'center',
             gap: 6,
             transition: 'all 0.2s',
-            boxShadow: '0 4px 12px rgba(164,217,85,0.2)'
+            boxShadow: '0 4px 12px rgba(20,184,166,0.2)'
           }}
-          onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 6px 16px rgba(164,217,85,0.4)'; }}
-          onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 12px rgba(164,217,85,0.2)'; }}
+          onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 6px 16px rgba(20,184,166,0.4)'; }}
+          onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 12px rgba(20,184,166,0.2)'; }}
         >
           Agenda tu cita
         </button>
       </div>
+    </div>
+  );
+}
+
+// --- SUB-COMPONENTE: RoiCard (ROI Discovery) ---
+function RoiCard() {
+  const [isHovered, setIsHovered] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [showConsultorVideo, setShowConsultorVideo] = useState(false);
+
+  const handleAgendarCita = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const rect = e.currentTarget.getBoundingClientRect();
+    if ((window as any).openCalendly) {
+      (window as any).openCalendly({ x: rect.right + 12, y: Math.max(20, rect.top - 140) });
+    } else {
+      window.open("https://calendly.com/mayiainteligencia/consulta-mayia", '_blank');
+    }
+    setMenuOpen(false);
+  };
+
+  return (
+    <div 
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => { setIsHovered(false); setMenuOpen(false); }}
+      style={{
+        borderRadius: 24, 
+        border: `2px solid ${isHovered ? '#ea580c' : '#E5E7EB'}`,
+        boxShadow: isHovered 
+          ? '0 20px 40px -8px rgba(234, 88, 12, 0.35), 0 0 24px 2px rgba(234, 88, 12, 0.20), inset 0 0 24px 2px rgba(234, 88, 12, 0.18)' 
+          : 'none',
+        background: isHovered 
+          ? 'radial-gradient(120% 120% at 50% 50%, rgba(255, 255, 255, 0) 30%, rgba(234, 88, 12, 0.08) 100%)' 
+          : '#FFFFFF',
+        display: 'flex', 
+        flexDirection: 'column', 
+        height: '100%', 
+        position: 'relative',
+        overflow: 'hidden',
+        transition: 'all 0.3s ease-in-out'
+      }}
+    >
+      {/* Header */}
+      <div style={{ display: 'flex', alignItems: 'center', padding: '0 20px', justifyContent: 'space-between', height: 90 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+          <div style={{ 
+            width: 44, 
+            height: 44, 
+            borderRadius: 10, 
+            background: 'rgba(234,88,12,0.15)', 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'center', 
+            flexShrink: 0 
+          }}>
+            <Wrench size={22} color="#ea580c" />
+          </div>
+          <div>
+            <h3 style={{ margin: 0, fontSize: 18, fontWeight: 800, color: '#111827', lineHeight: 1.2 }}>ROI Discovery</h3>
+            <p style={{ margin: 0, fontSize: 11, color: '#4B5563', fontWeight: 600, letterSpacing: '0.01em', marginTop: 2 }}>Descubre el valor que la IA puede generar en tu empresa</p>
+          </div>
+        </div>
+
+        <div style={{ position: 'relative', zIndex: 10 }}>
+          <button 
+            onClick={() => setMenuOpen(!menuOpen)}
+            style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#6B7280', padding: 4, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 8, transition: 'all 0.2s' }}
+          >
+            <MoreVertical size={20} />
+          </button>
+          
+          {menuOpen && (
+            <>
+              <div style={{ position: 'fixed', inset: 0, zIndex: 30 }} onClick={() => setMenuOpen(false)} />
+              <div style={{ position: 'absolute', right: 0, top: 32, background: '#FFFFFF', borderRadius: 12, boxShadow: '0 10px 25px rgba(0,0,0,0.1)', border: '1px solid #E5E7EB', overflow: 'hidden', zIndex: 40, width: 'max-content', minWidth: 280 }}>
+                <button 
+                  onClick={handleAgendarCita}
+                  style={{ width: '100%', padding: '12px 16px', textAlign: 'left', fontSize: 13, color: '#374151', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, transition: 'background 0.2s' }}
+                  onMouseEnter={e => e.currentTarget.style.background = 'rgba(234,88,12,0.08)'}
+                  onMouseLeave={e => e.currentTarget.style.background = 'none'}
+                >
+                  <Calendar size={16} /> Conversa con el Agentico de ROI Discovery
+                </button>
+              </div>
+            </>
+          )}
+        </div>
+      </div>
+
+      {/* Main Video Area */}
+      <div style={{ 
+        margin: '0 20px 16px', 
+        borderRadius: 16, 
+        overflow: 'hidden', 
+        height: 180, 
+        position: 'relative', 
+        background: '#F9FAFB',
+        border: `2px solid ${isHovered ? '#ea580c' : 'transparent'}`,
+        boxShadow: isHovered ? '0 0 20px rgba(234, 88, 12, 0.25)' : 'none',
+        transition: 'all 0.3s ease'
+      }}>
+        <LazyVideo 
+          autoPlay loop muted playsInline preload="metadata"
+          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          videoSrc={roiVideo}
+          accentColor="#ea580c"
+        />
+
+        {/* Video Overlay with Text & Calendly Button */}
+        <div style={{
+          position: 'absolute',
+          bottom: 6,
+          right: 6,
+          width: 125,
+          background: 'rgba(255, 255, 255, 0.92)',
+          backdropFilter: 'blur(6px)',
+          borderRadius: 8,
+          padding: '6px 8px',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'stretch',
+          gap: 5,
+          border: '1px solid rgba(234, 88, 12, 0.35)',
+          boxShadow: '0 4px 15px rgba(0, 0, 0, 0.1)',
+          zIndex: 5
+        }}>
+          <span style={{
+            fontSize: 7.5,
+            fontWeight: 800,
+            color: '#111827',
+            lineHeight: 1.2,
+            textAlign: 'center'
+          }}>
+            Conversemos sobre el valor que la IA puede generar en tu empresa
+          </span>
+          <button 
+            onClick={handleAgendarCita}
+            style={{
+              background: 'linear-gradient(135deg, #ea580c, #c2410c)',
+              color: '#ffffff',
+              border: 'none',
+              borderRadius: 4,
+              padding: '4px 6px',
+              fontSize: 7.5,
+              fontWeight: 800,
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: 3,
+              transition: 'all 0.2s',
+              width: '100%'
+            }}
+            onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-1px)'; }}
+            onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; }}
+          >
+            <Calendar size={8} /> Agendar Cita &rarr;
+          </button>
+        </div>
+      </div>
+
+      {/* Wrapper to distribute remaining space vertically */}
+      <div style={{
+        flex: 1,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between'
+      }}>
+        {/* Description */}
+        <p style={{
+          margin: '0 20px 16px',
+          fontSize: 13,
+          color: '#4B5563',
+          lineHeight: 1.5,
+          fontWeight: 500,
+          textAlign: 'justify'
+        }}>
+          Analizamos tus procesos, costos y oportunidades para identificar dónde la IA puede generar mayor impacto. Te entregamos un ROI claro, cuantificado y alineado a tus objetivos estratégicos.
+        </p>
+
+        {/* 4 Small Cards Grid */}
+        <div style={{ 
+          display: 'grid', 
+          gridTemplateColumns: 'repeat(auto-fit, minmax(135px, 1fr))', 
+          gap: 8, 
+          margin: '0 20px 20px' 
+        }}>
+          {[
+            {
+              title: "Valor Total de Oportunidad (TVO)",
+              desc: "Identificamos y cuantificamos el valor económico potencial de cada iniciativa de IA antes de invertir.",
+              icon: Target,
+              color: '#1d4ed8',
+              bg: 'rgba(29, 78, 216, 0.08)',
+              borderColor: 'rgba(29, 78, 216, 0.15)'
+            },
+            {
+              title: "ROI y Caso de Negocio",
+              desc: "Construimos un caso financiero sólido que demuestra beneficios, costos, riesgos y retorno esperado.",
+              icon: FileText,
+              color: '#16a34a',
+              bg: 'rgba(22, 163, 74, 0.08)',
+              borderColor: 'rgba(22, 163, 74, 0.15)'
+            },
+            {
+              title: "Priorización Estratégica",
+              desc: "Comparamos y clasificamos proyectos de IA según su impacto en crecimiento, margen, flujo y ventaja competitiva.",
+              icon: TrendingUp,
+              color: '#9333ea',
+              bg: 'rgba(147, 51, 234, 0.08)',
+              borderColor: 'rgba(147, 51, 234, 0.15)'
+            },
+            {
+              title: "Decisiones para Dirección",
+              desc: "Proporcionamos información clara para que CEO, CFO, CIO y CTO tomen decisiones basadas en valor y no en supuestos.",
+              icon: Users,
+              color: '#ea580c',
+              bg: 'rgba(234, 88, 12, 0.08)',
+              borderColor: 'rgba(234, 88, 12, 0.15)'
+            }
+          ].map((subCard, index) => {
+            const SubIcon = subCard.icon;
+            return (
+              <div 
+                key={index}
+                style={{
+                  background: '#FFFFFF',
+                  border: '1.5px solid #E5E7EB',
+                  borderRadius: 16,
+                  padding: 10,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 6,
+                  boxShadow: '0 2px 4px rgba(0,0,0,0.01)'
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                  <div style={{
+                    width: 28,
+                    height: 28,
+                    borderRadius: '50%',
+                    background: subCard.bg,
+                    border: `1px solid ${subCard.borderColor}`,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexShrink: 0
+                  }}>
+                    <SubIcon size={14} color={subCard.color} />
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+                    <h4 style={{
+                      margin: 0,
+                      fontSize: 8.5,
+                      fontWeight: 800,
+                      color: '#111827',
+                      lineHeight: 1.1
+                    }}>
+                      {subCard.title}
+                    </h4>
+                    <div style={{
+                      width: 12,
+                      height: 1.5,
+                      background: subCard.color,
+                      borderRadius: 1
+                    }} />
+                  </div>
+                </div>
+                <p style={{
+                  margin: 0,
+                  fontSize: 8,
+                  color: '#4B5563',
+                  lineHeight: 1.3,
+                  fontWeight: 500,
+                  textAlign: 'justify'
+                }}>
+                  {subCard.desc}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Ver video del consultor button */}
+        <div style={{ display: 'flex', padding: '0 20px 20px', marginTop: 'auto' }}>
+          <button 
+            onClick={() => setShowConsultorVideo(true)}
+            style={{
+              background: 'linear-gradient(135deg, #ea580c, #c2410c)',
+              color: '#ffffff',
+              border: 'none',
+              borderRadius: 8,
+              padding: '12px 16px',
+              fontSize: 13,
+              fontWeight: 700,
+              display: 'flex',
+              alignItems: 'center',
+              gap: 8,
+              cursor: 'pointer',
+              width: '100%',
+              justifyContent: 'center',
+              transition: 'all 0.2s',
+              boxShadow: '0 4px 12px rgba(234,88,12,0.2)'
+            }}
+            onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 6px 16px rgba(234,88,12,0.3)'; }}
+            onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 12px rgba(234,88,12,0.2)'; }}
+          >
+            Ver video del consultor &rarr;
+          </button>
+        </div>
+      </div>
+
+      {/* Video Modal */}
+      {showConsultorVideo && (
+        <div 
+          className="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-[99999] p-4"
+          onClick={() => setShowConsultorVideo(false)}
+        >
+          <div 
+            style={{
+              background: '#090d16',
+              borderRadius: 24,
+              maxWidth: 800,
+              width: '100%',
+              border: '2px solid #ea580c',
+              boxShadow: '0 25px 50px -12px rgba(234, 88, 12, 0.4)',
+              overflow: 'hidden',
+              position: 'relative'
+            }}
+            onClick={e => e.stopPropagation()}
+          >
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px 24px', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+              <h3 style={{ margin: 0, color: '#FFFFFF', fontSize: 18, fontWeight: 800 }}>Video del Consultor - ROI Discovery</h3>
+              <button 
+                onClick={() => setShowConsultorVideo(false)}
+                style={{
+                  background: 'rgba(255,255,255,0.1)',
+                  border: 'none',
+                  color: '#FFFFFF',
+                  width: 32,
+                  height: 32,
+                  borderRadius: '50%',
+                  cursor: 'pointer',
+                  fontWeight: 'bold',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+              >
+                ✕
+              </button>
+            </div>
+            <div style={{ padding: 24, background: '#000000', display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: 360 }}>
+              <video 
+                controls 
+                autoPlay
+                style={{ width: '100%', borderRadius: 12, maxHeight: '60vh' }}
+              >
+                <source src="/assets/videos/consultorVideo.mp4" type="video/mp4" />
+                Tu navegador no soporta reproducción de video.
+              </video>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -1448,6 +1834,7 @@ function StandardCard({
   children?: React.ReactNode 
 }) {
   const [isHovered, setIsHovered] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const handleAgendarCita = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -1462,7 +1849,7 @@ function StandardCard({
   return (
     <div 
       onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseLeave={() => { setIsHovered(false); setMenuOpen(false); }}
       style={{ 
         borderRadius: 24, 
         padding: 24, 
@@ -1481,11 +1868,38 @@ function StandardCard({
         overflow: 'hidden'
       }}
     >
-      <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 16 }}>
-        <div style={{ width: 44, height: 44, borderRadius: 10, background: bg, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-          <Icon size={22} color={color} />
+      <div style={{ display: 'flex', alignItems: 'center', gap: 16, height: 50, marginBottom: 16, justifyContent: 'space-between' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 16, flex: 1 }}>
+          <div style={{ width: 44, height: 44, borderRadius: 10, background: bg, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+            <Icon size={22} color={color} />
+          </div>
+          <h3 style={{ fontSize: 18, fontWeight: 800, color: '#111827', margin: 0, lineHeight: 1.2 }}>{title}</h3>
         </div>
-        <h3 style={{ fontSize: 18, fontWeight: 800, color: '#111827', margin: 0, lineHeight: 1.2 }}>{title}</h3>
+
+        <div style={{ position: 'relative', zIndex: 10 }}>
+          <button 
+            onClick={(e) => { e.stopPropagation(); setMenuOpen(!menuOpen); }}
+            style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#6B7280', padding: 4, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 8, transition: 'all 0.2s' }}
+          >
+            <MoreVertical size={20} />
+          </button>
+          
+          {menuOpen && (
+            <>
+              <div style={{ position: 'fixed', inset: 0, zIndex: 30 }} onClick={(e) => { e.stopPropagation(); setMenuOpen(false); }} />
+              <div style={{ position: 'absolute', right: 0, top: 32, background: '#FFFFFF', borderRadius: 12, boxShadow: '0 10px 25px rgba(0,0,0,0.1)', border: '1px solid #E5E7EB', overflow: 'hidden', zIndex: 40, width: 'max-content', minWidth: 280 }}>
+                <button 
+                  onClick={(e) => { handleAgendarCita(e); setMenuOpen(false); }}
+                  style={{ width: '100%', padding: '12px 16px', textAlign: 'left', fontSize: 13, color: '#374151', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, transition: 'background 0.2s' }}
+                  onMouseEnter={e => e.currentTarget.style.background = hexToRgba(color, 0.08)}
+                  onMouseLeave={e => e.currentTarget.style.background = 'none'}
+                >
+                  <Calendar size={16} /> Conversa con el Agentico de {title}
+                </button>
+              </div>
+            </>
+          )}
+        </div>
       </div>
 
       {videoSrc && (
@@ -1510,7 +1924,7 @@ function StandardCard({
         </div>
       )}
 
-      <p style={{ fontSize: 14, color: '#4B5563', lineHeight: 1.5, margin: 0, marginBottom: 20, fontWeight: 500 }}>
+      <p style={{ fontSize: 14, color: '#4B5563', lineHeight: 1.5, margin: 0, marginBottom: 20, fontWeight: 500, textAlign: 'justify' }}>
         {desc}
       </p>
 
@@ -1541,11 +1955,24 @@ function StandardCard({
         <button 
           onClick={handleAgendarCita}
           style={{ 
-            background: 'rgba(0,0,0,0.04)', color: '#374151', border: '1px solid rgba(0,0,0,0.08)', borderRadius: 8, padding: '10px 16px', fontSize: 13, fontWeight: 700, 
-            display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', flex: 1, justifyContent: 'center', transition: 'all 0.2s' 
+            background: `linear-gradient(135deg, ${color}, ${hexToRgba(color, 0.85)})`, 
+            color: '#ffffff', 
+            border: 'none', 
+            borderRadius: 8, 
+            padding: '12px 16px', 
+            fontSize: 13, 
+            fontWeight: 700, 
+            display: 'flex', 
+            alignItems: 'center', 
+            gap: 8, 
+            cursor: 'pointer', 
+            flex: 1, 
+            justifyContent: 'center', 
+            transition: 'all 0.2s',
+            boxShadow: `0 4px 12px ${hexToRgba(color, 0.2)}`
           }}
-          onMouseEnter={e => { e.currentTarget.style.background = 'rgba(0,0,0,0.08)'; e.currentTarget.style.borderColor = color; }}
-          onMouseLeave={e => { e.currentTarget.style.background = 'rgba(0,0,0,0.04)'; e.currentTarget.style.borderColor = 'rgba(0,0,0,0.08)'; }}
+          onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = `0 6px 16px ${hexToRgba(color, 0.35)}`; }}
+          onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = `0 4px 12px ${hexToRgba(color, 0.2)}`; }}
         >
           Conocer más &rarr;
         </button>
@@ -1581,56 +2008,56 @@ function AcademiaCard() {
 
   const cursos = [
     // Gestión y Liderazgo
-    { titulo: "Fundamentos del Prompting", nivel: "PRINCIPIANTE", horas: "4h", categoria: "Gestión" },
-    { titulo: "IA para Trabajo Inteligente", nivel: "INTERMEDIO", horas: "25h", categoria: "Gestión" },
-    { titulo: "Comunicación Efectiva en Equipo", nivel: "INTERMEDIO", horas: "10h", categoria: "Gestión" },
-    { titulo: "Priorización y Delegación", nivel: "INTERMEDIO", horas: "10h", categoria: "Gestión" },
-    { titulo: "IA para Gerentes", nivel: "AVANZADO", horas: "30h", categoria: "Gestión" },
-    { titulo: "Gestión del Cambio", nivel: "AVANZADO", horas: "20h", categoria: "Gestión" },
-    { titulo: "Toma de Decisiones Estratégicas", nivel: "AVANZADO", horas: "15h", categoria: "Gestión" },
-    { titulo: "Optimización de Procesos", nivel: "AVANZADO", horas: "25h", categoria: "Gestión" },
-    { titulo: "Desarrollo de Talento Humano", nivel: "AVANZADO", horas: "20h", categoria: "Gestión" },
+    { titulo: "Fundamentos del Prompting", nivel: "Principiante", horas: "4h", categoria: "Gestión" },
+    { titulo: "IA para Trabajo Inteligente", nivel: "Intermedio", horas: "25h", categoria: "Gestión" },
+    { titulo: "Comunicación Efectiva en Equipo", nivel: "Intermedio", horas: "10h", categoria: "Gestión" },
+    { titulo: "Priorización y Delegación", nivel: "Intermedio", horas: "10h", categoria: "Gestión" },
+    { titulo: "IA para Gerentes", nivel: "Avanzado", horas: "30h", categoria: "Gestión" },
+    { titulo: "Gestión del Cambio", nivel: "Avanzado", horas: "20h", categoria: "Gestión" },
+    { titulo: "Toma de Decisiones Estratégicas", nivel: "Avanzado", horas: "15h", categoria: "Gestión" },
+    { titulo: "Optimización de Procesos", nivel: "Avanzado", horas: "25h", categoria: "Gestión" },
+    { titulo: "Desarrollo de Talento Humano", nivel: "Avanzado", horas: "20h", categoria: "Gestión" },
     
     // Desarrollo y Programación
-    { titulo: "Programación Asistida por IA", nivel: "INTERMEDIO", horas: "30h", categoria: "Desarrollo" },
-    { titulo: "Django REST Framework", nivel: "AVANZADO", horas: "40h", categoria: "Desarrollo" },
-    { titulo: "Python Fundamentos", nivel: "PRINCIPIANTE", horas: "35h", categoria: "Desarrollo" },
-    { titulo: "Django Web Development", nivel: "INTERMEDIO", horas: "45h", categoria: "Desarrollo" },
-    { titulo: "Docker para Python", nivel: "INTERMEDIO", horas: "20h", categoria: "Desarrollo" },
-    { titulo: "Fundamentos de LLMs", nivel: "AVANZADO", horas: "50h", categoria: "Desarrollo" },
-    { titulo: "Flask Web Apps", nivel: "INTERMEDIO", horas: "30h", categoria: "Desarrollo" },
+    { titulo: "Programación Asistida por IA", nivel: "Intermedio", horas: "30h", categoria: "Desarrollo" },
+    { titulo: "Django REST Framework", nivel: "Avanzado", horas: "40h", categoria: "Desarrollo" },
+    { titulo: "Python Fundamentos", nivel: "Principiante", horas: "35h", categoria: "Desarrollo" },
+    { titulo: "Django Web Development", nivel: "Intermedio", horas: "45h", categoria: "Desarrollo" },
+    { titulo: "Docker para Python", nivel: "Intermedio", horas: "20h", categoria: "Desarrollo" },
+    { titulo: "Fundamentos de LLMs", nivel: "Avanzado", horas: "50h", categoria: "Desarrollo" },
+    { titulo: "Flask Web Apps", nivel: "Intermedio", horas: "30h", categoria: "Desarrollo" },
     
     // Bases de Datos
-    { titulo: "SQL Básico", nivel: "PRINCIPIANTE", horas: "15h", categoria: "Datos" },
-    { titulo: "SQL Avanzado", nivel: "AVANZADO", horas: "25h", categoria: "Datos" },
+    { titulo: "SQL Básico", nivel: "Principiante", horas: "15h", categoria: "Datos" },
+    { titulo: "SQL Avanzado", nivel: "Avanzado", horas: "25h", categoria: "Datos" },
     
     // Machine Learning y Análisis
-    { titulo: "Machine Learning Fundamentos", nivel: "INTERMEDIO", horas: "40h", categoria: "ML & AI" },
-    { titulo: "Computer Vision", nivel: "AVANZADO", horas: "45h", categoria: "ML & AI" },
-    { titulo: "Tableau Visualización", nivel: "INTERMEDIO", horas: "20h", categoria: "ML & AI" },
-    { titulo: "Data Wrangling", nivel: "INTERMEDIO", horas: "25h", categoria: "ML & AI" },
-    { titulo: "Álgebra Lineal", nivel: "AVANZADO", horas: "30h", categoria: "ML & AI" },
-    { titulo: "ML para Textos", nivel: "AVANZADO", horas: "35h", categoria: "ML & AI" },
-    { titulo: "ML para Negocios", nivel: "AVANZADO", horas: "30h", categoria: "ML & AI" },
-    { titulo: "Métodos Numéricos en ML", nivel: "AVANZADO", horas: "40h", categoria: "ML & AI" },
-    { titulo: "Análisis Estadístico", nivel: "INTERMEDIO", horas: "30h", categoria: "ML & AI" },
-    { titulo: "Aprendizaje Supervisado", nivel: "AVANZADO", horas: "45h", categoria: "ML & AI" },
-    { titulo: "Python para Análisis", nivel: "PRINCIPIANTE", horas: "25h", categoria: "ML & AI" },
-    { titulo: "Series Temporales", nivel: "AVANZADO", horas: "35h", categoria: "ML & AI" },
-    { titulo: "Aprendizaje No Supervisado", nivel: "AVANZADO", horas: "40h", categoria: "ML & AI" },
+    { titulo: "Machine Learning Fundamentos", nivel: "Intermedio", horas: "40h", categoria: "ML & AI" },
+    { titulo: "Computer Vision", nivel: "Avanzado", horas: "45h", categoria: "ML & AI" },
+    { titulo: "Tableau Visualización", nivel: "Intermedio", horas: "20h", categoria: "ML & AI" },
+    { titulo: "Data Wrangling", nivel: "Intermedio", horas: "25h", categoria: "ML & AI" },
+    { titulo: "Álgebra Lineal", nivel: "Avanzado", horas: "30h", categoria: "ML & AI" },
+    { titulo: "ML para Textos", nivel: "Avanzado", horas: "35h", categoria: "ML & AI" },
+    { titulo: "ML para Negocios", nivel: "Avanzado", horas: "30h", categoria: "ML & AI" },
+    { titulo: "Métodos Numéricos en ML", nivel: "Avanzado", horas: "40h", categoria: "ML & AI" },
+    { titulo: "Análisis Estadístico", nivel: "Intermedio", horas: "30h", categoria: "ML & AI" },
+    { titulo: "Aprendizaje Supervisado", nivel: "Avanzado", horas: "45h", categoria: "ML & AI" },
+    { titulo: "Python para Análisis", nivel: "Principiante", horas: "25h", categoria: "ML & AI" },
+    { titulo: "Series Temporales", nivel: "Avanzado", horas: "35h", categoria: "ML & AI" },
+    { titulo: "Aprendizaje No Supervisado", nivel: "Avanzado", horas: "40h", categoria: "ML & AI" },
     
     // Habilidades Blandas
-    { titulo: "Habilidades Blandas", nivel: "PRINCIPIANTE", horas: "15h", categoria: "Soft Skills" }
+    { titulo: "Habilidades Blandas", nivel: "Principiante", horas: "15h", categoria: "Soft Skills" }
   ];
 
   const opciones = [
-    { id: 1, titulo: "IA PARA EMPRESAS", descripcion: "Capacitación corporativa" },
-    { id: 2, titulo: "IA PARA PROFESIONALES", descripcion: "Cursos individuales" },
-    { id: 3, titulo: "ALIANZAS Y GOBIERNOS", descripcion: "Programas especiales" }
+    { id: 1, titulo: "IA para Empresas", descripcion: "Capacitación corporativa" },
+    { id: 2, titulo: "IA para Profesionales", descripcion: "Cursos individuales" },
+    { id: 3, titulo: "Alianzas y Gobiernos", descripcion: "Programas especiales" }
   ];
 
   const getNivelColor = (nivel: string) => {
-    switch(nivel) {
+    switch(nivel.toUpperCase()) {
       case 'PRINCIPIANTE': return { color: '#15803d', background: '#f0fdf4', border: '1px solid rgba(21,128,61,0.15)' };
       case 'INTERMEDIO': return { color: '#1d4ed8', background: '#eff6ff', border: '1px solid rgba(29,78,216,0.15)' };
       case 'AVANZADO': return { color: '#6b21a8', background: '#faf5ff', border: '1px solid rgba(107,33,168,0.15)' };
@@ -1655,12 +2082,12 @@ function AcademiaCard() {
       style={{ 
         borderRadius: 24, 
         padding: 24, 
-        border: `2px solid ${isHovered ? '#A4D955' : '#E5E7EB'}`, 
+        border: `2px solid ${isHovered ? '#ea580c' : '#E5E7EB'}`, 
         boxShadow: isHovered 
-          ? '0 20px 40px -8px rgba(164, 217, 85, 0.35), 0 0 24px 2px rgba(164, 217, 85, 0.20), inset 0 0 24px 2px rgba(164, 217, 85, 0.18)' 
+          ? '0 20px 40px -8px rgba(234, 88, 12, 0.35), 0 0 24px 2px rgba(234, 88, 12, 0.20), inset 0 0 24px 2px rgba(234, 88, 12, 0.18)' 
           : 'none', 
         background: isHovered 
-          ? 'radial-gradient(120% 120% at 50% 50%, rgba(255, 255, 255, 0) 30%, rgba(164, 217, 85, 0.08) 100%)' 
+          ? 'radial-gradient(120% 120% at 50% 50%, rgba(255, 255, 255, 0) 30%, rgba(234, 88, 12, 0.08) 100%)' 
           : '#FFFFFF',
         display: 'flex', 
         flexDirection: 'column', 
@@ -1671,7 +2098,7 @@ function AcademiaCard() {
       }}
     >
       {/* Header */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 16, justifyContent: 'space-between' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 16, height: 50, marginBottom: 16, justifyContent: 'space-between' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 16, flex: 1 }}>
           <div style={{ width: 44, height: 44, borderRadius: 10, background: '#ffedd5', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
             <GraduationCap size={22} color="#ea580c" />
@@ -1692,22 +2119,14 @@ function AcademiaCard() {
           {menuOpen && (
             <>
               <div style={{ position: 'fixed', inset: 0, zIndex: 30 }} onClick={() => setMenuOpen(false)} />
-              <div style={{ position: 'absolute', right: 0, top: 32, background: '#FFFFFF', borderRadius: 12, boxShadow: '0 10px 25px rgba(0,0,0,0.1)', border: '1px solid #E5E7EB', overflow: 'hidden', zIndex: 40, minWidth: 220 }}>
+              <div style={{ position: 'absolute', right: 0, top: 32, background: '#FFFFFF', borderRadius: 12, boxShadow: '0 10px 25px rgba(0,0,0,0.1)', border: '1px solid #E5E7EB', overflow: 'hidden', zIndex: 40, width: 'max-content', minWidth: 280 }}>
                 <button 
                   onClick={handleAgendarCita}
                   style={{ width: '100%', padding: '12px 16px', textAlign: 'left', fontSize: 13, color: '#374151', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, transition: 'background 0.2s' }}
-                  onMouseEnter={e => e.currentTarget.style.background = 'rgba(164,217,85,0.08)'}
+                  onMouseEnter={e => e.currentTarget.style.background = 'rgba(234,88,12,0.08)'}
                   onMouseLeave={e => e.currentTarget.style.background = 'none'}
                 >
-                  <Calendar size={16} /> Agendar cita para cotización
-                </button>
-                <button 
-                  onClick={handleMasInformacion}
-                  style={{ width: '100%', padding: '12px 16px', textAlign: 'left', fontSize: 13, color: '#374151', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, transition: 'background 0.2s' }}
-                  onMouseEnter={e => e.currentTarget.style.background = 'rgba(164,217,85,0.08)'}
-                  onMouseLeave={e => e.currentTarget.style.background = 'none'}
-                >
-                  <Info size={16} /> Más información
+                  <Calendar size={16} /> Conversa con el Agentico de Academia MAYiA
                 </button>
               </div>
             </>
@@ -1723,15 +2142,15 @@ function AcademiaCard() {
         position: 'relative', 
         background: '#F9FAFB', 
         marginBottom: 16,
-        border: `2px solid ${isHovered ? '#A4D955' : 'transparent'}`,
-        boxShadow: isHovered ? '0 0 20px rgba(164, 217, 85, 0.4), inset 0 0 20px rgba(164, 217, 85, 0.05)' : 'none',
+        border: `2px solid ${isHovered ? '#ea580c' : 'transparent'}`,
+        boxShadow: isHovered ? '0 0 20px rgba(234, 88, 12, 0.4), inset 0 0 20px rgba(234, 88, 12, 0.05)' : 'none',
         transition: 'all 0.3s ease'
       }}>
         <LazyVideo 
           autoPlay loop muted playsInline preload="metadata"
           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           videoSrc="/assets/images/productos/astronautaSaludo.webm"
-          accentColor="#A4D955"
+          accentColor="#ea580c"
         />
         
         {/* Overlay gradient */}
@@ -1759,9 +2178,9 @@ function AcademiaCard() {
                   setSelectedOption(isSelected ? null : opcion.id);
                 }}
                 style={{
-                  background: isSelected ? 'linear-gradient(135deg, #A4D955, #7EBB2A)' : 'rgba(255, 255, 255, 0.9)',
-                  color: isSelected ? '#111827' : '#374151',
-                  border: isSelected ? '1px solid #A4D955' : '1px solid rgba(0,0,0,0.1)',
+                  background: isSelected ? 'linear-gradient(135deg, #ea580c, #c2410c)' : 'rgba(255, 255, 255, 0.9)',
+                  color: isSelected ? '#FFFFFF' : '#374151',
+                  border: isSelected ? '1px solid #ea580c' : '1px solid rgba(0,0,0,0.1)',
                   borderRadius: 8,
                   padding: '6px 8px',
                   fontSize: 8,
@@ -1785,9 +2204,9 @@ function AcademiaCard() {
                   justifyContent: 'center',
                   width: 14,
                   height: 14,
-                  background: isSelected ? '#111827' : '#A4D955',
+                  background: isSelected ? '#FFFFFF' : '#ea580c',
                   borderRadius: '50%',
-                  color: isSelected ? '#A4D955' : '#FFFFFF',
+                  color: isSelected ? '#ea580c' : '#FFFFFF',
                   flexShrink: 0,
                   marginLeft: 4,
                   fontSize: 8,
@@ -1810,7 +2229,7 @@ function AcademiaCard() {
             position: 'absolute',
             bottom: 10,
             left: 10,
-            background: 'linear-gradient(135deg, #00913f, #14B8A6)',
+            background: 'linear-gradient(135deg, #ea580c, #f97316)',
             color: '#FFFFFF',
             border: 'none',
             borderRadius: 20,
@@ -1838,7 +2257,7 @@ function AcademiaCard() {
       {cursosOpen && (
         <div style={{
           background: '#F9FAFB',
-          border: '1px solid #E5E7EB',
+          border: '1px solid rgba(234, 88, 12, 0.1)',
           borderRadius: 16,
           padding: 12,
           maxHeight: 220,
@@ -1886,7 +2305,7 @@ function AcademiaCard() {
                     ⏱ {curso.horas}
                   </span>
                   <span style={{ color: '#E5E7EB' }}>|</span>
-                  <span style={{ color: '#14B8A6', fontWeight: 600 }}>{curso.categoria}</span>
+                  <span style={{ color: '#ea580c', fontWeight: 600 }}>{curso.categoria}</span>
                 </div>
               </div>
             );
@@ -1894,16 +2313,16 @@ function AcademiaCard() {
         </div>
       )}
 
-      <p style={{ fontSize: 14, color: '#4B5563', lineHeight: 1.5, margin: '0 0 20px', fontWeight: 500 }}>
+      <p style={{ fontSize: 14, color: '#4B5563', lineHeight: 1.5, margin: '0 0 20px', fontWeight: 500, textAlign: 'justify' }}>
         Conoce nuestros 32 cursos de Inteligencia Artificial para equipos de trabajo de Negocios y Equipos Tech con Certificación.
       </p>
       
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginBottom: 16 }}>
         {[
-          { icon: BookOpen, value: '32', label: 'Cursos', color: '#84cc16' },
-          { icon: Award, value: '6+', label: 'Certificaciones', color: '#3b82f6' },
-          { icon: Briefcase, value: 'B2B', label: 'IA para negocios', color: '#f59e0b' },
-          { icon: Users, value: 'Tech', label: 'IA para equipos', color: '#8b5cf6' },
+          { icon: BookOpen, value: '32', label: 'Cursos', color: '#ea580c' },
+          { icon: Award, value: '6+', label: 'Certificaciones', color: '#ea580c' },
+          { icon: Briefcase, value: 'B2B', label: 'IA para negocios', color: '#ea580c' },
+          { icon: Users, value: 'Tech', label: 'IA para equipos', color: '#ea580c' },
         ].map((h, i) => (
           <div key={i} style={{ 
             display: 'flex', alignItems: 'center', gap: 8, padding: '10px 12px', 
@@ -1925,13 +2344,13 @@ function AcademiaCard() {
             flex: 1,
             display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
             padding: '12px 12px', borderRadius: 8,
-            background: 'linear-gradient(135deg, #A4D955, #65a30d)',
-            color: '#111827', fontWeight: 700, fontSize: 13, border: 'none', cursor: 'pointer',
-            boxShadow: '0 4px 12px rgba(164,217,85,0.2)',
+            background: 'linear-gradient(135deg, #ea580c, #c2410c)',
+            color: '#ffffff', fontWeight: 700, fontSize: 13, border: 'none', cursor: 'pointer',
+            boxShadow: '0 4px 12px rgba(234,88,12,0.2)',
             transition: 'all 0.2s'
           }}
-          onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 6px 16px rgba(164,217,85,0.3)'; }}
-          onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 12px rgba(164,217,85,0.2)'; }}
+          onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 6px 16px rgba(234,88,12,0.3)'; }}
+          onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 12px rgba(234,88,12,0.2)'; }}
         >
           Cotizar cursos
         </button>
@@ -1945,8 +2364,8 @@ function AcademiaCard() {
             color: '#374151', fontWeight: 600, fontSize: 13, textDecoration: 'none',
             transition: 'all 0.2s'
           }}
-          onMouseEnter={e => { e.currentTarget.style.background = '#E5E7EB'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
-          onMouseLeave={e => { e.currentTarget.style.background = '#F3F4F6'; e.currentTarget.style.transform = 'translateY(0)'; }}
+          onMouseEnter={e => { e.currentTarget.style.background = '#E5E7EB'; e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.borderColor = '#ea580c'; }}
+          onMouseLeave={e => { e.currentTarget.style.background = '#F3F4F6'; e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.borderColor = '#D1D5DB'; }}
         >
           Revisar fechas
         </button>
@@ -1966,7 +2385,7 @@ function AcademiaCard() {
               width: '100%',
               maxHeight: '90vh',
               overflowY: 'auto',
-              border: '2px solid rgba(0, 145, 63, 0.3)',
+              border: '2px solid rgba(234, 88, 12, 0.3)',
               boxShadow: '0 20px 50px rgba(0,0,0,0.15)',
               display: 'flex',
               flexDirection: 'column',
@@ -1975,7 +2394,7 @@ function AcademiaCard() {
           >
             {/* Header del Modal */}
             <div style={{
-              background: 'linear-gradient(to right, #00913f, #14B8A6)',
+              background: 'linear-gradient(to right, #ea580c, #f97316)',
               padding: '24px',
               display: 'flex',
               alignItems: 'center',
@@ -2009,8 +2428,8 @@ function AcademiaCard() {
 
             {/* Contenido del Modal */}
             <div style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: 20 }}>
-              <div style={{ background: 'linear-gradient(135deg, rgba(0,145,63,0.05), rgba(20,184,166,0.05))', borderRadius: 12, padding: '16px', border: '1px solid rgba(0, 145, 63, 0.15)' }}>
-                <h3 style={{ margin: '0 0 6px', fontSize: 16, fontWeight: 700, color: '#00913f' }}>Capacitación Especializada</h3>
+              <div style={{ background: 'linear-gradient(135deg, rgba(234,88,12,0.05), rgba(249,115,22,0.05))', borderRadius: 12, padding: '16px', border: '1px solid rgba(234, 88, 12, 0.15)' }}>
+                <h3 style={{ margin: '0 0 6px', fontSize: 16, fontWeight: 700, color: '#ea580c' }}>Capacitación Especializada</h3>
                 <p style={{ fontSize: 14, color: '#374151', lineHeight: 1.6, margin: 0 }}>
                   Ofrecemos más de 32 cursos certificados en Inteligencia Artificial, desde fundamentos hasta implementaciones avanzadas.
                   Nuestros programas están diseñados para empresas y equipos técnicos que buscan dominar las últimas tecnologías en IA.
@@ -2032,8 +2451,8 @@ function AcademiaCard() {
                     text: 'Programas diseñados a la medida para la transformación de tu fuerza laboral o capacitación profesional.'
                   }
                 ].map((feature, idx) => (
-                  <div key={idx} style={{ background: '#F9FAFB', borderRadius: 12, padding: '16px', border: '1px solid rgba(0, 145, 63, 0.1)' }}>
-                    <h3 style={{ margin: '0 0 6px', fontSize: 14, fontWeight: 700, color: '#00913f' }}>{feature.title}</h3>
+                  <div key={idx} style={{ background: '#F9FAFB', borderRadius: 12, padding: '16px', border: '1px solid rgba(234, 88, 12, 0.1)' }}>
+                    <h3 style={{ margin: '0 0 6px', fontSize: 14, fontWeight: 700, color: '#ea580c' }}>{feature.title}</h3>
                     <p style={{ margin: 0, fontSize: 13, color: '#4B5563', lineHeight: 1.5 }}>{feature.text}</p>
                   </div>
                 ))}
@@ -2045,12 +2464,12 @@ function AcademiaCard() {
                   handleAgendarCita(e);
                 }}
                 style={{ 
-                  background: 'linear-gradient(135deg, #00913f, #14B8A6)', color: '#FFFFFF', border: 'none', borderRadius: 8, padding: '14px 16px', 
+                  background: 'linear-gradient(135deg, #ea580c, #f97316)', color: '#FFFFFF', border: 'none', borderRadius: 8, padding: '14px 16px', 
                   fontSize: 14, fontWeight: 700, cursor: 'pointer', width: '100%', textAlign: 'center', transition: 'all 0.2s',
-                  boxShadow: '0 4px 12px rgba(20,184,166,0.3)', marginTop: 8
+                  boxShadow: '0 4px 12px rgba(234,88,12,0.3)', marginTop: 8
                 }}
-                onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 6px 16px rgba(20,184,166,0.4)'; }}
-                onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 12px rgba(20,184,166,0.3)'; }}
+                onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 6px 16px rgba(234,88,12,0.4)'; }}
+                onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 12px rgba(234,88,12,0.3)'; }}
               >
                 Agendar Cotización
               </button>
@@ -2129,42 +2548,7 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
         }
       `}</style>
       
-      {/* Background Grid & Blobs */}
-      <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', pointerEvents: 'none' }}>
-        <div
-          style={{
-            position: 'absolute',
-            inset: 0,
-            opacity: 0.05,
-            backgroundImage: 'linear-gradient(to right, #000000 1px, transparent 1px), linear-gradient(to bottom, #000000 1px, transparent 1px)',
-            backgroundSize: '48px 48px',
-          }}
-        />
-        <div
-          style={{
-            position: 'absolute',
-            top: '10%',
-            left: '5%',
-            width: '400px',
-            height: '400px',
-            borderRadius: 'full',
-            background: 'rgba(164, 217, 85, 0.06)',
-            filter: 'blur(100px)',
-          }}
-        />
-        <div
-          style={{
-            position: 'absolute',
-            bottom: '10%',
-            right: '5%',
-            width: '400px',
-            height: '400px',
-            borderRadius: 'full',
-            background: 'rgba(72, 129, 235, 0.05)',
-            filter: 'blur(100px)',
-          }}
-        />
-      </div>
+      {/* Fondo blanco puro sin grid ni blobs */}
 
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 1 }}>
         
@@ -2265,24 +2649,7 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
           </Wrapper>
 
           <Wrapper category="Infraestructura">
-            <StandardCard 
-              icon={Wrench} 
-              color="#ea580c" 
-              bg="rgba(234,88,12,0.15)" 
-              title="ROI Discovery" 
-              desc="Descubre cuánto valor puede generar la IA en tu empresa. Analizamos procesos, costos y oportunidades para identificar dónde implementar IA con mayor retorno." 
-              videoSrc="/assets/images/productos/portalia.webm"
-              stats={[
-                { value: "10x+", label: "ROI Estimado" },
-                { value: "4 Semanas", label: "De análisis" },
-                { value: "100%", label: "Alineación a KPIs" }
-              ]}
-              videoOverlay={
-                <div style={{ position: 'absolute', top: 10, left: 10, background: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(4px)', padding: '4px 10px', borderRadius: 20, fontSize: 10, fontWeight: 700, color: '#ea580c', border: '1px solid rgba(234,88,12,0.2)' }}>
-                  📈 ROI Calculator Active
-                </div>
-              }
-            />
+            <RoiCard />
           </Wrapper>
 
           {/* --- CATEGORIA: Desarrollo --- */}
