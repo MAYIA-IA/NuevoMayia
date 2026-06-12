@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { ArrowRight, Calendar, User, Tag, Search, Sparkles } from "lucide-react";
 import ArticleModal, { type BlogPost } from "./ArticleModal";
+import mayiaLakeBanner from "../assets/MAYIA_LAKE_BANNER.jpg.jpeg";
+import fabricaMxBanner from "../assets/FABRICA_MX_BANNER.jpg.jpeg";
+import origenBanner from "../assets/ORIGEN_BANNER.jpg.jpeg";
+import squadsBanner from "../assets/SQUADS_BANNER.jpg.jpeg";
 
 const BLOG_POSTS: BlogPost[] = [
   {
@@ -113,7 +117,7 @@ const BLOG_POSTS: BlogPost[] = [
     date: "1 Junio 2026",
     author: "Veronica Viniegra",
     readTime: "7 min lectura",
-    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1170&auto=format&fit=crop",
+    image: fabricaMxBanner,
     featured: false,
     content: [
       { type: "paragraph", text: "La inteligencia artificial empresarial necesita mucho mas que un modelo. Necesita infraestructura. Necesita datos protegidos. Necesita computo. Necesita almacenamiento. Necesita red. Necesita seguridad. Necesita energia. Necesita operacion. Necesita especialistas capaces de llevar la inteligencia artificial del concepto a la realidad diaria de una empresa." },
@@ -140,7 +144,7 @@ const BLOG_POSTS: BlogPost[] = [
     date: "28 Mayo 2026",
     author: "Veronica Viniegra",
     readTime: "9 min lectura",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1170&auto=format&fit=crop",
+    image: mayiaLakeBanner,
     featured: false,
     content: [
       { type: "paragraph", text: "MAYIA Lakehouse es la plataforma de datos empresariales de MAYIA disenada para ayudar a las organizaciones a ordenar, conectar, gobernar y activar sus datos para inteligencia artificial, analitica avanzada, automatizacion, agentes inteligentes y toma de decisiones en tiempo real." },
@@ -160,6 +164,82 @@ const BLOG_POSTS: BlogPost[] = [
       { type: "heading", text: "Beneficios de MAYIA Lakehouse" },
       { type: "bullets", items: ["Preparar datos para inteligencia artificial.", "Reducir silos de informacion.", "Mejorar calidad de datos.", "Acelerar reportes y dashboards.", "Crear una vision unica del negocio.", "Reducir dependencia de Excel.", "Mejorar gobierno y trazabilidad.", "Proteger datos sensibles.", "Habilitar IA generativa privada.", "Construir agentes de IA mas confiables."] },
       { type: "highlight", text: "Con MAYIA Lakehouse, tus datos se convierten en una base inteligente para operar, analizar, predecir, automatizar y construir soluciones de inteligencia artificial empresarial." }
+    ]
+  },
+  {
+    id: 6,
+    title: "Forward-Deployed AI Squads: la nueva forma de implementar IA en las empresas",
+    excerpt: "MAYIA despliega Forward-Deployed AI Squads dentro de las empresas para implementar agentes inteligentes, automatizacion con IA, integracion de datos, seguridad, gobierno y ROI medible.",
+    category: "IA Empresarial",
+    date: "12 Junio 2026",
+    author: "Veronica Viniegra",
+    readTime: "6 min lectura",
+    image: squadsBanner,
+    featured: false,
+    content: [
+      { type: "paragraph", text: "La inteligencia artificial ya no se gana con presentaciones, pilotos aislados o herramientas desconectadas. Hoy, las empresas que quieren competir necesitan llevar la IA a sus procesos reales, conectarla con sus datos, integrarla con sus sistemas y convertirla en una capacidad operativa medible." },
+      { type: "paragraph", text: "Ahi nace el modelo de Forward-Deployed AI Squads: equipos especializados de inteligencia artificial que se integran temporalmente dentro de la empresa para construir, implementar y escalar soluciones reales de IA." },
+      { type: "paragraph", text: "En MAYIA, este modelo representa una nueva forma de llevar inteligencia artificial empresarial a Mexico: no desde la distancia, no como consultoria generica, sino desde el corazon operativo del cliente." },
+      { type: "quote", text: "Un Forward-Deployed AI Squad es un equipo de IA integrado al cliente para implementar inteligencia artificial real, segura y medible." },
+      { type: "heading", text: "Que son los Forward-Deployed AI Squads" },
+      { type: "paragraph", text: "Los Forward-Deployed AI Squads son equipos de especialistas que trabajan directamente con las areas de negocio, tecnologia, datos, seguridad y operacion de una empresa para llevar casos de uso de IA desde la idea hasta produccion." },
+      { type: "paragraph", text: "Este modelo ya esta tomando fuerza en las companias lideres de IA. Anthropic, por ejemplo, describe a sus Forward-Deployed Engineers como perfiles que trabajan dentro de los sistemas del cliente para construir aplicaciones productivas con modelos de IA, desarrollar artefactos tecnicos como servidores MCP, subagentes y habilidades de agentes, ademas de acompanar despliegues enterprise." },
+      { type: "paragraph", text: "OpenAI tambien lanzo una compania de despliegue empresarial para ayudar a organizaciones a llevar sistemas de IA a produccion, incorporando Forward Deployed Engineers desde el inicio. EY, por su parte, anuncio roles de Forward Deployed Engineer para ayudar a las empresas a pasar de experimentacion a despliegues de IA listos para produccion." },
+      { type: "heading", text: "No vendemos IA. Implementamos capacidad real de IA" },
+      { type: "paragraph", text: "Muchas empresas ya probaron herramientas de inteligencia artificial. Algunas hicieron demos. Otras compraron licencias. Pero pocas han logrado integrar IA en sus procesos criticos con seguridad, gobierno, adopcion y retorno de inversion." },
+      { type: "bullets", items: [
+        "Forward-Deployed AI Engineers",
+        "AI Implementation Squads",
+        "Enterprise AI Squads",
+        "AI Engineering Squads",
+        "AI Delivery Squads",
+        "AI Transformation Squads",
+        "AI Adoption Squads",
+        "AI Production Squads"
+      ] },
+      { type: "heading", text: "Como trabaja un Squad de IA MAYIA" },
+      { type: "paragraph", text: "Cada AI Implementation Squad se integra temporalmente con el cliente para entender sus procesos reales, identificar oportunidades de alto impacto y construir soluciones de IA listas para operar. Nuestra metodologia conecta:" },
+      { type: "highlight", text: "Diagnostico -> Datos -> Proceso -> Arquitectura -> Agente -> Integracion -> Seguridad -> Produccion -> Adopcion -> ROI" },
+      { type: "paragraph", text: "Esto significa que no empezamos preguntando 'que modelo quieres usar'. Empezamos preguntando: que proceso quieres transformar, que decision quieres acelerar, que tarea quieres automatizar, que datos tienes disponibles, que sistemas deben integrarse, que riesgo debemos controlar y que resultado financiero quieres medir." },
+      { type: "heading", text: "Beneficios de un Forward-Deployed AI Squad" },
+      { type: "bullets", items: [
+        "Reduccion del tiempo para pasar de idea a produccion.",
+        "Implementacion de agentes de IA conectados a procesos reales.",
+        "Integracion con datos, sistemas y flujos de trabajo existentes.",
+        "Mayor adopcion por parte de usuarios internos.",
+        "Seguridad, trazabilidad y gobierno desde el diseno.",
+        "Transferencia de conocimiento al equipo del cliente.",
+        "Medicion de ROI, productividad y eficiencia operativa."
+      ] },
+      { type: "highlight", text: "MAYIA Forward-Deployed AI Squads: la unidad que lleva inteligencia artificial empresarial del diagnostico a produccion, con agentes inteligentes, seguridad, gobierno, adopcion and ROI medible." }
+    ]
+  },
+  {
+    id: 7,
+    title: "Conoce El Origen De Nuestra Marca: ¿Por que MAYIA?",
+    excerpt: "MAYIA nace de una raiz profunda: Maya + IA. Un nombre que une la inteligencia ancestral de Mexico con la inteligencia artificial que hoy esta escribiendo una nueva etapa para el mundo.",
+    category: "Innovacion",
+    date: "12 Junio 2026",
+    author: "Veronica Viniegra",
+    readTime: "4 min lectura",
+    image: origenBanner,
+    featured: false,
+    content: [
+      { type: "paragraph", text: "MAYIA nace de una raiz profunda: Maya + IA. Un nombre que une la inteligencia ancestral de Mexico con la inteligencia artificial que hoy esta escribiendo una nueva etapa para el mundo." },
+      { type: "paragraph", text: "La civilizacion maya fue una civilizacion del conocimiento. Observo el cielo con precision, desarrollo sistemas matematicos, midio el tiempo, construyo ciudades, creo arquitectura monumental, entendio ciclos naturales, dejo escritura, simbolos y una vision extraordinaria sobre la relacion entre el ser humano, la naturaleza y el universo." },
+      { type: "heading", text: "Inspiracion ancestral para la era digital" },
+      { type: "bullets", items: [
+        "Los mayas miraban el cielo para leer senales.",
+        "Estudiaban los ciclos para tomar decisiones.",
+        "Transformaban la observacion en conocimiento.",
+        "Convertian el calculo en arquitectura.",
+        "Hacian del tiempo un sistema.",
+        "Hacian de la inteligencia una forma de vida."
+      ] },
+      { type: "heading", text: "Inteligencia Artificial con raiz mexicana" },
+      { type: "paragraph", text: "El nombre MAYIA lleva dentro una declaracion poderosa: la inteligencia artificial mexicana tambien puede tener identidad, raiz, territorio y proposito. Puede mirar hacia adelante honrando lo que somos. Puede hablar de tecnologia desde una historia propia. Puede nacer desde Mexico con una voz que reconoce su origen y proyecta su futuro." },
+      { type: "paragraph", text: "MAYIA representa inteligencia artificial desde Mexico: desde servidores ubicados en territorio nacional, con soberania de datos y una vision entrenada en el conocimiento, la cultura, las necesidades y la realidad actual de la nacion, para impulsar la competitividad digital de las personas, las empresas y los gobiernos a nivel nacional e internacional." },
+      { type: "highlight", text: "MAYIA es inteligencia artificial con raiz mexicana. Es la evolucion simbolica de una herencia que observo las estrellas y hoy mira hacia el futuro, uniendo la inteligencia ancestral de Mexico con la inteligencia artificial que construye la nueva era digital." }
     ]
   }
 ];
