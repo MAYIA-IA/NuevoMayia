@@ -3,7 +3,9 @@ import { motion } from 'framer-motion';
 import { 
   Database, FlaskConical, FileText, Wrench, Calendar,
   Briefcase, LineChart, ShoppingBag, GraduationCap, GitBranch, ScanEye,
-  BookOpen, Award, Users, MoreVertical, Info, Cloud, Target, TrendingUp
+  BookOpen, Award, Users, MoreVertical, Info, Cloud, Target, TrendingUp,
+  TrendingDown, Shield, Bot, Zap, Link2, Lock, Layers, FlaskRound,
+  MonitorCheck, GraduationCap as GradCap, ChevronRight, MessageSquare
 } from 'lucide-react';
 import logoMaia from '../assets/logosNativos/logoMaia.webp';
 import academiaLogo from '../assets/logosNativos/academia-horizontal.webp';
@@ -1446,7 +1448,259 @@ function SquadsMayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
   );
 }
 
-// --- SUB-COMPONENTE: RoiCard (ROI Discovery) ---
+// --- SUB-COMPONENTE: IAEmpresarialCard ---
+function IAEmpresarialCard() {
+  const [isHovered, setIsHovered] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [hoveredFeature, setHoveredFeature] = useState<number | null>(null);
+  const [hoveredService, setHoveredService] = useState<number | null>(null);
+
+  const BLUE = '#2563eb';
+
+  const handleAgendarCita = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const rect = e.currentTarget.getBoundingClientRect();
+    if ((window as any).openCalendly) {
+      (window as any).openCalendly({ x: rect.right + 12, y: Math.max(20, rect.top - 140) });
+    } else {
+      window.open('https://calendly.com/mayiainteligencia/consulta-mayia', '_blank');
+    }
+    setMenuOpen(false);
+  };
+
+  const features = [
+    { icon: TrendingUp, bg: 'linear-gradient(135deg,#7c3aed,#6d28d9)', title: 'Estrategia ROI' },
+    { icon: Shield,     bg: 'linear-gradient(135deg,#059669,#047857)', title: 'Tecnología segura' },
+    { icon: Users,      bg: 'linear-gradient(135deg,#2563eb,#1d4ed8)', title: 'Squads de IA' },
+    { icon: BookOpen,   bg: 'linear-gradient(135deg,#ea580c,#c2410c)', title: 'Adopción & Academia' },
+  ];
+
+  const topServices = [
+    { icon: Link2, label: 'Interoperabilidad', color: BLUE },
+    { icon: Lock,  label: 'IA Privada',        color: BLUE },
+    { icon: Bot,   label: 'Agentes IA',        color: '#7c3aed' },
+    { icon: Zap,   label: 'Automatización IA', color: '#059669' },
+  ];
+
+  const subServices = [
+    { icon: Cloud,        label: 'Infra propia' },
+    { icon: Database,     label: 'MAYIA Lake' },
+    { icon: Shield,       label: 'CiberSeg.' },
+    { icon: FlaskConical, label: 'Labs IA' },
+    { icon: Users,        label: 'Squads' },
+    { icon: MonitorCheck, label: 'Monitoreo' },
+    { icon: Zap,          label: 'RPA' },
+    { icon: GraduationCap,label: 'Academia' },
+  ];
+
+  return (
+    <div
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => { setIsHovered(false); setMenuOpen(false); }}
+      style={{
+        borderRadius: 24,
+        padding: 24,
+        border: `2px solid ${isHovered ? BLUE : '#E5E7EB'}`,
+        boxShadow: isHovered
+          ? `0 20px 40px -8px rgba(37,99,235,0.35), 0 0 24px 2px rgba(37,99,235,0.20), inset 0 0 24px 2px rgba(37,99,235,0.18)`
+          : 'none',
+        background: isHovered
+          ? `radial-gradient(120% 120% at 50% 50%, rgba(255,255,255,0) 30%, rgba(37,99,235,0.08) 100%)`
+          : '#FFFFFF',
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100%',
+        transition: 'all 0.3s ease-in-out',
+        position: 'relative',
+        overflow: 'hidden'
+      }}
+    >
+      {/* Header — mismo patrón que StandardCard */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 16, height: 50, marginBottom: 16, justifyContent: 'space-between' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 16, flex: 1, minWidth: 0 }}>
+          <div style={{ width: 44, height: 44, borderRadius: 10, background: 'rgba(37,99,235,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+            <Briefcase size={22} color={BLUE} />
+          </div>
+          <div style={{ minWidth: 0 }}>
+            <h3 style={{ fontSize: 16, fontWeight: 800, color: '#111827', margin: 0, lineHeight: 1.2 }}>Desarrollo IA Empresarial</h3>
+            <p style={{ margin: 0, fontSize: 10, color: '#4B5563', fontWeight: 500, marginTop: 2, lineHeight: 1.2 }}>Gen-AI · Computer Vision · Agentes Autónomos · RPA</p>
+          </div>
+        </div>
+        <div style={{ position: 'relative', zIndex: 10, flexShrink: 0 }}>
+          <button
+            onClick={(e) => { e.stopPropagation(); setMenuOpen(!menuOpen); }}
+            style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#6B7280', padding: 4, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 8, transition: 'all 0.2s' }}
+          >
+            <MoreVertical size={20} />
+          </button>
+          {menuOpen && (
+            <>
+              <div style={{ position: 'fixed', inset: 0, zIndex: 30 }} onClick={(e) => { e.stopPropagation(); setMenuOpen(false); }} />
+              <div style={{ position: 'absolute', right: 0, top: 32, background: '#FFFFFF', borderRadius: 12, boxShadow: '0 10px 25px rgba(0,0,0,0.1)', border: '1px solid #E5E7EB', overflow: 'hidden', zIndex: 40, width: 'max-content', minWidth: 280 }}>
+                <button
+                  onClick={(e) => { handleAgendarCita(e); setMenuOpen(false); }}
+                  style={{ width: '100%', padding: '12px 16px', textAlign: 'left', fontSize: 13, color: '#374151', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, transition: 'background 0.2s' }}
+                  onMouseEnter={e => e.currentTarget.style.background = 'rgba(37,99,235,0.08)'}
+                  onMouseLeave={e => e.currentTarget.style.background = 'none'}
+                >
+                  <Calendar size={16} /> Conversa con el Agentico de Desarrollo IA Empresarial
+                </button>
+              </div>
+            </>
+          )}
+        </div>
+      </div>
+
+      {/* Video — mismo tamaño que todos los cards: height 180 */}
+      <div style={{
+        borderRadius: 16,
+        overflow: 'hidden',
+        height: 180,
+        position: 'relative',
+        background: '#F9FAFB',
+        marginBottom: 16,
+        border: `2px solid ${isHovered ? BLUE : 'transparent'}`,
+        boxShadow: isHovered ? `0 0 20px rgba(37,99,235,0.40), inset 0 0 20px rgba(37,99,235,0.05)` : 'none',
+        transition: 'all 0.3s ease'
+      }}>
+        <video
+          autoPlay loop muted playsInline
+          style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+          src="/assets/images/productos/prediccionVent.webm"
+        />
+        {/* Gradiente lateral suave para legibilidad de pills */}
+        <div style={{
+          position: 'absolute', inset: 0,
+          background: 'linear-gradient(90deg, rgba(0,0,0,0.50) 0%, rgba(0,0,0,0.15) 42%, rgba(0,0,0,0) 100%)',
+          pointerEvents: 'none'
+        }} />
+        {/* 4 feature pills — columna izquierda sobre el video */}
+        <div style={{
+          position: 'absolute', top: 0, left: 0, bottom: 0,
+          display: 'flex', flexDirection: 'column', justifyContent: 'center',
+          gap: 5, padding: '10px 8px 10px 10px', width: 148
+        }}>
+          {features.map((f, i) => {
+            const IconComp = f.icon;
+            const active = hoveredFeature === i;
+            return (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: i * 0.06, duration: 0.28 }}
+                onMouseEnter={() => setHoveredFeature(i)}
+                onMouseLeave={() => setHoveredFeature(null)}
+                style={{
+                  display: 'flex', alignItems: 'center', gap: 6,
+                  padding: '4px 7px', borderRadius: 7,
+                  background: active ? 'rgba(255,255,255,0.16)' : 'rgba(255,255,255,0.07)',
+                  border: `1px solid ${active ? 'rgba(255,255,255,0.32)' : 'rgba(255,255,255,0.12)'}`,
+                  backdropFilter: 'blur(6px)',
+                  transition: 'all 0.18s ease',
+                  cursor: 'default'
+                }}
+              >
+                <div style={{
+                  width: 20, height: 20, borderRadius: '50%',
+                  background: f.bg,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+                  boxShadow: '0 1px 5px rgba(0,0,0,0.28)'
+                }}>
+                  <IconComp size={10} color="#ffffff" />
+                </div>
+                <p style={{ margin: 0, fontSize: 8.5, fontWeight: 700, color: '#ffffff', lineHeight: 1.2, opacity: active ? 1 : 0.85 }}>{f.title}</p>
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Descripción */}
+      <p style={{ fontSize: 13, color: '#4B5563', lineHeight: 1.5, margin: 0, marginBottom: 16, fontWeight: 500, textAlign: 'justify' }}>
+        Transformamos empresas en organizaciones inteligentes mediante <strong style={{ color: BLUE }}>Business Workflows</strong> con <strong style={{ color: BLUE }}>Gen-AI, Computer Vision, Robotics</strong> y <strong style={{ color: BLUE }}>Agentes Autónomos</strong>, integrando estrategia, datos, procesos y ciberseguridad para generar crecimiento, eficiencia y ventaja competitiva.
+      </p>
+
+      {/* Ecosistema de servicios */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 20 }}>
+
+        {/* 4 servicios principales */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 6 }}>
+          {topServices.map((svc, i) => {
+            const IconComp = svc.icon;
+            const active = hoveredService === i;
+            return (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 + i * 0.06, duration: 0.3 }}
+                onMouseEnter={() => setHoveredService(i)}
+                onMouseLeave={() => setHoveredService(null)}
+                style={{
+                  background: active ? `${svc.color}10` : '#F8FAFF',
+                  border: `1.5px solid ${active ? svc.color : '#E5E7EB'}`,
+                  borderRadius: 10, padding: '7px 4px',
+                  display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4,
+                  transition: 'all 0.2s ease', cursor: 'default',
+                  boxShadow: active ? `0 3px 10px ${svc.color}22` : 'none'
+                }}
+              >
+                <div style={{ width: 28, height: 28, borderRadius: 8, background: `${svc.color}18`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <IconComp size={15} color={svc.color} />
+                </div>
+                <p style={{ margin: 0, fontSize: 8, fontWeight: 700, color: svc.color, textAlign: 'center', lineHeight: 1.2 }}>{svc.label}</p>
+              </motion.div>
+            );
+          })}
+        </div>
+
+        {/* 8 sub-servicios */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(8, 1fr)', gap: 4, paddingTop: 8, borderTop: '1px solid #E5E7EB' }}>
+          {subServices.map((sub, i) => {
+            const IconComp = sub.icon;
+            return (
+              <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3 }}>
+                <div style={{ width: 26, height: 26, borderRadius: 7, background: 'rgba(37,99,235,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <IconComp size={12} color={BLUE} />
+                </div>
+                <p style={{ margin: 0, fontSize: 7, fontWeight: 500, color: '#6B7280', textAlign: 'center', lineHeight: 1.2 }}>{sub.label}</p>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* CTA — mismo patrón que StandardCard: marginTop auto */}
+      <div style={{ marginTop: 'auto' }}>
+        <motion.div
+          onClick={handleAgendarCita}
+          style={{
+            background: `linear-gradient(135deg, ${BLUE} 0%, #7c3aed 100%)`,
+            borderRadius: 10, padding: '10px 14px',
+            display: 'flex', alignItems: 'center', gap: 10,
+            cursor: 'pointer',
+            boxShadow: '0 5px 18px rgba(37,99,235,0.28)',
+          }}
+          whileHover={{ scale: 1.01, boxShadow: '0 8px 22px rgba(37,99,235,0.42)' }}
+          whileTap={{ scale: 0.99 }}
+        >
+          <div style={{ width: 30, height: 30, borderRadius: 8, background: 'rgba(255,255,255,0.18)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+            <MessageSquare size={15} color="#ffffff" />
+          </div>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <p style={{ margin: 0, fontSize: 11, fontWeight: 800, color: '#ffffff', lineHeight: 1.2 }}>Conversemos sobre el potencial de la IA en tu empresa →</p>
+            <p style={{ margin: 0, marginTop: 2, fontSize: 8.5, color: 'rgba(255,255,255,0.8)', fontWeight: 500 }}>Diagnóstico sin costo &nbsp;|&nbsp; Enfoque en ROI &nbsp;|&nbsp; Casos de alto impacto</p>
+          </div>
+        </motion.div>
+      </div>
+    </div>
+  );
+}
+
+
+
+
 function RoiCard() {
   const [isHovered, setIsHovered] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -2662,24 +2916,7 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
           </Wrapper>
 
           <Wrapper category="Desarrollo">
-            <StandardCard 
-              icon={Briefcase} 
-              color="#2563eb" 
-              bg="rgba(37,99,235,0.15)" 
-              title="Desarrollo IA Empresarial" 
-              desc="Diseñamos soluciones de IA personalizadas que optimizan procesos, mejoran la toma de decisiones y generan un retorno de inversión claro y medible." 
-              videoSrc="/assets/images/productos/mabePanel.webm"
-              stats={[
-                { value: "99.9%", label: "Precisión Modelos" },
-                { value: "90%", label: "Automatización" },
-                { value: "RAG/LLM", label: "Arquitectura" }
-              ]}
-              videoOverlay={
-                <div style={{ position: 'absolute', top: 10, left: 10, background: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(4px)', padding: '4px 10px', borderRadius: 20, fontSize: 10, fontWeight: 700, color: '#2563eb', border: '1px solid rgba(37,99,235,0.2)' }}>
-                  ⚡ Enterprise RAG Ready
-                </div>
-              }
-            />
+            <IAEmpresarialCard />
           </Wrapper>
 
           <Wrapper category="Desarrollo">
@@ -2710,7 +2947,7 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
               bg="rgba(22,163,74,0.15)" 
               title="Desarrollo IA por Sector" 
               desc="Tu industria ya opera con inteligencia artificial. Creamos soluciones especializadas para tu sector, adaptadas a tus retos, clientes y oportunidades reales." 
-              videoSrc="/assets/images/productos/prediccionVent.webm"
+              videoSrc="/assets/images/productos/mabePanel.webm"
               stats={[
                 { value: "10+", label: "Sectores Clave" },
                 { value: "Real-Time", label: "Procesamiento" },
