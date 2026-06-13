@@ -571,7 +571,7 @@ function FlaiCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
           </div>
           <div>
             <h3 style={{ margin: 0, fontSize: 18, fontWeight: 800, color: '#111827' }}>FLAI</h3>
-            <p style={{ margin: 0, fontSize: 12, color: '#4B5563', fontWeight: 600 }}>Nube Soberana</p>
+            <p style={{ margin: 0, fontSize: 12, color: '#4B5563', fontWeight: 600 }}>Nube Soberana Inteligente</p>
           </div>
         </div>
 
