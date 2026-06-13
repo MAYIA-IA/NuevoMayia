@@ -27,6 +27,24 @@ const hexToRgba = (hex: string, alpha: number) => {
   return hex;
 };
 
+const getPastelTheme = (color: string) => {
+  const c = color.toLowerCase();
+  if (c === '#16a34a' || c === '#86efac' || c === '#4ade80') {
+    return { bg: '#f0fdf4', hoverBg: '#dcfce7', border: '#86efac' };
+  } else if (c === '#9333ea' || c === '#d8b4fe' || c === '#c084fc') {
+    return { bg: '#faf5ff', hoverBg: '#f3e8ff', border: '#d8b4fe' };
+  } else if (c === '#dc2626' || c === '#fca5a5' || c === '#f87171') {
+    return { bg: '#fef2f2', hoverBg: '#fee2e2', border: '#fca5a5' };
+  } else if (c === '#ea580c' || c === '#fdba74' || c === '#fb923c') {
+    return { bg: '#fff7ed', hoverBg: '#ffedd5', border: '#fdba74' };
+  } else if (c === '#a4d955' || c === '#d9f99d' || c === '#bef264') {
+    return { bg: '#f8fde9', hoverBg: '#f1fbd1', border: '#d9f99d' };
+  } else if (c === '#14b8a6' || c === '#5eead4' || c === '#2dd4bf') {
+    return { bg: '#f0fdfa', hoverBg: '#ddfbf2', border: '#5eead4' };
+  }
+  return { bg: '#f0f6ff', hoverBg: '#e2efff', border: '#93c5fd' };
+};
+
 // Hook personalizado para detectar dispositivos móviles (<768px)
 const useIsMobile = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -120,6 +138,8 @@ const CATEGORIES = ['Infraestructura', 'Desarrollo', 'Modelos', 'Agentes', 'Oper
 function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOpenMap?: () => void; onOpenFabricaInfo?: () => void; onOpenDiagnostico?: () => void }) {
   const [isHovered, setIsHovered] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const color = '#60a5fa';
+  const theme = getPastelTheme(color);
   
   const mainVideoRef = useRef<HTMLVideoElement>(null);
   const iconVideoRef = useRef<HTMLVideoElement>(null);
@@ -150,13 +170,9 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOp
       onMouseLeave={() => { setIsHovered(false); setMenuOpen(false); }}
       style={{
         borderRadius: 24, 
-        border: `2px solid ${isHovered ? '#4881EB' : '#E5E7EB'}`,
-        boxShadow: isHovered 
-          ? '0 20px 40px -8px rgba(72, 129, 235, 0.35), 0 0 24px 2px rgba(72, 129, 235, 0.20), inset 0 0 24px 2px rgba(72, 129, 235, 0.18)' 
-          : 'none',
-        background: isHovered 
-          ? 'radial-gradient(120% 120% at 50% 50%, rgba(255, 255, 255, 0) 30%, rgba(72, 129, 235, 0.08) 100%)' 
-          : '#FFFFFF',
+        border: `2px solid ${theme.border}`,
+        boxShadow: 'none',
+        background: theme.bg,
         display: 'flex', 
         flexDirection: 'column', 
         height: '100%', 
@@ -174,8 +190,8 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOp
             borderRadius: 14, 
             overflow: 'hidden', 
             background: '#090d16', 
-            border: '2px solid #4881EB', 
-            boxShadow: '0 4px 12px rgba(72, 129, 235, 0.4), inset 0 0 6px rgba(255, 255, 255, 0.15)', 
+            border: `2px solid ${color}`, 
+            boxShadow: `0 4px 12px ${hexToRgba(color, 0.4)}, inset 0 0 6px rgba(255, 255, 255, 0.15)`, 
             display: 'flex', 
             alignItems: 'center', 
             justifyContent: 'center', 
@@ -189,7 +205,7 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOp
               playsInline 
               style={{ width: '100%', height: '100%', objectFit: 'cover' }}
               videoSrc="/assets/images/jaguar.webm"
-              accentColor="#4881EB"
+              accentColor={color}
             />
           </div>
           <div>
@@ -213,7 +229,7 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOp
                 <button 
                   onClick={handleAgendarCita}
                   style={{ width: '100%', padding: '12px 16px', textAlign: 'left', fontSize: 13, color: '#374151', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, transition: 'background 0.2s' }}
-                  onMouseEnter={e => e.currentTarget.style.background = 'rgba(72,129,235,0.08)'}
+                  onMouseEnter={e => e.currentTarget.style.background = hexToRgba(color, 0.08)}
                   onMouseLeave={e => e.currentTarget.style.background = 'none'}
                 >
                   <Calendar size={16} /> Conversa con el Agentico de Fábrica de IA
@@ -232,8 +248,8 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOp
         height: 180, 
         position: 'relative', 
         background: '#F9FAFB',
-        border: `2px solid ${isHovered ? '#4881EB' : 'transparent'}`,
-        boxShadow: isHovered ? '0 0 20px rgba(72, 129, 235, 0.25)' : 'none',
+        border: `2px solid ${isHovered ? color : 'transparent'}`,
+        boxShadow: isHovered ? `0 0 20px ${hexToRgba(color, 0.25)}` : 'none',
         transition: 'all 0.3s ease'
       }}>
         <LazyVideo 
@@ -241,7 +257,7 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOp
           autoPlay loop muted playsInline preload="metadata"
           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           videoSrc="/assets/images/productos/drpVideo.webm"
-          accentColor="#4881EB"
+          accentColor={color}
         />
 
         {/* Left overlays: Nuestros servidores, Modo Hibrido, Modo on premise */}
@@ -272,8 +288,8 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOp
                   width: 5,
                   height: 5,
                   borderRadius: '50%',
-                  backgroundColor: '#4881EB',
-                  boxShadow: '0 0 4px #4881EB',
+                  backgroundColor: color,
+                  boxShadow: `0 0 4px ${color}`,
                   flexShrink: 0,
                 }}
                 animate={{
@@ -295,20 +311,20 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOp
           <motion.div
             style={{
               background: 'rgba(219, 234, 254, 0.95)', 
-              border: '1px solid #4881EB',
+              border: `1px solid ${color}`,
               borderRadius: 6,
               padding: '3.5px 8px',
               display: 'flex',
               alignItems: 'center',
               gap: 5,
-              boxShadow: '0 2px 6px rgba(72, 129, 235, 0.15)',
+              boxShadow: `0 2px 6px ${hexToRgba(color, 0.15)}`,
             }}
             animate={{
               scale: [1, 1.01, 1],
               boxShadow: [
-                '0 2px 6px rgba(72, 129, 235, 0.1)',
-                '0 2px 12px rgba(72, 129, 235, 0.4)',
-                '0 2px 6px rgba(72, 129, 235, 0.1)',
+                `0 2px 6px ${hexToRgba(color, 0.1)}`,
+                `0 2px 12px ${hexToRgba(color, 0.4)}`,
+                `0 2px 6px ${hexToRgba(color, 0.1)}`,
               ]
             }}
             transition={{
@@ -323,8 +339,8 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOp
                 width: 5,
                 height: 5,
                 borderRadius: '50%',
-                backgroundColor: '#4881EB',
-                boxShadow: '0 0 4px #4881EB',
+                backgroundColor: color,
+                boxShadow: `0 0 4px ${color}`,
                 flexShrink: 0,
               }}
               animate={{
@@ -368,8 +384,8 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOp
               if (onOpenFabricaInfo) onOpenFabricaInfo();
             }}
             style={{
-              background: 'linear-gradient(135deg, #1e3a8a, #3b82f6)',
-              color: '#ffffff',
+              background: `linear-gradient(135deg, ${color}, ${hexToRgba(color, 0.85)})`,
+              color: '#111827',
               border: 'none',
               borderRadius: 4,
               padding: '12px 6px',
@@ -382,10 +398,10 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOp
               textAlign: 'center',
               lineHeight: 1.1,
               transition: 'all 0.2s',
-              boxShadow: '0 2px 6px rgba(30, 58, 138, 0.15)'
+              boxShadow: `0 2px 6px ${hexToRgba(color, 0.15)}`
             }}
-            onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.boxShadow = '0 4px 10px rgba(30, 58, 138, 0.25)'; }}
-            onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 2px 6px rgba(30, 58, 138, 0.15)'; }}
+            onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.boxShadow = `0 4px 10px ${hexToRgba(color, 0.25)}`; }}
+            onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = `0 2px 6px ${hexToRgba(color, 0.15)}`; }}
           >
             Conoce más
           </button>
@@ -396,8 +412,8 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOp
               if (onOpenDiagnostico) onOpenDiagnostico();
             }}
             style={{
-              background: 'linear-gradient(135deg, #1d4ed8, #3b82f6)',
-              color: '#ffffff',
+              background: `linear-gradient(135deg, ${color}, ${hexToRgba(color, 0.85)})`,
+              color: '#111827',
               border: 'none',
               borderRadius: 4,
               padding: '12px 6px',
@@ -410,10 +426,10 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOp
               textAlign: 'center',
               lineHeight: 1.1,
               transition: 'all 0.2s',
-              boxShadow: '0 2px 6px rgba(30, 58, 138, 0.15)'
+              boxShadow: `0 2px 6px ${hexToRgba(color, 0.15)}`
             }}
-            onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.boxShadow = '0 4px 10px rgba(30, 58, 138, 0.25)'; }}
-            onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 2px 6px rgba(30, 58, 138, 0.15)'; }}
+            onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.boxShadow = `0 4px 10px ${hexToRgba(color, 0.25)}`; }}
+            onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = `0 2px 6px ${hexToRgba(color, 0.15)}`; }}
           >
             Realiza tu diagnóstico
           </button>
@@ -424,8 +440,8 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOp
               handleAgendarCita(e);
             }}
             style={{
-              background: 'linear-gradient(135deg, #1e3a8a, #3b82f6)',
-              color: '#ffffff',
+              background: `linear-gradient(135deg, ${color}, ${hexToRgba(color, 0.85)})`,
+              color: '#111827',
               border: 'none',
               borderRadius: 4,
               padding: '12px 6px',
@@ -438,10 +454,10 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOp
               textAlign: 'center',
               lineHeight: 1.1,
               transition: 'all 0.2s',
-              boxShadow: '0 2px 6px rgba(30, 58, 138, 0.15)'
+              boxShadow: `0 2px 6px ${hexToRgba(color, 0.15)}`
             }}
-            onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.boxShadow = '0 4px 10px rgba(30, 58, 138, 0.25)'; }}
-            onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 2px 6px rgba(30, 58, 138, 0.15)'; }}
+            onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.boxShadow = `0 4px 10px ${hexToRgba(color, 0.25)}`; }}
+            onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = `0 2px 6px ${hexToRgba(color, 0.15)}`; }}
           >
             Agenda una cita
           </button>
@@ -484,8 +500,8 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOp
               alignItems: 'center',
               gap: 6
             }}
-            onMouseEnter={e => { e.currentTarget.style.background = '#4881EB'; e.currentTarget.style.transform = 'scale(1.03)'; }}
-            onMouseLeave={e => { e.currentTarget.style.background = '#111827'; e.currentTarget.style.transform = 'scale(1)'; }}
+            onMouseEnter={e => { e.currentTarget.style.background = color; e.currentTarget.style.color = '#111827'; e.currentTarget.style.transform = 'scale(1.03)'; }}
+            onMouseLeave={e => { e.currentTarget.style.background = '#111827'; e.currentTarget.style.color = '#ffffff'; e.currentTarget.style.transform = 'scale(1)'; }}
           >
             Descubre porque &rarr;
           </button>
@@ -499,6 +515,8 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOp
 function FlaiCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
   const [isHovered, setIsHovered] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const color = '#f87171';
+  const theme = getPastelTheme(color);
 
   const handleAgendarCita = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -523,13 +541,9 @@ function FlaiCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
       onMouseLeave={() => { setIsHovered(false); setMenuOpen(false); }}
       style={{
         borderRadius: 24, 
-        border: `2px solid ${isHovered ? '#DC2626' : '#E5E7EB'}`,
-        boxShadow: isHovered 
-          ? '0 20px 40px -8px rgba(220, 38, 38, 0.35), 0 0 24px 2px rgba(220, 38, 38, 0.20), inset 0 0 24px 2px rgba(220, 38, 38, 0.18)' 
-          : 'none',
-        background: isHovered 
-          ? 'radial-gradient(120% 120% at 50% 50%, rgba(255, 255, 255, 0) 30%, rgba(220, 38, 38, 0.08) 100%)' 
-          : '#FFFFFF',
+        border: `2px solid ${theme.border}`,
+        boxShadow: 'none',
+        background: theme.bg,
         display: 'flex', 
         flexDirection: 'column', 
         height: '100%', 
@@ -546,15 +560,14 @@ function FlaiCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
             height: 44, 
             borderRadius: 12, 
             background: '#FFFFFF', 
-            border: '1px solid rgba(220, 38, 38, 0.15)', 
-            boxShadow: '0 4px 10px rgba(220, 38, 38, 0.08)',
+            border: `1px solid ${hexToRgba(color, 0.4)}`, 
+            boxShadow: `0 4px 10px ${hexToRgba(color, 0.25)}`,
             display: 'flex', 
             alignItems: 'center', 
             justifyContent: 'center', 
-            padding: 4,
             overflow: 'hidden'
           }}>
-            <img src={flaiLogo} alt="FLAI" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+            <img src={flaiLogo} alt="FLAI" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           </div>
           <div>
             <h3 style={{ margin: 0, fontSize: 18, fontWeight: 800, color: '#111827' }}>FLAI</h3>
@@ -577,7 +590,7 @@ function FlaiCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
                 <button 
                   onClick={handleAgendarCita}
                   style={{ width: '100%', padding: '12px 16px', textAlign: 'left', fontSize: 13, color: '#374151', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, transition: 'background 0.2s' }}
-                  onMouseEnter={e => e.currentTarget.style.background = 'rgba(220,38,38,0.08)'}
+                  onMouseEnter={e => e.currentTarget.style.background = hexToRgba(color, 0.08)}
                   onMouseLeave={e => e.currentTarget.style.background = 'none'}
                 >
                   <Calendar size={16} /> Conversa con el Agentico de FLAI
@@ -596,15 +609,15 @@ function FlaiCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
         height: 180, 
         position: 'relative', 
         background: '#F9FAFB',
-        border: `2px solid ${isHovered ? '#DC2626' : 'transparent'}`,
-        boxShadow: isHovered ? '0 0 20px rgba(220, 38, 38, 0.4), inset 0 0 20px rgba(220, 38, 38, 0.05)' : 'none',
+        border: `2px solid ${isHovered ? color : 'transparent'}`,
+        boxShadow: isHovered ? `0 0 20px ${hexToRgba(color, 0.4)}, inset 0 0 20px ${hexToRgba(color, 0.05)}` : 'none',
         transition: 'all 0.3s ease'
       }}>
         <LazyVideo 
           autoPlay loop muted playsInline preload="metadata"
           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           videoSrc="/assets/images/productos/flaiMarcoVideo.webm"
-          accentColor="#DC2626"
+          accentColor={color}
         />
       </div>
 
@@ -631,7 +644,7 @@ function FlaiCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
             style={{ 
               fontSize: 9.5,
               fontWeight: 800, 
-              color: '#DC2626', 
+              color: '#991b1b', 
               whiteSpace: 'nowrap',
               borderRight: idx < 2 ? '1px solid #E5E7EB' : 'none',
               paddingRight: idx < 2 ? 12 : 0
@@ -651,22 +664,22 @@ function FlaiCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
         {['GPU AMD MI300X', 'Soberanía Digital', 'Baja Latencia Edge', 'Cumplimiento Local'].map((tag, idx) => (
           <motion.div
             key={idx}
-            whileHover={{ scale: 1.03, borderColor: '#DC2626', boxShadow: '0 4px 12px rgba(220, 38, 38, 0.12)' }}
+            whileHover={{ scale: 1.03, borderColor: color, boxShadow: `0 4px 12px ${hexToRgba(color, 0.12)}` }}
             style={{ 
               fontSize: 10, 
               fontWeight: 800, 
               padding: '10px 8px', 
               borderRadius: 12, 
-              background: 'rgba(220, 38, 38, 0.04)', 
-              color: '#DC2626', 
-              border: '1.5px solid rgba(220, 38, 38, 0.15)',
+              background: hexToRgba(color, 0.15), 
+              color: '#991b1b', 
+              border: `1.5px solid ${hexToRgba(color, 0.35)}`,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               textAlign: 'center',
               cursor: 'default',
               minHeight: 40,
-              boxShadow: '0 2px 4px rgba(220, 38, 38, 0.02)',
+              boxShadow: `0 2px 4px ${hexToRgba(color, 0.02)}`,
               transition: 'all 0.2s ease-in-out'
             }}
           >
@@ -679,12 +692,12 @@ function FlaiCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
         <button 
           onClick={handleAgendarCita}
           style={{ 
-            background: 'linear-gradient(135deg, #DC2626, #991B1B)', color: '#ffffff', border: 'none', borderRadius: 8, padding: '12px 16px', 
+            background: `linear-gradient(135deg, ${color}, ${hexToRgba(color, 0.85)})`, color: '#111827', border: 'none', borderRadius: 8, padding: '12px 16px', 
             fontSize: 13, fontWeight: 700, display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', width: '100%', justifyContent: 'center', 
-            transition: 'all 0.2s', boxShadow: '0 4px 12px rgba(220,38,38,0.2)'
+            transition: 'all 0.2s', boxShadow: `0 4px 12px ${hexToRgba(color, 0.2)}`
           }}
-          onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 6px 16px rgba(220,38,38,0.3)'; }}
-          onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 12px rgba(220,38,38,0.2)'; }}
+          onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = `0 6px 16px ${hexToRgba(color, 0.3)}`; }}
+          onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = `0 4px 12px ${hexToRgba(color, 0.2)}`; }}
         >
           Cotiza ahora &rarr;
         </button>
@@ -698,6 +711,8 @@ function SocCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
   const [isHovered, setIsHovered] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [showCerts, setShowCerts] = useState(false);
+  const color = '#60a5fa';
+  const theme = getPastelTheme(color);
 
   const handleAgendarCita = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -716,13 +731,9 @@ function SocCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
       onMouseLeave={() => { setIsHovered(false); setMenuOpen(false); }}
       style={{ 
         borderRadius: 24, 
-        border: `2px solid ${isHovered ? '#4881EB' : '#E5E7EB'}`, 
-        boxShadow: isHovered 
-          ? '0 20px 40px -8px rgba(72, 129, 235, 0.35), 0 0 24px 2px rgba(72, 129, 235, 0.20), inset 0 0 24px 2px rgba(72, 129, 235, 0.18)' 
-          : 'none', 
-        background: isHovered 
-          ? 'radial-gradient(120% 120% at 50% 50%, rgba(255, 255, 255, 0) 30%, rgba(72, 129, 235, 0.08) 100%)' 
-          : '#FFFFFF',
+        border: `2px solid ${theme.border}`, 
+        boxShadow: 'none', 
+        background: theme.bg,
         display: 'flex', 
         flexDirection: 'column', 
         height: '100%', 
@@ -757,7 +768,7 @@ function SocCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
                 <button 
                   onClick={handleAgendarCita}
                   style={{ width: '100%', padding: '12px 16px', textAlign: 'left', fontSize: 13, color: '#374151', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, transition: 'background 0.2s' }}
-                  onMouseEnter={e => e.currentTarget.style.background = 'rgba(72,129,235,0.08)'}
+                  onMouseEnter={e => e.currentTarget.style.background = hexToRgba(color, 0.08)}
                   onMouseLeave={e => e.currentTarget.style.background = 'none'}
                 >
                   <Calendar size={16} /> Conversa con el Agentico de SOC IA CyberPeace
@@ -776,19 +787,19 @@ function SocCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
         height: 180, 
         position: 'relative', 
         background: '#F9FAFB',
-        border: `2px solid ${isHovered ? '#4881EB' : 'transparent'}`,
-        boxShadow: isHovered ? '0 0 20px rgba(72, 129, 235, 0.4), inset 0 0 20px rgba(72, 129, 235, 0.05)' : 'none',
+        border: `2px solid ${isHovered ? color : 'transparent'}`,
+        boxShadow: isHovered ? `0 0 20px ${hexToRgba(color, 0.4)}, inset 0 0 20px ${hexToRgba(color, 0.05)}` : 'none',
         transition: 'all 0.3s ease'
       }}>
         <LazyVideo 
             autoPlay loop muted playsInline preload="metadata"
             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
             videoSrc="/assets/images/productos/cyberpeaceVid.webm"
-            accentColor="#4881EB"
+            accentColor={color}
         />
         <div style={{ position: 'absolute', top: 12, left: 12, display: 'flex', flexDirection: 'column', gap: 6, maxWidth: '80%', zIndex: 5 }}>
            {["Cacería de Amenazas", "Inteligencia de Amenazas", "Evaluación de Riesgos", "Estrategia y Gobierno de Ciberseguridad", "Gestión de Respuestas y Contención de Incidentes"].map((f, i) => (
-             <span key={i} style={{ background: 'rgba(72,129,235,0.85)', backdropFilter: 'blur(4px)', color: '#ffffff', fontSize: 8, fontWeight: 800, padding: '4px 8px', borderRadius: 6, border: '1px solid rgba(125,209,255,0.4)', letterSpacing: '0.04em', width: 'fit-content' }}>{f}</span>
+             <span key={i} style={{ background: 'rgba(255, 255, 255, 0.9)', backdropFilter: 'blur(4px)', color: '#1e3a8a', fontSize: 8, fontWeight: 800, padding: '4px 8px', borderRadius: 6, border: `1.5px solid ${color}`, letterSpacing: '0.04em', width: 'fit-content' }}>{f}</span>
            ))}
         </div>
       </div>
@@ -800,11 +811,11 @@ function SocCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
           <p style={{ margin: 0, fontSize: 10, color: '#4B5563', fontWeight: 600 }}>Miembro</p>
         </div>
         <div style={{ textAlign: 'center' }}>
-          <p style={{ margin: 0, fontSize: 14, fontWeight: 800, color: '#4881EB' }}>ISO 27001</p>
+          <p style={{ margin: 0, fontSize: 14, fontWeight: 800, color: '#1e3a8a' }}>ISO 27001</p>
           <p style={{ margin: 0, fontSize: 10, color: '#4B5563', fontWeight: 600 }}>Seguridad</p>
         </div>
         <div style={{ textAlign: 'center' }}>
-          <p style={{ margin: 0, fontSize: 14, fontWeight: 800, color: '#4881EB' }}>ISO 42001</p>
+          <p style={{ margin: 0, fontSize: 14, fontWeight: 800, color: '#1e3a8a' }}>ISO 42001</p>
           <p style={{ margin: 0, fontSize: 10, color: '#4B5563', fontWeight: 600 }}>IA</p>
         </div>
         <div style={{ textAlign: 'center' }}>
@@ -833,7 +844,7 @@ function SocCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
             border: '1px solid #E5E7EB', display: 'flex', flexWrap: 'wrap', gap: 6, justifyContent: 'center'
           }}>
             {['ISO 27034', 'ISO 27017', 'ISO 9001', 'ISO 37001', 'ISO 27018'].map(cert => (
-              <span key={cert} style={{ fontSize: 9, fontWeight: 700, padding: '4px 8px', borderRadius: 99, background: 'rgba(72,129,235,0.08)', color: '#4881EB', border: '1px solid rgba(72,129,235,0.2)' }}>
+              <span key={cert} style={{ fontSize: 9, fontWeight: 700, padding: '4px 8px', borderRadius: 99, background: hexToRgba(color, 0.15), color: '#1e3a8a', border: `1px solid ${hexToRgba(color, 0.3)}` }}>
                 {cert}
               </span>
             ))}
@@ -845,12 +856,12 @@ function SocCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
         <button 
           onClick={handleAgendarCita}
           style={{ 
-            background: 'linear-gradient(to right, #1d4ed8, #3b82f6)', color: '#ffffff', border: 'none', borderRadius: 8, padding: '10px 0', fontSize: 13, fontWeight: 700, 
+            background: `linear-gradient(135deg, ${color}, ${hexToRgba(color, 0.85)})`, color: '#111827', border: 'none', borderRadius: 8, padding: '10px 0', fontSize: 13, fontWeight: 700, 
             display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', flex: 1, justifyContent: 'center', transition: 'all 0.2s',
-            boxShadow: '0 4px 12px rgba(59,130,246,0.2)'
+            boxShadow: `0 4px 12px ${hexToRgba(color, 0.2)}`
           }}
-          onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 6px 16px rgba(59,130,246,0.3)'; }}
-          onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 12px rgba(59,130,246,0.2)'; }}
+          onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = `0 6px 16px ${hexToRgba(color, 0.3)}`; }}
+          onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = `0 4px 12px ${hexToRgba(color, 0.2)}`; }}
         >
           Proteger ahora
         </button>
@@ -875,6 +886,8 @@ function MayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
   const [isHovered, setIsHovered] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [showInfoModal, setShowInfoModal] = useState(false);
+  const color = '#bef264';
+  const theme = getPastelTheme(color);
   const videoRef = useRef<HTMLVideoElement>(null);
   const jaguarVideoRef = useRef<HTMLVideoElement>(null);
 
@@ -928,13 +941,9 @@ function MayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
       onMouseLeave={() => { setIsHovered(false); setMenuOpen(false); }}
       style={{
         borderRadius: 24, 
-        border: `2px solid ${isHovered ? '#A4D955' : '#E5E7EB'}`,
-        boxShadow: isHovered 
-          ? '0 20px 40px -8px rgba(164, 217, 85, 0.35), 0 0 24px 2px rgba(164, 217, 85, 0.20), inset 0 0 24px 2px rgba(164, 217, 85, 0.18)' 
-          : 'none',
-        background: isHovered 
-          ? 'radial-gradient(120% 120% at 50% 50%, rgba(255, 255, 255, 0) 30%, rgba(164, 217, 85, 0.08) 100%)' 
-          : '#FFFFFF',
+        border: `2px solid ${theme.border}`,
+        boxShadow: 'none',
+        background: theme.bg,
         display: 'flex', 
         flexDirection: 'column', 
         height: '100%', 
@@ -946,7 +955,7 @@ function MayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
       {/* Header */}
       <div style={{ display: 'flex', alignItems: 'center', padding: '0 20px', justifyContent: 'space-between', height: 90 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          <div style={{ width: 44, height: 44, borderRadius: '50%', background: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', border: '1.5px solid #A4D955' }}>
+          <div style={{ width: 44, height: 44, borderRadius: '50%', background: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', border: `1.5px solid ${color}` }}>
             <img src={mayiaLakeLogo} alt="MAYiA Lakehouse" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           </div>
           <div>
@@ -991,8 +1000,8 @@ function MayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
         height: 180, 
         position: 'relative', 
         background: '#F9FAFB',
-        border: `2px solid ${isHovered ? '#A4D955' : 'transparent'}`,
-        boxShadow: isHovered ? '0 0 20px rgba(164, 217, 85, 0.4), inset 0 0 20px rgba(164, 217, 85, 0.05)' : 'none',
+        border: `2px solid ${isHovered ? color : 'transparent'}`,
+        boxShadow: isHovered ? `0 0 20px ${hexToRgba(color, 0.4)}, inset 0 0 20px ${hexToRgba(color, 0.05)}` : 'none',
         transition: 'all 0.3s ease'
       }}>
         <LazyVideo 
@@ -1000,7 +1009,7 @@ function MayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
           autoPlay loop muted playsInline preload="metadata"
           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           videoSrc={ajoloteVideo}
-          accentColor="#A4D955"
+          accentColor={color}
         />
         {/* Overlays en el video removidos */}
       </div>
@@ -1041,7 +1050,7 @@ function MayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
                 </div>
                 {idx < 2 ? (
                   <span style={{ 
-                    color: '#A4D955', 
+                    color: color, 
                     fontWeight: 900, 
                     fontSize: 12,
                     userSelect: 'none',
@@ -1098,7 +1107,7 @@ function MayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
         <button 
           onClick={handleMasInformacion}
           style={{ 
-            background: 'linear-gradient(135deg, #A4D955, #7EBB2A)', 
+            background: `linear-gradient(135deg, ${color}, ${hexToRgba(color, 0.85)})`, 
             color: '#111827', 
             border: 'none', 
             borderRadius: 8, 
@@ -1112,17 +1121,17 @@ function MayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
             alignItems: 'center',
             gap: 6,
             transition: 'all 0.2s',
-            boxShadow: '0 4px 12px rgba(164,217,85,0.2)'
+            boxShadow: `0 4px 12px ${hexToRgba(color, 0.2)}`
           }}
-          onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 6px 16px rgba(164,217,85,0.4)'; }}
-          onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 12px rgba(164,217,85,0.2)'; }}
+          onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = `0 6px 16px ${hexToRgba(color, 0.4)}`; }}
+          onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = `0 4px 12px ${hexToRgba(color, 0.2)}`; }}
         >
           Conoce más
         </button>
         <button 
           onClick={handleAgendarCita}
           style={{ 
-            background: 'linear-gradient(135deg, #A4D955, #7EBB2A)', 
+            background: `linear-gradient(135deg, ${color}, ${hexToRgba(color, 0.85)})`, 
             color: '#111827', 
             border: 'none', 
             borderRadius: 8, 
@@ -1136,10 +1145,10 @@ function MayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
             alignItems: 'center',
             gap: 6,
             transition: 'all 0.2s',
-            boxShadow: '0 4px 12px rgba(164,217,85,0.2)'
+            boxShadow: `0 4px 12px ${hexToRgba(color, 0.2)}`
           }}
-          onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 6px 16px rgba(164,217,85,0.4)'; }}
-          onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 12px rgba(164,217,85,0.2)'; }}
+          onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = `0 6px 16px ${hexToRgba(color, 0.4)}`; }}
+          onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = `0 4px 12px ${hexToRgba(color, 0.2)}`; }}
         >
           Agenda tu cita
         </button>
@@ -1154,6 +1163,8 @@ function MayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
 function SquadsMayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
   const [isHovered, setIsHovered] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const color = '#2dd4bf';
+  const theme = getPastelTheme(color);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const handleAgendarCita = (e: React.MouseEvent) => {
@@ -1197,13 +1208,9 @@ function SquadsMayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
       onMouseLeave={() => { setIsHovered(false); setMenuOpen(false); }}
       style={{
         borderRadius: 24, 
-        border: `2px solid ${isHovered ? '#14b8a6' : '#E5E7EB'}`,
-        boxShadow: isHovered 
-          ? '0 20px 40px -8px rgba(20, 184, 166, 0.35), 0 0 24px 2px rgba(20, 184, 166, 0.20), inset 0 0 24px 2px rgba(20, 184, 166, 0.18)' 
-          : 'none',
-        background: isHovered 
-          ? 'radial-gradient(120% 120% at 50% 50%, rgba(255, 255, 255, 0) 30%, rgba(20, 184, 166, 0.08) 100%)' 
-          : '#FFFFFF',
+        border: `2px solid ${theme.border}`,
+        boxShadow: 'none',
+        background: theme.bg,
         display: 'flex', 
         flexDirection: 'column', 
         height: '100%', 
@@ -1215,8 +1222,8 @@ function SquadsMayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
       {/* Header */}
       <div style={{ display: 'flex', alignItems: 'center', padding: '0 20px', justifyContent: 'space-between', height: 90 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          <div style={{ width: 44, height: 44, borderRadius: '50%', background: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', border: '1.5px solid #14b8a6' }}>
-            <Users size={22} color="#14b8a6" />
+          <div style={{ width: 44, height: 44, borderRadius: '50%', background: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', border: `1.5px solid ${color}` }}>
+            <Users size={22} color={color} />
           </div>
           <div>
             <h3 style={{ margin: 0, fontSize: 18, fontWeight: 800, color: '#111827' }}>Squads MAYiA</h3>
@@ -1258,8 +1265,8 @@ function SquadsMayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
         height: 180, 
         position: 'relative', 
         background: '#F9FAFB',
-        border: `2px solid ${isHovered ? '#14b8a6' : 'transparent'}`,
-        boxShadow: isHovered ? '0 0 20px rgba(20, 184, 166, 0.4), inset 0 0 20px rgba(20, 184, 166, 0.05)' : 'none',
+        border: `2px solid ${isHovered ? color : 'transparent'}`,
+        boxShadow: isHovered ? `0 0 20px ${hexToRgba(color, 0.4)}, inset 0 0 20px ${hexToRgba(color, 0.05)}` : 'none',
         transition: 'all 0.3s ease'
       }}>
         <LazyVideo 
@@ -1267,7 +1274,7 @@ function SquadsMayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
           autoPlay loop muted playsInline preload="metadata"
           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           videoSrc={squadVideo}
-          accentColor="#14b8a6"
+          accentColor={color}
         />
         {/* Animated Badge Container - Top Left */}
         <div style={{ 
@@ -1278,11 +1285,11 @@ function SquadsMayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
         }}>
           <motion.div
             animate={{
-              borderColor: ['#20e0c0', '#14b8a6', '#20e0c0'],
+              borderColor: [color, hexToRgba(color, 0.8), color],
               boxShadow: [
-                '0 0 4px rgba(32, 224, 192, 0.3)',
-                '0 0 8px rgba(20, 184, 166, 0.5)',
-                '0 0 4px rgba(32, 224, 192, 0.3)'
+                `0 0 4px ${hexToRgba(color, 0.3)}`,
+                `0 0 8px ${hexToRgba(color, 0.5)}`,
+                `0 0 4px ${hexToRgba(color, 0.3)}`
               ]
             }}
             transition={{
@@ -1293,7 +1300,7 @@ function SquadsMayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
             style={{
               background: 'rgba(10, 10, 20, 0.85)', 
               backdropFilter: 'blur(4px)', 
-              color: '#14b8a6', 
+              color: color, 
               fontSize: 7.5, 
               fontWeight: 800, 
               padding: '3px 6px', 
@@ -1316,11 +1323,11 @@ function SquadsMayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
         }}>
           <motion.div
             animate={{
-              borderColor: ['#20e0c0', '#14b8a6', '#20e0c0'],
+              borderColor: [color, hexToRgba(color, 0.8), color],
               boxShadow: [
-                '0 0 8px rgba(32, 224, 192, 0.4)',
-                '0 0 16px rgba(20, 184, 166, 0.6)',
-                '0 0 8px rgba(32, 224, 192, 0.4)'
+                `0 0 8px ${hexToRgba(color, 0.4)}`,
+                `0 0 16px ${hexToRgba(color, 0.6)}`,
+                `0 0 8px ${hexToRgba(color, 0.4)}`
               ]
             }}
             transition={{
@@ -1331,7 +1338,7 @@ function SquadsMayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
             style={{
               background: 'rgba(10, 10, 20, 0.85)', 
               backdropFilter: 'blur(4px)', 
-              color: '#14b8a6', 
+              color: color, 
               fontSize: 9, 
               fontWeight: 800, 
               padding: '6px 12px', 
@@ -1361,14 +1368,14 @@ function SquadsMayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
       {/* Grid 2x2 Animado */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, margin: '0 20px 20px' }}>
         {[
-          { text: "Infraestructura / Nube\nDRP / Data Center", color: "#4881EB", bg: "rgba(72,129,235,0.06)", borderColor: "rgba(72,129,235,0.25)" },
-          { text: "Análisis de Datos\nInteligencia Artificial", color: "#14b8a6", bg: "rgba(20,184,166,0.06)", borderColor: "rgba(20,184,166,0.25)" },
-          { text: "Ciberseguridad y Gobernanza", color: "#dc2626", bg: "rgba(220,38,38,0.06)", borderColor: "rgba(220,38,38,0.25)" },
-          { text: "Academia de IA para Grupos de Trabajo", color: "#ea580c", bg: "rgba(234,88,12,0.06)", borderColor: "rgba(234,88,12,0.25)" }
+          { text: "Infraestructura / Nube\nDRP / Data Center", color: "#1e3a8a", bg: "rgba(147,197,253,0.15)", borderColor: "rgba(147,197,253,0.4)" },
+          { text: "Análisis de Datos\nInteligencia Artificial", color: "#0d9488", bg: "rgba(94,234,212,0.15)", borderColor: "rgba(94,234,212,0.4)" },
+          { text: "Ciberseguridad y Gobernanza", color: "#991b1b", bg: "rgba(252,165,165,0.15)", borderColor: "rgba(252,165,165,0.4)" },
+          { text: "Academia de IA para Grupos de Trabajo", color: "#9a3412", bg: "rgba(253,186,116,0.15)", borderColor: "rgba(253,186,116,0.4)" }
         ].map((item, idx) => (
           <motion.div
             key={idx}
-            whileHover={{ scale: 1.03, borderColor: item.color, boxShadow: `0 4px 12px ${hexToRgba(item.color, 0.15)}` }}
+            whileHover={{ scale: 1.03, borderColor: item.borderColor.replace('0.4', '1'), boxShadow: `0 4px 12px ${hexToRgba(item.color, 0.15)}` }}
             style={{
               background: item.bg,
               border: `1.5px solid ${item.borderColor}`,
@@ -1398,8 +1405,8 @@ function SquadsMayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
         <button 
           onClick={handleMasInformacion}
           style={{ 
-            background: 'linear-gradient(135deg, #14b8a6, #0d9488)', 
-            color: '#ffffff', 
+            background: `linear-gradient(135deg, ${color}, ${hexToRgba(color, 0.85)})`, 
+            color: '#111827', 
             border: 'none', 
             borderRadius: 8, 
             padding: '10px 16px', 
@@ -1412,18 +1419,18 @@ function SquadsMayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
             alignItems: 'center',
             gap: 6,
             transition: 'all 0.2s',
-            boxShadow: '0 4px 12px rgba(20,184,166,0.2)'
+            boxShadow: `0 4px 12px ${hexToRgba(color, 0.2)}`
           }}
-          onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 6px 16px rgba(20,184,166,0.4)'; }}
-          onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 12px rgba(20,184,166,0.2)'; }}
+          onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = `0 6px 16px ${hexToRgba(color, 0.4)}`; }}
+          onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = `0 4px 12px ${hexToRgba(color, 0.2)}`; }}
         >
           Conoce más
         </button>
         <button 
           onClick={handleAgendarCita}
           style={{ 
-            background: 'linear-gradient(135deg, #14b8a6, #0d9488)', 
-            color: '#ffffff', 
+            background: `linear-gradient(135deg, ${color}, ${hexToRgba(color, 0.85)})`, 
+            color: '#111827', 
             border: 'none', 
             borderRadius: 8, 
             padding: '10px 16px', 
@@ -1436,10 +1443,10 @@ function SquadsMayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
             alignItems: 'center',
             gap: 6,
             transition: 'all 0.2s',
-            boxShadow: '0 4px 12px rgba(20,184,166,0.2)'
+            boxShadow: `0 4px 12px ${hexToRgba(color, 0.2)}`
           }}
-          onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 6px 16px rgba(20,184,166,0.4)'; }}
-          onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 12px rgba(20,184,166,0.2)'; }}
+          onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = `0 6px 16px ${hexToRgba(color, 0.4)}`; }}
+          onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = `0 4px 12px ${hexToRgba(color, 0.2)}`; }}
         >
           Agenda tu cita
         </button>
@@ -1456,6 +1463,8 @@ function IAEmpresarialCard() {
   const [hoveredService, setHoveredService] = useState<number | null>(null);
 
   const BLUE = '#2563eb';
+  const color = '#60a5fa';
+  const theme = getPastelTheme(color);
 
   const handleAgendarCita = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -1478,8 +1487,8 @@ function IAEmpresarialCard() {
   const topServices = [
     { icon: Link2, label: 'Interoperabilidad', color: BLUE },
     { icon: Lock,  label: 'IA Privada',        color: BLUE },
-    { icon: Bot,   label: 'Agentes IA',        color: '#7c3aed' },
-    { icon: Zap,   label: 'Automatización IA', color: '#059669' },
+    { icon: Bot,   label: 'Agentes IA',        color: BLUE },
+    { icon: Zap,   label: 'Automatización IA', color: BLUE },
   ];
 
   const subServices = [
@@ -1489,7 +1498,6 @@ function IAEmpresarialCard() {
     { icon: FlaskConical, label: 'Labs IA' },
     { icon: Users,        label: 'Squads' },
     { icon: MonitorCheck, label: 'Monitoreo' },
-    { icon: Zap,          label: 'RPA' },
     { icon: GraduationCap,label: 'Academia' },
   ];
 
@@ -1500,13 +1508,9 @@ function IAEmpresarialCard() {
       style={{
         borderRadius: 24,
         padding: 24,
-        border: `2px solid ${isHovered ? BLUE : '#E5E7EB'}`,
-        boxShadow: isHovered
-          ? `0 20px 40px -8px rgba(37,99,235,0.35), 0 0 24px 2px rgba(37,99,235,0.20), inset 0 0 24px 2px rgba(37,99,235,0.18)`
-          : 'none',
-        background: isHovered
-          ? `radial-gradient(120% 120% at 50% 50%, rgba(255,255,255,0) 30%, rgba(37,99,235,0.08) 100%)`
-          : '#FFFFFF',
+        border: `2px solid ${theme.border}`,
+        boxShadow: 'none',
+        background: theme.bg,
         display: 'flex',
         flexDirection: 'column',
         height: '100%',
@@ -1518,12 +1522,12 @@ function IAEmpresarialCard() {
       {/* Header — mismo patrón que StandardCard */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 16, height: 50, marginBottom: 16, justifyContent: 'space-between' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 16, flex: 1, minWidth: 0 }}>
-          <div style={{ width: 44, height: 44, borderRadius: 10, background: 'rgba(37,99,235,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-            <Briefcase size={22} color={BLUE} />
+          <div style={{ width: 44, height: 44, borderRadius: 10, background: hexToRgba(color, 0.15), display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+            <Briefcase size={22} color="#1e3a8a" />
           </div>
           <div style={{ minWidth: 0 }}>
             <h3 style={{ fontSize: 16, fontWeight: 800, color: '#111827', margin: 0, lineHeight: 1.2 }}>Desarrollo IA Empresarial</h3>
-            <p style={{ margin: 0, fontSize: 10, color: '#4B5563', fontWeight: 500, marginTop: 2, lineHeight: 1.2 }}>Gen-AI · Computer Vision · Agentes Autónomos · RPA</p>
+            <p style={{ margin: 0, fontSize: 10, color: '#4B5563', fontWeight: 500, marginTop: 2, lineHeight: 1.2 }}>Automatizacion con IA</p>
           </div>
         </div>
         <div style={{ position: 'relative', zIndex: 10, flexShrink: 0 }}>
@@ -1559,8 +1563,8 @@ function IAEmpresarialCard() {
         position: 'relative',
         background: '#F9FAFB',
         marginBottom: 16,
-        border: `2px solid ${isHovered ? BLUE : 'transparent'}`,
-        boxShadow: isHovered ? `0 0 20px rgba(37,99,235,0.40), inset 0 0 20px rgba(37,99,235,0.05)` : 'none',
+        border: `2px solid ${isHovered ? color : 'transparent'}`,
+        boxShadow: isHovered ? `0 0 20px ${hexToRgba(color, 0.40)}, inset 0 0 20px ${hexToRgba(color, 0.05)}` : 'none',
         transition: 'all 0.3s ease'
       }}>
         <video
@@ -1655,13 +1659,13 @@ function IAEmpresarialCard() {
           })}
         </div>
 
-        {/* 8 sub-servicios */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(8, 1fr)', gap: 4, paddingTop: 8, borderTop: '1px solid #E5E7EB' }}>
+        {/* 7 sub-servicios */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: 4, paddingTop: 8, borderTop: '1px solid #E5E7EB' }}>
           {subServices.map((sub, i) => {
             const IconComp = sub.icon;
             return (
               <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3 }}>
-                <div style={{ width: 26, height: 26, borderRadius: 7, background: 'rgba(37,99,235,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div style={{ width: 26, height: 26, borderRadius: 7, background: hexToRgba(color, 0.15), display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <IconComp size={12} color={BLUE} />
                 </div>
                 <p style={{ margin: 0, fontSize: 7, fontWeight: 500, color: '#6B7280', textAlign: 'center', lineHeight: 1.2 }}>{sub.label}</p>
@@ -1676,21 +1680,21 @@ function IAEmpresarialCard() {
         <motion.div
           onClick={handleAgendarCita}
           style={{
-            background: `linear-gradient(135deg, ${BLUE} 0%, #7c3aed 100%)`,
+            background: `linear-gradient(135deg, ${color}, ${hexToRgba(color, 0.85)})`,
             borderRadius: 10, padding: '10px 14px',
             display: 'flex', alignItems: 'center', gap: 10,
             cursor: 'pointer',
-            boxShadow: '0 5px 18px rgba(37,99,235,0.28)',
+            boxShadow: `0 4px 12px ${hexToRgba(color, 0.2)}`,
           }}
-          whileHover={{ scale: 1.01, boxShadow: '0 8px 22px rgba(37,99,235,0.42)' }}
+          whileHover={{ scale: 1.01, boxShadow: `0 6px 16px ${hexToRgba(color, 0.4)}` }}
           whileTap={{ scale: 0.99 }}
         >
-          <div style={{ width: 30, height: 30, borderRadius: 8, background: 'rgba(255,255,255,0.18)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-            <MessageSquare size={15} color="#ffffff" />
+          <div style={{ width: 30, height: 30, borderRadius: 8, background: 'rgba(255,255,255,0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+            <MessageSquare size={15} color="#111827" />
           </div>
           <div style={{ flex: 1, minWidth: 0 }}>
-            <p style={{ margin: 0, fontSize: 11, fontWeight: 800, color: '#ffffff', lineHeight: 1.2 }}>Conversemos sobre el potencial de la IA en tu empresa →</p>
-            <p style={{ margin: 0, marginTop: 2, fontSize: 8.5, color: 'rgba(255,255,255,0.8)', fontWeight: 500 }}>Diagnóstico sin costo &nbsp;|&nbsp; Enfoque en ROI &nbsp;|&nbsp; Casos de alto impacto</p>
+            <p style={{ margin: 0, fontSize: 11, fontWeight: 800, color: '#111827', lineHeight: 1.2 }}>Conversemos sobre el potencial de la IA en tu empresa →</p>
+            <p style={{ margin: 0, marginTop: 2, fontSize: 8.5, color: '#374151', fontWeight: 600 }}>Diagnóstico sin costo &nbsp;|&nbsp; Enfoque en ROI &nbsp;|&nbsp; Casos de alto impacto</p>
           </div>
         </motion.div>
       </div>
@@ -1705,6 +1709,8 @@ function RoiCard() {
   const [isHovered, setIsHovered] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [showConsultorVideo, setShowConsultorVideo] = useState(false);
+  const color = '#fb923c';
+  const theme = getPastelTheme(color);
 
   const handleAgendarCita = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -1723,13 +1729,9 @@ function RoiCard() {
       onMouseLeave={() => { setIsHovered(false); setMenuOpen(false); }}
       style={{
         borderRadius: 24, 
-        border: `2px solid ${isHovered ? '#ea580c' : '#E5E7EB'}`,
-        boxShadow: isHovered 
-          ? '0 20px 40px -8px rgba(234, 88, 12, 0.35), 0 0 24px 2px rgba(234, 88, 12, 0.20), inset 0 0 24px 2px rgba(234, 88, 12, 0.18)' 
-          : 'none',
-        background: isHovered 
-          ? 'radial-gradient(120% 120% at 50% 50%, rgba(255, 255, 255, 0) 30%, rgba(234, 88, 12, 0.08) 100%)' 
-          : '#FFFFFF',
+        border: `2px solid ${theme.border}`,
+        boxShadow: 'none',
+        background: theme.bg,
         display: 'flex', 
         flexDirection: 'column', 
         height: '100%', 
@@ -1745,7 +1747,7 @@ function RoiCard() {
             width: 44, 
             height: 44, 
             borderRadius: 10, 
-            background: 'rgba(234,88,12,0.15)', 
+            background: hexToRgba(color, 0.15), 
             display: 'flex', 
             alignItems: 'center', 
             justifyContent: 'center', 
@@ -1774,7 +1776,7 @@ function RoiCard() {
                 <button 
                   onClick={handleAgendarCita}
                   style={{ width: '100%', padding: '12px 16px', textAlign: 'left', fontSize: 13, color: '#374151', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, transition: 'background 0.2s' }}
-                  onMouseEnter={e => e.currentTarget.style.background = 'rgba(234,88,12,0.08)'}
+                  onMouseEnter={e => e.currentTarget.style.background = hexToRgba(color, 0.08)}
                   onMouseLeave={e => e.currentTarget.style.background = 'none'}
                 >
                   <Calendar size={16} /> Conversa con el Agentico de ROI Discovery
@@ -1793,15 +1795,15 @@ function RoiCard() {
         height: 180, 
         position: 'relative', 
         background: '#F9FAFB',
-        border: `2px solid ${isHovered ? '#ea580c' : 'transparent'}`,
-        boxShadow: isHovered ? '0 0 20px rgba(234, 88, 12, 0.25)' : 'none',
+        border: `2px solid ${isHovered ? color : 'transparent'}`,
+        boxShadow: isHovered ? `0 0 20px ${hexToRgba(color, 0.25)}` : 'none',
         transition: 'all 0.3s ease'
       }}>
         <LazyVideo 
           autoPlay loop muted playsInline preload="metadata"
           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           videoSrc={roiVideo}
-          accentColor="#ea580c"
+          accentColor={color}
         />
 
         {/* Video Overlay with Text & Calendly Button */}
@@ -1818,7 +1820,7 @@ function RoiCard() {
           flexDirection: 'column',
           alignItems: 'stretch',
           gap: 5,
-          border: '1px solid rgba(234, 88, 12, 0.35)',
+          border: `1px solid ${hexToRgba(color, 0.35)}`,
           boxShadow: '0 4px 15px rgba(0, 0, 0, 0.1)',
           zIndex: 5
         }}>
@@ -1834,8 +1836,8 @@ function RoiCard() {
           <button 
             onClick={handleAgendarCita}
             style={{
-              background: 'linear-gradient(135deg, #ea580c, #c2410c)',
-              color: '#ffffff',
+              background: `linear-gradient(135deg, ${color}, ${hexToRgba(color, 0.85)})`,
+              color: '#111827',
               border: 'none',
               borderRadius: 4,
               padding: '4px 6px',
@@ -1984,8 +1986,8 @@ function RoiCard() {
           <button 
             onClick={() => setShowConsultorVideo(true)}
             style={{
-              background: 'linear-gradient(135deg, #ea580c, #c2410c)',
-              color: '#ffffff',
+              background: `linear-gradient(135deg, ${color}, ${hexToRgba(color, 0.85)})`,
+              color: '#111827',
               border: 'none',
               borderRadius: 8,
               padding: '12px 16px',
@@ -1998,10 +2000,10 @@ function RoiCard() {
               width: '100%',
               justifyContent: 'center',
               transition: 'all 0.2s',
-              boxShadow: '0 4px 12px rgba(234,88,12,0.2)'
+              boxShadow: `0 4px 12px ${hexToRgba(color, 0.2)}`
             }}
-            onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 6px 16px rgba(234,88,12,0.3)'; }}
-            onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 12px rgba(234,88,12,0.2)'; }}
+            onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = `0 6px 16px ${hexToRgba(color, 0.3)}`; }}
+            onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = `0 4px 12px ${hexToRgba(color, 0.2)}`; }}
           >
             Ver video del consultor &rarr;
           </button>
@@ -2020,8 +2022,8 @@ function RoiCard() {
               borderRadius: 24,
               maxWidth: 800,
               width: '100%',
-              border: '2px solid #ea580c',
-              boxShadow: '0 25px 50px -12px rgba(234, 88, 12, 0.4)',
+              border: `2px solid ${color}`,
+              boxShadow: `0 25px 50px -12px ${hexToRgba(color, 0.4)}`,
               overflow: 'hidden',
               position: 'relative'
             }}
@@ -2089,6 +2091,7 @@ function StandardCard({
 }) {
   const [isHovered, setIsHovered] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const theme = getPastelTheme(color);
 
   const handleAgendarCita = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -2107,13 +2110,9 @@ function StandardCard({
       style={{ 
         borderRadius: 24, 
         padding: 24, 
-        border: `2px solid ${isHovered ? color : '#E5E7EB'}`, 
-        boxShadow: isHovered 
-          ? `0 20px 40px -8px ${hexToRgba(color, 0.35)}, 0 0 24px 2px ${hexToRgba(color, 0.20)}, inset 0 0 24px 2px ${hexToRgba(color, 0.18)}` 
-          : 'none', 
-        background: isHovered 
-          ? `radial-gradient(120% 120% at 50% 50%, rgba(255, 255, 255, 0) 30%, ${hexToRgba(color, 0.08)} 100%)` 
-          : '#FFFFFF',
+        border: `2px solid ${theme.border}`, 
+        boxShadow: 'none', 
+        background: theme.bg,
         display: 'flex', 
         flexDirection: 'column', 
         height: '100%',
@@ -2210,7 +2209,7 @@ function StandardCard({
           onClick={handleAgendarCita}
           style={{ 
             background: `linear-gradient(135deg, ${color}, ${hexToRgba(color, 0.85)})`, 
-            color: '#ffffff', 
+            color: '#111827', 
             border: 'none', 
             borderRadius: 8, 
             padding: '12px 16px', 
@@ -2242,6 +2241,8 @@ function AcademiaCard() {
   const [cursosOpen, setCursosOpen] = useState(false);
   const [showInfoModal, setShowInfoModal] = useState(false);
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
+  const color = '#fb923c';
+  const theme = getPastelTheme(color);
 
   const handleAgendarCita = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -2336,13 +2337,9 @@ function AcademiaCard() {
       style={{ 
         borderRadius: 24, 
         padding: 24, 
-        border: `2px solid ${isHovered ? '#ea580c' : '#E5E7EB'}`, 
-        boxShadow: isHovered 
-          ? '0 20px 40px -8px rgba(234, 88, 12, 0.35), 0 0 24px 2px rgba(234, 88, 12, 0.20), inset 0 0 24px 2px rgba(234, 88, 12, 0.18)' 
-          : 'none', 
-        background: isHovered 
-          ? 'radial-gradient(120% 120% at 50% 50%, rgba(255, 255, 255, 0) 30%, rgba(234, 88, 12, 0.08) 100%)' 
-          : '#FFFFFF',
+        border: `2px solid ${theme.border}`, 
+        boxShadow: 'none', 
+        background: theme.bg,
         display: 'flex', 
         flexDirection: 'column', 
         height: '100%',
@@ -2354,8 +2351,8 @@ function AcademiaCard() {
       {/* Header */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 16, height: 50, marginBottom: 16, justifyContent: 'space-between' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 16, flex: 1 }}>
-          <div style={{ width: 44, height: 44, borderRadius: 10, background: '#ffedd5', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-            <GraduationCap size={22} color="#ea580c" />
+          <div style={{ width: 44, height: 44, borderRadius: 10, background: hexToRgba(color, 0.15), display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+            <GraduationCap size={22} color={color} />
           </div>
           <div style={{ flex: 1, display: 'flex', alignItems: 'center' }}>
             <img src={academiaLogo} alt="Academia MAYiA" style={{ height: '32px', objectFit: 'contain', filter: 'none' }} />
@@ -2396,15 +2393,15 @@ function AcademiaCard() {
         position: 'relative', 
         background: '#F9FAFB', 
         marginBottom: 16,
-        border: `2px solid ${isHovered ? '#ea580c' : 'transparent'}`,
-        boxShadow: isHovered ? '0 0 20px rgba(234, 88, 12, 0.4), inset 0 0 20px rgba(234, 88, 12, 0.05)' : 'none',
+        border: `2px solid ${isHovered ? color : 'transparent'}`,
+        boxShadow: isHovered ? `0 0 20px ${hexToRgba(color, 0.4)}, inset 0 0 20px ${hexToRgba(color, 0.05)}` : 'none',
         transition: 'all 0.3s ease'
       }}>
         <LazyVideo 
           autoPlay loop muted playsInline preload="metadata"
           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           videoSrc="/assets/images/productos/astronautaSaludo.webm"
-          accentColor="#ea580c"
+          accentColor={color}
         />
         
         {/* Overlay gradient */}
@@ -2432,9 +2429,9 @@ function AcademiaCard() {
                   setSelectedOption(isSelected ? null : opcion.id);
                 }}
                 style={{
-                  background: isSelected ? 'linear-gradient(135deg, #ea580c, #c2410c)' : 'rgba(255, 255, 255, 0.9)',
-                  color: isSelected ? '#FFFFFF' : '#374151',
-                  border: isSelected ? '1px solid #ea580c' : '1px solid rgba(0,0,0,0.1)',
+                  background: isSelected ? `linear-gradient(135deg, ${color}, ${hexToRgba(color, 0.85)})` : 'rgba(255, 255, 255, 0.9)',
+                  color: isSelected ? '#111827' : '#374151',
+                  border: isSelected ? `1px solid ${color}` : '1px solid rgba(0,0,0,0.1)',
                   borderRadius: 8,
                   padding: '6px 8px',
                   fontSize: 8,
@@ -2458,9 +2455,9 @@ function AcademiaCard() {
                   justifyContent: 'center',
                   width: 14,
                   height: 14,
-                  background: isSelected ? '#FFFFFF' : '#ea580c',
+                  background: isSelected ? '#FFFFFF' : color,
                   borderRadius: '50%',
-                  color: isSelected ? '#ea580c' : '#FFFFFF',
+                  color: isSelected ? color : '#FFFFFF',
                   flexShrink: 0,
                   marginLeft: 4,
                   fontSize: 8,
@@ -2483,15 +2480,15 @@ function AcademiaCard() {
             position: 'absolute',
             bottom: 10,
             left: 10,
-            background: 'linear-gradient(135deg, #ea580c, #f97316)',
-            color: '#FFFFFF',
+            background: `linear-gradient(135deg, ${color}, ${hexToRgba(color, 0.85)})`,
+            color: '#111827',
             border: 'none',
             borderRadius: 20,
             padding: '6px 12px',
             fontSize: 10,
             fontWeight: 700,
             cursor: 'pointer',
-            boxShadow: '0 4px 10px rgba(0,0,0,0.3)',
+            boxShadow: `0 4px 10px ${hexToRgba(color, 0.3)}`,
             display: 'flex',
             alignItems: 'center',
             gap: 4,
@@ -2511,7 +2508,7 @@ function AcademiaCard() {
       {cursosOpen && (
         <div style={{
           background: '#F9FAFB',
-          border: '1px solid rgba(234, 88, 12, 0.1)',
+          border: `1px solid ${hexToRgba(color, 0.2)}`,
           borderRadius: 16,
           padding: 12,
           maxHeight: 220,
@@ -2598,13 +2595,13 @@ function AcademiaCard() {
             flex: 1,
             display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
             padding: '12px 12px', borderRadius: 8,
-            background: 'linear-gradient(135deg, #ea580c, #c2410c)',
-            color: '#ffffff', fontWeight: 700, fontSize: 13, border: 'none', cursor: 'pointer',
-            boxShadow: '0 4px 12px rgba(234,88,12,0.2)',
+            background: `linear-gradient(135deg, ${color}, ${hexToRgba(color, 0.85)})`,
+            color: '#111827', fontWeight: 700, fontSize: 13, border: 'none', cursor: 'pointer',
+            boxShadow: `0 4px 12px ${hexToRgba(color, 0.2)}`,
             transition: 'all 0.2s'
           }}
-          onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 6px 16px rgba(234,88,12,0.3)'; }}
-          onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 12px rgba(234,88,12,0.2)'; }}
+          onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = `0 6px 16px ${hexToRgba(color, 0.3)}`; }}
+          onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = `0 4px 12px ${hexToRgba(color, 0.2)}`; }}
         >
           Cotizar cursos
         </button>
@@ -2718,12 +2715,12 @@ function AcademiaCard() {
                   handleAgendarCita(e);
                 }}
                 style={{ 
-                  background: 'linear-gradient(135deg, #ea580c, #f97316)', color: '#FFFFFF', border: 'none', borderRadius: 8, padding: '14px 16px', 
+                  background: `linear-gradient(135deg, ${color}, ${hexToRgba(color, 0.85)})`, color: '#111827', border: 'none', borderRadius: 8, padding: '14px 16px', 
                   fontSize: 14, fontWeight: 700, cursor: 'pointer', width: '100%', textAlign: 'center', transition: 'all 0.2s',
-                  boxShadow: '0 4px 12px rgba(234,88,12,0.3)', marginTop: 8
+                  boxShadow: `0 4px 12px ${hexToRgba(color, 0.3)}`, marginTop: 8
                 }}
-                onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 6px 16px rgba(234,88,12,0.4)'; }}
-                onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 12px rgba(234,88,12,0.3)'; }}
+                onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = `0 6px 16px ${hexToRgba(color, 0.4)}`; }}
+                onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = `0 4px 12px ${hexToRgba(color, 0.3)}`; }}
               >
                 Agendar Cotización
               </button>
@@ -2895,8 +2892,8 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
           <Wrapper category="Infraestructura">
             <StandardCard 
               icon={FlaskConical} 
-              color="#16a34a" 
-              bg="rgba(22,163,74,0.15)" 
+              color="#4ade80" 
+              bg="rgba(74,222,128,0.15)" 
               title="Laboratorios IA" 
               desc="Experimenta, valida y crea soluciones de inteligencia artificial antes de invertir a gran escala. Convierte ideas en prototipos funcionales y descubre nuevas oportunidades para tu negocio." 
             />
@@ -2922,8 +2919,8 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
           <Wrapper category="Desarrollo">
             <StandardCard 
               icon={GitBranch} 
-              color="#9333ea" 
-              bg="rgba(147,51,234,0.15)" 
+              color="#c084fc" 
+              bg="rgba(192,132,252,0.15)" 
               title="Desarrollo IA en Organigrama" 
               desc="Identifica qué áreas de tu empresa pueden ser potenciadas con IA. Desarrollamos empleados digitales inteligentes para transformar funciones, equipos y flujos de trabajo en todo tu organigrama." 
               videoSrc="/assets/images/robotAbajo.webm"
@@ -2933,7 +2930,7 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
                 { value: "Autónomo", label: "Flujo de Trabajo" }
               ]}
               videoOverlay={
-                <div style={{ position: 'absolute', top: 10, left: 10, background: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(4px)', padding: '4px 10px', borderRadius: 20, fontSize: 10, fontWeight: 700, color: '#9333ea', border: '1px solid rgba(147,51,234,0.2)' }}>
+                <div style={{ position: 'absolute', top: 10, left: 10, background: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(4px)', padding: '4px 10px', borderRadius: 20, fontSize: 10, fontWeight: 700, color: '#c084fc', border: '1px solid rgba(192,132,252,0.2)' }}>
                   🤖 Agentic Workforce
                 </div>
               }
@@ -2943,8 +2940,8 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
           <Wrapper category="Desarrollo">
             <StandardCard 
               icon={LineChart} 
-              color="#16a34a" 
-              bg="rgba(22,163,74,0.15)" 
+              color="#4ade80" 
+              bg="rgba(74,222,128,0.15)" 
               title="Desarrollo IA por Sector" 
               desc="Tu industria ya opera con inteligencia artificial. Creamos soluciones especializadas para tu sector, adaptadas a tus retos, clientes y oportunidades reales." 
               videoSrc="/assets/images/productos/mabePanel.webm"
@@ -2954,7 +2951,7 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
                 { value: "API-First", label: "Integración" }
               ]}
               videoOverlay={
-                <div style={{ position: 'absolute', top: 10, left: 10, background: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(4px)', padding: '4px 10px', borderRadius: 20, fontSize: 10, fontWeight: 700, color: '#16a34a', border: '1px solid rgba(22,163,74,0.2)' }}>
+                <div style={{ position: 'absolute', top: 10, left: 10, background: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(4px)', padding: '4px 10px', borderRadius: 20, fontSize: 10, fontWeight: 700, color: '#4ade80', border: '1px solid rgba(74,222,128,0.2)' }}>
                   🏭 Multi-Industry Engines
                 </div>
               }
@@ -2964,8 +2961,8 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
           <Wrapper category="Desarrollo">
             <StandardCard 
               icon={FileText} 
-              color="#dc2626" 
-              bg="rgba(220,38,38,0.15)" 
+              color="#f87171" 
+              bg="rgba(248,113,113,0.15)" 
               title="Desarrollo IA Estatal" 
               desc="Modernizamos servicios públicos, superamos la atención ciudadana y toma decisiones en tiempo real basadas en datos abiertos con soluciones de IA diseñadas para instituciones gubernamentales." 
               stats={[
@@ -2979,8 +2976,8 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
           <Wrapper category="Desarrollo">
             <StandardCard 
               icon={Wrench} 
-              color="#ea580c" 
-              bg="rgba(234,88,12,0.15)" 
+              color="#fb923c" 
+              bg="rgba(251,146,60,0.15)" 
               title="Desarrollo IA PYME" 
               desc="Conoce las Píldoras de IA. Automatiza tareas, vende mejor, atiende más rápido y compite con tecnología accesible para pequeñas y medianas empresas." 
               videoSrc="/assets/images/productos/whatsFaq.webm"
@@ -2990,7 +2987,7 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
                 { value: "WhatsApp", label: "Canal Principal" }
               ]}
               videoOverlay={
-                <div style={{ position: 'absolute', top: 10, left: 10, background: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(4px)', padding: '4px 10px', borderRadius: 20, fontSize: 10, fontWeight: 700, color: '#ea580c', border: '1px solid rgba(234,88,12,0.2)' }}>
+                <div style={{ position: 'absolute', top: 10, left: 10, background: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(4px)', padding: '4px 10px', borderRadius: 20, fontSize: 10, fontWeight: 700, color: '#fb923c', border: '1px solid rgba(251,146,60,0.2)' }}>
                   💬 WhatsApp AI Bot
                 </div>
               }
@@ -3000,12 +2997,12 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
           <Wrapper category="Desarrollo">
             <StandardCard 
               icon={ScanEye} 
-              color="#16a34a" 
-              bg="rgba(22,163,74,0.15)" 
+              color="#4ade80" 
+              bg="rgba(74,222,128,0.15)" 
               title="Desarrollo IA en Computer Vision" 
               desc="Haz que tus sistemas vean, detecten y actúen. Implementamos visión artificial para inspección, seguridad, conteo, reconocimiento y automatización visual en tiempo real." 
               stats={[
-                { value: "30 FPS", label: "Procesamiento Live" },
+                { value: "30 FPS", label: "Monitoreo Live" },
                 { value: "99.5%", label: "Precisión Visual" },
                 { value: "Edge/Cloud", label: "Despliegue" }
               ]}
@@ -3015,8 +3012,8 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
           <Wrapper category="Desarrollo">
             <StandardCard 
               icon={ShoppingBag} 
-              color="#dc2626" 
-              bg="rgba(220,38,38,0.15)" 
+              color="#f87171" 
+              bg="rgba(248,113,113,0.15)" 
               title="Market Place de Soluciones" 
               desc="Encuentra soluciones de IA listas para implementar. Explora herramientas, agentes y automatizaciones creadas para resolver problemas reales de negocio." 
               videoSrc="/assets/images/productos/portalia.webm"
@@ -3026,7 +3023,7 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
                 { value: "Seguro", label: "Certificado" }
               ]}
               videoOverlay={
-                <div style={{ position: 'absolute', top: 10, left: 10, background: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(4px)', padding: '4px 10px', borderRadius: 20, fontSize: 10, fontWeight: 700, color: '#dc2626', border: '1px solid rgba(220,38,38,0.2)' }}>
+                <div style={{ position: 'absolute', top: 10, left: 10, background: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(4px)', padding: '4px 10px', borderRadius: 20, fontSize: 10, fontWeight: 700, color: '#f87171', border: '1px solid rgba(248,113,113,0.2)' }}>
                   🛒 App Store Ready
                 </div>
               }
@@ -3037,8 +3034,8 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
           <Wrapper category="Monitoreo">
             <StandardCard 
               icon={FileText} 
-              color="#dc2626" 
-              bg="rgba(220,38,38,0.15)" 
+              color="#f87171" 
+              bg="rgba(248,113,113,0.15)" 
               title="Monitoreo de Modelos IA" 
               desc="Supervisa el desempeño de tus modelos, automatizaciones y agentes inteligentes en tiempo real. Detecta fallas, mide resultados y mejora continuamente tus soluciones de IA." 
               videoSrc="/assets/images/productos/deteccionAnomalias.webm"
@@ -3048,7 +3045,7 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
                 { value: "ISO 42001", label: "Gobernanza IA" }
               ]}
               videoOverlay={
-                <div style={{ position: 'absolute', top: 10, left: 10, background: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(4px)', padding: '4px 10px', borderRadius: 20, fontSize: 10, fontWeight: 700, color: '#dc2626', border: '1px solid rgba(220,38,38,0.2)' }}>
+                <div style={{ position: 'absolute', top: 10, left: 10, background: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(4px)', padding: '4px 10px', borderRadius: 20, fontSize: 10, fontWeight: 700, color: '#f87171', border: '1px solid rgba(248,113,113,0.2)' }}>
                   📈 MLOps Monitor Active
                 </div>
               }
