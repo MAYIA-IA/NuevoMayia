@@ -2840,34 +2840,64 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
         </div>
 
         {/* Categories / Tabs */}
-        <div style={{ display: 'flex', gap: 40, marginBottom: 32, borderBottom: '1px solid #E5E7EB', paddingBottom: 16, overflowX: 'auto', whiteSpace: 'nowrap' }}>
+        <div style={{ 
+          display: 'flex', 
+          gap: 12, 
+          marginBottom: 32, 
+          overflowX: 'auto', 
+          whiteSpace: 'nowrap',
+          paddingBottom: 8,
+          scrollbarWidth: 'none',
+          WebkitOverflowScrolling: 'touch'
+        }}>
           {CATEGORIES.map((cat) => {
             const isActive = activeTab === cat;
             return (
-              <span 
+              <motion.button 
                 key={cat} 
                 onClick={() => setActiveTab(cat)}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 style={{ 
-                  fontSize: 16, 
+                  width: 135,
+                  height: 36,
+                  borderRadius: 9999,
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: 12.5, 
                   fontWeight: isActive ? 700 : 500, 
-                  color: isActive ? '#111827' : '#6B7280', 
+                  color: isActive ? '#111827' : '#4B5563', 
                   cursor: 'pointer', 
-                  position: 'relative',
-                  transition: 'color 0.3s ease'
+                  background: isActive ? '#A4D955' : '#FFFFFF',
+                  border: `1px solid ${isActive ? '#A4D955' : '#E5E7EB'}`,
+                  boxShadow: isActive ? '0 4px 10px rgba(164,217,85,0.2)' : 'none',
+                  transition: 'color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease',
+                  outline: 'none',
+                  flexShrink: 0,
+                  fontFamily: "'Inter', system-ui, sans-serif"
+                }}
+                onMouseEnter={e => {
+                  if (!isActive) {
+                    e.currentTarget.style.background = '#F3F4F6';
+                    e.currentTarget.style.color = '#111827';
+                    e.currentTarget.style.borderColor = '#D1D5DB';
+                  }
+                }}
+                onMouseLeave={e => {
+                  if (!isActive) {
+                    e.currentTarget.style.background = '#FFFFFF';
+                    e.currentTarget.style.color = '#4B5563';
+                    e.currentTarget.style.borderColor = '#E5E7EB';
+                  }
                 }}
               >
                 {cat}
-                {isActive && (
-                  <motion.div 
-                    layoutId="activeTabUnderline"
-                    style={{ position: 'absolute', bottom: -17, left: 0, right: 0, height: 2, background: '#A4D955' }} 
-                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                  />
-                )}
-              </span>
+              </motion.button>
             );
           })}
         </div>
+
 
         {/* Grid de Tarjetas */}
         <motion.div layout style={{ 
