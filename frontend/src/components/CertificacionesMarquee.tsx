@@ -55,8 +55,8 @@ export default function CertificacionesMarquee() {
       
       {/* Título lateral */}
       <div className="absolute left-0 top-1/2 -translate-y-1/2 z-20 hidden md:flex flex-col items-start bg-white/90 backdrop-blur-sm px-6 py-4 rounded-r-xl border border-l-0 border-gray-200 shadow-sm">
-        <span className="text-[10px] text-gray-400 uppercase tracking-widest font-bold">Nuestras</span>
-        <span className="text-sm text-lime-500 font-bold">Certificaciones</span>
+        <span className="text-[10px] text-gray-400 uppercase tracking-widest font-bold">Certificaciones del</span>
+        <span className="text-sm text-lime-500 font-bold">SOC</span>
       </div>
 
       {/* Gradients para difuminar los bordes laterales */}
