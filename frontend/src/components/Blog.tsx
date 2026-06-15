@@ -2,9 +2,10 @@ import { useState } from "react";
 import { ArrowRight, Calendar, User, Tag, Search, Sparkles } from "lucide-react";
 import ArticleModal, { type BlogPost } from "./ArticleModal";
 import mayiaLakeBanner from "../assets/MAYIA_LAKE_BANNER.jpg.jpeg";
-import fabricaMxBanner from "../assets/FABRICA_MX_BANNER.jpg.jpeg";
+import mxBanner from "../assets/MX_BANNER.jpg";
 import origenBanner from "../assets/ORIGEN_BANNER.jpg.jpeg";
 import squadsBanner from "../assets/SQUADS_BANNER.jpg.jpeg";
+import agentesBanner from "../assets/AGENTES_BANNER.jpeg";
 
 const BLOG_POSTS: BlogPost[] = [
   {
@@ -15,7 +16,7 @@ const BLOG_POSTS: BlogPost[] = [
     date: "22 Mayo 2026",
     author: "Dulce Meza",
     readTime: "8 min lectura",
-    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1170&auto=format&fit=crop",
+    image: agentesBanner,
     featured: false,
     content: [
       { type: "paragraph", text: "Los Agentes de Inteligencia Artificial son sistemas inteligentes disenados para entender objetivos de negocio, consultar datos privados, analizar contexto, recomendar acciones, ejecutar tareas, coordinar workflows y operar procesos empresariales con distintos niveles de autonomia, seguridad, trazabilidad y supervision humana." },
@@ -117,7 +118,7 @@ const BLOG_POSTS: BlogPost[] = [
     date: "1 Junio 2026",
     author: "Veronica Viniegra",
     readTime: "7 min lectura",
-    image: fabricaMxBanner,
+    image: mxBanner,
     featured: false,
     content: [
       { type: "paragraph", text: "La inteligencia artificial empresarial necesita mucho mas que un modelo. Necesita infraestructura. Necesita datos protegidos. Necesita computo. Necesita almacenamiento. Necesita red. Necesita seguridad. Necesita energia. Necesita operacion. Necesita especialistas capaces de llevar la inteligencia artificial del concepto a la realidad diaria de una empresa." },
