@@ -464,22 +464,30 @@ export const MexicoEsMayia: React.FC = () => {
               </div>
             </div>
           ) : (
-            <div style={{
-              background: colores.fondoSecundario,
-              borderRadius: '20px',
-              padding: '32px 20px',
-              border: `1px solid ${colores.borde}`,
-              textAlign: 'center',
-            }}>
-              <div style={{
-                width: '48px', height: '48px', borderRadius: '14px',
-                background: `${COLOR_SELECTED}20`,
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                margin: '0 auto 14px',
-              }}>
+            <div 
+              className="select-state-prompt-card"
+              style={{
+                borderRadius: '20px',
+                padding: '32px 20px',
+                textAlign: 'center',
+              }}
+            >
+              <div 
+                className="select-state-prompt-icon"
+                style={{
+                  width: '48px', height: '48px', borderRadius: '14px',
+                  background: `${COLOR_SELECTED}20`,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  margin: '0 auto 14px',
+                  transition: 'all 0.3s ease',
+                }}
+              >
                 <MapPin size={22} color={COLOR_SELECTED} />
               </div>
-              <p style={{ fontSize: '13px', fontWeight: '700', color: colores.textoClaro, margin: '0 0 6px 0' }}>
+              <p 
+                className="select-state-prompt-title"
+                style={{ fontSize: '13px', fontWeight: '700', margin: '0 0 6px 0' }}
+              >
                 Selecciona un estado
               </p>
               <p style={{ fontSize: '12px', color: colores.textoMedio, margin: 0, lineHeight: 1.55 }}>
@@ -543,6 +551,48 @@ export const MexicoEsMayia: React.FC = () => {
         }
         .network-line-animation {
           animation: dataFlow 1s linear infinite;
+        }
+        @keyframes promptPulse {
+          0%, 100% {
+            border-color: ${colores.borde};
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            background-color: ${colores.fondoSecundario};
+          }
+          50% {
+            border-color: rgba(164, 217, 85, 0.85);
+            box-shadow: 0 0 25px rgba(164, 217, 85, 0.35);
+            background-color: rgba(164, 217, 85, 0.06);
+          }
+        }
+        @keyframes pinBounce {
+          0%, 100% {
+            transform: translateY(0) scale(1);
+          }
+          50% {
+            transform: translateY(-6px) scale(1.08);
+          }
+        }
+        @keyframes textShimmer {
+          0%, 100% {
+            color: ${colores.textoClaro};
+            text-shadow: none;
+          }
+          50% {
+            color: #A4D955;
+            text-shadow: 0 0 8px rgba(164, 217, 85, 0.4);
+          }
+        }
+        .select-state-prompt-card {
+          border: 1px solid ${colores.borde};
+          background-color: ${colores.fondoSecundario};
+          animation: promptPulse 3s ease-in-out infinite;
+          transition: all 0.3s ease;
+        }
+        .select-state-prompt-icon {
+          animation: pinBounce 2s ease-in-out infinite;
+        }
+        .select-state-prompt-title {
+          animation: textShimmer 3s ease-in-out infinite;
         }
       `}</style>
     </div>
