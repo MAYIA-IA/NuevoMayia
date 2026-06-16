@@ -45,6 +45,17 @@ const getPastelTheme = (color: string) => {
   return { bg: '#f0f6ff', hoverBg: '#e2efff', border: '#93c5fd' };
 };
 
+const getPulseAnimationName = (hexColor: string) => {
+  const c = hexColor.toLowerCase();
+  if (c === '#16a34a' || c === '#86efac' || c === '#4ade80') return 'cta-glow-pulse-green';
+  if (c === '#9333ea' || c === '#d8b4fe' || c === '#c084fc') return 'cta-glow-pulse-purple';
+  if (c === '#dc2626' || c === '#fca5a5' || c === '#f87171') return 'cta-glow-pulse-red';
+  if (c === '#ea580c' || c === '#fdba74' || c === '#fb923c') return 'cta-glow-pulse-orange';
+  if (c === '#a4d955' || c === '#d9f99d' || c === '#bef264') return 'cta-glow-pulse-lime';
+  if (c === '#14b8a6' || c === '#5eead4' || c === '#2dd4bf') return 'cta-glow-pulse-teal';
+  return 'cta-glow-pulse-blue';
+};
+
 // Hook personalizado para detectar dispositivos móviles (<768px)
 const useIsMobile = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -206,6 +217,8 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOp
               style={{ width: '100%', height: '100%', objectFit: 'cover' }}
               videoSrc="/assets/images/jaguar.webm"
               accentColor={color}
+              title="Fábrica de Inteligencia Artificial - IA Privada Mayia"
+              aria-label="Animación del jaguar representando la Fábrica de Inteligencia Artificial Privada de MAYiA"
             />
           </div>
           <div>
@@ -258,6 +271,8 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOp
           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           videoSrc="/assets/images/productos/drpVideo.webm"
           accentColor={color}
+          title="Servidores e Infraestructura de la Fábrica de IA"
+          aria-label="Video que muestra el funcionamiento de los servidores e infraestructura híbrida y on-premise de la Fábrica de Inteligencia Artificial"
         />
 
         {/* Left overlays: Nuestros servidores, Modo Hibrido, Modo on premise */}
@@ -387,7 +402,7 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOp
               background: `linear-gradient(135deg, ${color}, ${hexToRgba(color, 0.85)})`,
               color: '#111827',
               border: 'none',
-              borderRadius: 4,
+              borderRadius: 12,
               padding: '12px 6px',
               fontSize: 10,
               fontWeight: 800,
@@ -415,7 +430,7 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOp
               background: `linear-gradient(135deg, ${color}, ${hexToRgba(color, 0.85)})`,
               color: '#111827',
               border: 'none',
-              borderRadius: 4,
+              borderRadius: 12,
               padding: '12px 6px',
               fontSize: 10,
               fontWeight: 800,
@@ -443,7 +458,7 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOp
               background: `linear-gradient(135deg, ${color}, ${hexToRgba(color, 0.85)})`,
               color: '#111827',
               border: 'none',
-              borderRadius: 4,
+              borderRadius: 12,
               padding: '12px 6px',
               fontSize: 10,
               fontWeight: 800,
@@ -486,9 +501,10 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOp
           <button
             onClick={onOpenMap}
             style={{
-              background: '#111827',
-              color: '#ffffff',
-              border: 'none',
+              background: `linear-gradient(135deg, ${hexToRgba(color, 0.12)} 0%, ${hexToRgba(color, 0.35)} 50%, ${hexToRgba(color, 0.12)} 100%)`,
+              backgroundSize: '200% auto',
+              color: '#1e40af',
+              border: `1px solid ${hexToRgba(color, 0.45)}`,
               borderRadius: 8,
               padding: '10px 14px',
               fontSize: 11,
@@ -498,12 +514,13 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOp
               transition: 'all 0.2s',
               display: 'flex',
               alignItems: 'center',
-              gap: 6
+              gap: 6,
+              animation: 'cta-shimmer 3s linear infinite, cta-glow-pulse-blue 2.5s infinite'
             }}
-            onMouseEnter={e => { e.currentTarget.style.background = color; e.currentTarget.style.color = '#111827'; e.currentTarget.style.transform = 'scale(1.03)'; }}
-            onMouseLeave={e => { e.currentTarget.style.background = '#111827'; e.currentTarget.style.color = '#ffffff'; e.currentTarget.style.transform = 'scale(1)'; }}
+            onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.03)'; }}
+            onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; }}
           >
-            Descubre porque &rarr;
+            Descubre porque <span className="cta-arrow-animate" style={{ fontSize: 13, fontWeight: 'bold' }}>&rarr;</span>
           </button>
         </div>
       </div>
@@ -567,7 +584,7 @@ function FlaiCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
             justifyContent: 'center', 
             overflow: 'hidden'
           }}>
-            <img src={flaiLogo} alt="FLAI" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            <img src={flaiLogo} alt="FLAI - Nube Soberana Inteligente de MAYiA, plataforma de nube soberana de Inteligencia Artificial" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           </div>
           <div>
             <h3 style={{ margin: 0, fontSize: 18, fontWeight: 800, color: '#111827' }}>FLAI</h3>
@@ -618,6 +635,8 @@ function FlaiCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           videoSrc="/assets/images/productos/flaiMarcoVideo.webm"
           accentColor={color}
+          title="Nube Soberana Inteligente FLAI"
+          aria-label="Presentación de la infraestructura y servicios de cómputo en la nube soberana FLAI de MAYiA"
         />
       </div>
 
@@ -692,14 +711,17 @@ function FlaiCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
         <button 
           onClick={handleAgendarCita}
           style={{ 
-            background: `linear-gradient(135deg, ${color}, ${hexToRgba(color, 0.85)})`, color: '#111827', border: 'none', borderRadius: 8, padding: '12px 16px', 
+            background: `linear-gradient(135deg, ${color} 0%, rgba(255, 255, 255, 0.6) 50%, ${hexToRgba(color, 0.85)} 100%)`, 
+            backgroundSize: '200% auto',
+            color: '#111827', border: 'none', borderRadius: 8, padding: '12px 16px', 
             fontSize: 13, fontWeight: 700, display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', width: '100%', justifyContent: 'center', 
-            transition: 'all 0.2s', boxShadow: `0 4px 12px ${hexToRgba(color, 0.2)}`
+            transition: 'all 0.2s',
+            animation: 'cta-shimmer 3s linear infinite, cta-glow-pulse-red 2.5s infinite'
           }}
-          onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = `0 6px 16px ${hexToRgba(color, 0.3)}`; }}
-          onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = `0 4px 12px ${hexToRgba(color, 0.2)}`; }}
+          onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; }}
+          onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; }}
         >
-          Cotiza ahora &rarr;
+          Cotiza ahora <span className="cta-arrow-animate">&rarr;</span>
         </button>
       </div>
     </div>
@@ -745,7 +767,7 @@ function SocCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 20px', height: 90 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
           <div style={{ width: 44, height: 44, borderRadius: 10, background: '#ffffff', border: '1px solid #E5E7EB', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 6 }}>
-            <img src="/assets/images/productos/cyberpeaceLogo.webp" alt="CyberPeace SOC" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+            <img src="/assets/images/productos/cyberpeaceLogo.webp" alt="CyberPeace SOC - Centro de Operaciones de Seguridad Inteligente para Ciberseguridad con Inteligencia Artificial" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
           </div>
           <div>
             <h3 style={{ margin: 0, fontSize: 18, fontWeight: 800, color: '#111827' }}>SOC IA CyberPeace</h3>
@@ -796,6 +818,8 @@ function SocCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
             videoSrc="/assets/images/productos/cyberpeaceVid.webm"
             accentColor={color}
+            title="Monitoreo del SOC de Ciberseguridad con Inteligencia Artificial"
+            aria-label="Interfaz del SOC CyberPeace que muestra el monitoreo en tiempo real de ciberamenazas asistido por Inteligencia Artificial"
         />
         <div style={{ position: 'absolute', top: 12, left: 12, display: 'flex', flexDirection: 'column', gap: 6, maxWidth: '80%', zIndex: 5 }}>
            {["Cacería de Amenazas", "Inteligencia de Amenazas", "Evaluación de Riesgos", "Estrategia y Gobierno de Ciberseguridad", "Gestión de Respuestas y Contención de Incidentes"].map((f, i) => (
@@ -856,12 +880,14 @@ function SocCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
         <button 
           onClick={handleAgendarCita}
           style={{ 
-            background: `linear-gradient(135deg, ${color}, ${hexToRgba(color, 0.85)})`, color: '#111827', border: 'none', borderRadius: 8, padding: '10px 0', fontSize: 13, fontWeight: 700, 
+            background: `linear-gradient(135deg, ${color} 0%, rgba(255, 255, 255, 0.6) 50%, ${hexToRgba(color, 0.85)} 100%)`, 
+            backgroundSize: '200% auto',
+            color: '#111827', border: 'none', borderRadius: 8, padding: '10px 0', fontSize: 13, fontWeight: 700, 
             display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', flex: 1, justifyContent: 'center', transition: 'all 0.2s',
-            boxShadow: `0 4px 12px ${hexToRgba(color, 0.2)}`
+            animation: 'cta-shimmer 3s linear infinite, cta-glow-pulse-blue 2.5s infinite'
           }}
-          onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = `0 6px 16px ${hexToRgba(color, 0.3)}`; }}
-          onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = `0 4px 12px ${hexToRgba(color, 0.2)}`; }}
+          onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; }}
+          onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; }}
         >
           Proteger ahora
         </button>
@@ -874,7 +900,7 @@ function SocCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
           onMouseEnter={e => { e.currentTarget.style.background = '#E5E7EB'; }}
           onMouseLeave={e => { e.currentTarget.style.background = '#F3F4F6'; }}
         >
-          Conocer más &rarr;
+          Conocer más <span className="cta-arrow-animate">&rarr;</span>
         </button>
       </div>
     </div>
@@ -956,11 +982,11 @@ function MayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
       <div style={{ display: 'flex', alignItems: 'center', padding: '0 20px', justifyContent: 'space-between', height: 90 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
           <div style={{ width: 44, height: 44, borderRadius: '50%', background: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', border: `1.5px solid ${color}` }}>
-            <img src={mayiaLakeLogo} alt="MAYiA Lakehouse" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            <img src={mayiaLakeLogo} alt="MAYiA Lakehouse - Plataforma inteligente de almacenamiento y procesamiento de datos para Inteligencia Artificial" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           </div>
           <div>
             <h3 style={{ margin: 0, fontSize: 18, fontWeight: 800, color: '#111827', display: 'flex', alignItems: 'center', gap: 4 }}>
-              <img src={logoMaia} alt="MAYiA" style={{ height: '15px', objectFit: 'contain' }} /> Lakehouse
+              <img src={logoMaia} alt="MAYiA Inteligencia Artificial - Logo oficial" style={{ height: '15px', objectFit: 'contain' }} /> Lakehouse
             </h3>
             <p style={{ margin: 0, fontSize: 12, color: '#4B5563', fontWeight: 600 }}>Prepara tus datos para la IA</p>
           </div>
@@ -1010,6 +1036,8 @@ function MayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           videoSrc={ajoloteVideo}
           accentColor={color}
+          title="Plataforma de Datos MAYiA Lakehouse"
+          aria-label="Animación en 3D que representa la ingesta y estructuración de datos en tiempo real dentro de MAYiA Lakehouse"
         />
         {/* Overlays en el video removidos */}
       </div>
@@ -1131,7 +1159,8 @@ function MayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
         <button 
           onClick={handleAgendarCita}
           style={{ 
-            background: `linear-gradient(135deg, ${color}, ${hexToRgba(color, 0.85)})`, 
+            background: `linear-gradient(135deg, ${color} 0%, rgba(255, 255, 255, 0.6) 50%, ${hexToRgba(color, 0.85)} 100%)`, 
+            backgroundSize: '200% auto',
             color: '#111827', 
             border: 'none', 
             borderRadius: 8, 
@@ -1145,10 +1174,10 @@ function MayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
             alignItems: 'center',
             gap: 6,
             transition: 'all 0.2s',
-            boxShadow: `0 4px 12px ${hexToRgba(color, 0.2)}`
+            animation: 'cta-shimmer 3s linear infinite, cta-glow-pulse-lime 2.5s infinite'
           }}
-          onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = `0 6px 16px ${hexToRgba(color, 0.4)}`; }}
-          onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = `0 4px 12px ${hexToRgba(color, 0.2)}`; }}
+          onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; }}
+          onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; }}
         >
           Agenda tu cita
         </button>
@@ -1275,6 +1304,8 @@ function SquadsMayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           videoSrc={squadVideo}
           accentColor={color}
+          title="Squads de Desarrollo de IA MAYiA"
+          aria-label="Presentación en video de los squads y equipos ágiles especializados en el desarrollo e integración de Inteligencia Artificial de MAYiA"
         />
         {/* Animated Badge Container - Top Left */}
         <div style={{ 
@@ -1429,7 +1460,8 @@ function SquadsMayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
         <button 
           onClick={handleAgendarCita}
           style={{ 
-            background: `linear-gradient(135deg, ${color}, ${hexToRgba(color, 0.85)})`, 
+            background: `linear-gradient(135deg, ${color} 0%, rgba(255, 255, 255, 0.6) 50%, ${hexToRgba(color, 0.85)} 100%)`, 
+            backgroundSize: '200% auto',
             color: '#111827', 
             border: 'none', 
             borderRadius: 8, 
@@ -1443,10 +1475,10 @@ function SquadsMayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
             alignItems: 'center',
             gap: 6,
             transition: 'all 0.2s',
-            boxShadow: `0 4px 12px ${hexToRgba(color, 0.2)}`
+            animation: 'cta-shimmer 3s linear infinite, cta-glow-pulse-teal 2.5s infinite'
           }}
-          onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = `0 6px 16px ${hexToRgba(color, 0.4)}`; }}
-          onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = `0 4px 12px ${hexToRgba(color, 0.2)}`; }}
+          onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; }}
+          onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; }}
         >
           Agenda tu cita
         </button>
@@ -1680,20 +1712,21 @@ function IAEmpresarialCard() {
         <motion.div
           onClick={handleAgendarCita}
           style={{
-            background: `linear-gradient(135deg, ${color}, ${hexToRgba(color, 0.85)})`,
+            background: `linear-gradient(135deg, ${color} 0%, rgba(255, 255, 255, 0.6) 50%, ${hexToRgba(color, 0.85)} 100%)`,
+            backgroundSize: '200% auto',
             borderRadius: 10, padding: '10px 14px',
             display: 'flex', alignItems: 'center', gap: 10,
             cursor: 'pointer',
-            boxShadow: `0 4px 12px ${hexToRgba(color, 0.2)}`,
+            animation: 'cta-shimmer 3s linear infinite, cta-glow-pulse-blue 2.5s infinite'
           }}
-          whileHover={{ scale: 1.01, boxShadow: `0 6px 16px ${hexToRgba(color, 0.4)}` }}
+          whileHover={{ scale: 1.01 }}
           whileTap={{ scale: 0.99 }}
         >
           <div style={{ width: 30, height: 30, borderRadius: 8, background: 'rgba(255,255,255,0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
             <MessageSquare size={15} color="#111827" />
           </div>
           <div style={{ flex: 1, minWidth: 0 }}>
-            <p style={{ margin: 0, fontSize: 11, fontWeight: 800, color: '#111827', lineHeight: 1.2 }}>Conversemos sobre el potencial de la IA en tu empresa →</p>
+            <p style={{ margin: 0, fontSize: 11, fontWeight: 800, color: '#111827', lineHeight: 1.2 }}>Conversemos sobre el potencial de la IA en tu empresa <span className="cta-arrow-animate">→</span></p>
             <p style={{ margin: 0, marginTop: 2, fontSize: 8.5, color: '#374151', fontWeight: 600 }}>Diagnóstico sin costo &nbsp;|&nbsp; Enfoque en ROI &nbsp;|&nbsp; Casos de alto impacto</p>
           </div>
         </motion.div>
@@ -1804,6 +1837,8 @@ function RoiCard() {
           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           videoSrc={roiVideo}
           accentColor={color}
+          title="Simulador de Retorno de Inversión (ROI) en Proyectos de IA"
+          aria-label="Video explicativo sobre el cálculo del retorno de inversión y beneficios económicos al implementar Inteligencia Artificial en empresas"
         />
 
         {/* Video Overlay with Text & Calendly Button */}
@@ -1854,7 +1889,7 @@ function RoiCard() {
             onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-1px)'; }}
             onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; }}
           >
-            <Calendar size={8} /> Agendar Cita &rarr;
+            <Calendar size={8} /> Agendar Cita <span className="cta-arrow-animate">&rarr;</span>
           </button>
         </div>
       </div>
@@ -2005,7 +2040,7 @@ function RoiCard() {
             onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = `0 6px 16px ${hexToRgba(color, 0.3)}`; }}
             onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = `0 4px 12px ${hexToRgba(color, 0.2)}`; }}
           >
-            Ver video del consultor &rarr;
+            Ver video del consultor <span className="cta-arrow-animate">&rarr;</span>
           </button>
         </div>
       </div>
@@ -2172,6 +2207,8 @@ function StandardCard({
             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
             videoSrc={videoSrc}
             accentColor={color}
+            title={`Video de presentación - ${title}`}
+            aria-label={`Video demostrativo de la solución de ${title}`}
           />
           {videoOverlay && videoOverlay}
         </div>
@@ -2208,7 +2245,8 @@ function StandardCard({
         <button 
           onClick={handleAgendarCita}
           style={{ 
-            background: `linear-gradient(135deg, ${color}, ${hexToRgba(color, 0.85)})`, 
+            background: `linear-gradient(135deg, ${color} 0%, rgba(255, 255, 255, 0.6) 50%, ${hexToRgba(color, 0.85)} 100%)`, 
+            backgroundSize: '200% auto',
             color: '#111827', 
             border: 'none', 
             borderRadius: 8, 
@@ -2222,12 +2260,12 @@ function StandardCard({
             flex: 1, 
             justifyContent: 'center', 
             transition: 'all 0.2s',
-            boxShadow: `0 4px 12px ${hexToRgba(color, 0.2)}`
+            animation: `cta-shimmer 3s linear infinite, ${getPulseAnimationName(color)} 2.5s infinite`
           }}
-          onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = `0 6px 16px ${hexToRgba(color, 0.35)}`; }}
-          onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = `0 4px 12px ${hexToRgba(color, 0.2)}`; }}
+          onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; }}
+          onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; }}
         >
-          Conocer más &rarr;
+          Conocer más <span className="cta-arrow-animate">&rarr;</span>
         </button>
       </div>
     </div>
@@ -2241,7 +2279,7 @@ function AcademiaCard() {
   const [cursosOpen, setCursosOpen] = useState(false);
   const [showInfoModal, setShowInfoModal] = useState(false);
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
-  const color = '#fb923c';
+  const color = '#4ade80';
   const theme = getPastelTheme(color);
 
   const handleAgendarCita = (e: React.MouseEvent) => {
@@ -2355,7 +2393,7 @@ function AcademiaCard() {
             <GraduationCap size={22} color={color} />
           </div>
           <div style={{ flex: 1, display: 'flex', alignItems: 'center' }}>
-            <img src={academiaLogo} alt="Academia MAYiA" style={{ height: '32px', objectFit: 'contain', filter: 'none' }} />
+            <img src={academiaLogo} alt="Academia MAYiA - Capacitación corporativa y cursos de Inteligencia Artificial para empresas" style={{ height: '32px', objectFit: 'contain', filter: 'none' }} />
           </div>
         </div>
 
@@ -2374,7 +2412,7 @@ function AcademiaCard() {
                 <button 
                   onClick={handleAgendarCita}
                   style={{ width: '100%', padding: '12px 16px', textAlign: 'left', fontSize: 13, color: '#374151', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, transition: 'background 0.2s' }}
-                  onMouseEnter={e => e.currentTarget.style.background = 'rgba(234,88,12,0.08)'}
+                  onMouseEnter={e => e.currentTarget.style.background = hexToRgba(color, 0.08)}
                   onMouseLeave={e => e.currentTarget.style.background = 'none'}
                 >
                   <Calendar size={16} /> Conversa con el Agentico de Academia MAYiA
@@ -2402,6 +2440,8 @@ function AcademiaCard() {
           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           videoSrc="/assets/images/productos/astronautaSaludo.webm"
           accentColor={color}
+          title="Presentación de Academia MAYiA"
+          aria-label="Animación del astronauta saludando para dar la bienvenida a los cursos de Academia MAYiA"
         />
         
         {/* Overlay gradient */}
@@ -2449,22 +2489,24 @@ function AcademiaCard() {
                 <div style={{ paddingRight: 4, lineHeight: 1.1 }}>
                   <span>{opcion.titulo}</span>
                 </div>
-                <div style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  width: 14,
-                  height: 14,
-                  background: isSelected ? '#FFFFFF' : color,
-                  borderRadius: '50%',
-                  color: isSelected ? color : '#FFFFFF',
-                  flexShrink: 0,
-                  marginLeft: 4,
-                  fontSize: 8,
-                  fontWeight: 'bold'
-                }}>
-                  →
-                </div>
+                <span className="cta-arrow-animate">
+                  <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    width: 14,
+                    height: 14,
+                    background: isSelected ? '#FFFFFF' : color,
+                    borderRadius: '50%',
+                    color: isSelected ? color : '#FFFFFF',
+                    flexShrink: 0,
+                    marginLeft: 4,
+                    fontSize: 8,
+                    fontWeight: 'bold'
+                  }}>
+                    →
+                  </div>
+                </span>
               </button>
             );
           })}
@@ -2556,7 +2598,7 @@ function AcademiaCard() {
                     ⏱ {curso.horas}
                   </span>
                   <span style={{ color: '#E5E7EB' }}>|</span>
-                  <span style={{ color: '#ea580c', fontWeight: 600 }}>{curso.categoria}</span>
+                  <span style={{ color: color, fontWeight: 600 }}>{curso.categoria}</span>
                 </div>
               </div>
             );
@@ -2570,10 +2612,10 @@ function AcademiaCard() {
       
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginBottom: 16 }}>
         {[
-          { icon: BookOpen, value: '32', label: 'Cursos', color: '#ea580c' },
-          { icon: Award, value: '6+', label: 'Certificaciones', color: '#ea580c' },
-          { icon: Briefcase, value: 'B2B', label: 'IA para negocios', color: '#ea580c' },
-          { icon: Users, value: 'Tech', label: 'IA para equipos', color: '#ea580c' },
+          { icon: BookOpen, value: '32', label: 'Cursos', color: color },
+          { icon: Award, value: '6+', label: 'Certificaciones', color: color },
+          { icon: Briefcase, value: 'B2B', label: 'IA para negocios', color: color },
+          { icon: Users, value: 'Tech', label: 'IA para equipos', color: color },
         ].map((h, i) => (
           <div key={i} style={{ 
             display: 'flex', alignItems: 'center', gap: 8, padding: '10px 12px', 
@@ -2595,13 +2637,14 @@ function AcademiaCard() {
             flex: 1,
             display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
             padding: '12px 12px', borderRadius: 8,
-            background: `linear-gradient(135deg, ${color}, ${hexToRgba(color, 0.85)})`,
+            background: `linear-gradient(135deg, ${color} 0%, rgba(255, 255, 255, 0.6) 50%, ${hexToRgba(color, 0.85)} 100%)`,
+            backgroundSize: '200% auto',
             color: '#111827', fontWeight: 700, fontSize: 13, border: 'none', cursor: 'pointer',
-            boxShadow: `0 4px 12px ${hexToRgba(color, 0.2)}`,
-            transition: 'all 0.2s'
+            transition: 'all 0.2s',
+            animation: `cta-shimmer 3s linear infinite, ${getPulseAnimationName(color)} 2.5s infinite`
           }}
-          onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = `0 6px 16px ${hexToRgba(color, 0.3)}`; }}
-          onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = `0 4px 12px ${hexToRgba(color, 0.2)}`; }}
+          onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; }}
+          onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; }}
         >
           Cotizar cursos
         </button>
@@ -2615,7 +2658,7 @@ function AcademiaCard() {
             color: '#374151', fontWeight: 600, fontSize: 13, textDecoration: 'none',
             transition: 'all 0.2s'
           }}
-          onMouseEnter={e => { e.currentTarget.style.background = '#E5E7EB'; e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.borderColor = '#ea580c'; }}
+          onMouseEnter={e => { e.currentTarget.style.background = '#E5E7EB'; e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.borderColor = color; }}
           onMouseLeave={e => { e.currentTarget.style.background = '#F3F4F6'; e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.borderColor = '#D1D5DB'; }}
         >
           Revisar fechas
@@ -2636,7 +2679,7 @@ function AcademiaCard() {
               width: '100%',
               maxHeight: '90vh',
               overflowY: 'auto',
-              border: '2px solid rgba(234, 88, 12, 0.3)',
+              border: `2px solid ${hexToRgba(color, 0.3)}`,
               boxShadow: '0 20px 50px rgba(0,0,0,0.15)',
               display: 'flex',
               flexDirection: 'column',
@@ -2645,7 +2688,7 @@ function AcademiaCard() {
           >
             {/* Header del Modal */}
             <div style={{
-              background: 'linear-gradient(to right, #ea580c, #f97316)',
+              background: `linear-gradient(to right, ${color}, ${hexToRgba(color, 0.8)})`,
               padding: '24px',
               display: 'flex',
               alignItems: 'center',
@@ -2656,7 +2699,7 @@ function AcademiaCard() {
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                 <div style={{ width: 44, height: 44, borderRadius: '50%', background: '#060606', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', border: '1.5px solid #FFFFFF' }}>
-                  <img src={academiaLogo} alt="Academia Logo" style={{ width: '80%', height: '80%', objectFit: 'contain' }} />
+                  <img src={academiaLogo} alt="Academia MAYiA - Logotipo de la academia de formación en Inteligencia Artificial" style={{ width: '80%', height: '80%', objectFit: 'contain' }} />
                 </div>
                 <div>
                   <h2 style={{ fontSize: 22, fontWeight: 800, color: '#FFFFFF', margin: 0 }}>Academia MAYiA</h2>
@@ -2797,6 +2840,46 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
           0% { transform: rotate(0deg); }
           100% { transform: rotate(360deg); }
         }
+        @keyframes cta-arrow-slide {
+          0%, 100% { transform: translateX(0); }
+          50%       { transform: translateX(5px); }
+        }
+        .cta-arrow-animate {
+          display: inline-block;
+          animation: cta-arrow-slide 1.2s ease-in-out infinite;
+        }
+        @keyframes cta-shimmer {
+          0% { background-position: -200% 0; }
+          100% { background-position: 200% 0; }
+        }
+        @keyframes cta-glow-pulse-blue {
+          0%, 100% { box-shadow: 0 4px 12px rgba(96, 165, 250, 0.35), 0 0 0 0 rgba(96, 165, 250, 0.45); }
+          50% { box-shadow: 0 4px 20px rgba(96, 165, 250, 0.6), 0 0 0 8px rgba(96, 165, 250, 0); }
+        }
+        @keyframes cta-glow-pulse-red {
+          0%, 100% { box-shadow: 0 4px 12px rgba(248, 113, 113, 0.35), 0 0 0 0 rgba(248, 113, 113, 0.45); }
+          50% { box-shadow: 0 4px 20px rgba(248, 113, 113, 0.6), 0 0 0 8px rgba(248, 113, 113, 0); }
+        }
+        @keyframes cta-glow-pulse-green {
+          0%, 100% { box-shadow: 0 4px 12px rgba(34, 197, 94, 0.35), 0 0 0 0 rgba(34, 197, 94, 0.45); }
+          50% { box-shadow: 0 4px 20px rgba(34, 197, 94, 0.6), 0 0 0 8px rgba(34, 197, 94, 0); }
+        }
+        @keyframes cta-glow-pulse-teal {
+          0%, 100% { box-shadow: 0 4px 12px rgba(45, 212, 191, 0.35), 0 0 0 0 rgba(45, 212, 191, 0.45); }
+          50% { box-shadow: 0 4px 20px rgba(45, 212, 191, 0.6), 0 0 0 8px rgba(45, 212, 191, 0); }
+        }
+        @keyframes cta-glow-pulse-lime {
+          0%, 100% { box-shadow: 0 4px 12px rgba(164, 217, 85, 0.35), 0 0 0 0 rgba(164, 217, 85, 0.45); }
+          50% { box-shadow: 0 4px 20px rgba(164, 217, 85, 0.6), 0 0 0 8px rgba(164, 217, 85, 0); }
+        }
+        @keyframes cta-glow-pulse-orange {
+          0%, 100% { box-shadow: 0 4px 12px rgba(234, 88, 12, 0.35), 0 0 0 0 rgba(234, 88, 12, 0.45); }
+          50% { box-shadow: 0 4px 20px rgba(234, 88, 12, 0.6), 0 0 0 8px rgba(234, 88, 12, 0); }
+        }
+        @keyframes cta-glow-pulse-purple {
+          0%, 100% { box-shadow: 0 4px 12px rgba(192, 132, 252, 0.35), 0 0 0 0 rgba(192, 132, 252, 0.45); }
+          50% { box-shadow: 0 4px 20px rgba(192, 132, 252, 0.6), 0 0 0 8px rgba(192, 132, 252, 0); }
+        }
       `}</style>
       
       {/* Fondo blanco puro sin grid ni blobs */}
@@ -2828,7 +2911,7 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
               >
                 <img 
                   src={logoMaia} 
-                  alt="MAYIA" 
+                  alt="MAYiA - Inteligencia Artificial para Empresas, consultoría e implementación de soluciones cognitivas y agentes autónomos" 
                   style={{ height: '48px', objectFit: 'contain', position: 'relative', zIndex: 1 }} 
                 />
               </div>
@@ -3027,8 +3110,8 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
           <Wrapper category="Desarrollo">
             <StandardCard 
               icon={ScanEye} 
-              color="#4ade80" 
-              bg="rgba(74,222,128,0.15)" 
+              color="#fb923c" 
+              bg="rgba(251,146,60,0.15)" 
               title="Desarrollo IA en Computer Vision" 
               desc="Haz que tus sistemas vean, detecten y actúen. Implementamos visión artificial para inspección, seguridad, conteo, reconocimiento y automatización visual en tiempo real." 
               stats={[
