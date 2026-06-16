@@ -17,6 +17,7 @@ export interface BlogPost {
   image: string;
   featured: boolean;
   readTime?: string;
+  imagePosition?: string;
   content: ArticleSection[];
 }
 
@@ -101,7 +102,7 @@ export default function ArticleModal({ post, onClose }: ArticleModalProps) {
         </div>
 
         <div style={{position:"relative", height:340, flexShrink:0, overflow:"hidden"}}>
-          <img src={post.image} alt={post.title} style={{width:"100%",height:"100%",objectFit:"cover",display:"block"}}/>
+          <img src={post.image} alt={post.title} style={{width:"100%",height:"100%",objectFit:"cover",objectPosition:post.imagePosition || "center",display:"block"}}/>
           <div style={{position:"absolute",inset:0,background:"linear-gradient(to bottom,rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.75) 100%)"}}/>
           <div style={{
             position:"absolute", top:20, left:24,
