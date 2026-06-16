@@ -11,7 +11,7 @@ export default function BrandFooter() {
           <div className="flex items-center gap-4 order-2 sm:order-1">
             <img 
               src={hechoEnMexicoLogo}
-              alt="Hecho en México" 
+              alt="Sello Oficial Hecho en México - Certificación del software y soluciones de Inteligencia Artificial desarrollados localmente por MAYiA" 
               className="h-16 sm:h-20 w-auto object-contain"
             />
           </div>

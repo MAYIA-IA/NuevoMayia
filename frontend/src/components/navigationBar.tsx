@@ -25,7 +25,7 @@ export default function NavigationBar() {
           <div className="flex-shrink-0">
             <img 
               src={mayiaLogo}
-              alt="MAYiA Logo" 
+              alt="MAYiA - Inteligencia Artificial para Empresas - Logo oficial de la consultoría de desarrollo e implementación tecnológica" 
               className="h-8 sm:h-10 md:h-12 w-auto object-contain"
             />
           </div>

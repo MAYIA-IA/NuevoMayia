@@ -126,7 +126,7 @@ const Footer = () => {
             <div className="flex items-center justify-center md:justify-start">
               <img 
                 src={hechoEnMexicoLogo}
-                alt="Hecho en México" 
+                alt="Sello Hecho en México - Distintivo oficial que certifica que las soluciones de Inteligencia Artificial de MAYiA son desarrolladas en México" 
                 className="h-14 w-auto opacity-90 hover:opacity-100 transition-opacity"
               />
             </div>

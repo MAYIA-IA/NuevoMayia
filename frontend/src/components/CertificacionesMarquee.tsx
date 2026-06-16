@@ -76,7 +76,7 @@ export default function CertificacionesMarquee() {
               >
                 <img 
                   src={cert.img} 
-                  alt={cert.name} 
+                  alt={`Certificación de Ciberseguridad del SOC - ${cert.name}`} 
                   className="max-w-full max-h-full object-contain filter transition-all duration-300" 
                 />
               </div>

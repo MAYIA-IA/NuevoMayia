@@ -104,6 +104,7 @@ function App() {
   const [socialModalYPos, setSocialModalYPos] = useState(0);
   const [globalCalendarPos, setGlobalCalendarPos] = useState<{x: number, y: number} | null>(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [hideBanner, setHideBanner] = useState(false);
   const { colores } = brandingConfig;
 
   useEffect(() => {
@@ -121,6 +122,18 @@ function App() {
     check();
     window.addEventListener('resize', check);
     return () => window.removeEventListener('resize', check);
+  }, []);
+
+  /* ── Ocultar banner en scroll ── */
+  useEffect(() => {
+    const handleScroll = (e: any) => {
+      const container = document.getElementById('main-scroll-container');
+      if (container) {
+        setHideBanner(container.scrollTop > 20);
+      }
+    };
+    window.addEventListener('scroll', handleScroll, true);
+    return () => window.removeEventListener('scroll', handleScroll, true);
   }, []);
 
   /* ── Scroll-spy ── */
@@ -290,7 +303,15 @@ function App() {
     }}>
       {/* AcademiaBanner — siempre visible arriba */}
       {!isMobile && (
-        <div style={{ flexShrink: 0, position: 'relative', zIndex: 100 }}>
+        <div style={{ 
+          flexShrink: 0, 
+          position: 'relative', 
+          zIndex: 100,
+          maxHeight: hideBanner ? '0px' : '180px',
+          opacity: hideBanner ? 0 : 1,
+          overflow: 'hidden',
+          transition: 'max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease-in-out',
+        }}>
           {/* HeaderBanner only, AcademiaBanner moved to right sidebar */}
           <HeaderBanner />
         </div>

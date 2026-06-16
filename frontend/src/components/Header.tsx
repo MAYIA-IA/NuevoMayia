@@ -42,7 +42,7 @@ const notificacionesEstaticas: Notification[] = [
 const WhatsappIcon = (props: any) => (
   <img 
     src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" 
-    alt="WhatsApp" 
+    alt="Icono oficial de WhatsApp - Contacto directo con soporte y consultoría MAYiA" 
     style={{ width: props.size || 15, height: props.size || 15, objectFit: 'contain', display: 'block' }}
   />
 );
@@ -58,6 +58,8 @@ const CONTACTOS = [
     bg: '#25D366',
     hoverBg: '#1ebe5d',
     pulse: true,
+    pulseColor: 'rgba(37,211,102,0.5)',
+    animationName: 'hdr-whatsapp-pulse',
   },
   {
     id: 'email',
@@ -67,7 +69,9 @@ const CONTACTOS = [
     tooltip: 'admin@mayia.mx',
     bg: '#0284c7',
     hoverBg: '#0369a1',
-    pulse: false,
+    pulse: true,
+    pulseColor: 'rgba(2,132,199,0.5)',
+    animationName: 'hdr-email-pulse',
   },
   {
     id: 'phone',
@@ -77,7 +81,9 @@ const CONTACTOS = [
     tooltip: '+52 56 5133 6439',
     bg: '#7c3aed',
     hoverBg: '#6d28d9',
-    pulse: false,
+    pulse: true,
+    pulseColor: 'rgba(124,58,237,0.5)',
+    animationName: 'hdr-phone-pulse',
   },
 ];
 
@@ -85,6 +91,14 @@ const contactCss = `
   @keyframes hdr-whatsapp-pulse {
     0%, 100% { box-shadow: 0 0 0 0 rgba(37,211,102,0.5); }
     50%       { box-shadow: 0 0 0 6px rgba(37,211,102,0); }
+  }
+  @keyframes hdr-email-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(2,132,199,0.5); }
+    50%       { box-shadow: 0 0 0 6px rgba(2,132,199,0); }
+  }
+  @keyframes hdr-phone-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(124,58,237,0.5); }
+    50%       { box-shadow: 0 0 0 6px rgba(124,58,237,0); }
   }
   @keyframes hdr-sparkle {
     0%, 100% { opacity: 1; transform: scale(1) rotate(0deg); }
@@ -343,8 +357,8 @@ export const Header: React.FC<HeaderProps> = ({ title: _title }) => {
                   padding: '7px 13px', borderRadius: '999px',
                   backgroundColor: hovContact === c.id ? c.hoverBg : c.bg,
                   textDecoration: 'none',
-                  boxShadow: c.pulse ? '0 0 0 0 rgba(37,211,102,0.5)' : 'none',
-                  animation: c.pulse ? 'hdr-whatsapp-pulse 2.5s infinite' : 'none',
+                  boxShadow: c.pulse ? `0 0 0 0 ${c.pulseColor}` : 'none',
+                  animation: c.pulse ? `${c.animationName} 2.5s infinite` : 'none',
                 }}
               >
                 <c.icon size={15} color="#ffffff" />
@@ -488,7 +502,7 @@ export const Header: React.FC<HeaderProps> = ({ title: _title }) => {
           >
             <img
               src={mayiaLogo}
-              alt="Perfil"
+              alt="Logotipo de perfil corporativo MAYiA - Plataforma de Inteligencia Artificial"
               style={{ width: '100%', height: '100%', objectFit: 'contain' }}
               onError={e => {
                 const target = e.target as HTMLImageElement;
