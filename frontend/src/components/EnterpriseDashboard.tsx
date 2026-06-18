@@ -640,39 +640,6 @@ function FlaiCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
         />
       </div>
 
-      {/* Stats en una sola línea horizontal (solo letras rojas) */}
-      <div style={{ 
-        display: 'flex', 
-        flexWrap: 'wrap',
-        justifyContent: 'center', 
-        alignItems: 'center',
-        margin: '0 20px 12px',
-        padding: '8px 12px',
-        background: '#F9FAFB',
-        border: '1px solid rgba(0,0,0,0.04)',
-        borderRadius: 10,
-        gap: '6px 12px'
-      }}>
-        {[
-          '100% México',
-          '1era Nube Soberana',
-          '30 CDN'
-        ].map((stat, idx) => (
-          <div 
-            key={idx} 
-            style={{ 
-              fontSize: 9.5,
-              fontWeight: 800, 
-              color: '#991b1b', 
-              whiteSpace: 'nowrap',
-              borderRight: idx < 2 ? '1px solid #E5E7EB' : 'none',
-              paddingRight: idx < 2 ? 12 : 0
-            }}
-          >
-            {stat}
-          </div>
-        ))}
-      </div>
 
       <p style={{ fontSize: 14, color: '#4B5563', lineHeight: 1.5, margin: '0 20px 16px', fontWeight: 500, textAlign: 'justify' }}>
         La primera nube de Inteligencia Artificial soberana de México. Resguarda tus datos dentro del territorio nacional con procesamiento GPU de altísimo rendimiento.
@@ -835,16 +802,8 @@ function SocCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
           <p style={{ margin: 0, fontSize: 10, color: '#4B5563', fontWeight: 600 }}>Miembro</p>
         </div>
         <div style={{ textAlign: 'center' }}>
-          <p style={{ margin: 0, fontSize: 14, fontWeight: 800, color: '#1e3a8a' }}>ISO 27001</p>
-          <p style={{ margin: 0, fontSize: 10, color: '#4B5563', fontWeight: 600 }}>Seguridad</p>
-        </div>
-        <div style={{ textAlign: 'center' }}>
           <p style={{ margin: 0, fontSize: 14, fontWeight: 800, color: '#1e3a8a' }}>ISO 42001</p>
           <p style={{ margin: 0, fontSize: 10, color: '#4B5563', fontWeight: 600 }}>IA</p>
-        </div>
-        <div style={{ textAlign: 'center' }}>
-          <p style={{ margin: 0, fontSize: 14, fontWeight: 800, color: '#22c55e' }}>24/7</p>
-          <p style={{ margin: 0, fontSize: 10, color: '#4B5563', fontWeight: 600 }}>Monitoreo</p>
         </div>
       </div>
 
@@ -867,7 +826,7 @@ function SocCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
             background: 'linear-gradient(135deg, #F9FAFB, #F3F4F6)', borderRadius: 12, padding: 12, marginTop: 8,
             border: '1px solid #E5E7EB', display: 'flex', flexWrap: 'wrap', gap: 6, justifyContent: 'center'
           }}>
-            {['ISO 27034', 'ISO 27017', 'ISO 9001', 'ISO 37001', 'ISO 27018'].map(cert => (
+            {['ISO 27001', 'ISO 27034', 'ISO 27017', 'ISO 9001', 'ISO 37001', 'ISO 27018'].map(cert => (
               <span key={cert} style={{ fontSize: 9, fontWeight: 700, padding: '4px 8px', borderRadius: 99, background: hexToRgba(color, 0.15), color: '#1e3a8a', border: `1px solid ${hexToRgba(color, 0.3)}` }}>
                 {cert}
               </span>
