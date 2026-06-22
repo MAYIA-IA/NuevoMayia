@@ -309,7 +309,7 @@ export const ResponsiveLayout: React.FC<ResponsiveLayoutProps> = ({
               <Sparkles size={16} color={colores.primario} />
             </button>
           )}
-          <a href="https://api.whatsapp.com/send/?phone=525651336439" target="_blank" rel="noopener noreferrer" className="rl-topbar-action-btn" aria-label="WhatsApp">
+          <a href="https://api.whatsapp.com/send/?phone=525562578145" target="_blank" rel="noopener noreferrer" className="rl-topbar-action-btn" aria-label="WhatsApp">
             <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style={{ width: 16, height: 16 }} />
           </a>
           {sidebarR && (
@@ -472,7 +472,7 @@ export const ResponsiveLayout: React.FC<ResponsiveLayoutProps> = ({
               justifyContent: 'space-around',
               gap: '8px'
             }}>
-              <a href="https://api.whatsapp.com/send/?phone=525651336439" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '6px', textDecoration: 'none', color: '#25D366', fontSize: '12px', fontWeight: 'bold' }}>
+              <a href="https://api.whatsapp.com/send/?phone=525562578145" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '6px', textDecoration: 'none', color: '#25D366', fontSize: '12px', fontWeight: 'bold' }}>
                 <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style={{ width: 16, height: 16 }} />
                 <span>WhatsApp</span>
               </a>
@@ -480,7 +480,7 @@ export const ResponsiveLayout: React.FC<ResponsiveLayoutProps> = ({
                 <Mail size={16} />
                 <span>Email</span>
               </a>
-              <a href="tel:+525651336439" style={{ display: 'flex', alignItems: 'center', gap: '6px', textDecoration: 'none', color: '#7c3aed', fontSize: '12px', fontWeight: 'bold' }}>
+              <a href="tel:+525562578145" style={{ display: 'flex', alignItems: 'center', gap: '6px', textDecoration: 'none', color: '#7c3aed', fontSize: '12px', fontWeight: 'bold' }}>
                 <Phone size={16} />
                 <span>Llamar</span>
               </a>

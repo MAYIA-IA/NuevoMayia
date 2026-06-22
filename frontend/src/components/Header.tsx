@@ -51,10 +51,10 @@ const WhatsappIcon = (props: any) => (
 const CONTACTOS = [
   {
     id: 'whatsapp',
-    href: 'https://api.whatsapp.com/send/?phone=525651336439',
+    href: 'https://api.whatsapp.com/send/?phone=525562578145',
     icon: WhatsappIcon,
     label: 'WhatsApp',
-    tooltip: '+52 56 5133 6439',
+    tooltip: '+52 55 6257 8145',
     bg: '#25D366',
     hoverBg: '#1ebe5d',
     pulse: true,
@@ -75,10 +75,10 @@ const CONTACTOS = [
   },
   {
     id: 'phone',
-    href: 'tel:+525651336439',
+    href: 'tel:+525562578145',
     icon: Phone,
     label: 'Llamar',
-    tooltip: '+52 56 5133 6439',
+    tooltip: '+52 55 6257 8145',
     bg: '#7c3aed',
     hoverBg: '#6d28d9',
     pulse: true,
