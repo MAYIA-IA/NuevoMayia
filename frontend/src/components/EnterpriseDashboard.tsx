@@ -145,7 +145,7 @@ const LazyVideo = forwardRef<HTMLVideoElement, any>(({ src, videoSrc, children, 
   );
 });
 
-const CATEGORIES = ['Infraestructura', 'Desarrollo', 'Modelos', 'Agentes', 'Operación', 'Monitoreo', 'Capacitación'];// --- SUB-COMPONENTE: EdgenetCard ("Fábrica para tu IA Privada") ---
+const CATEGORIES = ['Todos', 'Infraestructura', 'Desarrollo', 'Modelos', 'Agentes', 'Operación', 'Monitoreo', 'Capacitación'];// --- SUB-COMPONENTE: EdgenetCard ("Fábrica para tu IA Privada") ---
 function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOpenMap?: () => void; onOpenFabricaInfo?: () => void; onOpenDiagnostico?: () => void }) {
   const [isHovered, setIsHovered] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -1882,7 +1882,6 @@ function RoiCard() {
           {[
             {
               title: "Valor Total de Oportunidad (TVO)",
-              desc: "Identificamos y cuantificamos el valor económico potencial de cada iniciativa de IA antes de invertir.",
               icon: Target,
               color: '#1d4ed8',
               bg: 'rgba(29, 78, 216, 0.08)',
@@ -1890,7 +1889,6 @@ function RoiCard() {
             },
             {
               title: "ROI y Caso de Negocio",
-              desc: "Construimos un caso financiero sólido que demuestra beneficios, costos, riesgos y retorno esperado.",
               icon: FileText,
               color: '#16a34a',
               bg: 'rgba(22, 163, 74, 0.08)',
@@ -1898,7 +1896,6 @@ function RoiCard() {
             },
             {
               title: "Priorización Estratégica",
-              desc: "Comparamos y clasificamos proyectos de IA según su impacto en crecimiento, margen, flujo y ventaja competitiva.",
               icon: TrendingUp,
               color: '#9333ea',
               bg: 'rgba(147, 51, 234, 0.08)',
@@ -1906,7 +1903,6 @@ function RoiCard() {
             },
             {
               title: "Decisiones para Dirección",
-              desc: "Proporcionamos información clara para que CEO, CFO, CIO y CTO tomen decisiones basadas en valor y no en supuestos.",
               icon: Users,
               color: '#ea580c',
               bg: 'rgba(234, 88, 12, 0.08)',
@@ -1924,7 +1920,7 @@ function RoiCard() {
                   padding: 10,
                   display: 'flex',
                   flexDirection: 'column',
-                  gap: 6,
+                  justifyContent: 'center',
                   boxShadow: '0 2px 4px rgba(0,0,0,0.01)'
                 }}
               >
@@ -1945,7 +1941,7 @@ function RoiCard() {
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
                     <h4 style={{
                       margin: 0,
-                      fontSize: 8.5,
+                      fontSize: 9.5,
                       fontWeight: 800,
                       color: '#111827',
                       lineHeight: 1.1
@@ -1960,16 +1956,6 @@ function RoiCard() {
                     }} />
                   </div>
                 </div>
-                <p style={{
-                  margin: 0,
-                  fontSize: 8,
-                  color: '#4B5563',
-                  lineHeight: 1.3,
-                  fontWeight: 500,
-                  textAlign: 'justify'
-                }}>
-                  {subCard.desc}
-                </p>
               </div>
             );
           })}
@@ -2736,7 +2722,7 @@ function AcademiaCard() {
 
 // --- COMPONENTE PRINCIPAL ---
 export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenFabricaInfo, onOpenDiagnostico, onOpenLakehouseInfo, onOpenSquadsInfo }: { onOpenMap?: () => void, onOpenFlaiInfo?: () => void, onOpenFabricaInfo?: () => void, onOpenDiagnostico?: () => void, onOpenLakehouseInfo?: () => void, onOpenSquadsInfo?: () => void }) {
-  const [activeTab, setActiveTab] = useState('Infraestructura');
+  const [activeTab, setActiveTab] = useState('Todos');
 
   const Wrapper = ({ category, children }: { category: string, children: React.ReactNode }) => {
     const isMatch = activeTab === category;
@@ -2958,7 +2944,7 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
           </Wrapper>
 
           <Wrapper category="Infraestructura">
-            <SocCard onOpenInfo={() => alert('Sección de Más Información CyberPeace SOC en construcción.')} />
+            <RoiCard />
           </Wrapper>
 
           <Wrapper category="Infraestructura">
@@ -2971,21 +2957,41 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
             />
           </Wrapper>
 
-          <Wrapper category="Infraestructura">
-            <RoiCard />
-          </Wrapper>
-
-          {/* --- CATEGORIA: Desarrollo --- */}
-          <Wrapper category="Desarrollo">
-            <MayiaCard onOpenInfo={onOpenLakehouseInfo} />
-          </Wrapper>
-
           <Wrapper category="Desarrollo">
             <SquadsMayiaCard onOpenInfo={onOpenSquadsInfo} />
           </Wrapper>
 
           <Wrapper category="Desarrollo">
             <IAEmpresarialCard />
+          </Wrapper>
+
+          <Wrapper category="Infraestructura">
+            <SocCard onOpenInfo={() => alert('Sección de Más Información CyberPeace SOC en construcción.')} />
+          </Wrapper>
+
+          <Wrapper category="Monitoreo">
+            <StandardCard 
+              icon={FileText} 
+              color="#f87171" 
+              bg="rgba(248,113,113,0.15)" 
+              title="Monitoreo de Modelos IA" 
+              desc="Supervisa el desempeño de tus modelos, automatizaciones y agentes inteligentes en tiempo real. Detecta fallas, mide resultados y mejora continuamente tus soluciones de IA." 
+              videoSrc="/assets/images/productos/deteccionAnomalias.webm"
+              stats={[
+                { value: "Real-Time", label: "Latencia & Drift" },
+                { value: "Mailing", label: "Alertas Activas" },
+                { value: "ISO 42001", label: "Gobernanza IA" }
+              ]}
+              videoOverlay={
+                <div style={{ position: 'absolute', top: 10, left: 10, background: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(4px)', padding: '4px 10px', borderRadius: 20, fontSize: 10, fontWeight: 700, color: '#f87171', border: '1px solid rgba(248,113,113,0.2)' }}>
+                  📈 MLOps Monitor Active
+                </div>
+              }
+            />
+          </Wrapper>
+
+          <Wrapper category="Desarrollo">
+            <MayiaCard onOpenInfo={onOpenLakehouseInfo} />
           </Wrapper>
 
           <Wrapper category="Desarrollo">
@@ -3036,7 +3042,7 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
               color="#f87171" 
               bg="rgba(248,113,113,0.15)" 
               title="Desarrollo IA Estatal" 
-              desc="Modernizamos servicios públicos, superamos la atención ciudadana y toma decisiones en tiempo real basadas en datos abiertos con soluciones de IA diseñadas para instituciones gubernamentales." 
+              desc="Modernizamos servicios públicos, superamos la atención ciudadana y toma decisiones en tiempo real basadas en datos abiertos con soluciones de IA diseñadas para institutions gubernamentales." 
               stats={[
                 { value: "100k+", label: "Ciudadanos Activos" },
                 { value: "24/7", label: "Servicios Digitales" },
@@ -3102,29 +3108,6 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
             />
           </Wrapper>
 
-          {/* --- CATEGORIA: Monitoreo --- */}
-          <Wrapper category="Monitoreo">
-            <StandardCard 
-              icon={FileText} 
-              color="#f87171" 
-              bg="rgba(248,113,113,0.15)" 
-              title="Monitoreo de Modelos IA" 
-              desc="Supervisa el desempeño de tus modelos, automatizaciones y agentes inteligentes en tiempo real. Detecta fallas, mide resultados y mejora continuamente tus soluciones de IA." 
-              videoSrc="/assets/images/productos/deteccionAnomalias.webm"
-              stats={[
-                { value: "Real-Time", label: "Latencia & Drift" },
-                { value: "Mailing", label: "Alertas Activas" },
-                { value: "ISO 42001", label: "Gobernanza IA" }
-              ]}
-              videoOverlay={
-                <div style={{ position: 'absolute', top: 10, left: 10, background: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(4px)', padding: '4px 10px', borderRadius: 20, fontSize: 10, fontWeight: 700, color: '#f87171', border: '1px solid rgba(248,113,113,0.2)' }}>
-                  📈 MLOps Monitor Active
-                </div>
-              }
-            />
-          </Wrapper>
-
-          {/* --- CATEGORIA: Capacitación --- */}
           <Wrapper category="Capacitación">
             <AcademiaCard />
           </Wrapper>
