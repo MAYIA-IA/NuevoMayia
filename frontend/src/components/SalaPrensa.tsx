@@ -144,12 +144,12 @@ const SalaPrensa = () => {
                     admin@mayia.mx
                   </div>
                 </a>
-                <a href="tel:+525562578145" className="flex items-center gap-4 group cursor-pointer">
+                <a href="tel:+525553315526" className="flex items-center gap-4 group cursor-pointer">
                   <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center shrink-0 group-hover:bg-lime-50 group-hover:text-lime-500 transition-colors">
                     <Phone size={18} />
                   </div>
                   <div className="text-sm font-semibold text-gray-700 group-hover:text-lime-600 transition-colors">
-                    +52 55 6257 8145
+                    +52 55 5331 5526
                   </div>
                 </a>
               </div>

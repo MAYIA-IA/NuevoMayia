@@ -1,7 +1,7 @@
 import hechoEnMexicoLogo from '../assets/logosNativos/hechoEnMexicoRed.webp';
 
 export default function BrandFooter() {
-  const whatsappNumber = '+525562578145';
+  const whatsappNumber = '+525553315526';
   const whatsappLink = `https://wa.me/${whatsappNumber.replace(/\+/g, '')}`;
 
   return (

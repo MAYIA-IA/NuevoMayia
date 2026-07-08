@@ -125,7 +125,7 @@ PRÓXIMO EVENTO:
 - Si preguntan por eventos, webinars o actividades próximas, menciona este evento e invita a reservar lugar.
 
 CONTACTO:
-- WhatsApp: +52 55 6257 8145
+- WhatsApp: +52 55 5331 5526
 - Ubicación: Ciudad de México, México
 
 ${contexto && contexto.length > 0 ? `\n📊 DATOS ESPECÍFICOS DE LA BASE DE DATOS:\n${JSON.stringify(contexto, null, 2)}\n` : ''}
