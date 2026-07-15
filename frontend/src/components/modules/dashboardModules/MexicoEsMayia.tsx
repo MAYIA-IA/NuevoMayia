@@ -94,8 +94,18 @@ function getStateColor(id: string, hovered: boolean, selected: boolean, filtroZo
   return zona ? zona[1].color : '#E5E7EB'; // Color caricatura brillante por defecto
 }
 
-export const MexicoEsMayia: React.FC = () => {
-  const [selectedEstado, setSelectedEstado] = useState<string | null>(null);
+interface MexicoEsMayiaProps {
+  onlyMap?: boolean;
+  onStateClick?: (stateId: string) => void;
+  initialSelectedEstado?: string | null;
+}
+
+export const MexicoEsMayia: React.FC<MexicoEsMayiaProps> = ({
+  onlyMap = false,
+  onStateClick,
+  initialSelectedEstado = null,
+}) => {
+  const [selectedEstado, setSelectedEstado] = useState<string | null>(initialSelectedEstado);
   const [hoveredEstado, setHoveredEstado] = useState<string | null>(null);
   const [filtroZona, setFiltroZona] = useState('Todos');
   const [tooltip, setTooltip] = useState<{ x: number; y: number; id: string } | null>(null);
@@ -103,6 +113,10 @@ export const MexicoEsMayia: React.FC = () => {
   
   const [centroids, setCentroids] = useState<Record<string, { x: number, y: number }>>({});
   const pathRefs = useRef<Record<string, SVGPathElement | null>>({});
+
+  useEffect(() => {
+    setSelectedEstado(initialSelectedEstado);
+  }, [initialSelectedEstado]);
 
   useEffect(() => {
     const calcCentroids = () => {
@@ -128,6 +142,134 @@ export const MexicoEsMayia: React.FC = () => {
   }, []);
 
   const detalle = selectedEstado ? estadosData[selectedEstado] : null;
+
+  if (onlyMap) {
+    // Orden para la conexión de red (Norte a Sur)
+    const connectionOrder = [
+      'MX_BC', 'MX_BS', 'MX_SO', 'MX_CH', 'MX_SI', 'MX_DG', 'MX_CO', 'MX_NL', 'MX_TM', 
+      'MX_ZA', 'MX_SL', 'MX_AG', 'MX_NA', 'MX_JA', 'MX_GT', 'MX_QT', 'MX_HG', 'MX_MI', 
+      'MX_EM', 'MX_DF', 'MX_TL', 'MX_PU', 'MX_MO', 'MX_GR', 'MX_VE', 'MX_OA', 'MX_TB', 
+      'MX_CS', 'MX_CM', 'MX_YU', 'MX_QR'
+    ];
+    return (
+      <div style={{ position: 'relative', width: '100%', maxWidth: '420px', margin: '0 auto' }}>
+        {tooltip && estadosData[tooltip.id] && (
+          <div style={{
+            position: 'absolute',
+            left: tooltip.x + 12,
+            top: tooltip.y - 36,
+            background: '#ffffff',
+            color: '#1a1a1a',
+            padding: '8px 14px',
+            borderRadius: '12px',
+            fontSize: '13px',
+            fontWeight: '800',
+            pointerEvents: 'none',
+            zIndex: 10,
+            whiteSpace: 'nowrap',
+            boxShadow: '0 8px 24px rgba(0,0,0,0.15), 0 0 0 1px rgba(0,0,0,0.05)',
+          }}>
+            <span style={{ marginRight: '6px' }}>{estadosData[tooltip.id].nombre}</span>
+            <span style={{ color: estadosData[tooltip.id].zonaColor, fontSize: '11px', fontWeight: '600' }}>
+              {estadosData[tooltip.id].zona}
+            </span>
+          </div>
+        )}
+
+        <svg viewBox="0 0 959 593" style={{ width: '100%', height: 'auto', cursor: 'pointer', overflow: 'visible' }}>
+          <defs>
+            <filter id="sf-shadow-card" x="-40%" y="-40%" width="180%" height="180%">
+              <feOffset in="SourceAlpha" dx="0" dy="14" result="offset" />
+              <feGaussianBlur in="offset" stdDeviation="14" result="blurShadow" />
+              <feFlood floodColor="#000000" floodOpacity="0.75" result="shadowColor" />
+              <feComposite in="shadowColor" in2="blurShadow" operator="in" result="darkShadow" />
+              <feMerge>
+                <feMergeNode in="darkShadow" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+            <filter id="sf-glow-card" x="-60%" y="-60%" width="220%" height="220%">
+              <feGaussianBlur stdDeviation="18" result="blur" />
+            </filter>
+          </defs>
+
+          {mexicoEstadosPaths.map(({ id, path }) => {
+            const data = estadosData[id];
+            if (!data) return null;
+            const hovered = hoveredEstado === id;
+            const fill = getStateColor(id, hovered, false, filtroZona);
+            return (
+              <path
+                key={id}
+                ref={(el) => { pathRefs.current[id] = el; }}
+                d={path}
+                fill={fill}
+                stroke={'#ffffff'}
+                strokeWidth="2"
+                style={{
+                  transition: 'fill 0.22s ease, stroke 0.22s ease',
+                  cursor: 'pointer',
+                }}
+                onMouseEnter={(e) => {
+                  setHoveredEstado(id);
+                  const rect = (e.currentTarget.closest('div') as HTMLElement).getBoundingClientRect();
+                  setTooltip({ x: e.clientX - rect.left, y: e.clientY - rect.top, id });
+                }}
+                onMouseMove={(e) => {
+                  const rect = (e.currentTarget.closest('div') as HTMLElement).getBoundingClientRect();
+                  setTooltip({ x: e.clientX - rect.left, y: e.clientY - rect.top, id });
+                }}
+                onMouseLeave={() => { setHoveredEstado(null); setTooltip(null); }}
+                onClick={() => onStateClick?.(id)}
+              />
+            );
+          })}
+
+          {/* Red de nodos futuristas interconectados */}
+          {Object.keys(centroids).length > 0 && (
+            <g>
+              <path
+                d={connectionOrder.map((id, index) => {
+                  const p = centroids[id];
+                  if (!p) return '';
+                  return `${index === 0 ? 'M' : 'L'} ${p.x} ${p.y}`;
+                }).join(' ')}
+                fill="none"
+                stroke={colores.primarioOscuro}
+                strokeWidth="3"
+                strokeDasharray="10 10"
+                className="network-line-animation"
+                style={{ pointerEvents: 'none', filter: 'drop-shadow(0 0 6px rgba(164,217,85,0.8))' }}
+              />
+              
+              {Object.entries(centroids).map(([id, p]) => (
+                <circle
+                  key={`node-${id}`}
+                  cx={p.x}
+                  cy={p.y}
+                  r="5"
+                  fill="#ffffff"
+                  stroke={colores.primarioOscuro}
+                  strokeWidth="3"
+                  style={{ pointerEvents: 'none', filter: 'drop-shadow(0 0 8px rgba(164,217,85,0.7))' }}
+                />
+              ))}
+            </g>
+          )}
+        </svg>
+
+        <style>{`
+          @keyframes dataFlow {
+            from { stroke-dashoffset: 40; }
+            to { stroke-dashoffset: 0; }
+          }
+          .network-line-animation {
+            animation: dataFlow 1s linear infinite;
+          }
+        `}</style>
+      </div>
+    );
+  }
 
   // Orden para la conexión de red (Norte a Sur)
   const connectionOrder = [
