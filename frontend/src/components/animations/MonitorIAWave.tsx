@@ -1,4 +1,6 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
+import { useIntersectionObserver } from '../../utils/useIntersectionObserver';
+import { useViewport } from '../../utils/useViewport';
 
 export default function MonitorIAWave() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -10,6 +12,14 @@ export default function MonitorIAWave() {
 
   const [isListening, setIsListening] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  const isIntersecting = useIntersectionObserver(canvasRef);
+  const { width } = useViewport();
+  const isIntersectingRef = useRef(isIntersecting);
+
+  useEffect(() => {
+    isIntersectingRef.current = isIntersecting;
+  }, [isIntersecting]);
 
   const initAudio = useCallback(async () => {
     try {
@@ -52,6 +62,7 @@ export default function MonitorIAWave() {
   }, []);
 
   const draw = useCallback(() => {
+    if (!isIntersectingRef.current) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
@@ -72,7 +83,7 @@ export default function MonitorIAWave() {
     const dataArray = dataArrayRef.current;
 
     if (isListening && analyser && dataArray) {
-      analyser.getByteTimeDomainData(dataArray);
+      analyser.getByteTimeDomainData(dataArray as any);
       const sliceWidth = w / dataArray.length;
       let x = 0;
 
@@ -115,21 +126,20 @@ export default function MonitorIAWave() {
   };
 
   useEffect(() => {
+    if (!isIntersecting) {
+      cleanup();
+      return;
+    }
     animationIdRef.current = requestAnimationFrame(draw);
     return () => cleanup();
-  }, [draw, cleanup]);
+  }, [draw, cleanup, isIntersecting]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const resize = () => {
-      canvas.width = canvas.clientWidth;
-      canvas.height = canvas.clientHeight;
-    };
-    resize();
-    window.addEventListener('resize', resize);
-    return () => window.removeEventListener('resize', resize);
-  }, []);
+    canvas.width = canvas.clientWidth;
+    canvas.height = canvas.clientHeight;
+  }, [width]);
 
   return (
     <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden' }}>
