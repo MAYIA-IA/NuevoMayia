@@ -62,7 +62,7 @@ const AcademiaIA = () => {
             </div>
           </div>
 
-          <div className="flex sm:flex-col items-center sm:items-end justify-between w-full sm:w-auto relative z-10 shrink-0 gap-2">
+          <div className="flex flex-row gap-2 mt-1 sm:mt-0 sm:flex-col items-center sm:items-end w-auto relative z-10 shrink-0">
             <span className={`text-[9px] px-2 py-1 rounded-md font-bold border ${getNivelColor(curso.nivel)} uppercase tracking-wider whitespace-nowrap`}>{curso.nivel}</span>
             <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-gray-500 bg-gray-50 px-2 py-1 rounded-md border border-gray-100 whitespace-nowrap">
               <Clock size={12} className="group-hover:rotate-12 transition-transform duration-300 text-lime-500 shrink-0" /> {curso.duracion}
