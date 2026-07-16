@@ -1,8 +1,13 @@
 import { useRef, useEffect } from 'react';
+import { useIntersectionObserver } from '../../utils/useIntersectionObserver';
+import { useViewport } from '../../utils/useViewport';
 
 export default function Agencia33Graph() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationIdRef = useRef<number>(0);
+  const isIntersecting = useIntersectionObserver(canvasRef);
+  const { isMobile, width } = useViewport();
+
   const nodesRef = useRef([
     { id: 'n1', label: 'IA', x: 0.25, y: 0.3, radius: 14, color: '#93c5fd' },
     { id: 'n2', label: 'Agentes', x: 0.5, y: 0.2, radius: 16, color: '#60a5fa' },
@@ -24,6 +29,8 @@ export default function Agencia33Graph() {
   ]);
 
   useEffect(() => {
+    if (!isIntersecting) return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
@@ -41,6 +48,8 @@ export default function Agencia33Graph() {
       }
     };
     resize();
+
+    const shadow = isMobile ? 0 : 3;
 
     const animate = () => {
       resize();
@@ -80,7 +89,7 @@ export default function Agencia33Graph() {
         ctx.arc(px, py, 3, 0, Math.PI * 2);
         ctx.fillStyle = '#ffffff';
         ctx.shadowColor = '#60a5fa';
-        ctx.shadowBlur = 6;
+        ctx.shadowBlur = shadow;
         ctx.fill();
         ctx.shadowBlur = 0;
 
@@ -94,7 +103,7 @@ export default function Agencia33Graph() {
         ctx.arc(curr.curX, curr.curY, node.radius, 0, Math.PI * 2);
         ctx.fillStyle = node.color;
         ctx.shadowColor = '#60a5fa';
-        ctx.shadowBlur = 8;
+        ctx.shadowBlur = shadow * 1.33;
         ctx.fill();
         ctx.shadowBlur = 0;
 
@@ -114,7 +123,7 @@ export default function Agencia33Graph() {
 
     animate();
     return () => cancelAnimationFrame(animationIdRef.current);
-  }, []);
+  }, [isIntersecting, width, isMobile]);
 
   return <canvas ref={canvasRef} style={{ width: '100%', height: '100%', display: 'block' }} />;
 }
