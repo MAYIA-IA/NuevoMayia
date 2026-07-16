@@ -87,13 +87,10 @@ const useIsMobile = () => {
 const LazyVideo = forwardRef<HTMLVideoElement, any>(({ src, videoSrc, children, accentColor, ...props }, ref) => {
   const [shouldLoad, setShouldLoad] = useState(false);
   const internalRef = useRef<HTMLVideoElement>(null);
-  const isMobile = useIsMobile();
 
   useImperativeHandle(ref, () => internalRef.current!);
 
   useEffect(() => {
-    if (isMobile) return;
-
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -113,45 +110,20 @@ const LazyVideo = forwardRef<HTMLVideoElement, any>(({ src, videoSrc, children, 
     return () => {
       observer.disconnect();
     };
-  }, [isMobile]);
-
-  if (isMobile) {
-    const colorFinal = accentColor || '#A4D955';
-    return (
-      <div 
-        ref={internalRef as any}
-        style={{ 
-          width: '100%', 
-          height: '100%', 
-          background: 'linear-gradient(135deg, #090e1a 0%, #151d30 100%)', 
-          display: 'flex', 
-          alignItems: 'center', 
-          justifyContent: 'center',
-          position: 'relative',
-          overflow: 'hidden'
-        }}
-      >
-        <motion.div 
-          animate={{ scale: [0.9, 1.15], opacity: [0.7, 1] }}
-          transition={{ duration: 2.5, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
-          style={{
-            position: 'absolute',
-            width: '120px',
-            height: '120px',
-            borderRadius: '50%',
-            background: `radial-gradient(circle, ${hexToRgba(colorFinal, 0.25)} 0%, rgba(0,0,0,0) 70%)`,
-            filter: 'blur(8px)',
-          }}
-        />
-        <span style={{ fontSize: 28, opacity: 0.25, filter: 'drop-shadow(0 0 8px ' + colorFinal + ')' }}></span>
-      </div>
-    );
-  }
+  }, []);
 
   const actualSrc = src || videoSrc;
 
   return (
-    <video ref={internalRef} {...props}>
+    <video 
+      ref={internalRef} 
+      autoPlay 
+      muted 
+      loop 
+      playsInline 
+      preload="metadata" 
+      {...props}
+    >
       {shouldLoad && (
         children ? children : <source src={actualSrc} type={actualSrc?.endsWith('.webm') ? 'video/webm' : 'video/mp4'} />
       )}
@@ -163,6 +135,7 @@ const CATEGORIES = ['Todos', 'Infraestructura', 'Desarrollo', 'Modelos', 'Agente
 function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOpenMap?: () => void; onOpenFabricaInfo?: () => void; onOpenDiagnostico?: () => void }) {
   const [isHovered, setIsHovered] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const isMobile = useIsMobile();
   const color = '#60a5fa';
   const theme = getPastelTheme(color);
   
@@ -406,7 +379,7 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOp
         </p>
 
         {/* 3 buttons grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8, margin: '0 20px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: 8, margin: '0 20px' }}>
           <button
             onClick={(e) => {
               e.stopPropagation();
@@ -875,11 +848,11 @@ function SocCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
   );
 }
 
-// --- SUB-COMPONENTE: MayiaCard (MAYiA Lake / IA para Empresas) ---
 function MayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
   const [isHovered, setIsHovered] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [showInfoModal, setShowInfoModal] = useState(false);
+  const isMobile = useIsMobile();
   const color = '#bef264';
   const theme = getPastelTheme(color);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -1010,79 +983,163 @@ function MayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
         {/* Overlays en el video removidos */}
       </div>
 
-      {/* Diagrama de flujo de datos - Cuadrícula Justificada y Ordenada */}
-      <div style={{ 
-        display: 'grid', 
-        gridTemplateColumns: '1fr auto 1fr auto 1fr', 
-        gap: '10px 6px', 
-        margin: '0 20px 16px',
-        alignItems: 'center',
-        background: 'transparent'
-      }}>
-        {[
-          ['Ingesta', 'Recolección', 'Almacenamiento'],
-          ['Cómputo', 'Consumo', 'Linaje']
-        ].map((row, rIdx) => (
-          <Fragment key={rIdx}>
-            {row.map((txt, idx) => (
-              <Fragment key={txt}>
-                <div style={{ 
-                  background: '#111827', 
-                  color: '#ffffff', 
-                  borderRadius: 6, 
-                  padding: '6px 4px', 
-                  fontSize: 8.5, 
-                  fontWeight: 800, 
-                  textAlign: 'center', 
-                  letterSpacing: '0.02em',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  lineHeight: 1.1,
-                  whiteSpace: 'nowrap',
-                  boxShadow: '0 2px 4px rgba(0,0,0,0.08)'
-                }}>
-                  {txt}
-                </div>
-                {idx < 2 ? (
-                  <span style={{ 
-                    color: color, 
-                    fontWeight: 900, 
-                    fontSize: 12,
-                    userSelect: 'none',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                  }}>
-                    →
-                  </span>
-                ) : null}
-              </Fragment>
-            ))}
-          </Fragment>
-        ))}
-        {/* Último elemento centrado ocupando toda la fila */}
-        <div style={{ gridColumn: 'span 5', display: 'flex', justifyContent: 'center', marginTop: 2 }}>
-          <div style={{ 
-            background: '#111827', 
-            color: '#ffffff', 
-            borderRadius: 6, 
-            padding: '6px 16px', 
-            fontSize: 8.5, 
-            fontWeight: 800, 
-            textAlign: 'center', 
-            letterSpacing: '0.02em',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            lineHeight: 1.1,
-            whiteSpace: 'nowrap',
-            boxShadow: '0 2px 4px rgba(0,0,0,0.08)'
-          }}>
-            Calidad de Datos
+      {/* Diagrama de flujo de datos - Responsivo y Ordenado */}
+      {isMobile ? (
+        <div style={{ 
+          display: 'grid', 
+          gridTemplateColumns: 'repeat(2, 1fr)', 
+          gap: '8px', 
+          margin: '0 20px 16px',
+          background: 'transparent'
+        }}>
+          {[
+            { step: '1', name: 'Ingesta' },
+            { step: '2', name: 'Recolección' },
+            { step: '3', name: 'Almacenamiento' },
+            { step: '4', name: 'Cómputo' },
+            { step: '5', name: 'Consumo' },
+            { step: '6', name: 'Linaje' }
+          ].map((item) => (
+            <div 
+              key={item.step} 
+              style={{ 
+                background: '#111827', 
+                color: '#ffffff', 
+                borderRadius: 8, 
+                padding: '8px 6px', 
+                fontSize: 10, 
+                fontWeight: 800, 
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'flex-start',
+                gap: '8px',
+                boxShadow: '0 2px 4px rgba(0,0,0,0.08)'
+              }}
+            >
+              <span style={{ 
+                background: color, 
+                color: '#111827', 
+                borderRadius: '50%', 
+                width: '18px', 
+                height: '18px', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                fontSize: 9,
+                fontWeight: 900
+              }}>
+                {item.step}
+              </span>
+              <span>{item.name}</span>
+            </div>
+          ))}
+          <div style={{ gridColumn: 'span 2', display: 'flex', justifyContent: 'center', marginTop: 4 }}>
+            <div style={{ 
+              background: '#111827', 
+              color: '#ffffff', 
+              borderRadius: 8, 
+              padding: '8px 16px', 
+              fontSize: 10, 
+              fontWeight: 800, 
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '8px',
+              width: '100%',
+              boxShadow: '0 2px 4px rgba(0,0,0,0.08)'
+            }}>
+              <span style={{ 
+                background: color, 
+                color: '#111827', 
+                borderRadius: '50%', 
+                width: '18px', 
+                height: '18px', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                fontSize: 9,
+                fontWeight: 900
+              }}>
+                7
+              </span>
+              <span>Calidad de Datos</span>
+            </div>
           </div>
         </div>
-      </div>
+      ) : (
+        <div style={{ 
+          display: 'grid', 
+          gridTemplateColumns: '1fr auto 1fr auto 1fr', 
+          gap: '10px 6px', 
+          margin: '0 20px 16px',
+          alignItems: 'center',
+          background: 'transparent'
+        }}>
+          {[
+            ['Ingesta', 'Recolección', 'Almacenamiento'],
+            ['Cómputo', 'Consumo', 'Linaje']
+          ].map((row, rIdx) => (
+            <Fragment key={rIdx}>
+              {row.map((txt, idx) => (
+                <Fragment key={txt}>
+                  <div style={{ 
+                    background: '#111827', 
+                    color: '#ffffff', 
+                    borderRadius: 6, 
+                    padding: '6px 4px', 
+                    fontSize: 8.5, 
+                    fontWeight: 800, 
+                    textAlign: 'center', 
+                    letterSpacing: '0.02em',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    lineHeight: 1.1,
+                    whiteSpace: 'nowrap',
+                    boxShadow: '0 2px 4px rgba(0,0,0,0.08)'
+                  }}>
+                    {txt}
+                  </div>
+                  {idx < 2 ? (
+                    <span style={{ 
+                      color: color, 
+                      fontWeight: 900, 
+                      fontSize: 12,
+                      userSelect: 'none',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center'
+                    }}>
+                      →
+                    </span>
+                  ) : null}
+                </Fragment>
+              ))}
+            </Fragment>
+          ))}
+          {/* Último elemento centrado ocupando toda la fila */}
+          <div style={{ gridColumn: 'span 5', display: 'flex', justifyContent: 'center', marginTop: 2 }}>
+            <div style={{ 
+              background: '#111827', 
+              color: '#ffffff', 
+              borderRadius: 6, 
+              padding: '6px 16px', 
+              fontSize: 8.5, 
+              fontWeight: 800, 
+              textAlign: 'center', 
+              letterSpacing: '0.02em',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              lineHeight: 1.1,
+              whiteSpace: 'nowrap',
+              boxShadow: '0 2px 4px rgba(0,0,0,0.08)'
+            }}>
+              Calidad de Datos
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Descripción */}
       <p style={{ 
@@ -1461,6 +1518,7 @@ function IAEmpresarialCard() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [hoveredFeature, setHoveredFeature] = useState<number | null>(null);
   const [hoveredService, setHoveredService] = useState<number | null>(null);
+  const isMobile = useIsMobile();
 
   const BLUE = '#2563eb';
   const color = '#60a5fa';
@@ -1629,7 +1687,7 @@ function IAEmpresarialCard() {
       <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 20 }}>
 
         {/* 4 servicios principales */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 6 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)', gap: 6 }}>
           {topServices.map((svc, i) => {
             const IconComp = svc.icon;
             const active = hoveredService === i;
@@ -1660,15 +1718,29 @@ function IAEmpresarialCard() {
         </div>
 
         {/* 7 sub-servicios */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: 4, paddingTop: 8, borderTop: '1px solid #E5E7EB' }}>
+        <div style={{ 
+          display: 'flex', 
+          flexWrap: 'wrap', 
+          gap: '8px 12px', 
+          justifyContent: 'center', 
+          paddingTop: 8, 
+          borderTop: '1px solid #E5E7EB' 
+        }}>
           {subServices.map((sub, i) => {
             const IconComp = sub.icon;
             return (
-              <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3 }}>
+              <div key={i} style={{ 
+                display: 'flex', 
+                flexDirection: 'column', 
+                alignItems: 'center', 
+                gap: 3,
+                width: isMobile ? 'calc(25% - 12px)' : 'calc(14.28% - 4px)',
+                minWidth: isMobile ? '60px' : 'auto'
+              }}>
                 <div style={{ width: 26, height: 26, borderRadius: 7, background: hexToRgba(color, 0.15), display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <IconComp size={12} color={BLUE} />
                 </div>
-                <p style={{ margin: 0, fontSize: 7, fontWeight: 500, color: '#6B7280', textAlign: 'center', lineHeight: 1.2 }}>{sub.label}</p>
+                <p style={{ margin: 0, fontSize: isMobile ? 8.5 : 7, fontWeight: 500, color: '#6B7280', textAlign: 'center', lineHeight: 1.2 }}>{sub.label}</p>
               </div>
             );
           })}
@@ -2835,6 +2907,7 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
   const [activeTab, setActiveTab] = useState('Todos');
   const [showComputerVisionVideo, setShowComputerVisionVideo] = useState(false);
   const [selectedSolution, setSelectedSolution] = useState<null | { title: string, desc: string, details: string[], icon: any, color: string }>(null);
+  const isMobile = useIsMobile();
 
   const marketplaceSolutions = useMemo(() => [
     {
@@ -3410,9 +3483,12 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
             animate={{ opacity: 1, scale: 1, y: 0 }}
             style={{
               background: '#090d16',
-              borderRadius: 28,
+              borderRadius: isMobile ? 18 : 28,
               maxWidth: 550,
               width: '100%',
+              maxHeight: '90vh',
+              display: 'flex',
+              flexDirection: 'column',
               border: `2px solid ${selectedSolution.color}`,
               boxShadow: `0 25px 50px -12px ${hexToRgba(selectedSolution.color, 0.35)}`,
               overflow: 'hidden',
@@ -3425,8 +3501,9 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
               display: 'flex', 
               justifyContent: 'space-between', 
               alignItems: 'center', 
-              padding: '24px 28px', 
-              borderBottom: '1px solid rgba(255,255,255,0.08)' 
+              padding: isMobile ? '16px 20px' : '24px 28px', 
+              borderBottom: '1px solid rgba(255,255,255,0.08)',
+              flexShrink: 0
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
                 <div style={{ 
@@ -3447,7 +3524,7 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
                   })()}
                 </div>
                 <div>
-                  <h3 style={{ margin: 0, color: '#FFFFFF', fontSize: 20, fontWeight: 800 }}>{selectedSolution.title}</h3>
+                  <h3 style={{ margin: 0, color: '#FFFFFF', fontSize: isMobile ? 18 : 20, fontWeight: 800 }}>{selectedSolution.title}</h3>
                   <p style={{ margin: 0, fontSize: 11, color: selectedSolution.color, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 0.5, marginTop: 2 }}>
                     Implementación de IA
                   </p>
@@ -3467,7 +3544,8 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  transition: 'background 0.2s'
+                  transition: 'background 0.2s',
+                  flexShrink: 0
                 }}
                 onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.12)'}
                 onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.06)'}
@@ -3477,7 +3555,7 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
             </div>
 
             {/* Contenido del Modal */}
-            <div style={{ padding: '28px' }}>
+            <div style={{ padding: isMobile ? '20px' : '28px', overflowY: 'auto', flex: 1 }} className="hide-scrollbar">
               <p style={{ fontSize: 14, color: '#E5E7EB', lineHeight: 1.6, margin: 0, marginBottom: 24, fontWeight: 500 }}>
                 {selectedSolution.desc}
               </p>
@@ -3505,11 +3583,12 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
             
             {/* Footer / Cierre */}
             <div style={{ 
-              padding: '20px 28px', 
+              padding: isMobile ? '16px 20px' : '20px 28px', 
               background: 'rgba(255,255,255,0.02)', 
               display: 'flex', 
               justifyContent: 'flex-end', 
-              borderTop: '1px solid rgba(255,255,255,0.06)' 
+              borderTop: '1px solid rgba(255,255,255,0.06)',
+              flexShrink: 0
             }}>
               <button
                 onClick={() => setSelectedSolution(null)}
