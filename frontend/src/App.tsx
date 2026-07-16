@@ -8,11 +8,15 @@ import { Header } from './components/Header';
 import { brandingConfig } from './config/branding';
 import './responsive.css';
 
+import { useViewport } from './utils/useViewport';
+
 // Componentes críticos (carga estática)
 import CertificacionesMarquee from './components/CertificacionesMarquee';
-import NoticiasTicker from './components/NoticiasTicker';
 import SocialPopover from './components/SocialPopover';
-import CalendarModal from './components/CalendarModal';
+
+// Componentes pesados (carga perezosa)
+const NoticiasTicker = lazy(() => import('./components/NoticiasTicker'));
+const CalendarModal = lazy(() => import('./components/CalendarModal'));
 
 // Componentes pesados (carga perezosa)
 const EnterpriseDashboard = lazy(() => import('./components/EnterpriseDashboard'));
@@ -102,8 +106,9 @@ function App() {
   const [activeSection, setActiveSection] = useState('dashboard');
   const [activeSocialModal, setActiveSocialModal] = useState<string | null>(null);
   const [socialModalYPos, setSocialModalYPos] = useState(0);
+  const [preselectedState, setPreselectedState] = useState<string | null>(null);
   const [globalCalendarPos, setGlobalCalendarPos] = useState<{x: number, y: number} | null>(null);
-  const [isMobile, setIsMobile] = useState(false);
+  const { isMobile } = useViewport();
   const [hideBanner, setHideBanner] = useState(false);
   const { colores } = brandingConfig;
 
@@ -116,33 +121,32 @@ function App() {
     };
   }, []);
 
-  /* ── Detectar mobile ── */
+  /* ── Ocultar banner en scroll (Throttled) ── */
   useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 1024);
-    check();
-    window.addEventListener('resize', check);
-    return () => window.removeEventListener('resize', check);
-  }, []);
-
-  /* ── Ocultar banner en scroll ── */
-  useEffect(() => {
-    const handleScroll = (e: any) => {
+    let lastTime = 0;
+    const handleScroll = () => {
+      const now = Date.now();
+      if (now - lastTime < 100) return;
+      lastTime = now;
       const container = document.getElementById('main-scroll-container');
       if (container) {
-        setHideBanner(container.scrollTop > 20);
+        const shouldHide = container.scrollTop > 20;
+        setHideBanner(prev => {
+          if (prev !== shouldHide) return shouldHide;
+          return prev;
+        });
       }
     };
     window.addEventListener('scroll', handleScroll, true);
     return () => window.removeEventListener('scroll', handleScroll, true);
   }, []);
 
-  /* ── Scroll-spy ── */
+  /* ── Scroll-spy (Reactive MutationObserver) ── */
   useEffect(() => {
     let observer: IntersectionObserver | null = null;
 
     const setupObserver = () => {
       const scrollRoot = isMobile ? null : document.getElementById('main-scroll-container');
-      
       if (!isMobile && !scrollRoot) {
         return false;
       }
@@ -169,14 +173,20 @@ function App() {
       return true;
     };
 
-    const timerId = setInterval(() => {
+    if (setupObserver()) {
+      return () => observer?.disconnect();
+    }
+
+    const mutationObserver = new MutationObserver(() => {
       if (setupObserver()) {
-        clearInterval(timerId);
+        mutationObserver.disconnect();
       }
-    }, 1000);
+    });
+
+    mutationObserver.observe(document.body, { childList: true, subtree: true });
 
     return () => {
-      clearInterval(timerId);
+      mutationObserver.disconnect();
       observer?.disconnect();
     };
   }, [isMobile]);
@@ -212,9 +222,10 @@ function App() {
     }
   };
 
-  const handleOpenSocialModal = (id: string, yPos: number) => {
+  const handleOpenSocialModal = (id: string, yPos: number, stateId?: string) => {
     setSocialModalYPos(yPos);
     setActiveSocialModal(id);
+    setPreselectedState(stateId || null);
   };
 
   const getTitulo = () => {
@@ -250,7 +261,7 @@ function App() {
         {/* 2. Enterprise Dashboard interactivo (Ahora versión compacta y principal) */}
         <div id="dashboard" className="scroll-mt-20">
           <EnterpriseDashboard 
-            onOpenMap={() => handleOpenSocialModal('analiticos', window.innerHeight / 2)} 
+            onOpenMap={(stateId) => handleOpenSocialModal('analiticos', window.innerHeight / 2, stateId)} 
             onOpenFlaiInfo={() => handleOpenSocialModal('flai-info', window.innerHeight / 2)}
             onOpenFabricaInfo={() => handleOpenSocialModal('fabrica-ia', window.innerHeight / 2)}
             onOpenDiagnostico={() => handleOpenSocialModal('diagnostico-empresa', window.innerHeight / 2)}
@@ -359,7 +370,7 @@ function App() {
           {activeSocialModal === 'embajadores' && <EmbajadoresMayia />}
           {activeSocialModal === 'red-ia' && <NetworkingHub />}
           {activeSocialModal === 'temp-ia' && <TermometroIAMexico />}
-          {activeSocialModal === 'analiticos' && <Analiticos />}
+          {activeSocialModal === 'analiticos' && <Analiticos initialSelectedEstado={preselectedState} />}
           {activeSocialModal === 'flai-info' && <FlaiInfoModal />}
           {activeSocialModal === 'fabrica-ia' && <FabricaIaModal />}
           {activeSocialModal === 'lakehouse-info' && <MayiaLakehouseModal />}
@@ -385,7 +396,9 @@ function App() {
             top: window.innerWidth < 600 ? '50%' : `${Math.max(20, Math.min(globalCalendarPos.y, window.innerHeight - 640))}px`,
             transform: window.innerWidth < 600 ? 'translate(-50%, -50%)' : 'none',
           }} onClick={e => e.stopPropagation()}>
-            <CalendarModal onClose={() => setGlobalCalendarPos(null)} />
+            <Suspense fallback={<LoadingSection />}>
+              <CalendarModal onClose={() => setGlobalCalendarPos(null)} />
+            </Suspense>
           </div>
         </div>
       )}
