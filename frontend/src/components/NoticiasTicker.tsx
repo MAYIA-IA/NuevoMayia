@@ -291,6 +291,15 @@ function NewsBlock({ title, items }: { title: string; items: NewsItem[] }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia('(max-width: 768px)');
+    setIsMobile(media.matches);
+    const listener = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    media.addEventListener('change', listener);
+    return () => media.removeEventListener('change', listener);
+  }, []);
 
   useEffect(() => {
     if (!isPaused) {
@@ -336,7 +345,7 @@ function NewsBlock({ title, items }: { title: string; items: NewsItem[] }) {
 
       {/* Main content */}
       <div
-        style={{ display: 'grid', gridTemplateColumns: '1fr 340px', gap: 24 }}
+        style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1.4fr 1fr', gap: 24 }}
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
       >
