@@ -1,10 +1,16 @@
 import { useRef, useEffect } from 'react';
+import { useIntersectionObserver } from '../../utils/useIntersectionObserver';
+import { useViewport } from '../../utils/useViewport';
 
 export default function LumelWaves() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationIdRef = useRef<number>(0);
+  const isIntersecting = useIntersectionObserver(canvasRef);
+  const { isMobile, width } = useViewport();
 
   useEffect(() => {
+    if (!isIntersecting) return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
@@ -38,6 +44,8 @@ export default function LumelWaves() {
     }
 
     let time = 0;
+    const shadowMain = isMobile ? 0 : 3;
+    const shadowPart = isMobile ? 0 : 1;
 
     const animate = () => {
       resize();
@@ -68,7 +76,7 @@ export default function LumelWaves() {
         ctx.stroke();
 
         ctx.shadowColor = layer.color;
-        ctx.shadowBlur = 10;
+        ctx.shadowBlur = shadowMain;
         ctx.stroke();
         ctx.restore();
       });
@@ -86,7 +94,7 @@ export default function LumelWaves() {
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(230, 210, 255, ${p.alpha})`;
         ctx.shadowColor = '#d2b4de';
-        ctx.shadowBlur = 4;
+        ctx.shadowBlur = shadowPart;
         ctx.fill();
         ctx.shadowBlur = 0;
       });
@@ -97,7 +105,7 @@ export default function LumelWaves() {
 
     animate();
     return () => cancelAnimationFrame(animationIdRef.current);
-  }, []);
+  }, [isIntersecting, width, isMobile]);
 
   return <canvas ref={canvasRef} style={{ width: '100%', height: '100%', display: 'block' }} />;
 }
