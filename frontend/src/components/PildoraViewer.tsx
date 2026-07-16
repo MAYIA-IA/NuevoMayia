@@ -113,6 +113,7 @@ export default function PildoraViewer() {
   const mountRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    let isMounted = true;
     const el = mountRef.current;
     if (!el) return;
     const W = el.clientWidth, H = el.clientHeight;
@@ -301,6 +302,7 @@ export default function PildoraViewer() {
       [ 0.12,  RMIN + 0.01,  0.00],   // suelo der
     ];
 
+    let originalModel: THREE.Group | null = null;
     let orbitalRobot: THREE.Group | null = null;
     const ORB_A = 1.20, ORB_B = 0.55, ORB_TILT = 0.55, ORB_SPEED = 0.55, ORB_SCALE = 0.22;
 
@@ -309,6 +311,20 @@ export default function PildoraViewer() {
       ROBOT_SRC,
       (gltf) => {
         const model = gltf.scene;
+        if (!isMounted) {
+          model.traverse((child: any) => {
+            if (child.geometry) child.geometry.dispose();
+            if (child.material) {
+              if (Array.isArray(child.material)) {
+                child.material.forEach((mat: any) => mat.dispose());
+              } else {
+                child.material.dispose();
+              }
+            }
+          });
+          return;
+        }
+        originalModel = model;
         model.traverse((child: THREE.Object3D) => {
           if (child instanceof THREE.Mesh) {
             const mat = child.material as THREE.Material & {
@@ -496,11 +512,42 @@ export default function PildoraViewer() {
     window.addEventListener("resize", onResize);
 
     return () => {
+      isMounted = false;
       cancelAnimationFrame(animId);
       el.removeEventListener("mousemove", onMouseMove);
       window.removeEventListener("resize", onResize);
+
+      // Dispose original loaded model
+      if (originalModel) {
+        originalModel.traverse((child: any) => {
+          if (child.geometry) child.geometry.dispose();
+          if (child.material) {
+            if (Array.isArray(child.material)) {
+              child.material.forEach((mat: any) => mat.dispose());
+            } else {
+              child.material.dispose();
+            }
+          }
+        });
+      }
+
+      // Dispose all geometries and materials in scene
+      scene.traverse((object: any) => {
+        if (object.geometry) {
+          object.geometry.dispose();
+        }
+        if (object.material) {
+          if (Array.isArray(object.material)) {
+            object.material.forEach((mat: any) => mat.dispose());
+          } else {
+            object.material.dispose();
+          }
+        }
+      });
+
       renderer.dispose();
       envTex.dispose(); capTex.dispose(); bandTex.dispose();
+      pmrem.dispose();
       if (el.contains(renderer.domElement)) el.removeChild(renderer.domElement);
     };
   }, []);
