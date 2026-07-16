@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useViewport } from '../utils/useViewport';
 import {
   Menu, X, LayoutDashboard, TrendingUp, Shield,
   GraduationCap, ChevronRight, Newspaper, Handshake,
@@ -48,14 +49,7 @@ export const ResponsiveLayout: React.FC<ResponsiveLayoutProps> = ({
   const { colores, empresa } = brandingConfig;
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [drawerROpen, setDrawerROpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 1024);
-    check();
-    window.addEventListener('resize', check);
-    return () => window.removeEventListener('resize', check);
-  }, []);
+  const { isMobile } = useViewport();
 
   const handleSectionChange = (section: string) => {
     onSectionChange(section);
@@ -276,7 +270,7 @@ export const ResponsiveLayout: React.FC<ResponsiveLayoutProps> = ({
 
       {/* ── Top bar ── */}
       <div className="rl-topbar">
-        <button className="rl-hambtn" onClick={() => setDrawerOpen(true)}>
+        <button className="rl-hambtn" onClick={() => setDrawerOpen(true)} aria-label="Abrir menú de navegación lateral" aria-expanded={drawerOpen}>
           <Menu size={20} color="#ffffff" />
         </button>
 
@@ -313,7 +307,7 @@ export const ResponsiveLayout: React.FC<ResponsiveLayoutProps> = ({
             <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style={{ width: 16, height: 16 }} />
           </a>
           {sidebarR && (
-            <button className="rl-topbar-action-btn" onClick={() => setDrawerROpen(true)} aria-label="Hub Digital">
+            <button className="rl-topbar-action-btn" onClick={() => setDrawerROpen(true)} aria-label="Hub Digital" aria-expanded={drawerROpen}>
               <Newspaper size={16} color={colores.primario} />
             </button>
           )}
@@ -368,6 +362,8 @@ export const ResponsiveLayout: React.FC<ResponsiveLayoutProps> = ({
           className="rl-navitem"
           onClick={() => setDrawerOpen(true)}
           style={{ backgroundColor: 'transparent' }}
+          aria-label="Ver todas las secciones de navegación"
+          aria-expanded={drawerOpen}
         >
           <div style={{
             width: '32px', height: '32px', borderRadius: '10px',
@@ -413,6 +409,7 @@ export const ResponsiveLayout: React.FC<ResponsiveLayoutProps> = ({
               </div>
               <button
                 onClick={() => setDrawerOpen(false)}
+                aria-label="Cerrar menú de navegación lateral"
                 style={{
                   width: '32px', height: '32px', borderRadius: '8px',
                   background: colores.fondoTerciario, border: 'none', cursor: 'pointer',
@@ -513,6 +510,7 @@ export const ResponsiveLayout: React.FC<ResponsiveLayoutProps> = ({
               <span style={{ fontSize: '14px', fontWeight: '800', color: '#ffffff' }}>Hub SEO · Contenido</span>
               <button
                 onClick={() => setDrawerROpen(false)}
+                aria-label="Cerrar hub de contenido"
                 style={{
                   width: '32px', height: '32px', borderRadius: '8px',
                   background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', cursor: 'pointer',
