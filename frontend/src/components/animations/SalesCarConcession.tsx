@@ -1,4 +1,6 @@
 import { useRef, useEffect, useState, useCallback } from 'react';
+import { useIntersectionObserver } from '../../utils/useIntersectionObserver';
+import { useViewport } from '../../utils/useViewport';
 
 export default function SalesCarConcession() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -7,6 +9,9 @@ export default function SalesCarConcession() {
   const carOffsetRef = useRef(0);
   const moveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const isMovingRef = useRef(false);
+
+  const isIntersecting = useIntersectionObserver(canvasRef);
+  const { width } = useViewport();
 
   const drawCar = useCallback((ctx: CanvasRenderingContext2D, x: number, y: number) => {
     ctx.fillStyle = '#f59e0b';
@@ -84,6 +89,8 @@ export default function SalesCarConcession() {
   }, []);
 
   useEffect(() => {
+    if (!isIntersecting) return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
@@ -114,13 +121,18 @@ export default function SalesCarConcession() {
 
     animate();
     return () => cancelAnimationFrame(animFrameRef.current);
-  }, [drawBackground, drawCar]);
+  }, [drawBackground, drawCar, isIntersecting, width]);
 
   useEffect(() => {
     carOffsetRef.current = carOffset;
   }, [carOffset]);
 
   useEffect(() => {
+    if (!isIntersecting) {
+      if (moveTimerRef.current) clearTimeout(moveTimerRef.current);
+      return;
+    }
+
     const scheduleMove = () => {
       const delay = Math.random() * 3000 + 2000;
       moveTimerRef.current = setTimeout(() => {
@@ -173,7 +185,7 @@ export default function SalesCarConcession() {
     return () => {
       if (moveTimerRef.current) clearTimeout(moveTimerRef.current);
     };
-  }, []);
+  }, [isIntersecting]);
 
   return <canvas ref={canvasRef} style={{ width: '100%', height: '100%', display: 'block' }} />;
 }
