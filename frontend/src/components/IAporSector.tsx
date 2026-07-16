@@ -149,7 +149,7 @@ const IAPorSector = () => {
                 onMouseEnter={() => !isMobile && setActiveSector(sector.id)}
                 onClick={() => setActiveSector(sector.id)}
                 className={`relative group cursor-pointer overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] flex-shrink-0 md:flex-shrink md:h-full
-                  ${isActive ? 'h-[340px] md:flex-[6]' : 'h-[64px] md:flex-1'}
+                  ${isActive ? 'h-[390px] md:flex-[6]' : 'h-[64px] md:flex-1'}
                 `}
               >
                 {/* Imagen de Fondo */}
@@ -186,14 +186,14 @@ const IAPorSector = () => {
                     {sector.title}
                   </h3>
                   
-                  {/* Lista de servicios (Oculta en móviles muy pequeños, visible en desktop) */}
-                  <ul className="space-y-2.5 mb-8 max-w-md hidden sm:block">
+                  {/* Lista de servicios en móviles y desktop */}
+                  <ul className="space-y-1 sm:space-y-2.5 mb-4 sm:mb-8 max-w-md block">
                     {sector.services.map((service, index) => (
-                      <li key={index} className="flex items-start gap-3 text-sm text-gray-200">
-                        <svg className={`w-5 h-5 flex-shrink-0 mt-0.5 text-white`} fill="currentColor" viewBox="0 0 20 20">
+                      <li key={index} className="flex items-start gap-2 sm:gap-3 text-xs sm:text-sm text-gray-200">
+                        <svg className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 mt-0.5 text-white" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                         </svg>
-                        <span className="font-medium text-shadow-sm">{service}</span>
+                        <span className="font-medium text-shadow-sm leading-snug sm:leading-normal">{service}</span>
                       </li>
                     ))}
                   </ul>
