@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, memo } from 'react';
+import { useState, useRef, useEffect, memo, lazy, Suspense } from 'react';
 import { X } from 'lucide-react';
 import video1 from '../assets/PildorasIA/Imagen2.webm';
 import video2 from '../assets/PildorasIA/WhCF.webm';
@@ -10,8 +10,10 @@ import video7 from '../assets/PildorasIA/PrevencionRobo.webm';
 import video8 from '../assets/PildorasIA/OperacionSucursales.webm';
 
 import logoSrc from '../assets/PildorasIA/Imagen6.webp';
-import PildoraViewer from './PildoraViewer';
+import { useViewport } from '../utils/useViewport';
 import AgentesConsultores from './AgentesConsultores';
+
+const PildoraViewer = lazy(() => import('./PildoraViewer'));
 
 const WA_URL = 'https://calendly.com/mayiainteligencia/consulta-mayia';
 const openWA = (e?: React.MouseEvent) => {
@@ -173,14 +175,7 @@ const PildorasIA = () => {
   const [selectedVideo, setSelectedVideo] = useState<number | null>(null);
   const [activeFilter, setActiveFilter] = useState('Todas');
   const modalVideoRef = useRef<HTMLVideoElement | null>(null);
-  const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' ? window.innerWidth < 1024 : false);
-
-  useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 1024);
-    check();
-    window.addEventListener('resize', check);
-    return () => window.removeEventListener('resize', check);
-  }, []);
+  const { isMobile } = useViewport();
 
   const filteredPildoras = activeFilter === 'Todas'
     ? PILDORAS_DATA
@@ -242,9 +237,36 @@ const PildorasIA = () => {
               </button>
             </div>
             
-            {/* 3D Viewer subtle in background */}
+            {/* 3D/SVG Viewer subtle in background */}
             <div className="absolute right-0 bottom-0 w-64 h-64 lg:w-96 lg:h-96 opacity-30 pointer-events-none transition-all duration-1000" style={{ transform: 'translate(10%, 10%)' }}>
-               <PildoraViewer />
+              {!isMobile ? (
+                <Suspense fallback={null}>
+                  <PildoraViewer />
+                </Suspense>
+              ) : (
+                <div className="w-full h-full flex items-center justify-center">
+                  <svg viewBox="0 0 100 100" className="w-48 h-48 opacity-80" style={{ filter: 'drop-shadow(0 0 20px rgba(163, 230, 53, 0.7))', animation: 'floatPill 4s ease-in-out infinite' }}>
+                    <defs>
+                      <linearGradient id="pillGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#a3e635" />
+                        <stop offset="100%" stopColor="#65a30d" />
+                      </linearGradient>
+                    </defs>
+                    <g transform="rotate(45 50 50)">
+                      <rect x="35" y="15" width="30" height="70" rx="15" fill="url(#pillGrad)" />
+                      <line x1="35" y1="50" x2="65" y2="50" stroke="#111827" strokeWidth="2.5" opacity="0.3" />
+                      <circle cx="50" cy="32" r="5" fill="#ffffff" opacity="0.8" />
+                      <circle cx="50" cy="68" r="4" fill="#ffffff" opacity="0.5" />
+                    </g>
+                  </svg>
+                  <style>{`
+                    @keyframes floatPill {
+                      0%, 100% { transform: translateY(0) rotate(0deg); }
+                      50% { transform: translateY(-10px) rotate(5deg); }
+                    }
+                  `}</style>
+                </div>
+              )}
             </div>
           </div>
 
