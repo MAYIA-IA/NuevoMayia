@@ -103,7 +103,7 @@ const PildoraExpandible = memo(({ pildora, isHovered, isOtherHovered, onHover, o
       }}
       className={`group relative transition-all duration-[800ms] ease-[cubic-bezier(0.4,0,0.2,1)] overflow-hidden cursor-pointer shrink-0 box-border
         ${isHovered 
-          ? 'w-full h-[450px] lg:h-[520px] rounded-[32px] shadow-[0_0_50px_rgba(163,230,53,0.3)] z-50 order-first lg:order-none border-2 border-lime-400/50' 
+          ? 'w-full h-[360px] lg:h-[520px] rounded-[24px] lg:rounded-[32px] shadow-[0_0_50px_rgba(163,230,53,0.3)] z-50 order-first lg:order-none border-2 border-lime-400/50' 
           : isOtherHovered
             ? 'w-0 h-0 opacity-0 m-0 p-0 border-0'
             : `${baseSize} rounded-2xl shadow-lg border border-white/40 hover:border-lime-400 hover:shadow-[0_0_20px_rgba(163,230,53,0.5)]`
@@ -133,14 +133,14 @@ const PildoraExpandible = memo(({ pildora, isHovered, isOtherHovered, onHover, o
       {/* Contenido Píldora Abierta (Revelado detrás de las puertas) */}
       <div className={`absolute inset-0 z-10 bg-black transition-opacity duration-[800ms] ${isHovered ? 'opacity-100 delay-[200ms]' : 'opacity-0'}`}>
         <img src={THUMBNAILS[pildora.id]} className="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-overlay" />
-        {isHovered && !isMobile && (
+        {isHovered && (
            <video src={pildora.video} autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-screen" />
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-[#05050A] via-[#05050A]/70 to-transparent" />
         
         {/* Información revelada gigante */}
-        <div className={`absolute inset-0 flex flex-col items-center justify-center p-6 transition-all duration-[800ms] delay-[300ms] ${isHovered ? 'opacity-100 scale-100' : 'opacity-0 scale-90 pointer-events-none'}`}>
-          <div className="absolute top-5 left-5 px-3 py-1.5 rounded-full text-[10px] font-extrabold bg-black/40 backdrop-blur-md uppercase tracking-widest text-white border border-white/20 shadow-lg">
+        <div className={`absolute inset-0 flex flex-col items-center justify-center p-4 lg:p-6 transition-all duration-[800ms] delay-[300ms] ${isHovered ? 'opacity-100 scale-100' : 'opacity-0 scale-90 pointer-events-none'}`}>
+          <div className="absolute top-4 left-4 lg:top-5 lg:left-5 px-3 py-1.5 rounded-full text-[9px] lg:text-[10px] font-extrabold bg-black/40 backdrop-blur-md uppercase tracking-widest text-white border border-white/20 shadow-lg">
             {pildora.category}
           </div>
           
@@ -149,19 +149,19 @@ const PildoraExpandible = memo(({ pildora, isHovered, isOtherHovered, onHover, o
               e.stopPropagation();
               onClick(pildora.id); // Open video modal on play button click
             }}
-            className="w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center text-gray-900 shadow-[0_0_50px_rgba(255,255,255,0.3)] hover:scale-110 transition-transform mb-4 lg:mb-6 animate-pulse" 
+            className="w-12 h-12 lg:w-20 lg:h-20 rounded-full flex items-center justify-center text-gray-900 shadow-[0_0_50px_rgba(255,255,255,0.3)] hover:scale-110 transition-transform mb-3 lg:mb-6 animate-pulse" 
             style={{ backgroundColor: pildora.accent, border: '2px solid rgba(255,255,255,0.5)' }}
           >
-            <svg className="w-8 h-8 sm:w-10 sm:h-10 ml-1" fill="currentColor" viewBox="0 0 20 20">
+            <svg className="w-6 h-6 lg:w-10 lg:h-10 ml-0.5 lg:ml-1" fill="currentColor" viewBox="0 0 20 20">
               <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
             </svg>
           </button>
           
-          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white text-center leading-tight mb-4 drop-shadow-2xl">{pildora.title}</h3>
+          <h3 className="text-lg lg:text-4xl font-black text-white text-center leading-tight mb-2 lg:mb-4 drop-shadow-2xl">{pildora.title}</h3>
           
-          <div className="flex flex-wrap gap-2 justify-center max-w-lg mb-6">
+          <div className="flex flex-wrap gap-1 lg:gap-2 justify-center max-w-xs lg:max-w-lg mb-4 lg:mb-6">
             {pildora.features.map((feat: any, i: number) => (
-              <span key={i} className="text-xs sm:text-sm px-3 py-1.5 rounded-full bg-white/5 text-gray-100 border border-white/10 backdrop-blur-md shadow-inner">{feat}</span>
+              <span key={i} className="text-[10px] lg:text-sm px-2.5 py-1 lg:px-3 lg:py-1.5 rounded-full bg-white/5 text-gray-100 border border-white/10 backdrop-blur-md shadow-inner">{feat}</span>
             ))}
           </div>
         </div>
