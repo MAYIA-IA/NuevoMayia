@@ -1,5 +1,7 @@
-import { forwardRef, useRef, useImperativeHandle, useEffect } from 'react';
+import { forwardRef, useRef, useImperativeHandle, useEffect, Suspense } from 'react';
 import { brandingConfig } from '../../config/branding';
+import { useViewport } from '../../utils/useViewport';
+import { useIntersectionObserver } from '../../utils/useIntersectionObserver';
 
 const hexToRgba = (hex: string, alpha: number) => {
   if (!hex || typeof hex !== 'string') return `rgba(164, 217, 85, ${alpha})`;
@@ -21,10 +23,15 @@ const BrainCanvas = forwardRef<BrainHandle, { onPulse?: () => void }>(({ onPulse
   const spinRef = useRef(0);
   const ripples = useRef<number[]>([]);
 
+  const { isMobile, width } = useViewport();
+  const isIntersecting = useIntersectionObserver(canvasRef);
+
   const boost = () => { spinRef.current = Math.min(spinRef.current + 0.30, 0.6); ripples.current.push(tRef.current); };
   useImperativeHandle(ref, () => ({ boost }));
 
   useEffect(() => {
+    if (!isIntersecting) return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
@@ -41,7 +48,6 @@ const BrainCanvas = forwardRef<BrainHandle, { onPulse?: () => void }>(({ onPulse
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
     resize();
-    window.addEventListener('resize', resize);
 
     const N = 340;
     const pts: { x: number; y: number; z: number }[] = [];
@@ -58,6 +64,8 @@ const BrainCanvas = forwardRef<BrainHandle, { onPulse?: () => void }>(({ onPulse
       { a: 0.55, b: 1.20, sp: -0.5, ph: 0.5, c: '45,106,79' },
       { a: 1.14, b: 0.88, sp: 0.4, ph: 1.2, c: '124,203,169' },
     ];
+
+    const shadow = isMobile ? 0 : 3;
 
     const draw = () => {
       const t = tRef.current + 0.006 + spinRef.current;
@@ -85,7 +93,7 @@ const BrainCanvas = forwardRef<BrainHandle, { onPulse?: () => void }>(({ onPulse
         ctx.strokeStyle = `rgba(${rg.c},0.32)`;
         ctx.lineWidth = 1.5;
         ctx.shadowColor = 'rgba(82,183,136,0.6)';
-        ctx.shadowBlur = 8;
+        ctx.shadowBlur = shadow;
         ctx.stroke();
         // electrón
         const ex = Math.cos(t * 2 + rg.ph) * R * rg.a;
@@ -93,7 +101,7 @@ const BrainCanvas = forwardRef<BrainHandle, { onPulse?: () => void }>(({ onPulse
         ctx.beginPath();
         ctx.fillStyle = 'rgba(124,203,169,0.95)';
         ctx.shadowColor = 'rgba(82,183,136,1)';
-        ctx.shadowBlur = 14;
+        ctx.shadowBlur = shadow * 1.5;
         ctx.arc(ex, ey, 3.2, 0, Math.PI * 2);
         ctx.fill();
         ctx.restore();
@@ -117,7 +125,7 @@ const BrainCanvas = forwardRef<BrainHandle, { onPulse?: () => void }>(({ onPulse
         ctx.beginPath();
         ctx.fillStyle = `rgba(45,106,79,${0.12 + depth * 0.78})`;
         ctx.shadowColor = 'rgba(82,183,136,0.9)';
-        ctx.shadowBlur = depth * 11;
+        ctx.shadowBlur = depth * shadow * 1.5;
         ctx.arc(q.sx, q.sy, 1.1 + depth * 2.5, 0, Math.PI * 2);
         ctx.fill();
       }
@@ -151,7 +159,7 @@ const BrainCanvas = forwardRef<BrainHandle, { onPulse?: () => void }>(({ onPulse
       ctx.strokeStyle = 'rgba(82,183,136,0.45)';
       ctx.lineWidth = 1.5;
       ctx.shadowColor = 'rgba(82,183,136,0.8)';
-      ctx.shadowBlur = 12;
+      ctx.shadowBlur = shadow * 1.5;
       ctx.arc(cx, cy, R, 0, Math.PI * 2);
       ctx.stroke();
       ctx.shadowBlur = 0;
@@ -180,7 +188,7 @@ const BrainCanvas = forwardRef<BrainHandle, { onPulse?: () => void }>(({ onPulse
         ctx.strokeStyle = lg;
         ctx.lineWidth = 1.8;
         ctx.shadowColor = 'rgba(82,183,136,0.7)';
-        ctx.shadowBlur = 8;
+        ctx.shadowBlur = shadow;
         ctx.stroke();
         ctx.shadowBlur = 0;
         for (let k = 0; k < 4; k++) {
@@ -193,7 +201,7 @@ const BrainCanvas = forwardRef<BrainHandle, { onPulse?: () => void }>(({ onPulse
           ctx.beginPath();
           ctx.fillStyle = `rgba(${k === 0 ? '124,203,169' : '82,183,136'},${(k === 0 ? 0.95 : 0.55) * fade})`;
           ctx.shadowColor = 'rgba(82,183,136,1)';
-          ctx.shadowBlur = 10 * fade;
+          ctx.shadowBlur = shadow * 1.2 * fade;
           ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
           ctx.fill();
         }
@@ -215,8 +223,8 @@ const BrainCanvas = forwardRef<BrainHandle, { onPulse?: () => void }>(({ onPulse
     };
     draw();
 
-    return () => { cancelAnimationFrame(raf); window.removeEventListener('resize', resize); };
-  }, []);
+    return () => { cancelAnimationFrame(raf); };
+  }, [isIntersecting, width, isMobile]);
 
   return (
     <canvas
