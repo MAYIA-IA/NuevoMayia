@@ -1,0 +1,2469 @@
+[
+  {
+    "id": 1,
+    "title": "Que son los agentes de inteligencia artificial",
+    "excerpt": "Los agentes IA son sistemas capaces de percibir informacion, analizar contextos, tomar decisiones y ejecutar acciones de manera autonoma. Descubre como operan y benefician a las empresas.",
+    "category": "Innovacion",
+    "date": "22 Mayo 2026",
+    "author": "Dulce Meza",
+    "readTime": "8 min lectura",
+    "image": "agentesBanner",
+    "featured": false,
+    "content": [
+      {
+        "type": "paragraph",
+        "text": "Los Agentes de Inteligencia Artificial son sistemas inteligentes disenados para entender objetivos de negocio, consultar datos privados, analizar contexto, recomendar acciones, ejecutar tareas, coordinar workflows y operar procesos empresariales con distintos niveles de autonomia, seguridad, trazabilidad y supervision humana."
+      },
+      {
+        "type": "quote",
+        "text": "A diferencia de un chatbot tradicional, un agente de IA no solo conversa. Un agente entiende, decide, ejecuta y coordina."
+      },
+      {
+        "type": "heading",
+        "text": "Que hace realmente un Agente de IA"
+      },
+      {
+        "type": "paragraph",
+        "text": "Un chatbot responde preguntas. Un asistente ayuda a una persona. Un agente de inteligencia artificial opera una mision. Un sistema multi-agente puede orquestar una empresa."
+      },
+      {
+        "type": "subheading",
+        "text": "Agentes que entienden"
+      },
+      {
+        "type": "paragraph",
+        "text": "Consultan documentos, bases de conocimiento, politicas internas, manuales, reportes, contratos, expedientes, inventarios, CRM, ERP, POS, correos, tickets, bases de datos, imagenes, audio, video y sistemas internos. Convierten informacion dispersa en contexto util para tomar decisiones."
+      },
+      {
+        "type": "subheading",
+        "text": "Agentes que recomiendan"
+      },
+      {
+        "type": "paragraph",
+        "text": "Analizan escenarios y sugieren la mejor accion posible. Pueden recomendar que vender, que comprar, que mover, que corregir, que priorizar, que campana activar, que inventario redistribuir, que cliente atender o que riesgo escalar."
+      },
+      {
+        "type": "subheading",
+        "text": "Agentes que ejecutan"
+      },
+      {
+        "type": "paragraph",
+        "text": "No se quedan en la recomendacion. Pueden abrir tickets, generar reportes, enviar alertas, actualizar sistemas, crear ordenes, agendar citas, enviar correos, clasificar documentos, registrar evidencias y activar workflows de negocio."
+      },
+      {
+        "type": "subheading",
+        "text": "Agentes que aprenden"
+      },
+      {
+        "type": "paragraph",
+        "text": "Mejoran con retroalimentacion humana, metricas de desempeno, resultados historicos, comportamiento de usuarios, validacion operativa y datos del negocio. No solo ejecutan. Evolucionan."
+      },
+      {
+        "type": "heading",
+        "text": "La diferencia entre un chatbot y un agente de IA"
+      },
+      {
+        "type": "bullets",
+        "items": [
+          "Un chatbot responde. Un agente actua.",
+          "Un chatbot depende de una conversacion. Un agente puede iniciar, ejecutar y cerrar tareas.",
+          "Un chatbot entrega informacion. Un agente genera resultados.",
+          "Un chatbot vive en una interfaz. Un agente vive dentro de la operacion.",
+          "Un chatbot es una herramienta. Un agente es una capacidad empresarial."
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Arquitectura de los Agentes de IA MAYIA"
+      },
+      {
+        "type": "paragraph",
+        "text": "Un agente empresarial serio no puede depender unicamente de un modelo generativo. Para operar en una empresa necesita arquitectura, datos, control, seguridad y gobierno."
+      },
+      {
+        "type": "bullets",
+        "items": [
+          "IA Generativa: lenguaje natural y sintesis de conocimiento.",
+          "RAG Empresarial: datos privados de la organizacion.",
+          "MAYIA Lakehouse: fuente unificada de datos confiables.",
+          "Ciberseguridad: proteccion, trazabilidad y limites de autonomia.",
+          "Human-in-the-Loop: supervision humana en decisiones criticas.",
+          "Monitoreo continuo: ROI, precision, calidad y adopcion."
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Agentes de IA por industria"
+      },
+      {
+        "type": "subheading",
+        "text": "Retail"
+      },
+      {
+        "type": "paragraph",
+        "text": "Recomendadores inteligentes, asistentes de tienda, analisis de shopper, optimizacion de promociones, computer vision en gondola, monitoreo de anaquel y agentes de trade marketing."
+      },
+      {
+        "type": "subheading",
+        "text": "Manufactura"
+      },
+      {
+        "type": "paragraph",
+        "text": "Agentes para mantenimiento predictivo, control de calidad visual, planeacion de produccion, monitoreo de planta, reduccion de desperdicio y optimizacion de supply chain."
+      },
+      {
+        "type": "subheading",
+        "text": "Finanzas"
+      },
+      {
+        "type": "paragraph",
+        "text": "Agentes de riesgo, cobranza, cumplimiento, analisis documental, atencion inteligente y deteccion de anomalias."
+      },
+      {
+        "type": "highlight",
+        "text": "MAYIA no crea bots. MAYIA construye agentes empresariales que entienden, deciden, ejecutan y orquestan el futuro inteligente de las empresas mexicanas."
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Que es la Inteligencia Artificial Empresarial",
+    "excerpt": "La guia para entender como la IA transforma empresas, industrias y gobiernos en Mexico.",
+    "category": "IA Empresarial",
+    "date": "10 Junio 2026",
+    "author": "Veronica Viniegra",
+    "readTime": "8 min lectura",
+    "image": "empresBanner",
+    "featured": false,
+    "content": [
+      {
+        "type": "paragraph",
+        "text": "La Inteligencia Artificial Empresarial es la aplicación estratégica de tecnologías como IA Generativa, Agentes de Inteligencia Artificial, Computer Vision, Analítica Predictiva, Automatización Inteligente, Machine Learning, Robotics y modelos de lenguaje empresarial para optimizar procesos, tomar mejores decisiones, reducir costos, aumentar ventas y crear nuevas ventajas competitivas."
+      },
+      {
+        "type": "paragraph",
+        "text": "A diferencia de la inteligencia artificial usada como herramienta aislada, la IA Empresarial se integra directamente en la operación del negocio: conecta datos, sistemas, áreas de trabajo, clientes, colaboradores, procesos críticos y decisiones estratégicas. Su objetivo no es “usar IA”, sino convertir la inteligencia artificial en crecimiento, eficiencia, productividad, rentabilidad y valor medible."
+      },
+      {
+        "type": "quote",
+        "text": "En otras palabras: la IA Empresarial no es un chatbot. Es una nueva forma de operar."
+      },
+      {
+        "type": "heading",
+        "text": "Por qué la Inteligencia Artificial Empresarial es clave para México"
+      },
+      {
+        "type": "paragraph",
+        "text": "México se encuentra frente a una oportunidad histórica. La inteligencia artificial ya no es una promesa futura; es una tecnología que está cambiando la competitividad de empresas, industrias y países."
+      },
+      {
+        "type": "paragraph",
+        "text": "El estudio “México Inteligente: La manufactura frente a la oportunidad que no espera”, elaborado por Centro México Digital, muestra que la adopción de IA en México todavía es baja, pero que las empresas que adoptan inteligencia artificial ya están asociadas con mayores niveles de producción, mejores salarios y más empleo. Esto confirma una idea central: la IA no sustituye el valor humano cuando se implementa correctamente; lo amplifica."
+      },
+      {
+        "type": "paragraph",
+        "text": "La gran pregunta para las empresas mexicanas ya no es si deben adoptar inteligencia artificial."
+      },
+      {
+        "type": "quote",
+        "text": "La pregunta correcta es:"
+      },
+      {
+        "type": "paragraph",
+        "text": "¿Cómo implementar IA empresarial de forma segura, rentable, medible y alineada a los objetivos del negocio?"
+      },
+      {
+        "type": "heading",
+        "text": "Qué hace realmente la Inteligencia Artificial Empresarial"
+      },
+      {
+        "type": "paragraph",
+        "text": "La Inteligencia Artificial Empresarial permite transformar la operación completa de una organización mediante sistemas capaces de analizar información, predecir escenarios, recomendar acciones, automatizar procesos, asistir equipos de trabajo y ejecutar tareas con distintos niveles de autonomía."
+      },
+      {
+        "type": "paragraph",
+        "text": "Sus aplicaciones más relevantes incluyen:"
+      },
+      {
+        "type": "paragraph",
+        "text": "Automatización de procesos con IA."
+      },
+      {
+        "type": "paragraph",
+        "text": "Agentes de inteligencia artificial para empresas."
+      },
+      {
+        "type": "paragraph",
+        "text": "IA conversacional para atención, ventas y soporte."
+      },
+      {
+        "type": "paragraph",
+        "text": "Computer Vision para inspección, monitoreo y control visual."
+      },
+      {
+        "type": "paragraph",
+        "text": "Analítica predictiva para demanda, inventarios, ventas y riesgos."
+      },
+      {
+        "type": "paragraph",
+        "text": "IA para retail, manufactura, salud, logística, finanzas y gobierno."
+      },
+      {
+        "type": "paragraph",
+        "text": "Recomendadores inteligentes para clientes y colaboradores."
+      },
+      {
+        "type": "paragraph",
+        "text": "Business Workflows inteligentes para coordinar equipos y operaciones."
+      },
+      {
+        "type": "paragraph",
+        "text": "IA Generativa para acelerar conocimiento, documentación y toma de decisiones."
+      },
+      {
+        "type": "paragraph",
+        "text": "Ciberseguridad con IA para proteger datos, sistemas y operaciones críticas."
+      },
+      {
+        "type": "paragraph",
+        "text": "Cuando estas capacidades se integran correctamente, la empresa deja de operar de manera reactiva y comienza a operar de manera predictiva, automatizada e inteligente."
+      },
+      {
+        "type": "heading",
+        "text": "El error más común: confundir IA con herramientas"
+      },
+      {
+        "type": "paragraph",
+        "text": "Muchas empresas empiezan su camino de inteligencia artificial comprando una herramienta, instalando un chatbot o probando un modelo generativo. Eso puede ser útil, pero no necesariamente crea valor empresarial."
+      },
+      {
+        "type": "subheading",
+        "text": "La verdadera Inteligencia Artificial Empresarial requiere cinco elementos:"
+      },
+      {
+        "type": "paragraph",
+        "text": "Estrategia de IA alineada al negocio."
+      },
+      {
+        "type": "paragraph",
+        "text": "Datos organizados, gobernados y disponibles."
+      },
+      {
+        "type": "paragraph",
+        "text": "Infraestructura segura y escalable."
+      },
+      {
+        "type": "paragraph",
+        "text": "Casos de uso con ROI claro."
+      },
+      {
+        "type": "paragraph",
+        "text": "Equipos capaces de implementar, operar y adoptar la solución."
+      },
+      {
+        "type": "paragraph",
+        "text": "Sin estos elementos, la IA se queda en pilotos, pruebas aisladas o proyectos que no escalan."
+      },
+      {
+        "type": "paragraph",
+        "text": "Con estos elementos, la IA se convierte en una ventaja competitiva."
+      },
+      {
+        "type": "heading",
+        "text": "MAYIA: desarrollo de Inteligencia Artificial Empresarial con integración vertical"
+      },
+      {
+        "type": "paragraph",
+        "text": "MAYIA es una empresa mexicana especializada en desarrollo de Inteligencia Artificial Empresarial, agentes de IA para empresas, automatización de procesos, IA Generativa, Computer Vision, analítica predictiva, IA conversacional, IA para retail, IA para operaciones e implementación de soluciones inteligentes para empresas mexicanas."
+      },
+      {
+        "type": "paragraph",
+        "text": "El diferencial de MAYIA es su modelo de integración vertical."
+      },
+      {
+        "type": "paragraph",
+        "text": "MAYIA no solo diseña soluciones de inteligencia artificial. Integra estrategia, infraestructura, nube, datos, ciberseguridad, desarrollo, laboratorios, squads de IA, monitoreo, capacitación y medición de valor en un solo ecosistema."
+      },
+      {
+        "type": "paragraph",
+        "text": "Esto permite llevar la IA desde la idea hasta la producción real."
+      },
+      {
+        "type": "subheading",
+        "text": "MAYIA cuenta con:"
+      },
+      {
+        "type": "paragraph",
+        "text": "Infraestructura propia para IA."
+      },
+      {
+        "type": "paragraph",
+        "text": "Nube soberana mexicana."
+      },
+      {
+        "type": "paragraph",
+        "text": "MAYIA Lakehouse para integrar, organizar y explotar datos empresariales."
+      },
+      {
+        "type": "paragraph",
+        "text": "Laboratorios de IA para pruebas, pilotos y validación de casos de uso."
+      },
+      {
+        "type": "paragraph",
+        "text": "Squads especializados para desarrollo e implementación."
+      },
+      {
+        "type": "paragraph",
+        "text": "Ciberseguridad para proteger datos, modelos y operación."
+      },
+      {
+        "type": "paragraph",
+        "text": "Monitoreo continuo de soluciones de IA."
+      },
+      {
+        "type": "paragraph",
+        "text": "Academia de IA para adopción, capacitación y desarrollo de talento."
+      },
+      {
+        "type": "paragraph",
+        "text": "Estrategia orientada a ROI, RL y RS: Retorno de Inversión, Retorno Laboral y Retorno Social."
+      },
+      {
+        "type": "paragraph",
+        "text": "Este modelo convierte a MAYIA en una fábrica mexicana de inteligencia artificial empresarial: una plataforma integral para diseñar, construir, implementar, operar y escalar IA segura, soberana y medible."
+      },
+      {
+        "type": "heading",
+        "text": "IA Empresarial no es solo tecnología: es creación de valor"
+      },
+      {
+        "type": "paragraph",
+        "text": "Para que una solución de IA sea estratégica debe impactar una o más palancas del negocio:"
+      },
+      {
+        "type": "paragraph",
+        "text": "Aumentar ingresos."
+      },
+      {
+        "type": "paragraph",
+        "text": "Mejorar margen operativo."
+      },
+      {
+        "type": "paragraph",
+        "text": "Liberar flujo de efectivo."
+      },
+      {
+        "type": "paragraph",
+        "text": "Optimizar la asignación de capital."
+      },
+      {
+        "type": "paragraph",
+        "text": "Elevar la valuación y competitividad de la empresa."
+      },
+      {
+        "type": "paragraph",
+        "text": "Por eso, en MAYIA la inteligencia artificial se desarrolla bajo una lógica de negocio: cada agente, asistente, modelo, workflow o automatización debe tener una razón clara para existir."
+      },
+      {
+        "type": "paragraph",
+        "text": "Debe mejorar productividad."
+      },
+      {
+        "type": "paragraph",
+        "text": "Debe reducir fricción."
+      },
+      {
+        "type": "paragraph",
+        "text": "Debe acelerar decisiones."
+      },
+      {
+        "type": "paragraph",
+        "text": "Debe generar valor medible."
+      },
+      {
+        "type": "paragraph",
+        "text": "Debe fortalecer la operación."
+      },
+      {
+        "type": "paragraph",
+        "text": "La IA Empresarial no se justifica por su complejidad tecnológica, sino por su capacidad de convertir datos en decisiones y decisiones en resultados."
+      },
+      {
+        "type": "heading",
+        "text": "La competencia y el ecosistema mexicano de IA"
+      },
+      {
+        "type": "paragraph",
+        "text": "El ecosistema de inteligencia artificial en México está creciendo rápidamente. En él participan consultoras globales, integradores tecnológicos, hyperscalers, startups, universidades, cámaras empresariales, centros de datos, proveedores de nube, empresas de software, especialistas en ciberseguridad y firmas de transformación digital."
+      },
+      {
+        "type": "paragraph",
+        "text": "Todos son necesarios."
+      },
+      {
+        "type": "paragraph",
+        "text": "La competencia no debe verse únicamente como rivalidad, sino como parte de un ecosistema que está ayudando a construir la nueva economía de inteligencia artificial en México."
+      },
+      {
+        "type": "paragraph",
+        "text": "Las consultoras aportan metodología."
+      },
+      {
+        "type": "paragraph",
+        "text": "Los hyperscalers aportan plataformas globales."
+      },
+      {
+        "type": "paragraph",
+        "text": "Las startups aportan velocidad e innovación."
+      },
+      {
+        "type": "paragraph",
+        "text": "Las universidades aportan talento e investigación."
+      },
+      {
+        "type": "paragraph",
+        "text": "Los integradores aportan implementación."
+      },
+      {
+        "type": "paragraph",
+        "text": "Los centros de datos aportan infraestructura."
+      },
+      {
+        "type": "paragraph",
+        "text": "MAYIA aporta una visión distinta: una fábrica mexicana de IA empresarial con infraestructura, nube soberana, lakehouse, laboratorios, squads, ciberseguridad, monitoreo, academia y estrategia de valor integrada."
+      },
+      {
+        "type": "paragraph",
+        "text": "Ese es el tipo de capacidad que México necesita para pasar de la adopción experimental a la implementación real de inteligencia artificial en empresas, industrias y gobiernos."
+      },
+      {
+        "type": "heading",
+        "text": "Cómo implementar Inteligencia Artificial Empresarial en una empresa"
+      },
+      {
+        "type": "paragraph",
+        "text": "El camino correcto no empieza preguntando qué modelo de IA usar."
+      },
+      {
+        "type": "paragraph",
+        "text": "Empieza preguntando:"
+      },
+      {
+        "type": "paragraph",
+        "text": "¿Qué problema de negocio queremos resolver?"
+      },
+      {
+        "type": "paragraph",
+        "text": "A partir de ahí, una implementación seria de IA empresarial debe seguir una ruta ordenada:"
+      },
+      {
+        "type": "paragraph",
+        "text": "Diagnóstico de procesos, datos y oportunidades."
+      },
+      {
+        "type": "paragraph",
+        "text": "Identificación de casos de uso con mayor retorno."
+      },
+      {
+        "type": "paragraph",
+        "text": "Evaluación de ROI, impacto operativo y riesgo."
+      },
+      {
+        "type": "paragraph",
+        "text": "Diseño de arquitectura de datos e IA."
+      },
+      {
+        "type": "paragraph",
+        "text": "Desarrollo del agente, asistente, modelo o workflow."
+      },
+      {
+        "type": "paragraph",
+        "text": "Prueba en laboratorio o piloto controlado."
+      },
+      {
+        "type": "paragraph",
+        "text": "Integración con sistemas existentes."
+      },
+      {
+        "type": "paragraph",
+        "text": "Ciberseguridad y gobierno de datos."
+      },
+      {
+        "type": "paragraph",
+        "text": "Monitoreo continuo de desempeño."
+      },
+      {
+        "type": "paragraph",
+        "text": "Capacitación de equipos y adopción humana."
+      },
+      {
+        "type": "paragraph",
+        "text": "Escalamiento operativo y mejora continua."
+      },
+      {
+        "type": "paragraph",
+        "text": "Este enfoque permite implementar inteligencia artificial con control, seguridad, medición y resultados."
+      },
+      {
+        "type": "heading",
+        "text": "Casos de uso de IA Empresarial"
+      },
+      {
+        "type": "paragraph",
+        "text": "La Inteligencia Artificial Empresarial puede aplicarse en prácticamente cualquier área de la organización:"
+      },
+      {
+        "type": "subheading",
+        "text": "IA para ventas"
+      },
+      {
+        "type": "paragraph",
+        "text": "Agentes inteligentes, recomendadores, lead scoring, predicción de demanda, asistentes comerciales y automatización de seguimiento."
+      },
+      {
+        "type": "subheading",
+        "text": "IA para operaciones"
+      },
+      {
+        "type": "paragraph",
+        "text": "Optimización de procesos, monitoreo operativo, control de calidad, automatización de tareas y análisis de productividad."
+      },
+      {
+        "type": "subheading",
+        "text": "IA para retail"
+      },
+      {
+        "type": "paragraph",
+        "text": "Recomendadores en tienda, asistentes para shopper, analítica de punto de venta, computer vision, pricing inteligente y trade marketing basado en datos."
+      },
+      {
+        "type": "subheading",
+        "text": "IA para manufactura"
+      },
+      {
+        "type": "paragraph",
+        "text": "Mantenimiento predictivo, inspección visual, planeación de producción, control de calidad, reducción de desperdicio y optimización de supply chain."
+      },
+      {
+        "type": "subheading",
+        "text": "IA para PyMEs mexicanas"
+      },
+      {
+        "type": "paragraph",
+        "text": "Automatización administrativa, asistentes de atención, IA conversacional, análisis de ventas, gestión documental y procesos inteligentes de bajo costo."
+      },
+      {
+        "type": "subheading",
+        "text": "IA para gobierno"
+      },
+      {
+        "type": "paragraph",
+        "text": "Análisis de datos públicos, asistentes ciudadanos, automatización documental, predicción de demanda de servicios y sistemas de atención inteligente."
+      },
+      {
+        "type": "heading",
+        "text": "El futuro de la IA en México será empresarial, soberano y medible"
+      },
+      {
+        "type": "paragraph",
+        "text": "México tiene una oportunidad única para convertirse en un país líder en adopción de inteligencia artificial aplicada. Pero para lograrlo, no basta con hablar de innovación. Se necesita infraestructura, talento, datos, seguridad, metodologías de ROI, casos de uso reales y empresas capaces de implementar IA en producción."
+      },
+      {
+        "type": "paragraph",
+        "text": "Ahí es donde MAYIA concentra su mayor valor."
+      },
+      {
+        "type": "paragraph",
+        "text": "MAYIA desarrolla soluciones de IA para empresas mexicanas con una visión integral: inteligencia artificial empresarial, nube soberana, data centers AI Ready, ciberseguridad, agentes inteligentes, automatización de procesos, analítica predictiva, computer vision, IA conversacional, laboratorios, squads de IA, MAYIA Lakehouse y Academia de IA."
+      },
+      {
+        "type": "paragraph",
+        "text": "La inteligencia artificial en México debe dejar de ser una conversación tecnológica y convertirse en una estrategia nacional de productividad, competitividad y crecimiento."
+      },
+      {
+        "type": "paragraph",
+        "text": "MAYIA nace para acelerar esa transición."
+      },
+      {
+        "type": "heading",
+        "text": "Conclusión"
+      },
+      {
+        "type": "paragraph",
+        "text": "La Inteligencia Artificial Empresarial es la capacidad de convertir datos, procesos y conocimiento en decisiones inteligentes, operaciones automatizadas y resultados medibles."
+      },
+      {
+        "type": "paragraph",
+        "text": "Para las empresas mexicanas, representa una oportunidad directa para aumentar productividad, reducir costos, mejorar ventas, optimizar operaciones y construir ventajas competitivas sostenibles."
+      },
+      {
+        "type": "paragraph",
+        "text": "Pero la IA solo genera valor cuando se implementa con estrategia, infraestructura, seguridad, talento y medición."
+      },
+      {
+        "type": "paragraph",
+        "text": "Por eso MAYIA se posiciona como una fábrica mexicana de inteligencia artificial empresarial: un ecosistema vertical que integra desarrollo, nube soberana, lakehouse, ciberseguridad, laboratorios, squads, monitoreo, academia y estrategia de ROI para llevar la IA de la idea a la producción."
+      },
+      {
+        "type": "highlight",
+        "text": "MAYIA: Inteligencia Artificial Empresarial hecha en México para transformar empresas, industrias y gobiernos con valor medible."
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Agentes de IA MAYIA: la nueva generacion de IA empresarial",
+    "excerpt": "Los Agentes de Inteligencia Artificial MAYIA son sistemas inteligentes que entienden objetivos, consultan datos privados, recomiendan acciones, ejecutan tareas y coordinan workflows empresariales.",
+    "category": "Innovacion",
+    "date": "5 Junio 2026",
+    "author": "Veronica Viniegra",
+    "readTime": "11 min lectura",
+    "image": "agentes2Banner",
+    "featured": false,
+    "content": [
+      {
+        "type": "paragraph",
+        "text": "Los Agentes de Inteligencia Artificial MAYIA son sistemas inteligentes diseñados para entender objetivos de negocio, consultar datos privados, analizar contexto, recomendar acciones, ejecutar tareas, coordinar workflows y operar procesos empresariales con distintos niveles de autonomía, seguridad, trazabilidad y supervisión humana."
+      },
+      {
+        "type": "paragraph",
+        "text": "A diferencia de un chatbot tradicional, un agente de IA no solo conversa. Un agente entiende, decide, ejecuta y coordina."
+      },
+      {
+        "type": "quote",
+        "text": "Un chatbot responde preguntas.Un asistente ayuda a una persona.Un agente de inteligencia artificial opera una misión.Un sistema multi-agente puede orquestar una empresa."
+      },
+      {
+        "type": "paragraph",
+        "text": "Esa es la nueva frontera de la Inteligencia Artificial Empresarial."
+      },
+      {
+        "type": "paragraph",
+        "text": "En MAYIA desarrollamos Agentes de Inteligencia Artificial para empresas mexicanas que integran IA Generativa, RAG empresarial, Computer Vision, analítica predictiva, automatización inteligente, IA conversacional, IA privada, nube soberana, ciberseguridad, datos empresariales y workflows inteligentes para transformar operaciones reales en resultados medibles."
+      },
+      {
+        "type": "heading",
+        "text": "Los agentes de IA no deben diseñarse por organigrama"
+      },
+      {
+        "type": "paragraph",
+        "text": "Uno de los errores más comunes en las empresas es pensar que los agentes de inteligencia artificial deben organizarse únicamente por departamento: agente de ventas, agente de recursos humanos, agente financiero, agente operativo o agente de atención al cliente."
+      },
+      {
+        "type": "paragraph",
+        "text": "Esa visión es limitada."
+      },
+      {
+        "type": "paragraph",
+        "text": "Los agentes empresariales más poderosos no se definen por organigrama. Se definen por misión."
+      },
+      {
+        "type": "paragraph",
+        "text": "Un agente de IA empresarial debe diseñarse según:"
+      },
+      {
+        "type": "paragraph",
+        "text": "El problema de negocio que resuelve."
+      },
+      {
+        "type": "paragraph",
+        "text": "La decisión que debe apoyar o ejecutar."
+      },
+      {
+        "type": "paragraph",
+        "text": "Los datos que necesita consultar."
+      },
+      {
+        "type": "paragraph",
+        "text": "Los sistemas con los que debe conectarse."
+      },
+      {
+        "type": "paragraph",
+        "text": "Las reglas que debe respetar."
+      },
+      {
+        "type": "paragraph",
+        "text": "El workflow que debe activar."
+      },
+      {
+        "type": "paragraph",
+        "text": "El nivel de autonomía permitido."
+      },
+      {
+        "type": "paragraph",
+        "text": "El riesgo que debe controlar."
+      },
+      {
+        "type": "paragraph",
+        "text": "El valor financiero que debe generar."
+      },
+      {
+        "type": "paragraph",
+        "text": "La pregunta correcta no es:¿A qué área pertenece el agente?"
+      },
+      {
+        "type": "paragraph",
+        "text": "La pregunta correcta es:¿Qué proceso, decisión o resultado estratégico debe orquestar este agente para crear valor?"
+      },
+      {
+        "type": "paragraph",
+        "text": "Por eso, los Agentes de IA MAYIA no se limitan a un área. Cruzan procesos, conectan sistemas, coordinan personas, integran datos y ejecutan acciones entre áreas distintas de la organización."
+      },
+      {
+        "type": "heading",
+        "text": "Qué hacen realmente los Agentes de Inteligencia Artificial MAYIA"
+      },
+      {
+        "type": "paragraph",
+        "text": "Los Agentes de Inteligencia Artificial para Empresas de MAYIA están diseñados para operar sobre capacidades empresariales reales."
+      },
+      {
+        "type": "subheading",
+        "text": "1. Agentes que entienden"
+      },
+      {
+        "type": "paragraph",
+        "text": "Consultan documentos, bases de conocimiento, políticas internas, manuales, reportes, contratos, expedientes, inventarios, CRM, ERP, POS, correos, tickets, bases de datos, imágenes, audio, video y sistemas internos."
+      },
+      {
+        "type": "paragraph",
+        "text": "Convierten información dispersa en contexto útil para tomar decisiones."
+      },
+      {
+        "type": "subheading",
+        "text": "2. Agentes que recomiendan"
+      },
+      {
+        "type": "paragraph",
+        "text": "Analizan escenarios y sugieren la mejor acción posible."
+      },
+      {
+        "type": "paragraph",
+        "text": "Pueden recomendar qué vender, qué comprar, qué mover, qué corregir, qué priorizar, qué campaña activar, qué inventario redistribuir, qué cliente atender o qué riesgo escalar."
+      },
+      {
+        "type": "subheading",
+        "text": "3. Agentes que ejecutan"
+      },
+      {
+        "type": "paragraph",
+        "text": "No se quedan en la recomendación."
+      },
+      {
+        "type": "paragraph",
+        "text": "Pueden abrir tickets, generar reportes, enviar alertas, actualizar sistemas, crear órdenes, agendar citas, enviar correos, clasificar documentos, registrar evidencias y activar workflows de negocio."
+      },
+      {
+        "type": "subheading",
+        "text": "4. Agentes que coordinan"
+      },
+      {
+        "type": "paragraph",
+        "text": "Conectan áreas, procesos, sistemas y equipos de trabajo."
+      },
+      {
+        "type": "paragraph",
+        "text": "Un agente avanzado puede coordinar ventas, inventario, logística, pricing, compras, atención al cliente, finanzas, marketing y dirección en un solo flujo inteligente."
+      },
+      {
+        "type": "paragraph",
+        "text": "Estos agentes rompen silos."
+      },
+      {
+        "type": "subheading",
+        "text": "5. Agentes que aprenden"
+      },
+      {
+        "type": "paragraph",
+        "text": "Mejoran con retroalimentación humana, métricas de desempeño, resultados históricos, comportamiento de usuarios, validación operativa y datos del negocio."
+      },
+      {
+        "type": "paragraph",
+        "text": "No solo ejecutan. Evolucionan."
+      },
+      {
+        "type": "subheading",
+        "text": "6. Agentes que gobiernan"
+      },
+      {
+        "type": "paragraph",
+        "text": "Controlan permisos, seguridad, trazabilidad, cumplimiento, auditoría, calidad de respuestas, sesgos, riesgos y límites de autonomía."
+      },
+      {
+        "type": "paragraph",
+        "text": "Estos agentes son críticos para implementar IA empresarial segura, privada y escalable."
+      },
+      {
+        "type": "heading",
+        "text": "Los agentes más avanzados son transversales"
+      },
+      {
+        "type": "paragraph",
+        "text": "Los agentes de IA más complejos no pertenecen a un solo departamento. Operan entre áreas, sistemas, decisiones y procesos."
+      },
+      {
+        "type": "paragraph",
+        "text": "En MAYIA desarrollamos agentes empresariales de alto valor como:"
+      },
+      {
+        "type": "subheading",
+        "text": "Agentes Orquestadores"
+      },
+      {
+        "type": "paragraph",
+        "text": "Coordinan otros agentes, tareas, datos y sistemas."
+      },
+      {
+        "type": "paragraph",
+        "text": "Ejemplo: un agente maestro que detecta una caída de ventas, consulta inventario, revisa precios, activa una campaña, notifica al equipo comercial y sugiere redistribución logística."
+      },
+      {
+        "type": "subheading",
+        "text": "Agentes de Decisión"
+      },
+      {
+        "type": "paragraph",
+        "text": "Analizan variables, escenarios, restricciones y consecuencias para recomendar la mejor acción."
+      },
+      {
+        "type": "paragraph",
+        "text": "Ejemplo: decidir qué producto priorizar, qué sucursal abastecer, qué promoción activar o qué inversión acelerar."
+      },
+      {
+        "type": "subheading",
+        "text": "Agentes de Ejecución"
+      },
+      {
+        "type": "paragraph",
+        "text": "Convierten decisiones en acciones operativas."
+      },
+      {
+        "type": "paragraph",
+        "text": "Ejemplo: generar órdenes, actualizar CRM, crear tickets, mandar instrucciones, programar tareas o activar alertas."
+      },
+      {
+        "type": "subheading",
+        "text": "Agentes de Monitoreo"
+      },
+      {
+        "type": "paragraph",
+        "text": "Observan procesos en tiempo real y detectan anomalías."
+      },
+      {
+        "type": "paragraph",
+        "text": "Ejemplo: detectar desabasto, fraude, errores de caja, fallas operativas, incumplimientos, retrasos, desperdicio, desviaciones de calidad o riesgos de productividad."
+      },
+      {
+        "type": "subheading",
+        "text": "Agentes de Riesgo y Cumplimiento"
+      },
+      {
+        "type": "paragraph",
+        "text": "Validan reglas, políticas, permisos, privacidad, ciberseguridad, trazabilidad y cumplimiento normativo."
+      },
+      {
+        "type": "paragraph",
+        "text": "Ejemplo: revisar si una acción cumple con políticas internas antes de ejecutarse."
+      },
+      {
+        "type": "subheading",
+        "text": "Agentes de Inteligencia Comercial"
+      },
+      {
+        "type": "paragraph",
+        "text": "Analizan mercado, clientes, productos, campañas, competencia, precios y oportunidades."
+      },
+      {
+        "type": "paragraph",
+        "text": "Ejemplo: recomendar promociones, bundles, leads, cross-sell, up-sell, pricing dinámico o segmentos prioritarios."
+      },
+      {
+        "type": "subheading",
+        "text": "Agentes de Simulación"
+      },
+      {
+        "type": "paragraph",
+        "text": "Modelan escenarios futuros."
+      },
+      {
+        "type": "paragraph",
+        "text": "Ejemplo: “¿Qué pasa si subimos precio?”, “¿Qué pasa si cambiamos proveedor?”, “¿Qué pasa si reducimos inventario?”, “¿Qué pasa si abrimos una nueva región?”"
+      },
+      {
+        "type": "subheading",
+        "text": "Agentes Multimodales"
+      },
+      {
+        "type": "paragraph",
+        "text": "Interpretan texto, voz, imagen, video, sensores, cámaras o audio."
+      },
+      {
+        "type": "paragraph",
+        "text": "Ejemplo: un agente que observa una góndola, escucha una llamada, analiza un mostrador, revisa una cámara o interpreta documentos."
+      },
+      {
+        "type": "subheading",
+        "text": "Agentes Robóticos o Físicos"
+      },
+      {
+        "type": "paragraph",
+        "text": "Conectan inteligencia artificial con dispositivos, kioscos, sensores, robots, cámaras, actuadores o equipos físicos."
+      },
+      {
+        "type": "paragraph",
+        "text": "Ejemplo: inspección visual, picking, kioscos inteligentes, mostradores inteligentes, robots de servicio o monitoreo en planta."
+      },
+      {
+        "type": "subheading",
+        "text": "Agentes Supervisores"
+      },
+      {
+        "type": "paragraph",
+        "text": "Auditan a otros agentes."
+      },
+      {
+        "type": "paragraph",
+        "text": "Evalúan calidad, precisión, errores, sesgos, cumplimiento, evidencias, desempeño y trazabilidad."
+      },
+      {
+        "type": "heading",
+        "text": "La diferencia entre un chatbot y un agente de IA empresarial"
+      },
+      {
+        "type": "quote",
+        "text": "Un chatbot responde.Un agente actúa."
+      },
+      {
+        "type": "paragraph",
+        "text": "Un chatbot depende de una conversación.Un agente puede iniciar, ejecutar y cerrar tareas."
+      },
+      {
+        "type": "paragraph",
+        "text": "Un chatbot entrega información.Un agente genera resultados."
+      },
+      {
+        "type": "paragraph",
+        "text": "Un chatbot vive en una interfaz.Un agente vive dentro de la operación."
+      },
+      {
+        "type": "quote",
+        "text": "Un chatbot es una herramienta.Un agente es una capacidad empresarial."
+      },
+      {
+        "type": "paragraph",
+        "text": "Por eso, en MAYIA no construimos bots aislados. Construimos agentes de inteligencia artificial empresariales integrados a datos, sistemas, workflows, seguridad, monitoreo y objetivos de negocio."
+      },
+      {
+        "type": "heading",
+        "text": "Arquitectura de los Agentes de Inteligencia Artificial MAYIA"
+      },
+      {
+        "type": "paragraph",
+        "text": "Un agente empresarial serio no puede depender únicamente de un modelo generativo. Para operar en una empresa necesita arquitectura, datos, control, seguridad y gobierno."
+      },
+      {
+        "type": "paragraph",
+        "text": "La arquitectura MAYIA integra:"
+      },
+      {
+        "type": "paragraph",
+        "text": "IA Generativa"
+      },
+      {
+        "type": "paragraph",
+        "text": "Permite entender lenguaje natural, explicar información, redactar respuestas, generar recomendaciones, conversar con usuarios y sintetizar conocimiento."
+      },
+      {
+        "type": "paragraph",
+        "text": "RAG Empresarial"
+      },
+      {
+        "type": "paragraph",
+        "text": "Conecta al agente con documentos, políticas, manuales, reportes, bases de conocimiento y datos privados de la organización para responder con contexto real y trazable."
+      },
+      {
+        "type": "paragraph",
+        "text": "MAYIA Lakehouse"
+      },
+      {
+        "type": "paragraph",
+        "text": "Unifica datos estructurados y no estructurados para que los agentes puedan consultar, analizar y activar información desde una fuente confiable."
+      },
+      {
+        "type": "paragraph",
+        "text": "IA Simbólica y reglas de negocio"
+      },
+      {
+        "type": "paragraph",
+        "text": "Define límites, políticas, restricciones, validaciones, cálculos, permisos, reglas operativas y criterios de decisión."
+      },
+      {
+        "type": "paragraph",
+        "text": "Orquestación de workflows"
+      },
+      {
+        "type": "paragraph",
+        "text": "Permite que los agentes activen procesos, coordinen tareas, escalen casos, asignen responsables y conecten diferentes sistemas."
+      },
+      {
+        "type": "paragraph",
+        "text": "APIs e interoperabilidad"
+      },
+      {
+        "type": "paragraph",
+        "text": "Conecta agentes con ERP, CRM, POS, inventarios, calendarios, correo, sistemas internos, plataformas de operación, cámaras, sensores y aplicaciones empresariales."
+      },
+      {
+        "type": "paragraph",
+        "text": "Ciberseguridad y gobierno de datos"
+      },
+      {
+        "type": "paragraph",
+        "text": "Protege información, controla accesos, registra actividad, asegura trazabilidad y establece límites de autonomía."
+      },
+      {
+        "type": "paragraph",
+        "text": "Human-in-the-Loop"
+      },
+      {
+        "type": "paragraph",
+        "text": "Mantiene supervisión humana en decisiones críticas, aprobaciones, excepciones, riesgos y procesos de alto impacto."
+      },
+      {
+        "type": "paragraph",
+        "text": "Monitoreo continuo"
+      },
+      {
+        "type": "paragraph",
+        "text": "Mide desempeño, precisión, calidad, costos, adopción, errores, productividad, retorno de inversión y valor generado."
+      },
+      {
+        "type": "heading",
+        "text": "MAYIA: Fábrica de IA con integración vertical"
+      },
+      {
+        "type": "paragraph",
+        "text": "El mayor valor de MAYIA es que no desarrolla agentes como piezas aisladas. MAYIA opera como una Fábrica de Inteligencia Artificial Empresarial con integración vertical."
+      },
+      {
+        "type": "paragraph",
+        "text": "Eso significa que integramos en un solo ecosistema:"
+      },
+      {
+        "type": "paragraph",
+        "text": "Estrategia de IA empresarial."
+      },
+      {
+        "type": "paragraph",
+        "text": "Diagnóstico de oportunidades."
+      },
+      {
+        "type": "paragraph",
+        "text": "Diseño de casos de uso."
+      },
+      {
+        "type": "paragraph",
+        "text": "Infraestructura propia para IA."
+      },
+      {
+        "type": "paragraph",
+        "text": "Nube soberana."
+      },
+      {
+        "type": "paragraph",
+        "text": "MAYIA Lakehouse."
+      },
+      {
+        "type": "paragraph",
+        "text": "Laboratorios de innovación y pruebas."
+      },
+      {
+        "type": "paragraph",
+        "text": "Squads especializados de IA."
+      },
+      {
+        "type": "paragraph",
+        "text": "Ciberseguridad empresarial."
+      },
+      {
+        "type": "paragraph",
+        "text": "Monitoreo continuo."
+      },
+      {
+        "type": "paragraph",
+        "text": "Academia de IA."
+      },
+      {
+        "type": "paragraph",
+        "text": "Gobierno de datos."
+      },
+      {
+        "type": "paragraph",
+        "text": "Human-in-the-Loop."
+      },
+      {
+        "type": "paragraph",
+        "text": "Medición de ROI, RL y RS."
+      },
+      {
+        "type": "paragraph",
+        "text": "La mayoría de las empresas que ofrecen inteligencia artificial se enfocan en una parte del problema: consultoría, software, nube, modelos, automatización o capacitación."
+      },
+      {
+        "type": "paragraph",
+        "text": "MAYIA integra toda la cadena de valor."
+      },
+      {
+        "type": "paragraph",
+        "text": "De la estrategia a la arquitectura.De los datos al agente.Del laboratorio a producción.De la implementación al monitoreo.De la capacitación al retorno medible."
+      },
+      {
+        "type": "paragraph",
+        "text": "Esta integración vertical permite que los Agentes de IA MAYIA no sean experimentos tecnológicos, sino soluciones empresariales diseñadas para operar, escalar y generar valor real."
+      },
+      {
+        "type": "heading",
+        "text": "Por qué México necesita agentes de inteligencia artificial empresariales"
+      },
+      {
+        "type": "paragraph",
+        "text": "México enfrenta una oportunidad histórica."
+      },
+      {
+        "type": "paragraph",
+        "text": "La adopción de inteligencia artificial en las empresas mexicanas sigue siendo baja en comparación con el potencial económico del país. El estudio de Centro México Digital, “México Inteligente: La manufactura frente a la oportunidad que no espera”, documenta que la manufactura mexicana —uno de los motores productivos más importantes del país— todavía tiene una baja adopción de IA, a pesar de que la inteligencia artificial ya se asocia con mayores niveles de producción, salarios y empleo cuando se implementa correctamente."
+      },
+      {
+        "type": "paragraph",
+        "text": "Esto confirma una tesis central:"
+      },
+      {
+        "type": "paragraph",
+        "text": "La IA no reemplaza el valor humano. Lo amplifica."
+      },
+      {
+        "type": "paragraph",
+        "text": "Pero para que eso ocurra, la IA debe dejar de ser una prueba aislada y convertirse en capacidad instalada."
+      },
+      {
+        "type": "paragraph",
+        "text": "Las empresas mexicanas no necesitan más pilotos sin escalamiento. Necesitan agentes empresariales conectados a datos reales, sistemas reales, decisiones reales y resultados medibles."
+      },
+      {
+        "type": "paragraph",
+        "text": "Ahí es donde MAYIA concentra su mayor valor."
+      },
+      {
+        "type": "heading",
+        "text": "Agentes de IA y creación de valor empresarial"
+      },
+      {
+        "type": "paragraph",
+        "text": "Los agentes de inteligencia artificial deben justificar su existencia con impacto de negocio."
+      },
+      {
+        "type": "paragraph",
+        "text": "En MAYIA evaluamos los agentes bajo cinco palancas de creación de valor:"
+      },
+      {
+        "type": "subheading",
+        "text": "1. Crecimiento de ingresos"
+      },
+      {
+        "type": "paragraph",
+        "text": "Agentes que aumentan ventas, conversión, ticket promedio, recurrencia, atención comercial, nuevos productos digitales o monetización de datos."
+      },
+      {
+        "type": "subheading",
+        "text": "2. Margen operativo"
+      },
+      {
+        "type": "paragraph",
+        "text": "Agentes que reducen costos, errores, retrabajos, tiempos operativos, dependencia manual, desperdicio o ineficiencias."
+      },
+      {
+        "type": "subheading",
+        "text": "3. Flujo de efectivo"
+      },
+      {
+        "type": "paragraph",
+        "text": "Agentes que mejoran inventario, rotación, cobranza, disponibilidad, planeación de demanda o capital de trabajo."
+      },
+      {
+        "type": "subheading",
+        "text": "4. Asignación de capital"
+      },
+      {
+        "type": "paragraph",
+        "text": "Agentes que ayudan a decidir dónde invertir, qué proyecto priorizar, qué campaña financiar, qué operación escalar o qué riesgo atender primero."
+      },
+      {
+        "type": "subheading",
+        "text": "5. Múltiplo de valuación"
+      },
+      {
+        "type": "paragraph",
+        "text": "Agentes que reducen riesgo percibido, aumentan escalabilidad, mejoran trazabilidad, elevan predictibilidad, fortalecen control operativo y hacen que la empresa sea más confiable, medible y preparada para crecer."
+      },
+      {
+        "type": "quote",
+        "text": "La IA no es estratégica por ser avanzada. Es estratégica cuando mueve una palanca real de valor."
+      },
+      {
+        "type": "heading",
+        "text": "ROI, RL y RS: la nueva medición de valor de los agentes de IA"
+      },
+      {
+        "type": "paragraph",
+        "text": "En MAYIA no medimos los agentes únicamente por eficiencia técnica."
+      },
+      {
+        "type": "paragraph",
+        "text": "Los medimos por tres retornos:"
+      },
+      {
+        "type": "subheading",
+        "text": "ROI — Retorno de Inversión"
+      },
+      {
+        "type": "paragraph",
+        "text": "¿Cuánto valor financiero genera el agente frente al costo de implementación y operación?"
+      },
+      {
+        "type": "subheading",
+        "text": "RL — Retorno Laboral"
+      },
+      {
+        "type": "paragraph",
+        "text": "¿Cuánto tiempo libera? ¿Qué capacidades amplifica? ¿Qué tareas elimina? ¿Qué productividad habilita en los equipos?"
+      },
+      {
+        "type": "subheading",
+        "text": "RS — Retorno Social"
+      },
+      {
+        "type": "paragraph",
+        "text": "¿Qué impacto genera en empleo, capacitación, inclusión digital, atención ciudadana, seguridad, salud, educación o desarrollo regional?"
+      },
+      {
+        "type": "paragraph",
+        "text": "Este enfoque permite que los agentes de inteligencia artificial no se vendan como tecnología, sino como motores de productividad, competitividad y transformación empresarial."
+      },
+      {
+        "type": "heading",
+        "text": "Agentes de IA por industria"
+      },
+      {
+        "type": "paragraph",
+        "text": "Los agentes MAYIA pueden aplicarse en múltiples sectores."
+      },
+      {
+        "type": "subheading",
+        "text": "Retail"
+      },
+      {
+        "type": "paragraph",
+        "text": "Recomendadores inteligentes, asistentes de tienda, análisis de shopper, optimización de promociones, computer vision en góndola, monitoreo de anaquel y agentes de trade marketing."
+      },
+      {
+        "type": "subheading",
+        "text": "Salud"
+      },
+      {
+        "type": "paragraph",
+        "text": "Agentes para expedientes, citas, validación de diagnósticos, seguimiento de pacientes, inventario farmacéutico, alertas sanitarias y analítica poblacional."
+      },
+      {
+        "type": "subheading",
+        "text": "Manufactura"
+      },
+      {
+        "type": "paragraph",
+        "text": "Agentes para mantenimiento predictivo, control de calidad visual, planeación de producción, monitoreo de planta, reducción de desperdicio y optimización de supply chain."
+      },
+      {
+        "type": "subheading",
+        "text": "Medios"
+      },
+      {
+        "type": "paragraph",
+        "text": "Agentes de monitoreo de campañas, análisis de menciones, verificación de pauta, generación de testimoniales y reportes en tiempo real."
+      },
+      {
+        "type": "subheading",
+        "text": "Finanzas"
+      },
+      {
+        "type": "paragraph",
+        "text": "Agentes de riesgo, cobranza, cumplimiento, análisis documental, atención inteligente y detección de anomalías."
+      },
+      {
+        "type": "subheading",
+        "text": "Gobierno"
+      },
+      {
+        "type": "paragraph",
+        "text": "Agentes ciudadanos, automatización documental, inteligencia territorial, análisis de datos públicos, atención multicanal y gestión de servicios."
+      },
+      {
+        "type": "subheading",
+        "text": "PyMEs"
+      },
+      {
+        "type": "paragraph",
+        "text": "Agentes accesibles para ventas, atención al cliente, administración, cobranza, inventarios, marketing, reportes y automatización de procesos repetitivos."
+      },
+      {
+        "type": "heading",
+        "text": "El ecosistema mexicano de agentes de IA"
+      },
+      {
+        "type": "paragraph",
+        "text": "La construcción de un ecosistema de inteligencia artificial empresarial en México requiere la participación de muchos actores."
+      },
+      {
+        "type": "paragraph",
+        "text": "Las consultoras aportan metodología.Los hyperscalers aportan plataformas globales.Los centros de datos aportan infraestructura.Las universidades aportan talento.Las startups aportan velocidad e innovación.Los integradores aportan implementación.Las empresas aportan casos de uso reales.El gobierno aporta visión país, regulación e incentivos."
+      },
+      {
+        "type": "paragraph",
+        "text": "Todos son necesarios."
+      },
+      {
+        "type": "paragraph",
+        "text": "MAYIA aporta una capacidad distintiva: integración vertical mexicana para llevar agentes de IA desde la estrategia hasta la operación real."
+      },
+      {
+        "type": "paragraph",
+        "text": "No se trata solo de competir. Se trata de construir el ecosistema de IA empresarial que México necesita para competir en la nueva economía de la inteligencia."
+      },
+      {
+        "type": "heading",
+        "text": "Cómo implementar agentes de inteligencia artificial en una empresa"
+      },
+      {
+        "type": "paragraph",
+        "text": "La implementación correcta no inicia con tecnología."
+      },
+      {
+        "type": "paragraph",
+        "text": "Inicia con estrategia."
+      },
+      {
+        "type": "paragraph",
+        "text": "El proceso recomendado MAYIA sigue una ruta clara:"
+      },
+      {
+        "type": "subheading",
+        "text": "1. Diagnóstico"
+      },
+      {
+        "type": "paragraph",
+        "text": "Identificar procesos, datos, fricciones, oportunidades y objetivos de negocio."
+      },
+      {
+        "type": "subheading",
+        "text": "2. Priorización"
+      },
+      {
+        "type": "paragraph",
+        "text": "Seleccionar casos de uso según impacto, viabilidad, riesgo y retorno."
+      },
+      {
+        "type": "subheading",
+        "text": "3. Diseño del agente"
+      },
+      {
+        "type": "paragraph",
+        "text": "Definir misión, autonomía, datos, reglas, herramientas, usuarios, límites y métricas."
+      },
+      {
+        "type": "subheading",
+        "text": "4. Arquitectura"
+      },
+      {
+        "type": "paragraph",
+        "text": "Diseñar RAG, Lakehouse, APIs, seguridad, orquestación, monitoreo y gobierno."
+      },
+      {
+        "type": "subheading",
+        "text": "5. Laboratorio"
+      },
+      {
+        "type": "paragraph",
+        "text": "Probar el agente en un ambiente controlado antes de exponerlo a operación real."
+      },
+      {
+        "type": "subheading",
+        "text": "6. Piloto"
+      },
+      {
+        "type": "paragraph",
+        "text": "Validar desempeño, adopción, precisión, ahorro, productividad y experiencia del usuario."
+      },
+      {
+        "type": "subheading",
+        "text": "7. Integración"
+      },
+      {
+        "type": "paragraph",
+        "text": "Conectar con sistemas empresariales, workflows, equipos y reglas operativas."
+      },
+      {
+        "type": "subheading",
+        "text": "8. Monitoreo"
+      },
+      {
+        "type": "paragraph",
+        "text": "Medir desempeño, errores, costos, adopción, seguridad, ROI, RL y RS."
+      },
+      {
+        "type": "subheading",
+        "text": "9. Escalamiento"
+      },
+      {
+        "type": "paragraph",
+        "text": "Convertir el agente en una capacidad empresarial replicable."
+      },
+      {
+        "type": "subheading",
+        "text": "10. Sistema multi-agente"
+      },
+      {
+        "type": "paragraph",
+        "text": "Evolucionar de agentes individuales hacia una red inteligente de agentes coordinados."
+      },
+      {
+        "type": "heading",
+        "text": "La evolución: de agentes individuales a sistemas multi-agente"
+      },
+      {
+        "type": "paragraph",
+        "text": "El verdadero potencial aparece cuando los agentes dejan de operar de forma aislada y comienzan a colaborar entre sí."
+      },
+      {
+        "type": "paragraph",
+        "text": "Un agente detecta.Otro analiza.Otro recomienda.Otro ejecuta.Otro audita.Otro aprende.Otro reporta."
+      },
+      {
+        "type": "paragraph",
+        "text": "Eso convierte a la empresa en una organización inteligente."
+      },
+      {
+        "type": "paragraph",
+        "text": "En niveles avanzados, los sistemas multi-agente pueden coordinar operaciones completas: ventas, inventario, logística, atención, pricing, compras, marketing, finanzas, riesgos y dirección."
+      },
+      {
+        "type": "paragraph",
+        "text": "Esa es la evolución natural de la IA empresarial:"
+      },
+      {
+        "type": "paragraph",
+        "text": "De automatizar tareas.A coordinar workflows.A orquestar decisiones.A transformar modelos operativos."
+      },
+      {
+        "type": "heading",
+        "text": "Por qué MAYIA puede liderar la conversación de agentes en México"
+      },
+      {
+        "type": "paragraph",
+        "text": "Porque los agentes de IA no se construyen solo con prompts."
+      },
+      {
+        "type": "paragraph",
+        "text": "Se construyen con datos, infraestructura, seguridad, arquitectura, especialistas, laboratorios, gobierno, monitoreo, adopción y estrategia de valor."
+      },
+      {
+        "type": "paragraph",
+        "text": "MAYIA integra todos esos elementos."
+      },
+      {
+        "type": "paragraph",
+        "text": "Nuestra propuesta no es desarrollar agentes como herramientas aisladas, sino como capacidades empresariales conectadas al corazón operativo de cada organización."
+      },
+      {
+        "type": "paragraph",
+        "text": "MAYIA entiende que la inteligencia artificial empresarial requiere:"
+      },
+      {
+        "type": "paragraph",
+        "text": "Datos preparados."
+      },
+      {
+        "type": "paragraph",
+        "text": "Infraestructura segura."
+      },
+      {
+        "type": "paragraph",
+        "text": "Nube soberana."
+      },
+      {
+        "type": "paragraph",
+        "text": "Arquitectura escalable."
+      },
+      {
+        "type": "paragraph",
+        "text": "Ciberseguridad."
+      },
+      {
+        "type": "paragraph",
+        "text": "Interoperabilidad."
+      },
+      {
+        "type": "paragraph",
+        "text": "Casos de uso con ROI."
+      },
+      {
+        "type": "paragraph",
+        "text": "Equipos especializados."
+      },
+      {
+        "type": "paragraph",
+        "text": "Capacitación."
+      },
+      {
+        "type": "paragraph",
+        "text": "Monitoreo."
+      },
+      {
+        "type": "paragraph",
+        "text": "Gobierno."
+      },
+      {
+        "type": "paragraph",
+        "text": "Evolución continua."
+      },
+      {
+        "type": "paragraph",
+        "text": "Por eso MAYIA se posiciona como una fábrica mexicana de inteligencia artificial empresarial con integración vertical."
+      },
+      {
+        "type": "paragraph",
+        "text": "Frase estratégica"
+      },
+      {
+        "type": "highlight",
+        "text": "Los Agentes de Inteligencia Artificial MAYIA no se limitan a responder preguntas: entienden objetivos, consultan datos, ejecutan tareas, coordinan equipos, gobiernan riesgos y convierten workflows empresariales en valor medible."
+      },
+      {
+        "type": "heading",
+        "text": "Conclusión"
+      },
+      {
+        "type": "paragraph",
+        "text": "Los agentes de inteligencia artificial representan la siguiente etapa de la transformación empresarial."
+      },
+      {
+        "type": "paragraph",
+        "text": "No son chatbots.No son asistentes aislados.No son herramientas de moda."
+      },
+      {
+        "type": "paragraph",
+        "text": "Son sistemas inteligentes capaces de operar misiones empresariales."
+      },
+      {
+        "type": "paragraph",
+        "text": "Las empresas que adopten agentes de IA de forma seria podrán automatizar procesos, aumentar productividad, reducir costos, mejorar ventas, optimizar operaciones, acelerar decisiones y construir ventajas competitivas sostenibles."
+      },
+      {
+        "type": "paragraph",
+        "text": "Pero para lograrlo se necesita más que tecnología."
+      },
+      {
+        "type": "paragraph",
+        "text": "Se necesita estrategia, infraestructura, datos, ciberseguridad, talento, monitoreo, gobierno, adopción humana y medición de valor."
+      },
+      {
+        "type": "paragraph",
+        "text": "Eso es MAYIA."
+      },
+      {
+        "type": "highlight",
+        "text": "MAYIA desarrolla Agentes de Inteligencia Artificial para Empresas con integración vertical: estrategia, nube soberana, MAYIA Lakehouse, infraestructura propia, laboratorios, squads, ciberseguridad, monitoreo, academia y medición de ROI, RL y RS."
+      },
+      {
+        "type": "highlight",
+        "text": "MAYIA no crea bots."
+      },
+      {
+        "type": "paragraph",
+        "text": "MAYIA construye agentes empresariales que entienden, deciden, ejecutan y orquestan el futuro inteligente de las empresas mexicanas."
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Fabrica de Inteligencia Artificial en Mexico: MAYIA",
+    "excerpt": "La inteligencia artificial empresarial necesita mucho mas que un modelo. Necesita infraestructura, datos protegidos, computacion, almacenamiento, seguridad y especialistas capaces de llevar la IA del concepto a la realidad.",
+    "category": "Infraestructura",
+    "date": "1 Junio 2026",
+    "author": "Veronica Viniegra",
+    "readTime": "7 min lectura",
+    "image": "mxBanner",
+    "featured": false,
+    "content": [
+      {
+        "type": "paragraph",
+        "text": "La inteligencia artificial empresarial necesita mucho mas que un modelo. Necesita infraestructura. Necesita datos protegidos. Necesita computo. Necesita almacenamiento. Necesita red. Necesita seguridad. Necesita energia. Necesita operacion. Necesita especialistas capaces de llevar la inteligencia artificial del concepto a la realidad diaria de una empresa."
+      },
+      {
+        "type": "quote",
+        "text": "Por eso nace MAYIA: la fabrica mexicana de inteligencia artificial."
+      },
+      {
+        "type": "heading",
+        "text": "IA privada, segura y soberana para empresas mexicanas"
+      },
+      {
+        "type": "paragraph",
+        "text": "Las empresas que implementan IA necesitan saber donde viven sus datos, bajo que reglas se procesan, quien los opera, como se protegen y sobre que infraestructura se ejecutan sus modelos, aplicaciones y agentes inteligentes. MAYIA responde con una vision clara: inteligencia artificial privada, segura y soberana."
+      },
+      {
+        "type": "heading",
+        "text": "Infraestructura para ejecutar IA en Mexico"
+      },
+      {
+        "type": "paragraph",
+        "text": "MAYIA opera sobre el ecosistema EdgeNet IA Ready y la nube soberana FLAI, habilitando una arquitectura nacional para empresas que requieren enterprise AI infrastructure, private AI cloud, GPU cloud, GPU as a Service y AI-ready data center."
+      },
+      {
+        "type": "bullets",
+        "items": [
+          "En nuestros centros de datos: entorno seguro, operado y alojado en territorio nacional.",
+          "En modelo hibrido: combina infraestructura actual con capacidades del ecosistema MAYIA y FLAI.",
+          "En modalidad on premise: la solucion vive dentro de las instalaciones del cliente."
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Data Centers AI Ready para IA empresarial"
+      },
+      {
+        "type": "paragraph",
+        "text": "La inteligencia artificial necesita infraestructura preparada para operar con exigencias reales de procesamiento, seguridad, disponibilidad y gobierno de datos. MAYIA se apoya en Data Centers AI Ready: centros preparados para alojar, procesar y operar soluciones de IA empresarial en Mexico."
+      },
+      {
+        "type": "heading",
+        "text": "La fabrica donde la IA se convierte en valor"
+      },
+      {
+        "type": "paragraph",
+        "text": "Una AI Factory es el lugar donde la inteligencia artificial se disena, se entrena, se integra, se despliega, se gobierna y se mejora de forma continua. MAYIA lleva este concept al mercado mexicano: infraestructura soberana, nube, datos, ciberseguridad, automatizacion, agentes inteligentes y talento especializado en un solo ecosistema."
+      },
+      {
+        "type": "heading",
+        "text": "IA para personas, empresas y gobiernos"
+      },
+      {
+        "type": "bullets",
+        "items": [
+          "Para las personas: nuevas habilidades, mejores herramientas y mayor capacidad de decision.",
+          "Para las empresas: eficiencia, automatizacion, analisis, productividad, crecimiento y ventaja competitiva.",
+          "Para los gobiernos: mejores datos, mayor capacidad operativa y decisiones con mayor evidencia."
+        ]
+      },
+      {
+        "type": "highlight",
+        "text": "MAYIA es la fabrica mexicana de inteligencia artificial que lleva la IA empresarial del concepto a la operacion, con infraestructura privada, soberana y segura para empresas, gobiernos y PyMEs."
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "title": "MAYIA Lakehouse: prepara los datos de tu empresa para IA",
+    "excerpt": "La inteligencia artificial empieza con datos confiables, integrados, seguros y listos para operar. MAYIA Lakehouse es la plataforma que unifica tu informacion para IA, analitica avanzada y toma de decisiones en tiempo real.",
+    "category": "Datos & IA",
+    "date": "28 Mayo 2026",
+    "author": "Veronica Viniegra",
+    "readTime": "5 min lectura",
+    "image": "mayiaLakeBanner",
+    "featured": false,
+    "imagePosition": "right",
+    "content": [
+      {
+        "type": "paragraph",
+        "text": "La inteligencia artificial empieza con datos confiables, integrados, seguros y listos para operar."
+      },
+      {
+        "type": "paragraph",
+        "text": "MAYIA Lakehouse es la plataforma de datos empresariales de MAYIA diseñada para ayudar a las organizaciones a ordenar, conectar, gobernar y activar sus datos para inteligencia artificial, analítica avanzada, automatización, agentes inteligentes y toma de decisiones en tiempo real."
+      },
+      {
+        "type": "paragraph",
+        "text": "Integramos lo mejor de un Data Lake, un Data Warehouse y una arquitectura moderna Lakehouse para que tu empresa pueda dejar atrás los silos de información, los reportes desconectados, las bases de datos aisladas y los procesos manuales que impiden escalar la IA."
+      },
+      {
+        "type": "paragraph",
+        "text": "Con MAYIA Lakehouse, tus datos se convierten en una base inteligente para operar, analizar, predecir, automatizar y construir soluciones de inteligencia artificial empresarial."
+      },
+      {
+        "type": "heading",
+        "text": "¿Qué es MAYIA Lakehouse?"
+      },
+      {
+        "type": "paragraph",
+        "text": "MAYIA Lakehouse es una arquitectura de datos moderna que permite almacenar, integrar, gobernar y consultar información estructurada, semiestructurada y no estructurada desde una sola plataforma."
+      },
+      {
+        "type": "subheading",
+        "text": "Está diseñado para empresas que necesitan preparar sus datos para:"
+      },
+      {
+        "type": "bullets",
+        "items": [
+          "Inteligencia artificial empresarial.",
+          "Agentes de IA.",
+          "Analítica avanzada.",
+          "Dashboards ejecutivos.",
+          "Modelos predictivos.",
+          "Automatización inteligente.",
+          "RAG empresarial.",
+          "Machine learning.",
+          "Business intelligence.",
+          "Gobierno de datos.",
+          "Ciberseguridad de datos.",
+          "Toma de decisiones en tiempo real."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "En lugar de tener información dispersa en ERP, CRM, Excel, bases de datos, documentos, correos, sistemas operativos, plataformas de ventas, inventarios o atención a clientes, MAYIA Lakehouse crea una capa central de datos confiables, trazables y gobernados."
+      },
+      {
+        "type": "heading",
+        "text": "El problema: muchas empresas quieren IA, pero sus datos no están listos"
+      },
+      {
+        "type": "paragraph",
+        "text": "La mayoría de las organizaciones ya tiene datos. El problema es que esos datos suelen estar fragmentados, duplicados, incompletos, desactualizados o atrapados en sistemas que no se comunican entre sí."
+      },
+      {
+        "type": "subheading",
+        "text": "Esto provoca:"
+      },
+      {
+        "type": "bullets",
+        "items": [
+          "Reportes inconsistentes.",
+          "Decisiones lentas.",
+          "Datos duplicados.",
+          "Falta de trazabilidad.",
+          "Baja calidad de información.",
+          "Riesgos de seguridad.",
+          "Procesos dependientes de Excel.",
+          "Sistemas desconectados.",
+          "IA implementada en silos.",
+          "Pilotos de IA que no escalan.",
+          "Dificultad para medir ROI.",
+          "Falta de gobierno de datos.",
+          "Imposibilidad de construir agentes de IA confiables."
+        ]
+      },
+      {
+        "type": "quote",
+        "text": "La IA empresarial solo puede generar valor cuando los datos están conectados, gobernados, protegidos y disponibles para los procesos correctos."
+      },
+      {
+        "type": "heading",
+        "text": "Nuestra solución: datos listos para IA"
+      },
+      {
+        "type": "paragraph",
+        "text": "MAYIA Lakehouse prepara la información de tu empresa para convertirla en inteligencia accionable."
+      },
+      {
+        "type": "subheading",
+        "text": "Nuestra plataforma permite:"
+      },
+      {
+        "type": "bullets",
+        "items": [
+          "Integrar fuentes de datos empresariales.",
+          "Conectar ERP, CRM, BI, bases de datos, APIs, documentos y sistemas internos.",
+          "Crear pipelines de datos.",
+          "Organizar información en capas de datos.",
+          "Mejorar calidad, limpieza y consistencia.",
+          "Construir catálogos de datos.",
+          "Aplicar políticas de acceso y seguridad.",
+          "Habilitar dashboards y analítica avanzada.",
+          "Preparar datos para modelos de IA y agentes inteligentes.",
+          "Crear una arquitectura escalable para inteligencia artificial."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "El resultado es una empresa con datos preparados para analizar, automatizar y tomar mejores decisiones."
+      },
+      {
+        "type": "heading",
+        "text": "MAYIA Lakehouse convierte tus datos en inteligencia empresarial"
+      },
+      {
+        "type": "paragraph",
+        "text": "Con MAYIA Lakehouse, los datos dejan de ser archivos aislados y se convierten en una plataforma viva de inteligencia empresarial."
+      },
+      {
+        "type": "subheading",
+        "text": "La información puede alimentar:"
+      },
+      {
+        "type": "bullets",
+        "items": [
+          "Copilotos empresariales.",
+          "Agentes de IA por área.",
+          "Modelos predictivos.",
+          "Analítica comercial.",
+          "Inteligencia de clientes.",
+          "Automatización de procesos.",
+          "Reportes ejecutivos.",
+          "Sistemas de alerta.",
+          "Recomendadores.",
+          "Motores de decisión.",
+          "Soluciones RAG con documentos internos.",
+          "Plataformas de IA generativa privada."
+        ]
+      },
+      {
+        "type": "quote",
+        "text": "Esto permite que la inteligencia artificial trabaje con contexto real del negocio, no con información incompleta o desconectada."
+      },
+      {
+        "type": "heading",
+        "text": "¿Qué datos puede integrar MAYIA Lakehouse?"
+      },
+      {
+        "type": "subheading",
+        "text": "MAYIA Lakehouse puede conectar datos de múltiples fuentes:"
+      },
+      {
+        "type": "bullets",
+        "items": [
+          "ERP.",
+          "CRM.",
+          "POS.",
+          "E-commerce.",
+          "Inventarios.",
+          "Finanzas.",
+          "Ventas.",
+          "Marketing.",
+          "Recursos humanos.",
+          "Operaciones.",
+          "Logística.",
+          "Atención a clientes.",
+          "Documentos internos.",
+          "Archivos PDF.",
+          "Excel.",
+          "Correos.",
+          "Bases SQL.",
+          "Bases NoSQL.",
+          "APIs.",
+          "IoT.",
+          "Sensores.",
+          "Datos históricos.",
+          "Datos externos.",
+          "Sistemas legados.",
+          "Imágenes.",
+          "Videos."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "La meta es crear una visión unificada del negocio para que cada área pueda decidir con información confiable."
+      },
+      {
+        "type": "heading",
+        "text": "Arquitectura Lakehouse para empresas que quieren implementar IA"
+      },
+      {
+        "type": "paragraph",
+        "text": "MAYIA Lakehouse se construye sobre una arquitectura diseñada para escalar:"
+      },
+      {
+        "type": "bullets",
+        "items": [
+          "1. Ingesta de datos: Conectamos fuentes internas y externas para traer información desde sistemas, aplicaciones, documentos, bases de datos y APIs.",
+          "2. Capa de datos crudos: Organizamos los datos originales para conservar trazabilidad, historial y control.",
+          "3. Capa de datos limpios: Procesamos, validamos, depuramos y estandarizamos la información para mejorar calidad y consistencia.",
+          "4. Capa de datos de negocio: Convertimos los datos en información útil para dashboards, reportes, modelos, agentes y decisiones ejecutivas.",
+          "5. Gobierno y seguridad: Integramos permisos, trazabilidad, catálogo, control de acceso, auditoría, protección de datos sensibles y reglas de uso.",
+          "6. Activación con IA: Preparamos los datos para analítica avanzada, modelos predictivos, inteligencia artificial generativa, RAG, agentes inteligentes y automatización."
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Beneficios de MAYIA Lakehouse"
+      },
+      {
+        "type": "subheading",
+        "text": "MAYIA Lakehouse ayuda a tu empresa a:"
+      },
+      {
+        "type": "bullets",
+        "items": [
+          "Preparar datos para inteligencia artificial.",
+          "Reducir silos de información.",
+          "Mejorar calidad de datos.",
+          "Acelerar reportes y dashboards.",
+          "Crear una visión única del negocio.",
+          "Reducir dependencia de Excel.",
+          "Mejorar gobierno y trazabilidad.",
+          "Proteger datos sensibles.",
+          "Habilitar IA generativa privada.",
+          "Construir agentes de IA más confiables.",
+          "Integrar sistemas empresariales.",
+          "Escalar casos de uso de IA.",
+          "Medir ROI de iniciativas de datos e IA.",
+          "Tomar decisiones con mayor velocidad y precisión."
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Casos de uso de MAYIA Lakehouse"
+      },
+      {
+        "type": "paragraph",
+        "text": "MAYIA Lakehouse puede aplicarse en distintas áreas de negocio:"
+      },
+      {
+        "type": "bullets",
+        "items": [
+          "Dirección general: Dashboards ejecutivos, indicadores estratégicos, inteligencia de negocio y toma de decisiones basada en datos.",
+          "Ventas: Análisis de clientes, predicción de demanda, oportunidades comerciales, segmentación, leads inteligentes y agentes de ventas.",
+          "Finanzas: Control presupuestal, análisis de rentabilidad, riesgo, cobranza, conciliación, alertas y modelos predictivos.",
+          "Operaciones: Optimización de procesos, productividad, eficiencia, trazabilidad, indicadores operativos y automatización.",
+          "Retail: Inventarios inteligentes, comportamiento de clientes, tickets de venta, promociones, demanda por tienda y prevención de quiebres de stock.",
+          "Manufactura: Mantenimiento predictivo, calidad, trazabilidad de producción, eficiencia de línea, consumo energético y reducción de desperdicio.",
+          "Recursos humanos: Analítica de talento, capacitación, productividad, clima laboral, rotación y agentes internos de soporte.",
+          "Atención a clientes: Visión 360 del cliente, clasificación de tickets, análisis de conversaciones, agentes de servicio y automatización de respuestas."
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "De datos dispersos a una empresa lista para IA"
+      },
+      {
+        "type": "paragraph",
+        "text": "MAYIA Lakehouse ayuda a las empresas a pasar de datos desconectados a una arquitectura empresarial de inteligencia artificial."
+      },
+      {
+        "type": "bullets",
+        "items": [
+          "Primero ordenamos los datos.",
+          "Luego los gobernamos.",
+          "Después los conectamos con procesos.",
+          "Finalmente los activamos con IA, agentes inteligentes, dashboards, modelos predictivos y automatización."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Ese es el camino para convertir la información en valor real."
+      },
+      {
+        "type": "heading",
+        "text": "MAYIA Lakehouse + IA empresarial"
+      },
+      {
+        "type": "paragraph",
+        "text": "MAYIA Lakehouse no es solo almacenamiento de datos. Es la base para construir inteligencia artificial empresarial segura, gobernada y medible."
+      },
+      {
+        "type": "subheading",
+        "text": "Sobre esta plataforma, MAYIA puede implementar:"
+      },
+      {
+        "type": "bullets",
+        "items": [
+          "Agentes de inteligencia artificial.",
+          "Sistemas RAG con documentos internos.",
+          "Analítica predictiva.",
+          "Copilotos empresariales.",
+          "Automatización de procesos.",
+          "Dashboards inteligentes.",
+          "Modelos de machine learning.",
+          "Alertas de negocio.",
+          "Sistemas de decisión.",
+          "Orquestación de datos, procesos y agentes."
+        ]
+      },
+      {
+        "type": "quote",
+        "text": "La IA necesita datos. La empresa necesita gobierno. MAYIA Lakehouse une ambos."
+      },
+      {
+        "type": "heading",
+        "text": "Preguntas frecuentes"
+      },
+      {
+        "type": "subheading",
+        "text": "¿Qué es un Lakehouse?"
+      },
+      {
+        "type": "paragraph",
+        "text": "Un Lakehouse es una arquitectura moderna de datos que combina la flexibilidad de un Data Lake con la estructura, gobierno y capacidad analítica de un Data Warehouse."
+      },
+      {
+        "type": "subheading",
+        "text": "¿Para qué sirve un Lakehouse?"
+      },
+      {
+        "type": "paragraph",
+        "text": "Sirve para integrar, organizar, gobernar y activar datos empresariales para analítica, inteligencia artificial, dashboards, machine learning, automatización y toma de decisiones."
+      },
+      {
+        "type": "subheading",
+        "text": "¿Por qué una empresa necesita un Lakehouse para IA?"
+      },
+      {
+        "type": "paragraph",
+        "text": "Porque la inteligencia artificial necesita datos confiables, conectados, seguros y contextualizados. Sin una arquitectura de datos sólida, los modelos y agentes de IA pueden trabajar con información incompleta o incorrecta."
+      },
+      {
+        "type": "subheading",
+        "text": "¿MAYIA Lakehouse reemplaza mi ERP o CRM?"
+      },
+      {
+        "type": "paragraph",
+        "text": "No. MAYIA Lakehouse no reemplaza tus sistemas actuales. Los conecta, organiza y convierte sus datos en una base común para analítica e inteligencia artificial."
+      },
+      {
+        "type": "subheading",
+        "text": "¿MAYIA Lakehouse ayuda a implementar agentes de IA?"
+      },
+      {
+        "type": "paragraph",
+        "text": "Sí. MAYIA Lakehouse prepara los datos que necesitan los agentes de IA para responder, analizar, recomendar, automatizar y operar con contexto real del negocio."
+      },
+      {
+        "type": "subheading",
+        "text": "¿MAYIA Lakehouse es para empresas grandes o también para PyMEs?"
+      },
+      {
+        "type": "paragraph",
+        "text": "Puede implementarse de forma progresiva. Una empresa puede iniciar con fuentes críticas de datos, un caso de uso prioritario y escalar hacia una arquitectura Lakehouse más robusta."
+      },
+      {
+        "type": "heading",
+        "text": "Prepara tus datos para inteligencia artificial"
+      },
+      {
+        "type": "paragraph",
+        "text": "La IA empresarial no se construye sobre datos dispersos. Se construye sobre una arquitectura confiable, gobernada y segura."
+      },
+      {
+        "type": "highlight",
+        "text": "Solicita un diagnóstico MAYIA Lakehouse y descubre qué tan lista está tu empresa para implementar inteligencia artificial."
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Forward-Deployed AI Squads: la nueva forma de implementar IA en las empresas",
+    "excerpt": "MAYIA despliega Forward-Deployed AI Squads dentro de las empresas para implementar agentes inteligentes, automatizacion con IA, integracion de datos, seguridad, gobierno y ROI medible.",
+    "category": "IA Empresarial",
+    "date": "12 Junio 2026",
+    "author": "Veronica Viniegra",
+    "readTime": "5 min lectura",
+    "image": "squadsBanner",
+    "featured": false,
+    "content": [
+      {
+        "type": "paragraph",
+        "text": "La inteligencia artificial ya no se gana con presentaciones, pilotos aislados o herramientas desconectadas. Hoy, las empresas que quieren competir necesitan llevar la IA a sus procesos reales, conectarla con sus datos, integrarla con sus sistemas y convertirla en una capacidad operativa medible."
+      },
+      {
+        "type": "paragraph",
+        "text": "Ahí nace el modelo de Forward-Deployed AI Squads: equipos especializados de inteligencia artificial que se integran temporalmente dentro de la empresa para construir, implementar y escalar soluciones reales de IA."
+      },
+      {
+        "type": "paragraph",
+        "text": "En MAYIA, este modelo representa una nueva forma de llevar inteligencia artificial empresarial a México: no desde la distancia, no como consultoría genérica, sino desde el corazón operativo del cliente."
+      },
+      {
+        "type": "heading",
+        "text": "Qué son los Forward-Deployed AI Squads"
+      },
+      {
+        "type": "paragraph",
+        "text": "Los Forward-Deployed AI Squads son equipos de especialistas que trabajan directamente con las áreas de negocio, tecnología, datos, seguridad y operación de una empresa para llevar casos de uso de IA desde la idea hasta producción."
+      },
+      {
+        "type": "paragraph",
+        "text": "Este modelo ya está tomando fuerza en las compañías líderes de IA. Anthropic, por ejemplo, describe a sus Forward-Deployed Engineers como perfiles que trabajan dentro de los sistemas del cliente para construir aplicaciones productivas con modelos de IA, desarrollar artefactos técnicos como servidores MCP, subagentes y habilidades de agentes, además de acompañar despliegues enterprise. (Greenhouse)"
+      },
+      {
+        "type": "paragraph",
+        "text": "OpenAI también lanzó una compañía de despliegue empresarial para ayudar a organizaciones a llevar sistemas de IA a producción, incorporando Forward Deployed Engineers desde el inicio. (OpenAI) EY, por su parte, anunció roles de Forward Deployed Engineer para ayudar a las empresas a pasar de experimentación a despliegues de IA listos para producción. (EY)"
+      },
+      {
+        "type": "quote",
+        "text": "un Forward-Deployed AI Squad es un equipo de IA integrado al cliente para implementar inteligencia artificial real, segura y medible."
+      },
+      {
+        "type": "heading",
+        "text": "MAYIA Forward-Deployed AI Squads"
+      },
+      {
+        "type": "paragraph",
+        "text": "En MAYIA desplegamos Squads de IA Aplicada en Campo dentro de tu organización para acelerar la implementación de inteligencia artificial empresarial."
+      },
+      {
+        "type": "subheading",
+        "text": "Nuestros equipos combinan:"
+      },
+      {
+        "type": "bullets",
+        "items": [
+          "Forward-Deployed AI Engineers",
+          "AI Implementation Squads",
+          "Enterprise AI Squads",
+          "AI Engineering Squads",
+          "AI Delivery Squads",
+          "AI Transformation Squads",
+          "AI Adoption Squads",
+          "AI Production Squads",
+          "Applied AI Deployment Teams",
+          "Embedded AI Delivery Teams",
+          "Customer Embedded AI Engineers"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "En términos simples: somos el equipo experto que entra a tu empresa para convertir procesos, datos y talento en agentes inteligentes funcionando en producción."
+      },
+      {
+        "type": "heading",
+        "text": "No vendemos IA. Implementamos capacidad real de IA"
+      },
+      {
+        "type": "paragraph",
+        "text": "Muchas empresas ya probaron herramientas de inteligencia artificial. Algunas hicieron demos. Otras compraron licencias. Pero pocas han logrado integrar IA en sus procesos críticos con seguridad, gobierno, adopción y retorno de inversión."
+      },
+      {
+        "type": "quote",
+        "text": "El problema no es la falta de tecnología. El problema es la falta de implementación."
+      },
+      {
+        "type": "paragraph",
+        "text": "Por eso MAYIA trabaja bajo un enfoque de AI Field Deployment, field AI engineering, AI customer engineering y applied AI deployment. Nuestro objetivo es llevar la IA al terreno donde realmente genera valor: ventas, atención a clientes, operaciones, finanzas, compras, recursos humanos, legal, logística, manufactura, retail, dirección general y análisis de datos."
+      },
+      {
+        "type": "heading",
+        "text": "Cómo trabaja un Squad de IA MAYIA"
+      },
+      {
+        "type": "paragraph",
+        "text": "Cada AI Implementation Squad se integra temporalmente con el cliente para entender sus procesos reales, identificar oportunidades de alto impacto y construir soluciones de IA listas para operar."
+      },
+      {
+        "type": "subheading",
+        "text": "Nuestra metodología conecta:"
+      },
+      {
+        "type": "highlight",
+        "text": "Diagnóstico → Datos → Proceso → Arquitectura → Agente → Integración → Seguridad → Producción → Adopción → ROI"
+      },
+      {
+        "type": "paragraph",
+        "text": "Esto significa que no empezamos preguntando \"qué modelo quieres usar\". Empezamos preguntando:"
+      },
+      {
+        "type": "bullets",
+        "items": [
+          "¿Qué proceso quieres transformar?",
+          "¿Qué decisión quieres acelerar?",
+          "¿Qué tarea quieres automatizar?",
+          "¿Qué datos tienes disponibles?",
+          "¿Qué sistemas deben integrarse?",
+          "¿Qué riesgo debemos controlar?",
+          "¿Qué resultado financiero quieres medir?"
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Agentes de IA para empresas"
+      },
+      {
+        "type": "paragraph",
+        "text": "Los MAYIA Forward-Deployed AI Squads diseñan e implementan agentes inteligentes y asistentes empresariales para casos de uso como:"
+      },
+      {
+        "type": "bullets",
+        "items": [
+          "Agentes de IA para ventas.",
+          "Agentes de IA para atención a clientes.",
+          "Agentes de IA para cobranza.",
+          "Agentes de IA para compras.",
+          "Agentes de IA para recursos humanos.",
+          "Agentes de IA para finanzas.",
+          "Agentes de IA para análisis documental.",
+          "Agentes de IA para dirección general.",
+          "Agentes de IA para operaciones.",
+          "Agentes de IA para reportes, BI y toma de decisiones."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Cada agente se diseña con permisos, trazabilidad, gobierno de datos, Human in the Loop, monitoreo, evaluación y seguridad empresarial."
+      },
+      {
+        "type": "quote",
+        "text": "La meta no es crear un chatbot. La meta es crear una nueva capacidad operativa."
+      },
+      {
+        "type": "heading",
+        "text": "De piloto a producción"
+      },
+      {
+        "type": "paragraph",
+        "text": "Uno de los mayores retos de la inteligencia artificial empresarial es pasar del piloto a producción."
+      },
+      {
+        "type": "quote",
+        "text": "Un piloto demuestra posibilidad. Un sistema en producción demuestra valor."
+      },
+      {
+        "type": "paragraph",
+        "text": "Por eso nuestros AI Production Squads trabajan para que cada solución tenga arquitectura enterprise, integración con sistemas reales, fuentes de datos confiables, controles de acceso, métricas de desempeño, monitoreo y un responsable operativo dentro de la organización."
+      },
+      {
+        "type": "paragraph",
+        "text": "La IA empresarial no puede vivir como experimento eterno. Debe vivir como infraestructura de productividad, crecimiento y competitividad."
+      },
+      {
+        "type": "heading",
+        "text": "Por qué México necesita Squads de IA"
+      },
+      {
+        "type": "paragraph",
+        "text": "México tiene una oportunidad histórica: convertir la inteligencia artificial en una herramienta de competitividad para empresas, industrias, gobiernos y sectores productivos."
+      },
+      {
+        "type": "paragraph",
+        "text": "Pero para lograrlo no basta con adoptar herramientas extranjeras. Se necesita talento especializado, infraestructura segura, nube soberana, datos gobernados, ciberseguridad, capacitación y equipos capaces de implementar IA en el contexto real de las empresas mexicanas."
+      },
+      {
+        "type": "paragraph",
+        "text": "Ahí entra MAYIA."
+      },
+      {
+        "type": "paragraph",
+        "text": "Con nuestros Forward-Deployed AI Squads, ayudamos a las organizaciones a pasar de la intención a la implementación real: construimos agentes, automatizamos procesos, conectamos datos, integramos sistemas, capacitamos equipos y medimos resultados."
+      },
+      {
+        "type": "heading",
+        "text": "Beneficios de un Forward-Deployed AI Squad"
+      },
+      {
+        "type": "subheading",
+        "text": "Un Enterprise AI Squad permite acelerar la adopción de inteligencia artificial con menor riesgo y mayor claridad de negocio. Entre los principales beneficios están:"
+      },
+      {
+        "type": "bullets",
+        "items": [
+          "Reducción del tiempo para pasar de idea a producción.",
+          "Implementación de agentes de IA conectados a procesos reales.",
+          "Integración con datos, sistemas y flujos de trabajo existentes.",
+          "Mayor adopción por parte de usuarios internos.",
+          "Seguridad, trazabilidad y gobierno desde el diseño.",
+          "Transferencia de conocimiento al equipo del cliente.",
+          "Medición de ROI, productividad y eficiencia operativa.",
+          "Escalamiento ordenado hacia nuevas áreas de negocio."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "El resultado es claro: la empresa no solo usa IA; aprende a operar con IA."
+      },
+      {
+        "type": "heading",
+        "text": "MAYIA: la fábrica mexicana de inteligencia artificial aplicada"
+      },
+      {
+        "type": "paragraph",
+        "text": "MAYIA está diseñada para ayudar a empresas mexicanas a implementar inteligencia artificial de forma segura, estratégica y medible."
+      },
+      {
+        "type": "paragraph",
+        "text": "Nuestros Squads de IA Aplicada en Campo combinan consultoría estratégica, ingeniería de IA, arquitectura de datos, automatización, ciberseguridad, gobierno, adopción y medición de valor."
+      },
+      {
+        "type": "subheading",
+        "text": "La diferencia es nuestra forma de trabajar:"
+      },
+      {
+        "type": "bullets",
+        "items": [
+          "No llegamos con una presentación.",
+          "Llegamos con un equipo.",
+          "No vendemos promesas.",
+          "Construimos soluciones.",
+          "No dejamos dependencia.",
+          "Dejamos capacidad instalada."
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "La nueva ventaja competitiva: IA implementada"
+      },
+      {
+        "type": "quote",
+        "text": "El futuro no será de las empresas que hablen más de inteligencia artificial. Será de las empresas que sepan implementarla mejor."
+      },
+      {
+        "type": "paragraph",
+        "text": "Los Forward-Deployed AI Engineers, AI Delivery Squads, AI Transformation Squads y AI Adoption Squads representan una nueva categoría de servicios empresariales: equipos expertos capaces de convertir inteligencia artificial en operación, productividad, ingresos, eficiencia y conocimiento interno."
+      },
+      {
+        "type": "subheading",
+        "text": "En MAYIA creemos que la IA debe llegar a donde ocurre el trabajo real:"
+      },
+      {
+        "type": "bullets",
+        "items": [
+          "A la sucursal.",
+          "Al call center.",
+          "Al área comercial.",
+          "A finanzas.",
+          "A operaciones.",
+          "A manufactura.",
+          "A logística.",
+          "A recursos humanos.",
+          "A dirección general."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Porque la inteligencia artificial solo genera valor cuando se integra al negocio."
+      },
+      {
+        "type": "heading",
+        "text": "Implementa IA real con MAYIA"
+      },
+      {
+        "type": "paragraph",
+        "text": "Si tu empresa quiere pasar de probar inteligencia artificial a implementarla en producción, necesitas más que una herramienta. Necesitas un Forward-Deployed AI Squad."
+      },
+      {
+        "type": "paragraph",
+        "text": "Necesitas un equipo que entienda tu negocio, tus datos, tus procesos, tus riesgos y tus objetivos."
+      },
+      {
+        "type": "paragraph",
+        "text": "Necesitas MAYIA."
+      },
+      {
+        "type": "highlight",
+        "text": "MAYIA Forward-Deployed AI Squads: la unidad que lleva inteligencia artificial empresarial del diagnóstico a producción, con agentes inteligentes, seguridad, gobierno, adopción y ROI medible."
+      },
+      {
+        "type": "heading",
+        "text": "Agenda un diagnóstico de IA con MAYIA"
+      },
+      {
+        "type": "paragraph",
+        "text": "Descubre cómo un Forward-Deployed AI Squad puede transformar tus procesos, automatizar tareas críticas e implementar agentes inteligentes dentro de tu empresa."
+      },
+      {
+        "type": "highlight",
+        "text": "MAYIA: inteligencia artificial aplicada, segura y medible para empresas mexicanas."
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "title": "Conoce El Origen De Nuestra Marca: ¿Por que MAYIA?",
+    "excerpt": "MAYIA nace de una raiz profunda: Maya + IA. Un nombre que une la inteligencia ancestral de Mexico con la inteligencia artificial que hoy esta escribiendo una nueva etapa para el mundo.",
+    "category": "Innovacion",
+    "date": "12 Junio 2026",
+    "author": "Veronica Viniegra",
+    "readTime": "3 min lectura",
+    "image": "origenBanner",
+    "featured": false,
+    "content": [
+      {
+        "type": "paragraph",
+        "text": "MAYIA nace de una raíz profunda: Maya + IA."
+      },
+      {
+        "type": "paragraph",
+        "text": "Un nombre que une la inteligencia ancestral de México con la inteligencia artificial que hoy está escribiendo una nueva etapa para el mundo."
+      },
+      {
+        "type": "paragraph",
+        "text": "La civilización maya fue una civilización del conocimiento. Observó el cielo con precisión, desarrolló sistemas matemáticos, midió el tiempo, construyó ciudades, creó arquitectura monumental, entendió ciclos naturales, dejó escritura, símbolos y una visión extraordinaria sobre la relación entre el ser humano, la naturaleza y el universo."
+      },
+      {
+        "type": "heading",
+        "text": "Inspiración ancestral para la era digital"
+      },
+      {
+        "type": "bullets",
+        "items": [
+          "Los mayas miraban el cielo para leer señales.",
+          "Estudiaban los ciclos para tomar decisiones.",
+          "Transformaban la observación en conocimiento.",
+          "Convertían el cálculo en arquitectura.",
+          "Hacían del tiempo un sistema.",
+          "Hacían de la inteligencia una forma de vida."
+        ]
+      },
+      {
+        "type": "quote",
+        "text": "De esa inspiración nace MAYIA Inteligencia Artificial."
+      },
+      {
+        "type": "paragraph",
+        "text": "MAYIA es un homenaje a esa memoria. A esa capacidad profunda de observar, interpretar, calcular, construir y anticipar. Es una marca que reconoce que México tiene una historia milenaria de inteligencia, ciencia, pensamiento, precisión y visión de futuro."
+      },
+      {
+        "type": "heading",
+        "text": "Inteligencia artificial con raíz mexicana"
+      },
+      {
+        "type": "paragraph",
+        "text": "El nombre MAYIA lleva dentro una declaración poderosa: la inteligencia artificial mexicana también puede tener identidad, raíz, territorio y propósito. Puede mirar hacia adelante honrando lo que somos. Puede hablar de tecnología desde una historia propia. Puede nacer desde México con una voz que reconoce su origen y proyecta su futuro."
+      },
+      {
+        "type": "paragraph",
+        "text": "MAYIA representa inteligencia artificial desde México: desde servidores ubicados en territorio nacional, con soberanía de datos y una visión entrenada en el conocimiento, la cultura, las necesidades y la realidad actual de la nación, para impulsar la competitividad digital de las personas, las empresas y los gobiernos a nivel nacional e internacional."
+      },
+      {
+        "type": "paragraph",
+        "text": "Así como los mayas observaron el cielo para entender el mundo, MAYIA mira la nueva era digital como un territorio de conocimiento, posibilidad y transformación."
+      },
+      {
+        "type": "heading",
+        "text": "MAYIA representa inteligencia artificial desde México"
+      },
+      {
+        "type": "subheading",
+        "text": "MAYIA une pasado, presente y futuro:"
+      },
+      {
+        "type": "bullets",
+        "items": [
+          "Une memoria y tecnología.",
+          "Une raíz y visión.",
+          "Une territorio e inteligencia.",
+          "Une la grandeza intelectual de una civilización extraordinaria con la inteligencia artificial aplicada que está redefiniendo nuestro tiempo."
+        ]
+      },
+      {
+        "type": "quote",
+        "text": "Porque antes de hablar de inteligencia artificial, México ya tenía una historia profunda de inteligencia."
+      },
+      {
+        "type": "highlight",
+        "text": "MAYIA es inteligencia artificial con raíz mexicana."
+      },
+      {
+        "type": "paragraph",
+        "text": "Es la evolución simbólica de una herencia que observó las estrellas y hoy mira hacia el futuro."
+      },
+      {
+        "type": "highlight",
+        "text": "MAYIA une la inteligencia ancestral de México con la inteligencia artificial que construye la nueva era digital."
+      }
+    ]
+  }
+]
