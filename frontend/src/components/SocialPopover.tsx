@@ -13,6 +13,15 @@ interface SocialPopoverProps {
 
 const SocialPopover: React.FC<SocialPopoverProps> = ({ isOpen, onClose, children }) => {
   const [mounted, setMounted] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia('(max-width: 767px)');
+    setIsMobile(media.matches);
+    const listener = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    media.addEventListener('change', listener);
+    return () => media.removeEventListener('change', listener);
+  }, []);
 
   useEffect(() => {
     if (isOpen) {
@@ -36,7 +45,7 @@ const SocialPopover: React.FC<SocialPopoverProps> = ({ isOpen, onClose, children
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: '24px',
+        padding: isMobile ? '8px' : '24px',
         pointerEvents: isOpen ? 'auto' : 'none',
       }}
     >
@@ -58,12 +67,12 @@ const SocialPopover: React.FC<SocialPopoverProps> = ({ isOpen, onClose, children
       <div
         style={{
           position: 'relative',
-          width: '95%',
+          width: isMobile ? '98%' : '95%',
           maxWidth: '850px',
           height: 'auto',
-          maxHeight: '85vh',
+          maxHeight: isMobile ? '92vh' : '85vh',
           backgroundColor: '#ffffff', // Light theme background
-          borderRadius: '24px',
+          borderRadius: isMobile ? '16px' : '24px',
           border: `1px solid #e5e7eb`,
           boxShadow: `0 25px 50px -12px rgba(0,0,0,0.25), 0 0 40px ${colores.primario}20`,
           overflow: 'hidden', // Contains the child scroll
