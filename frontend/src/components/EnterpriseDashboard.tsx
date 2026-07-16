@@ -1,11 +1,11 @@
-import { useState, useEffect, useRef, useMemo, forwardRef, useImperativeHandle, Fragment } from 'react';
+import { useState, useEffect, useRef, useMemo, useCallback, forwardRef, useImperativeHandle, Fragment } from 'react';
 import { motion } from 'framer-motion';
 import { 
   Database, FlaskConical, FileText, Wrench, Calendar,
   Briefcase, LineChart, ShoppingBag, GraduationCap, GitBranch, ScanEye,
   BookOpen, Award, Users, MoreVertical, Info, Cloud, Target, TrendingUp,
   TrendingDown, Shield, Bot, Zap, Link2, Lock, Layers, FlaskRound,
-  MonitorCheck, GraduationCap as GradCap, ChevronRight, MessageSquare
+  MonitorCheck, GraduationCap as GradCap, ChevronRight, MessageSquare, Cpu
 } from 'lucide-react';
 import logoMaia from '../assets/logosNativos/logoMaia.webp';
 import academiaLogo from '../assets/logosNativos/academia-horizontal.webp';
@@ -14,6 +14,20 @@ import mayiaLakeLogo from '../assets/logosNativos/MAYiA_LAKE.webp';
 import ajoloteVideo from '../assets/AJOLOTE.webm';
 import roiVideo from '../assets/ROI_Video.mp4';
 import squadVideo from '../assets/SQUAD_MAYIA.mp4';
+import senderoSeguroVideo from '../assets/SENDERO SEGURO.mp4';
+import servidoresVideo from '../assets/SERVIDORES.mp4';
+import autoVideo from '../assets/AUTO.mp4';
+import camaraVideo from '../assets/CAMARA.mp4';
+import { MexicoEsMayia } from './modules/dashboardModules/MexicoEsMayia';
+import { brandingConfig } from '../config/branding';
+
+import Agencia33Graph from './animations/Agencia33Graph';
+import MonitorIAWave from './animations/MonitorIAWave';
+import SalesCarConcession from './animations/SalesCarConcession';
+import LumelWaves from './animations/LumelWaves';
+import BrainCanvas from './animations/BrainCanvas';
+import type { BrainHandle } from './animations/BrainCanvas';
+
 
 const hexToRgba = (hex: string, alpha: number) => {
   if (!hex || typeof hex !== 'string') return `rgba(164, 217, 85, ${alpha})`;
@@ -129,7 +143,7 @@ const LazyVideo = forwardRef<HTMLVideoElement, any>(({ src, videoSrc, children, 
             filter: 'blur(8px)',
           }}
         />
-        <span style={{ fontSize: 28, opacity: 0.25, filter: 'drop-shadow(0 0 8px ' + colorFinal + ')' }}>⚡</span>
+        <span style={{ fontSize: 28, opacity: 0.25, filter: 'drop-shadow(0 0 8px ' + colorFinal + ')' }}></span>
       </div>
     );
   }
@@ -699,7 +713,6 @@ function FlaiCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
 function SocCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
   const [isHovered, setIsHovered] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [showCerts, setShowCerts] = useState(false);
   const color = '#60a5fa';
   const theme = getPastelTheme(color);
 
@@ -737,8 +750,8 @@ function SocCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
             <img src="/assets/images/productos/cyberpeaceLogo.webp" alt="CyberPeace SOC - Centro de Operaciones de Seguridad Inteligente para Ciberseguridad con Inteligencia Artificial" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
           </div>
           <div>
-            <h3 style={{ margin: 0, fontSize: 18, fontWeight: 800, color: '#111827' }}>SOC IA CyberPeace</h3>
-            <p style={{ margin: 0, fontSize: 12, color: '#4B5563', fontWeight: 600 }}>Ciberseguridad 360°</p>
+            <h3 style={{ margin: 0, fontSize: 18, fontWeight: 800, color: '#111827' }}>Ciberseguridad 360°</h3>
+            <p style={{ margin: 0, fontSize: 12, color: '#4B5563', fontWeight: 600 }}>SOC IA con CyberPeace</p>
           </div>
         </div>
 
@@ -809,30 +822,26 @@ function SocCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
 
       {/* Certificaciones adicionales */}
       <div style={{ padding: '0 20px 16px' }}>
-        <button
-          onClick={() => setShowCerts(!showCerts)}
+        <div
           style={{
             width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 12px',
             borderRadius: 12, border: '1px solid #E5E7EB', background: '#F3F4F6', color: '#4B5563',
-            fontSize: 12, fontWeight: 600, cursor: 'pointer', transition: 'all 0.3s'
+            fontSize: 12, fontWeight: 600
           }}
         >
           <span>Certificaciones Adicionales</span>
-          <span style={{ transform: showCerts ? 'rotate(180deg)' : 'none', transition: 'transform 0.3s' }}>▼</span>
-        </button>
+        </div>
 
-        {showCerts && (
-          <div style={{
-            background: 'linear-gradient(135deg, #F9FAFB, #F3F4F6)', borderRadius: 12, padding: 12, marginTop: 8,
-            border: '1px solid #E5E7EB', display: 'flex', flexWrap: 'wrap', gap: 6, justifyContent: 'center'
-          }}>
-            {['ISO 27001', 'ISO 27034', 'ISO 27017', 'ISO 9001', 'ISO 37001', 'ISO 27018'].map(cert => (
-              <span key={cert} style={{ fontSize: 9, fontWeight: 700, padding: '4px 8px', borderRadius: 99, background: hexToRgba(color, 0.15), color: '#1e3a8a', border: `1px solid ${hexToRgba(color, 0.3)}` }}>
-                {cert}
-              </span>
-            ))}
-          </div>
-        )}
+        <div style={{
+          background: 'linear-gradient(135deg, #F9FAFB, #F3F4F6)', borderRadius: 12, padding: 12, marginTop: 8,
+          border: '1px solid #E5E7EB', display: 'flex', flexWrap: 'wrap', gap: 6, justifyContent: 'center'
+        }}>
+          {['ISO 27001', 'ISO 27034', 'ISO 27017', 'ISO 9001', 'ISO 37001', 'ISO 27018'].map(cert => (
+            <span key={cert} style={{ fontSize: 9, fontWeight: 700, padding: '4px 8px', borderRadius: 99, background: hexToRgba(color, 0.15), color: '#1e3a8a', border: `1px solid ${hexToRgba(color, 0.3)}` }}>
+              {cert}
+            </span>
+          ))}
+        </div>
       </div>
 
       <div style={{ display: 'flex', gap: 8, padding: '20px 20px 20px', marginTop: 'auto' }}>
@@ -1215,7 +1224,7 @@ function SquadsMayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
           </div>
           <div>
             <h3 style={{ margin: 0, fontSize: 18, fontWeight: 800, color: '#111827' }}>Squads MAYiA</h3>
-            <p style={{ margin: 0, fontSize: 11, color: '#4B5563', fontWeight: 600 }}>Consultores e Ingenieros de IA</p>
+            <p style={{ margin: 0, fontSize: 11, color: '#4B5563', fontWeight: 600 }}>Forward-Deployed Engineers</p>
           </div>
         </div>
 
@@ -1300,7 +1309,7 @@ function SquadsMayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
               letterSpacing: '0.04em',
             }}
           >
-            Forward-Deployed Engineers
+            Creamos IA en tu entorno
           </motion.div>
         </div>
 
@@ -2057,6 +2066,8 @@ function StandardCard({
   videoSrc, 
   stats,
   videoOverlay,
+  beforeText,
+  onConocerMas,
   children 
 }: { 
   icon: any, 
@@ -2067,6 +2078,8 @@ function StandardCard({
   videoSrc?: string, 
   stats?: Array<{ value: string, label: string, color?: string }>,
   videoOverlay?: React.ReactNode,
+  beforeText?: React.ReactNode,
+  onConocerMas?: () => void,
   children?: React.ReactNode 
 }) {
   const [isHovered, setIsHovered] = useState(false);
@@ -2135,6 +2148,12 @@ function StandardCard({
         </div>
       </div>
 
+      {beforeText && (
+        <div style={{ marginBottom: 16 }}>
+          {beforeText}
+        </div>
+      )}
+
       {videoSrc && (
         <div style={{ 
           borderRadius: 16, 
@@ -2188,7 +2207,7 @@ function StandardCard({
 
       <div style={{ display: 'flex', marginTop: 'auto', gap: 8 }}>
         <button 
-          onClick={handleAgendarCita}
+          onClick={onConocerMas ? (e) => { e.stopPropagation(); onConocerMas(); } : handleAgendarCita}
           style={{ 
             background: `linear-gradient(135deg, ${color} 0%, rgba(255, 255, 255, 0.6) 50%, ${hexToRgba(color, 0.85)} 100%)`, 
             backgroundSize: '200% auto',
@@ -2720,9 +2739,161 @@ function AcademiaCard() {
   );
 }
 
+// --- COMPONENTE AUXILIAR: SolutionCardItem ---
+interface SolutionCardItemProps {
+  sol: {
+    title: string;
+    slogan: string;
+    desc: string;
+    details: string[];
+    color: string;
+    animation: React.ComponentType;
+  };
+  onClick: () => void;
+}
+
+function SolutionCardItem({ sol, onClick }: SolutionCardItemProps) {
+  const [isHovered, setIsHovered] = useState(false);
+  const AnimComponent = sol.animation;
+  
+  return (
+    <motion.div
+      onClick={onClick}
+      whileHover={{ scale: 1.01, y: -1.5 }}
+      whileTap={{ scale: 0.99 }}
+      style={{
+        position: 'relative',
+        height: 48,
+        borderRadius: 12,
+        overflow: 'hidden',
+        cursor: 'pointer',
+        border: `1.5px solid ${isHovered ? sol.color : 'rgba(255, 255, 255, 0.08)'}`,
+        boxShadow: isHovered 
+          ? `0 6px 12px -6px ${sol.color}40`
+          : '0 2px 6px rgba(0,0,0,0.02)',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-start',
+        justifyContent: 'center',
+        paddingLeft: 16,
+        paddingRight: 16,
+        transition: 'border-color 0.3s ease, box-shadow 0.3s ease'
+      }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {/* Animación "Ventana" de fondo */}
+      <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
+        <AnimComponent />
+      </div>
+
+      {/* Capa de cristal/filtro que oscurece el fondo y resalta las letras */}
+      <div 
+        style={{
+          position: 'absolute',
+          inset: 0,
+          zIndex: 1,
+          background: isHovered ? 'rgba(9, 13, 22, 0.45)' : 'rgba(9, 13, 22, 0.65)',
+          backdropFilter: isHovered ? 'blur(0.5px)' : 'blur(1.5px)',
+          transition: 'background-color 0.3s ease, backdrop-filter 0.3s ease'
+        }}
+      />
+
+      {/* Textos: Título y Slogan */}
+      <div style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', gap: 1, pointerEvents: 'none' }}>
+        <h4 
+          style={{
+            margin: 0,
+            color: '#FFFFFF',
+            fontSize: 12,
+            fontWeight: 800,
+            letterSpacing: '0.5px',
+            textTransform: 'uppercase',
+            transition: 'all 0.3s ease',
+            textShadow: isHovered ? `0 0 10px ${sol.color}` : 'none',
+          }}
+        >
+          {sol.title}
+        </h4>
+        <span 
+          style={{
+            fontSize: 9,
+            color: isHovered ? sol.color : 'rgba(255, 255, 255, 0.55)',
+            fontWeight: 500,
+            transition: 'color 0.3s ease'
+          }}
+        >
+          {sol.slogan}
+        </span>
+      </div>
+    </motion.div>
+  );
+}
+
 // --- COMPONENTE PRINCIPAL ---
-export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenFabricaInfo, onOpenDiagnostico, onOpenLakehouseInfo, onOpenSquadsInfo }: { onOpenMap?: () => void, onOpenFlaiInfo?: () => void, onOpenFabricaInfo?: () => void, onOpenDiagnostico?: () => void, onOpenLakehouseInfo?: () => void, onOpenSquadsInfo?: () => void }) {
+export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenFabricaInfo, onOpenDiagnostico, onOpenLakehouseInfo, onOpenSquadsInfo }: { onOpenMap?: (stateId?: string) => void, onOpenFlaiInfo?: () => void, onOpenFabricaInfo?: () => void, onOpenDiagnostico?: () => void, onOpenLakehouseInfo?: () => void, onOpenSquadsInfo?: () => void }) {
   const [activeTab, setActiveTab] = useState('Todos');
+  const [showComputerVisionVideo, setShowComputerVisionVideo] = useState(false);
+  const [selectedSolution, setSelectedSolution] = useState<null | { title: string, desc: string, details: string[], icon: any, color: string }>(null);
+
+  const marketplaceSolutions = useMemo(() => [
+    {
+      title: "Agencia 33",
+      slogan: "Simulador Masivo de Opinión Pública",
+      desc: "Revolucionario simulador de opinión y comportamiento social que despliega miles de agentes autónomos con perfiles demográficos reales en las regiones de México. Permite modelar escenarios complejos, predecir la adopción de posturas y analizar cómo se propagan y debaten las ideas colectivamente.",
+      icon: Briefcase,
+      color: "#3b82f6",
+      animation: Agencia33Graph,
+      details: [
+        "Simulación Demográfica a Gran Escala: Despliegue de miles de agentes de IA mapeados con perfiles psicográficos reales en todo México.",
+        "Modelado de Consenso y Opinión: Capacidad de los agentes para comunicarse, debatir y compartir ideas autónomamente sobre temas específicos.",
+        "Análisis de Propagación de Posturas: Visualización predictiva de cómo viajan las ideas y tendencias a través de diferentes redes sociales virtuales.",
+        "Inteligencia Estratégica Regional: Segmentación granular de posturas y comportamiento colectivo para la toma de decisiones de alto impacto."
+      ]
+    },
+    {
+      title: "Monitor IA",
+      slogan: "Monitoreo Inteligente de Medios y Campañas",
+      desc: "Avanzada plataforma de inteligencia que audita y analiza transmisiones de radio en tiempo real mediante procesamiento de voz con IA. Detecta anuncios publicitarios, menciones de marcas y palabras clave específicas de forma instantánea, correlacionando los datos con campañas en redes sociales para medir el impacto omnicanal absoluto.",
+      icon: LineChart,
+      color: "#10b981",
+      animation: MonitorIAWave,
+      details: [
+        "Auditoría de Audio en Tiempo Real: Procesamiento simultáneo de múltiples frecuencias radiofónicas para identificar anuncios y menciones con precisión de milisegundos.",
+        "Análisis de Voz y Palabras Clave: Transcripción automática y detección semántica de conceptos clave configurados a la medida.",
+        "Correlación Omnicanal con Redes Sociales: Cruzado inteligente de menciones en radio tradicional con el pulso digital en redes sociales para medir el engagement global.",
+        "Monitoreo de Campañas y Competencia: Reportes inmediatos sobre la pauta publicitaria propia y de terceros para optimizar el retorno de inversión (ROI) en medios."
+      ]
+    },
+    {
+      title: "Sales Command Center",
+      slogan: "Control Centralizado de Ventas y Operaciones",
+      desc: "Plataforma de inteligencia comercial y analítica centralizada que consolida las ventas físicas e interacciones de tus sucursales en un solo lugar. Impulsada por IA, procesa cada transacción en tiempo real, monitorea la productividad de los locales y ofrece proyecciones operativas para maximizar la rentabilidad del negocio.",
+      icon: Target,
+      color: "#f59e0b",
+      animation: SalesCarConcession,
+      details: [
+        "Consolidación de Ventas Multicanal: Registro y centralización en tiempo real de todas las transacciones físicas e interacciones comerciales de la empresa.",
+        "Análisis Predictivo de Locales y Sucursales: Evaluación automatizada del rendimiento operativo de cada punto de venta y sucursal.",
+        "Proyecciones y Tendencias de Demanda: Modelado de patrones de compra históricos mediante IA para predecir picos de venta y optimizar inventarios.",
+        "Auditoría Operativa Inteligente: Detección automatizada de anomalías transaccionales o cuellos de botella en la operación diaria de los locales."
+      ]
+    },
+    {
+      title: "Lumel",
+      slogan: "Asistente RAG y gestión documental de LLMs",
+      desc: "Asistente inteligente empresarial para la consulta y gestión del conocimiento corporativo mediante búsquedas semánticas avanzadas.",
+      icon: BookOpen,
+      color: "#8b5cf6",
+      animation: LumelWaves,
+      details: [
+        "Búsqueda semántica (RAG) de alta precisión sobre repositorios documentales.",
+        "Análisis y comparación automatizada de contratos y acuerdos legales.",
+        "Respuestas inmediatas con citas directas de fuentes corporativas oficiales.",
+        "Integración nativa con sistemas ERP, CRM y bases de datos relacionales."
+      ]
+    }
+  ], []);
 
   const Wrapper = ({ category, children }: { category: string, children: React.ReactNode }) => {
     const isMatch = activeTab === category;
@@ -2954,6 +3125,12 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
               bg="rgba(74,222,128,0.15)" 
               title="Laboratorios IA" 
               desc="Experimenta, valida y crea soluciones de inteligencia artificial antes de invertir a gran escala. Convierte ideas en prototipos funcionales y descubre nuevas oportunidades para tu negocio." 
+              videoSrc={servidoresVideo}
+              videoOverlay={
+                <div style={{ position: 'absolute', top: 10, left: 10, background: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(4px)', padding: '4px 10px', borderRadius: 20, fontSize: 10, fontWeight: 700, color: '#4ade80', border: '1px solid rgba(74,222,128,0.2)' }}>
+                  High-Performance Computing
+                </div>
+              }
             />
           </Wrapper>
 
@@ -2984,7 +3161,7 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
               ]}
               videoOverlay={
                 <div style={{ position: 'absolute', top: 10, left: 10, background: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(4px)', padding: '4px 10px', borderRadius: 20, fontSize: 10, fontWeight: 700, color: '#f87171', border: '1px solid rgba(248,113,113,0.2)' }}>
-                  📈 MLOps Monitor Active
+                  MLOps Monitor Active
                 </div>
               }
             />
@@ -2997,19 +3174,28 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
           <Wrapper category="Desarrollo">
             <StandardCard 
               icon={GitBranch} 
-              color="#c084fc" 
-              bg="rgba(192,132,252,0.15)" 
+              color="#52b788" 
+              bg="rgba(82, 183, 136, 0.15)" 
               title="Desarrollo IA en Organigrama" 
               desc="Identifica qué áreas de tu empresa pueden ser potenciadas con IA. Desarrollamos empleados digitales inteligentes para transformar funciones, equipos y flujos de trabajo en todo tu organigrama." 
-              videoSrc="/assets/images/robotAbajo.webm"
               stats={[
                 { value: "5+", label: "Roles de Agentes" },
                 { value: "60%", label: "Ahorro de Tiempo" },
                 { value: "Autónomo", label: "Flujo de Trabajo" }
               ]}
-              videoOverlay={
-                <div style={{ position: 'absolute', top: 10, left: 10, background: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(4px)', padding: '4px 10px', borderRadius: 20, fontSize: 10, fontWeight: 700, color: '#c084fc', border: '1px solid rgba(192,132,252,0.2)' }}>
-                  🤖 Agentic Workforce
+              beforeText={
+                <div style={{ 
+                  borderRadius: 16, 
+                  overflow: 'hidden', 
+                  height: 180, 
+                  position: 'relative', 
+                  background: '#0B1511', 
+                  marginBottom: 16,
+                  border: `2px solid rgba(82,183,136,0.35)`,
+                  boxShadow: '0 4px 15px rgba(82,183,136,0.15)',
+                  transition: 'all 0.3s ease'
+                }}>
+                  <BrainCanvas onPulse={() => {}} />
                 </div>
               }
             />
@@ -3022,7 +3208,7 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
               bg="rgba(74,222,128,0.15)" 
               title="Desarrollo IA por Sector" 
               desc="Tu industria ya opera con inteligencia artificial. Creamos soluciones especializadas para tu sector, adaptadas a tus retos, clientes y oportunidades reales." 
-              videoSrc="/assets/images/productos/mabePanel.webm"
+              videoSrc={autoVideo}
               stats={[
                 { value: "10+", label: "Sectores Clave" },
                 { value: "Real-Time", label: "Procesamiento" },
@@ -3030,7 +3216,7 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
               ]}
               videoOverlay={
                 <div style={{ position: 'absolute', top: 10, left: 10, background: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(4px)', padding: '4px 10px', borderRadius: 20, fontSize: 10, fontWeight: 700, color: '#4ade80', border: '1px solid rgba(74,222,128,0.2)' }}>
-                  🏭 Multi-Industry Engines
+                  Multi-Industry Engines
                 </div>
               }
             />
@@ -3043,11 +3229,12 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
               bg="rgba(248,113,113,0.15)" 
               title="Desarrollo IA Estatal" 
               desc="Modernizamos servicios públicos, superamos la atención ciudadana y toma decisiones en tiempo real basadas en datos abiertos con soluciones de IA diseñadas para institutions gubernamentales." 
-              stats={[
-                { value: "100k+", label: "Ciudadanos Activos" },
-                { value: "24/7", label: "Servicios Digitales" },
-                { value: "Seguros", label: "Datos de Gobierno" }
-              ]}
+              beforeText={
+                <MexicoEsMayia 
+                  onlyMap={true} 
+                  onStateClick={(stateId) => onOpenMap?.(stateId)} 
+                />
+              }
             />
           </Wrapper>
 
@@ -3066,7 +3253,7 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
               ]}
               videoOverlay={
                 <div style={{ position: 'absolute', top: 10, left: 10, background: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(4px)', padding: '4px 10px', borderRadius: 20, fontSize: 10, fontWeight: 700, color: '#fb923c', border: '1px solid rgba(251,146,60,0.2)' }}>
-                  💬 WhatsApp AI Bot
+                  WhatsApp AI Bot
                 </div>
               }
             />
@@ -3075,15 +3262,22 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
           <Wrapper category="Desarrollo">
             <StandardCard 
               icon={ScanEye} 
-              color="#fb923c" 
-              bg="rgba(251,146,60,0.15)" 
+              color="#00c853" 
+              bg="rgba(0,200,83,0.15)" 
               title="Desarrollo IA en Computer Vision" 
               desc="Haz que tus sistemas vean, detecten y actúen. Implementamos visión artificial para inspección, seguridad, conteo, reconocimiento y automatización visual en tiempo real." 
+              videoSrc={camaraVideo}
               stats={[
                 { value: "30 FPS", label: "Monitoreo Live" },
                 { value: "99.5%", label: "Precisión Visual" },
                 { value: "Edge/Cloud", label: "Despliegue" }
               ]}
+              videoOverlay={
+                <div style={{ position: 'absolute', top: 10, left: 10, background: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(4px)', padding: '4px 10px', borderRadius: 20, fontSize: 10, fontWeight: 700, color: '#00c853', border: '1px solid rgba(0,200,83,0.2)' }}>
+                  Live Vision Engine
+                </div>
+              }
+              onConocerMas={() => setShowComputerVisionVideo(true)}
             />
           </Wrapper>
 
@@ -3095,25 +3289,251 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
               title="Market Place de Soluciones" 
               desc="Encuentra soluciones de IA listas para implementar. Explora herramientas, agentes y automatizaciones creadas para resolver problemas reales de negocio." 
               videoSrc="/assets/images/productos/portalia.webm"
-              stats={[
-                { value: "50+", label: "Apps Listas" },
-                { value: "1-Click", label: "Instalación" },
-                { value: "Seguro", label: "Certificado" }
-              ]}
               videoOverlay={
                 <div style={{ position: 'absolute', top: 10, left: 10, background: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(4px)', padding: '4px 10px', borderRadius: 20, fontSize: 10, fontWeight: 700, color: '#f87171', border: '1px solid rgba(248,113,113,0.2)' }}>
-                  🛒 App Store Ready
+                  App Store Ready
                 </div>
               }
-            />
+            >
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginTop: 16 }}>
+                {marketplaceSolutions.map((sol, idx) => (
+                  <SolutionCardItem 
+                    key={idx} 
+                    sol={sol} 
+                    onClick={() => setSelectedSolution(sol)} 
+                  />
+                ))}
+              </div>
+            </StandardCard>
           </Wrapper>
 
           <Wrapper category="Capacitación">
             <AcademiaCard />
           </Wrapper>
 
+          <Wrapper category="Desarrollo">
+            <StandardCard 
+              icon={Link2} 
+              color="#06b6d4" 
+              bg="rgba(6,182,212,0.15)" 
+              title="Interoperabilidad" 
+              desc="Conectando sistemas heredados y arquitecturas de datos modernas. Muy pronto podrás unificar flujos de trabajo de múltiples plataformas tradicionales y descentralizadas con integración nativa por IA. Mantente al tanto de esta nueva funcionalidad." 
+              stats={[
+                { value: "R&D", label: "Fase de Desarrollo" },
+                { value: "API-First", label: "Arquitectura" },
+                { value: "Próximamente", label: "Disponibilidad" }
+              ]}
+            />
+          </Wrapper>
+
+          <Wrapper category="Infraestructura">
+            <StandardCard 
+              icon={Cpu} 
+              color="#8b5cf6" 
+              bg="rgba(139,92,246,0.15)" 
+              title="Cómputo Cuántico" 
+              desc="La próxima frontera en el procesamiento a escala masiva. Nos estamos preparando para integrar capacidades de algoritmos cuánticos aplicados a optimización matemática compleja y criptografía de nueva generación. Próximamente disponible." 
+              stats={[
+                { value: "Fase Beta", label: "Preparación" },
+                { value: "Quantum", label: "Algoritmos" },
+                { value: "Próximamente", label: "Disponibilidad" }
+              ]}
+            />
+          </Wrapper>
+
         </motion.div>
       </div>
+
+      {showComputerVisionVideo && (
+        <div 
+          className="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-[99999] p-4"
+          onClick={() => setShowComputerVisionVideo(false)}
+        >
+          <div 
+            style={{
+              background: '#090d16',
+              borderRadius: 24,
+              maxWidth: 800,
+              width: '100%',
+              border: `2px solid #00c853`,
+              boxShadow: `0 25px 50px -12px rgba(0, 200, 83, 0.4)`,
+              overflow: 'hidden',
+              position: 'relative'
+            }}
+            onClick={e => e.stopPropagation()}
+          >
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px 24px', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+              <h3 style={{ margin: 0, color: '#FFFFFF', fontSize: 18, fontWeight: 800 }}>Desarrollo IA en Computer Vision - Sendero Seguro</h3>
+              <button 
+                onClick={() => setShowComputerVisionVideo(false)}
+                style={{
+                  background: 'rgba(255,255,255,0.1)',
+                  border: 'none',
+                  color: '#FFFFFF',
+                  width: 32,
+                  height: 32,
+                  borderRadius: '50%',
+                  cursor: 'pointer',
+                  fontWeight: 'bold',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+              >
+                ✕
+              </button>
+            </div>
+            <div style={{ padding: 24, background: '#000000', display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: 360 }}>
+              <video 
+                controls 
+                autoPlay
+                controlsList="nodownload"
+                disablePictureInPicture
+                onContextMenu={(e) => e.preventDefault()}
+                style={{ width: '100%', borderRadius: 12, maxHeight: '60vh', userSelect: 'none' }}
+              >
+                <source src={senderoSeguroVideo} type="video/mp4" />
+                Tu navegador no soporta reproducción de video.
+              </video>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {selectedSolution && (
+        <div 
+          className="fixed inset-0 bg-black/70 backdrop-blur-md flex items-center justify-center z-[99999] p-4"
+          onClick={() => setSelectedSolution(null)}
+        >
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95, y: 15 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            style={{
+              background: '#090d16',
+              borderRadius: 28,
+              maxWidth: 550,
+              width: '100%',
+              border: `2px solid ${selectedSolution.color}`,
+              boxShadow: `0 25px 50px -12px ${hexToRgba(selectedSolution.color, 0.35)}`,
+              overflow: 'hidden',
+              position: 'relative'
+            }}
+            onClick={e => e.stopPropagation()}
+          >
+            {/* Header del Modal */}
+            <div style={{ 
+              display: 'flex', 
+              justifyContent: 'space-between', 
+              alignItems: 'center', 
+              padding: '24px 28px', 
+              borderBottom: '1px solid rgba(255,255,255,0.08)' 
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+                <div style={{ 
+                  width: 44, 
+                  height: 44, 
+                  borderRadius: 12, 
+                  background: `${selectedSolution.color}20`, 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  justifyContent: 'center',
+                  color: selectedSolution.color,
+                  border: `1.5px solid ${selectedSolution.color}40`,
+                  flexShrink: 0
+                }}>
+                  {(() => {
+                    const IconComp = selectedSolution.icon;
+                    return <IconComp size={22} strokeWidth={2.5} />;
+                  })()}
+                </div>
+                <div>
+                  <h3 style={{ margin: 0, color: '#FFFFFF', fontSize: 20, fontWeight: 800 }}>{selectedSolution.title}</h3>
+                  <p style={{ margin: 0, fontSize: 11, color: selectedSolution.color, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 0.5, marginTop: 2 }}>
+                    Implementación de IA
+                  </p>
+                </div>
+              </div>
+              <button 
+                onClick={() => setSelectedSolution(null)}
+                style={{
+                  background: 'rgba(255,255,255,0.06)',
+                  border: 'none',
+                  color: '#FFFFFF',
+                  width: 36,
+                  height: 36,
+                  borderRadius: '50%',
+                  cursor: 'pointer',
+                  fontWeight: 'bold',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  transition: 'background 0.2s'
+                }}
+                onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.12)'}
+                onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.06)'}
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* Contenido del Modal */}
+            <div style={{ padding: '28px' }}>
+              <p style={{ fontSize: 14, color: '#E5E7EB', lineHeight: 1.6, margin: 0, marginBottom: 24, fontWeight: 500 }}>
+                {selectedSolution.desc}
+              </p>
+
+              <h4 style={{ margin: 0, color: '#9CA3AF', fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 14 }}>
+                Características Clave
+              </h4>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                {selectedSolution.details.map((detail, idx) => (
+                  <div key={idx} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+                    <div style={{ 
+                      width: 6, 
+                      height: 6, 
+                      borderRadius: '50%', 
+                      background: selectedSolution.color, 
+                      marginTop: 7, 
+                      flexShrink: 0 
+                    }} />
+                    <span style={{ fontSize: 13, color: '#D1D5DB', lineHeight: 1.5, fontWeight: 500 }}>{detail}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            {/* Footer / Cierre */}
+            <div style={{ 
+              padding: '20px 28px', 
+              background: 'rgba(255,255,255,0.02)', 
+              display: 'flex', 
+              justifyContent: 'flex-end', 
+              borderTop: '1px solid rgba(255,255,255,0.06)' 
+            }}>
+              <button
+                onClick={() => setSelectedSolution(null)}
+                style={{
+                  background: selectedSolution.color,
+                  color: '#090d16',
+                  border: 'none',
+                  borderRadius: 10,
+                  padding: '10px 20px',
+                  fontSize: 13,
+                  fontWeight: 700,
+                  cursor: 'pointer',
+                  boxShadow: `0 4px 14px ${hexToRgba(selectedSolution.color, 0.3)}`,
+                  transition: 'transform 0.2s'
+                }}
+                onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-1px)'}
+                onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0)'}
+              >
+                Entendido
+              </button>
+            </div>
+          </motion.div>
+        </div>
+      )}
     </section>
   );
 }
