@@ -18,6 +18,7 @@ import senderoSeguroVideo from '../assets/SENDERO SEGURO.mp4';
 import servidoresVideo from '../assets/SERVIDORES.mp4';
 import autoVideo from '../assets/AUTO.mp4';
 import camaraVideo from '../assets/CAMARA.mp4';
+import quantumVideo from '../assets/QUANTUM.mp4';
 import { MexicoEsMayia } from './modules/dashboardModules/MexicoEsMayia';
 import { brandingConfig } from '../config/branding';
 
@@ -3405,6 +3406,7 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
               color="#8b5cf6" 
               bg="rgba(139,92,246,0.15)" 
               title="Cómputo Cuántico" 
+              videoSrc={quantumVideo}
               desc="La próxima frontera en el procesamiento a escala masiva. Nos estamos preparando para integrar capacidades de algoritmos cuánticos aplicados a optimización matemática compleja y criptografía de nueva generación. Próximamente disponible." 
               stats={[
                 { value: "Fase Beta", label: "Preparación" },
