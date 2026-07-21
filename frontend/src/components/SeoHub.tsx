@@ -6,6 +6,7 @@ import {
   BookOpen,
 } from 'lucide-react';
 import { brandingConfig } from '../config/branding';
+import HubsDigitales from './HubsDigitales';
 const { colores } = brandingConfig;
 
 /* ── Hub modules data ──────────────────────────────────────── */
@@ -315,6 +316,9 @@ export default function SeoHub({ activeSection, onSectionChange, onOpenSocialMod
                 onOpenSocialModal={onOpenSocialModal}
               />
             ))}
+
+            <SectionLabel label="Hubs Digitales" />
+            <HubsDigitales />
 
             <SectionLabel label="Contenido y Noticias" />
             {MODULES_TOP.map(m => (
