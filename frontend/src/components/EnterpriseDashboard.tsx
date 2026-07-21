@@ -834,7 +834,7 @@ function SocCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
         >
           Proteger ahora
         </button>
-        <button 
+        {/* <button 
           onClick={onOpenInfo}
           style={{ 
             background: '#F3F4F6', color: '#374151', border: '1px solid #D1D5DB', borderRadius: 8, padding: '10px 0', fontSize: 13, fontWeight: 600, 
@@ -844,7 +844,7 @@ function SocCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
           onMouseLeave={e => { e.currentTarget.style.background = '#F3F4F6'; }}
         >
           Conocer más <span className="cta-arrow-animate">&rarr;</span>
-        </button>
+        </button> */}
       </div>
     </div>
   );
@@ -3334,6 +3334,7 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
               bg="rgba(248,113,113,0.15)" 
               title="Monitoreo de Modelos IA" 
               desc="Supervisa el desempeño de tus modelos, automatizaciones y agentes inteligentes en tiempo real. Detecta fallas, mide resultados y mejora continuamente tus soluciones de IA." 
+              buttonText='Agenda una cita'
               videoSrc="/assets/images/productos/deteccionAnomalias.webm"
               stats={[
                 { value: "Real-Time", label: "Latencia & Drift" },
