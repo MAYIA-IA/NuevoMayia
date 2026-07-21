@@ -132,9 +132,9 @@ const PildoraExpandible = memo(({ pildora, isHovered, isOtherHovered, onHover, o
 
       {/* Contenido Píldora Abierta (Revelado detrás de las puertas) */}
       <div className={`absolute inset-0 z-10 bg-black transition-opacity duration-[800ms] ${isHovered ? 'opacity-100 delay-[200ms]' : 'opacity-0'}`}>
-        <img src={THUMBNAILS[pildora.id]} className="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-overlay" />
+        <img src={THUMBNAILS[pildora.id]} alt={`Miniatura representativa de la píldora informativa de IA: ${pildora.title}`} className="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-overlay" />
         {isHovered && (
-           <video src={pildora.video} autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-screen" />
+           <video src={pildora.video} aria-label={`Vista previa en vídeo sobre ${pildora.title}`} autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-screen" />
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-[#05050A] via-[#05050A]/70 to-transparent" />
         

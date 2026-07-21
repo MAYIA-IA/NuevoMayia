@@ -166,13 +166,19 @@ const EmpleadosDigitales = () => {
                     <div className="w-full h-full bg-gray-900 rounded-t-full overflow-hidden relative">
                       <video
                         ref={videoRef}
-                        src={robotVideo}
                         className="w-full h-full object-cover scale-[1.02]"
                         autoPlay
                         loop
                         muted
                         playsInline
-                      />
+                        aria-label="Vídeo representativo del Robot Asistente Digital con Inteligencia Artificial"
+                        title="Robot Asistente Digital MAYiA"
+                      >
+                        <source src={robotVideo} type="video/webm" />
+                        <span className="sr-only">
+                          Vídeo animado del Robot Asistente Digital MAYiA representando a los empleados digitales capaces de automatizar tareas corporativas, finanzas, inventario y productividad.
+                        </span>
+                      </video>
                       <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent mix-blend-overlay"></div>
                     </div>
                   </div>

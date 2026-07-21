@@ -198,17 +198,22 @@ const AgentesConsultores = () => {
                   <video
                     ref={el => { videoRefs.current[consultor.id] = el; }}
                     muted loop preload={isMobile ? "none" : "auto"} playsInline
+                    aria-label={`Vídeo demostración del consultor de IA: ${consultor.title} - ${consultor.subtitle}`}
+                    title={`${consultor.title} - Consultor IA MAYiA`}
                     onError={() => handleVideoError(consultor.id)}
                     onLoadedData={() => handleVideoLoad(consultor.id)}
                     className={`absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] ease-out origin-center ${isActive ? 'scale-100' : 'scale-[1.15] grayscale-[40%]'}`}
                     poster={consultor.image}
                     style={{ objectPosition: isMobile ? 'center 20%' : 'center' }}
                   >
-                    <source src={consultor.videoPath} type="video/mp4" />
+                    <source src={consultor.videoPath} type="video/webm" />
+                    <span className="sr-only">
+                      Transcripción del vídeo del consultor: {consultor.title} ({consultor.subtitle}). {consultor.description}
+                    </span>
                   </video>
                 ) : (
                   <img 
-                    src={consultor.image} alt={consultor.title}
+                    src={consultor.image} alt={`Fotografía y perfil de ${consultor.title} - ${consultor.subtitle}`}
                     className={`absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] ease-out ${isActive ? 'scale-100' : 'scale-[1.15] grayscale-[40%]'}`}
                     style={{ objectPosition: isMobile ? 'center 20%' : 'center' }}
                   />

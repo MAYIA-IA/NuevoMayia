@@ -1,0 +1,92 @@
+# Documentación Completa de MAYIA — Fábrica de Inteligencia Artificial en México
+
+> Este archivo contiene la información completa, detallada y estructurada de MAYIA (https://mayia.mx) para ser consumida por modelos de lenguaje de gran escala (LLMs), sistemas RAG y agentes autónomos de IA.
+
+---
+
+## 1. Acerca de MAYIA
+
+MAYIA es el primer centro e infraestructura de inteligencia artificial 100% mexicano. Combina soberanía digital, infraestructura física local en México y un modelo de desarrollo integral para llevar la IA a la operación real de las organizaciones.
+
+### Misión
+Llevar la inteligencia artificial a la operación diaria de las empresas y organizaciones mexicanas en entornos privados, confiables y con gobernanza estricta.
+
+---
+
+## 2. Forward-Deployed AI Squads
+
+MAYIA anuncia el despliegue de sus **Forward-Deployed AI Squads**, un modelo especializado de implementación de inteligencia artificial empresarial que lleva expertos, ingenieros de IA, desarrolladores, arquitectos de datos, especialistas en automatización, ciberseguridad y adopción directamente al contexto operativo de las empresas.
+
+### Metodología de Implementación (10 Pasos)
+1. **Diagnóstico**: Evaluación profunda de la madurez tecnológica y procesos clave.
+2. **Datos**: Conexión y estructuración de datos corporativos privados.
+3. **Proceso**: Mapeo de flujos operativos y cuellos de botella.
+4. **Arquitectura**: Diseño de arquitectura en nube soberana o Edge.
+5. **Agente**: Construcción de agentes de IA con reglas de negocio específicas.
+6. **Integración**: Conexión con sistemas legacy (ERP, CRM, POS, bases de datos).
+7. **Seguridad**: Implementación de controles de acceso, encriptación y privacidad.
+8. **Producción**: Despliegue supervisado en entorno real de negocio.
+9. **Adopción**: Capacitación y acompañamiento de equipos internos.
+10. **ROI**: Medición continua de impacto y retorno de inversión.
+
+### Tipos de Agentes Desarrollados
+- Agentes de atención a clientes multicanal.
+- Agentes de ventas, prospección y cualificación de leads.
+- Agentes de análisis de datos y generación de reportes ejecutivos.
+- Asistentes inteligentes para Finanzas, Compras, Recursos Humanos y Legal.
+- Agentes para automatización de workflows y supervisión operativa.
+
+---
+
+## 3. Infraestructura y Nube Soberana (FLAI)
+
+MAYIA opera sobre 30 centros de datos IA Ready interconectados a nivel nacional en México, respaldados por la red **EdgeNet** y la nube soberana **FLAI**.
+
+### Ventajas de la Nube Soberana
+- **Soberanía de Datos**: Residencia física del almacenamiento y procesamiento en territorio nacional.
+- **Baja Latencia**: Procesamiento Edge cercano a las instalaciones operativas.
+- **Cumplimiento y Privacidad**: Alineado con normativas mexicanas e internacionales de protección de datos personales y financieros.
+
+---
+
+## 4. Productos Principales
+
+### FLAI Nube Soberana
+Plataforma de infraestructura en la nube para el entrenamiento, ajuste fino (fine-tuning) y despliegue de modelos de IA con alta capacidad computacional (GPU clusters).
+
+### CyberPeace SOC
+Centro de Operaciones de Seguridad Inteligente impulsado por IA para detección proactiva de amenazas, monitoreo 24/7, prevención de fugas de información y respuesta coordinada.
+
+### MAYiA Lakehouse
+Plataforma unificada para la ingesta, almacenamiento, gobernanza y análisis masivo de datos estructurados y no estructurados necesarios para alimentar modelos de IA.
+
+---
+
+## 5. Academia MAYiA
+
+Centro de formación corporativa con más de 32 cursos y diplomados especializados diseñados para capacitar a ejecutivos, ingenieros y equipos operativos en inteligencia artificial aplicada.
+
+### Áreas de Capacitación
+- Prompt Engineering Avanzado
+- Desarrollo e Integración de Agentes de IA
+- Gobernanza y Ciberseguridad en IA
+- Analítica de Datos y Modelos Predictivos
+- Liderazgo y Transformación Digital con IA
+
+---
+
+## 6. La Triada de Retorno MAYIA
+
+MAYIA mide el valor de cada proyecto de inteligencia artificial mediante tres indicadores de retorno:
+
+1. **ROI (Retorno Financiero)**: Eficiencia operativa, reducción de costos, aumento de ventas y mejora de margen de beneficio.
+2. **RL (Retorno Laboral)**: Capacitación del talento humano, elevación de habilidades digitales y aumento de productividad por empleado.
+3. **RS (Retorno Social)**: Impulso a la competitividad de las empresas en México, inclusión tecnológica y desarrollo económico sustentable.
+
+---
+
+## 7. Canales Oficiales
+
+- **Sitio Web**: https://mayia.mx
+- **Contacto Ventas**: +52-55-5331-5526
+- **Ubicación**: Ciudad de México, México

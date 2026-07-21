@@ -1,0 +1,30 @@
+# MAYIA — Fábrica de Inteligencia Artificial en México
+
+> MAYIA (https://mayia.mx) es el primer centro e infraestructura de inteligencia artificial 100% mexicano. Ofrece infraestructura soberana de IA, Forward-Deployed AI Squads, agentes inteligentes empresariales, data lakehouse, ciberseguridad y formación corporativa.
+
+## Resumen Ejecutivo
+
+MAYIA transforma empresas, gobiernos, industrias y PYMES en México mediante la implementación real de inteligencia artificial aplicada en entornos privados, seguros y gobernados.
+
+### Ecosistema y Capacidades Principales
+
+- **Forward-Deployed AI Squads**: Equipos especializados de ingenieros de IA, arquitectos de datos, desarrolladores y especialistas en ciberseguridad que se integran directamente a la operación del cliente para construir agentes inteligentes y automatizar workflows.
+- **FLAI (Nube Soberana)**: Infraestructura cloud de IA 100% mexicana sobre 30 centros de datos IA Ready e interconectados vía EdgeNet, garantizando soberanía de datos y baja latencia.
+- **MAYiA Lakehouse**: Plataforma inteligente de almacenamiento, procesamiento masivo y arquitectura de datos optimizada para modelos de aprendizaje automático.
+- **CyberPeace SOC**: Centro de Operaciones de Seguridad Inteligente con monitoreo 24/7 y protección de infraestructura/datos impulsado por IA.
+- **Academia MAYiA**: Programa de capacitación corporativa con más de 32 cursos y diplomados especializados en inteligencia artificial para todos los niveles organizacionales.
+- **Triada de Retorno**: Medición del valor de IA en tres dimensiones: ROI (Retorno Financiero), RL (Retorno Laboral) y RS (Retorno Social).
+
+## Secciones y Documentación
+
+- [Noticia Oficial: Forward-Deployed AI Squads](https://mayia.mx/blog/mayia-especialistas-inteligencia-artificial-empresas-forward-deployed-ai-squads): Despliegue de especialistas de IA en la operación diaria de las organizaciones.
+- [Infraestructura y Nube Soberana FLAI](https://mayia.mx/#infraestructura): Nube privada, GPU clusters y procesamiento de datos local en México.
+- [Soluciones por Sector](https://mayia.mx/#ia-sectores): Casos de uso en Finanzas, Retail, Salud, Industria, Logística, Gobierno y Educación.
+- [Academia y Formación IA](https://mayia.mx/#academia): Cursos de prompt engineering, desarrollo de agentes, ciberseguridad e IA aplicada.
+
+## Contacto y Canales Oficiales
+
+- **Sitio Web**: https://mayia.mx
+- **Teléfono / WhatsApp**: +52-55-5331-5526
+- **LinkedIn**: https://www.linkedin.com/company/mayia-edgenet/
+- **YouTube**: https://www.youtube.com/@MAYIAInteligenciaArtificial
