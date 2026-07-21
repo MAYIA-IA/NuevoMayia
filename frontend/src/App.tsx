@@ -21,7 +21,6 @@ const CalendarModal = lazy(() => import('./components/CalendarModal'));
 // Componentes pesados (carga perezosa)
 const EnterpriseDashboard = lazy(() => import('./components/EnterpriseDashboard'));
 const Analiticos = lazy(() => import('./components/departamentos/Analiticos').then(m => ({ default: m.Analiticos })));
-const HubsDigitales = lazy(() => import('./components/HubsDigitales'));
 const IAEmpresarial = lazy(() => import('./components/IAEmpresarial'));
 const IAporSector = lazy(() => import('./components/IAporSector'));
 const EmpleadosDigitales = lazy(() => import('./components/EmpleadosDigitales'));
@@ -201,6 +200,14 @@ function App() {
       handleOpenSocialModal('fabrica-ia', window.innerHeight / 2);
       return;
     }
+    if (section === 'hubs-digitales') {
+      setActiveSection(section);
+      const el = document.getElementById('hubs-digitales');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      return;
+    }
     setActiveSection(section);
     const el = document.getElementById(section);
     if (!el) return;
@@ -275,9 +282,6 @@ function App() {
         
         {/* Las secciones sociales (Noticias, Blog, Sala Prensa, Embajadores, Networking) 
             fueron extraídas al SocialPopover */}
-        
-        {/* 7. Hubs Digitales */}
-        <LazySection id="hubs-digitales" height="400px"><HubsDigitales /></LazySection>
         
         {/* 9. IA Empresarial */}
         <LazySection id="ia-empresarial" height="400px"><IAEmpresarial /></LazySection>
