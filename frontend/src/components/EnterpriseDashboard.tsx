@@ -5,7 +5,7 @@ import {
   Briefcase, LineChart, ShoppingBag, GraduationCap, GitBranch, ScanEye,
   BookOpen, Award, Users, MoreVertical, Info, Cloud, Target, TrendingUp,
   TrendingDown, Shield, Bot, Zap, Link2, Lock, Layers, FlaskRound,
-  MonitorCheck, GraduationCap as GradCap, ChevronRight, MessageSquare, Cpu
+  MonitorCheck, GraduationCap as GradCap, ChevronRight, MessageSquare, Cpu, MapPin, Play
 } from 'lucide-react';
 import logoMaia from '../assets/logosNativos/logoMaia.webp';
 import academiaLogo from '../assets/logosNativos/academia-horizontal.webp';
@@ -19,6 +19,7 @@ import servidoresVideo from '../assets/SERVIDORES.mp4';
 import autoVideo from '../assets/AUTO.mp4';
 import camaraVideo from '../assets/CAMARA.mp4';
 import quantumVideo from '../assets/QUANTUM.mp4';
+import interoperabilidadVideo from '../assets/INTEROPERABILIDAD_NUEVO.mp4';
 import { MexicoEsMayia } from './modules/dashboardModules/MexicoEsMayia';
 import { brandingConfig } from '../config/branding';
 
@@ -2129,35 +2130,138 @@ function RoiCard() {
   );
 }
 
+// --- SUB-COMPONENTE: SectoresGrid ---
+function SectoresGrid() {
+  const [expanded, setExpanded] = useState(false);
+
+  const sectores = [
+    { nombre: "Agricultura", importante: true },
+    { nombre: "Ganadería", importante: false },
+    { nombre: "Minería", importante: false },
+    { nombre: "Energía", importante: false },
+    { nombre: "Manufactura", importante: true },
+    { nombre: "Construcción", importante: false },
+    { nombre: "Salud", importante: true },
+    { nombre: "Educación", importante: false },
+    { nombre: "Retail / Comercio", importante: true },
+    { nombre: "Turismo", importante: true },
+    { nombre: "Transporte", importante: false },
+    { nombre: "Finanzas", importante: false },
+    { nombre: "Educación", importante: false },
+    { nombre: "Instituciones Públicas", importante: true },
+    { nombre: "Publicidad y medios", importante: false },
+    { nombre: "Seguridad", importante: true },
+  ];
+
+  // 4 principales iniciales (Importantes)
+  const principales = sectores.filter(s => s.importante).slice(0, 4);
+  const itemsToShow = expanded ? sectores : principales;
+
+  return (
+    <div style={{ marginBottom: 16 }}>
+      <div style={{ 
+        display: 'grid', 
+        gridTemplateColumns: 'repeat(2, 1fr)', 
+        gap: 8 
+      }}>
+        {itemsToShow.map((sector, idx) => (
+          <div 
+            key={idx}
+            style={{ 
+              display: 'flex', 
+              alignItems: 'center', 
+              gap: 6, 
+              padding: '9px 10px', 
+              borderRadius: 10,
+              fontSize: 11,
+              fontWeight: 700,
+              lineHeight: 1.25,
+              background: sector.importante 
+                ? 'linear-gradient(135deg, rgba(34, 197, 94, 0.14), rgba(16, 185, 129, 0.06))' 
+                : 'linear-gradient(135deg, rgba(59, 130, 246, 0.14), rgba(37, 99, 235, 0.06))',
+              border: sector.importante 
+                ? '1px solid rgba(34, 197, 94, 0.4)' 
+                : '1px solid rgba(59, 130, 246, 0.4)',
+              color: sector.importante ? '#15803d' : '#1d4ed8',
+              boxShadow: '0 1px 2px rgba(0,0,0,0.02)'
+            }}
+          >
+            <span style={{ 
+              width: 7, 
+              height: 7, 
+              borderRadius: '50%', 
+              background: sector.importante ? '#16a34a' : '#2563eb',
+              flexShrink: 0 
+            }} />
+            <span style={{ textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
+              {sector.nombre}
+            </span>
+          </div>
+        ))}
+      </div>
+
+      <button
+        onClick={(e) => { e.stopPropagation(); setExpanded(!expanded); }}
+        style={{
+          width: '100%',
+          marginTop: 12,
+          padding: '9px 14px',
+          borderRadius: 10,
+          background: expanded ? 'rgba(0,0,0,0.04)' : 'linear-gradient(135deg, rgba(74,222,128,0.12), rgba(59,130,246,0.12))',
+          border: '1px dashed rgba(74,222,128,0.5)',
+          color: '#111827',
+          fontSize: 12,
+          fontWeight: 700,
+          cursor: 'pointer',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: 6,
+          transition: 'all 0.2s ease'
+        }}
+        onMouseEnter={e => e.currentTarget.style.opacity = '0.85'}
+        onMouseLeave={e => e.currentTarget.style.opacity = '1'}
+      >
+        {expanded ? '▲ Ver menos' : `▼ Ver todos los sectores (${sectores.length})`}
+      </button>
+    </div>
+  );
+}
+
 // --- SUB-COMPONENTE: StandardCard (Tarjetas de Categoria Comunes) ---
 function StandardCard({ 
   icon: Icon, 
   color, 
   bg, 
   title, 
+  titleFontSize,
   desc, 
   videoSrc, 
   stats,
   videoOverlay,
   beforeText,
   onConocerMas,
+  buttonText,
   children 
 }: { 
   icon: any, 
   color: string, 
   bg: string, 
   title: string, 
+  titleFontSize?: number,
   desc: string, 
   videoSrc?: string, 
   stats?: Array<{ value: string, label: string, color?: string }>,
   videoOverlay?: React.ReactNode,
   beforeText?: React.ReactNode,
   onConocerMas?: () => void,
+  buttonText?: string,
   children?: React.ReactNode 
 }) {
   const [isHovered, setIsHovered] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const theme = getPastelTheme(color);
+  const calculatedFontSize = titleFontSize || (title.length > 35 ? 14 : title.length > 25 ? 16 : 18);
 
   const handleAgendarCita = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -2187,12 +2291,12 @@ function StandardCard({
         overflow: 'hidden'
       }}
     >
-      <div style={{ display: 'flex', alignItems: 'center', gap: 16, height: 50, marginBottom: 16, justifyContent: 'space-between' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 16, flex: 1 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 14, minHeight: 50, marginBottom: 16, justifyContent: 'space-between' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 14, flex: 1 }}>
           <div style={{ width: 44, height: 44, borderRadius: 10, background: bg, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
             <Icon size={22} color={color} />
           </div>
-          <h3 style={{ fontSize: 18, fontWeight: 800, color: '#111827', margin: 0, lineHeight: 1.2 }}>{title}</h3>
+          <h3 style={{ fontSize: calculatedFontSize, fontWeight: 800, color: '#111827', margin: 0, lineHeight: 1.25 }}>{title}</h3>
         </div>
 
         <div style={{ position: 'relative', zIndex: 10 }}>
@@ -2251,9 +2355,11 @@ function StandardCard({
         </div>
       )}
 
-      <p style={{ fontSize: 14, color: '#4B5563', lineHeight: 1.5, margin: 0, marginBottom: 20, fontWeight: 500, textAlign: 'justify' }}>
-        {desc}
-      </p>
+      {desc && (
+        <p style={{ fontSize: 14, color: '#4B5563', lineHeight: 1.5, margin: 0, marginBottom: 20, fontWeight: 500, textAlign: 'justify' }}>
+          {desc}
+        </p>
+      )}
 
       {stats && (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8, marginBottom: 20 }}>
@@ -2302,7 +2408,7 @@ function StandardCard({
           onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; }}
           onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; }}
         >
-          Conocer más <span className="cta-arrow-animate">&rarr;</span>
+          {buttonText || "Conocer más"} <span className="cta-arrow-animate">&rarr;</span>
         </button>
       </div>
     </div>
@@ -3198,11 +3304,12 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
               color="#4ade80" 
               bg="rgba(74,222,128,0.15)" 
               title="Laboratorios IA" 
-              desc="Experimenta, valida y crea soluciones de inteligencia artificial antes de invertir a gran escala. Convierte ideas en prototipos funcionales y descubre nuevas oportunidades para tu negocio." 
+              desc="Experimenta, valida y crea soluciones de Inteligencia Artificial antes de invertir en gran escala. Nuestros laboratorios están a tu disposición para entrenar, ajustar y optimizar tus modelos. Busca una reunión para más información" 
+              buttonText="Agenda una cita"
               videoSrc={servidoresVideo}
               videoOverlay={
-                <div style={{ position: 'absolute', top: 10, left: 10, background: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(4px)', padding: '4px 10px', borderRadius: 20, fontSize: 10, fontWeight: 700, color: '#4ade80', border: '1px solid rgba(74,222,128,0.2)' }}>
-                  High-Performance Computing
+                <div style={{ position: 'absolute', top: 10, left: 200, background: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(4px)', padding: '4px 10px', borderRadius: 20, fontSize: 10, fontWeight: 700, color: '#4ade80', border: '1px solid rgba(74,222,128,0.2)' }}>
+                  Activo
                 </div>
               }
             />
@@ -3250,29 +3357,78 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
               icon={GitBranch} 
               color="#52b788" 
               bg="rgba(82, 183, 136, 0.15)" 
-              title="Desarrollo IA en Organigrama" 
-              desc="Identifica qué áreas de tu empresa pueden ser potenciadas con IA. Desarrollamos empleados digitales inteligentes para transformar funciones, equipos y flujos de trabajo en todo tu organigrama." 
-              stats={[
-                { value: "5+", label: "Roles de Agentes" },
-                { value: "60%", label: "Ahorro de Tiempo" },
-                { value: "Autónomo", label: "Flujo de Trabajo" }
-              ]}
+              title="Agentes Transversales de Inteligencia Artificial" 
+              desc="Son entidades inteligentes capaces de entender objetivos de negocio, consultar datos privados, coordinar equipos, ejecutar business workflows y operar procesos críticos entre distintas áreas de la organización" 
+              buttonText="Agenda una cita"
               beforeText={
-                <div style={{ 
-                  borderRadius: 16, 
-                  overflow: 'hidden', 
-                  height: 180, 
-                  position: 'relative', 
-                  background: '#0B1511', 
-                  marginBottom: 16,
-                  border: `2px solid rgba(82,183,136,0.35)`,
-                  boxShadow: '0 4px 15px rgba(82,183,136,0.15)',
-                  transition: 'all 0.3s ease'
-                }}>
-                  <BrainCanvas onPulse={() => {}} />
-                </div>
+                <>
+                  <div style={{ 
+                    borderRadius: 16, 
+                    overflow: 'hidden', 
+                    height: 180, 
+                    position: 'relative', 
+                    background: '#0B1511', 
+                    marginBottom: 12,
+                    border: `2px solid rgba(82,183,136,0.35)`,
+                    boxShadow: '0 4px 15px rgba(82,183,136,0.15)',
+                    transition: 'all 0.3s ease'
+                  }}>
+                    <BrainCanvas onPulse={() => {}} />
+                  </div>
+                  <div style={{ 
+                    marginBottom: 16, 
+                    padding: '10px 14px', 
+                    borderRadius: 12, 
+                    background: 'linear-gradient(135deg, rgba(82,183,136,0.08), rgba(82,183,136,0.03))',
+                    border: '1px solid rgba(82,183,136,0.2)',
+                    textAlign: 'center'
+                  }}>
+                    <div style={{ fontSize: 12, fontWeight: 700, color: '#52b788', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                      Un agente ejecuta
+                    </div>
+                    <div style={{ fontSize: 13, fontWeight: 800, color: '#111827', marginTop: 2 }}>
+                      Un sistema multi-agente MAYiA orquesta el negocio
+                    </div>
+                  </div>
+                </>
               }
-            />
+            >
+              <div style={{ 
+                display: 'grid', 
+                gridTemplateColumns: 'repeat(3, 1fr)', 
+                gap: 8, 
+                marginBottom: 16 
+              }}>
+                {[
+                  "Automatizan procesos",
+                  "Predictibilidad de escenarios",
+                  "Actuan y dan soluciones a problemas",
+                  "Alertas de inteligencia",
+                  "Coordinan Tareas",
+                  "Aprenden y mejoran"
+                ].map((bloque, idx) => (
+                  <div 
+                    key={idx} 
+                    style={{ 
+                      display: 'flex', 
+                      alignItems: 'center', 
+                      justifyContent: 'center',
+                      textAlign: 'center',
+                      padding: '10px 6px', 
+                      background: 'linear-gradient(135deg, rgba(82,183,136,0.06), #F9FAFB)', 
+                      border: '1px solid rgba(82, 183, 136, 0.25)', 
+                      borderRadius: 12,
+                      fontSize: 11,
+                      fontWeight: 700,
+                      color: '#1f2937',
+                      lineHeight: 1.25
+                    }}
+                  >
+                    {bloque}
+                  </div>
+                ))}
+              </div>
+            </StandardCard>
           </Wrapper>
 
           <Wrapper category="Desarrollo">
@@ -3281,19 +3437,17 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
               color="#4ade80" 
               bg="rgba(74,222,128,0.15)" 
               title="Desarrollo IA por Sector" 
-              desc="Tu industria ya opera con inteligencia artificial. Creamos soluciones especializadas para tu sector, adaptadas a tus retos, clientes y oportunidades reales." 
+              desc=""
+              buttonText="Agenda una cita"
               videoSrc={autoVideo}
-              stats={[
-                { value: "10+", label: "Sectores Clave" },
-                { value: "Real-Time", label: "Procesamiento" },
-                { value: "API-First", label: "Integración" }
-              ]}
               videoOverlay={
                 <div style={{ position: 'absolute', top: 10, left: 10, background: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(4px)', padding: '4px 10px', borderRadius: 20, fontSize: 10, fontWeight: 700, color: '#4ade80', border: '1px solid rgba(74,222,128,0.2)' }}>
                   Multi-Industry Engines
                 </div>
               }
-            />
+            >
+              <SectoresGrid />
+            </StandardCard>
           </Wrapper>
 
           <Wrapper category="Desarrollo">
@@ -3302,12 +3456,44 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
               color="#f87171" 
               bg="rgba(248,113,113,0.15)" 
               title="Desarrollo IA Estatal" 
-              desc="Modernizamos servicios públicos, superamos la atención ciudadana y toma decisiones en tiempo real basadas en datos abiertos con soluciones de IA diseñadas para institutions gubernamentales." 
+              desc="Desarrollamos soluciones de inteligencia artificial por estado, alineadas a las unidades económicas y sectores productivos de cada región. Impulsamos la transformación digital, automatización, analítica y toma de decisiones en gobierno, industria, comercio y servicios." 
+              buttonText='Agenda Una Cita Ahora'
               beforeText={
-                <MexicoEsMayia 
-                  onlyMap={true} 
-                  onStateClick={(stateId) => onOpenMap?.(stateId)} 
-                />
+                <div style={{ position: 'relative' }}>
+                  <div style={{
+                    position: 'absolute',
+                    top: 10,
+                    right: 10,
+                    zIndex: 10,
+                    background: 'rgba(255, 255, 255, 0.92)',
+                    backdropFilter: 'blur(6px)',
+                    border: '1px solid rgba(248, 113, 113, 0.4)',
+                    borderRadius: 20,
+                    padding: '4px 10px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 6,
+                    boxShadow: '0 2px 10px rgba(0,0,0,0.06)',
+                    pointerEvents: 'none'
+                  }}>
+                    <div style={{
+                      width: 20, height: 20, borderRadius: '50%',
+                      background: 'linear-gradient(135deg, #f87171, #ef4444)',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      flexShrink: 0
+                    }}>
+                      <MapPin size={11} color="#fff" />
+                    </div>
+                    <span style={{ fontSize: 11, fontWeight: 700, color: '#1f2937' }}>
+                      Haz clic en un estado
+                    </span>
+                  </div>
+
+                  <MexicoEsMayia 
+                    onlyMap={true} 
+                    onStateClick={(stateId) => onOpenMap?.(stateId)} 
+                  />
+                </div>
               }
             />
           </Wrapper>
@@ -3317,20 +3503,48 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
               icon={Wrench} 
               color="#fb923c" 
               bg="rgba(251,146,60,0.15)" 
-              title="Desarrollo IA PYME" 
-              desc="Conoce las Píldoras de IA. Automatiza tareas, vende mejor, atiende más rápido y compite con tecnología accesible para pequeñas y medianas empresas." 
+              title="Inteligencia Artificial para PYMES" 
+              desc="Conoce nuestras Píldoras de Inteligencia Artificial. Soluciones de IA listas para usar que ayudan a las pequeñas y medianas empresas a vender más, atender clientes, automatizar tareas y tomar decisiones con datos, sin invertir en talento especializado o infraestructura propia." 
               videoSrc="/assets/images/productos/whatsFaq.webm"
-              stats={[
-                { value: "Asequible", label: "Inversión Pyme" },
-                { value: "1 Semana", label: "Despliegue Rápido" },
-                { value: "WhatsApp", label: "Canal Principal" }
-              ]}
               videoOverlay={
                 <div style={{ position: 'absolute', top: 10, left: 10, background: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(4px)', padding: '4px 10px', borderRadius: 20, fontSize: 10, fontWeight: 700, color: '#fb923c', border: '1px solid rgba(251,146,60,0.2)' }}>
                   WhatsApp AI Bot
                 </div>
               }
-            />
+            >
+              <div style={{ 
+                display: 'grid', 
+                gridTemplateColumns: 'repeat(3, 1fr)', 
+                gap: 8, 
+                marginBottom: 16 
+              }}>
+                {[
+                  "Automatización con IA",
+                  "Agentes de IA",
+                  "IA para Ventas"
+                ].map((bloque, idx) => (
+                  <div 
+                    key={idx} 
+                    style={{ 
+                      display: 'flex', 
+                      alignItems: 'center', 
+                      justifyContent: 'center',
+                      textAlign: 'center',
+                      padding: '10px 6px', 
+                      background: 'linear-gradient(135deg, rgba(251, 146, 60, 0.08), #F9FAFB)', 
+                      border: '1px solid rgba(251, 146, 60, 0.3)', 
+                      borderRadius: 12,
+                      fontSize: 11,
+                      fontWeight: 700,
+                      color: '#1f2937',
+                      lineHeight: 1.25
+                    }}
+                  >
+                    {bloque}
+                  </div>
+                ))}
+              </div>
+            </StandardCard>
           </Wrapper>
 
           <Wrapper category="Desarrollo">
@@ -3338,21 +3552,77 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
               icon={ScanEye} 
               color="#00c853" 
               bg="rgba(0,200,83,0.15)" 
-              title="Desarrollo IA en Computer Vision" 
-              desc="Haz que tus sistemas vean, detecten y actúen. Implementamos visión artificial para inspección, seguridad, conteo, reconocimiento y automatización visual en tiempo real." 
+              title="Cámaras con Inteligencia Artificial (Computer Vision)" 
+              desc="Computer Vision para que tus  cámaras vean, detecten, alerten y actúen. Implementamos visión artificial para análisis de video, detección de objetos, armas de fuego, incendios, accidentes, conteo e inventarios, equipo de seguridad, violación de perímetros, monitoreo inteligente y visión en tiempo real." 
               videoSrc={camaraVideo}
-              stats={[
-                { value: "30 FPS", label: "Monitoreo Live" },
-                { value: "99.5%", label: "Precisión Visual" },
-                { value: "Edge/Cloud", label: "Despliegue" }
-              ]}
+              buttonText="Agenda una cita ahora"
               videoOverlay={
                 <div style={{ position: 'absolute', top: 10, left: 10, background: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(4px)', padding: '4px 10px', borderRadius: 20, fontSize: 10, fontWeight: 700, color: '#00c853', border: '1px solid rgba(0,200,83,0.2)' }}>
                   Live Vision Engine
                 </div>
               }
-              onConocerMas={() => setShowComputerVisionVideo(true)}
-            />
+            >
+              <div style={{ 
+                display: 'grid', 
+                gridTemplateColumns: 'repeat(3, 1fr)', 
+                gap: 8, 
+                marginBottom: 16 
+              }}>
+                {[
+                  "Centro de Entretenimiento",
+                  "Tiendas y Centros Comerciales",
+                  "Ciudades Inteligentes",
+                  "Empresas y Residenciales",
+                  "Seguridad Privada",
+                  "Escuelas Y Universidades"
+                ].map((bloque, idx) => (
+                  <div 
+                    key={idx} 
+                    style={{ 
+                      display: 'flex', 
+                      alignItems: 'center', 
+                      justifyContent: 'center',
+                      textAlign: 'center',
+                      padding: '10px 6px', 
+                      background: 'linear-gradient(135deg, rgba(0, 200, 83, 0.08), #F9FAFB)', 
+                      border: '1px solid rgba(0, 200, 83, 0.3)', 
+                      borderRadius: 12,
+                      fontSize: 11,
+                      fontWeight: 700,
+                      color: '#1f2937',
+                      lineHeight: 1.25
+                    }}
+                  >
+                    {bloque}
+                  </div>
+                ))}
+              </div>
+
+              <button
+                onClick={(e) => { e.stopPropagation(); setShowComputerVisionVideo(true); }}
+                style={{
+                  width: '100%',
+                  background: 'linear-gradient(135deg, rgba(0,200,83,0.12), rgba(0,200,83,0.04))',
+                  border: '1px solid rgba(0, 200, 83, 0.35)',
+                  borderRadius: 10,
+                  padding: '10px 14px',
+                  color: '#008a38',
+                  fontSize: 13,
+                  fontWeight: 700,
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: 8,
+                  transition: 'all 0.2s ease',
+                  boxShadow: '0 2px 6px rgba(0,200,83,0.06)'
+                }}
+                onMouseEnter={e => { e.currentTarget.style.background = 'rgba(0,200,83,0.2)'; e.currentTarget.style.transform = 'translateY(-1px)'; }}
+                onMouseLeave={e => { e.currentTarget.style.background = 'linear-gradient(135deg, rgba(0,200,83,0.12), rgba(0,200,83,0.04))'; e.currentTarget.style.transform = 'translateY(0)'; }}
+              >
+                <Play size={14} fill="#008a38" color="#008a38" /> Ver video
+              </button>
+            </StandardCard>
           </Wrapper>
 
           <Wrapper category="Desarrollo">
@@ -3390,14 +3660,58 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
               icon={Link2} 
               color="#06b6d4" 
               bg="rgba(6,182,212,0.15)" 
-              title="Interoperabilidad" 
-              desc="Conectando sistemas heredados y arquitecturas de datos modernas. Muy pronto podrás unificar flujos de trabajo de múltiples plataformas tradicionales y descentralizadas con integración nativa por IA. Mantente al tanto de esta nueva funcionalidad." 
-              stats={[
-                { value: "R&D", label: "Fase de Desarrollo" },
-                { value: "API-First", label: "Arquitectura" },
-                { value: "Próximamente", label: "Disponibilidad" }
-              ]}
-            />
+              title="Inteligencia Artificial Física e Interoperabilidad" 
+              videoSrc={interoperabilidadVideo}
+              desc="Conectamos robots, cámaras, drones, sensores, datos, sistemas, nube y agentes de IA para crear ecosistemas inteligentes capaces de percibir, analizar, decidir y actuar en tiempo real." 
+              buttonText='Agenda una cita ahora'
+            >
+              <div style={{ 
+                display: 'grid', 
+                gridTemplateColumns: 'repeat(2, 1fr)', 
+                gap: 8, 
+                marginBottom: 16 
+              }}>
+                {[
+                  "IoT",
+                  "Fase de Desarrollo",
+                  "Robots",
+                  "Arquitectura",
+                  "Drones",
+                  "Disponibilidad",
+                  "Cámaras"
+                ].map((bloque, idx) => (
+                  <div 
+                    key={idx} 
+                    style={{ 
+                      display: 'flex', 
+                      alignItems: 'center', 
+                      justifyContent: 'center',
+                      textAlign: 'center',
+                      gap: 6,
+                      padding: '10px 8px', 
+                      background: 'linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(6, 182, 212, 0.03))', 
+                      border: '1px solid rgba(6, 182, 212, 0.35)', 
+                      borderRadius: 12,
+                      fontSize: 11,
+                      fontWeight: 700,
+                      color: '#0891b2',
+                      lineHeight: 1.25,
+                      boxShadow: '0 1px 3px rgba(0,0,0,0.02)',
+                      gridColumn: idx === 6 ? '1 / -1' : 'auto'
+                    }}
+                  >
+                    <span style={{ 
+                      width: 6, 
+                      height: 6, 
+                      borderRadius: '50%', 
+                      background: '#06b6d4', 
+                      flexShrink: 0 
+                    }} />
+                    {bloque}
+                  </div>
+                ))}
+              </div>
+            </StandardCard>
           </Wrapper>
 
           <Wrapper category="Infraestructura">
@@ -3405,13 +3719,14 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
               icon={Cpu} 
               color="#8b5cf6" 
               bg="rgba(139,92,246,0.15)" 
-              title="Cómputo Cuántico" 
+              title="Inteligencia Artificial y Computación Cuántica" 
+              buttonText='Agenda una cita ahora'
               videoSrc={quantumVideo}
-              desc="La próxima frontera en el procesamiento a escala masiva. Nos estamos preparando para integrar capacidades de algoritmos cuánticos aplicados a optimización matemática compleja y criptografía de nueva generación. Próximamente disponible." 
+              desc="Desarrollamos soluciones para problemas complejos mediante inteligencia artificial y cómputo cuántico, aplicados a optimización, simulación, análisis predictivo y toma de decisiones empresariales y de industria." 
               stats={[
-                { value: "Fase Beta", label: "Preparación" },
+                { value: "Habilitado", label: "Preparación" },
                 { value: "Quantum", label: "Algoritmos" },
-                { value: "Próximamente", label: "Disponibilidad" }
+                { value: "¡Ya Disponible!", label: "Disponibilidad" }
               ]}
             />
           </Wrapper>
