@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useMemo, useCallback, forwardRef, useImperativeHandle, Fragment } from 'react';
+import { createPortal } from 'react-dom';
 import { motion } from 'framer-motion';
 import { 
   Database, FlaskConical, FileText, Wrench, Calendar,
@@ -16,7 +17,7 @@ import roiVideo from '../assets/ROI_Video.mp4';
 import squadVideo from '../assets/SQUAD_MAYIA.mp4';
 import senderoSeguroVideo from '../assets/SENDERO SEGURO.mp4';
 import servidoresVideo from '../assets/SERVIDORES.mp4';
-import autoVideo from '../assets/AUTO.mp4';
+import tiendaServicio from '../assets/TiendaServicio.mp4';
 import camaraVideo from '../assets/CAMARA.mp4';
 import quantumVideo from '../assets/QUANTUM.mp4';
 import interoperabilidadVideo from '../assets/INTEROPERABILIDAD_NUEVO.mp4';
@@ -314,21 +315,21 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOp
         <div style={{ position: 'absolute', top: 8, right: 8 }}>
           <motion.div
             style={{
-              background: 'rgba(219, 234, 254, 0.95)', 
-              border: `1px solid ${color}`,
+              background: 'rgba(220, 252, 231, 0.95)', 
+              border: '1px solid #86efac',
               borderRadius: 6,
               padding: '3.5px 8px',
               display: 'flex',
               alignItems: 'center',
               gap: 5,
-              boxShadow: `0 2px 6px ${hexToRgba(color, 0.15)}`,
+              boxShadow: `0 2px 6px ${hexToRgba('#16a34a', 0.15)}`,
             }}
             animate={{
               scale: [1, 1.01, 1],
               boxShadow: [
-                `0 2px 6px ${hexToRgba(color, 0.1)}`,
-                `0 2px 12px ${hexToRgba(color, 0.4)}`,
-                `0 2px 6px ${hexToRgba(color, 0.1)}`,
+                `0 2px 6px ${hexToRgba('#16a34a', 0.1)}`,
+                `0 2px 12px ${hexToRgba('#16a34a', 0.4)}`,
+                `0 2px 6px ${hexToRgba('#16a34a', 0.1)}`,
               ]
             }}
             transition={{
@@ -337,14 +338,14 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOp
               ease: "easeInOut"
             }}
           >
-            <span style={{ fontSize: 8.5, color: '#1e40af', fontWeight: 900, letterSpacing: '0.03em' }}>Activo</span>
+            <span style={{ fontSize: 8.5, color: '#15803d', fontWeight: 900, letterSpacing: '0.03em' }}>Activo</span>
             <motion.div
               style={{
                 width: 5,
                 height: 5,
                 borderRadius: '50%',
-                backgroundColor: color,
-                boxShadow: `0 0 4px ${color}`,
+                backgroundColor: '#16a34a',
+                boxShadow: '0 0 4px #16a34a',
                 flexShrink: 0,
               }}
               animate={{
@@ -985,169 +986,93 @@ function MayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
         {/* Overlays en el video removidos */}
       </div>
 
-      {/* Diagrama de flujo de datos - Responsivo y Ordenado */}
-      {isMobile ? (
+      {/* Diagrama de flujo de datos - 7 Etapas estructuradas en retícula */}
+      <div style={{ margin: '0 16px 16px' }}>
         <div style={{ 
           display: 'grid', 
-          gridTemplateColumns: 'repeat(2, 1fr)', 
-          gap: '8px', 
-          margin: '0 20px 16px',
-          background: 'transparent'
+          gridTemplateColumns: isMobile ? '1fr' : 'repeat(2, 1fr)', 
+          gap: 6 
         }}>
           {[
-            { step: '1', name: 'Ingesta' },
-            { step: '2', name: 'Recolección' },
-            { step: '3', name: 'Almacenamiento' },
-            { step: '4', name: 'Cómputo' },
-            { step: '5', name: 'Consumo' },
-            { step: '6', name: 'Linaje' }
+            { step: '01', name: 'Ingesta' },
+            { step: '02', name: 'Recolección' },
+            { step: '03', name: 'Almacenamiento' },
+            { step: '04', name: 'Cómputo' },
+            { step: '05', name: 'Consumo' },
+            { step: '06', name: 'Linaje' }
           ].map((item) => (
             <div 
               key={item.step} 
               style={{ 
                 background: '#111827', 
                 color: '#ffffff', 
-                borderRadius: 8, 
-                padding: '8px 6px', 
-                fontSize: 10, 
+                borderRadius: 10, 
+                padding: '8px 8px', 
+                fontSize: 10.5, 
                 fontWeight: 800, 
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'flex-start',
-                gap: '8px',
-                boxShadow: '0 2px 4px rgba(0,0,0,0.08)'
+                gap: 6,
+                minWidth: 0,
+                boxShadow: '0 2px 6px rgba(0,0,0,0.12)',
+                border: '1px solid rgba(255,255,255,0.08)'
               }}
             >
               <span style={{ 
                 background: color, 
                 color: '#111827', 
-                borderRadius: '50%', 
-                width: '18px', 
-                height: '18px', 
-                display: 'flex', 
-                alignItems: 'center', 
-                justifyContent: 'center',
-                fontSize: 9,
-                fontWeight: 900
+                borderRadius: 6, 
+                padding: '2px 5px', 
+                fontSize: 9, 
+                fontWeight: 900,
+                flexShrink: 0
               }}>
                 {item.step}
               </span>
-              <span>{item.name}</span>
+              <span style={{ flex: 1, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.name}</span>
             </div>
           ))}
-          <div style={{ gridColumn: 'span 2', display: 'flex', justifyContent: 'center', marginTop: 4 }}>
+
+          {/* Etapa 07: Calidad de Datos en ancho completo */}
+          <div style={{ gridColumn: isMobile ? 'span 1' : 'span 2', minWidth: 0 }}>
             <div style={{ 
               background: '#111827', 
               color: '#ffffff', 
-              borderRadius: 8, 
-              padding: '8px 16px', 
-              fontSize: 10, 
+              borderRadius: 10, 
+              padding: '8px 12px', 
+              fontSize: 11, 
               fontWeight: 800, 
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              gap: '8px',
+              gap: 8,
               width: '100%',
-              boxShadow: '0 2px 4px rgba(0,0,0,0.08)'
+              minWidth: 0,
+              border: `1.5px solid ${color}`,
+              boxShadow: `0 3px 10px ${hexToRgba(color, 0.25)}`
             }}>
               <span style={{ 
                 background: color, 
                 color: '#111827', 
-                borderRadius: '50%', 
-                width: '18px', 
-                height: '18px', 
-                display: 'flex', 
-                alignItems: 'center', 
-                justifyContent: 'center',
-                fontSize: 9,
-                fontWeight: 900
+                borderRadius: 6, 
+                padding: '2px 6px', 
+                fontSize: 9, 
+                fontWeight: 900,
+                flexShrink: 0
               }}>
-                7
+                07
               </span>
-              <span>Calidad de Datos</span>
+              <span style={{ whiteSpace: 'nowrap' }}>Calidad de Datos</span>
             </div>
           </div>
         </div>
-      ) : (
-        <div style={{ 
-          display: 'grid', 
-          gridTemplateColumns: '1fr auto 1fr auto 1fr', 
-          gap: '10px 6px', 
-          margin: '0 20px 16px',
-          alignItems: 'center',
-          background: 'transparent'
-        }}>
-          {[
-            ['Ingesta', 'Recolección', 'Almacenamiento'],
-            ['Cómputo', 'Consumo', 'Linaje']
-          ].map((row, rIdx) => (
-            <Fragment key={rIdx}>
-              {row.map((txt, idx) => (
-                <Fragment key={txt}>
-                  <div style={{ 
-                    background: '#111827', 
-                    color: '#ffffff', 
-                    borderRadius: 6, 
-                    padding: '6px 4px', 
-                    fontSize: 8.5, 
-                    fontWeight: 800, 
-                    textAlign: 'center', 
-                    letterSpacing: '0.02em',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    lineHeight: 1.1,
-                    whiteSpace: 'nowrap',
-                    boxShadow: '0 2px 4px rgba(0,0,0,0.08)'
-                  }}>
-                    {txt}
-                  </div>
-                  {idx < 2 ? (
-                    <span style={{ 
-                      color: color, 
-                      fontWeight: 900, 
-                      fontSize: 12,
-                      userSelect: 'none',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center'
-                    }}>
-                      →
-                    </span>
-                  ) : null}
-                </Fragment>
-              ))}
-            </Fragment>
-          ))}
-          {/* Último elemento centrado ocupando toda la fila */}
-          <div style={{ gridColumn: 'span 5', display: 'flex', justifyContent: 'center', marginTop: 2 }}>
-            <div style={{ 
-              background: '#111827', 
-              color: '#ffffff', 
-              borderRadius: 6, 
-              padding: '6px 16px', 
-              fontSize: 8.5, 
-              fontWeight: 800, 
-              textAlign: 'center', 
-              letterSpacing: '0.02em',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              lineHeight: 1.1,
-              whiteSpace: 'nowrap',
-              boxShadow: '0 2px 4px rgba(0,0,0,0.08)'
-            }}>
-              Calidad de Datos
-            </div>
-          </div>
-        </div>
-      )}
+      </div>
 
       {/* Descripción */}
       <p style={{ 
         fontSize: 13, 
         color: '#4B5563', 
-        lineHeight: 1.5, 
+        lineHeight: 1.6, 
         margin: '0 20px 20px', 
         fontWeight: 500,
         textAlign: 'justify'
@@ -1157,7 +1082,7 @@ function MayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
         Conoce el servicio de nuestros <strong>Squads</strong> de especialistas MAYIA, vamos a tu empresa y te apoyamos a preparar tu datos para la IA.
       </p>
 
-      {/* Botones de acción */}
+      {/* Botones de acción — alinear al fondo como en los demás cards */}
       <div style={{ display: 'flex', gap: 8, padding: '0 20px 20px', marginTop: 'auto' }}>
         <button 
           onClick={handleMasInformacion}
@@ -1219,6 +1144,7 @@ function MayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
 function SquadsMayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
   const [isHovered, setIsHovered] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [showYoutubeModal, setShowYoutubeModal] = useState(false);
   const color = '#2dd4bf';
   const theme = getPastelTheme(color);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -1271,15 +1197,26 @@ function SquadsMayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
         flexDirection: 'column', 
         height: '100%', 
         position: 'relative',
-        overflow: 'hidden',
         transition: 'all 0.3s ease-in-out'
       }}
     >
       {/* Header */}
       <div style={{ display: 'flex', alignItems: 'center', padding: '0 20px', justifyContent: 'space-between', height: 90 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          <div style={{ width: 44, height: 44, borderRadius: '50%', background: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', border: `1.5px solid ${color}` }}>
-            <Users size={22} color={color} />
+          <div style={{ 
+            width: 44, 
+            height: 44, 
+            borderRadius: 12, 
+            background: '#000000', 
+            border: `1.5px solid ${hexToRgba(color, 0.4)}`, 
+            boxShadow: `0 4px 10px ${hexToRgba(color, 0.25)}`,
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'center', 
+            overflow: 'hidden',
+            flexShrink: 0 
+          }}>
+            <img src="/assets/images/card-icons/squads_mayia.jpg" alt="Squads MAYiA" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           </div>
           <div>
             <h3 style={{ margin: 0, fontSize: 18, fontWeight: 800, color: '#111827' }}>Squads MAYiA</h3>
@@ -1368,46 +1305,63 @@ function SquadsMayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
               letterSpacing: '0.04em',
             }}
           >
-            Creamos IA en tu entorno
+            Human As A Service
           </motion.div>
         </div>
 
-        {/* Animated Badge Container - Bottom Left */}
+        {/* Animated Eye-Catching Play Button Container - Bottom Left */}
         <div style={{ 
           position: 'absolute', 
           bottom: 12, 
           left: 12, 
-          zIndex: 5 
+          zIndex: 10 
         }}>
-          <motion.div
+          <motion.button
+            onClick={(e) => { e.stopPropagation(); setShowYoutubeModal(true); }}
+            whileHover={{ scale: 1.08 }}
+            whileTap={{ scale: 0.95 }}
             animate={{
-              borderColor: [color, hexToRgba(color, 0.8), color],
               boxShadow: [
-                `0 0 8px ${hexToRgba(color, 0.4)}`,
-                `0 0 16px ${hexToRgba(color, 0.6)}`,
-                `0 0 8px ${hexToRgba(color, 0.4)}`
+                `0 0 10px ${hexToRgba(color, 0.4)}, 0 0 20px ${hexToRgba(color, 0.2)}`,
+                `0 0 22px ${hexToRgba(color, 0.9)}, 0 0 35px ${hexToRgba(color, 0.4)}`,
+                `0 0 10px ${hexToRgba(color, 0.4)}, 0 0 20px ${hexToRgba(color, 0.2)}`
               ]
             }}
             transition={{
-              duration: 3,
+              duration: 2,
               repeat: Infinity,
               ease: 'easeInOut'
             }}
             style={{
-              background: 'rgba(10, 10, 20, 0.85)', 
-              backdropFilter: 'blur(4px)', 
-              color: color, 
-              fontSize: 9, 
-              fontWeight: 800, 
-              padding: '6px 12px', 
-              borderRadius: 8, 
-              borderWidth: 1.5,
-              borderStyle: 'solid',
-              letterSpacing: '0.06em',
+              background: `linear-gradient(135deg, ${color} 0%, #0d9488 100%)`, 
+              color: '#090d16', 
+              fontSize: 11, 
+              fontWeight: 900, 
+              padding: '7px 14px', 
+              borderRadius: 10, 
+              border: `1.5px solid #ffffff`,
+              letterSpacing: '0.04em',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: 7,
+              boxShadow: `0 4px 15px ${hexToRgba(color, 0.4)}`
             }}
           >
-            Human as a Service
-          </motion.div>
+            <div style={{ 
+              width: 20, 
+              height: 20, 
+              borderRadius: '50%', 
+              background: '#090d16', 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center',
+              boxShadow: '0 2px 5px rgba(0,0,0,0.3)'
+            }}>
+              <Play size={11} fill={color} color={color} style={{ marginLeft: 1 }} />
+            </div>
+            <span>Ver Video</span>
+          </motion.button>
         </div>
       </div>
 
@@ -1510,6 +1464,111 @@ function SquadsMayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
           Agenda tu cita
         </button>
       </div>
+
+      {/* YouTube Modal Overlay — renderizado via Portal directamente en document.body */}
+      {showYoutubeModal && createPortal(
+        <div 
+          onClick={() => setShowYoutubeModal(false)}
+          style={{
+            position: 'fixed',
+            inset: 0,
+            background: 'rgba(0, 0, 0, 0.82)',
+            backdropFilter: 'blur(10px)',
+            WebkitBackdropFilter: 'blur(10px)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 999999,
+            padding: 16
+          }}
+        >
+          <div 
+            style={{
+              background: '#090d16',
+              borderRadius: 24,
+              maxWidth: 720,
+              width: '100%',
+              border: `2px solid #2dd4bf`,
+              boxShadow: `0 25px 50px -12px rgba(45,212,191,0.4)`,
+              overflow: 'hidden',
+              position: 'relative'
+            }}
+            onClick={e => e.stopPropagation()}
+          >
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px 24px', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                <div style={{ width: 32, height: 32, borderRadius: 8, background: '#FF0000', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <Play size={16} fill="#ffffff" color="#ffffff" />
+                </div>
+                <div>
+                  <h3 style={{ margin: 0, color: '#FFFFFF', fontSize: 16, fontWeight: 800 }}>Squads MAYiA — Canal Oficial de YouTube</h3>
+                  <p style={{ margin: 0, color: '#9CA3AF', fontSize: 11, fontWeight: 500 }}>Soluciones e Ingenieros de IA MAYiA</p>
+                </div>
+              </div>
+              <button 
+                onClick={() => setShowYoutubeModal(false)}
+                style={{
+                  background: 'rgba(255,255,255,0.1)',
+                  border: 'none',
+                  color: '#FFFFFF',
+                  width: 36,
+                  height: 36,
+                  borderRadius: '50%',
+                  cursor: 'pointer',
+                  fontWeight: 'bold',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: 16,
+                  flexShrink: 0
+                }}
+              >
+                ✕
+              </button>
+            </div>
+            
+            <div style={{ padding: 20, display: 'flex', flexDirection: 'column', gap: 16 }}>
+              {/* Iframe en proporción 16:9 */}
+              <div style={{ position: 'relative', width: '100%', paddingBottom: '56.25%', height: 0, borderRadius: 16, overflow: 'hidden', background: '#000' }}>
+                <iframe
+                  style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none' }}
+                  src="https://www.youtube.com/@mayiainteligencia"
+                  title="MAYiA YouTube Channel"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                />
+              </div>
+
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
+                <span style={{ fontSize: 12, color: '#9CA3AF', fontWeight: 500 }}>
+                  Explora nuestras soluciones, demos e integraciones en YouTube
+                </span>
+                <a
+                  href="https://www.youtube.com/@mayiainteligencia"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    background: '#FF0000',
+                    color: '#FFFFFF',
+                    padding: '8px 16px',
+                    borderRadius: 10,
+                    fontSize: 12,
+                    fontWeight: 700,
+                    textDecoration: 'none',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 6,
+                    whiteSpace: 'nowrap'
+                  }}
+                >
+                  Abrir en YouTube ↗
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>,
+        document.body
+      )}
     </div>
   );
 }
@@ -1551,16 +1610,6 @@ function IAEmpresarialCard() {
     { icon: Zap,   label: 'Automatización IA', color: BLUE },
   ];
 
-  const subServices = [
-    { icon: Cloud,        label: 'Infra propia' },
-    { icon: Database,     label: 'MAYIA Lake' },
-    { icon: Shield,       label: 'CiberSeg.' },
-    { icon: FlaskConical, label: 'Labs IA' },
-    { icon: Users,        label: 'Squads' },
-    { icon: MonitorCheck, label: 'Monitoreo' },
-    { icon: GraduationCap,label: 'Academia' },
-  ];
-
   return (
     <div
       onMouseEnter={() => setIsHovered(true)}
@@ -1582,8 +1631,20 @@ function IAEmpresarialCard() {
       {/* Header — mismo patrón que StandardCard */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 16, height: 50, marginBottom: 16, justifyContent: 'space-between' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 16, flex: 1, minWidth: 0 }}>
-          <div style={{ width: 44, height: 44, borderRadius: 10, background: hexToRgba(color, 0.15), display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-            <Briefcase size={22} color="#1e3a8a" />
+          <div style={{ 
+            width: 44, 
+            height: 44, 
+            borderRadius: 12, 
+            background: '#000000', 
+            border: `1.5px solid ${hexToRgba(color, 0.4)}`, 
+            boxShadow: `0 4px 10px ${hexToRgba(color, 0.25)}`,
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'center', 
+            overflow: 'hidden',
+            flexShrink: 0 
+          }}>
+            <img src="/assets/images/card-icons/ia_empresarial.jpg" alt="Desarrollo IA Empresarial" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           </div>
           <div style={{ minWidth: 0 }}>
             <h3 style={{ fontSize: 16, fontWeight: 800, color: '#111827', margin: 0, lineHeight: 1.2 }}>Desarrollo IA Empresarial</h3>
@@ -1684,8 +1745,6 @@ function IAEmpresarialCard() {
       <p style={{ fontSize: 13, color: '#4B5563', lineHeight: 1.5, margin: 0, marginBottom: 16, fontWeight: 500, textAlign: 'justify' }}>
         Transformamos empresas en organizaciones inteligentes mediante <strong style={{ color: BLUE }}>Business Workflows</strong> con <strong style={{ color: BLUE }}>Gen-AI, Computer Vision, Robotics</strong> y <strong style={{ color: BLUE }}>Agentes Autónomos</strong>, integrando estrategia, datos, procesos y ciberseguridad para generar crecimiento, eficiencia y ventaja competitiva.
       </p>
-
-      {/* Ecosistema de servicios */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 20 }}>
 
         {/* 4 servicios principales */}
@@ -1715,35 +1774,6 @@ function IAEmpresarialCard() {
                 </div>
                 <p style={{ margin: 0, fontSize: 8, fontWeight: 700, color: svc.color, textAlign: 'center', lineHeight: 1.2 }}>{svc.label}</p>
               </motion.div>
-            );
-          })}
-        </div>
-
-        {/* 7 sub-servicios */}
-        <div style={{ 
-          display: 'flex', 
-          flexWrap: 'wrap', 
-          gap: '8px 12px', 
-          justifyContent: 'center', 
-          paddingTop: 8, 
-          borderTop: '1px solid #E5E7EB' 
-        }}>
-          {subServices.map((sub, i) => {
-            const IconComp = sub.icon;
-            return (
-              <div key={i} style={{ 
-                display: 'flex', 
-                flexDirection: 'column', 
-                alignItems: 'center', 
-                gap: 3,
-                width: isMobile ? 'calc(25% - 12px)' : 'calc(14.28% - 4px)',
-                minWidth: isMobile ? '60px' : 'auto'
-              }}>
-                <div style={{ width: 26, height: 26, borderRadius: 7, background: hexToRgba(color, 0.15), display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <IconComp size={12} color={BLUE} />
-                </div>
-                <p style={{ margin: 0, fontSize: isMobile ? 8.5 : 7, fontWeight: 500, color: '#6B7280', textAlign: 'center', lineHeight: 1.2 }}>{sub.label}</p>
-              </div>
             );
           })}
         </div>
@@ -1821,14 +1851,17 @@ function RoiCard() {
           <div style={{ 
             width: 44, 
             height: 44, 
-            borderRadius: 10, 
-            background: hexToRgba(color, 0.15), 
+            borderRadius: 12, 
+            background: '#000000', 
+            border: `1.5px solid ${hexToRgba(color, 0.4)}`, 
+            boxShadow: `0 4px 10px ${hexToRgba(color, 0.25)}`,
             display: 'flex', 
             alignItems: 'center', 
             justifyContent: 'center', 
+            overflow: 'hidden',
             flexShrink: 0 
           }}>
-            <Wrench size={22} color="#ea580c" />
+            <img src="/assets/images/card-icons/roi_discovery.jpg" alt="ROI Discovery" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           </div>
           <div>
             <h3 style={{ margin: 0, fontSize: 18, fontWeight: 800, color: '#111827', lineHeight: 1.2 }}>ROI Discovery</h3>
@@ -2242,6 +2275,7 @@ function StandardCard({
   beforeText,
   onConocerMas,
   buttonText,
+  iconImage,
   children 
 }: { 
   icon: any, 
@@ -2256,6 +2290,7 @@ function StandardCard({
   beforeText?: React.ReactNode,
   onConocerMas?: () => void,
   buttonText?: string,
+  iconImage?: string,
   children?: React.ReactNode 
 }) {
   const [isHovered, setIsHovered] = useState(false);
@@ -2293,8 +2328,24 @@ function StandardCard({
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: 14, minHeight: 50, marginBottom: 16, justifyContent: 'space-between' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 14, flex: 1 }}>
-          <div style={{ width: 44, height: 44, borderRadius: 10, background: bg, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-            <Icon size={22} color={color} />
+          <div style={{ 
+            width: 44, 
+            height: 44, 
+            borderRadius: 12, 
+            background: '#000000', 
+            border: `1.5px solid ${hexToRgba(color, 0.4)}`, 
+            boxShadow: `0 4px 10px ${hexToRgba(color, 0.25)}`,
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'center', 
+            overflow: 'hidden',
+            flexShrink: 0 
+          }}>
+            {iconImage ? (
+              <img src={iconImage} alt={title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            ) : (
+              <Icon size={22} color={color} />
+            )}
           </div>
           <h3 style={{ fontSize: calculatedFontSize, fontWeight: 800, color: '#111827', margin: 0, lineHeight: 1.25 }}>{title}</h3>
         </div>
@@ -2532,8 +2583,20 @@ function AcademiaCard() {
       {/* Header */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 16, height: 50, marginBottom: 16, justifyContent: 'space-between' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 16, flex: 1 }}>
-          <div style={{ width: 44, height: 44, borderRadius: 10, background: hexToRgba(color, 0.15), display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-            <GraduationCap size={22} color={color} />
+          <div style={{ 
+            width: 44, 
+            height: 44, 
+            borderRadius: 12, 
+            background: '#000000', 
+            border: `1.5px solid ${hexToRgba(color, 0.4)}`, 
+            boxShadow: `0 4px 10px ${hexToRgba(color, 0.25)}`,
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'center', 
+            overflow: 'hidden',
+            flexShrink: 0 
+          }}>
+            <img src="/assets/images/card-icons/academia_mayia.svg" alt="Academia MAYiA" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           </div>
           <div style={{ flex: 1, display: 'flex', alignItems: 'center' }}>
             <img src={academiaLogo} alt="Academia MAYiA - Capacitación corporativa y cursos de Inteligencia Artificial para empresas" style={{ height: '32px', objectFit: 'contain', filter: 'none' }} />
@@ -3015,6 +3078,45 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
   const [showComputerVisionVideo, setShowComputerVisionVideo] = useState(false);
   const [selectedSolution, setSelectedSolution] = useState<null | { title: string, desc: string, details: string[], icon: any, color: string }>(null);
   const isMobile = useIsMobile();
+  
+  const categoriesRef = useRef<HTMLDivElement>(null);
+  const [isCategoryPaused, setIsCategoryPaused] = useState(false);
+
+  useEffect(() => {
+    let animId: number;
+    const container = categoriesRef.current;
+    if (!container) return;
+
+    const autoScroll = () => {
+      if (!isCategoryPaused && container) {
+        container.scrollLeft += 0.55;
+        const singleSetWidth = container.scrollWidth / 3;
+        if (container.scrollLeft >= singleSetWidth * 2) {
+          container.scrollLeft -= singleSetWidth;
+        }
+      }
+      animId = requestAnimationFrame(autoScroll);
+    };
+
+    animId = requestAnimationFrame(autoScroll);
+    return () => cancelAnimationFrame(animId);
+  }, [isCategoryPaused]);
+
+  const duplicatedCategories = useMemo(() => [
+    ...CATEGORIES,
+    ...CATEGORIES,
+    ...CATEGORIES
+  ], []);
+  const greetingText = useMemo(() => {
+    const hour = new Date().getHours();
+    if (hour >= 5 && hour < 12) {
+      return '¿Qué solución de IA necesitas implementar esta mañana?';
+    } else if (hour >= 12 && hour < 19) {
+      return '¿Qué solución de IA necesitas implementar esta tarde?';
+    } else {
+      return '¿Qué solución de IA necesitas implementar esta noche?';
+    }
+  }, []);
 
   const marketplaceSolutions = useMemo(() => [
     {
@@ -3213,68 +3315,104 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
               </div>
             </div>
             <h2 style={{ fontSize: 26, fontWeight: 400, color: '#4B5563', margin: 0 }}>
-              ¿Qué solución de IA necesitas implementar hoy?
+              {greetingText}
             </h2>
           </div>
         </div>
 
-        {/* Categories / Tabs */}
-        <div style={{ 
-          display: 'flex', 
-          gap: 12, 
-          marginBottom: 32, 
-          overflowX: 'auto', 
-          whiteSpace: 'nowrap',
-          paddingBottom: 8,
-          scrollbarWidth: 'none',
-          WebkitOverflowScrolling: 'touch'
-        }}>
-          {CATEGORIES.map((cat) => {
-            const isActive = activeTab === cat;
-            return (
-              <motion.button 
-                key={cat} 
-                onClick={() => setActiveTab(cat)}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                style={{ 
-                  width: 135,
-                  height: 36,
-                  borderRadius: 9999,
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: 12.5, 
-                  fontWeight: isActive ? 700 : 500, 
-                  color: isActive ? '#111827' : '#4B5563', 
-                  cursor: 'pointer', 
-                  background: isActive ? '#A4D955' : '#FFFFFF',
-                  border: `1px solid ${isActive ? '#A4D955' : '#E5E7EB'}`,
-                  boxShadow: isActive ? '0 4px 10px rgba(164,217,85,0.2)' : 'none',
-                  transition: 'color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease',
-                  outline: 'none',
-                  flexShrink: 0,
-                  fontFamily: "'Inter', system-ui, sans-serif"
-                }}
-                onMouseEnter={e => {
-                  if (!isActive) {
-                    e.currentTarget.style.background = '#F3F4F6';
-                    e.currentTarget.style.color = '#111827';
-                    e.currentTarget.style.borderColor = '#D1D5DB';
-                  }
-                }}
-                onMouseLeave={e => {
-                  if (!isActive) {
-                    e.currentTarget.style.background = '#FFFFFF';
-                    e.currentTarget.style.color = '#4B5563';
-                    e.currentTarget.style.borderColor = '#E5E7EB';
-                  }
-                }}
-              >
-                {cat}
-              </motion.button>
-            );
-          })}
+        {/* Categories / Tabs Carousel */}
+        <div 
+          style={{ position: 'relative', marginBottom: 32, width: '100%' }}
+          onMouseEnter={() => setIsCategoryPaused(true)}
+          onMouseLeave={() => setIsCategoryPaused(false)}
+          onTouchStart={() => setIsCategoryPaused(true)}
+          onTouchEnd={() => setIsCategoryPaused(false)}
+        >
+          {/* Degradados laterales de desvanecimiento */}
+          <div style={{
+            position: 'absolute',
+            left: 0,
+            top: 0,
+            bottom: 0,
+            width: 36,
+            background: 'linear-gradient(to right, #FFFFFF 30%, transparent)',
+            pointerEvents: 'none',
+            zIndex: 10
+          }} />
+          <div style={{
+            position: 'absolute',
+            right: 0,
+            top: 0,
+            bottom: 0,
+            width: 36,
+            background: 'linear-gradient(to left, #FFFFFF 30%, transparent)',
+            pointerEvents: 'none',
+            zIndex: 10
+          }} />
+
+          <div 
+            ref={categoriesRef}
+            style={{ 
+              display: 'flex', 
+              gap: 12, 
+              overflowX: 'auto', 
+              whiteSpace: 'nowrap',
+              paddingBottom: 8,
+              paddingTop: 4,
+              paddingLeft: 8,
+              paddingRight: 8,
+              scrollbarWidth: 'none',
+              msOverflowStyle: 'none',
+              WebkitOverflowScrolling: 'touch'
+            }}
+          >
+            {duplicatedCategories.map((cat, idx) => {
+              const isActive = activeTab === cat;
+              return (
+                <motion.button 
+                  key={`${cat}-${idx}`} 
+                  onClick={() => setActiveTab(cat)}
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                  style={{ 
+                    width: 135,
+                    height: 36,
+                    borderRadius: 9999,
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: 12.5, 
+                    fontWeight: isActive ? 700 : 500, 
+                    color: isActive ? '#111827' : '#4B5563', 
+                    cursor: 'pointer', 
+                    background: isActive ? '#A4D955' : '#FFFFFF',
+                    border: `1px solid ${isActive ? '#A4D955' : '#E5E7EB'}`,
+                    boxShadow: isActive ? '0 4px 10px rgba(164,217,85,0.25)' : '0 1px 3px rgba(0,0,0,0.03)',
+                    transition: 'color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease',
+                    outline: 'none',
+                    flexShrink: 0,
+                    fontFamily: "'Inter', system-ui, sans-serif"
+                  }}
+                  onMouseEnter={e => {
+                    if (!isActive) {
+                      e.currentTarget.style.background = '#F3F4F6';
+                      e.currentTarget.style.color = '#111827';
+                      e.currentTarget.style.borderColor = '#D1D5DB';
+                    }
+                  }}
+                  onMouseLeave={e => {
+                    if (!isActive) {
+                      e.currentTarget.style.background = '#FFFFFF';
+                      e.currentTarget.style.color = '#4B5563';
+                      e.currentTarget.style.borderColor = '#E5E7EB';
+                    }
+                  }}
+                >
+                  {cat}
+                </motion.button>
+              );
+            })}
+          </div>
         </div>
 
 
@@ -3304,12 +3442,58 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
               color="#4ade80" 
               bg="rgba(74,222,128,0.15)" 
               title="Laboratorios IA" 
+              iconImage="/assets/images/card-icons/laboratorios_ia.jpg"
               desc="Experimenta, valida y crea soluciones de Inteligencia Artificial antes de invertir en gran escala. Nuestros laboratorios están a tu disposición para entrenar, ajustar y optimizar tus modelos. Busca una reunión para más información" 
               buttonText="Agenda una cita"
               videoSrc={servidoresVideo}
               videoOverlay={
-                <div style={{ position: 'absolute', top: 10, left: 200, background: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(4px)', padding: '4px 10px', borderRadius: 20, fontSize: 10, fontWeight: 700, color: '#4ade80', border: '1px solid rgba(74,222,128,0.2)' }}>
-                  Activo
+                <div style={{ position: 'absolute', top: 8, right: 8 }}>
+                  <motion.div
+                    style={{
+                      background: 'rgba(220, 252, 231, 0.95)', 
+                      border: '1px solid #86efac',
+                      borderRadius: 6,
+                      padding: '3.5px 8px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 5,
+                      boxShadow: `0 2px 6px ${hexToRgba('#16a34a', 0.15)}`,
+                    }}
+                    animate={{
+                      scale: [1, 1.01, 1],
+                      boxShadow: [
+                        `0 2px 6px ${hexToRgba('#16a34a', 0.1)}`,
+                        `0 2px 12px ${hexToRgba('#16a34a', 0.4)}`,
+                        `0 2px 6px ${hexToRgba('#16a34a', 0.1)}`,
+                      ]
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  >
+                    <span style={{ fontSize: 8.5, color: '#15803d', fontWeight: 900, letterSpacing: '0.03em' }}>Activo</span>
+                    <motion.div
+                      style={{
+                        width: 5,
+                        height: 5,
+                        borderRadius: '50%',
+                        backgroundColor: '#16a34a',
+                        boxShadow: '0 0 4px #16a34a',
+                        flexShrink: 0,
+                      }}
+                      animate={{
+                        opacity: [0.4, 1, 0.4],
+                        scale: [0.9, 1.1, 0.9],
+                      }}
+                      transition={{
+                        duration: 1.5,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                    />
+                  </motion.div>
                 </div>
               }
             />
@@ -3333,6 +3517,7 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
               color="#f87171" 
               bg="rgba(248,113,113,0.15)" 
               title="Monitoreo de Modelos IA" 
+              iconImage="/assets/images/card-icons/monitoreo_modelos.jpg"
               desc="Supervisa el desempeño de tus modelos, automatizaciones y agentes inteligentes en tiempo real. Detecta fallas, mide resultados y mejora continuamente tus soluciones de IA." 
               buttonText='Agenda una cita'
               videoSrc="/assets/images/productos/deteccionAnomalias.webm"
@@ -3359,6 +3544,7 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
               color="#52b788" 
               bg="rgba(82, 183, 136, 0.15)" 
               title="Agentes Transversales de Inteligencia Artificial" 
+              iconImage="/assets/images/card-icons/agentes_transversales.jpg"
               desc="Son entidades inteligentes capaces de entender objetivos de negocio, consultar datos privados, coordinar equipos, ejecutar business workflows y operar procesos críticos entre distintas áreas de la organización" 
               buttonText="Agenda una cita"
               beforeText={
@@ -3438,9 +3624,10 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
               color="#4ade80" 
               bg="rgba(74,222,128,0.15)" 
               title="Desarrollo IA por Sector" 
+              iconImage="/assets/images/card-icons/ia_sector.jpg"
               desc=""
               buttonText="Agenda una cita"
-              videoSrc={autoVideo}
+              videoSrc={tiendaServicio}
               videoOverlay={
                 <div style={{ position: 'absolute', top: 10, left: 10, background: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(4px)', padding: '4px 10px', borderRadius: 20, fontSize: 10, fontWeight: 700, color: '#4ade80', border: '1px solid rgba(74,222,128,0.2)' }}>
                   Multi-Industry Engines
@@ -3457,6 +3644,7 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
               color="#f87171" 
               bg="rgba(248,113,113,0.15)" 
               title="Desarrollo IA Estatal" 
+              iconImage="/assets/images/card-icons/ia_estatal.jpg"
               desc="Desarrollamos soluciones de inteligencia artificial por estado, alineadas a las unidades económicas y sectores productivos de cada región. Impulsamos la transformación digital, automatización, analítica y toma de decisiones en gobierno, industria, comercio y servicios." 
               buttonText='Agenda Una Cita Ahora'
               beforeText={
@@ -3505,6 +3693,7 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
               color="#fb923c" 
               bg="rgba(251,146,60,0.15)" 
               title="Inteligencia Artificial para PYMES" 
+              iconImage="/assets/images/card-icons/ia_pymes.jpg"
               desc="Conoce nuestras Píldoras de Inteligencia Artificial. Soluciones de IA listas para usar que ayudan a las pequeñas y medianas empresas a vender más, atender clientes, automatizar tareas y tomar decisiones con datos, sin invertir en talento especializado o infraestructura propia." 
               videoSrc="/assets/images/productos/whatsFaq.webm"
               videoOverlay={
@@ -3554,6 +3743,7 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
               color="#00c853" 
               bg="rgba(0,200,83,0.15)" 
               title="Cámaras con Inteligencia Artificial (Computer Vision)" 
+              iconImage="/assets/images/card-icons/computer_vision.jpg"
               desc="Computer Vision para que tus  cámaras vean, detecten, alerten y actúen. Implementamos visión artificial para análisis de video, detección de objetos, armas de fuego, incendios, accidentes, conteo e inventarios, equipo de seguridad, violación de perímetros, monitoreo inteligente y visión en tiempo real." 
               videoSrc={camaraVideo}
               buttonText="Agenda una cita ahora"
@@ -3632,6 +3822,7 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
               color="#f87171" 
               bg="rgba(248,113,113,0.15)" 
               title="Market Place de Soluciones" 
+              iconImage="/assets/images/card-icons/marketplace_soluciones.jpg"
               desc="Encuentra soluciones de IA listas para implementar. Explora herramientas, agentes y automatizaciones creadas para resolver problemas reales de negocio." 
               videoSrc="/assets/images/productos/portalia.webm"
               videoOverlay={
@@ -3662,6 +3853,7 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
               color="#06b6d4" 
               bg="rgba(6,182,212,0.15)" 
               title="Inteligencia Artificial Física e Interoperabilidad" 
+              iconImage="/assets/images/card-icons/ia_fisica_interoperabilidad.svg"
               videoSrc={interoperabilidadVideo}
               desc="Conectamos robots, cámaras, drones, sensores, datos, sistemas, nube y agentes de IA para crear ecosistemas inteligentes capaces de percibir, analizar, decidir y actuar en tiempo real." 
               buttonText='Agenda una cita ahora'
@@ -3721,6 +3913,7 @@ export default function EnterpriseDashboard({ onOpenMap, onOpenFlaiInfo, onOpenF
               color="#8b5cf6" 
               bg="rgba(139,92,246,0.15)" 
               title="Inteligencia Artificial y Computación Cuántica" 
+              iconImage="/assets/images/card-icons/computacion_cuantica.svg"
               buttonText='Agenda una cita ahora'
               videoSrc={quantumVideo}
               desc="Desarrollamos soluciones para problemas complejos mediante inteligencia artificial y cómputo cuántico, aplicados a optimización, simulación, análisis predictivo y toma de decisiones empresariales y de industria." 
