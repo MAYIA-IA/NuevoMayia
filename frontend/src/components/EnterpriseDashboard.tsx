@@ -1532,9 +1532,10 @@ function SquadsMayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
               <div style={{ position: 'relative', width: '100%', paddingBottom: '56.25%', height: 0, borderRadius: 16, overflow: 'hidden', background: '#000' }}>
                 <iframe
                   style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none' }}
-                  src="https://www.youtube.com/@mayiainteligencia"
-                  title="MAYiA YouTube Channel"
+                  src="https://www.youtube-nocookie.com/embed/N28EnoEYmJw?autoplay=1&rel=0&enablejsapi=1"
+                  title="Squads MAYiA Video"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
                   allowFullScreen
                 />
               </div>
@@ -1544,7 +1545,7 @@ function SquadsMayiaCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
                   Explora nuestras soluciones, demos e integraciones en YouTube
                 </span>
                 <a
-                  href="https://www.youtube.com/@mayiainteligencia"
+                  href="https://www.youtube.com/watch?v=N28EnoEYmJw"
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{
