@@ -1,11 +1,19 @@
 import { useEffect, useRef, useState } from 'react';
 import { TrendingUp, Bot, Trophy, BarChart2, Lock, Globe, Lightbulb, GraduationCap, Handshake } from 'lucide-react';
 
-import imagen1 from '../assets/news/news1.webp';
-import imagen2 from '../assets/news/news2.webp';
-import imagen3 from '../assets/news/news3.webp';
-import imagen4 from '../assets/news/news4.webp';
-import imagen5 from '../assets/news/news5.webp';
+import newsMayiaComunicado from '../assets/news/news_mayia_comunicado.jpg';
+import newsEdgenetSoberania from '../assets/news/news_edgenet_soberania.jpg';
+import newsMayiaPymes from '../assets/news/news_mayia_pymes.jpg';
+import newsEdgenetRed30 from '../assets/news/news_edgenet_red_30.jpg';
+import newsEdgenetIntel from '../assets/news/news_edgenet_intel.jpg';
+import newsMayiaCentroAura from '../assets/news/news_mayia_centro_aura.jpg';
+import newsMayiaConferencia from '../assets/news/news_mayia_conferencia.jpg';
+import newsMayiaAperturaPuertas from '../assets/news/news_mayia_apertura_puertas.jpg';
+import newsEdgenetCables from '../assets/news/news_edgenet_cables.jpg';
+import newsEdgenetVariosCentros from '../assets/news/news_edgenet_varios_centros.jpg';
+import newsEdgenetConexionesMexico from '../assets/news/news_edgenet_conexiones_mexico.jpg';
+import newsEdgenetCrecimiento from '../assets/news/news_edgenet_crecimiento.jpg';
+import newsEdgenetEdificioImponente from '../assets/news/news_edgenet_edificio_imponente.jpg';
 
 /* ── Datos de noticias – editar aquí ────────────────────────────── */
 interface NewsItem {
@@ -24,7 +32,7 @@ interface NewsItem {
 const newsItems: NewsItem[] = [
   {
     id: 1,
-    image: imagen1,
+    image: newsMayiaCentroAura,
     category: 'INFRAESTRUCTURA',
     categoryColor: '#ef4444',
     headline: 'MAYIA, primer centro de inteligencia artificial con sello Hecho en México, inicia operaciones',
@@ -36,7 +44,7 @@ const newsItems: NewsItem[] = [
   },
   {
     id: 2,
-    image: imagen2,
+    image: newsMayiaPymes,
     category: 'SOBERANÍA DIGITAL',
     categoryColor: '#0071C5',
     headline: 'MAYIA: primer centro de IA con sello Hecho en México',
@@ -48,7 +56,7 @@ const newsItems: NewsItem[] = [
   },
   {
     id: 3,
-    image: imagen3,
+    image: newsMayiaCentroAura,
     category: 'INNOVACIÓN',
     categoryColor: '#a78bfa',
     headline: 'MAYIA centro de inteligencia artificial mexicano',
@@ -59,7 +67,7 @@ const newsItems: NewsItem[] = [
   },
   {
     id: 4,
-    image: imagen4,
+    image: newsMayiaConferencia,
     category: 'PYMES',
     categoryColor: '#f59e0b',
     headline: 'Nace MAYIA, el primer centro de IA 100% mexicano para PyMES y soberanía digital',
@@ -71,7 +79,7 @@ const newsItems: NewsItem[] = [
   },
   {
     id: 5,
-    image: imagen5,
+    image: newsMayiaAperturaPuertas,
     category: 'OFICIAL',
     categoryColor: '#34d399',
     headline: 'Comunicado oficial: MAYIA abre operaciones',
@@ -82,7 +90,7 @@ const newsItems: NewsItem[] = [
   },
   {
     id: 6,
-    image: imagen1,
+    image: newsEdgenetCables,
     category: 'INFRAESTRUCTURA',
     categoryColor: '#ef4444',
     headline: 'Edgenet Data Technologies da el banderazo de salida a la primera red mexicana de centros de datos',
@@ -93,7 +101,7 @@ const newsItems: NewsItem[] = [
   },
   {
     id: 7,
-    image: imagen2,
+    image: newsEdgenetVariosCentros,
     category: 'CENTROS DE DATOS',
     categoryColor: '#0071C5',
     headline: 'Surge Edgenet primera red mexicana de centros de datos con IA',
@@ -104,7 +112,7 @@ const newsItems: NewsItem[] = [
   },
   {
     id: 8,
-    image: imagen3,
+    image: newsEdgenetConexionesMexico,
     category: 'INNOVACIÓN',
     categoryColor: '#a78bfa',
     headline: 'Edgenet rompe la centralización del data center en México',
@@ -115,7 +123,7 @@ const newsItems: NewsItem[] = [
   },
   {
     id: 9,
-    image: imagen4,
+    image: newsEdgenetCrecimiento,
     category: 'TENDENCIAS',
     categoryColor: '#f59e0b',
     headline: 'Centros de datos de borde crecen a doble dígito en México',
@@ -126,7 +134,7 @@ const newsItems: NewsItem[] = [
   },
   {
     id: 10,
-    image: imagen5,
+    image: newsEdgenetEdificioImponente,
     category: 'LANZAMIENTO',
     categoryColor: '#34d399',
     headline: 'Edgenet centros de datos México',
@@ -137,7 +145,7 @@ const newsItems: NewsItem[] = [
   },
   {
     id: 11,
-    image: imagen1,
+    image: newsEdgenetConexionesMexico,
     category: 'INFRAESTRUCTURA',
     categoryColor: '#ef4444',
     headline: 'Edgenet expande capacidad de centros de datos',
@@ -148,7 +156,7 @@ const newsItems: NewsItem[] = [
   },
   {
     id: 12,
-    image: imagen2,
+    image: newsEdgenetEdificioImponente,
     category: 'OPERACIONES',
     categoryColor: '#0071C5',
     headline: 'Edgenet Data Technologies inicia operaciones',
@@ -159,7 +167,7 @@ const newsItems: NewsItem[] = [
   },
   {
     id: 13,
-    image: imagen3,
+    image: newsEdgenetVariosCentros,
     category: 'EXPANSIÓN',
     categoryColor: '#a78bfa',
     headline: 'Edgenet lanza red nacional 30 centros de datos México',
@@ -170,7 +178,7 @@ const newsItems: NewsItem[] = [
   },
   {
     id: 14,
-    image: imagen4,
+    image: newsEdgenetIntel,
     category: 'PARTNERS',
     categoryColor: '#f59e0b',
     headline: 'Intel y Edgenet lanzan la primera red mexicana de centros de datos IA ready',
@@ -181,7 +189,7 @@ const newsItems: NewsItem[] = [
   },
   {
     id: 15,
-    image: imagen5,
+    image: newsEdgenetSoberania,
     category: 'SOBERANÍA DIGITAL',
     categoryColor: '#34d399',
     headline: 'Edgenet, VCP Tecnología y Lenovo impulsando la soberanía tecnológica',
@@ -192,7 +200,7 @@ const newsItems: NewsItem[] = [
   },
   {
     id: 16,
-    image: imagen1,
+    image: newsEdgenetRed30,
     category: 'REGIONAL',
     categoryColor: '#ef4444',
     headline: 'Edgenet habilita 30 centros de datos en el país',
@@ -203,7 +211,7 @@ const newsItems: NewsItem[] = [
   },
   {
     id: 17,
-    image: imagen2,
+    image: newsEdgenetCrecimiento,
     category: 'LIDERAZGO',
     categoryColor: '#0071C5',
     headline: 'Edgenet lanza 30 centros de datos y se posiciona como líder en México',
