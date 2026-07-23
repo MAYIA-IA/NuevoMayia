@@ -218,7 +218,6 @@ const newsItems: NewsItem[] = [
 const TICKER_ITEMS = [
   { text: 'Demanda IA México +340% Q1 2026', icon: TrendingUp },
   { text: 'MAYiA Lake: 2.1PB datos soberanos procesados', icon: Bot },
-  { text: 'Hackaton Intel × MAYiA: $500K MXN en premios', icon: Trophy },
   { text: 'Termómetro IA: Escasez de talento IA en 78% de sectores', icon: BarChart2 },
   { text: 'Ciberseguridad IA: 99.9% de modelos protegidos', icon: Lock },
   { text: 'EdgeNet: 30 nodos activos en México', icon: Globe },
