@@ -6,7 +6,7 @@ import {
   Briefcase, LineChart, ShoppingBag, GraduationCap, GitBranch, ScanEye,
   BookOpen, Award, Users, MoreVertical, Info, Cloud, Target, TrendingUp,
   TrendingDown, Shield, Bot, Zap, Link2, Lock, Layers, FlaskRound,
-  MonitorCheck, GraduationCap as GradCap, ChevronRight, MessageSquare, Cpu, MapPin, Play
+  MonitorCheck, GraduationCap as GradCap, ChevronRight, MessageSquare, Cpu, MapPin, Play, ExternalLink
 } from 'lucide-react';
 import logoMaia from '../assets/logosNativos/logoMaia.webp';
 import academiaLogo from '../assets/logosNativos/academia-horizontal.webp';
@@ -522,6 +522,7 @@ function EdgenetCard({ onOpenMap, onOpenFabricaInfo, onOpenDiagnostico }: { onOp
 function FlaiCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
   const [isHovered, setIsHovered] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [showFlaiModal, setShowFlaiModal] = useState(false);
   const color = '#f87171';
   const theme = getPastelTheme(color);
 
@@ -666,7 +667,10 @@ function FlaiCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
 
       <div style={{ display: 'flex', marginTop: 'auto', padding: '0 20px 20px' }}>
         <button 
-          onClick={handleAgendarCita}
+          onClick={(e) => {
+            e.stopPropagation();
+            setShowFlaiModal(true);
+          }}
           style={{ 
             background: `linear-gradient(135deg, ${color} 0%, rgba(255, 255, 255, 0.6) 50%, ${hexToRgba(color, 0.85)} 100%)`, 
             backgroundSize: '200% auto',
@@ -681,6 +685,110 @@ function FlaiCard({ onOpenInfo }: { onOpenInfo?: () => void }) {
           Cotiza ahora <span className="cta-arrow-animate">&rarr;</span>
         </button>
       </div>
+
+      {/* Modal Overlay para https://www.flainube.com/ — Portal en document.body */}
+      {showFlaiModal && createPortal(
+        <div 
+          onClick={() => setShowFlaiModal(false)}
+          style={{
+            position: 'fixed',
+            inset: 0,
+            background: 'rgba(0, 0, 0, 0.82)',
+            backdropFilter: 'blur(10px)',
+            WebkitBackdropFilter: 'blur(10px)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 999999,
+            padding: 16
+          }}
+        >
+          <div 
+            style={{
+              background: '#090d16',
+              borderRadius: 24,
+              maxWidth: 1100,
+              width: '100%',
+              height: '85vh',
+              maxHeight: 800,
+              border: `2px solid ${color}`,
+              boxShadow: `0 25px 50px -12px ${hexToRgba(color, 0.4)}`,
+              overflow: 'hidden',
+              position: 'relative',
+              display: 'flex',
+              flexDirection: 'column'
+            }}
+            onClick={e => e.stopPropagation()}
+          >
+            {/* Header del Modal */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px 20px', borderBottom: '1px solid rgba(255,255,255,0.1)', background: '#0d1322' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                <div style={{ width: 36, height: 36, borderRadius: 10, background: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', border: `1px solid ${hexToRgba(color, 0.4)}` }}>
+                  <img src={flaiLogo} alt="FLAI Logo" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                </div>
+                <div>
+                  <h3 style={{ margin: 0, color: '#FFFFFF', fontSize: 16, fontWeight: 800 }}>FLAI — Nube Soberana Inteligente</h3>
+                  <p style={{ margin: 0, color: '#9CA3AF', fontSize: 11, fontWeight: 500 }}>https://www.flainube.com/</p>
+                </div>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                <a
+                  href="https://www.flainube.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 6,
+                    background: hexToRgba(color, 0.15),
+                    color: color,
+                    border: `1px solid ${hexToRgba(color, 0.4)}`,
+                    padding: '6px 12px',
+                    borderRadius: 8,
+                    fontSize: 12,
+                    fontWeight: 600,
+                    textDecoration: 'none',
+                    transition: 'all 0.2s'
+                  }}
+                >
+                  <ExternalLink size={14} /> Abrir en pestaña externa
+                </a>
+                <button 
+                  onClick={() => setShowFlaiModal(false)}
+                  style={{
+                    background: 'rgba(255,255,255,0.1)',
+                    border: 'none',
+                    color: '#FFFFFF',
+                    width: 36,
+                    height: 36,
+                    borderRadius: '50%',
+                    cursor: 'pointer',
+                    fontWeight: 'bold',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: 16,
+                    flexShrink: 0
+                  }}
+                >
+                  ✕
+                </button>
+              </div>
+            </div>
+            
+            {/* Contenido iframe de flainube.com */}
+            <div style={{ flex: 1, position: 'relative', width: '100%', background: '#000' }}>
+              <iframe
+                style={{ width: '100%', height: '100%', border: 'none' }}
+                src="https://www.flainube.com/"
+                title="FLAI Nube Soberana Inteligente"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              />
+            </div>
+          </div>
+        </div>,
+        document.body
+      )}
     </div>
   );
 }
