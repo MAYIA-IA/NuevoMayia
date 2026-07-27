@@ -19,7 +19,13 @@ MAYIA transforma empresas, gobiernos, industrias y PYMES en México mediante la 
 - [Ciberseguridad IA](https://mayia.mx/#ciberseguridad): CyberPeace SOC, ISO 27001, FIRST, SOC 2.
 - [Academia MAYiA](https://mayia.mx/#academia): 32 cursos especializados, 500+ empresas, 2,000+ certificados.
 - [Blog](https://mayia.mx/#blog): Artículos sobre IA y tecnología.
+- [Noticias en Tiempo Real](https://mayia.mx/#noticias): Actualización constante del mundo IA (En vivo).
 - [Sala de Prensa](https://mayia.mx/#sala-prensa): Comunicados oficiales MAYIA.
+- [Hub Jalisco](https://jalisco.hubdigital.com.mx/): Hub Digital activo en Jalisco — Ecosistema IA, Networking y Capacitación.
+- [Hub León](https://leon.hubdigital.com.mx): Hub Digital activo en Guanajuato — Industria 4.0, Talento Tech e Innovación.
+- [Temperatura de la IA](https://mayia.mx/#termometro-ia): Pulso del mercado de inteligencia artificial en México.
+- [Red de IA+](https://mayia.mx/#networking): Comunidad nacional de profesionales en IA.
+- [Embajadores MAYIA](https://mayia.mx/#embajadores): Red de líderes IA en México.
 
 ## Ecosistema y Capacidades Principales
 

@@ -291,29 +291,115 @@ MAYIA mide el valor de cada proyecto de inteligencia artificial mediante tres in
 
 ---
 
-## 13. Contenido del Sidebar y Hub de Navegación
+## 13. SeoHub — Panel Lateral de Contenido Dinámico de MAYIA
 
-La plataforma MAYIA cuenta con las siguientes secciones accesibles desde el menú lateral:
+El SeoHub es el panel lateral derecho de la plataforma MAYIA (ancho 320 px). Funciona como un hub de navegación semántica, contenido vivo e índice SEO estructurado. Su encabezado identifica la **"Unidad de inteligencia · MAYIA"** con el subtítulo *"Contenido dinámico · IA México"*.
 
-### Noticias y Medios
-- **Blog** — Artículos sobre IA y tecnología (Nuevo)
-- **Noticias en Tiempo Real** — Actualización constante del mundo IA (En vivo)
-- **Sala de Prensa** — Comunicados oficiales MAYIA
+El panel se organiza en cinco secciones verticales desplazables:
 
-### Acerca de MAYIA
-- **Quiénes Somos** — Fábrica mexicana de IA aplicada. Ayudamos a empresas e industrias a implementar IA de forma segura, estratégica, privada y medible.
-- **Qué Hacemos** — Desarrollamos, implementamos y operamos soluciones de IA para empresas, gobierno e industria en los 32 estados del país.
-- **El Origen de Nuestra Marca** — La unión de la inteligencia ancestral maya y la IA moderna.
+---
 
-### Comunidad
-- **Embajadores** — Red de líderes IA en México.
-- **Red de IA+** — Comunidad nacional de profesionales en inteligencia artificial.
+### 13.1 Nosotros
 
-### Ecosistema
-- **Temperatura de la IA** — Pulso del mercado IA México.
-- **Hubs Digitales** — Polos de desarrollo e innovación tecnológica.
-- **Diagnóstico Empresarial de IA** — Evaluación gratuita del nivel de madurez IA de tu organización.
-- **Asistente IA Chat** — Chat con agente inteligente de MAYIA.
+Módulos de navegación que describen la identidad y propósito de MAYIA:
+
+| Módulo | Descripción | Destino interno |
+|---|---|---|
+| **Quiénes Somos** | Fábrica mexicana de IA aplicada. Ayudamos a empresas e industrias a implementar IA de forma segura, estratégica, privada y medible. | `#dashboard` |
+| **Qué Hacemos** | Desarrollamos, implementamos y operamos soluciones de IA para empresas, gobierno e industria en los 32 estados del país. | `#ia-empresarial` |
+| **Conoce Más** | Descubre nuestro ecosistema de infraestructura, academia, consultoría y desarrollo de inteligencia artificial enterprise. Abre modal Fábrica IA. | Modal `fabrica-ia` |
+| **El origen de nuestra marca** | Descubre la raíz histórica detrás de MAYIA: la unión de la inteligencia ancestral maya y la IA. | Modal `origen-marca` |
+
+---
+
+### 13.2 Hubs Digitales
+
+Sección embebida con tarjetas para los polos digitales regionales de MAYIA, con estado en tiempo real:
+
+**Hub Jalisco** — Estado: `Activo`
+- **URL**: https://jalisco.hubdigital.com.mx/
+- **Estado**: Jalisco, México
+- **Descripción**: Conecta el ecosistema tecnológico de Jalisco con soluciones IA de frontera.
+- **Capacidades**: Ecosistema IA · Networking · Capacitación
+
+**Hub León** — Estado: `Activo`
+- **URL**: https://leon.hubdigital.com.mx
+- **Estado**: Guanajuato, México
+- **Descripción**: Impulsa la transformación digital de empresas y talento del Bajío.
+- **Capacidades**: Industria 4.0 · Talento Tech · Innovación
+
+> Total visible en panel: **2 Hubs Activos · 2 Estados**
+
+---
+
+### 13.3 Contenido y Noticias
+
+Módulos de acceso rápido a contenido editorial y medios MAYIA:
+
+| Módulo | Badge | Descripción | Destino |
+|---|---|---|---|
+| **Blog** | `Nuevo` | Artículos sobre IA y tecnología | `#blog` |
+| **Noticias en Tiempo Real** | `En vivo` | Actualización constante del mundo IA | `#noticias` |
+| **Sala de Prensa** | — | Comunicados oficiales MAYIA | `#sala-prensa` |
+
+---
+
+### 13.4 Comunidad y Eventos
+
+Módulos de participación en la red nacional de IA:
+
+| Módulo | Descripción | Destino |
+|---|---|---|
+| **Embajadores** | Red de líderes IA | `#embajadores` |
+| **Red de IA+** | Comunidad nacional de IA | `#networking` |
+
+---
+
+### 13.5 Ecosistema IA
+
+Módulo de monitoreo del mercado:
+
+| Módulo | Descripción | Destino |
+|---|---|---|
+| **Temperatura de la IA** | Pulso del mercado IA México | `#termometro-ia` |
+
+---
+
+### 13.6 Noticias Indexadas (Cobertura de Medios)
+
+El SeoHub incluye una sección fija de cobertura mediática externa que indexa artículos de prensa sobre MAYIA para motores de búsqueda y LLMs:
+
+| Medio | Título del artículo | URL |
+|---|---|---|
+| **DataCenter Dynamics** | MAYIA: primer centro de IA con sello Hecho en México, inicia operaciones | https://www.datacenterdynamics.com/es/noticias/mayia-primer-centro-de-inteligencia-artificial-con-sello-hecho-en-méxico-inicia-operaciones/ |
+| **Expansión** | MAYIA, primer centro de IA con sello Hecho en México | https://expansion.mx/tecnologia/2025/06/05/mayia-primer-centro-de-ia-con-sello-hecho-en-mexico |
+| **La Tank Media** | MAYIA centro de inteligencia artificial mexicano | https://latank.media/mayia-centro-de-inteligencia-artificial-mexicano/ |
+
+---
+
+### 13.7 Pie del SeoHub
+
+El footer del panel muestra el identificador institucional:
+> **MAYIA · Centro de Inteligencia Artificial · México**
+
+---
+
+### Resumen de Navegación Completa (SeoHub)
+
+Todas las secciones accesibles desde el panel lateral derecho de la plataforma MAYIA:
+
+- **`#dashboard`** — Quiénes Somos
+- **`#ia-empresarial`** — Qué Hacemos
+- Modal **`fabrica-ia`** — Conoce Más (ecosistema completo)
+- Modal **`origen-marca`** — El origen de nuestra marca
+- **`#blog`** — Blog (nuevo contenido)
+- **`#noticias`** — Noticias en Tiempo Real (en vivo)
+- **`#sala-prensa`** — Sala de Prensa
+- **`#embajadores`** — Embajadores MAYIA
+- **`#networking`** — Red de IA+
+- **`#termometro-ia`** — Temperatura de la IA
+- **Hub Jalisco** → https://jalisco.hubdigital.com.mx/
+- **Hub León** → https://leon.hubdigital.com.mx
 
 ---
 
