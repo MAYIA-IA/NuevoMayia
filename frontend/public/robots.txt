@@ -1,17 +1,76 @@
 User-agent: *
 Allow: /
 
+# Bots de búsqueda habituales
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+# Bots de LLMs y agentes IA
 User-agent: GPTBot
 Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /llm.txt
+
+User-agent: ChatGPT-User
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /llm.txt
 
 User-agent: ClaudeBot
 Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /llm.txt
 
 User-agent: PerplexityBot
 Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /llm.txt
 
 User-agent: Google-Extended
 Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /llm.txt
 
+User-agent: anthropic-ai
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /llm.txt
+
+User-agent: cohere-ai
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /llm.txt
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Crawlers de entrenamiento de IA (opcionales, permitidos)
+User-agent: CCBot
+Allow: /
+
+User-agent: DataForSeoBot
+Allow: /
+
+# Sitemap y archivos para LLMs
 Sitemap: https://mayia.mx/sitemap.xml
-
+LLMs-txt: https://mayia.mx/llms.txt
+LLMs-Full-txt: https://mayia.mx/llms-full.txt

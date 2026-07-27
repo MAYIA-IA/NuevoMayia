@@ -1,6 +1,6 @@
 # Documentación Completa de MAYIA — Fábrica de Inteligencia Artificial en México
 
-> Este archivo contiene la información completa, detallada y estructurada de MAYIA (https://mayia.mx) para ser consumida por modelos de lenguaje de gran escala (LLMs), sistemas RAG y agentes autónomos de IA.
+> Este archivo contiene la información completa, detallada y estructurada de MAYIA (https://mayia.mx) para ser consumida por modelos de lenguaje de gran escala (LLMs), sistemas RAG y agentes autónomos de IA. Refleja con exactitud los contenidos visibles en el sitio web público de MAYIA al 26 de julio de 2026.
 
 ---
 
@@ -9,13 +9,46 @@
 MAYIA es el primer centro e infraestructura de inteligencia artificial 100% mexicano. Combina soberanía digital, infraestructura física local en México y un modelo de desarrollo integral para llevar la IA a la operación real de las organizaciones.
 
 ### Misión
-Llevar la inteligencia artificial a la operación diaria de las empresas y organizaciones mexicanas en entornos privados, confiables y con gobernanza estricta.
+Llevar la inteligencia artificial a la operación diaria de las empresas y organizaciones mexicanas en entornos privados, confiables y con gobernanza estricta. MAYIA desarrolla, implementa y opera soluciones de IA para empresas, gobierno e industria en los 32 estados del país.
+
+### Identidad de Marca
+El nombre MAYIA une la inteligencia ancestral maya con la Inteligencia Artificial moderna (IA), simbolizando la convergencia entre el legado histórico de México y la tecnología del futuro.
+
+### Sello "Hecho en México"
+MAYIA porta el distintivo oficial "Hecho en México", certificando que sus soluciones de inteligencia artificial son desarrolladas íntegramente en territorio nacional.
 
 ---
 
-## 2. Forward-Deployed AI Squads
+## 2. IA Empresarial — Servicios Principales
 
-MAYIA anuncia el despliegue de sus **Forward-Deployed AI Squads**, un modelo especializado de implementación de inteligencia artificial empresarial que lleva expertos, ingenieros de IA, desarrolladores, arquitectos de datos, especialistas en automatización, ciberseguridad y adopción directamente al contexto operativo de las empresas.
+MAYIA ofrece soluciones de IA desde discovery hasta implementación con ROI medible. Implementación en 2–4 meses, 100% soberanía de datos y soporte 24/7.
+
+### Servicios
+
+**Consultoría Estratégica** — ROI promedio: 2–3x
+- Transformación digital con ROI medible.
+- Enfoque holístico en personas, procesos y tecnología.
+- Aumento de calidad, mejores prácticas e innovación constante.
+
+**Científicos de Datos** — Ecosistema 365x
+- Centro de I+D interno.
+- Ecosistema de startups innovadoras.
+- Soluciones disponibles hoy, no mañana, con enfoque híbrido.
+
+**Integración Completa** — 100% Soberanía
+- Primera plataforma IA integral de México.
+- Infraestructura soberana y desarrollo especializado.
+- Red nacional de centros de datos con velocidad y seguridad.
+
+**Soporte 24/7** — Disponibilidad garantizada
+- Mantenimiento, seguridad y preparación para el futuro.
+- Servicio internacional con capacitación continua.
+
+---
+
+## 3. Forward-Deployed AI Squads
+
+MAYIA despliega equipos especializados de ingenieros de IA, arquitectos de datos, desarrolladores, especialistas en automatización, ciberseguridad y adopción directamente en el contexto operativo de las empresas.
 
 ### Metodología de Implementación (10 Pasos)
 1. **Diagnóstico**: Evaluación profunda de la madurez tecnológica y procesos clave.
@@ -30,7 +63,7 @@ MAYIA anuncia el despliegue de sus **Forward-Deployed AI Squads**, un modelo esp
 10. **ROI**: Medición continua de impacto y retorno de inversión.
 
 ### Tipos de Agentes Desarrollados
-- Agentes de atención a clientes multicanal.
+- Agentes de atención a clientes multicanal (24/7, multiidioma).
 - Agentes de ventas, prospección y cualificación de leads.
 - Agentes de análisis de datos y generación de reportes ejecutivos.
 - Asistentes inteligentes para Finanzas, Compras, Recursos Humanos y Legal.
@@ -38,7 +71,7 @@ MAYIA anuncia el despliegue de sus **Forward-Deployed AI Squads**, un modelo esp
 
 ---
 
-## 3. Infraestructura y Nube Soberana (FLAI)
+## 4. Infraestructura y Nube Soberana (FLAI)
 
 MAYIA opera sobre 30 centros de datos IA Ready interconectados a nivel nacional en México, respaldados por la red **EdgeNet** y la nube soberana **FLAI**.
 
@@ -46,38 +79,211 @@ MAYIA opera sobre 30 centros de datos IA Ready interconectados a nivel nacional 
 - **Soberanía de Datos**: Residencia física del almacenamiento y procesamiento en territorio nacional.
 - **Baja Latencia**: Procesamiento Edge cercano a las instalaciones operativas.
 - **Cumplimiento y Privacidad**: Alineado con normativas mexicanas e internacionales de protección de datos personales y financieros.
+- **GPU Clusters**: Alta capacidad computacional para entrenamiento y fine-tuning de modelos.
 
 ---
 
-## 4. Productos Principales
+## 5. MAYiA Lakehouse — Plataforma de Datos
 
-### FLAI Nube Soberana
-Plataforma de infraestructura en la nube para el entrenamiento, ajuste fino (fine-tuning) y despliegue de modelos de IA con alta capacidad computacional (GPU clusters).
-
-### CyberPeace SOC
-Centro de Operaciones de Seguridad Inteligente impulsado por IA para detección proactiva de amenazas, monitoreo 24/7, prevención de fugas de información y respuesta coordinada.
-
-### MAYiA Lakehouse
 Plataforma unificada para la ingesta, almacenamiento, gobernanza y análisis masivo de datos estructurados y no estructurados necesarios para alimentar modelos de IA.
 
 ---
 
-## 5. Academia MAYiA
+## 6. Empleados Digitales — Agentes IA para tu Organigrama
 
-Centro de formación corporativa con más de 32 cursos y diplomados especializados diseñados para capacitar a ejecutivos, ingenieros y equipos operativos en inteligencia artificial aplicada.
+Empleados digitales que piensan, actúan y evolucionan con tu empresa. Características clave:
 
-### Áreas de Capacitación
-- Prompt Engineering Avanzado
-- Desarrollo e Integración de Agentes de IA
-- Gobernanza y Ciberseguridad en IA
-- Analítica de Datos y Modelos Predictivos
-- Liderazgo y Transformación Digital con IA
+- **24/7** — Disponibilidad total sin interrupciones.
+- **10x** — Más productivo que un empleado convencional.
+- **85%** — Ahorro de tiempo en tareas repetitivas.
+- **0** — Errores humanos en procesos automatizados.
+- **100% Confidencialidad** — Datos protegidos en infraestructura soberana.
+
+### Casos de Uso (Empleados Digitales)
+- **Ana - Finanzas**: Procesamiento de solicitudes de crédito en 3 minutos, envío automatizado de documentos.
+- **Marco - Inventario**: Detección y reabastecimiento de productos prioritarios, generación automática de órdenes de compra.
+- **Sofia - Asistente**: Confirmación de juntas, envío de briefs y materiales a participantes.
+- **David - Marketing**: Monitoreo de conversiones, análisis de ROI de campañas en tiempo real.
 
 ---
 
-## 6. La Triada de Retorno MAYIA
+## 7. Ciberseguridad para Inteligencia Artificial — CyberPeace SOC
 
-MAYIA mide el valor de cada proyecto de inteligencia artificial mediante tres indicadores de retorno:
+Centro de Operaciones de Seguridad Inteligente especializado para MLOps y AI-as-a-Service. Protección desde datos de entrenamiento hasta modelos en producción.
+
+### Certificaciones
+- **FIRST** (Forum of Incident Response and Security Teams)
+- **ISO 27001** (Gestión de Seguridad de la Información)
+- **ISO 27034** (Seguridad en Aplicaciones)
+- **SOC 2** (Controles de Seguridad y Disponibilidad)
+
+### Servicios de Ciberseguridad IA
+
+**Protección de Modelos (Model Security)** — 99.9% Protección
+- Defensa contra ataques adversarios, envenenamiento de datos y extracción de modelos.
+
+**Seguridad de Datos (Data Privacy)** — 100% Confidencial
+- Cifrado homomórfico, federated learning y privacidad diferencial.
+
+**Detección de Ataques (Threat Detection)** — Monitoreo 24/7
+- Monitoreo proactivo contra evasión, inferencia y extracción.
+- IA que defiende IA.
+
+**Gobernanza & Compliance (AI Governance)** — ISO Certificado
+- Cumplimiento regulatorio, evaluación de riesgo y auditoría continua para IA ética.
+
+### Amenazas Interceptadas (Live Dashboard)
+- Ataques Adversarios — Nivel: Critical
+- Data Poisoning — Nivel: High
+- Model Extraction — Nivel: High
+- Membership Inference — Nivel: Medium
+
+---
+
+## 8. IA por Sector — Soluciones VaaS y SaaS
+
+Soluciones disponibles como VaaS (Value as a Service) y SaaS (Software as a Service) para 8 sectores clave:
+
+### Finanzas
+- Detección de Pagos y Fraudes
+- Banca Personalizada (chatbots)
+- Perspectivas de Inversión y Trading
+
+### Salud
+- Simulación de Moléculas
+- Descubrimiento de Fármacos
+- Análisis de Datos de Ensayos Clínicos
+
+### Retail
+- Compras Personalizadas
+- Tiendas Inteligentes y Cadena de Suministro
+- Gestión Omnicanal
+- Chatbots de Servicio al Cliente
+
+### Ingeniería y Construcción
+- Acelerar Flujos de Trabajo de Diseño
+- Toma de Decisiones Más Rápidas con Rastreo en Tiempo Real
+- Perspectivas Más Profundas en Productos de Diseño
+
+### Medios y Entretenimiento
+- Desarrollo de Personajes
+- Edición de Video y Creación de Imágenes
+- Publicidad Hiper-Personalizada para el Consumidor
+
+### Manufactura
+- La Fábrica Habilitada por IA
+- Diseño y Desarrollo de Productos
+- Mantenimiento Predictivo
+- Chatbots para el Proceso de Ventas
+
+### Sector Público (GovTech)
+- Chatbots para la Participación Ciudadana
+- Resumen de Documentos
+- Cumplimiento de Auditorías
+- Asistentes Virtuales de IA
+
+### Energía
+- Gemelos Digitales
+- Mantenimiento Predictivo y Preventivo
+- Servicio al Cliente
+
+---
+
+## 9. Píldoras IA — Demostraciones de Agentes Especializados
+
+12+ agentes de IA demostrativos por categoría, disponibles para ver en acción:
+
+- **Asesor Contable Fiscal** (Finanzas) — Asesoría 24/7, normatividad actualizada.
+- **WhatsApp Cobro y Facturación** (Automatización) — Respuestas automáticas, integración pagos.
+- **Recomendadora Inteligente** (Ventas) — ML personalizado, cross-selling.
+- **Técnico Ciberseguridad** (Seguridad) — Monitoreo 24/7, alertas en tiempo real.
+- **Asesor Recursos Humanos** (RRHH) — Gestión de talento, onboarding.
+- **Seguridad en el Trabajo** (Compliance) — Protocolos, auditorías.
+- **Asesor ISO 9001** (Calidad) — Certificación, mejora continua.
+- **Operadora con IA** (Call Center) — Atención 24/7, multiidioma.
+- **3 Cámaras Seguridad IA** (Seguridad) — Detección de movimiento, alertas móvil.
+- **Lectura de Placas IA** (Acceso) — Reconocimiento OCR, base de datos.
+- **Prevención Robo y Merma** (Retail) — Análisis de comportamiento, alertas en tiempo real.
+- **Operación de Sucursales** (Gestión) — Dashboard central, KPIs en vivo.
+
+---
+
+## 10. Marketplace de Soluciones IA
+
+Ecosistema inteligente MAYIA con proyectos y agentes IA creados para resolver problemas específicos por industria. Más de 12 proyectos, 3 categorías top.
+
+### Proyectos Destacados
+
+**Agente 33** (Seguridad) — Estado: Destacado — 1,250 votos
+- La máxima expresión de inteligencia artificial táctica. Agente 33 no solo monitorea, neutraliza. Diseñado para entornos empresariales de alta exigencia.
+- Tecnologías: Computer Vision, Defensa Neuronal, Respuesta Autónoma.
+- Equipo: Seguridad MAYiA.
+
+**Lumel** (RRHH) — Estado: Popular — 984 votos
+- Inteligencia Artificial con entendimiento profundo del comportamiento humano, ideal para recursos humanos. Combina procesamiento de lenguaje natural avanzado con empatía cognitiva.
+- Tecnologías: Empatía Cognitiva, LLM, MAYiA API.
+- Equipo: Equipo de RRHH.
+
+**MCP CDMX** (GovTech) — Estado: Nuevo — 890 votos
+- Asistente de IA soberana de la CDMX. Permite consultar datos sobre movilidad, medio ambiente y finanzas utilizando herramientas MCP en tiempo real.
+- Tecnologías: CopilotKit, MCP, React.
+- Equipo: Claude Impact.
+
+---
+
+## 11. Academia MAYiA — Formación Profesional en IA
+
+Centro de formación corporativa especializada en Inteligencia Artificial aplicada a negocio, industria y sector público.
+
+### Estadísticas
+- **500+** Empresas capacitadas
+- **95%** Satisfacción
+- **2,000+** Certificados emitidos
+- **32** Cursos disponibles
+
+### Catálogo Completo de Cursos
+
+#### Cursos de Negocios
+1. Fundamentos del Prompting (4 horas) — PRINCIPIANTE
+2. IA para Trabajo Inteligente (25 horas) — INTERMEDIO
+3. Comunicación Efectiva en Equipo (10 horas) — INTERMEDIO
+4. Priorización y Delegación (10 horas) — INTERMEDIO
+5. IA para Gerentes (30 horas) — AVANZADO — Aceleración de adopción IA, ROI y gobernanza
+6. Gestión del Cambio (15 horas) — AVANZADO
+7. Toma de Decisiones Estratégicas (6 horas) — AVANZADO
+8. Optimización de Procesos (12 horas) — AVANZADO
+9. Desarrollo de Talento Humano (15 horas) — AVANZADO
+
+#### Cursos Tech
+10. Programación Asistida por IA (20 horas) — INTERMEDIO
+11. Django REST Framework (40 horas) — AVANZADO
+12. Python Fundamentos (30 horas) — PRINCIPIANTE
+13. Django Web Development (20 horas) — INTERMEDIO
+14. Docker para Python (10 horas) — INTERMEDIO
+15. Fundamentos de LLMs (30 horas) — AVANZADO — Prompting, RAG, LLMs de código abierto
+16. Flask Web Apps (16 horas) — INTERMEDIO
+17. SQL Básico (30 horas) — PRINCIPIANTE
+18. SQL Avanzado (30 horas) — AVANZADO
+19. Machine Learning Fundamentos (40 horas) — INTERMEDIO — Scikit-learn
+20. Computer Vision (40 horas) — AVANZADO — Clasificación de imágenes con redes neuronales
+21. Tableau Visualización (25 horas) — INTERMEDIO — Dashboards e informes interactivos
+22. Data Wrangling (25 horas) — INTERMEDIO — Limpieza y transformación de datos
+23. Álgebra Lineal (40 horas) — AVANZADO — Fundamentos para ciencia de datos
+24. ML para Textos (40 horas) — AVANZADO — Análisis de sentimientos y BERT
+25. ML para Negocios (40 horas) — AVANZADO — Aplicación de ML a problemas empresariales
+26. Métodos Numéricos en ML (30 horas) — AVANZADO — Descenso por gradiente y boosting
+27. Habilidades Blandas (2.5 horas) — PRINCIPIANTE
+28. Análisis Estadístico (40 horas) — INTERMEDIO — Métodos estadísticos y prueba de hipótesis
+29. Aprendizaje Supervisado (40 horas) — AVANZADO — Optimización de hiperparámetros y métricas
+30. Python para Análisis (32 horas) — PRINCIPIANTE — Variables, Pandas y preprocesamiento
+31. Series Temporales (30 horas) — AVANZADO — Tendencias, estacionalidad y pronósticos
+32. Aprendizaje No Supervisado (30 horas) — AVANZADO — K-means y detección de anomalías
+
+---
+
+## 12. La Triada de Retorno MAYIA
+
+MAYIA mide el valor de cada proyecto de inteligencia artificial mediante tres indicadores:
 
 1. **ROI (Retorno Financiero)**: Eficiencia operativa, reducción de costos, aumento de ventas y mejora de margen de beneficio.
 2. **RL (Retorno Laboral)**: Capacitación del talento humano, elevación de habilidades digitales y aumento de productividad por empleado.
@@ -85,8 +291,42 @@ MAYIA mide el valor de cada proyecto de inteligencia artificial mediante tres in
 
 ---
 
-## 7. Canales Oficiales
+## 13. Contenido del Sidebar y Hub de Navegación
+
+La plataforma MAYIA cuenta con las siguientes secciones accesibles desde el menú lateral:
+
+### Noticias y Medios
+- **Blog** — Artículos sobre IA y tecnología (Nuevo)
+- **Noticias en Tiempo Real** — Actualización constante del mundo IA (En vivo)
+- **Sala de Prensa** — Comunicados oficiales MAYIA
+
+### Acerca de MAYIA
+- **Quiénes Somos** — Fábrica mexicana de IA aplicada. Ayudamos a empresas e industrias a implementar IA de forma segura, estratégica, privada y medible.
+- **Qué Hacemos** — Desarrollamos, implementamos y operamos soluciones de IA para empresas, gobierno e industria en los 32 estados del país.
+- **El Origen de Nuestra Marca** — La unión de la inteligencia ancestral maya y la IA moderna.
+
+### Comunidad
+- **Embajadores** — Red de líderes IA en México.
+- **Red de IA+** — Comunidad nacional de profesionales en inteligencia artificial.
+
+### Ecosistema
+- **Temperatura de la IA** — Pulso del mercado IA México.
+- **Hubs Digitales** — Polos de desarrollo e innovación tecnológica.
+- **Diagnóstico Empresarial de IA** — Evaluación gratuita del nivel de madurez IA de tu organización.
+- **Asistente IA Chat** — Chat con agente inteligente de MAYIA.
+
+---
+
+## 14. Canales Oficiales y Datos de Contacto
 
 - **Sitio Web**: https://mayia.mx
-- **Contacto Ventas**: +52-55-5331-5526
+- **Contacto / WhatsApp**: +52-55-5331-5526
+- **Agendar consultoría gratuita**: https://calendly.com/mayiainteligencia/consulta-mayia
+- **LinkedIn**: https://www.linkedin.com/company/mayia-edgenet/
+- **YouTube**: https://www.youtube.com/@MAYIAInteligenciaArtificial
+- **Instagram**: https://www.instagram.com/mayia.inteligencia.artificial/
+- **Facebook**: https://www.facebook.com/MAYiaInteligenciaArtificial
+- **X / Twitter**: https://x.com/EdgenetData
 - **Ubicación**: Ciudad de México, México
+- **Fundación**: 2025
+- **© 2026 MAYiA. Todos los derechos reservados.**
