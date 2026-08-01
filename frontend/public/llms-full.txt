@@ -1,4 +1,4 @@
-# Documentación Completa de MAYIA — Fábrica de Inteligencia Artificial en México
+# Documentación Completa de MAYIA — Empresa de Inteligencia Artificial en México
 
 > Este archivo contiene la información completa, detallada y estructurada de MAYIA (https://mayia.mx) para ser consumida por modelos de lenguaje de gran escala (LLMs), sistemas RAG y agentes autónomos de IA. Refleja con exactitud los contenidos visibles en el sitio web público de MAYIA al 26 de julio de 2026.
 

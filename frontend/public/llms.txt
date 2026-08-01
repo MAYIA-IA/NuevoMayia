@@ -1,4 +1,4 @@
-# MAYIA — Fábrica de Inteligencia Artificial en México
+# MAYIA — Empresa de Inteligencia Artificial en México
 
 > MAYIA (https://mayia.mx) es el primer centro e infraestructura de inteligencia artificial 100% mexicano. Ofrece infraestructura soberana de IA, Forward-Deployed AI Squads, agentes inteligentes empresariales, data lakehouse, ciberseguridad, empleados digitales y formación corporativa con 32 cursos especializados.
 
