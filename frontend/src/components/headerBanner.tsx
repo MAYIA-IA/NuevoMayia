@@ -13,9 +13,9 @@ export default function HeaderBanner() {
 
   useEffect(() => {
     // Fecha objetivo: 
-    // 25 de Julio 2026 12:00 CET
+    // 13 de Agosto 2026 12:00 CET
     
-    const targetDate = new Date('2026-07-30T12:00:00+02:00');
+    const targetDate = new Date('2026-08-13T12:00:00+02:00');
 
     const calculateTimeLeft = () => {
       const now = new Date();
@@ -89,7 +89,7 @@ export default function HeaderBanner() {
           <div className="text-white font-bold text-lg leading-tight">
             Webinar | Centro de Comando de Ventas
           </div>
-          <div className="text-gray-400 text-sm mt-0.5">30 de Julio 2026 · 12:00 hrs CET</div>
+          <div className="text-gray-400 text-sm mt-0.5">13 de Agosto 2026 · 12:00 hrs CET</div>
         </div>
 
         {/* CTA */}
