@@ -14,7 +14,7 @@ export default function HeaderBanner() {
   useEffect(() => {
     // Fecha objetivo: 
     // 13 de Agosto 2026 12:00 CET
-    
+    //  Commit de prueba
     const targetDate = new Date('2026-08-13T12:00:00+02:00');
 
     const calculateTimeLeft = () => {
